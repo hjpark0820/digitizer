@@ -1,16 +1,16 @@
 # Plot Digitizer v46
 
-그래프 이미지에서 데이터 점을 추출하고, 브라우저에서 수정한 뒤 JSON·Excel·CSV로 저장하는 로컬 웹앱입니다. 색상 그래프와 흑백 그래프를 지원합니다. AI가 코드를 수정할 때는 [README_AI.md](README_AI.md)를 읽어 주세요.
+A local web app for extracting data points from chart images, editing them in a browser, and saving the results as JSON, Excel, or CSV. Supports colour and black-and-white charts. AI agents maintaining the code should read [README_AI.md](README_AI.md).
 
-## 설치와 실행
+## Installation and startup
 
-검증 기준은 **Windows, Python 3.12, CPU 실행**입니다. Chrome 또는 Edge에서 `localhost`로 접속하면 폴더 열기와 원본 이미지 옆 JSON 저장 기능을 사용할 수 있습니다.
+The verified environment is **Windows, Python 3.12, and CPU execution**. Open the app at `localhost` in Chrome or Edge to access folders and save JSON files alongside their original images.
 
-**v46 단독 실행 배포본입니다. `run_A4_auto_v45.py`는 필요하지 않으며 배포본에 포함하지 않습니다.**
+**This is a standalone v46 distribution. `run_A4_auto_v45.py` is neither required nor included.**
 
-이 폴더를 GitHub 저장소의 루트로 사용하세요. 기존 개발 프로젝트의 `data`, `models`, `experiments`, `outputs` 폴더는 필요하지 않습니다.
+Use this folder as the root of your GitHub repository. The original development project's `data`, `models`, `experiments`, and `outputs` folders are not required.
 
-Windows PowerShell에서 이 폴더로 이동한 뒤 실행합니다.
+In Windows PowerShell, navigate to this folder and run:
 
 ```powershell
 py -3.12 -m venv .venv
@@ -18,148 +18,155 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe run.py
 ```
 
-브라우저에서 **http://localhost:8000**을 엽니다. 사용 중에는 터미널을 열어 두고, 종료할 때 `Ctrl+C`를 누릅니다. 가상환경 활성화는 필요하지 않습니다.
+Open **http://localhost:8000** in your browser. Keep the terminal open while using the app, and press `Ctrl+C` to stop the server. You do not need to activate the virtual environment.
 
-8000 포트를 다른 프로그램이 사용 중이면 다음처럼 실행하고 `http://localhost:8001`로 접속합니다.
+If another program is using port 8000, run the following command and open `http://localhost:8001`:
 
 ```powershell
 .\.venv\Scripts\python.exe run.py --port 8001
 ```
 
-macOS/Linux의 대응 명령은 `python3.12 -m venv .venv`, `.venv/bin/python -m pip install -r requirements.txt`, `.venv/bin/python run.py`입니다. 이번 배포의 실제 설치 검증은 Windows에서 수행했습니다.
+The equivalent macOS/Linux commands are `python3.12 -m venv .venv`, `.venv/bin/python -m pip install -r requirements.txt`, and `.venv/bin/python run.py`. Installation of this distribution was verified on Windows.
 
-### OCR과 GPU
+### OCR and GPU support
 
-- **OCR(이미지의 문자를 읽는 기능)**: 축 숫자와 범례 문자를 자동으로 읽으려면 Tesseract 실행 프로그램을 별도로 설치하고 `PATH`에 등록하세요. `tesseract --version`으로 확인합니다. `pytesseract` Python 패키지만 설치하면 Tesseract 실행 프로그램은 설치되지 않습니다. OCR이 없거나 인식이 불확실하면 축 값을 직접 입력하고 결과를 확인하세요.
-- **CPU만으로 실행 가능**: 현재 v46 검출에는 학습된 모델 가중치, `timm`, YOLO가 필요하지 않습니다.
-- **선택적 GPU 가속**: CUDA를 사용할 수 있는 PyTorch가 이미 설치돼 있으면 B&W v46의 자동 계산 장치 선택이 GPU를 검사합니다. 사용할 수 없으면 CPU로 실행합니다. PyTorch는 기본 설치 목록에서 제외했습니다. CPU를 명시하려면 실행 전에 PowerShell에서 `$env:BW_V46_REFINEMENT_BACKEND='cpu'`를 설정하세요. 이 배포의 독립 환경 검증에는 GPU를 사용하지 않았습니다.
+- **OCR (optical character recognition)**: To read axis numbers and legend text automatically, install the Tesseract executable separately and add it to `PATH`. Check the installation with `tesseract --version`. Installing the `pytesseract` Python package does not install the Tesseract executable. If OCR is unavailable or a reading is uncertain, enter the axis values manually and review the results.
+- **CPU-only operation**: Current v46 detection does not require trained model weights, `timm`, or YOLO.
+- **Optional GPU acceleration**: If a CUDA-capable PyTorch installation is already available, B&W v46 checks the GPU when selecting a compute device automatically. Otherwise, it uses the CPU. PyTorch is excluded from the default requirements. To select the CPU explicitly, set `$env:BW_V46_REFINEMENT_BACKEND='cpu'` in PowerShell before starting the app. The standalone environment checks for this distribution did not use a GPU.
 
-## Codex / Claude Code에서 이용하기
+## Using the app with Codex or Claude Code
 
-AI에게 저장소를 로컬로 내려받고 `README_AI.md`에 따라 가상환경·패키지를 준비한 뒤
-서버를 실행해 달라고 요청할 수 있습니다. 실행한 주소를 열고 기존 **Plot area**와
-**Legend** 버튼으로 사용자가 직접 영역을 드래그하면 됩니다.
+You can ask an AI agent to download the repository locally, prepare the virtual
+environment and packages according to `README_AI.md`, and start the server.
+Open the resulting URL and draw the regions yourself using the existing
+**Plot area** and **Legend** buttons.
 
-- **Codex 데스크톱의 내장 브라우저를 사용할 수 있는 경우**: 앱 안에서 로컬 페이지를
-  열어 선택합니다. CLI/브라우저 없는 환경에서는 일반 Chrome/Edge를 엽니다.
-- **Claude Code**: Chrome 연동이 준비돼 있으면 연결된 브라우저를 사용하고,
-  연동이 없으면 일반 브라우저에서 로컬 주소를 직접 엽니다.
-- **WebFetch만으로는 영역 선택 불가**: 페이지 내용을 읽는 도구이므로 마우스 드래그를
-  받는 화면이 아닙니다. 실제 브라우저가 필요합니다.
-- **Tesseract가 없을 때**: AI가 `python run.py --ai-ocr`로 실행하면 프로그램이 실제
-  OCR 이미지 조각을 저장하고 기다립니다. Codex/Claude가 조각을 읽어 응답하면 검출이
-  이어집니다. AI에게 [AI OCR 연결 안내](src/AI_OCR.md)에 따라 요청을 계속 처리하게
-  하세요. 이미지 보기·로컬 명령 실행 도구가 필요하며, 별도 API 키는 필요 없습니다.
-  AI를 종료하거나 응답하지 않으면 기본 5분 후 오류를 표시합니다. 흐릿한 글자는
-  추측하지 않고 확인합니다. 일반 실행에서는 기존 Tesseract/수동 입력을 사용합니다.
+- **Codex desktop with a built-in browser available**: Open the local page in
+  the app and select the regions there. In a CLI or an environment without a
+  browser integration, open the page in regular Chrome or Edge.
+- **Claude Code**: Use its connected browser when Chrome integration is ready.
+  Otherwise, open the local URL manually in your browser.
+- **WebFetch alone cannot collect region selections**: It retrieves page
+  content and does not provide an interactive canvas for mouse dragging.
+  A browser is required.
+- **When Tesseract is unavailable**: If the agent starts the app with
+  `python run.py --ai-ocr`, the program saves the actual OCR image snippets
+  and waits. Detection continues when Codex or Claude reads the snippets and
+  submits answers. Have the agent keep handling requests according to the
+  [AI OCR handoff guide](src/AI_OCR.md). Image-viewing and local command tools
+  are required; no separate API key is needed. If the agent stops or does not
+  answer, the request reports an error after five minutes by default. Confirm
+  unclear text instead of guessing. Ordinary execution uses Tesseract or
+  manual input as before.
 
-영역 선택 후 **Run**을 누르면 좌표가 검출 서버로 전송됩니다. 선택만 한 상태는
-AI 대화에 자동 전송되지 않습니다. 후속 작업을 AI에게 맡길 때는 결과를 저장하고
-저장한 JSON 경로를 알려주거나 연결된 브라우저로 결과를 확인하게 하세요.
+After selecting the regions, press **Run** to send their coordinates to the
+detection server. Selecting a region alone does not send it to the AI
+conversation. To delegate follow-up work, save the results and give the agent
+the JSON path, or let the agent inspect the results through a connected browser.
 
-## 새 그래프에서 데이터 추출
+## Extracting data from a new chart
 
-1. **New detection: choose image**에서 PNG/JPEG를 선택합니다.
-2. **Colour / B&W** 모드를 선택합니다. 필요하면 **Image preparation**에서 이미지 해상도나 회전을 조정합니다.
-3. **Plot area**로 그래프 영역을 지정합니다. 범례가 있으면 **Legend**로 범례 영역도 지정합니다. 범례 없이 실행할 때는 **하나의 데이터 계열**을 가정합니다.
-4. 실제 축 값을 입력합니다. 로그 축은 해당 옵션을 켭니다. 축 정보를 확보하지 못한 결과는 물리량 대신 픽셀 좌표를 사용할 수 있습니다.
-5. 색상 그래프의 **Colour chart series**는 보통 `Auto`를 사용합니다. 필요한 경우 마커가 있는 그래프와 선만 있는 그래프를 직접 지정합니다.
-6. **Run**을 누르고 원본 위의 점과 재구성 그래프를 확인합니다.
-7. 지원되는 결과는 **Step 5**로 자동 보정할 수 있습니다. 저장된 보정 근거가 없는 구형 JSON은 수동 편집만 가능할 수 있습니다.
+1. Select a PNG or JPEG using **New detection: choose image**.
+2. Choose **Colour / B&W** mode. If needed, adjust the image resolution or rotation under **Image preparation**.
+3. Select the plotting region with **Plot area**. If the chart has a legend, select it with **Legend**. Running without a legend assumes **one data series**.
+4. Enter the actual axis values. Enable the corresponding option for logarithmic axes. Results without sufficient axis information may use pixel coordinates instead of physical values.
+5. For colour charts, **Colour chart series** can usually remain set to `Auto`. If needed, explicitly select a chart with markers or a line-only chart.
+6. Press **Run**, then review the points overlaid on the original image and the reconstructed plot.
+7. Supported results can be corrected automatically with **Step 5**. Older JSON files without saved correction evidence may support manual editing only.
 
-자동 검출이 불확실한 경우 앱은 검출 실패 또는 보류 이유를 표시할 수 있습니다. 선택 영역과 모드를 확인하세요. 재구성 그래프는 현재 점을 x 좌표 순으로 직선 연결한 확인용 그림입니다.
+When automatic detection is uncertain, the app may display a failure or a reason for withholding a result. Check the selected regions and mode. The reconstructed plot is a review view that connects the current points with straight lines in x-coordinate order.
 
-## 저장된 이미지와 JSON 열기
+## Opening saved images and JSON files
 
-1. **Edit saved results → Choose edit folder**로 이미지 폴더를 선택합니다.
-2. `plot.png`와 `plot.json`처럼 이름이 같은 이미지·JSON 쌍만 편집 목록에 나타납니다.
-3. 목록이나 `<`·`>`로 파일을 선택하면 **Original / Overlay / Reconstructed plot** 미리보기가 자동으로 바뀝니다.
-4. **Open selected image for editing**을 누릅니다. 버전이 여러 개면 편집할 저장 버전을 선택합니다.
+1. Select an image folder using **Edit saved results → Choose edit folder**.
+2. Only image/JSON pairs with matching names, such as `plot.png` and `plot.json`, appear in the editing list.
+3. Select a file from the list or use `<` / `>` to update the **Original / Overlay / Reconstructed plot** previews automatically.
+4. Press **Open selected image for editing**. If several versions are available, select the saved version to edit.
 
-페이지를 새로고침하거나 다시 열면 폴더를 다시 선택해야 합니다. 폴더 접근을 지원하지 않는 브라우저에서는 **Legacy import — select image + JSON manually**로 개별 파일을 불러올 수 있습니다. 폴더에 직접 저장하려면 Chrome/Edge의 폴더 접근 기능을 사용하세요.
+Select the folder again after refreshing or reopening the page. In browsers without folder access support, use **Legacy import — select image + JSON manually** to load individual files. Direct saving to a folder requires Chrome or Edge's folder access feature.
 
-## 전용 편집 화면
+## Dedicated editing view
 
-Edit를 누르면 이전 화면에서 전용 편집 화면으로 전환됩니다. 파일 이동, 색상 선택, 확대, 저장 버튼을 화면 안에서 사용할 수 있습니다.
+Pressing Edit switches from the previous workspace to a dedicated editing view. File navigation, series selection, zoom, and save controls remain available within the view.
 
-| 조작 | 동작 |
+| Control or gesture | Action |
 | --- | --- |
-| 색상/계열 버튼 | 선택한 계열만 편집 이미지와 재구성 그래프에 표시 |
-| All symbols | 모든 계열 표시 |
-| Edit points에서 점 드래그 | 점 좌표 수정 |
-| Edit points에서 빈 공간 클릭 | 선택한 계열에 점 추가 |
-| 빈 공간을 왼쪽 버튼으로 드래그 | 확대된 화면 이동 |
-| Pan 선택 후 왼쪽 드래그 | 점 위에서도 화면 이동 |
-| 점 선택 후 Delete / Remove selected | 점 삭제 |
-| `+` / `−` / Ctrl+휠 | 확대·축소; 기존 600% 상한 없음 |
-| Fit | 이미지 전체 보기 |
-| `<` / `>` | 같은 폴더의 이전·다음 편집 파일 |
-| Coordinates table | 좌표표 펼치기/접기 |
-| Back / Resume editing | 현재 페이지 안에서 수정 내용·확대·스크롤 위치를 유지하며 복귀 |
+| Colour/series button | Show only the selected series in the editing image and reconstructed plot |
+| All symbols | Show every series |
+| Drag a point in Edit points mode | Change the point's coordinates |
+| Click empty space in Edit points mode | Add a point to the selected series |
+| Left-drag on empty space | Pan the zoomed image |
+| Select Pan, then left-drag | Pan even when the drag starts on a point |
+| Select a point, then Delete / Remove selected | Delete the point |
+| `+` / `−` / Ctrl+mouse wheel | Zoom in or out; the former 600% limit has been removed |
+| Fit | Show the entire image |
+| `<` / `>` | Move to the previous or next editable file in the same folder |
+| Coordinates table | Expand or collapse the coordinate table |
+| Back / Resume editing | Switch views within the current page while preserving edits, zoom, and scroll position |
 
-`Back`은 파일에 저장하는 기능이 아닙니다. 새로고침하거나 브라우저를 닫기 전에 **Save result versions (.json)**을 누르세요.
+`Back` does not save changes to a file. Press **Save result versions (.json)** before refreshing the page or closing the browser.
 
-## 저장 형식
+## Saved formats
 
-- **JSON**: 원본 이미지 옆의 같은 이름 JSON에 결과 이력, 수정 좌표, 축 정보, 사용 가능한 보정 근거를 저장합니다. 초기 검출·Step 5·수동 편집 버전을 구분합니다. 원본 이미지와 JSON을 함께 보관하세요. 회전·축소한 작업 이미지가 JSON에 포함돼 파일이 커질 수 있습니다.
-- **Excel / CSV**: 분석용 좌표 표입니다. 편집을 다시 이어갈 때 필요한 보정 근거 전체를 대신하지 않습니다.
-- 색상 버튼으로 한 계열만 보여도 저장/내보내기는 전체 계열을 보존합니다.
-- JSON의 앱 제한은 128MiB입니다. 1MiB를 넘는 편집 데이터도 파일 업로드 방식으로 전송합니다.
+- **JSON**: Stores result history, edited coordinates, axis information, and available correction evidence in a JSON file with the same name as the original image, alongside that image. Initial detection, Step 5, and manual edits are stored as separate versions. Keep the original image and JSON together. Rotated or resized working images may be embedded in the JSON, increasing its size.
+- **Excel / CSV**: Coordinate tables for analysis. They do not replace the complete correction evidence needed to resume editing.
+- Saving and exporting preserve all series, even when a colour button filters the view to one series.
+- The app's JSON limit is 128 MiB. Editing data larger than 1 MiB is transmitted as a file upload.
 
-서버의 임시 결과는 운영체제 임시 폴더의 `unified_digitizer_jobs` 아래에 생성됩니다. 임시 결과는 사용자가 저장한 JSON을 대체하지 않습니다. 이미지 처리는 로컬 Python 서버에서 수행합니다.
+The server creates temporary results under `unified_digitizer_jobs` in the operating system's temporary folder. Temporary results do not replace the JSON files you save. Image processing runs on the local Python server.
 
-## 폴더 구성
+## Folder layout
 
 ```text
 .
-├── README.md              # 사람용 설치·사용 설명
-├── README_AI.md           # AI용 구조·변경·검증 안내
-├── AGENTS.md              # Codex 등 AI 안내 진입점
-├── CLAUDE.md              # Claude Code용 안내 문서 가져오기
-├── requirements.txt       # 검증한 Python 의존성
-├── run.py                 # 권장 실행 진입점
-├── RUNTIME_MANIFEST.json  # 포함 소스 목록·참조 위치·SHA-256
+├── README.md              # Installation and usage guide for people
+├── README_AI.md           # Architecture, maintenance, and verification guide for AI agents
+├── AGENTS.md              # Instructions entry point for Codex and other AI agents
+├── CLAUDE.md              # Imports the instruction documents for Claude Code
+├── requirements.txt       # Verified Python dependencies
+├── run.py                 # Recommended launcher
+├── RUNTIME_MANIFEST.json  # Included sources, reference locations, and SHA-256 hashes
 └── src/
     ├── unified_server.py
     ├── index.html
     ├── image_sidecar_v46.js
     ├── run_A4_auto_v46.py
     ├── run_A4_color_v46.py
-    ├── color_pipeline_v46.py  # v46 실행 단계
-    ├── chart_analysis_v46.py  # 공통 분석 함수
-    ├── legend_palette_v46.py  # 범례·색상 구성
-    ├── analysis_session_v46.py # 이미지별 분석 상태
+    ├── color_pipeline_v46.py  # v46 processing stages
+    ├── chart_analysis_v46.py  # Shared analysis functions
+    ├── legend_palette_v46.py  # Legend and palette construction
+    ├── analysis_session_v46.py # Per-image analysis state
     ├── legend_optional_v46/
     ├── type3_v46/
-    └── ...                # 검출·보정·저장에 연결된 실행 모듈
+    └── ...                # Runtime modules for detection, correction, and saving
 ```
 
-`src`의 실행 파일은 기존 작업 폴더에서 그대로 복사했습니다. 과거의 ViT 검출 CLI, 학습 코드, 실험 결과와 모델 파일은 배포 범위에서 제외했습니다. `src/unified_server.py` 직접 실행도 가능하지만, `run.py`는 현재 작업 디렉터리와 관계없이 앱을 찾고 기본 주소를 `127.0.0.1`로 설정합니다.
+The runtime files in `src` were copied from the development workspace. Legacy Vision Transformer (ViT) detection CLIs, training code, experimental results, and model files are excluded from this distribution. You can also run `src/unified_server.py` directly, but `run.py` locates the app independently of the current working directory and defaults to `127.0.0.1`.
 
-## 문제 해결
+## Troubleshooting
 
-- **주소를 이미 사용 중이라는 오류**: 기존 서버를 종료하거나 `run.py --port 8001`을 사용합니다.
-- **화면에 새 기능이 안 보임**: 수정 내용을 저장한 뒤 새로고침합니다. Python 서버 코드를 바꿨다면 서버도 재시작합니다.
-- **저장 오류에 `1024KB` 또는 이전 형식 관련 문구가 나옴**: 다른 폴더에서 실행한 오래된 서버가 같은 포트를 사용 중인지 확인하고, 배포 폴더의 `run.py`로 실행합니다.
-- **이미지·JSON 쌍 불일치**: 같은 이름뿐 아니라 원본 이미지 내용도 일치해야 합니다. 이름만 바꿔 다른 이미지에 연결하지 마세요.
-- **폴더 선택/저장 권한 문제**: Chrome/Edge에서 `http://localhost:포트`로 접속하고 폴더를 다시 선택합니다.
+- **Address already in use**: Stop the existing server or use `run.py --port 8001`.
+- **New features do not appear**: Save your changes and refresh the page. If you changed Python server code, restart the server as well.
+- **A save error mentions `1024KB` or an older format**: Check whether an older server started from another folder is using the same port, then launch `run.py` from this distribution folder.
+- **Image/JSON pair mismatch**: Both the filenames and the original image content must match. Do not rename a JSON file to associate it with a different image.
+- **Folder selection or save permission problems**: Open `http://localhost:PORT` in Chrome or Edge, replacing `PORT` with the server's port number, and select the folder again.
 
-## 배포본 검증
+## Distribution verification
 
-2026-09-21에 기존 프로젝트와 분리된 임시 위치 및 새 Python 3.12 가상환경에서 확인했습니다.
+On 2026-09-21, the distribution was checked in a temporary location separate from the original project, using a fresh Python 3.12 virtual environment.
 
-- `requirements.txt` 설치 및 패키지 간 의존성 검사 통과.
-- v45 파일이 없는 배포본에서 런타임 파일 143개의 해시 확인, Python 모듈 141개 import 통과.
-- 독립 폴더에서 검출 5가지와 각각의 Step 5 보정 통과. 기존 버전과 좌표·색상·라벨·축 정보 일치.
-- 서버 시작, 화면/JavaScript 제공, 이미지 축소·회전 확인.
-- 생성한 샘플로 범례 유무에 따른 Colour/B&W 마커 검출, 범례 없는 선 그래프 검출, 각 결과의 저장 근거 기반 Step 5 보정 통과.
-- 1,472,804바이트 JSON 업로드, 점 55,000개 저장·재불러오기·Excel 내보내기 통과.
-- PyTorch 없이 자동 계산 장치 선택이 CPU로 전환되는 것을 확인.
+- Installation from `requirements.txt` and package dependency checks passed.
+- In a distribution without v45 files, hashes for 143 runtime files were verified and 141 Python modules imported successfully.
+- Five detection cases and their respective Step 5 corrections passed from an independent folder. Coordinates, colours, labels, and axis information matched the previous version.
+- Server startup, HTML/JavaScript delivery, image resizing, and rotation were verified.
+- Generated samples passed Colour/B&W marker detection with and without legends, line-only detection without a legend, and Step 5 correction from each result's saved evidence.
+- Uploading a 1,472,804-byte JSON file and saving, reloading, and exporting 55,000 points to Excel passed.
+- Automatic compute-device selection fell back to the CPU when PyTorch was unavailable.
 
-검증용 이미지·가상환경·결과 파일은 이 배포 폴더에 포함하지 않았습니다. 샘플 실행 검사는 설치와 기능 연결을 확인하며, 모든 실제 그래프의 검출 정확도를 보증하는 평가 결과는 아닙니다.
+Verification images, virtual environments, and result files are not included in this distribution. These sample runs check installation and feature integration; they do not establish detection accuracy for every real-world chart.
 
-GitHub에 올릴 때는 이 폴더의 **내용을 새 저장소의 루트에** 넣으세요. 가상환경, 개인 이미지, 저장 JSON, 임시 결과를 함께 올릴 필요는 없습니다.
+When uploading to GitHub, place the **contents of this folder at the root of the new repository**. You do not need to include virtual environments, personal images, saved JSON files, or temporary results.
 
-## v45 의존성 제거
+## Removing the v45 dependency
 
-서버는 `run_A4_auto_v46.py`를 명시적으로 선택합니다. v45 소스 읽기·수정 실행과 구형 검출기로의 자동 전환을 제거했습니다. 마커 범례를 분석하지 못하면 오류를 표시하므로 선택 영역을 확인하거나 `Auto` / `line-only` 모드를 선택하세요. `PLOT_PIPELINE` 환경 변수가 예전 v45 파일을 가리키면 삭제하거나 v46 경로로 바꿔 주세요. 기존 서버를 종료하고 다시 실행하면 수정사항이 적용됩니다.
+The server explicitly selects `run_A4_auto_v46.py`. Reading and rewriting v45 source for execution, and automatic fallback to legacy detectors, have been removed. If a marker legend cannot be analyzed, the app reports an error; check the selected region or choose `Auto` / `line-only` mode. If the `PLOT_PIPELINE` environment variable points to an old v45 file, unset it or change it to the v46 path. Restart the existing server to apply the changes.
