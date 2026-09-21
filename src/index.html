@@ -1,0 +1,2481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plot Digitizer</title>
+<style>
+  :root { --accent:#3B6D11; --border:#ccc; --muted:#666; }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+         margin: 0; padding: 24px; color:#222; background:#fafafa; }
+  h1 { font-size: 20px; font-weight: 600; margin: 0 0 4px; }
+  p.sub { color: var(--muted); margin: 0 0 20px; font-size: 14px; }
+  .row { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+  .panel { background:#fff; border:1px solid var(--border); border-radius:10px;
+           padding:16px; }
+  .controls { width: 300px; }
+  label.file { display:inline-block; padding:8px 14px; background:var(--accent);
+               color:#fff; border-radius:8px; cursor:pointer; font-size:14px; }
+  label.file input { display:none; }
+  .tool { display:flex; align-items:center; gap:8px; margin:12px 0; font-size:14px; }
+  .tool button { padding:6px 12px; border:1px solid var(--border); background:#fff;
+                 border-radius:8px; cursor:pointer; font-size:13px; }
+  .tool button.active { border-color:var(--accent); color:var(--accent); font-weight:600; }
+  .swatch { width:14px; height:14px; border-radius:3px; display:inline-block; }
+  .box-info { font-size:12px; color:var(--muted); margin-top:2px; font-family:monospace; }
+  #run { width:100%; padding:12px; background:var(--accent); color:#fff; border:none;
+         border-radius:8px; font-size:15px; cursor:pointer; margin-top:8px; }
+  #run:disabled { opacity:.5; cursor:default; }
+  canvas { border:1px solid var(--border); border-radius:8px; cursor:crosshair;
+           max-width:100%; touch-action:none; }
+  .canvaswrap { max-width: 640px; }
+  #editor { position:fixed; inset:0; z-index:1000; border:0; border-radius:0; padding:16px; background:#fafafa; flex-direction:column; gap:10px; overflow:hidden; }
+  .editor-header { display:flex; align-items:center; gap:16px; flex-shrink:0; }
+  .editor-header h1 { font-size:17px; white-space:nowrap; }
+  #editor .tool { margin:0; gap:6px; flex-wrap:wrap; }
+  .editor-toolbar { display:flex; flex-direction:column; gap:8px; flex-shrink:0; max-height:35vh; overflow:auto; }
+  #editor #curvePicker { flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px; flex-shrink:0; }
+  #curvePicker > * { flex-shrink:0; }
+  #editor .hint { margin:0; }
+  #editor button { cursor:pointer; }
+  #editor button:disabled { cursor:default; }
+  .editor-plots { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:16px; flex:1; min-height:0; }
+  .editor-plots > .canvaswrap { display:flex; flex-direction:column; gap:4px; max-width:none; min-width:0; min-height:0; }
+  .editor-recon-view { flex:1; min-height:0; overflow:hidden; }
+  #reconCanvas { display:block; width:100%; height:100%; object-fit:contain; background:#fff; cursor:default; }
+  .editor-footer { flex-shrink:0; }
+  #edCoordinates { margin-top:8px; font-size:12px; }
+  #edCoordinates summary { cursor:pointer; }
+  #edTableWrap { max-height:23vh; overflow:auto; margin-top:6px; }
+  #editScroll { width:100%; flex:1; min-height:0; overflow:scroll; border:1px solid var(--border); border-radius:8px; background:#fff; overscroll-behavior:contain; }
+  #editSurface { position:relative; }
+  #editCanvas { display:block; position:absolute; max-width:none; border:0; border-radius:0; }
+  #result img { max-width:100%; border:1px solid var(--border); border-radius:8px; }
+  #result a { display:inline-block; margin-top:12px; padding:10px 16px;
+              background:#185FA5; color:#fff; border-radius:8px; text-decoration:none;
+              font-size:14px; }
+  .hint { font-size:12px; color:var(--muted); line-height:1.6; }
+  pre.log { font-size:11px; color:#555; background:#f4f4f4; padding:8px;
+            border-radius:6px; max-height:140px; overflow:auto; white-space:pre-wrap; }
+  .spinner { display:none; font-size:14px; color:var(--accent); }
+  .modeseg { display:inline-flex; background:var(--surface-0,#f1efe8); border:1px solid var(--border); border-radius:10px; padding:3px; gap:3px; margin-top:6px; }
+  .modebtn { display:flex; align-items:center; gap:7px; padding:8px 16px; border:2px solid transparent; background:transparent; color:var(--muted,#6b6b6b); border-radius:8px; cursor:pointer; font-size:13px; font-weight:500; transition:all .15s; }
+  .modebtn svg { display:block; }
+  .modebtn:hover { color:#333; }
+  .modebtn-on { background:#fff; color:var(--accent); border-color:var(--accent); font-weight:600; box-shadow:0 1px 4px rgba(24,95,165,.2); }
+  .modebtn-on::after { content:"\2713"; font-size:12px; font-weight:700; margin-left:2px; }
+  .toolrow { display:flex; gap:6px; margin:8px 0 4px; }
+  .toolbtn { flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:8px 6px; border:1px solid var(--border); background:#fff; color:#333; border-radius:8px; cursor:pointer; font-size:12px; font-weight:500; white-space:nowrap; transition:all .12s; }
+  .toolbtn:hover { border-color:var(--accent); }
+  .toolbtn.active { border-color:var(--accent); background:rgba(24,95,165,.08); color:var(--accent); font-weight:600; }
+  .toolbtn-clear { flex:0 0 auto; color:var(--muted,#6b6b6b); }
+  .toolbtn .swatch { width:11px; height:11px; border-radius:3px; }
+  .axisgrid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px; }
+  .axisgrid label { font-size:12px; color:var(--muted); display:flex;
+                    flex-direction:column; gap:3px; }
+  .axisgrid input { padding:6px 8px; border:1px solid var(--border);
+                    border-radius:6px; font-size:13px; }
+  .axischecks { display:flex; gap:16px; font-size:13px; margin-bottom:4px; }
+  .axischecks label { display:flex; align-items:center; gap:5px; cursor:pointer; }
+  button:disabled { opacity:.5; cursor:default; }
+  .image-prep { padding:12px; margin:12px 0; border:1px solid #cad8c4; border-radius:8px; background:#f7faf5; }
+  .image-prep summary { font-size:14px; font-weight:600; cursor:pointer; }
+  .image-prep[open] summary { margin-bottom:8px; }
+  .prep-row { display:flex; flex-wrap:wrap; align-items:center; gap:5px; margin-top:8px; }
+  .prep-row button { border:1px solid var(--border); background:white; border-radius:6px; padding:6px 8px; font-size:12px; }
+  .prep-row input { width:64px; padding:5px; border:1px solid var(--border); border-radius:5px; }
+  #bwImageStatus { margin-top:6px; }
+  /* colour-mask gallery */
+  .masks-title { font-size:14px; font-weight:600; margin:16px 0 8px; }
+  .masks { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
+           gap:10px; }
+  .maskcard { border:1px solid var(--border); border-radius:8px; padding:6px;
+              background:#fff; }
+  .maskcard img { width:100%; border:none; border-radius:4px; display:block; }
+  .maskcard .cap { font-size:11px; color:#444; margin-top:4px; font-family:monospace;
+                   line-height:1.35; }
+  .pipe { font-size:12px; color:var(--muted); font-family:monospace; margin-bottom:8px; }
+  .saved-edit-workspace { display:grid; grid-template-columns:300px minmax(0,1fr); gap:24px; align-items:start; margin-top:24px; }
+  .saved-edit-workspace > .saved-edit { margin-top:0; }
+  .saved-edit-workspace:has(> .saved-edit:not([open])) > .folder-result-preview { display:none; }
+  .folder-result-preview { min-width:0; }
+  .saved-preview-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; align-items:start; }
+  .saved-preview-grid figure { min-width:0; margin:0; }
+  .saved-preview-grid figcaption { font-size:13px; font-weight:600; margin-bottom:8px; }
+  .saved-preview-grid img, .saved-preview-grid canvas { width:100%; height:auto; max-height:480px; object-fit:contain; background:white; border:1px solid var(--border); border-radius:8px; cursor:default; }
+  #folderPreviewStatus, #folderPreviewDetails { overflow-wrap:anywhere; }
+  @media (max-width:1000px) { .saved-edit-workspace { grid-template-columns:260px minmax(0,1fr); gap:16px; } .saved-preview-grid { grid-template-columns:1fr; } }
+  @media (max-width:640px) { .saved-edit-workspace { grid-template-columns:1fr; } }
+  .file-navigation { display:flex; align-items:center; gap:8px; margin:10px 0; }
+  .file-navigation[hidden] { display:none; }
+  .file-navigation button { flex:0 0 36px; height:36px; border:1px solid var(--border); border-radius:8px; background:#fff; font-size:22px; cursor:pointer; }
+  .file-navigation button:disabled { cursor:default; }
+  .file-navigation .file-position { flex:1; min-width:0; text-align:center; font-size:12px; overflow-wrap:anywhere; }
+  #editorFileNavigation { flex:1; max-width:600px; margin:0 auto; }
+  @media (max-width:700px) { #editor { padding:8px; gap:6px; } .editor-header { gap:8px; flex-wrap:wrap; } .editor-header h1 { font-size:15px; } .editor-plots { grid-template-columns:1fr; grid-template-rows:minmax(0,1fr) minmax(0,.6fr); gap:6px; } }
+  #imageBrowser { width:min(1050px,95vw); max-height:90vh; padding:20px; border:1px solid var(--border); border-radius:12px; }
+  #imageBrowser::backdrop { background:rgba(0,0,0,.4); }
+  .browser-toolbar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
+  .browser-toolbar input { flex:1; min-width:180px; padding:8px; }
+  .image-thumbnails { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; }
+  .image-thumbnail { padding:8px; border:1px solid var(--border); border-radius:8px; background:#fff; text-align:left; cursor:pointer; }
+  .image-thumbnail:hover, .image-thumbnail[aria-pressed="true"] { border:2px solid var(--accent); padding:7px; }
+  .image-thumbnail img { display:block; width:100%; height:175px; object-fit:contain; background:#fff; }
+  .image-thumbnail span { display:block; margin-top:6px; font-size:12px; overflow-wrap:anywhere; }
+  .image-thumbnail .hint { min-height:20px; }
+  #versionBrowser { width:min(1100px,94vw); max-height:90vh; border:1px solid var(--border); border-radius:12px; padding:20px; }
+  #versionBrowser::backdrop { background:rgba(0,0,0,.4); }
+  #versionSelect { width:100%; padding:8px; margin:10px 0; }
+  #versionPreview { display:block; max-width:100%; max-height:55vh; object-fit:contain; margin:12px auto; }
+  .saved-edit { margin-top:20px; padding:12px; border:1px solid var(--border); border-radius:8px; background:#f8fafc; }
+  .saved-edit > summary { cursor:pointer; font-size:14px; font-weight:600; }
+  .saved-edit[open] > summary { margin-bottom:12px; }
+  .saved-edit input[type="file"] { max-width:100%; }
+</style>
+</head>
+<body>
+<main id="mainWorkspace">
+  <h1>Plot Digitizer</h1>
+  <p class="sub">Upload an image and draw the plot area. Select a legend when available, or leave the legend empty to infer one series from the plot.</p>
+  <button id="resumeEditor" type="button" hidden>Resume editing →</button>
+
+  <div class="row">
+    <!-- Left: controls -->
+    <div class="panel controls">
+      <label class="file">New detection: choose image
+        <input id="fileInput" type="file" accept="image/png,image/jpeg">
+      </label>
+
+      <div class="tool" style="margin-top:10px;">
+        <span style="font-size:13px; font-weight:600;">Mode:</span>
+        <div class="modeseg">
+          <button id="modeColor" data-mode="color" class="modebtn modebtn-on">
+            <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="5" cy="6" r="2.6" fill="#e24b4a"/><circle cx="10.5" cy="9.5" r="2.6" fill="#1d9e75"/><circle cx="8" cy="5" r="2.6" fill="#378add" opacity="0.9"/></svg>
+            Colour
+          </button>
+          <button id="modeBw" data-mode="bw" class="modebtn">
+            <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="5" cy="8" r="2.4" fill="#2c2c2a"/><rect x="8.4" y="5.6" width="4.6" height="4.6" fill="none" stroke="#2c2c2a" stroke-width="1.3"/></svg>
+            B&amp;W
+          </button>
+        </div>
+      </div>
+
+      <details id="bwImagePrep" class="image-prep" aria-label="Image preparation">
+        <summary>Image preparation</summary>
+        <div id="bwImageDimensions" class="hint">Original: — · Current: —</div>
+        <div class="prep-row" aria-label="Resolution presets">
+          <span class="hint">Resolution:</span>
+          <button type="button" data-resolution="100">100%</button>
+          <button type="button" data-resolution="75">75%</button>
+          <button type="button" data-resolution="50">50%</button>
+          <button type="button" data-resolution="25">25%</button>
+        </div>
+        <div class="prep-row">
+          <label class="hint" for="bwResolution">Custom %</label>
+          <input id="bwResolution" type="number" min="1" max="100" step="any" value="100">
+          <button type="button" id="bwApplyResolution">Apply resolution</button>
+        </div>
+        <div class="prep-row" aria-label="Rotate immediately">
+          <button type="button" data-rotation="-90" title="Rotate 90 degrees counterclockwise">↶ 90° CCW</button>
+          <button type="button" data-rotation="90" title="Rotate 90 degrees clockwise">↷ 90° CW</button>
+          <button type="button" data-rotation="-1" title="Rotate 1 degree counterclockwise">↶ 1° CCW</button>
+          <button type="button" data-rotation="1" title="Rotate 1 degree clockwise">↷ 1° CW</button>
+        </div>
+        <div class="prep-row"><button type="button" id="bwResetImage">Reset to original</button><span id="bwImageAngle" class="hint">0° clockwise</span></div>
+        <p class="hint" style="margin-bottom:0;">Available in Colour and B&amp;W. Prepare the image before drawing regions. Each image change starts from the original upload, clears regions/results, and requires redrawing. Switching modes keeps the prepared image and regions. Rotation expands onto white so nothing is clipped. Reducing resolution can lose small-marker detail.</p>
+        <div id="bwImageStatus" class="hint" role="status" aria-live="polite"></div>
+      </details>
+
+      <div class="toolrow">
+        <button id="btnLegend" data-tool="legend" class="toolbtn"><span class="swatch" style="background:#d64545"></span>Legend</button>
+        <button id="btnPlot" data-tool="plot" class="toolbtn"><span class="swatch" style="background:#1d9e75"></span>Plot area</button>
+        <button id="btnClear" class="toolbtn toolbtn-clear">Clear</button>
+      </div>
+      <p id="legendSelectionHint" class="hint" role="status">No legend selected: automatically infer one series from plot. Draw the plot area before running.</p>
+
+      <hr style="border:none; border-top:1px solid var(--border); margin:16px 0;">
+      <div style="font-size:13px; font-weight:600; margin-bottom:8px;">Axis values <span id="axisOpt">(optional)</span></div>
+      <p class="hint" style="margin-top:0;"><span id="axisMapHint">Without a legend, omitted axis values keep the output in pixels.</span></p>
+      <label style="font-size:13px;"><input id="useScaleBox" type="checkbox"> Use a separate <b>scale box</b> (optional)</label>
+      <div class="hint" style="margin-top:2px;">
+        Turn this on to type the axis values. Draw the scale box exactly on the axes, so the
+        plot area can be drawn larger (to catch points sitting on or just outside them)
+        without making the values ambiguous.
+      </div>
+      <div id="scaleBoxPanel" style="display:none; margin-top:8px;">
+        <div style="margin-bottom:8px;">
+          <button id="btnScale" data-tool="scale" class="toolbtn"><span class="swatch" style="background:#e08a1e"></span>Draw scale box</button>
+          <span id="scaleBoxInfo" class="hint" style="margin-left:8px;">drag the box exactly on the axes</span>
+        </div>
+        <div class="axisgrid">
+          <label>x min <input id="xMin" type="text" inputmode="text" placeholder="auto"></label>
+          <label>x max <input id="xMax" type="text" inputmode="text" placeholder="auto"></label>
+          <label>y min <input id="yMin" type="text" inputmode="text" placeholder="e.g. 1e-15 or 10^-15"></label>
+          <label>y max <input id="yMax" type="text" inputmode="text" placeholder="auto"></label>
+        </div>
+        <div class="axischecks">
+          <label><input id="xLog" type="checkbox"> x log scale</label>
+          <label><input id="yLog" type="checkbox"> y log scale</label>
+        </div>
+      </div>
+
+
+
+      <div id="colorSeriesPanel" style="margin-top:14px; padding-top:12px; border-top:1px dashed var(--border);">
+        <label for="colorSeriesMode">Colour chart series</label>
+        <select id="colorSeriesMode" style="width:100%; margin-top:6px;">
+          <option value="auto" selected>Auto — infer markers or line-only from plot</option>
+          <option value="markers">Markers — v46 marker detector</option>
+          <option value="line-only">No markers — line / error-bar centres (type 3)</option>
+        </select>
+        <p class="hint">Auto checks the plot for markers even when the legend shows only a line. Use a manual choice to specify known marker or line-only charts. Line-only detection uses curve, error-bar and corner evidence; added correction points remain hypotheses.</p>
+      </div>
+
+      <div id="bwPanel" style="display:none; margin-top:14px; padding-top:12px; border-top:1px dashed var(--border);">
+        <div style="font-size:13px; font-weight:600; margin-bottom:8px;">B&amp;W v46 — automatic series detection</div>
+        <p id="bwAutoLegendHint" class="hint" style="margin-top:8px;">No legend selected: infer one series from plot. A plot area is required. With a selected legend, marker shapes are classified automatically from the legend; uncertain shapes remain <code>unknown_marker</code>. Without a legend, v46 checks the plot for markers or a line-only series and reports uncertain evidence.</p>
+      </div>
+
+      <button id="run" disabled>Run</button>
+      <div class="spinner" id="spinner">Processing... (this can take up to a minute)</div>
+      <div id="aiOcrHint" class="hint" hidden>AI OCR enabled: if Tesseract is unavailable, detection waits for the operating Claude/Codex agent to read image snippets and submit answers. Keep the agent running.</div>
+
+    </div>
+
+    <!-- Middle: canvas -->
+    <div class="panel canvaswrap">
+      <canvas id="canvas" width="600" height="400"></canvas>
+    </div>
+
+    <!-- Right: result -->
+    <div class="panel" id="result" style="min-width:320px; display:none;">
+      <div id="summary" role="status" style="font-size:14px; margin-bottom:10px;"></div>
+      <div id="inferenceDiagnostic" style="display:none; margin-bottom:10px;">
+        <a id="inferenceDiagnosticLink" target="_blank" rel="noopener">Open v46 series inference diagnostic</a>
+        <pre id="inferenceDiagnosticText" style="white-space:pre-wrap; overflow-wrap:anywhere; font-size:12px;"></pre>
+      </div>
+      <details id="triangleGuardDiagnostic" style="display:none; margin-bottom:12px;">
+        <summary id="triangleGuardSummary">Triangle / error-bar check — automatic</summary>
+        <p id="triangleGuardText" class="hint" style="white-space:pre-wrap;"></p>
+        <img id="triangleGuardImg" alt="Initial detection: active markers and weak error-bar candidates" style="display:none; max-width:100%; border:1px solid var(--border); border-radius:8px;">
+        <a id="triangleGuardWeakLink" target="_blank" rel="noopener">Weak suppressed candidates (JSON)</a>
+        <a id="triangleGuardDiagnosticLink" target="_blank" rel="noopener" style="margin-left:10px;">Window scores and legend evidence (JSON)</a>
+      </details>
+      <div style="margin-bottom:10px;">
+        <button id="clearHistory" style="padding:6px 12px; background:#fff; color:#666; border:1px solid var(--border); border-radius:6px; cursor:pointer; font-size:12px;">Clear results</button>
+        <span class="hint" style="margin-left:8px;">Each Run starts fresh; each Step-5 correction is added below for comparison.</span>
+      </div>
+      <div id="resultsHistory"></div>
+      <br>
+      <button id="downloadXlsx" type="button">Save Excel (current data)</button>
+      <button id="saveCorrection" type="button">Save result versions (.json)</button>
+      <button id="openEditor" style="display:none; margin-top:12px; margin-left:8px; padding:10px 16px; background:var(--accent); color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:14px;">Correct data points →</button>
+      <button id="toggleDiag" style="display:none; margin-top:12px; margin-left:8px; padding:10px 16px; background:#fff; color:#333; border:1px solid var(--border); border-radius:8px; cursor:pointer; font-size:14px;">Show legend fit diagnostic</button>
+      <button id="toggleMasks" style="display:none; margin-top:12px; margin-left:8px; padding:10px 16px; background:#fff; color:#333; border:1px solid var(--border); border-radius:8px; cursor:pointer; font-size:14px;">Show colour masks</button>
+      <div id="correctItersWrap" style="display:none; margin-top:12px; margin-left:8px; font-size:13px; color:#333;">
+        <label>Step 5 stopping:
+          <select id="step5StopPolicy" style="padding:4px;" aria-describedby="step5StopHint">
+            <option value="manual">Manual iteration limit</option>
+            <option value="auto">Automatic stop (maximum 20)</option>
+          </select>
+        </label>
+        <label id="step5ManualIters">Iteration limit: <input id="bwCorrectIters" type="number" min="1" max="50" value="5" style="width:60px; padding:4px;"></label>
+        <p id="step5StopHint" class="hint" style="margin:6px 0 0;">Uses the chosen limit; native no-improvement stopping remains enabled.</p>
+      </div>
+      <button id="btnStep5" style="display:none; margin-top:12px; margin-left:8px; padding:10px 16px; background:#fff; color:var(--accent); border:1px solid var(--accent); border-radius:8px; cursor:pointer; font-size:14px;">Run Step 5 correction ↻</button>
+      <div id="step5MethodHint" class="hint" style="display:none; margin-top:8px;"></div>
+      <div id="colorStep5Objective" class="hint" style="display:none; margin-top:6px; padding:8px; background:#edf5f0;"></div>
+      <div id="diagBox" style="display:none; margin-top:12px;">
+        <div class="hint" id="legendDiagHint"></div>
+        <img id="diagImg" alt="legend diagnostic" style="max-width:100%; border:1px solid var(--border); border-radius:8px;">
+        <div class="hint" id="legendOverlayWrap" style="margin-top:8px;">Legend locations on the original image:</div>
+        <img id="legendImg" alt="legend table overlay" style="max-width:100%; border:1px solid var(--border); border-radius:8px;">
+      </div>
+      <div id="masksBox" style="display:none; margin-top:12px;">
+        <div class="hint">Per-curve colour masks — each shows only the pixels assigned to that curve (white circles = detected data points). Use this to spot colour bleed between curves.</div>
+        <div id="masksGrid" class="masks"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="saved-edit-workspace">
+      <details id="savedEditPanel" class="saved-edit" aria-label="Edit saved results">
+        <summary>Edit saved results</summary>
+        <p class="hint">Select a saved image + JSON pair to preview the original, saved points and reconstructed plot on the right. Open only when you want to edit.</p>
+        <button id="chooseImageFolder" type="button">Choose edit folder</button>
+        <select id="folderImage" aria-label="Saved image with matching JSON" style="max-width:100%; margin-top:8px;"><option value="">Choose a folder first</option></select>
+        <button id="browseFolderImages" type="button" style="margin-top:8px;">Browse image previews</button>
+        <div class="file-navigation" role="group" aria-label="Browse editable files">
+          <button id="folderFilePrev" type="button" aria-label="Preview previous file" title="Preview previous file" disabled>&lt;</button>
+          <span id="folderFilePosition" class="file-position" role="status" aria-live="polite">0 / 0</span>
+          <button id="folderFileNext" type="button" aria-label="Preview next file" title="Preview next file" disabled>&gt;</button>
+        </div>
+        <p class="hint">Use &lt; / &gt; to browse saved results. All three previews update automatically without opening the editor.</p>
+        <button id="openFolderImage" type="button">Open selected image for editing</button>
+        <p id="sidecarStatus" class="hint" role="status">Edit list: only image + same-name JSON pairs. Select a picture to preview it before opening.</p>
+        <details style="margin-top:12px;" id="loadCorrectionPanel">
+          <summary>Legacy import — select image + JSON manually</summary>
+          <label class="hint">Paired image (PNG/JPG)<input id="correctionImage" type="file" accept="image/png,image/jpeg"></label>
+          <label class="hint">Correction JSON or edit_data.json<input id="correctionData" type="file" accept=".json,application/json"></label>
+          <button id="loadCorrection" type="button">Load image + data</button>
+          <p class="hint">Use the exact saved image. A correction JSON preserves Step-5 evidence; a plain edit_data.json supports manual editing only. CSV/XLSX are not correction-session files.</p>
+          <div id="correctionLoadStatus" class="hint" role="status"></div>
+        </details>
+      </details>
+    <section id="folderResultPreview" class="panel folder-result-preview" aria-label="Saved result preview" hidden>
+      <h2 style="font-size:16px; margin:0 0 6px;">Saved result preview</h2>
+      <p id="folderPreviewStatus" class="hint" role="status" aria-live="polite"></p>
+      <div class="saved-preview-grid">
+        <figure><figcaption>Original</figcaption><img id="folderPreview" alt="Selected original image" hidden></figure>
+        <figure><figcaption>Overlay — saved points</figcaption><canvas id="folderOverlayPreview" aria-label="Saved points over the working image" hidden></canvas></figure>
+        <figure><figcaption>Reconstructed plot</figcaption><canvas id="folderReconPreview" aria-label="Reconstructed plot from saved points" hidden></canvas></figure>
+      </div>
+      <p id="folderPreviewDetails" class="hint"></p>
+    </section>
+  </div>
+
+</main>
+  <!-- Dedicated editor: controls stay visible while only plot/table panes scroll. -->
+  <section class="panel" id="editor" aria-label="Point editor" style="display:none;">
+    <header class="editor-header">
+    <button id="closeEditor" type="button">← Back</button>
+    <h1>Correct data points</h1>
+    <div id="editorFileNavigation" class="file-navigation" role="group" aria-label="Open adjacent editable file" hidden>
+      <button id="editorFilePrev" type="button" aria-label="Edit previous file" title="Open previous file's saved result" disabled>&lt;</button>
+      <span id="editorFilePosition" class="file-position" role="status" aria-live="polite"></span>
+      <button id="editorFileNext" type="button" aria-label="Edit next file" title="Open next file's saved result" disabled>&gt;</button>
+    </div>
+    </header>
+    <div class="editor-toolbar">
+    <div class="tool" id="curvePicker"></div>
+    <div class="tool">
+      <button id="edToolEdit" type="button" class="active" aria-pressed="true">Edit points</button>
+      <button id="edToolPan" type="button" aria-pressed="false" title="Drag anywhere, including on points, to move the view">Pan</button>
+      <button id="edDelete">Remove selected</button>
+      <button id="edReset">Reset to loaded result</button>
+      <button id="edRecompute" style="background:var(--accent); color:#fff; border:none;">Recompute &amp; reconstruct</button>
+      <span style="margin-left:12px;">Zoom:</span>
+      <button id="edZoomOut" title="Zoom out">&#8722;</button>
+      <span id="edZoomLabel" class="hint" style="min-width:42px; display:inline-block; text-align:center;">100%</span>
+      <button id="edZoomIn" title="Zoom in">&#43;</button>
+      <button id="edZoomFit" title="Fit">Fit</button>
+      <span class="hint" id="edStatus"></span>
+    </div>
+    <p class="hint">Left-drag empty space to pan · drag a dot to move it · click empty space to add a point · Delete removes the selected dot. Pan lets you drag anywhere. +/&#8722; or Ctrl+scroll zooms; Fit shows the whole image.</p>
+    </div>
+    <div class="editor-plots">
+      <div class="canvaswrap">
+        <div class="hint">Original + editable points</div>
+        <div id="editScroll" tabindex="0" role="region" aria-label="Scrollable point editor">
+          <div id="editSurface">
+            <canvas id="editCanvas" width="600" height="400" tabindex="0" aria-label="Editable plot"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="canvaswrap">
+        <div class="hint" id="editorReconCaption">Reconstructed plot (live)</div>
+        <div class="editor-recon-view"><canvas id="reconCanvas" width="600" height="400"></canvas></div>
+      </div>
+    </div>
+    <footer class="editor-footer">
+    <div class="tool">
+      <button id="edCsv" style="background:#185FA5; color:#fff; border:none; padding:10px 16px; border-radius:8px; cursor:pointer;">Download corrected data (.csv)</button>
+      <button id="edSaveCorrection" type="button">Save result versions (.json)</button>
+      <button id="edSaveExcel" type="button">Save Excel (current edits)</button>
+    </div>
+    <details id="edCoordinates"><summary>Coordinates table</summary><div id="edTableWrap"></div></details>
+    </footer>
+  </section>
+
+<dialog id="imageBrowser" aria-labelledby="imageBrowserTitle">
+  <div class="browser-toolbar">
+    <h2 id="imageBrowserTitle" style="font-size:18px; margin:0;">Saved plots — select a picture</h2>
+    <button id="closeImageBrowser" type="button">Close</button>
+  </div>
+  <div class="browser-toolbar">
+    <input id="imageBrowserSearch" type="search" placeholder="Filter by filename" aria-label="Filter saved plot images">
+    <button id="imageBrowserPrev" type="button">Previous</button>
+    <span id="imageBrowserCount" class="hint" role="status"></span>
+    <button id="imageBrowserNext" type="button">Next</button>
+  </div>
+  <p class="hint">Original images only. Click a thumbnail to select and preview; then open it for editing. JSON integrity is checked when opening.</p>
+  <div id="imageBrowserGrid" class="image-thumbnails"></div>
+</dialog>
+<dialog id="versionBrowser" aria-labelledby="versionBrowserTitle">
+  <h2 id="versionBrowserTitle" style="font-size:18px;margin:0;">Choose a saved result version</h2>
+  <p class="hint">Initial detection, Step-5 results and manual edits are kept separately. Opening a version does not rerun detection or change another version.</p>
+  <select id="versionSelect" aria-label="Saved result version"></select>
+  <p id="versionDetails" class="hint" role="status"></p>
+  <canvas id="versionPreview" aria-label="Selected result points over the working image"></canvas>
+  <div class="browser-toolbar">
+    <button id="openVersion" type="button">Open this version for editing</button>
+    <button id="cancelVersion" type="button">Cancel</button>
+  </div>
+</dialog>
+<script src="/image_sidecar_v46.js"></script>
+<script id="bwImageState">
+// Pure image/request state: browser Blob bytes are immutable. A prepared PNG
+// never becomes the source for another preparation request.
+class BwImageState {
+  constructor() {
+    this.mode = 'color'; this.serial = 0; this.revision = 0; this.busy = null;
+    this.originalBlob = null; this.currentBlob = null;
+    this.originalSize = null; this.currentSize = null;
+    this.percent = 100; this.angle = 0;
+  }
+  static percent(value) {
+    if (String(value).trim() === '') throw new Error('Resolution must be between 1 and 100%.');
+    const number = Number(value);
+    if (!Number.isFinite(number) || number < 1 || number > 100) throw new Error('Resolution must be between 1 and 100%.');
+    return number;
+  }
+  static angle(value) {
+    const number = Number(value);
+    if (!Number.isFinite(number)) throw new Error('Rotation must be finite.');
+    return ((number % 360) + 360) % 360;
+  }
+  current(token) { return !!token && token.serial === this.serial; }
+  begin(kind) {
+    if (this.busy) throw new Error('Wait for the current operation to finish.');
+    this.busy = kind;
+    return {serial: ++this.serial, revision: this.revision, kind, mode: this.mode};
+  }
+  upload(blob) {
+    if (this.busy === 'digitize') throw new Error('Wait for detection to finish before uploading.');
+    this.busy = null; this.revision++;
+    this.originalBlob = blob; this.currentBlob = null;
+    this.originalSize = this.currentSize = null; this.percent = 100; this.angle = 0;
+    return this.begin('upload');
+  }
+  commitUpload(token, size) {
+    if (!this.current(token) || token.kind !== 'upload') return false;
+    this.originalSize = {...size}; this.currentSize = {...size}; this.currentBlob = this.originalBlob;
+    return true;
+  }
+  prepare(percent, angle) {
+    if (!this.currentBlob) throw new Error('Load an image first.');
+    const values = {percent: BwImageState.percent(percent), angle: BwImageState.angle(angle)};
+    return {...this.begin('prepare'), ...values, source: this.originalBlob};
+  }
+  commitPrepared(token, blob, size) {
+    if (!this.current(token) || token.kind !== 'prepare') return false;
+    this.currentBlob = blob; this.currentSize = {...size};
+    this.percent = token.percent; this.angle = token.angle; this.revision++;
+    return true;
+  }
+  reset() {
+    if (this.busy) throw new Error('Wait for the current operation to finish.');
+    this.serial++; this.revision++; this.percent = 100; this.angle = 0;
+    this.currentBlob = this.originalBlob;
+    this.currentSize = this.originalSize ? {...this.originalSize} : null;
+  }
+  setMode(mode) {
+    if (!['bw', 'color'].includes(mode)) throw new Error('Unknown mode.');
+    if (this.busy) throw new Error('Wait for the current operation to finish.');
+    if (mode === this.mode) return false;
+    // Preparation and pixel geometry are shared by both detectors. Changing
+    // detector mode invalidates request ownership, not the displayed image.
+    this.mode = mode; this.serial++;
+    return true;
+  }
+  digitize() {
+    if (!this.currentBlob) throw new Error('Load an image first.');
+    return {...this.begin('digitize'), blob: this.currentBlob};
+  }
+  finish(token) { if (this.current(token)) this.busy = null; }
+}
+globalThis.BwImageState = BwImageState;
+</script>
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let img = new Image();
+let imgLoaded = false;
+let tool = null;
+let boxes = { legend: null, plot: null, scale: null };
+let drag = null;
+let fileBlob = null;
+let APP_MODE = 'color';                // 'color' | 'bw'
+const imageState = new BwImageState();
+let originalImage = null;
+let originalUrl = null;
+let preparedUrl = null;
+let prepareController = null;
+const sidecar = new ImageSidecarV46.ImageSidecar();
+let editImageNames=[], imageBrowserPage=0, thumbnailUrls=[], thumbnailSerial=0;
+let folderPreviewUrl=null, folderPreviewSerial=0;
+let folderNavigationBusy=false, folderEditorSource=null, folderEditorDirectory=null;
+let savedFolderState=null;
+const IMAGE_BROWSER_PAGE_SIZE=12;
+
+function syncImageControls() {
+  const busy = !!imageState.busy || folderNavigationBusy;
+  document.getElementById('run').disabled = busy || !imgLoaded;
+  document.getElementById('btnStep5').disabled = busy || !imgLoaded || !window._lastJobId;
+  const stopPolicy = document.getElementById('step5StopPolicy');
+  if (stopPolicy) stopPolicy.disabled = busy;
+  document.getElementById('bwCorrectIters').disabled = busy || stopPolicy?.value === 'auto';
+  for (const id of ['fileInput', 'modeColor', 'modeBw', 'colorSeriesMode', 'correctionImage', 'correctionData', 'loadCorrection', 'chooseImageFolder', 'folderImage', 'openFolderImage']) document.getElementById(id).disabled = busy;
+  document.getElementById('openFolderImage').disabled = busy || !editImageNames.includes(document.getElementById('folderImage').value);
+  document.getElementById('browseFolderImages').disabled = busy || !editImageNames.length;
+  document.getElementById('saveCorrection').disabled = busy || !window._lastJobId;
+  document.getElementById('downloadXlsx').disabled = busy || !window._lastJobId;
+  document.getElementById('edSaveExcel').disabled = busy || !window._lastJobId;
+  document.querySelectorAll('#bwImagePrep button, #bwImagePrep input').forEach(el => {
+    el.disabled = busy || !imgLoaded;
+  });
+  for (const id of ['btnLegend', 'btnPlot', 'btnScale', 'btnClear', 'useScaleBox']) {
+    document.getElementById(id).disabled = busy || !imgLoaded;
+  }
+  for (const id of ['xMin', 'xMax', 'yMin', 'yMax', 'xLog', 'yLog', 'openEditor', 'clearHistory']) {
+    document.getElementById(id).disabled = busy;
+  }
+  document.querySelectorAll('#editor button').forEach(el => { el.disabled = busy; });
+  syncFolderNavigation();
+  const dims = size => size ? `${size.width} × ${size.height} px` : '—';
+  document.getElementById('bwImageDimensions').textContent =
+    `Original: ${dims(imageState.originalSize)} · Current: ${dims(imageState.currentSize)}`;
+  document.getElementById('bwImageAngle').textContent = `${imageState.angle}° clockwise · ${imageState.percent}% applied`;
+}
+
+function clearDetectionState() {
+  window._lastJobId = null; window.lastData = null; window._step5Count = 0;
+  clearEditorState();
+  document.getElementById('resultsHistory').innerHTML = '';
+  document.getElementById('summary').textContent = '';
+  document.getElementById('masksGrid').innerHTML = '';
+  document.getElementById('downloadXlsx').removeAttribute('href');
+  for (const id of ['result', 'diagBox', 'masksBox', 'correctItersWrap', 'step5MethodHint', 'inferenceDiagnostic']) {
+    document.getElementById(id).style.display = 'none';
+  }
+  for (const id of ['openEditor', 'toggleDiag', 'toggleMasks', 'btnStep5']) {
+    const el = document.getElementById(id); el.style.display = 'none'; el.onclick = null;
+  }
+  configureLegendDiagnostic({}, () => false);
+  configureTriangleDiagnostic({}, () => false);
+}
+
+function configureTriangleDiagnostic(data, resultCurrent) {
+  const box = document.getElementById('triangleGuardDiagnostic');
+  const caption = document.getElementById('triangleGuardSummary');
+  const text = document.getElementById('triangleGuardText');
+  const img = document.getElementById('triangleGuardImg');
+  const guard = data.triangle_errorbar;
+  box.ontoggle = null; box.open = false;
+  img.onerror = null; img.removeAttribute('src'); img.style.display = 'none';
+  for (const [id, url] of [['triangleGuardWeakLink', data.triangle_errorbar_weak_url],
+                          ['triangleGuardDiagnosticLink', data.triangle_errorbar_diagnostic_url]]) {
+    const link = document.getElementById(id);
+    link.style.display = url ? 'inline' : 'none';
+    if (url) link.href = url; else link.removeAttribute('href');
+  }
+  box.style.display = guard && guard.status !== 'not_applicable' && guard.status !== 'disabled' ? 'block' : 'none';
+  caption.textContent = 'Triangle / error-bar check — automatic';
+  text.textContent = '';
+  if (!guard) return;
+  if (guard.status !== 'completed') {
+    text.textContent = guard.reason || 'Check incomplete; inspect the detection log.';
+    return;
+  }
+  caption.textContent += ': ' + (guard.weak_suppressed_count || 0) + ' weak suppressed';
+  text.textContent = 'Initial detection (before Step 5): ' + guard.before_active_count + ' → ' +
+    guard.after_active_count + ' active. Checked ' + guard.checked_candidates + ' triangle windows.\n' +
+    'Cyan rings = active markers; magenta × = weak suppressed shape/error-bar candidates. ' +
+    'Weak candidates are retained for review, not admitted as strong Step-5 evidence. Original pixels are unchanged.\n' +
+    'Legend priors: ' + Object.entries(guard.priors || {}).filter(([, p]) => p.applicable)
+      .map(([id, p]) => id + ': ' + p.orientation + ' triangle (' + p.strength + ')').join('; ');
+  if (guard.independent_shape_checked !== undefined) {
+    text.textContent += '\nRequired triangle ink is checked independently of T-shape confidence. ' +
+      'Other-color occlusion and ignored pixels are excluded, not counted as positive evidence. ' +
+      'Independent checks: ' + guard.independent_shape_checked + '; additional score reductions: ' +
+      (guard.independent_shape_reduced || 0) + '.';
+  }
+  if (guard.net_body_reduced !== undefined) {
+    text.textContent += '\nTriangle-only body support minus unexplained missing ink also caps the final score. ' +
+      'T/guide ink is not marker evidence; net-body score reductions: ' + guard.net_body_reduced + '.';
+  }
+  let loaded = false;
+  box.ontoggle = () => {
+    if (!box.open || loaded || !resultCurrent() || imageState.busy || !data.triangle_errorbar_overlay_url) return;
+    loaded = true; img.style.display = 'block';
+    img.onerror = () => {
+      if (!resultCurrent()) return;
+      img.style.display = 'none'; text.textContent += '\nCould not load the saved review overlay.';
+    };
+    img.src = data.triangle_errorbar_overlay_url;
+  };
+}
+
+function configureLegendDiagnostic(data, resultCurrent) {
+  const toggle = document.getElementById('toggleDiag');
+  const box = document.getElementById('diagBox');
+  const hint = document.getElementById('legendDiagHint');
+  const diag = document.getElementById('diagImg');
+  const overlay = document.getElementById('legendImg');
+  const overlayCaption = document.getElementById('legendOverlayWrap');
+  const dUrl = data.legend_diagnostic_url;
+  const oUrl = data.legend_overlay_url;
+  for (const img of [diag, overlay]) {
+    img.onerror = null;
+    img.removeAttribute('src');
+    img.style.display = 'none';
+  }
+  box.style.display = 'none';
+  overlayCaption.style.display = 'none';
+  toggle.onclick = null;
+  toggle.style.display = dUrl || oUrl ? 'inline-block' : 'none';
+  toggle.textContent = 'Show legend fit diagnostic';
+  hint.textContent = data.legend_diagnostic_kind === 'color-group-templates'
+    ? 'Colour-group v46: source legend swatch | actual detection template | separate series ID. Supported line + symbol decompositions remove connector ink from the model, including dashed lines through open circles. Uncertain decompositions retain an observed fallback.'
+    : data.legend_diagnostic_kind === 'bw-observed-templates'
+    ? 'B&W v46: original legend boxes, source swatches, actual soft-ink templates and binary shape masks. Green = swatch box; cyan = marker extent. unknown_marker remains a separate detected series, not a rejected swatch.'
+    : 'Colour legend table: green = accepted colour swatch; cyan = accepted grey/black key; orange = near-neutral rejection; yellow = missing text label; red = size/shape rejection.';
+  if (!dUrl && !oUrl) return;
+  let loaded = false;
+  toggle.onclick = () => {
+    if (!resultCurrent() || imageState.busy) return;
+    const open = box.style.display === 'none';
+    box.style.display = open ? 'block' : 'none';
+    toggle.textContent = open ? 'Hide legend fit diagnostic' : 'Show legend fit diagnostic';
+    if (!open || loaded) return;
+    const load = (img, url, caption) => {
+      if (!url) return;
+      img.onerror = () => {
+        if (!resultCurrent()) return;
+        img.style.display = 'none';
+        if (caption) caption.style.display = 'none';
+        hint.textContent += ' A saved diagnostic image could not be loaded; run detection again.';
+      };
+      img.style.display = 'block';
+      if (caption) caption.style.display = 'block';
+      img.src = url + (url.includes('?') ? '&' : '?') + 't=' + Date.now();
+    };
+    load(diag, dUrl);
+    load(overlay, oUrl, overlayCaption);
+    loaded = true;
+  };
+}
+
+function clearEditorState() {
+  closeEditorView();
+  editorLoadSerial++;
+  window._editorJobId = null;
+  window._edOpenArg = null; window._edRows = null;
+  ED = null; edDragging = null; edSelPt = null; edViewFilter = null;
+  document.getElementById('resumeEditor').hidden = true;
+  edImg.onload = null; edImg.onerror = null; edImg = new Image();
+  document.getElementById('curvePicker').innerHTML = '';
+  document.getElementById('edTableWrap').innerHTML = '';
+  document.getElementById('editor').style.display = 'none';
+}
+
+function currentResultGuard() {
+  // Result ownership survives a failed preparation/run, which leaves the old
+  // image/result valid; successful replacement or geometry changes invalidate it.
+  const data = window.lastData, revision = imageState.revision;
+  return () => !!data && window.lastData === data && imageState.revision === revision;
+}
+
+function clearImageGeometry() {
+  boxes = {legend: null, plot: null, scale: null}; drag = null; tool = null;
+  for (const id of ['btnLegend', 'btnPlot', 'btnScale']) document.getElementById(id).classList.remove('active');
+  clearDetectionState(); updateInfo(); scaleBoxUpdate();
+}
+
+function showImage(loaded, blob) {
+  img = loaded; fileBlob = blob; imgLoaded = true;
+  const previewScale = Math.min(1, 600 / img.width);
+  canvas.width = Math.max(1, Math.round(img.width * previewScale));
+  canvas.height = Math.max(1, Math.round(img.height * previewScale));
+  redraw();
+}
+
+function decodeImage(url) {
+  return new Promise((resolve, reject) => {
+    const loaded = new Image();
+    loaded.onload = () => resolve(loaded);
+    loaded.onerror = () => reject(new Error('The image could not be decoded.'));
+    loaded.src = url;
+  });
+}
+
+function revokePreparedUrl() {
+  if (preparedUrl) URL.revokeObjectURL(preparedUrl);
+  preparedUrl = null;
+}
+
+function setMode(m) {
+  if (imageState.busy || m === APP_MODE) return;
+  imageState.setMode(m);
+  APP_MODE = m;
+  document.getElementById('modeColor').classList.toggle('modebtn-on', m === 'color');
+  document.getElementById('modeBw').classList.toggle('modebtn-on', m === 'bw');
+  const bw = (m === 'bw');
+  document.getElementById('bwPanel').style.display = bw ? 'block' : 'none';
+  document.getElementById('colorSeriesPanel').style.display = bw ? 'none' : 'block';
+  // Legend region: colour uses it for the palette; B&W extracts and classifies
+  // the swatches automatically and excludes the legend from plot detection.
+  // Keep the button compact; the meaning is conveyed by the mode hint below.
+  const ocrHint = document.getElementById('axisOcrHint');
+  if (ocrHint) ocrHint.style.display = bw ? 'none' : 'inline';
+  clearDetectionState();
+  updateInfo();
+  syncImageControls();
+}
+document.getElementById('modeColor').addEventListener('click', () => setMode('color'));
+document.getElementById('modeBw').addEventListener('click', () => setMode('bw'));
+document.getElementById('colorSeriesMode').addEventListener('change', () => {
+  // A changed detector must not resume the previous detector's correction state.
+  imageState.serial++;
+  clearDetectionState();
+  syncImageControls();
+});
+
+const COLORS = { legend: '#d64545', plot: '#1d9e75', scale: '#e08a1e' };
+
+async function loadSourceImage(f) {
+  if (!f || (imageState.busy && !['upload','prepare'].includes(imageState.busy))) return;
+  if (prepareController) prepareController.abort();
+  const token = imageState.upload(f);
+  imgLoaded = false; fileBlob = null; originalImage = null;
+  clearImageGeometry(); ctx.clearRect(0, 0, canvas.width, canvas.height);
+  revokePreparedUrl();
+  if (originalUrl) URL.revokeObjectURL(originalUrl);
+  const url = URL.createObjectURL(f);
+  originalUrl = url;
+  document.getElementById('bwResolution').value = '100';
+  document.getElementById('bwImageStatus').textContent = 'Loading original image…';
+  syncImageControls();
+  try {
+    const loaded = await decodeImage(url);
+    if (!imageState.commitUpload(token, {width: loaded.width, height: loaded.height})) return;
+    if(!await sidecar.bind(f,()=>imageState.current(token)))return;
+    originalImage = loaded; showImage(loaded, imageState.currentBlob);
+    document.getElementById('bwImageStatus').textContent = 'Original loaded. Prepare the image, then draw regions.';
+  } catch (error) {
+    if (!imageState.current(token)) return;
+    imageState.originalBlob = null; imageState.currentBlob = null;
+    sidecar.source=null;sidecar.sourceDigest=null;
+    if (originalUrl === url) { URL.revokeObjectURL(url); originalUrl = null; }
+    document.getElementById('bwImageStatus').textContent = error.message;
+    throw error;
+  } finally {
+    if (imageState.current(token)) { imageState.finish(token); syncImageControls(); }
+  }
+}
+
+async function openSourceImage(file) {
+  if (!file || (imageState.busy && !['upload','prepare'].includes(imageState.busy))) return;
+  // This button explicitly starts a new detection input. Saved edits are opened
+  // from the paired-image browser, which never falls back to detection.
+  try {
+    await loadSourceImage(file);
+  } catch(error) { alert('Cannot open image: '+error.message); }
+}
+
+async function chooseImageFolder() {
+  if(imageState.busy)return;
+  if(!window.showDirectoryPicker) { alert('Same-folder access requires a supported browser such as Chrome or Edge on localhost. Use legacy import for manual image + JSON loading.'); return; }
+  const token=imageState.begin('folder');syncImageControls();
+  try {
+    const directory=await window.showDirectoryPicker({id:'chartocode-images',mode:'readwrite'});
+    await selectImageDirectory(directory);
+  } catch(error) { if(error.name!=='AbortError')alert('Folder access failed: '+error.message); }
+  finally { imageState.finish(token);syncImageControls(); }
+}
+
+async function selectImageDirectory(directory) {
+  const previous=sidecar.directory===directory ? document.getElementById('folderImage').value : '';
+  const names=await sidecar.select(directory);
+  editImageNames=names;
+  imageBrowserPage=0;clearThumbnailUrls();clearFolderPreview();
+  const select=document.getElementById('folderImage');select.replaceChildren();
+  const placeholder=document.createElement('option');placeholder.value='';placeholder.textContent=names.length ? 'Select a saved image' : 'No image + JSON pairs';select.appendChild(placeholder);
+  for(const name of names) { const option=document.createElement('option');option.value=name;option.textContent=name;select.appendChild(option); }
+  select.value=names.includes(previous) ? previous : (names[0] || '');
+  document.getElementById('sidecarStatus').textContent=directory.name+': '+names.length+' image + JSON pairs. Images without same-name JSON are not listed for editing.';
+  await previewFolderImage();
+}
+
+function syncFolderNavigation() {
+  const busy=!!imageState.busy || folderNavigationBusy;
+  const previewIndex=editImageNames.indexOf(document.getElementById('folderImage').value);
+  const editorIndex=folderEditorSource===sidecar.source && folderEditorDirectory===sidecar.directory
+    ? editImageNames.indexOf(folderEditorSource?.name) : -1;
+  for(const [prefix,index] of [['folder',previewIndex],['editor',editorIndex]]) {
+    document.getElementById(prefix+'FilePrev').disabled=busy || index<=0;
+    document.getElementById(prefix+'FileNext').disabled=busy || !editImageNames.length || index>=editImageNames.length-1;
+    document.getElementById(prefix+'FilePosition').textContent=(index+1)+' / '+editImageNames.length+
+      (index>=0 ? ' · '+editImageNames[index] : '');
+  }
+  document.getElementById('editorFileNavigation').hidden=editorIndex<0 || !window._lastJobId;
+}
+
+async function moveFolderFile(step, openForEditing=false) {
+  if(imageState.busy || folderNavigationBusy || ![-1,1].includes(step))return;
+  const name=openForEditing ? folderEditorSource?.name : document.getElementById('folderImage').value;
+  if(openForEditing && (folderEditorSource!==sidecar.source || folderEditorDirectory!==sidecar.directory))return;
+  const index=editImageNames.indexOf(name), next=index+step;
+  if((openForEditing && index<0) || next<0 || next>=editImageNames.length)return;
+  if(openForEditing) return openFolderImage(editImageNames[next],true);
+  document.getElementById('folderImage').value=editImageNames[next];
+  await previewFolderImage();
+}
+
+function markFolderResultSaved() {
+  savedFolderState={jobId:window._lastJobId,editData:JSON.stringify(currentEdForSave())};
+}
+
+function hasUnsavedFolderChanges() {
+  if(!window._lastJobId)return false;
+  if(savedFolderState?.jobId!==window._lastJobId)return true;
+  const edits=currentEdForSave();
+  return !!edits && JSON.stringify(edits)!==savedFolderState.editData;
+}
+
+function clearFolderPreview() {
+  folderPreviewSerial++;
+  if(folderPreviewUrl)URL.revokeObjectURL(folderPreviewUrl);
+  folderPreviewUrl=null;
+  const preview=document.getElementById('folderPreview');preview.onload=null;preview.onerror=null;
+  preview.removeAttribute('src');preview.hidden=true;
+  document.getElementById('folderPreviewStatus').textContent='';
+  document.getElementById('folderPreviewDetails').textContent='';
+  document.getElementById('folderResultPreview').hidden=true;
+  for(const id of ['folderOverlayPreview','folderReconPreview']) {
+    const canvas=document.getElementById(id);canvas.width=1;canvas.height=1;canvas.hidden=true;
+  }
+}
+
+async function previewFolderImage() {
+  clearFolderPreview();syncImageControls();
+  const name=document.getElementById('folderImage').value;
+  if(!editImageNames.includes(name))return;
+  const serial=folderPreviewSerial;
+  const current=()=>serial===folderPreviewSerial;
+  document.getElementById('folderResultPreview').hidden=false;
+  const status=document.getElementById('folderPreviewStatus');status.textContent=name+' · Loading saved preview…';
+  try {
+    const pair=await sidecar.pair(name);
+    if(!current())return;
+    folderPreviewUrl=URL.createObjectURL(pair.image);
+    const original=await decodeImage(folderPreviewUrl);
+    if(!current())return;
+    const preview=document.getElementById('folderPreview');preview.src=folderPreviewUrl;preview.hidden=false;
+    const saved=await ImageSidecarV46.readPreview(pair.image,pair.json);
+    if(!current())return;
+    const working=saved.workingImage ? await decodeImage('data:image/png;base64,'+saved.workingImage) : original;
+    if(!current())return;
+    const count=drawFolderResultPreview(working,saved.editData);
+    status.textContent=name+' · '+saved.version+' · '+count+' points';
+    document.getElementById('folderPreviewDetails').textContent=
+      'Original: '+original.width+' × '+original.height+' px. '+
+      (saved.workingImage ? 'Overlay uses the saved prepared image: '+working.width+' × '+working.height+' px. ' : '')+
+      'Preview of the saved JSON; current editor changes are kept. '+
+      (saved.sourceVerified ? '' : 'Legacy JSON: image dimensions checked; verify the pairing. ')+
+      document.getElementById('folderReconPreview').title;
+  } catch(error) {
+    if(current()) {
+      status.textContent=name+' · Saved preview unavailable: '+error.message;
+      for(const id of ['folderOverlayPreview','folderReconPreview'])document.getElementById(id).hidden=true;
+    }
+  }
+}
+
+function drawFolderResultPreview(image,ed) {
+  if(ed.image?.width!==image.width || ed.image?.height!==image.height)
+    throw new Error('Saved coordinates do not match the image dimensions.');
+  if(ed.curves.length>200)throw new Error('Too many saved series.');
+  const cal=ed.calibration || null;
+  if(cal)for(const axis of ['x','y']) {
+    const a=cal[axis];
+    if(!a || !['p0','p1','v0','v1'].every(key=>Number.isFinite(a[key])) || a.p0===a.p1 ||
+       (a.log && Math.min(a.v0,a.v1)<=0))throw new Error('Invalid saved axis calibration.');
+  }
+  const rows=[];
+  for(const curve of ed.curves) {
+    if(!Array.isArray(curve.rgb) || curve.rgb.length!==3 || !curve.rgb.every(v=>Number.isFinite(v)&&v>=0&&v<=255) ||
+       !Array.isArray(curve.points))throw new Error('Invalid saved series.');
+    for(const p of curve.points) {
+      if(!p || !Number.isFinite(p.x) || !Number.isFinite(p.y) || p.x<0 || p.y<0 || p.x>=image.width || p.y>=image.height)
+        throw new Error('Invalid saved point coordinates.');
+      if(rows.length>=100000)throw new Error('Too many saved points.');
+      rows.push({label:curve.label||curve.name,name:curve.name,rgb:curve.rgb,px:p.x,py:p.y,
+        dx:cal ? pxToData(p.x,cal.x) : null,dy:cal ? pxToData(p.y,cal.y) : null,
+        curve,hypothesis:p.state==='active_hypothesis'});
+    }
+  }
+  const scale=Math.min(1,1000/image.width,700/image.height);
+  const overlay=document.getElementById('folderOverlayPreview');
+  overlay.width=Math.max(1,Math.round(image.width*scale));overlay.height=Math.max(1,Math.round(image.height*scale));
+  const c=overlay.getContext('2d');c.drawImage(image,0,0,overlay.width,overlay.height);
+  for(const p of rows) {
+    c.beginPath();c.arc(p.px*overlay.width/image.width,p.py*overlay.height/image.height,Math.max(3,4*scale),0,2*Math.PI);
+    c.strokeStyle='#fff';c.lineWidth=4;c.stroke();
+    c.strokeStyle=rgbCss(p.rgb);c.lineWidth=2;c.stroke();
+    if(p.hypothesis) {
+      c.save();c.setLineDash([3,2]);c.strokeStyle='#b000bf';
+      c.beginPath();c.arc(p.px*overlay.width/image.width,p.py*overlay.height/image.height,Math.max(6,7*scale),0,2*Math.PI);c.stroke();c.restore();
+    }
+  }
+  const bounds=cal ? {xmin:Math.min(cal.x.v0,cal.x.v1),xmax:Math.max(cal.x.v0,cal.x.v1),
+    ymin:Math.min(cal.y.v0,cal.y.v1),ymax:Math.max(cal.y.v0,cal.y.v1)} : null;
+  const recon=document.getElementById('folderReconPreview');
+  drawReconStandalone(rows,recon,overlay.width,overlay.height,cal,bounds);
+  overlay.hidden=false;recon.hidden=false;
+  return rows.length;
+}
+
+function clearThumbnailUrls() {
+  thumbnailSerial++;
+  for(const url of thumbnailUrls)URL.revokeObjectURL(url);
+  thumbnailUrls=[];
+  document.getElementById('imageBrowserGrid').replaceChildren();
+}
+
+async function renderImageBrowser() {
+  clearThumbnailUrls();
+  const serial=thumbnailSerial;
+  const query=document.getElementById('imageBrowserSearch').value.trim().toLocaleLowerCase();
+  const names=editImageNames.filter(name=>name.toLocaleLowerCase().includes(query));
+  const pages=Math.max(1,Math.ceil(names.length/IMAGE_BROWSER_PAGE_SIZE));
+  imageBrowserPage=Math.min(Math.max(0,imageBrowserPage),pages-1);
+  document.getElementById('imageBrowserPrev').disabled=imageBrowserPage===0;
+  document.getElementById('imageBrowserNext').disabled=imageBrowserPage===pages-1;
+  document.getElementById('imageBrowserCount').textContent=names.length+' paired images · '+(imageBrowserPage+1)+' / '+pages;
+  const grid=document.getElementById('imageBrowserGrid');
+  if(!names.length) { grid.textContent='No image + JSON pairs match.';return; }
+  for(const name of names.slice(imageBrowserPage*IMAGE_BROWSER_PAGE_SIZE,(imageBrowserPage+1)*IMAGE_BROWSER_PAGE_SIZE)) {
+    const card=document.createElement('button');card.type='button';card.className='image-thumbnail';
+    card.setAttribute('aria-pressed',String(document.getElementById('folderImage').value===name));
+    card.setAttribute('aria-label','Select '+name);
+    const img=document.createElement('img');img.alt=name;img.decoding='async';
+    const label=document.createElement('span');label.textContent=name;
+    const status=document.createElement('span');status.className='hint';status.textContent='Loading…';
+    card.appendChild(img);card.appendChild(label);card.appendChild(status);grid.appendChild(card);
+    card.onclick=()=>{
+      if(imageState.busy)return;
+      document.getElementById('folderImage').value=name;
+      document.getElementById('imageBrowser').close();previewFolderImage();
+    };
+    // Sequential bounded loading avoids decoding an entire high-resolution folder.
+    try {
+      const file=await sidecar.image(name);
+      if(serial!==thumbnailSerial)return;
+      const url=URL.createObjectURL(file);thumbnailUrls.push(url);
+      img.onload=()=>{if(serial===thumbnailSerial)status.textContent=img.naturalWidth+' × '+img.naturalHeight+' px';};
+      img.onerror=()=>{if(serial===thumbnailSerial)status.textContent='Preview unavailable';};
+      img.src=url;
+    } catch(error) { if(serial!==thumbnailSerial)return;status.textContent='Preview unavailable'; }
+  }
+}
+
+function browseFolderImages() {
+  if(imageState.busy || !editImageNames.length)return;
+  document.getElementById('imageBrowserSearch').value='';imageBrowserPage=0;
+  document.getElementById('imageBrowser').showModal();renderImageBrowser();
+}
+
+async function openFolderImage(name=document.getElementById('folderImage').value, useSavedVersion=false) {
+  if(imageState.busy || folderNavigationBusy)return;
+  if(!editImageNames.includes(name))return;
+  if(hasUnsavedFolderChanges() && !confirm('The current result has unsaved changes. Open another saved result and discard these changes? Choose Cancel to save result versions (.json) first.'))return false;
+  folderNavigationBusy=true;
+  const token=imageState.begin('reading');syncImageControls();
+  try {
+    const pair=await sidecar.pair(name);
+    if(!pair.json)throw new Error('The matching JSON is missing. Choose the edit folder again to refresh the list. Detection was not run.');
+    imageState.finish(token);
+    if(await loadCorrectionPair(pair.image,pair.json,useSavedVersion)===false)return false;
+    folderEditorSource=sidecar.source;folderEditorDirectory=sidecar.directory;
+    document.getElementById('folderImage').value=name;
+    await previewFolderImage();
+    document.getElementById('sidecarStatus').textContent=name+' + '+pair.json.name+' loaded. Detection skipped.';
+    return true;
+  } catch(error) { alert('Cannot open saved image: '+error.message); }
+  finally { imageState.finish(token);folderNavigationBusy=false;syncImageControls(); }
+}
+
+document.getElementById('fileInput').addEventListener('change', e => openSourceImage(e.target.files[0]));
+document.getElementById('chooseImageFolder').addEventListener('click',chooseImageFolder);
+document.getElementById('openFolderImage').addEventListener('click',()=>openFolderImage());
+document.getElementById('folderFilePrev').addEventListener('click',()=>moveFolderFile(-1));
+document.getElementById('folderFileNext').addEventListener('click',()=>moveFolderFile(1));
+document.getElementById('editorFilePrev').addEventListener('click',()=>moveFolderFile(-1,true));
+document.getElementById('editorFileNext').addEventListener('click',()=>moveFolderFile(1,true));
+document.getElementById('folderImage').addEventListener('change',previewFolderImage);
+document.getElementById('browseFolderImages').addEventListener('click',browseFolderImages);
+document.getElementById('closeImageBrowser').addEventListener('click',()=>document.getElementById('imageBrowser').close());
+document.getElementById('imageBrowser').addEventListener('close',clearThumbnailUrls);
+document.getElementById('imageBrowserSearch').addEventListener('input',()=>{imageBrowserPage=0;renderImageBrowser();});
+document.getElementById('imageBrowserPrev').addEventListener('click',()=>{imageBrowserPage--;renderImageBrowser();});
+document.getElementById('imageBrowserNext').addEventListener('click',()=>{imageBrowserPage++;renderImageBrowser();});
+
+async function prepareBwImage(percent, angle) {
+  if (imageState.busy || !imgLoaded) return;
+  let token;
+  try { token = imageState.prepare(percent, angle); }
+  catch (error) { alert(error.message); return; }
+  prepareController = new AbortController();
+  const controller = prepareController;
+  const fd = new FormData();
+  fd.append('image', token.source);
+  fd.append('resolution_percent', String(token.percent));
+  fd.append('rotation_degrees', String(token.angle));
+  document.getElementById('bwImageStatus').textContent = 'Preparing from original pixels…';
+  drag = null; syncImageControls();
+  let url = null;
+  try {
+    const response = await fetch('/prepare-image', {method: 'POST', body: fd, signal: controller.signal});
+    if (!imageState.current(token)) return;
+    if (!response.ok) throw new Error(await response.text());
+    const blob = await response.blob();
+    if (!imageState.current(token)) return;
+    if (blob.type.split(';')[0] !== 'image/png') throw new Error('Image preparation did not return a PNG.');
+    url = URL.createObjectURL(blob);
+    const loaded = await decodeImage(url);
+    if (!imageState.commitPrepared(token, blob, {width: loaded.width, height: loaded.height})) return;
+    clearImageGeometry(); revokePreparedUrl(); preparedUrl = url; url = null;
+    showImage(loaded, imageState.currentBlob);
+    document.getElementById('bwResolution').value = String(imageState.percent);
+    document.getElementById('bwImageStatus').textContent = 'Prepared PNG applied. Redraw plot, legend and any scale box before running.';
+  } catch (error) {
+    if (!imageState.current(token) || error.name === 'AbortError') return;
+    document.getElementById('bwImageStatus').textContent = 'Preparation failed; the displayed image is unchanged. ' + error.message;
+    alert('Image preparation failed: ' + error.message);
+  } finally {
+    if (url) URL.revokeObjectURL(url);
+    if (imageState.current(token)) {
+      imageState.finish(token); prepareController = null; syncImageControls();
+    }
+  }
+}
+
+document.querySelectorAll('[data-resolution]').forEach(button => button.addEventListener('click', () => {
+  if (imageState.busy) return;
+  document.getElementById('bwResolution').value = button.dataset.resolution;
+}));
+document.getElementById('bwApplyResolution').addEventListener('click', () =>
+  prepareBwImage(document.getElementById('bwResolution').value, imageState.angle));
+document.querySelectorAll('[data-rotation]').forEach(button => button.addEventListener('click', () =>
+  prepareBwImage(imageState.percent, imageState.angle + Number(button.dataset.rotation))));
+document.getElementById('bwResetImage').addEventListener('click', () => {
+  if (imageState.busy || !originalImage) return;
+  imageState.reset(); clearImageGeometry(); revokePreparedUrl(); showImage(originalImage, imageState.currentBlob);
+  document.getElementById('bwResolution').value = '100';
+  document.getElementById('bwImageStatus').textContent = 'Original restored. Redraw regions.';
+  syncImageControls();
+});
+window.addEventListener('beforeunload', () => {
+  revokePreparedUrl(); if (originalUrl) URL.revokeObjectURL(originalUrl);
+});
+
+for (const b of [document.getElementById('btnLegend'), document.getElementById('btnPlot'),
+                 document.getElementById('btnScale')]) {
+  b.addEventListener('click', () => {
+    if (imageState.busy || !imgLoaded) return;
+    tool = (tool === b.dataset.tool) ? null : b.dataset.tool;
+    document.getElementById('btnLegend').classList.toggle('active', tool === 'legend');
+    document.getElementById('btnPlot').classList.toggle('active', tool === 'plot');
+    document.getElementById('btnScale').classList.toggle('active', tool === 'scale');
+  });
+}
+document.getElementById('btnClear').addEventListener('click', () => {
+  if (imageState.busy) return;
+  boxes = { legend: null, plot: null, scale: null };
+  tool = null;
+  document.getElementById('btnLegend').classList.remove('active');
+  document.getElementById('btnPlot').classList.remove('active');
+  document.getElementById('btnScale').classList.remove('active');
+  for (const id of ['xMin','xMax','yMin','yMax']) document.getElementById(id).value = '';
+  document.getElementById('xLog').checked = false;
+  document.getElementById('yLog').checked = false;
+  imageState.serial++; clearDetectionState();
+  updateInfo(); redraw(); syncImageControls();
+});
+
+function canvasPos(e) {
+  const r = canvas.getBoundingClientRect();
+  const cx = (e.clientX - r.left) * (canvas.width / r.width);
+  const cy = (e.clientY - r.top) * (canvas.height / r.height);
+  return { x: Math.max(0, Math.min(canvas.width, cx)),
+           y: Math.max(0, Math.min(canvas.height, cy)) };
+}
+
+function canvasToImageBox(selection) {
+  // The CLI takes inclusive pixel indices, not image-edge coordinates.
+  // Use each actual canvas dimension: rounded preview height need not have
+  // exactly the same scale as preview width. Clamp all three ROI tools alike.
+  const pixel = (value, canvasSize, imageSize) =>
+    Math.max(0, Math.min(imageSize - 1, Math.round(value * imageSize / canvasSize)));
+  return [
+    pixel(Math.min(selection.x0, selection.x1), canvas.width, img.width),
+    pixel(Math.min(selection.y0, selection.y1), canvas.height, img.height),
+    pixel(Math.max(selection.x0, selection.x1), canvas.width, img.width),
+    pixel(Math.max(selection.y0, selection.y1), canvas.height, img.height),
+  ];
+}
+// ── optional scale box ───────────────────────────────────────────────────────
+function scaleBoxOn() { return document.getElementById('useScaleBox').checked; }
+function updateAxisMapHint() {
+  document.getElementById('axisMapHint').textContent = scaleBoxOn()
+    ? 'Values map to the scale box edges (if no scale box is drawn, to the plot area).'
+    : (!boxes.legend ? 'Without a legend, omitted axis values keep the output in pixels.'
+       : APP_MODE === 'color' ? 'Leave off to read the axis numbers automatically (OCR).'
+       : 'With a B&W legend, omitted axis values use the default 0–1 scale.');
+}
+function scaleBoxUpdate() {
+  const on = scaleBoxOn();
+  document.getElementById('scaleBoxPanel').style.display = on ? 'block' : 'none';
+  updateAxisMapHint();
+  const info = document.getElementById('scaleBoxInfo');
+  if (info) info.textContent = boxes.scale
+    ? ('scale box: ' + boxes.scale.join(', '))
+    : 'drag the box exactly on the axes';
+  if (!on && boxes.scale) { boxes.scale = null; }
+  if (!on && tool === 'scale') {
+    tool = null;
+    document.getElementById('btnScale').classList.remove('active');
+  }
+  redraw();
+}
+document.getElementById('useScaleBox').addEventListener('change', scaleBoxUpdate);
+
+// Map two reference points on one axis onto another box's edges.
+// Used to convert the calibration (Plot area) box into the equivalent range that
+// a larger Detection area box spans, so px_to_data downstream needs no changes.
+function _axisRange(p1, v1, p2, v2, edgeLo, edgeHi, isLog) {
+  if (p1 === p2 || !isFinite(v1) || !isFinite(v2)) return null;
+  if (isLog) {
+    if (v1 <= 0 || v2 <= 0) return null;
+    const l1 = Math.log10(v1), sl = (Math.log10(v2) - Math.log10(v1)) / (p2 - p1);
+    return [Math.pow(10, l1 + (edgeLo - p1) * sl), Math.pow(10, l1 + (edgeHi - p1) * sl)];
+  }
+  const sl = (v2 - v1) / (p2 - p1);
+  return [v1 + (edgeLo - p1) * sl, v1 + (edgeHi - p1) * sl];
+}
+
+canvas.addEventListener('pointerdown', e => {
+  if (!imgLoaded || !tool || imageState.busy) return;
+  const p = canvasPos(e);
+  drag = { x0: p.x, y0: p.y, x1: p.x, y1: p.y };
+  canvas.setPointerCapture(e.pointerId);
+});
+canvas.addEventListener('pointermove', e => {
+  if (!drag || imageState.busy) return;
+  const p = canvasPos(e);
+  drag.x1 = p.x; drag.y1 = p.y;
+  redraw();
+});
+canvas.addEventListener('pointerup', e => {
+  if (!drag || !tool || imageState.busy) { drag = null; return; }
+  const end = canvasPos(e);
+  drag.x1 = end.x; drag.y1 = end.y;
+  const selected = canvasToImageBox(drag);
+  if (selected[2] - selected[0] > 4 && selected[3] - selected[1] > 4) {
+    boxes[tool] = selected;
+    imageState.serial++; clearDetectionState(); syncImageControls();
+  }
+  drag = null;
+  updateInfo();
+  if (typeof scaleBoxUpdate === 'function' && scaleBoxOn()) scaleBoxUpdate();
+  redraw();
+});
+
+function updateInfo() {
+  document.getElementById('legendSelectionHint').textContent = boxes.legend
+    ? 'Legend selected: use legend entries and plot evidence. To infer one series without a legend, click Clear and redraw only the plot area.'
+    : 'No legend selected: automatically infer one series from plot.' + (boxes.plot ? '' : ' Draw the plot area before running.');
+  updateAxisMapHint();
+}
+
+function redraw() {
+  if (!imgLoaded) return;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  const scaleX = canvas.width / img.width, scaleY = canvas.height / img.height;
+  for (const key of ['legend', 'plot', 'scale']) {
+    const b = boxes[key];
+    if (!b) continue;
+    ctx.strokeStyle = COLORS[key];
+    ctx.lineWidth = 2;
+    ctx.strokeRect(b[0]*scaleX, b[1]*scaleY, (b[2]-b[0])*scaleX, (b[3]-b[1])*scaleY);
+    ctx.fillStyle = COLORS[key];
+    ctx.font = '12px sans-serif';
+    ctx.fillText(key, b[0]*scaleX + 3, b[1]*scaleY + 13);
+  }
+  if (drag && tool) {
+    ctx.strokeStyle = COLORS[tool];
+    ctx.setLineDash([5, 4]);
+    ctx.lineWidth = 2;
+    ctx.strokeRect(Math.min(drag.x0,drag.x1), Math.min(drag.y0,drag.y1),
+                   Math.abs(drag.x1-drag.x0), Math.abs(drag.y1-drag.y0));
+    ctx.setLineDash([]);
+  }
+}
+
+// Normalise axis values so scientific / power-of-ten notation is accepted and
+// sent as a plain float string the server can parse (Python float()):
+//   "10^(-15)", "10^-15", "10**-15", "10E-15" -> "1e-15"
+//   "2x10^3", "2*10^3", "2×10^-5"             -> "2e3", "2e-5"
+//   "1e-15", "3.2E4", "0.001", "-5"           -> unchanged (already valid)
+function parseAxisValue(s) {
+  s = (s || '').trim();
+  if (!s) return '';
+  const clean = s.replace(/\s+/g, '');
+  // Only transform explicit power-of-ten forms (a × 10 ^ b). The ^ / ** is
+  // REQUIRED, so plain numbers like "100" and already-valid scientific forms
+  // like "1e-15" or "3.2E4" pass through untouched (Python float() reads them).
+  //   "10^(-15)", "10^-15", "10**-15"  -> "1e-15"
+  //   "2x10^3", "2*10^-5", "2×10^-5"   -> "2e3", "2e-5"
+  const m = clean.match(/^([+-]?\d*\.?\d+)?[x*×·]?10(?:\^|\*\*)\(?([+-]?\d+)\)?$/);
+  if (m) {
+    const a = (m[1] === undefined || m[1] === '') ? '1' : m[1];
+    return a + 'e' + m[2];
+  }
+  return s;   // "100", "1e-15", "3.2E4", "0.001", "-5" -> unchanged
+}
+
+async function runDigitize(withCorrect) {
+  if (withCorrect) return runSavedCorrection();
+  if (!fileBlob || !imgLoaded || imageState.busy) return;
+  if (!boxes.plot && (APP_MODE === 'bw' || !boxes.legend)) {
+    alert('Draw a plot area before running. Without a legend, v46 infers one series inside the plot area.');
+    return;
+  }
+  const fd = new FormData();
+  fd.append('image', fileBlob);
+  fd.append('mode', APP_MODE);
+  if (APP_MODE === 'color') fd.append('color_series_mode', document.getElementById('colorSeriesMode').value);
+  if (boxes.legend) fd.append(APP_MODE === 'bw' ? 'legend_area' : 'legend_box', boxes.legend.join(','));
+  if (boxes.plot)   fd.append('plot_area',  boxes.plot.join(','));
+  let xMin = parseAxisValue(document.getElementById('xMin').value);
+  let xMax = parseAxisValue(document.getElementById('xMax').value);
+  let yMin = parseAxisValue(document.getElementById('yMin').value);
+  let yMax = parseAxisValue(document.getElementById('yMax').value);
+  // With a scale box the typed values refer to IT, not to the plot area that the
+  // pipeline receives. Re-express the range over the plot area so downstream
+  // px->data (which assumes the range spans plot_area) stays correct.
+  const _cal = (scaleBoxOn() ? boxes['scale'] : null), _det = boxes['plot'];
+  if (_det && _cal) {
+    const n = v => parseFloat(v);
+    const xr = _axisRange(_cal[0], n(xMin), _cal[2], n(xMax), _det[0], _det[2],
+                          document.getElementById('xLog').checked);
+    // y: bottom edge -> y_min, top edge -> y_max
+    const yr = _axisRange(_cal[3], n(yMin), _cal[1], n(yMax), _det[3], _det[1],
+                          document.getElementById('yLog').checked);
+    if (!xr || !yr) {
+      alert('Scale box: enter x/y min and max (they refer to the scale box) first.');
+      return;  // Validation runs before acquiring the busy/request token.
+    }
+    xMin = String(xr[0]); xMax = String(xr[1]);
+    yMin = String(yr[0]); yMax = String(yr[1]);
+  }
+  if (xMin) fd.append('x_min', xMin);
+  if (xMax) fd.append('x_max', xMax);
+  if (yMin) fd.append('y_min', yMin);
+  if (yMax) fd.append('y_max', yMax);
+  if (document.getElementById('xLog').checked) fd.append('x_log', '1');
+  if (document.getElementById('yLog').checked) fd.append('y_log', '1');
+  // Step 5 uses /correct-saved above. This endpoint starts detection only.
+  const runToken = imageState.digitize();
+  drag = null; syncImageControls();
+  document.getElementById('spinner').textContent = 'Processing the displayed image…';
+  document.getElementById('spinner').style.display = 'block';
+  try {
+    const res = await fetch('/digitize', { method: 'POST', body: fd });
+    if (!imageState.current(runToken)) return;
+    if (!res.ok) throw new Error(await res.text());
+    const data = await res.json();
+    if (!imageState.current(runToken)) return;
+    presentResult(data, withCorrect);
+  } catch (err) {
+    if (!imageState.current(runToken)) return;
+    alert('Failed: ' + err.message);
+  } finally {
+    if (imageState.current(runToken)) {
+      imageState.finish(runToken); syncImageControls();
+      document.getElementById('spinner').style.display = 'none';
+    }
+  }
+}
+
+fetch('/ocr/requests').then(response => response.ok ? response.json() : null)
+  .then(data => { document.getElementById('aiOcrHint').hidden = !data?.enabled; })
+  .catch(() => {});
+
+function presentResult(data, withCorrect = false) {
+    clearEditorState();
+    window.lastData = data;
+    const resultCurrent = currentResultGuard();
+    document.getElementById('result').style.display = 'block';
+    document.getElementById('summary').textContent = data.summary ||
+      (data.ok ? 'Detection complete.' : 'Detection or correction did not complete.');
+    const inference = data.legend_optional;
+    const diagnosticWrap = document.getElementById('inferenceDiagnostic');
+    diagnosticWrap.style.display = inference || !data.ok ? 'block' : 'none';
+    const diagnosticLink = document.getElementById('inferenceDiagnosticLink');
+    diagnosticLink.style.display = data.legend_optional_url ? 'inline' : 'none';
+    if (data.legend_optional_url) diagnosticLink.href = data.legend_optional_url;
+    else diagnosticLink.removeAttribute('href');
+    document.getElementById('inferenceDiagnosticText').textContent = inference
+      ? [inference.no_legend ? 'Assumption: one plotted series.' : 'Series inferred from selected legend and plot.',
+         'Status: ' + (inference.status || 'unknown'),
+         'Series: ' + (inference.chart_kind || 'undetermined'),
+         inference.reason || '',
+         Array.isArray(inference.points) ? 'Detected points: ' + inference.points.length : '',
+         Array.isArray(inference.suppressed_points) ? 'Suppressed hypotheses: ' + inference.suppressed_points.length : '',
+         inference.correction_unavailable_reason || '',
+         inference.calibration_warning || '',
+         !data.ok && data.log ? data.log : ''].filter(Boolean).join('\n')
+      : (!data.ok ? data.log || 'No diagnostic details were returned.' : '');
+    const overlayUrl = data.overlay_url ? data.overlay_url + '?t=' + Date.now() : null;
+    // Append a new pair (original+markers | reconstructed) to the results history.
+    // A fresh Run starts a new history; each Step-5 correction stacks below it so
+    // successive corrections can be compared side by side (nothing is discarded).
+    window._lastJobId = data.ok && data.job_id ? data.job_id : null;
+    const _history = document.getElementById('resultsHistory');
+    let _label, _accent;
+    if (withCorrect) {
+      window._step5Count = (window._step5Count || 0) + 1;
+      _label = 'Step 5 correction #' + window._step5Count + (data.ok ? '' : ' — incomplete');
+      _accent = true;
+    } else {
+      window._step5Count = 0;
+      _history.innerHTML = '';   // new detection run: start a fresh history
+      _label = data.ok ? (data.operation === 'import' ? 'Imported data — no detection' +
+        (data.loaded_version ? ' · '+data.loaded_version.label+' ['+data.loaded_version.id+']' : '') : 'Run — detection') : 'Run — unresolved / failed';
+      _accent = false;
+    }
+    const _pair = makeResultPair(_label, _accent);
+    _history.appendChild(_pair.wrap);
+    if (data.ok && data.step5_stop) showStep5StopReport(data.step5_stop, _pair.wrap, data.step5_stop_url);
+    if (overlayUrl) _pair.img.src = overlayUrl;
+    else _pair.img.style.display = 'none';
+    const _editUrl = data.edit_data_url ||
+      (data.job_id ? ('/result/' + data.job_id + '/edit_data.json') : null);
+    if (_editUrl) renderReconInto(_editUrl, _pair.canvas);
+    if (_editUrl && data.ok) showSuppressedReview(_editUrl, _pair.wrap,
+      data.input_url || (data.job_id ? '/result/'+data.job_id+'/input.png' : null));
+    _pair.wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    const download = document.getElementById('downloadXlsx');
+    document.getElementById('saveCorrection').style.display = data.ok ? 'inline-block' : 'none';
+    download.style.display = data.ok && data.xlsx_url ? 'inline' : 'none';
+    // Use the backend's existing artifacts, including BW and optional-legend routes.
+    configureLegendDiagnostic(data, resultCurrent);
+    configureTriangleDiagnostic(data, resultCurrent);
+    // Colour-mask gallery: fetch colormasks.json and show one card per curve.
+    const toggleMasks = document.getElementById('toggleMasks');
+    const masksBox = document.getElementById('masksBox');
+    const masksGrid = document.getElementById('masksGrid');
+    if (toggleMasks && !inference && !data.correction_only && (data.job_id || data.colormasks_url)) {
+      toggleMasks.style.display = 'inline-block';
+      masksBox.style.display = 'none';
+      toggleMasks.textContent = 'Show colour masks';
+      let masksLoaded = false;
+      toggleMasks.onclick = async () => {
+        if (!resultCurrent() || imageState.busy) return;
+        const open = masksBox.style.display === 'none';
+        masksBox.style.display = open ? 'block' : 'none';
+        toggleMasks.textContent = open ? 'Hide colour masks' : 'Show colour masks';
+        if (open && !masksLoaded) {
+          const base = data.job_id ? ('/result/' + data.job_id + '/') : '';
+          const mUrl = data.colormasks_url || (base + 'colormasks.json');
+          try {
+            const res = await fetch(mUrl + '?t=' + Date.now());
+            if (!resultCurrent()) return;
+            const masks = await res.json();
+            if (!resultCurrent()) return;
+            masksGrid.innerHTML = '';
+            masks.forEach(m => {
+              const card = document.createElement('div');
+              card.className = 'maskcard';
+              const img = document.createElement('img');
+              img.src = base + m.file + '?t=' + Date.now();
+              img.alt = m.name;
+              const cap = document.createElement('div');
+              cap.className = 'cap';
+              const rgb = m.legend_rgb ? ('rgb(' + m.legend_rgb.join(',') + ')') : '#ccc';
+              const swatch = '<span style="display:inline-block;width:10px;height:10px;'
+                + 'border:1px solid #999;vertical-align:middle;margin-right:4px;'
+                + 'background:' + rgb + '"></span>';
+              cap.innerHTML = swatch + (m.label || m.name) + '<br>'
+                + m.mask_px + ' px · ' + m.points + ' pts';
+              card.appendChild(img);
+              card.appendChild(cap);
+              masksGrid.appendChild(card);
+            });
+            if (!masks.length) masksGrid.innerHTML = '<div class="hint">No colour masks in this run.</div>';
+          } catch (e) {
+            if (!resultCurrent()) return;
+            masksGrid.innerHTML = '<div class="hint">Could not load colour masks ('
+              + e.message + '). Re-run with the latest pipeline/server.</div>';
+          }
+          masksLoaded = true;
+        }
+      };
+    } else if (toggleMasks) {
+      toggleMasks.style.display = 'none';
+      masksBox.style.display = 'none';
+    }
+    // "Correct data points" button — always available after a run; the editor
+    // opens on click. URLs fall back to job_id-based paths if the server didn't
+    // include them explicitly, so it works as long as the pipeline wrote
+    // edit_data.json and the server serves /result/<job>/<file>.
+    const openBtn = document.getElementById('openEditor');
+    openBtn.style.display = data.ok && data.edit_data_url ? 'inline-block' : 'none';
+    openBtn.onclick = () => {
+      if (!resultCurrent() || imageState.busy) return;
+      if (currentEdForSave()) { openEditorView(); return; }
+      const editUrl = data.edit_data_url ||
+        (data.job_id ? ('/result/' + data.job_id + '/edit_data.json') : null);
+      const inputUrl = data.input_url ||
+        (data.job_id ? ('/result/' + data.job_id + '/input.png') : null);
+      if (!editUrl || !inputUrl) {
+        alert('This run has no editable data. Update the local pipeline/server to the latest and re-run.');
+        return;
+      }
+      initEditor({ edit_data_url: editUrl, input_url: inputUrl }, resultCurrent).then(opened => {
+        if (!opened || !resultCurrent() || imageState.busy) return;
+        window._edOpenArg = { edit_data_url: editUrl, input_url: inputUrl };
+      }).catch(e => {
+        if (!resultCurrent()) return;
+        console.error('editor init failed:', e);
+        alert('Could not open editor (' + e.message + '). Make sure the latest ' +
+              'server.py and pipeline are in place and re-run.');
+      });
+    };
+    // Correction needs a completed detection and usable evidence.
+    const canCorrect = data.ok && data.step5_available !== false &&
+      (!inference || inference.status === 'completed');
+    const step5 = document.getElementById('btnStep5');
+    if (step5) {
+      step5.style.display = canCorrect ? 'inline-block' : 'none';
+      step5.textContent = data.correction_backend === 'colour_group_bw_elements'
+        ? 'Run Step 5 colour-group segment correction ↻'
+        : data.mode === 'color' ? 'Run Step 5 series-aware correction ↻' : 'Run Step 5 correction ↻';
+    }
+    const methodHint = document.getElementById('step5MethodHint');
+    methodHint.style.display = (canCorrect || data.correction_unavailable_reason) ? 'block' : 'none';
+    methodHint.textContent = data.correction_unavailable_reason || (data.correction_backend === 'colour_group_bw_elements'
+      ? 'Repeated legend colours: colour-family masks + BW grid/window marker detection. Legend line/symbol composition preserves open vs filled shapes. Step 5 compares saved line-segment geometry per colour group (including bounded dash gaps), with an original-point removal penalty. It does not merge same-colour series or rerun detection. Added points remain hypotheses.'
+      : inference && inference.chart_kind === 'line-only'
+      ? 'Line-only correction compares the reconstructed curve with observed plot ink. Added points remain hypotheses.'
+      : data.mode === 'color'
+      ? (data.symbol_scale_diagnostic_url ? 'Distinct-colour marker detection uses one shared size per legend identity before grid/window matching (new runs search 0.50–1.30x); insufficient evidence retains 1x. Saved correction reuses its original calibrated size. ' : '') + 'Colour v46 classifies each series separately. New supported fitted/uncertain corrections use LINEAR marker connections, completeness λ=0.5 and image cost μ=0.5. Image score is a weighted cost, not an ADD veto. White missing interior ink costs more than ink hidden by another original marker. P0 (the original detected points) and same-series x-slot safeguards remain protected. Connected, unsupported-path, B&W and line-only correction keep their own policies. Extracted fitted curves are image references, not fits to detected points. Added points are unvalidated hypotheses (dashed magenta rings in reconstruction), not confirmed detections.'
+      : 'B&W Step 5 checks each series for direct marker-to-marker connections. Only supported connected series use SSIM and bounded connector alignment; near-vertical error bars cannot justify alignment. Other series use conservative source-image marker checks and same-body duplicate removal, not deletion to match a fitted curve. Missing x slots are searched for image-backed suppressed candidates; ambiguous symbols remain suppressed. Display lines join points for comparison only. Detection is not rerun; corrected hypotheses are not validated measurements.');
+    const objectiveHint=document.getElementById('colorStep5Objective');
+    if(objectiveHint) {
+      objectiveHint.style.display=data.color_step5_objective?'block':'none';
+      objectiveHint.textContent=colourStep5ObjectiveText(data.color_step5_objective);
+    }
+    const _ciWrap = document.getElementById('correctItersWrap');
+    if (_ciWrap) _ciWrap.style.display = canCorrect ? 'inline-block' : 'none';
+}
+
+function currentEdForSave() {
+  return ED && window._editorJobId === window._lastJobId ? ED : null;
+}
+
+function responseErrorMessage(detail) {
+  if(Array.isArray(detail))return detail.map(responseErrorMessage).filter(Boolean).join('\n');
+  if(detail && typeof detail==='object') {
+    const message=detail.msg ?? detail.message ?? detail.detail;
+    if(message!==undefined) {
+      const location=Array.isArray(detail.loc) ? detail.loc.filter(part=>part!=='body').join('.') : '';
+      return (location ? location+': ' : '')+responseErrorMessage(message);
+    }
+    return JSON.stringify(detail);
+  }
+  return detail==null ? '' : String(detail);
+}
+
+async function checkedResponse(response) {
+  if (!response.ok) {
+    const raw=await response.text();
+    let detail=raw;
+    try { const body=JSON.parse(raw);detail=body?.detail ?? body?.message ?? body?.error ?? body; } catch (_) {}
+    let message=responseErrorMessage(detail) || response.statusText || 'Request failed';
+    if(response.status===422 && Array.isArray(detail) && detail.some(item=>
+      item.loc?.includes('edit_data') && ['string_type','type_error.str'].includes(item.type))) {
+      message+='\nThe running server expects the older save format. Restart unified_server.py, then retry Save without reloading this page to keep your current edits.';
+    }
+    const error=new Error((response.status ? 'HTTP '+response.status+': ' : '')+message);
+    error.status=response.status;
+    throw error;
+  }
+  return response;
+}
+
+async function saveCurrentFile(kind) {
+  if (!window._lastJobId || imageState.busy) return;
+  const token = imageState.begin('save'); syncImageControls();
+  try {
+    const response = await checkedResponse(await fetch('/correction-session/'+(kind==='excel'?'excel':'export'), {
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({job_id:window._lastJobId,mode:APP_MODE,edit_data:currentEdForSave()})}));
+    const blob = await response.blob();
+    if (!imageState.current(token)) return;
+    const url = URL.createObjectURL(blob), link = document.createElement('a');
+    link.href=url;
+    link.download=(kind==='excel'?'data_':'correction_')+window._lastJobId+(kind==='excel'?'.xlsx':'.json');
+    link.click();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+  } catch (error) { alert('Save failed: '+error.message); }
+  finally { imageState.finish(token); syncImageControls(); }
+}
+
+async function saveCorrection() {
+  if(!window._lastJobId || imageState.busy)return;
+  if(!sidecar.source) { alert('Load the original image before saving a linked JSON.'); return; }
+  if(!window.showDirectoryPicker) { alert('Same-folder saving is unavailable in this browser. Open the GUI in Chrome or Edge on localhost.'); return; }
+  const token=imageState.begin('save');syncImageControls();
+  try {
+    // Request permission while the Save click still supplies user activation.
+    if(!sidecar.directory) {
+      const directory=await window.showDirectoryPicker({id:'chartocode-images',mode:'readwrite'});
+      await selectImageDirectory(directory);
+    } else if(await sidecar.directory.requestPermission({mode:'readwrite'})!=='granted') {
+      throw new Error('Folder write permission was not granted.');
+    }
+    const fd=new FormData();fd.append('original',sidecar.source,sidecar.source.name);
+    fd.append('job_id',window._lastJobId);
+    // A JSON file part avoids the multipart parser's 1 MiB text-field limit.
+    fd.append('edit_data',new Blob([JSON.stringify(currentEdForSave())],{type:'application/json'}),'edit_data.json');
+    const response=await checkedResponse(await fetch('/correction-session/export-history',{method:'POST',body:fd}));
+    const packageValue=await response.json();
+    const name=await sidecar.save(packageValue);
+    markFolderResultSaved();
+    folderEditorSource=sidecar.source;folderEditorDirectory=sidecar.directory;
+    await selectImageDirectory(sidecar.directory);
+    document.getElementById('folderImage').value=sidecar.source.name;
+    await previewFolderImage();
+    document.getElementById('sidecarStatus').textContent='Saved '+sidecar.directory.name+'/'+name+'. Result versions and earlier branches preserved. Original image unchanged.';
+    document.getElementById('edStatus').textContent='Saved result versions in '+name+' beside the original image.';
+  } catch(error) { if(error.name!=='AbortError')alert('Save failed: '+error.message); }
+  finally { imageState.finish(token);syncImageControls(); }
+}
+
+async function saveExcel() {
+  return saveCurrentFile('excel');
+}
+
+async function loadCorrection() {
+  if (imageState.busy) return;
+  const imageFile=document.getElementById('correctionImage').files[0];
+  const dataFile=document.getElementById('correctionData').files[0];
+  if (!imageFile || !dataFile) { alert('Select both the paired image and JSON data file.'); return; }
+  try { await loadCorrectionPair(imageFile,dataFile); }
+  catch(error) { alert('Load failed: '+error.message); }
+}
+
+async function chooseSavedVersion(imageFile,dataFile,useSavedVersion=false) {
+  if(dataFile.size>ImageSidecarV46.MAX_JSON)throw new Error('Correction JSON exceeds 128 MB.');
+  const value=JSON.parse(await dataFile.text());
+  if(value?.format!==ImageSidecarV46.HISTORY_FORMAT)return {versionId:null};
+  const history=await ImageSidecarV46.asHistory(value);
+  if(await ImageSidecarV46.digest(imageFile)!==history.source_image.file_sha256)
+    throw new Error('Original image file does not match this version history.');
+  // Arrow navigation opens the version selected when the JSON was last saved.
+  // Explicit Open keeps the version chooser for inspecting older results.
+  if(useSavedVersion)return {versionId:history.selected_version_id};
+  const dialog=document.getElementById('versionBrowser');
+  const select=document.getElementById('versionSelect');select.replaceChildren();
+  const labels={detection:'Initial detection',step5:'Step 5 correction',manual:'Manual edits',imported:'Previously saved result'};
+  history.versions.forEach((v,i)=>{
+    const option=document.createElement('option');option.value=v.id;
+    option.textContent=(i+1)+'. '+(labels[v.kind]||v.label||'Saved result')+
+      (v.iterations ? ' · '+v.iterations+' requested iteration'+(v.iterations===1?'':'s') : '')+' · '+v.point_count+' points'+
+      (v.created_at ? ' · '+new Date(v.created_at).toLocaleString() : ' · date unknown');
+    select.appendChild(option);
+  });
+  select.value=history.selected_version_id;
+  const preview=document.getElementById('versionPreview'),status=document.getElementById('versionDetails');
+  const open=document.getElementById('openVersion'),cancel=document.getElementById('cancelVersion');
+  const sourceUrl=URL.createObjectURL(imageFile);
+  let serial=0,closed=false;
+  async function render() {
+    const ticket=++serial;open.disabled=true;preview.hidden=true;status.textContent='Loading version preview…';
+    try {
+      const v=history.versions.find(v=>v.id===select.value);
+      const packet=ImageSidecarV46.versionPackage(history,v.id);
+      const img=await decodeImage(packet.working_image_png_base64 ? 'data:image/png;base64,'+packet.working_image_png_base64 : sourceUrl);
+      if(closed || ticket!==serial)return;
+      if(img.width!==packet.image.width || img.height!==packet.image.height)throw new Error('Saved version has mismatched image dimensions.');
+      const scale=Math.min(1,1000/img.width,650/img.height);
+      preview.width=Math.round(img.width*scale);preview.height=Math.round(img.height*scale);
+      const c=preview.getContext('2d');c.drawImage(img,0,0,preview.width,preview.height);
+      for(const curve of packet.edit_data.curves)for(const p of curve.points) {
+        if(!Number.isFinite(p.x)||!Number.isFinite(p.y))throw new Error('Invalid point coordinates.');
+        c.beginPath();c.arc(p.x*scale,p.y*scale,Math.max(3,4*scale),0,2*Math.PI);
+        c.strokeStyle='white';c.lineWidth=4;c.stroke();
+        c.strokeStyle='rgb('+curve.rgb.join(',')+')';c.lineWidth=2;c.stroke();
+      }
+      const parent=history.versions.find(row=>row.id===v.parent_id);
+      status.textContent=v.point_count+' active points · '+packet.mode+' · '+
+        (parent ? 'Based on version '+(history.versions.indexOf(parent)+1) : 'Original saved result')+
+        '. Rings show active points; suppressed candidates remain separate in the saved evidence.';
+      preview.hidden=false;open.disabled=false;
+    } catch(error) { if(!closed && ticket===serial)status.textContent='Cannot preview version: '+error.message; }
+  }
+  try {
+    return await new Promise(resolve=>{
+      let chosen=null;
+      dialog.onclose=()=>{closed=true;resolve(chosen);};
+      select.onchange=render;
+      open.onclick=()=>{if(!open.disabled){chosen={versionId:select.value};dialog.close();}};
+      cancel.onclick=()=>dialog.close();
+      dialog.showModal();render();
+    });
+  } finally {
+    closed=true;serial++;URL.revokeObjectURL(sourceUrl);
+    select.onchange=null;open.onclick=null;cancel.onclick=null;dialog.onclose=null;
+    preview.width=1;preview.height=1;
+  }
+}
+
+async function loadCorrectionPair(imageFile,dataFile,useSavedVersion=false) {
+  const token=imageState.begin('import'); syncImageControls();
+  const status=document.getElementById('correctionLoadStatus');
+  status.textContent='Loading saved coordinates and evidence — no detection…';
+  try {
+    const choice=await chooseSavedVersion(imageFile,dataFile,useSavedVersion);
+    if(!choice){status.textContent='Version selection cancelled. Current data unchanged.';return false;}
+    const fd=new FormData(); fd.append('image',imageFile); fd.append('data_file',dataFile); fd.append('mode',APP_MODE);
+    if(choice.versionId)fd.append('version_id',choice.versionId);
+    const response=await checkedResponse(await fetch('/correction-session/import',{method:'POST',body:fd}));
+    const data=await response.json();
+    const saved=await (await checkedResponse(await fetch(data.edit_data_url))).json();
+    const blob=await (await checkedResponse(await fetch(data.input_url))).blob();
+    const url=URL.createObjectURL(blob);
+    let loaded;
+    try { loaded=await decodeImage(url); } catch(error) { URL.revokeObjectURL(url); throw error; }
+    if (!imageState.current(token)) { URL.revokeObjectURL(url); return; }
+    await sidecar.bind(imageFile);
+    // Replace the displayed job only after BOTH files and the returned image validate.
+    imageState.finish(token); setMode(data.mode); clearImageGeometry(); revokePreparedUrl();
+    if (originalUrl) URL.revokeObjectURL(originalUrl);
+    originalUrl=url; originalImage=loaded;
+    const upload=imageState.upload(blob);
+    imageState.commitUpload(upload,{width:loaded.width,height:loaded.height}); imageState.finish(upload);
+    boxes.plot=saved.plot_area.slice();
+    document.getElementById('useScaleBox').checked=false; scaleBoxUpdate();
+    for (const axis of ['x','y']) {
+      const a=saved.calibration && saved.calibration[axis];
+      document.getElementById(axis+'Min').value=a ? a.v0 : '';
+      document.getElementById(axis+'Max').value=a ? a.v1 : '';
+      document.getElementById(axis+'Log').checked=!!(a && a.log);
+    }
+    showImage(loaded,blob); updateInfo(); presentResult(data); syncImageControls();
+    document.getElementById('bwResolution').value='100';
+    document.getElementById('bwImageStatus').textContent='Imported paired image. Coordinates use these pixels.';
+    status.textContent=data.summary;
+    if(!await initEditor(data,currentResultGuard()))return false;
+    markFolderResultSaved();
+    return true;
+  } catch(error) { status.textContent='Load failed: '+error.message; throw error; }
+  finally { imageState.finish(token); syncImageControls(); }
+}
+
+async function runSavedCorrection() {
+  if (!window._lastJobId || imageState.busy) return;
+  const stopPolicy=document.getElementById('step5StopPolicy')?.value || 'manual';
+  const iterations=stopPolicy==='auto' ? 20 : Number(document.getElementById('bwCorrectIters').value);
+  if (!Number.isInteger(iterations) || iterations<1 || iterations>50) { alert('Iterations must be 1–50.'); return; }
+  const request={job_id:window._lastJobId,mode:APP_MODE,iterations,stop_policy:stopPolicy,edit_data:currentEdForSave()};
+  const token=imageState.begin('correction'); syncImageControls();
+  const spinner=document.getElementById('spinner'); spinner.textContent=stopPolicy==='auto'
+    ? 'Automatic Step 5 — stop when no admissible improvement remains; maximum 20 per series. Detection skipped…'
+    : 'Running saved-evidence Step 5 — detection skipped…'; spinner.style.display='block';
+  try {
+    const data=await (await checkedResponse(await fetch('/correct-saved',{
+      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(request)}))).json();
+    if (!imageState.current(token)) return;
+    if (!data.ok) throw new Error(data.summary+'\n'+(data.log || ''));
+    presentResult(data,true);
+    imageState.finish(token); syncImageControls();
+    await initEditor(data,currentResultGuard());
+  } catch(error) { alert('Correction failed; previous data and edits kept.\n'+error.message); }
+  finally { imageState.finish(token); syncImageControls(); spinner.style.display='none'; }
+}
+
+function syncStep5StopControls() {
+  const auto=document.getElementById('step5StopPolicy').value==='auto';
+  document.getElementById('step5ManualIters').style.display=auto?'none':'inline';
+  document.getElementById('bwCorrectIters').disabled=auto || !!imageState.busy;
+  document.getElementById('step5StopHint').textContent=auto
+    ? 'Stops when no admissible improvement remains, with a safety cap of 20 per run (joint B&W / per colour series). Gains below 0.1% are warnings only. Reaching the cap does not mean convergence.'
+    : 'Uses the chosen limit; native no-improvement stopping remains enabled.';
+}
+
+function colourStep5ObjectiveText(settings) {
+  if (!settings) return '';
+  const origin=settings.source==='saved'?'Saved correction settings':'New v46 defaults';
+  const policy=settings.policy==='weighted_cost'
+    ? 'J = path distance + λ × completeness loss + μ × image loss; μ='+settings.image_weight+', λ='+settings.completeness_weight+', '+String(settings.model).toUpperCase()+'. Image score does not veto ADD.'
+    : settings.policy==='hard_admission'?'Historical image pass/fail gate is still used by this saved correction.'
+    :'Objective settings unavailable.';
+  return origin+': '+policy+' '+(settings.note||'')+' Scope: supported fitted/uncertain colour paths; unsupported series keep their existing policy.';
+}
+
+function showStep5StopReport(report, container, reportUrl) {
+  if (!report || !Array.isArray(report.series)) return;
+  const box=document.createElement('div'); box.className='hint'; box.style.cssText='padding:10px;margin:10px 0;background:#f2f5f9;border:1px solid #ccd5e0;white-space:pre-wrap;';
+  const title=report.policy==='auto' ? 'Automatic stop' : 'Manual iteration limit';
+  const lines=[title+' · cap '+report.max_iterations+' per run',report.summary || ''];
+  for (const s of report.series) {
+    lines.push(s.series+': '+s.iterations_executed+' iteration(s), '+s.accepted_actions+' accepted action(s) — '+s.stop_message);
+    if (s.low_gain_warnings?.length) lines.push('  Warning: '+s.low_gain_warnings.length+' accepted action(s) improved the internal objective by less than 0.1%. This warning did not stop or change correction.');
+  }
+  lines.push('Stopping is not proof of correct or complete data points.');
+  box.textContent=lines.filter(Boolean).join('\n');
+  if (reportUrl) {
+    const link=document.createElement('a');link.href=reportUrl;link.textContent=' View stopping details (JSON)';link.target='_blank';link.rel='noopener';box.appendChild(link);
+  }
+  container.appendChild(box);
+}
+
+document.getElementById('step5StopPolicy').addEventListener('change',syncStep5StopControls);
+document.getElementById('loadCorrection').addEventListener('click',loadCorrection);
+document.getElementById('saveCorrection').addEventListener('click',saveCorrection);
+document.getElementById('edSaveCorrection').addEventListener('click',saveCorrection);
+document.getElementById('downloadXlsx').addEventListener('click',saveExcel);
+document.getElementById('edSaveExcel').addEventListener('click',saveExcel);
+document.getElementById('run').addEventListener('click', () => runDigitize(false));
+document.getElementById('btnStep5').addEventListener('click', () => runDigitize(true));
+document.getElementById('clearHistory').addEventListener('click', () => {
+  document.getElementById('resultsHistory').innerHTML = '';
+  window._step5Count = 0;
+});
+
+/* ---------------- Human-assist point editor ---------------- */
+let ED = null;
+let editorLoadSerial = 0;
+let edImg = new Image();
+let edScale = 1;
+let edBaseScale = 1;
+let edZoom = 1;
+let edViewX = 0, edViewY = 0;
+let edSel = 0;
+let edSelPt = null;
+let edDragging = null;
+let edGesture = null;
+let edTool = 'edit';
+let editorReturnScroll = 0, editorReturnFocus = null, editorBodyOverflow = '';
+let edViewFilter = null;   // null = show all symbols; otherwise a curve index (show only that symbol)
+const edCanvas = document.getElementById('editCanvas');
+const edCtx = edCanvas.getContext('2d');
+
+function openEditorView() {
+  if (!ED || imageState.busy) return;
+  const editor = document.getElementById('editor');
+  if (editor.style.display !== 'flex') {
+    editorReturnScroll = window.scrollY || 0;
+    editorReturnFocus = document.activeElement;
+    editorBodyOverflow = document.body.style.overflow;
+  }
+  document.getElementById('mainWorkspace').hidden = true;
+  document.body.style.overflow = 'hidden';
+  editor.style.display = 'flex';
+  document.getElementById('resumeEditor').hidden = false;
+  document.getElementById('closeEditor').focus({preventScroll:true});
+  drawEditor();
+}
+
+function closeEditorView() {
+  if (document.getElementById('editor').style.display !== 'flex') return;
+  cancelEditorGesture();
+  document.getElementById('editor').style.display = 'none';
+  document.getElementById('mainWorkspace').hidden = false;
+  document.body.style.overflow = editorBodyOverflow;
+  window.scrollTo(0, editorReturnScroll);
+  if (editorReturnFocus?.isConnected) editorReturnFocus.focus({preventScroll:true});
+}
+document.getElementById('closeEditor').onclick = closeEditorView;
+document.getElementById('resumeEditor').onclick = openEditorView;
+
+function pxToData(px, ax) {
+  const {p0, p1, v0, v1, log} = ax;
+  if (p1 === p0) return v0;
+  const t = (px - p0) / (p1 - p0);
+  if (log) {
+    const l0 = Math.log10(v0), l1 = Math.log10(v1);
+    return Math.pow(10, l0 + t * (l1 - l0));
+  }
+  return v0 + t * (v1 - v0);
+}
+
+async function initEditor(data, valid = currentResultGuard()) {
+  if (imageState.busy || !valid()) return false;
+  const loadSerial = ++editorLoadSerial;
+  const current = () => valid() && loadSerial === editorLoadSerial && !imageState.busy;
+  try {
+  const resp = await fetch(data.edit_data_url + '?t=' + Date.now());
+  if (!current()) return false;
+  if (!resp.ok) throw new Error('Editable data could not be loaded.');
+  const nextED = await resp.json();
+  if (!current()) return false;
+  const nextImage = await decodeImage(data.input_url + '?t=' + Date.now());
+  if (!current()) return false;
+  ED = nextED; edImg = nextImage;
+  window._editorJobId = window._lastJobId;
+  cancelEditorGesture();
+  edSel = 0; edSelPt = null; edViewFilter = null;
+  // Folder navigation owns a separate lock while the new editor is opening.
+  openEditorView();
+  buildCurvePicker(); fitEditorView();
+  return true;
+  } catch (error) {
+    if (!current()) return false;
+    throw error;
+  }
+}
+
+function resizeEditorSurface() {
+  const surface=document.getElementById('editSurface');
+  surface.style.width=Math.max(1,Math.round(edImg.width*edScale))+'px';
+  surface.style.height=Math.max(1,Math.round(edImg.height*edScale))+'px';
+}
+
+function fitEditorView() {
+  if (!ED) return;
+  const sc=document.getElementById('editScroll');
+  edBaseScale=Math.min(1,(sc.clientWidth || 600)/edImg.width,(sc.clientHeight || 520)/edImg.height);
+  edZoom=1;edScale=edBaseScale;
+  resizeEditorSurface();sc.scrollLeft=0;sc.scrollTop=0;
+  drawEditor();updateZoomLabel();recompute();
+}
+
+function applyZoom(newZoom, anchor) {
+  if (!ED || !Number.isFinite(newZoom) || newZoom<=0) return;
+  const old = edScale;
+  const sc = document.getElementById('editScroll');
+  // keep the anchor point (or center) stable while zooming
+  const ax = anchor ? anchor.x : (sc.scrollLeft + Math.min(sc.clientWidth,edImg.width*old) / 2);
+  const ay = anchor ? anchor.y : (sc.scrollTop + Math.min(sc.clientHeight,edImg.height*old) / 2);
+  const imgX = ax / old, imgY = ay / old;
+  edZoom = Math.max(0.5, newZoom);
+  edScale = edBaseScale * edZoom;
+  resizeEditorSurface();
+  sc.scrollLeft = imgX * edScale - (anchor ? anchor.clientX : sc.clientWidth / 2);
+  sc.scrollTop = imgY * edScale - (anchor ? anchor.clientY : sc.clientHeight / 2);
+  drawEditor();
+  updateZoomLabel();
+}
+function updateZoomLabel() {
+  const el = document.getElementById('edZoomLabel');
+  if (el) el.textContent = Math.round(edZoom * 100) + '%';
+}
+document.getElementById('edZoomIn').onclick = () => applyZoom(edZoom * 1.25);
+document.getElementById('edZoomOut').onclick = () => applyZoom(edZoom / 1.25);
+document.getElementById('edZoomFit').onclick = fitEditorView;
+document.getElementById('editScroll').addEventListener('scroll',drawEditor);
+if(typeof ResizeObserver!=='undefined') {
+  new ResizeObserver(()=>drawEditor()).observe(document.getElementById('editScroll'));
+}
+document.getElementById('editScroll').addEventListener('wheel', e => {
+  if (!e.ctrlKey || !ED) return;               // Ctrl+wheel zooms
+  e.preventDefault();
+  const pos = edPos(e);
+  const sc = document.getElementById('editScroll');
+  const r = sc.getBoundingClientRect();
+  applyZoom(edZoom * (e.deltaY < 0 ? 1.15 : 1 / 1.15),
+            { x: pos.x, y: pos.y,
+              clientX: e.clientX - r.left - sc.clientLeft,
+              clientY: e.clientY - r.top - sc.clientTop });
+}, { passive: false });
+
+function rgbCss(c) { return 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')'; }
+function escapeText(value) { return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function buildCurvePicker() {
+  const box = document.getElementById('curvePicker');
+  box.innerHTML = '<span class="hint" style="margin-right:6px;">Show:</span>';
+  // "All" button — show every symbol at once.
+  const allBtn = document.createElement('button');
+  allBtn.textContent = 'All symbols';
+  allBtn.className = (edViewFilter === null) ? 'active' : '';
+  allBtn.onclick = () => { edViewFilter = null; edSelPt = null; buildCurvePicker(); drawEditor(); recompute(); };
+  box.appendChild(allBtn);
+  // one button per symbol/series — click to view+edit ONLY that symbol.
+  ED.curves.forEach((c, i) => {
+    const b = document.createElement('button');
+    b.innerHTML = '<span class="swatch" style="background:' + rgbCss(c.rgb) +
+                  ';border:1px solid #999;"></span> ' + escapeText(c.label || c.name);
+    b.className = (edViewFilter === i) ? 'active' : '';
+    b.onclick = () => { edViewFilter = i; edSel = i; edSelPt = null; buildCurvePicker(); drawEditor(); recompute(); };
+    box.appendChild(b);
+  });
+}
+
+function drawEditor() {
+  if (!ED) return;
+  const sc=document.getElementById('editScroll');
+  edViewX=sc.scrollLeft;edViewY=sc.scrollTop;
+  // Only allocate pixels for the viewport. The surface supplies scroll extent,
+  // so high zoom never allocates a bitmap as large as the enlarged image.
+  const width=Math.max(1,Math.min(sc.clientWidth || 600,Math.round(edImg.width*edScale)));
+  const height=Math.max(1,Math.min(sc.clientHeight || 520,Math.round(edImg.height*edScale)));
+  if(edCanvas.width!==width)edCanvas.width=width;
+  if(edCanvas.height!==height)edCanvas.height=height;
+  edCanvas.style.left=edViewX+'px';edCanvas.style.top=edViewY+'px';
+  edCtx.clearRect(0, 0, edCanvas.width, edCanvas.height);
+  const sourceWidth=Math.min(edCanvas.width/edScale,edImg.width-edViewX/edScale);
+  const sourceHeight=Math.min(edCanvas.height/edScale,edImg.height-edViewY/edScale);
+  edCtx.drawImage(edImg,edViewX/edScale,edViewY/edScale,sourceWidth,sourceHeight,
+    0,0,sourceWidth*edScale,sourceHeight*edScale);
+  ED.curves.forEach((c, ci) => {
+    if (edViewFilter !== null && ci !== edViewFilter) return;   // show only the selected symbol
+    c.points.forEach((p, pi) => {
+      const x = p.x * edScale - edViewX, y = p.y * edScale - edViewY;
+      if(x < -10 || y < -10 || x > edCanvas.width+10 || y > edCanvas.height+10)return;
+      const sel = edSelPt && edSelPt.ci === ci && edSelPt.pi === pi;
+      edCtx.beginPath();
+      edCtx.arc(x, y, sel ? 7 : 5, 0, 2 * Math.PI);
+      edCtx.fillStyle = rgbCss(c.rgb);
+      edCtx.fill();
+      edCtx.lineWidth = sel ? 3 : 1.5;
+      edCtx.strokeStyle = sel ? '#000' : '#fff';
+      edCtx.stroke();
+    });
+  });
+}
+
+function edPos(e) {
+  const r = edCanvas.getBoundingClientRect();
+  return { x: edViewX + (e.clientX - r.left) * (edCanvas.width / r.width),
+           y: edViewY + (e.clientY - r.top) * (edCanvas.height / r.height) };
+}
+function edImagePoint(p) {
+  return {x:Math.round(Math.max(0,Math.min(ED.image.width-1,p.x/edScale))),
+          y:Math.round(Math.max(0,Math.min(ED.image.height-1,p.y/edScale)))};
+}
+function hitPoint(cx, cy) {
+  for (let ci = 0; ci < ED.curves.length; ci++) {
+    if (edViewFilter !== null && ci !== edViewFilter) continue;   // ignore hidden symbols
+    const pts = ED.curves[ci].points;
+    for (let pi = 0; pi < pts.length; pi++) {
+      const dx = pts[pi].x * edScale - cx, dy = pts[pi].y * edScale - cy;
+      if (dx * dx + dy * dy <= 81) return { ci, pi };
+    }
+  }
+  return null;
+}
+function setEditorTool(tool) {
+  cancelEditorGesture();
+  edTool = tool;
+  for (const [id,value] of [['edToolEdit','edit'],['edToolPan','pan']]) {
+    const button=document.getElementById(id);
+    button.classList.toggle('active',edTool===value);
+    button.setAttribute('aria-pressed',String(edTool===value));
+  }
+  edCanvas.style.cursor = 'grab';
+}
+document.getElementById('edToolEdit').onclick = () => setEditorTool('edit');
+document.getElementById('edToolPan').onclick = () => setEditorTool('pan');
+
+function cancelEditorGesture() {
+  const gesture=edGesture;
+  edGesture=null; edDragging=null;
+  if (gesture && edCanvas.hasPointerCapture(gesture.pointerId)) edCanvas.releasePointerCapture(gesture.pointerId);
+  edCanvas.style.cursor='grab';
+}
+
+function moveEditorGesture(e) {
+  if (!edGesture || (e.pointerId!==undefined && e.pointerId!==edGesture.pointerId) ||
+      !ED || imageState.busy || folderNavigationBusy) return;
+  if (!Number.isFinite(e.clientX) || !Number.isFinite(e.clientY)) return;
+  const g=edGesture, dx=e.clientX-g.x, dy=e.clientY-g.y;
+  if (Math.hypot(dx,dy)>4) g.moved=true;
+  if (g.kind==='point') {
+    if (!g.moved) return;
+    Object.assign(ED.curves[edDragging.ci].points[edDragging.pi],edImagePoint(edPos(e)));
+    drawEditor(); scheduleRecompute();
+  } else if (g.moved) {
+    const sc=document.getElementById('editScroll');
+    sc.scrollLeft=g.left-dx; sc.scrollTop=g.top-dy;
+    edCanvas.style.cursor='grabbing';
+    drawEditor();
+  }
+}
+edCanvas.addEventListener('pointerdown', e => {
+  if (!ED || imageState.busy || folderNavigationBusy || edGesture ||
+      (e.button!==undefined && e.button!==0)) return;
+  e.preventDefault();
+  edCanvas.focus({preventScroll:true});
+  const p = edPos(e);
+  const hit = edTool==='edit' ? hitPoint(p.x, p.y) : null;
+  const sc=document.getElementById('editScroll');
+  edGesture={kind:hit?'point':edTool==='pan'?'pan':'background',pointerId:e.pointerId,
+    x:e.clientX,y:e.clientY,left:sc.scrollLeft,top:sc.scrollTop,point:p,moved:false};
+  if (hit) {
+    edSel = hit.ci; edSelPt = hit; edDragging = hit;
+    buildCurvePicker();
+  }
+  edCanvas.style.cursor=hit?'move':'grabbing';
+  drawEditor();
+  edCanvas.setPointerCapture(e.pointerId);
+});
+edCanvas.addEventListener('pointermove', e => {
+  moveEditorGesture(e);
+});
+edCanvas.addEventListener('pointerup', e => {
+  if (!edGesture || (e.pointerId!==undefined && e.pointerId!==edGesture.pointerId)) return;
+  moveEditorGesture(e); // Capture the final position even without a final move event.
+  const g=edGesture;
+  if (ED && !imageState.busy && !folderNavigationBusy && g.kind==='background' && !g.moved && ED.curves[edSel]) {
+    ED.curves[edSel].points.push(edImagePoint(g.point));
+    edSelPt={ci:edSel,pi:ED.curves[edSel].points.length-1};
+  }
+  cancelEditorGesture(); drawEditor(); recompute();
+});
+edCanvas.addEventListener('pointercancel',cancelEditorGesture);
+edCanvas.addEventListener('lostpointercapture',cancelEditorGesture);
+
+// coalesce rapid drag updates into one recompute per animation frame
+let _recompPending = false;
+function scheduleRecompute() {
+  if (_recompPending) return;
+  _recompPending = true;
+  requestAnimationFrame(() => { _recompPending = false; recompute(); });
+}
+
+function deleteSelected() {
+  if (!edSelPt || imageState.busy || folderNavigationBusy) return;
+  ED.curves[edSelPt.ci].points.splice(edSelPt.pi, 1);
+  edSelPt = null; drawEditor(); recompute();   // live update on delete
+}
+document.getElementById('edDelete').onclick = deleteSelected;
+window.addEventListener('keydown', e => {
+  if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target?.tagName) || e.target?.isContentEditable) return;
+  if ((e.key === 'Delete' || e.key === 'Backspace') && edSelPt &&
+      document.getElementById('editor').style.display !== 'none') {
+    e.preventDefault(); deleteSelected();
+  }
+});
+document.getElementById('edReset').onclick = () => {
+  if (window._edOpenArg && !imageState.busy) {
+    const valid = currentResultGuard();
+    initEditor(window._edOpenArg, valid).catch(error => {
+      if (valid()) alert('Could not reset editor: ' + error.message);
+    });
+  }
+};
+
+function recompute() {
+  if (!ED) return;
+  const cal = ED.calibration && ED.calibration.x && ED.calibration.y ? ED.calibration : null;
+  const rows = [];
+  ED.curves.forEach(c => {
+    const label = c.label || c.name;
+    c.points.slice().sort((a, b) => a.x - b.x).forEach(p => {
+      let dx = null, dy = null;
+      if (cal) { dx = pxToData(p.x, cal.x); dy = pxToData(p.y, cal.y); }
+      rows.push({ label, name: c.name || label, swatch_id: c.swatch_id || '', rgb: c.rgb, px: p.x, py: p.y, dx, dy, curve: c, hypothesis: p.state === 'active_hypothesis' });
+    });
+  });
+  drawRecon(rows);
+  drawTable(rows);
+  window._edRows = rows;
+  document.getElementById('edStatus').textContent =
+    rows.length + ' points' + (!cal ? ' (no axis calibration — values are pixels)'
+      : [cal.x, cal.y].some(axis => axis.kind === 'pixel')
+        ? ' (' + ['x', 'y'].filter(axis => cal[axis].kind === 'pixel').join(', ') + ' in pixels)' : '');
+}
+document.getElementById('edRecompute').onclick = recompute;
+
+// Saved reference diagnostics may compare the active anchors that the server
+// evaluated. The point-preview renderer below does not display that reference.
+function matchingReconstructionAnchors(anchors, points, tolerance = 1e-6) {
+  const finitePoint = p => p && Number.isFinite(p.x) && Number.isFinite(p.y);
+  if (!Array.isArray(anchors) || !Array.isArray(points) || anchors.length !== points.length ||
+      !anchors.every(finitePoint) || !points.every(finitePoint)) return false;
+  // A one-to-one tolerance match also handles duplicate/near-duplicate x
+  // values without depending on input ordering or greedy nearest assignment.
+  const assigned = new Array(points.length).fill(-1);
+  function match(anchorIndex, visited) {
+    for (let i = 0; i < points.length; i++) {
+      if (visited.has(i) || Math.abs(points[i].x - anchors[anchorIndex].x) > tolerance ||
+          Math.abs(points[i].y - anchors[anchorIndex].y) > tolerance) continue;
+      visited.add(i);
+      if (assigned[i] < 0 || match(assigned[i], visited)) { assigned[i] = anchorIndex; return true; }
+    }
+    return false;
+  }
+  return anchors.every((_anchor, index) => match(index, new Set()));
+}
+
+function reconstructionGeometry(curve) {
+  // Display and correction are independent: always connect CURRENT markers,
+  // even for uncertain/fitted/scatter series. Do not overwrite the saved
+  // reference, connection_mode or correction state with this preview geometry.
+  const points = ((curve && curve.points) || [])
+    .filter(p => p && Number.isFinite(p.x) && Number.isFinite(p.y))
+    .map(p => ({ x: p.x, y: p.y })).sort((a, b) => a.x - b.x);
+  return { points, segments: [points], model: 'linear', server: false,
+    displayOnly: true, reason: 'x_ordered_marker_connections' };
+}
+
+function reconstructionCaption(rows) {
+  return 'Reconstructed plot — x-ordered straight connections (display only; not the Step-5 reference)';
+}
+
+function reconstructionCalibrationCaption(cal) {
+  const pixelAxes = !cal ? ['x', 'y'] : ['x', 'y'].filter(axis => cal[axis].kind === 'pixel');
+  const warnings = cal ? ['x', 'y'].map(axis => cal[axis].warning).filter(Boolean) : [];
+  return (pixelAxes.length ? ' · ' + pixelAxes.join(', ') + ' in pixels' : '') +
+    (warnings.length ? ' · WARNING: ' + warnings.join(' ') : '');
+}
+
+function drawReconstructionMarker(context, x, y, markerClass, radius = 3) {
+  const name = markerClass || 'filled_circle';
+  const open = name.startsWith('open_');
+  context.beginPath();
+  if (name.includes('square')) context.rect(x - radius, y - radius, radius * 2, radius * 2);
+  else if (name.includes('rhombus') || name.includes('diamond')) {
+    context.moveTo(x, y - radius - 1); context.lineTo(x + radius + 1, y);
+    context.lineTo(x, y + radius + 1); context.lineTo(x - radius - 1, y); context.closePath();
+  } else if (name.includes('triangle')) {
+    const sign = name.includes('inv_') ? -1 : 1;
+    context.moveTo(x, y - sign * (radius + 1));
+    context.lineTo(x + radius + 1, y + sign * radius);
+    context.lineTo(x - radius - 1, y + sign * radius); context.closePath();
+  } else if (name === 'x_marker' || name === 'plus_marker') {
+    if (name === 'x_marker') {
+      context.moveTo(x - radius, y - radius); context.lineTo(x + radius, y + radius);
+      context.moveTo(x - radius, y + radius); context.lineTo(x + radius, y - radius);
+    } else {
+      context.moveTo(x - radius, y); context.lineTo(x + radius, y);
+      context.moveTo(x, y - radius); context.lineTo(x, y + radius);
+    }
+    context.stroke(); return;
+  } else context.arc(x, y, radius, 0, 2 * Math.PI);
+  if (open) {
+    const fill = context.fillStyle; context.fillStyle = '#fff'; context.fill(); context.fillStyle = fill; context.stroke();
+  } else context.fill();
+}
+
+function drawSeriesReconstruction(context, list, fx, fy, useData, calibration) {
+  const curve = list[0].curve && list.every(r => r.curve === list[0].curve)
+    ? list[0].curve : { points: list.map(r => ({ x: r.px, y: r.py })) };
+  const geometry = reconstructionGeometry(curve);
+  context.strokeStyle = rgbCss(list[0].rgb); context.fillStyle = rgbCss(list[0].rgb); context.lineWidth = 1.5;
+  const project = p => [fx(useData ? pxToData(p.x, calibration.x) : p.x),
+                        fy(useData ? pxToData(p.y, calibration.y) : -p.y)];
+  const runs = geometry.segments;
+  runs.forEach(run => {
+    context.beginPath();
+    let connected = false;
+    run.forEach(p => {
+      const [x, y] = project(p);
+      if (!Number.isFinite(x) || !Number.isFinite(y)) { connected = false; return; }
+      if (connected) context.lineTo(x, y); else context.moveTo(x, y);
+      connected = true;
+    });
+    context.stroke();
+  });
+  list.forEach(r => {
+    const [x, y] = project({ x: r.px, y: r.py });
+    // Type 3 centres are editable hypotheses, not detected glyphs. Their
+    // original-image overlay shows centres; reconstruction stays line-only.
+    if (curve.series_mode !== 'line-only' && Number.isFinite(x) && Number.isFinite(y)) drawReconstructionMarker(context, x, y, curve.marker_class);
+    if (r.hypothesis && Number.isFinite(x) && Number.isFinite(y)) {
+      context.save(); context.strokeStyle = '#b000bf'; context.lineWidth = 1.5; context.setLineDash([2, 2]);
+      context.beginPath(); context.arc(x, y, 7, 0, 2 * Math.PI); context.stroke(); context.restore();
+    }
+  });
+}
+
+function drawRecon(rows) {
+  const cv = document.getElementById('reconCanvas');
+  const c = cv.getContext('2d');
+  // Reconstructed plot keeps a stable FIT size (independent of the edit canvas
+  // zoom) so zooming the image doesn't blow the recon canvas up off-screen.
+  const rw = Math.max(360, Math.round((edImg && edImg.width ? edImg.width : 600) * edBaseScale));
+  const rh = Math.max(240, Math.round((edImg && edImg.height ? edImg.height : 400) * edBaseScale));
+  cv.width = rw; cv.height = rh;
+  c.fillStyle = '#fff'; c.fillRect(0, 0, cv.width, cv.height);
+  const cal = ED.calibration && ED.calibration.x && ED.calibration.y ? ED.calibration : null;
+  const caption = reconstructionCaption(rows) + reconstructionCalibrationCaption(cal);
+  document.getElementById('editorReconCaption').textContent = caption;
+  cv.title = caption;
+  const M = { l: 46, r: 12, t: 12, b: 30 };
+  const W = cv.width - M.l - M.r, H = cv.height - M.t - M.b;
+  const useData = !!cal;
+  let xs, ys, xlog = false, ylog = false;
+  if (useData) {
+    xlog = cal.x.log; ylog = cal.y.log;
+    xs = rows.map(r => r.dx); ys = rows.map(r => r.dy);
+  } else {
+    xs = rows.map(r => r.px); ys = rows.map(r => -r.py);
+  }
+  if (!rows.length) return;
+  let xmin = Math.min(...xs), xmax = Math.max(...xs),
+      ymin = Math.min(...ys), ymax = Math.max(...ys);
+  const fx = v => {
+    let t;
+    if (xlog) t = (Math.log10(v) - Math.log10(xmin)) / ((Math.log10(xmax) - Math.log10(xmin)) || 1);
+    else t = (v - xmin) / ((xmax - xmin) || 1);
+    return M.l + t * W;
+  };
+  const fy = v => {
+    let t;
+    if (ylog) t = (Math.log10(v) - Math.log10(ymin)) / ((Math.log10(ymax) - Math.log10(ymin)) || 1);
+    else t = (v - ymin) / ((ymax - ymin) || 1);
+    return M.t + (1 - t) * H;
+  };
+  c.strokeStyle = '#333'; c.lineWidth = 1;
+  c.beginPath(); c.moveTo(M.l, M.t); c.lineTo(M.l, M.t + H); c.lineTo(M.l + W, M.t + H); c.stroke();
+  // Keep axes based on all points, but match the editor's selected series.
+  // Filtering only the drawing leaves table/export rows and saved data intact.
+  const visibleRows = edViewFilter === null ? rows : rows.filter(r => r.curve === ED.curves[edViewFilter]);
+  const byLabel = {};
+  visibleRows.forEach(r => {
+    const key = r.swatch_id || (r.curve && r.curve.reconstruction ? r.name : r.label);
+    (byLabel[key] = byLabel[key] || []).push(r);
+  });
+  Object.values(byLabel).forEach(list => {
+    drawSeriesReconstruction(c, list, fx, fy, useData, cal);
+  });
+  c.fillStyle = '#333'; c.font = '10px sans-serif';
+  c.fillText(('' + (Math.round(xmin * 100) / 100)), M.l, M.t + H + 12);
+  c.fillText(('' + (Math.round(xmax * 100) / 100)), M.l + W - 24, M.t + H + 12);
+  c.fillText('' + (Math.round(ymax * 100) / 100), 2, M.t + 8);
+  c.fillText('' + (Math.round(ymin * 100) / 100), 2, M.t + H);
+}
+
+// Standalone reconstruction render (no editor state) — draws edit_data points to
+// any canvas. Used to show a reconstructed plot beside the overlay after Run and
+// in the Step-5 comparison, without opening the point editor.
+function drawReconStandalone(rows, cv, imgW, imgH, cal, bounds) {
+  const c = cv.getContext('2d');
+  const rw = Math.max(360, Math.round((imgW || 600) * 0.6));
+  const rh = Math.max(240, Math.round((imgH || 400) * 0.6));
+  cv.width = rw; cv.height = rh;
+  c.fillStyle = '#fff'; c.fillRect(0, 0, cv.width, cv.height);
+  const caption = reconstructionCaption(rows) + reconstructionCalibrationCaption(cal);
+  cv.title = caption;
+  if (cv.reconstructionCaptionElement) cv.reconstructionCaptionElement.textContent = caption;
+  if (!rows || !rows.length) return;
+  const M = { l: 46, r: 12, t: 12, b: 30 };
+  const W = cv.width - M.l - M.r, H = cv.height - M.t - M.b;
+  const useData = !!cal;
+  let xs, ys, xlog = false, ylog = false;
+  if (useData) { xlog = cal.x.log; ylog = cal.y.log; xs = rows.map(r => r.dx); ys = rows.map(r => r.dy); }
+  else { xs = rows.map(r => r.px); ys = rows.map(r => -r.py); }
+  // Axis range: use the user-entered plot-area bounds (FIXED), not the detected
+  // point extent, so every reconstruction shows the same axes. Falls back to the
+  // point extent only when bounds are unusable (e.g. <=0 on a log axis).
+  let xmin, xmax, ymin, ymax;
+  if (bounds && useData) {
+    xmin = bounds.xmin; xmax = bounds.xmax; ymin = bounds.ymin; ymax = bounds.ymax;
+    if (xlog && (xmin <= 0 || xmax <= 0)) { const p = xs.filter(v => v > 0); xmin = Math.min(...p); xmax = Math.max(...p); }
+    if (ylog && (ymin <= 0 || ymax <= 0)) { const p = ys.filter(v => v > 0); ymin = Math.min(...p); ymax = Math.max(...p); }
+  } else {
+    xmin = Math.min(...xs); xmax = Math.max(...xs); ymin = Math.min(...ys); ymax = Math.max(...ys);
+  }
+  const fx = v => { let t; if (xlog) t = (Math.log10(v) - Math.log10(xmin)) / ((Math.log10(xmax) - Math.log10(xmin)) || 1); else t = (v - xmin) / ((xmax - xmin) || 1); return M.l + t * W; };
+  const fy = v => { let t; if (ylog) t = (Math.log10(v) - Math.log10(ymin)) / ((Math.log10(ymax) - Math.log10(ymin)) || 1); else t = (v - ymin) / ((ymax - ymin) || 1); return M.t + (1 - t) * H; };
+  c.strokeStyle = '#333'; c.lineWidth = 1;
+  c.beginPath(); c.moveTo(M.l, M.t); c.lineTo(M.l, M.t + H); c.lineTo(M.l + W, M.t + H); c.stroke();
+  const byLabel = {};
+  rows.forEach(r => { const k = r.name || r.label; (byLabel[k] = byLabel[k] || []).push(r); });
+  Object.values(byLabel).forEach(list => {
+    drawSeriesReconstruction(c, list, fx, fy, useData, cal);
+  });
+  c.fillStyle = '#333'; c.font = '10px sans-serif';
+  c.fillText('' + (Math.round(xmin * 100) / 100), M.l, M.t + H + 12);
+  c.fillText('' + (Math.round(xmax * 100) / 100), M.l + W - 24, M.t + H + 12);
+  c.fillText('' + (Math.round(ymax * 100) / 100), 2, M.t + 8);
+  c.fillText('' + (Math.round(ymin * 100) / 100), 2, M.t + H);
+}
+
+async function showSuppressedReview(editUrl, parent, inputUrl) {
+  try {
+    const response=await fetch(editUrl+'?t='+Date.now());
+    if(!response.ok)return;
+    const ed=await response.json();
+    if(!parent.isConnected)return;
+    const scored=(ed.curves||[]).filter(c=>Array.isArray(c.step5_candidate_reviews)&&c.step5_candidate_reviews.length);
+    if(scored.length) {
+      const panel=document.createElement('details'),title=document.createElement('summary');
+      title.textContent='Step 5 ADD tests: reconstructed curve vs extracted path';panel.appendChild(title);
+      const explanation=document.createElement('p');explanation.className='hint';
+      explanation.textContent='Every ADD is simulated. Lower total J is better; positive total gain is improvement. '+
+        'Weighted-image policy: J = path + λ × completeness loss + μ × image loss, with no image-score veto. '+
+        'Historical or unsupported-path policies retain image admission. A better total score does not prove a hidden marker exists. Costs are per-series.';
+      panel.appendChild(explanation);
+      const table=document.createElement('table');table.style.fontSize='12px';table.style.borderCollapse='collapse';
+      const addRow=(values,header)=>{
+        const tr=document.createElement('tr');
+        for(const value of values){const td=document.createElement(header?'th':'td');td.textContent=String(value);
+          td.style.padding='5px';td.style.border='1px solid #ccc';tr.appendChild(td);}
+        table.appendChild(tr);
+      };
+      const fmt=n=>Number.isFinite(n)?n.toFixed(4):'not available';
+      const weighted=scored.some(c=>c.step5_path_objective?.image_policy==='weighted_cost');
+      const composite=weighted || scored.some(c=>c.step5_path_objective?.completeness_enabled);
+      addRow(['Series','Iter','Candidate (source px)','Path before','Path after ADD','Gain',
+        ...(composite?['Completeness before / after','Total before / after','Total gain']:[]),
+        ...(weighted?['Weighted image cost before / after','Image weight μ','Image policy']:[]),
+        'Path use','Image score (diagnostic)','Selection / reason'],true);
+      for(const c of scored)for(const q of c.step5_candidate_reviews){
+        const m=q.path_comparison||{};
+        addRow([c.label||c.name,q.iteration,(q.candidate_id||'candidate')+' ('+fmt(q.x)+', '+fmt(q.y)+')',
+          fmt(m.before?.objective),fmt(m.after?.objective),fmt(m.gain),
+          ...(composite?[fmt(m.before?.completeness?.quality)+' / '+fmt(m.after?.completeness?.quality),
+            fmt(m.before?.combined_objective)+' / '+fmt(m.after?.combined_objective),fmt(m.objective_gain)]:[]),
+          ...(weighted?[fmt(m.before?.image_cost)+' / '+fmt(m.after?.image_cost),
+            fmt(c.step5_path_objective?.image_weight),c.step5_path_objective?.image_policy||'hard_admission']:[]),
+          m.status==='evaluated'?(m.ranking_enabled?'ADD ranking':'diagnostic only'):m.status||'unavailable',fmt(q.image_score),
+          q.selected?'SELECTED':q.admissible?'Eligible; not selected':q.reason||m.status],false);
+      }
+      const scroll=document.createElement('div');scroll.style.overflowX='auto';scroll.appendChild(table);
+      panel.appendChild(scroll);parent.appendChild(panel);
+    }
+    const rows=(ed.curves||[]).filter(c=>Array.isArray(c.suppressed_candidates)&&c.suppressed_candidates.length);
+    if(!rows.length || !parent.isConnected)return;
+    const count=rows.reduce((n,c)=>n+c.suppressed_candidates.length,0);
+    const details=document.createElement('details'),summary=document.createElement('summary');
+    summary.textContent='Suppressed review: '+count+' unconfirmed alternatives (not exported as data points)';
+    details.appendChild(summary);
+    const note=document.createElement('p');note.className='hint';
+    note.textContent='Outlined diamonds show remaining unconfirmed candidate centres, not active data points. Weighted-image Step 5 may activate compatible occlusion hypotheses; these remain unvalidated. '+
+      rows.map(c=>(c.label||c.name)+': '+c.suppressed_candidates.length).join(' · ');
+    details.appendChild(note);parent.appendChild(details);
+    if(!inputUrl)return;
+    let drawn=false;
+    details.addEventListener('toggle',async()=>{
+      if(!details.open || drawn)return;drawn=true;
+      try {
+        const img=await decodeImage(inputUrl),canvas=document.createElement('canvas');
+        const scale=Math.min(1,1200/img.width);canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);
+        canvas.style.maxWidth='100%';const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,canvas.width,canvas.height);
+        for(const c of rows)for(const p of c.suppressed_candidates) {
+          if(!Number.isFinite(p.cx)||!Number.isFinite(p.cy))continue;
+          const x=p.cx*scale,y=p.cy*scale,r=6;
+          ctx.beginPath();ctx.moveTo(x,y-r);ctx.lineTo(x+r,y);ctx.lineTo(x,y+r);ctx.lineTo(x-r,y);ctx.closePath();
+          ctx.strokeStyle='white';ctx.lineWidth=4;ctx.stroke();
+          ctx.strokeStyle='rgb('+(c.rgb||[60,60,60]).join(',')+')';ctx.lineWidth=2;ctx.stroke();
+        }
+        details.appendChild(canvas);
+      } catch(error) { drawn=false;note.textContent+=' Preview unavailable: '+error.message; }
+    });
+  } catch(error) { console.warn('Suppressed review unavailable:',error); }
+}
+
+async function renderReconInto(editUrl, canvasEl) {
+  if (!editUrl || !canvasEl) return;
+  const revision = imageState.revision;
+  // Step-5 retains earlier history charts. A newer result is not a reason to
+  // drop their pending reconstruction; only removal or new geometry is.
+  const valid = () => imageState.revision === revision && canvasEl.isConnected;
+  const fields = Object.fromEntries(['xMin', 'xMax', 'yMin', 'yMax'].map(id => [id, document.getElementById(id).value]));
+  try {
+    const resp = await fetch(editUrl + '?t=' + Date.now());
+    if (!valid()) return;
+    const ed = await resp.json();
+    if (!valid()) return;
+    const cal = ed.calibration && ed.calibration.x && ed.calibration.y ? ed.calibration : null;
+    const rows = [];
+    (ed.curves || []).forEach(cv => {
+      const label = cv.label || cv.name;
+      const cname = cv.name || label;          // class name: stable grouping key
+      cv.points.slice().sort((a, b) => a.x - b.x).forEach(p => {
+        let dx = null, dy = null;
+        if (cal) { dx = pxToData(p.x, cal.x); dy = pxToData(p.y, cal.y); }
+        rows.push({ label, name: cname, rgb: cv.rgb, px: p.x, py: p.y, dx, dy, curve: cv, hypothesis: p.state === 'active_hypothesis' });
+      });
+    });
+    const imgW = (ed.image && ed.image.width) || 600;
+    const imgH = (ed.image && ed.image.height) || 400;
+    // Fixed axis bounds. The calibration in edit_data.json already carries the
+    // real axis range (v0/v1 = the data values at the plot-area edges, whether
+    // they came from the typed values, the scale box or OCR), so prefer it.
+    // Only fall back to the typed fields, then to 0..1, when it is absent --
+    // defaulting to 0..1 on a log axis previously forced the renderer back to
+    // the point extent, which is why the axes looked wrong.
+    const _num = id => { const v = parseFloat(parseAxisValue(fields[id])); return isFinite(v) ? v : null; };
+    const _bx0 = _num('xMin'), _bx1 = _num('xMax'), _by0 = _num('yMin'), _by1 = _num('yMax');
+    const _rng = (ax, lo, hi, dLo, dHi) => (ax && isFinite(ax.v0) && isFinite(ax.v1))
+      ? [Math.min(ax.v0, ax.v1), Math.max(ax.v0, ax.v1)]
+      : [(lo !== null ? lo : dLo), (hi !== null ? hi : dHi)];
+    const _xr = _rng(cal && cal.x, _bx0, _bx1, 0, 1);
+    const _yr = _rng(cal && cal.y, _by0, _by1, 0, 1);
+    const bounds = { xmin: _xr[0], xmax: _xr[1], ymin: _yr[0], ymax: _yr[1] };
+    drawReconStandalone(rows, canvasEl, imgW, imgH, cal, bounds);
+  } catch (e) { if (valid()) console.error('recon render failed:', e); }
+}
+
+// Build a labelled pair block: [original + detected points] | [reconstructed plot].
+function makeResultPair(label, accent) {
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'margin-bottom:18px; padding-top:12px; border-top:1px solid var(--border);';
+  const title = document.createElement('div');
+  title.textContent = label;
+  title.style.cssText = 'font-size:13px; font-weight:700; margin-bottom:8px; color:' + (accent ? 'var(--accent)' : '#333') + ';';
+  const row = document.createElement('div');
+  row.style.cssText = 'display:flex; gap:12px; flex-wrap:wrap; align-items:flex-start;';
+  const col1 = document.createElement('div'); col1.style.cssText = 'flex:1; min-width:280px;';
+  const cap1 = document.createElement('div');
+  cap1.textContent = 'Original + detected points';
+  cap1.style.cssText = 'font-size:12px; font-weight:600; color:#6b6b6b; margin-bottom:4px;';
+  const img = document.createElement('img');
+  img.alt = 'data point overlay';
+  img.style.cssText = 'width:100%; border:1px solid var(--border); border-radius:8px;';
+  col1.appendChild(cap1); col1.appendChild(img);
+  const col2 = document.createElement('div'); col2.style.cssText = 'flex:1; min-width:280px;';
+  const cap2 = document.createElement('div');
+  cap2.textContent = 'Reconstructed plot';
+  cap2.style.cssText = 'font-size:12px; font-weight:600; color:' + (accent ? 'var(--accent)' : '#6b6b6b') + '; margin-bottom:4px;';
+  const canvas = document.createElement('canvas'); canvas.width = 600; canvas.height = 400;
+  canvas.reconstructionCaptionElement = cap2;
+  canvas.style.cssText = 'width:100%; background:#fff; border:1px solid ' + (accent ? 'var(--accent)' : 'var(--border)') + '; border-radius:8px;';
+  col2.appendChild(cap2); col2.appendChild(canvas);
+  row.appendChild(col1); row.appendChild(col2);
+  wrap.appendChild(title); wrap.appendChild(row);
+  return { wrap, img, canvas };
+}
+
+function drawTable(rows) {
+  const wrap = document.getElementById('edTableWrap');
+  let html = '<table style="border-collapse:collapse; font-size:12px; width:100%;">' +
+    '<tr style="position:sticky; top:0; background:#305496; color:#fff;">' +
+    '<th style="padding:4px 8px; text-align:left;">curve (legend label)</th>' +
+    '<th style="padding:4px 8px;">data_x</th><th style="padding:4px 8px;">data_y</th>' +
+    '<th style="padding:4px 8px;">px</th><th style="padding:4px 8px;">py</th></tr>';
+  rows.forEach(r => {
+    const chip = '<span class="swatch" style="background:' + rgbCss(r.rgb) +
+                 ';border:1px solid #999; vertical-align:middle; margin-right:5px;"></span>';
+    const dx = r.dx == null ? '' : (+r.dx).toPrecision(4);
+    const dy = r.dy == null ? '' : (+r.dy).toPrecision(4);
+    html += '<tr style="border-bottom:1px solid #eee;">' +
+      '<td style="padding:3px 8px;">' + chip + escapeText(r.label) + '</td>' +
+      '<td style="padding:3px 8px; text-align:right;">' + dx + '</td>' +
+      '<td style="padding:3px 8px; text-align:right;">' + dy + '</td>' +
+      '<td style="padding:3px 8px; text-align:right; color:#999;">' + r.px + '</td>' +
+      '<td style="padding:3px 8px; text-align:right; color:#999;">' + r.py + '</td></tr>';
+  });
+  html += '</table>';
+  wrap.innerHTML = html;
+}
+
+document.getElementById('edCsv').onclick = () => {
+  const rows = window._edRows || [];
+  const hasSwatchIds = rows.some(r => r.swatch_id);
+  let csv = (hasSwatchIds ? 'swatch_id,' : '') + 'curve,data_x,data_y,pixel_x,pixel_y\n';
+  rows.forEach(r => {
+    const lab = '"' + String(r.label).replace(/"/g, '""') + '"';
+    const values = [lab, r.dx == null ? '' : r.dx, r.dy == null ? '' : r.dy, r.px, r.py];
+    if (hasSwatchIds) values.unshift('"' + String(r.swatch_id || '').replace(/"/g, '""') + '"');
+    csv += values.join(',') + '\n';
+  });
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'corrected_data.csv'; a.click();
+};
+syncImageControls();
+</script>
+</body>
+</html>

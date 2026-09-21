@@ -1,0 +1,28 @@
+# Local Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Local inputs, results, model weights and secrets
+/data/
+/models/
+/outputs/
+/tmp/
+*.pth
+*.pt
+*.onnx
+.env
+.env.*
+!.env.example
+*.log
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
