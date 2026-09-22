@@ -27,6 +27,7 @@
   #run { width:100%; padding:12px; background:var(--accent); color:#fff; border:none;
          border-radius:8px; font-size:15px; cursor:pointer; margin-top:8px; }
   #run:disabled { opacity:.5; cursor:default; }
+  #result button:disabled { opacity:.5; cursor:not-allowed; }
   canvas { border:1px solid var(--border); border-radius:8px; cursor:crosshair;
            max-width:100%; touch-action:none; }
   .canvaswrap { max-width: 640px; }
@@ -195,14 +196,7 @@
       <p id="legendSelectionHint" class="hint" role="status">No legend selected: automatically infer one series from plot. Draw the plot area before running.</p>
 
       <hr style="border:none; border-top:1px solid var(--border); margin:16px 0;">
-      <div style="font-size:13px; font-weight:600; margin-bottom:8px;">Axis values <span id="axisOpt">(optional)</span></div>
-      <p class="hint" style="margin-top:0;"><span id="axisMapHint">Without a legend, omitted axis values keep the output in pixels.</span></p>
       <label style="font-size:13px;"><input id="useScaleBox" type="checkbox"> Use a separate <b>scale box</b> (optional)</label>
-      <div class="hint" style="margin-top:2px;">
-        Turn this on to type the axis values. Draw the scale box exactly on the axes, so the
-        plot area can be drawn larger (to catch points sitting on or just outside them)
-        without making the values ambiguous.
-      </div>
       <div id="scaleBoxPanel" style="display:none; margin-top:8px;">
         <div style="margin-bottom:8px;">
           <button id="btnScale" data-tool="scale" class="toolbtn"><span class="swatch" style="background:#e08a1e"></span>Draw scale box</button>
@@ -218,18 +212,6 @@
           <label><input id="xLog" type="checkbox"> x log scale</label>
           <label><input id="yLog" type="checkbox"> y log scale</label>
         </div>
-      </div>
-
-
-
-      <div id="colorSeriesPanel" style="margin-top:14px; padding-top:12px; border-top:1px dashed var(--border);">
-        <label for="colorSeriesMode">Colour chart series</label>
-        <select id="colorSeriesMode" style="width:100%; margin-top:6px;">
-          <option value="auto" selected>Auto — infer markers or line-only from plot</option>
-          <option value="markers">Markers — v46 marker detector</option>
-          <option value="line-only">No markers — line / error-bar centres (type 3)</option>
-        </select>
-        <p class="hint">Auto checks the plot for markers even when the legend shows only a line. Use a manual choice to specify known marker or line-only charts. Line-only detection uses curve, error-bar and corner evidence; added correction points remain hypotheses.</p>
       </div>
 
       <div id="bwPanel" style="display:none; margin-top:14px; padding-top:12px; border-top:1px dashed var(--border);">
@@ -251,10 +233,11 @@
     <!-- Right: result -->
     <div class="panel" id="result" style="min-width:320px; display:none;">
       <div id="summary" role="status" style="font-size:14px; margin-bottom:10px;"></div>
-      <div id="inferenceDiagnostic" style="display:none; margin-bottom:10px;">
+      <details id="inferenceDiagnostic" style="display:none; margin-bottom:10px;">
+        <summary>Detection status and log</summary>
         <a id="inferenceDiagnosticLink" target="_blank" rel="noopener">Open v46 series inference diagnostic</a>
         <pre id="inferenceDiagnosticText" style="white-space:pre-wrap; overflow-wrap:anywhere; font-size:12px;"></pre>
-      </div>
+      </details>
       <details id="triangleGuardDiagnostic" style="display:none; margin-bottom:12px;">
         <summary id="triangleGuardSummary">Triangle / error-bar check — automatic</summary>
         <p id="triangleGuardText" class="hint" style="white-space:pre-wrap;"></p>
@@ -268,6 +251,8 @@
       </div>
       <div id="resultsHistory"></div>
       <br>
+      <div id="resultActions">
+      <p id="resultActionsHint" class="hint" role="status"></p>
       <button id="downloadXlsx" type="button">Save Excel (current data)</button>
       <button id="saveCorrection" type="button">Save result versions (.json)</button>
       <button id="openEditor" style="display:none; margin-top:12px; margin-left:8px; padding:10px 16px; background:var(--accent); color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:14px;">Correct data points →</button>
@@ -286,8 +271,11 @@
       <button id="btnStep5" style="display:none; margin-top:12px; margin-left:8px; padding:10px 16px; background:#fff; color:var(--accent); border:1px solid var(--accent); border-radius:8px; cursor:pointer; font-size:14px;">Run Step 5 correction ↻</button>
       <div id="step5MethodHint" class="hint" style="display:none; margin-top:8px;"></div>
       <div id="colorStep5Objective" class="hint" style="display:none; margin-top:6px; padding:8px; background:#edf5f0;"></div>
+      </div>
       <div id="diagBox" style="display:none; margin-top:12px;">
         <div class="hint" id="legendDiagHint"></div>
+        <pre id="legendAnalysisText" style="white-space:pre-wrap; overflow-wrap:anywhere;"></pre>
+        <a id="legendAnalysisLink" target="_blank" rel="noopener" hidden>Open full legend / series analysis (JSON)</a>
         <img id="diagImg" alt="legend diagnostic" style="max-width:100%; border:1px solid var(--border); border-radius:8px;">
         <div class="hint" id="legendOverlayWrap" style="margin-top:8px;">Legend locations on the original image:</div>
         <img id="legendImg" alt="legend table overlay" style="max-width:100%; border:1px solid var(--border); border-radius:8px;">
@@ -509,14 +497,26 @@ let folderNavigationBusy=false, folderEditorSource=null, folderEditorDirectory=n
 let savedFolderState=null;
 const IMAGE_BROWSER_PAGE_SIZE=12;
 
+function resultCapabilities(data) {
+  const editable = !!data && (typeof data.editable_available === 'boolean'
+    ? data.editable_available : !!(data.edit_data_url && data.input_url));
+  const correctable = !!(editable && data.ok && data.job_id && data.step5_available !== false &&
+    (!data.legend_optional || data.legend_optional.status === 'completed'));
+  const legend = !!(data && (data.legend_diagnostic_url || data.legend_overlay_url ||
+    data.legend_optional_url || data.legend_optional));
+  return {editable, correctable, legend};
+}
+
 function syncImageControls() {
   const busy = !!imageState.busy || folderNavigationBusy;
+  const capabilities = resultCapabilities(window.lastData);
   document.getElementById('run').disabled = busy || !imgLoaded;
-  document.getElementById('btnStep5').disabled = busy || !imgLoaded || !window._lastJobId;
+  document.getElementById('btnStep5').disabled = busy || !capabilities.correctable;
+  document.getElementById('toggleDiag').disabled = busy || !capabilities.legend;
   const stopPolicy = document.getElementById('step5StopPolicy');
-  if (stopPolicy) stopPolicy.disabled = busy;
-  document.getElementById('bwCorrectIters').disabled = busy || stopPolicy?.value === 'auto';
-  for (const id of ['fileInput', 'modeColor', 'modeBw', 'colorSeriesMode', 'correctionImage', 'correctionData', 'loadCorrection', 'chooseImageFolder', 'folderImage', 'openFolderImage']) document.getElementById(id).disabled = busy;
+  if (stopPolicy) stopPolicy.disabled = busy || !capabilities.correctable;
+  document.getElementById('bwCorrectIters').disabled = busy || !capabilities.correctable || stopPolicy?.value === 'auto';
+  for (const id of ['fileInput', 'modeColor', 'modeBw', 'correctionImage', 'correctionData', 'loadCorrection', 'chooseImageFolder', 'folderImage', 'openFolderImage']) document.getElementById(id).disabled = busy;
   document.getElementById('openFolderImage').disabled = busy || !editImageNames.includes(document.getElementById('folderImage').value);
   document.getElementById('browseFolderImages').disabled = busy || !editImageNames.length;
   document.getElementById('saveCorrection').disabled = busy || !window._lastJobId;
@@ -528,9 +528,10 @@ function syncImageControls() {
   for (const id of ['btnLegend', 'btnPlot', 'btnScale', 'btnClear', 'useScaleBox']) {
     document.getElementById(id).disabled = busy || !imgLoaded;
   }
-  for (const id of ['xMin', 'xMax', 'yMin', 'yMax', 'xLog', 'yLog', 'openEditor', 'clearHistory']) {
+  for (const id of ['xMin', 'xMax', 'yMin', 'yMax', 'xLog', 'yLog', 'clearHistory']) {
     document.getElementById(id).disabled = busy;
   }
+  document.getElementById('openEditor').disabled = busy || !capabilities.editable;
   document.querySelectorAll('#editor button').forEach(el => { el.disabled = busy; });
   syncFolderNavigation();
   const dims = size => size ? `${size.width} × ${size.height} px` : '—';
@@ -616,6 +617,18 @@ function configureLegendDiagnostic(data, resultCurrent) {
   const overlayCaption = document.getElementById('legendOverlayWrap');
   const dUrl = data.legend_diagnostic_url;
   const oUrl = data.legend_overlay_url;
+  const analysis = data.legend_optional;
+  const analysisLink = document.getElementById('legendAnalysisLink');
+  analysisLink.hidden = !data.legend_optional_url;
+  if (data.legend_optional_url) analysisLink.href = data.legend_optional_url;
+  else analysisLink.removeAttribute('href');
+  document.getElementById('legendAnalysisText').textContent = analysis
+    ? ['Status: '+(analysis.status || 'unknown'),
+       'Chart type: '+(analysis.chart_kind || 'undetermined'),
+       'Legend: '+(analysis.no_legend ? 'not selected' : analysis.legend_probe?.kind || 'selected'),
+       analysis.reason || '',
+       ...(analysis.series || []).map(series => (series.label || series.id || 'Series') +
+         (series.role ? ' — '+series.role : ''))].filter(Boolean).join('\n') : '';
   for (const img of [diag, overlay]) {
     img.onerror = null;
     img.removeAttribute('src');
@@ -624,20 +637,27 @@ function configureLegendDiagnostic(data, resultCurrent) {
   box.style.display = 'none';
   overlayCaption.style.display = 'none';
   toggle.onclick = null;
-  toggle.style.display = dUrl || oUrl ? 'inline-block' : 'none';
-  toggle.textContent = 'Show legend fit diagnostic';
+  const available = !!(dUrl || oUrl || analysis || data.legend_optional_url);
+  toggle.style.display = data.job_id || available ? 'inline-block' : 'none';
+  toggle.disabled = !available;
+  toggle.title = available ? '' : 'This run did not produce a legend analysis.';
+  const diagnosticLabel = dUrl || oUrl ? 'legend fit diagnostic' : 'legend / series analysis';
+  toggle.textContent = 'Show '+diagnosticLabel;
   hint.textContent = data.legend_diagnostic_kind === 'color-group-templates'
     ? 'Colour-group v46: source legend swatch | actual detection template | separate series ID. Supported line + symbol decompositions remove connector ink from the model, including dashed lines through open circles. Uncertain decompositions retain an observed fallback.'
     : data.legend_diagnostic_kind === 'bw-observed-templates'
     ? 'B&W v46: original legend boxes, source swatches, actual soft-ink templates and binary shape masks. Green = swatch box; cyan = marker extent. unknown_marker remains a separate detected series, not a rejected swatch.'
     : 'Colour legend table: green = accepted colour swatch; cyan = accepted grey/black key; orange = near-neutral rejection; yellow = missing text label; red = size/shape rejection.';
-  if (!dUrl && !oUrl) return;
+  if (!dUrl && !oUrl) hint.textContent = analysis?.no_legend
+    ? 'No legend was selected. The saved single-series analysis is shown below.'
+    : 'Saved legend and series analysis. If detection is uncertain, review the selected regions or choose the appropriate chart mode before running again.';
+  if (!available) return;
   let loaded = false;
   toggle.onclick = () => {
     if (!resultCurrent() || imageState.busy) return;
     const open = box.style.display === 'none';
     box.style.display = open ? 'block' : 'none';
-    toggle.textContent = open ? 'Hide legend fit diagnostic' : 'Show legend fit diagnostic';
+    toggle.textContent = (open ? 'Hide ' : 'Show ')+diagnosticLabel;
     if (!open || loaded) return;
     const load = (img, url, caption) => {
       if (!url) return;
@@ -713,7 +733,6 @@ function setMode(m) {
   document.getElementById('modeBw').classList.toggle('modebtn-on', m === 'bw');
   const bw = (m === 'bw');
   document.getElementById('bwPanel').style.display = bw ? 'block' : 'none';
-  document.getElementById('colorSeriesPanel').style.display = bw ? 'none' : 'block';
   // Legend region: colour uses it for the palette; B&W extracts and classifies
   // the swatches automatically and excludes the legend from plot detection.
   // Keep the button compact; the meaning is conveyed by the mode hint below.
@@ -725,12 +744,6 @@ function setMode(m) {
 }
 document.getElementById('modeColor').addEventListener('click', () => setMode('color'));
 document.getElementById('modeBw').addEventListener('click', () => setMode('bw'));
-document.getElementById('colorSeriesMode').addEventListener('change', () => {
-  // A changed detector must not resume the previous detector's correction state.
-  imageState.serial++;
-  clearDetectionState();
-  syncImageControls();
-});
 
 const COLORS = { legend: '#d64545', plot: '#1d9e75', scale: '#e08a1e' };
 
@@ -1118,17 +1131,9 @@ function canvasToImageBox(selection) {
 }
 // ── optional scale box ───────────────────────────────────────────────────────
 function scaleBoxOn() { return document.getElementById('useScaleBox').checked; }
-function updateAxisMapHint() {
-  document.getElementById('axisMapHint').textContent = scaleBoxOn()
-    ? 'Values map to the scale box edges (if no scale box is drawn, to the plot area).'
-    : (!boxes.legend ? 'Without a legend, omitted axis values keep the output in pixels.'
-       : APP_MODE === 'color' ? 'Leave off to read the axis numbers automatically (OCR).'
-       : 'With a B&W legend, omitted axis values use the default 0–1 scale.');
-}
 function scaleBoxUpdate() {
   const on = scaleBoxOn();
   document.getElementById('scaleBoxPanel').style.display = on ? 'block' : 'none';
-  updateAxisMapHint();
   const info = document.getElementById('scaleBoxInfo');
   if (info) info.textContent = boxes.scale
     ? ('scale box: ' + boxes.scale.join(', '))
@@ -1187,7 +1192,6 @@ function updateInfo() {
   document.getElementById('legendSelectionHint').textContent = boxes.legend
     ? 'Legend selected: use legend entries and plot evidence. To infer one series without a legend, click Clear and redraw only the plot area.'
     : 'No legend selected: automatically infer one series from plot.' + (boxes.plot ? '' : ' Draw the plot area before running.');
-  updateAxisMapHint();
 }
 
 function redraw() {
@@ -1247,7 +1251,7 @@ async function runDigitize(withCorrect) {
   const fd = new FormData();
   fd.append('image', fileBlob);
   fd.append('mode', APP_MODE);
-  if (APP_MODE === 'color') fd.append('color_series_mode', document.getElementById('colorSeriesMode').value);
+  if (APP_MODE === 'color') fd.append('color_series_mode', 'auto');
   if (boxes.legend) fd.append(APP_MODE === 'bw' ? 'legend_area' : 'legend_box', boxes.legend.join(','));
   if (boxes.plot)   fd.append('plot_area',  boxes.plot.join(','));
   let xMin = parseAxisValue(document.getElementById('xMin').value);
@@ -1281,7 +1285,15 @@ async function runDigitize(withCorrect) {
   // Step 5 uses /correct-saved above. This endpoint starts detection only.
   const runToken = imageState.digitize();
   drag = null; syncImageControls();
-  document.getElementById('spinner').textContent = 'Processing the displayed image…';
+  const runStarted = Date.now();
+  const updateRunElapsed = () => {
+    if (!imageState.current(runToken)) return;
+    const seconds = Math.floor((Date.now() - runStarted) / 1000);
+    document.getElementById('spinner').textContent = 'Processing the displayed image… ' +
+      Math.floor(seconds / 60) + ':' + String(seconds % 60).padStart(2, '0');
+  };
+  updateRunElapsed();
+  const runTimer = setInterval(updateRunElapsed, 1000);
   document.getElementById('spinner').style.display = 'block';
   try {
     const res = await fetch('/digitize', { method: 'POST', body: fd });
@@ -1294,6 +1306,7 @@ async function runDigitize(withCorrect) {
     if (!imageState.current(runToken)) return;
     alert('Failed: ' + err.message);
   } finally {
+    clearInterval(runTimer);
     if (imageState.current(runToken)) {
       imageState.finish(runToken); syncImageControls();
       document.getElementById('spinner').style.display = 'none';
@@ -1308,6 +1321,9 @@ fetch('/ocr/requests').then(response => response.ok ? response.json() : null)
 function presentResult(data, withCorrect = false) {
     clearEditorState();
     window.lastData = data;
+    const capabilities = resultCapabilities(data);
+    const actions = document.getElementById('resultActions');
+    document.getElementById('result').insertBefore(actions, document.getElementById('inferenceDiagnostic'));
     const resultCurrent = currentResultGuard();
     document.getElementById('result').style.display = 'block';
     document.getElementById('summary').textContent = data.summary ||
@@ -1334,7 +1350,7 @@ function presentResult(data, withCorrect = false) {
     // Append a new pair (original+markers | reconstructed) to the results history.
     // A fresh Run starts a new history; each Step-5 correction stacks below it so
     // successive corrections can be compared side by side (nothing is discarded).
-    window._lastJobId = data.ok && data.job_id ? data.job_id : null;
+    window._lastJobId = capabilities.editable && data.job_id ? data.job_id : null;
     const _history = document.getElementById('resultsHistory');
     let _label, _accent;
     if (withCorrect) {
@@ -1358,10 +1374,14 @@ function presentResult(data, withCorrect = false) {
     if (_editUrl) renderReconInto(_editUrl, _pair.canvas);
     if (_editUrl && data.ok) showSuppressedReview(_editUrl, _pair.wrap,
       data.input_url || (data.job_id ? '/result/'+data.job_id+'/input.png' : null));
-    _pair.wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    actions.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     const download = document.getElementById('downloadXlsx');
-    document.getElementById('saveCorrection').style.display = data.ok ? 'inline-block' : 'none';
-    download.style.display = data.ok && data.xlsx_url ? 'inline' : 'none';
+    document.getElementById('saveCorrection').style.display = capabilities.editable ? 'inline-block' : 'none';
+    download.style.display = capabilities.editable ? 'inline' : 'none';
+    document.getElementById('resultActionsHint').textContent = capabilities.editable
+      ? (data.ok ? 'Edit points, inspect the legend analysis, or run Step 5 when correction evidence is available.'
+         : 'Automatic detection did not complete. You can open Edit to add or adjust points in the saved series and save the result. Step 5 remains unavailable until detection and correction evidence are complete.')
+      : data.editing_unavailable_reason || 'No editable series are available. Review the analysis, adjust the plot/legend selection and run again.';
     // Use the backend's existing artifacts, including BW and optional-legend routes.
     configureLegendDiagnostic(data, resultCurrent);
     configureTriangleDiagnostic(data, resultCurrent);
@@ -1424,9 +1444,12 @@ function presentResult(data, withCorrect = false) {
     // include them explicitly, so it works as long as the pipeline wrote
     // edit_data.json and the server serves /result/<job>/<file>.
     const openBtn = document.getElementById('openEditor');
-    openBtn.style.display = data.ok && data.edit_data_url ? 'inline-block' : 'none';
+    openBtn.style.display = 'inline-block';
+    openBtn.disabled = !capabilities.editable;
+    openBtn.textContent = data.ok ? 'Edit data points →' : 'Edit points manually →';
+    openBtn.title = capabilities.editable ? '' : data.editing_unavailable_reason || 'This run has no editable series.';
     openBtn.onclick = () => {
-      if (!resultCurrent() || imageState.busy) return;
+      if (!resultCurrent() || imageState.busy || !capabilities.editable) return;
       if (currentEdForSave()) { openEditorView(); return; }
       const editUrl = data.edit_data_url ||
         (data.job_id ? ('/result/' + data.job_id + '/edit_data.json') : null);
@@ -1447,18 +1470,19 @@ function presentResult(data, withCorrect = false) {
       });
     };
     // Correction needs a completed detection and usable evidence.
-    const canCorrect = data.ok && data.step5_available !== false &&
-      (!inference || inference.status === 'completed');
+    const canCorrect = capabilities.correctable;
     const step5 = document.getElementById('btnStep5');
     if (step5) {
-      step5.style.display = canCorrect ? 'inline-block' : 'none';
+      step5.style.display = 'inline-block';
+      step5.disabled = !canCorrect;
+      step5.title = canCorrect ? '' : data.correction_unavailable_reason || 'Step 5 needs a completed detection with saved correction evidence.';
       step5.textContent = data.correction_backend === 'colour_group_bw_elements'
         ? 'Run Step 5 colour-group segment correction ↻'
         : data.mode === 'color' ? 'Run Step 5 series-aware correction ↻' : 'Run Step 5 correction ↻';
     }
     const methodHint = document.getElementById('step5MethodHint');
-    methodHint.style.display = (canCorrect || data.correction_unavailable_reason) ? 'block' : 'none';
-    methodHint.textContent = data.correction_unavailable_reason || (data.correction_backend === 'colour_group_bw_elements'
+    methodHint.style.display = 'block';
+    methodHint.textContent = (!canCorrect ? step5.title : '') || data.correction_unavailable_reason || (data.correction_backend === 'colour_group_bw_elements'
       ? 'Repeated legend colours: colour-family masks + BW grid/window marker detection. Legend line/symbol composition preserves open vs filled shapes. Step 5 compares saved line-segment geometry per colour group (including bounded dash gaps), with an original-point removal penalty. It does not merge same-colour series or rerun detection. Added points remain hypotheses.'
       : inference && inference.chart_kind === 'line-only'
       ? 'Line-only correction compares the reconstructed curve with observed plot ink. Added points remain hypotheses.'
@@ -1680,6 +1704,10 @@ async function loadCorrectionPair(imageFile,dataFile,useSavedVersion=false) {
 
 async function runSavedCorrection() {
   if (!window._lastJobId || imageState.busy) return;
+  if (!resultCapabilities(window.lastData).correctable) {
+    alert(window.lastData?.correction_unavailable_reason || 'Step 5 needs a completed detection with saved correction evidence. Manual editing is still available.');
+    return;
+  }
   const stopPolicy=document.getElementById('step5StopPolicy')?.value || 'manual';
   const iterations=stopPolicy==='auto' ? 20 : Number(document.getElementById('bwCorrectIters').value);
   if (!Number.isInteger(iterations) || iterations<1 || iterations>50) { alert('Iterations must be 1–50.'); return; }
@@ -1694,8 +1722,7 @@ async function runSavedCorrection() {
     if (!imageState.current(token)) return;
     if (!data.ok) throw new Error(data.summary+'\n'+(data.log || ''));
     presentResult(data,true);
-    imageState.finish(token); syncImageControls();
-    await initEditor(data,currentResultGuard());
+    // Keep the correction comparison visible; Edit explicitly opens the editor.
   } catch(error) { alert('Correction failed; previous data and edits kept.\n'+error.message); }
   finally { imageState.finish(token); syncImageControls(); spinner.style.display='none'; }
 }
@@ -1703,7 +1730,7 @@ async function runSavedCorrection() {
 function syncStep5StopControls() {
   const auto=document.getElementById('step5StopPolicy').value==='auto';
   document.getElementById('step5ManualIters').style.display=auto?'none':'inline';
-  document.getElementById('bwCorrectIters').disabled=auto || !!imageState.busy;
+  document.getElementById('bwCorrectIters').disabled=auto || !!imageState.busy || !resultCapabilities(window.lastData).correctable;
   document.getElementById('step5StopHint').textContent=auto
     ? 'Stops when no admissible improvement remains, with a safety cap of 20 per run (joint B&W / per colour series). Gains below 0.1% are warnings only. Reaching the cap does not mean convergence.'
     : 'Uses the chosen limit; native no-improvement stopping remains enabled.';

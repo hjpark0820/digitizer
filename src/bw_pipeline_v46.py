@@ -482,7 +482,8 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
     if scale_policy == 'shared_symbol':
         from bw_shared_scale_v46 import calibrate_swatch_scales
         calibration = (geometry.calibrate(log_fn) if geometry is not None else
-                       calibrate_swatch_scales(image,templates,pa,ignore_regions=exclusions,log_fn=log_fn))
+                       calibrate_swatch_scales(image,templates,pa,ignore_regions=exclusions,log_fn=log_fn,
+                                              occlusion_mask=window_occlusion_mask))
     elif scale_policy == 'conservative':
         from bw_scale_calibration import calibrate_swatch_scales
         calibration = calibrate_swatch_scales(image,templates,pa,ignore_regions=exclusions)

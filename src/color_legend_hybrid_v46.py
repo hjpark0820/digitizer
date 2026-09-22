@@ -142,11 +142,60 @@ def _horizontal_body(support):
     return (max(x0,a-1),y0,min(x1,b+1),y1),line_rows
 
 
+def _repeated_horizontal_body(support):
+    """Recognize a line key containing three repeated compact marker bodies.
+
+    Tail columns cannot estimate line width when the legend itself repeats
+    markers at both ends. Use the intervening thin continuous connector, and
+    retain only the middle observed body. Pure dashes/letters do not establish
+    three aligned bulges plus a continuous shared connector.
+    """
+    x0,y0,x1,y1 = _tight(support)
+    height = y1-y0
+    if height < 3 or x1-x0 < 4*height:
+        return None
+    spans = np.array([np.ptp(np.flatnonzero(c))+1 if c.any() else 0 for c in support.T])
+    positive = spans[x0:x1][spans[x0:x1]>0]
+    thin = float(np.percentile(positive, 30))
+    if height < max(3., 1.6*thin):
+        return None
+    elevated = np.flatnonzero(spans > max(thin+.75, .60*height))
+    runs = np.split(elevated, np.flatnonzero(np.diff(elevated)>1)+1)
+    runs = [r for r in runs if max(2., .25*height) <= len(r) <= 1.5*height]
+    if len(runs) < 3:
+        return None
+    centers = np.array([(r[0]+r[-1])/2 for r in runs])
+    distances = np.diff(centers)
+    if np.ptp(distances) > max(1., .25*float(np.median(distances))):
+        return None
+    gap_columns = []
+    for left,right in zip(runs,runs[1:]):
+        gap = np.arange(left[-1]+1,right[0])
+        if len(gap)<max(2,height) or not np.all((spans[gap]>0)&(spans[gap]<=thin+.5)):
+            return None
+        gap_columns.extend(gap.tolist())
+    line_rows = support[:,gap_columns].mean(axis=1) >= .90
+    if not line_rows.any():
+        return None
+    # Every compact body must extend on both sides of the same connector.
+    ly = np.flatnonzero(line_rows)
+    for run in runs:
+        ys = np.flatnonzero(support[:,run].any(axis=1))
+        if not len(ys) or ys[0]>=ly[0] or ys[-1]<=ly[-1]:
+            return None
+    middle = runs[int(np.argmin(abs(centers-(x0+x1-1)/2)))]
+    return (max(x0,int(middle[0])-1),y0,min(x1,int(middle[-1])+2),y1),line_rows
+
+
 def _body(support):
     box=_tight(support)
     x0,y0,x1,y1=box
     horizontal=_horizontal_body(support)
     vertical=_horizontal_body(support.T)
+    if horizontal is None:
+        horizontal=_repeated_horizontal_body(support)
+    if vertical is None:
+        vertical=_repeated_horizontal_body(support.T)
     nuisance=np.zeros_like(support,bool)
     central_line=np.zeros_like(support,bool)
     direction=None

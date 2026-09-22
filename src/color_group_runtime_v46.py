@@ -133,7 +133,8 @@ def detect(runtime, env, legend_runtime, plot, legend, report):
         ownership_policy='uncertainty_v1',grid_evidence='confirmed',
         backend=VERSION,groups=group_reports,points=converted,uncertain_points=pool,
         templates=[{k:v for k,v in t.items() if k!='soft'} for t in templates],
-        scale_search=True,scale_policy='reviewed_colour_group_per_candidate_0.90_1.12',
+        scale_search=True,scale_policy='shared_symbol',
+        scale_scope='per legend series identity; shared by grid and window',
         correction_backend='colour_group_bw_elements',step5_state_file=STATE_FILE,
         overlap=overlap,triangle_errorbar_guard=dict(status='native_bw_window_verification',enabled=False),
         mask_note='Hue-family ownership selects ink; BW grid/window distinguish individual legend row identities.')

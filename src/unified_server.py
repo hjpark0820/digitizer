@@ -36,6 +36,7 @@ JOBS_ROOT.mkdir(exist_ok=True)
 # disabled: the requested Step-5 correction replaces them. Flip this back to True to
 # restore the built-in filters (it just stops setting NO_OUTLIER_FILTER).
 COLOR_OUTLIER_FILTER = False
+DETECTION_TIMEOUT_SECONDS = 900  # Multi-series native-resolution runs can exceed five minutes.
 
 app = FastAPI(title="Unified Chart Digitizer")
 
@@ -46,6 +47,8 @@ _OCR_JOBS = set()  # Only expose requests created by this server instance.
 
 def _ocr_env(out_dir):
     env = os.environ.copy()
+    env['PYTHONIOENCODING'] = 'utf-8'
+    env['PYTHONUNBUFFERED'] = '1'
     if ocr_bridge_v46.agent_enabled():
         _OCR_JOBS.add(out_dir.parent.name)
         env['CHARTOCODE_OCR_DIR'] = str((out_dir / 'ocr').resolve())
@@ -238,13 +241,24 @@ async def digitize(
     # input copy the front-end can display
     shutil.copyfile(in_path, out_dir / "input.png")
 
-    if mode == "bw":
-        return await run_in_threadpool(_run_bw, job_id, in_path, out_dir, plot_area, legend_area,
-                       known_classes, x_min, x_max, y_min, y_max, x_log, y_log,
-                       has_errorbars, conf, correct, scale, correct_iters, prev_job)
-    return await run_in_threadpool(_run_color, job_id, in_path, out_dir, plot_area, legend_box,
-                      x_min, x_max, y_min, y_max, x_log, y_log,
-                      correct, correct_iters, prev_job, color_series_mode)
+    try:
+        if mode == "bw":
+            return await run_in_threadpool(_run_bw, job_id, in_path, out_dir, plot_area, legend_area,
+                           known_classes, x_min, x_max, y_min, y_max, x_log, y_log,
+                           has_errorbars, conf, correct, scale, correct_iters, prev_job)
+        return await run_in_threadpool(_run_color, job_id, in_path, out_dir, plot_area, legend_box,
+                          x_min, x_max, y_min, y_max, x_log, y_log,
+                          correct, correct_iters, prev_job, color_series_mode)
+    except subprocess.TimeoutExpired as error:
+        # TimeoutExpired retains bytes even when subprocess text mode is used.
+        output = ''.join(value.decode('utf-8', errors='replace') if isinstance(value, bytes)
+                         else value or '' for value in (error.stdout, error.stderr))
+        message = (f'Processing timed out after {error.timeout:g} seconds. '
+                   'The job was stopped before completion. Try a lower image resolution '
+                   'under Image preparation, then redraw the plot and legend areas.')
+        response = json.loads(_response(job_id, out_dir, mode, False, output + '\n' + message).body)
+        response.update(summary=message, timed_out=True)
+        return JSONResponse(response)
 
 
 @app.post('/prepare-image')
@@ -302,7 +316,8 @@ def _run_color(job_id, in_path, out_dir, plot_area, legend_box,
     print(f"[unified] colour job: correct={correct!r} iters={correct_iters!r} "
           f"prev_job={prev_job!r}  outlier_filter="
           f"{'ON' if COLOR_OUTLIER_FILTER else 'OFF (replaced by Step-5)'}", flush=True)
-    proc = subprocess.run(cmd, capture_output=True, text=True, timeout=_ocr_timeout(300), env=_env)
+    proc = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace',
+                          timeout=_ocr_timeout(DETECTION_TIMEOUT_SECONDS), env=_env)
     _log = (proc.stdout or "") + (proc.stderr or "")
     # Surface the pipeline's own stdout (incl. DEBUG_LABELS [labels] lines) to the
     # server console. capture_output=True otherwise swallows it into the buffer, so
@@ -333,7 +348,8 @@ def _run_color(job_id, in_path, out_dir, plot_area, legend_box,
             if _prev.exists():
                 ccmd += ["--prev-state", str(_prev)]
         print("[unified] colour Step-5:", " ".join(ccmd), flush=True)
-        cproc = subprocess.run(ccmd, capture_output=True, text=True, timeout=_ocr_timeout(900), env=_env)
+        cproc = subprocess.run(ccmd, capture_output=True, text=True, encoding='utf-8', errors='replace',
+                               timeout=_ocr_timeout(900), env=_env)
         _clog = (cproc.stdout or "") + (cproc.stderr or "")
         print(_clog, flush=True)
         _log += "\n---- colour Step-5 ----\n" + _clog
@@ -423,7 +439,7 @@ def _run_bw(job_id, in_path, out_dir, plot_area, legend_area, known_classes,
 
     print("[unified] BW subprocess:", " ".join(cmd))
     proc = subprocess.run(cmd, capture_output=True, text=True,
-                          encoding="utf-8", errors="replace", timeout=_ocr_timeout(600), env=_ocr_env(out_dir))
+                          encoding="utf-8", errors="replace", timeout=_ocr_timeout(DETECTION_TIMEOUT_SECONDS), env=_ocr_env(out_dir))
     # Echo the child's output to the server console so failures are visible.
     if proc.stdout:
         print("---- bw_detect_cli stdout ----\n" + proc.stdout)
@@ -452,20 +468,37 @@ def _run_bw(job_id, in_path, out_dir, plot_area, legend_area, known_classes,
 
 
 def _response(job_id, out_dir, mode, ok, log):
+    (out_dir / 'pipeline.log').write_text(log, encoding='utf-8')
     def url(name):
         p = out_dir / name
         return f"/result/{job_id}/{name}" if p.exists() else None
     diagnostic = _optional_diagnostic(out_dir)
+    editable = False
+    editing_reason = 'No editable series were saved. Adjust the plot/legend selection and run detection again.'
+    if (out_dir/'edit_data.json').exists() and (out_dir/'input.png').exists():
+        from correction_session_v46 import read, validate_edit
+        try:
+            raster = cv2.imread(str(out_dir/'input.png'))
+            if raster is None:
+                raise ValueError('The paired image could not be decoded')
+            validate_edit(read(out_dir/'edit_data.json'), raster)
+            editable, editing_reason = True, None
+        except (OSError, ValueError, TypeError, KeyError, AttributeError) as error:
+            editing_reason = 'Saved data cannot be edited: '+str(error)
+    if diagnostic is not None:
+        ok = bool(ok) and diagnostic.get('status') == 'completed'
     meta_path = out_dir / 'session_meta.json'
-    if not meta_path.exists() and ok:
+    if not meta_path.exists() and (ok or editable):
         meta_path.write_text(json.dumps({'mode':mode}),encoding='utf-8')
     meta = json.loads(meta_path.read_text(encoding='utf-8')) if meta_path.exists() else {}
-    if ok:
+    if ok or editable:
         from correction_history_v46 import now
         meta.setdefault('version_id',job_id)
         meta.setdefault('version_kind','imported' if meta.get('imported') else 'detection')
         if not meta.get('created_at'):
             meta['created_at'] = now()
+        if not ok and editable:
+            meta.setdefault('manual_only_reason', 'Automatic detection did not complete. Saved series can be edited manually; Step 5 requires a completed detection with usable correction evidence.')
         meta_path.write_text(json.dumps(meta),encoding='utf-8')
     triangle_guard = _triangle_errorbar_diagnostic(out_dir) if mode == 'color' else None
     group_backend = (out_dir/'color_group_state_v46.json').exists()
@@ -498,7 +531,7 @@ def _response(job_id, out_dir, mode, ok, log):
         if not ok and diagnostic.get('status') == 'completed':
             summary += ' Detection or correction failed; inspect the log.'
     export_error = None
-    if ok:
+    if ok or editable:
         try:
             from correction_session_v46 import save_outputs
             save_outputs(out_dir,mode)
@@ -515,6 +548,8 @@ def _response(job_id, out_dir, mode, ok, log):
     colour_objective=settings_summary(out_dir) if mode=='color' else None
     return JSONResponse({
         "job_id": job_id, "mode": mode, "ok": ok,
+        "editable_available": editable,
+        "editing_unavailable_reason": editing_reason,
         "result_version": {k:meta.get(k) for k in ('version_id','version_kind','created_at','iterations','stop_policy')},
         "summary": summary,
         "correction_backend": 'colour_group_bw_elements' if group_backend else None,
@@ -534,8 +569,10 @@ def _response(job_id, out_dir, mode, ok, log):
         "step5_available": bool(ok) and (diagnostic or {}).get('correction_available', True) and
                            ('engine' not in meta or meta['engine'] is not None),
         "correction_only": bool(meta.get('detection_skipped')),
-        "correction_unavailable_reason": meta.get('manual_only_reason'),
-        "paired_image_url": f'/correction-image/{job_id}' if ok else None,
+        "correction_unavailable_reason": meta.get('manual_only_reason') or
+            (diagnostic or {}).get('correction_unavailable_reason') or
+            (None if ok else 'Automatic detection did not complete; review the analysis and adjust the plot/legend selection before Step 5.'),
+        "paired_image_url": f'/correction-image/{job_id}' if editable else None,
         "edit_data_url": url("edit_data.json"),
         "input_url": url("input.png"),
         "overlay_url": url("data_points_overlay.png"),
@@ -543,6 +580,7 @@ def _response(job_id, out_dir, mode, ok, log):
         "correction_session_url": url("correction_session.json") if not export_error else None,
         "export_error": export_error,
         "log": log[-4000:],
+        "log_url": url('pipeline.log'),
     })
 
 

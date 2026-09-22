@@ -1,7 +1,7 @@
 """One image-estimated scale per legend identity, before any grid detections.
 
-Port of the reviewed Iscalimab shared-symbol experiment. Matching uses gray
-ink and paper (including hollow interiors); independent x sites vote equally.
+Gray ink/paper correlation proposes sites, including hollow interiors. Filled
+anchors additionally require source-supported outer edges; independent x sites vote equally.
 Weak consensus is reported, not upgraded to high-confidence evidence. If no
 usable anchor exists, retain 1x rather than silently reopening per-marker fitting.
 """
@@ -36,8 +36,13 @@ def gray_match_map(observed, template, scale, allowed):
     a = cv2.matchTemplate(observed, weight, cv2.TM_CCORR)
     b = cv2.matchTemplate(observed**2, weight, cv2.TM_CCORR)
     numerator = cv2.matchTemplate(observed, centered, cv2.TM_CCORR)
-    denominator = np.sqrt(np.maximum(b-a*a/total, 1e-6)*variance)
+    observed_variance = np.maximum(b-a*a/total, 0)
+    denominator = np.sqrt(np.maximum(observed_variance, 1e-6)*variance)
     score = np.clip(numerator/denominator, -1, 1)
+    # Float32 correlation cancellation in paper/near-constant windows can
+    # otherwise produce a spurious perfect match. Real calibration anchors
+    # need measurable ink AND contrast; epsilon is not evidence.
+    score[(a/total < .015)|(observed_variance/total < .0025)] = -1
     valid = cv2.matchTemplate(allowed.astype(np.float32), np.ones(model.shape,np.float32), cv2.TM_CCORR)
     score[valid < model.size-.1] = -1
     ry, rx = model.shape[0]//2, model.shape[1]//2
@@ -46,7 +51,7 @@ def gray_match_map(observed, template, scale, allowed):
 
 
 def calibrate_swatch_scales(image, templates, plot, ignore_regions=(), log_fn=lambda *a:None,
-                            anchor_filter=None, search_scales=None):
+                            anchor_filter=None, search_scales=None, occlusion_mask=None):
     """Return one scale per swatch; default [0.7,1.3], explicit range supported.
 
     Positions in the report explain calibration only and are NOT detections.
@@ -59,6 +64,11 @@ def calibrate_swatch_scales(image, templates, plot, ignore_regions=(), log_fn=la
         raise ValueError('Calibration scales must be positive and finite')
     x0,y0,x1,y1 = plot
     crop = image[y0:y1,x0:x1]
+    other=None
+    if occlusion_mask is not None:
+        from bw_colour_visibility_v46 import validate_mask
+        other=validate_mask(occlusion_mask,image.shape[:2])[y0:y1,x0:x1]
+    from bw_scale_boundary_v46 import eligible, profile as boundary_profile, model_samples, VERSION
     allowed = np.ones(crop.shape[:2],bool)
     for a,b,c,d in ignore_regions:
         left,right = max(0,a-x0),min(x1,c)-x0
@@ -86,6 +96,7 @@ def calibrate_swatch_scales(image, templates, plot, ignore_regions=(), log_fn=la
             if any(np.hypot(x-q[0],y-q[1])<.85*t.diameter for q in unique):
                 continue
             unique.append((int(x),int(y)))
+            if len(unique)>=60:break
         profiles = np.full((len(unique),len(scales)),-1,np.float32)
         for j,scale in enumerate(scales):
             plane = stack[j] if stack is not None else gray_match_map(observed,t,scale,allowed)
@@ -97,18 +108,35 @@ def calibrate_swatch_scales(image, templates, plot, ignore_regions=(), log_fn=la
             for (x,y),profile in zip(unique,profiles)]
         if search_scales is not None:
             for q in candidates_by_key[t.key]:q['profile_scales']=list(scales)
+        if eligible(t):
+            # Correlation proposes positions, never finalizes a filled size.
+            # Use unblurred source membership for the ink/paper transitions.
+            source=ink_membership(crop,t.ink).astype(np.float32)
+            samples=model_samples(t)
+            for q in candidates_by_key[t.key]:
+                edge=boundary_profile(source,t,q['x']-x0,q['y']-y0,scales,
+                                      valid=allowed,other=other,samples=samples)
+                q['correlation_profile']=q['profile']
+                q['correlation_quality']=q['quality']
+                q['boundary_evidence']=edge
+                q['profile']=edge['profile'];q['quality']=edge.get('quality',-1.)
         del stack, observed
     reports = {}
     for t in templates:
         candidates = candidates_by_key[t.key]
         for q in candidates:
             x,y = q['x']-x0,q['y']-y0
-            rivals = [float(v[max(0,y-2):y+3,max(0,x-2):x+3].max())
-                      for key,v in best.items() if key!=t.key]
+            if eligible(t):
+                rivals=[r['quality'] for key,rows in candidates_by_key.items() if key!=t.key
+                        for r in rows if 'boundary_evidence' in r and
+                        np.hypot(q['x']-r['x'],q['y']-r['y'])<.40*t.diameter]
+            else:
+                rivals = [float(v[max(0,y-2):y+3,max(0,x-2):x+3].max())
+                          for key,v in best.items() if key!=t.key]
             q['identity_margin'] = q['quality']-max(rivals,default=-1.)
         anchors = []
         for q in sorted(candidates,key=lambda q:-q['quality']):
-            if not q['all_scales_inside_roi'] or q['quality']<.55 or q['identity_margin']<.015:
+            if not q['all_scales_inside_roi'] or q['quality']<(.32 if eligible(t) else .55) or q['identity_margin']<.015:
                 continue
             if anchor_filter is not None:
                 q['independent_anchor_evidence']=anchor_filter(t,q)
@@ -121,7 +149,19 @@ def calibrate_swatch_scales(image, templates, plot, ignore_regions=(), log_fn=la
                 break
         if anchors:
             curves = np.array([a['profile'] for a in anchors])
+            if eligible(t):
+                # A common scale must be supported by the same anchors, not
+                # an average of mutually incompatible individual sizes.
+                supported=(curves>=0)&(curves>=curves.max(axis=1,keepdims=True)-.05)
+                votes=supported.sum(axis=0)
+                quality=np.maximum(curves,0).sum(axis=0)/np.maximum(votes,1)
+                seed=max(range(len(scales)),key=lambda j:(int(votes[j]),float(quality[j])))
+                anchors=[a for a,ok in zip(anchors,supported[:,seed]) if ok]
+                curves=np.array([a['profile'] for a in anchors])
             loss = (curves.max(axis=1,keepdims=True)-curves).mean(axis=0)
+            if eligible(t):
+                common=np.all((curves>=0)&(curves>=curves.max(axis=1,keepdims=True)-.05),axis=0)
+                loss[~common]=2.
             index = int(np.argmin(loss));scale = scales[index]
             near = [s for s,v in zip(scales,loss) if v<=loss[index]+.015]
             status = 'multi_site_consensus' if len(anchors)>=3 else 'weak_consensus'
@@ -132,7 +172,10 @@ def calibrate_swatch_scales(image, templates, plot, ignore_regions=(), log_fn=la
             anchors=anchors,candidates=candidates,scales=list(scales),
             mean_regret=loss.tolist(),near_optimal_scales=near,
             reason='image-only shared symbol scale; one working geometry even with weak evidence',
-            criterion='mean per-site weighted grayscale-correlation regret; independent x anchors',
+            version=VERSION,
+            criterion=('distributed visible outer-boundary regret; independently supported common scale'
+                       if eligible(t) else 'mean per-site weighted grayscale-correlation regret; independent x anchors'),
+            proposal_limit=60,occlusion_aware=other is not None,
             manual_coordinates_used=False,saved_detections_used=False)
         log_fn(f'[v46 shared scale] {t.key} {t.shape_hint}: scale={scale:.3f}, '
                f'anchors={len(anchors)}, status={status}; all marker windows locked')

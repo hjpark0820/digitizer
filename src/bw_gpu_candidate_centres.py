@@ -318,12 +318,9 @@ def _rank_and_map(aggregates, template, plot_area, overlap_multiplicity):
         if 0 <= px < vote_map.shape[1] and 0 <= py < vote_map.shape[0]:
             vote_map[py, px] = max(vote_map[py, px], density)
     ranked.sort(key=lambda item: item[3], reverse=True)
-    selected = []
+    from partial_swatch_detector import _suppress_ranked_centres
     nms_radius = max(2.0, .28 * template.diameter)
-    for candidate in ranked:
-        if not any((candidate[0] - kept[0]) ** 2 + (candidate[1] - kept[1]) ** 2
-                   <= nms_radius ** 2 for kept in selected):
-            selected.append(candidate)
+    selected = _suppress_ranked_centres(ranked, nms_radius)
     if vote_map.any():
         vote_map = cv2.GaussianBlur(vote_map, (0, 0), max(.8, .10 * template.diameter))
     return selected, vote_map

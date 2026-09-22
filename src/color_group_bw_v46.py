@@ -108,11 +108,15 @@ def prepare_groups(image, plot_area, legend_area, colour_distance=14., group_pol
 
 
 def detection_options(group, proposal_scales=None):
-    """Keep the reviewed colour-group profile independent of BW GUI defaults."""
+    """One calibrated size per legend identity in the GUI/CLI colour-group route.
+
+    Explicit proposal scales retain the experimental per-candidate override.
+    """
     options=production_detection_options()
-    options.update(scale_policy='per_candidate',proposal_scales=LEGACY_PROPOSAL_SCALES,
+    options.update(scale_policy='shared_symbol',proposal_scales=None,
                    window_search_scales=None,geometry_first=False)
-    if proposal_scales is not None:options['proposal_scales']=proposal_scales
+    if proposal_scales is not None:
+        options.update(scale_policy='per_candidate',proposal_scales=proposal_scales)
     if any(t.model_completed and t.marker_kind=='open' for t in group['templates']):options['window_backend']='cpu'
     return options
 
@@ -124,8 +128,7 @@ def run_group(group, plot_area, legend_area, out_dir, max_iter=10, log_fn=print,
     cv2.imwrite(str(dest/'confirmed_gray.png'),group.get('window_image',group['image']))
     if 'uncertainty' in group:
         cv2.imwrite(str(dest/'colour_uncertainty.png'),np.uint8(group['uncertainty']*255))
-    # Preserve the separately reviewed colour-group workflow; shared-symbol
-    # calibration was requested for the B&W legend-marker production route.
+    # The same common scale controls both grid proposals and native windows.
     options=detection_options(group, proposal_scales)
     result=detect_points(group['image'],plot_area,legend_area,
         prepared_templates=(group['templates'],group['reports']),

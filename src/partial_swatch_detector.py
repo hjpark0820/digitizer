@@ -1137,6 +1137,27 @@ def _refine_candidate_center(
     return best
 
 
+def _suppress_ranked_centres(ranked, radius):
+    """Preserve greedy suppression order while checking only nearby centres."""
+    selected = []
+    buckets = {}
+    radius_squared = radius**2
+    for candidate in ranked:
+        bx = math.floor(candidate[0] / radius)
+        by = math.floor(candidate[1] / radius)
+        # Include a second cell at boundaries: floating-point subtraction can
+        # round a just-outside pair to exactly radius, which the original
+        # inclusive distance comparison suppresses too.
+        neighbours = (kept for dx in range(-2, 3) for dy in range(-2, 3)
+                      for kept in buckets.get((bx + dx, by + dy), ()))
+        if any((candidate[0] - kept[0]) ** 2 + (candidate[1] - kept[1]) ** 2
+               <= radius_squared for kept in neighbours):
+            continue
+        selected.append(candidate)
+        buckets.setdefault((bx, by), []).append(candidate)
+    return selected
+
+
 def _candidate_centres(
     hypotheses: Sequence[GridHypothesis],
     template: SwatchTemplate,
@@ -1178,16 +1199,8 @@ def _candidate_centres(
             vote_map[py, px] = max(vote_map[py, px], density)
 
     ranked.sort(key=lambda item: item[3], reverse=True)
-    selected: list[tuple[float, float, int, float]] = []
     nms_radius = max(2.0, 0.28 * template.diameter)
-    for candidate in ranked:
-        if any(
-            (candidate[0] - kept[0]) ** 2 + (candidate[1] - kept[1]) ** 2
-            <= nms_radius**2
-            for kept in selected
-        ):
-            continue
-        selected.append(candidate)
+    selected = _suppress_ranked_centres(ranked, nms_radius)
     if vote_map.any():
         sigma = max(0.8, 0.10 * template.diameter)
         vote_map = cv2.GaussianBlur(vote_map, (0, 0), sigma)

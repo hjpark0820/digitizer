@@ -69,12 +69,14 @@ the JSON path, or let the agent inspect the results through a connected browser.
 1. Select a PNG or JPEG using **New detection: choose image**.
 2. Choose **Colour / B&W** mode. If needed, adjust the image resolution or rotation under **Image preparation**.
 3. Select the plotting region with **Plot area**. If the chart has a legend, select it with **Legend**. Running without a legend assumes **one data series**.
-4. Enter the actual axis values. Enable the corresponding option for logarithmic axes. Results without sufficient axis information may use pixel coordinates instead of physical values.
-5. For colour charts, **Colour chart series** can usually remain set to `Auto`. If needed, explicitly select a chart with markers or a line-only chart.
+4. To enter axis values manually, check **Use a separate scale box (optional)** to expand the axis controls. Draw the scale box on the axes and enter their values; enable the corresponding option for logarithmic axes. Uncheck the box to collapse the controls. Results without sufficient axis information may use pixel coordinates instead of physical values.
+5. Colour charts automatically infer whether the plot uses markers or lines.
 6. Press **Run**, then review the points overlaid on the original image and the reconstructed plot.
 7. Supported results can be corrected automatically with **Step 5**. Older JSON files without saved correction evidence may support manual editing only.
 
-When automatic detection is uncertain, the app may display a failure or a reason for withholding a result. Check the selected regions and mode. The reconstructed plot is a review view that connects the current points with straight lines in x-coordinate order.
+When automatic detection is uncertain, the app may display a failure or a reason for withholding a result. Check the selected regions and mode. Edit, Step 5, and legend-analysis controls remain visible after Run. If valid series data were saved, you can add or adjust points manually even when automatic detection is incomplete, then save JSON or Excel. Step 5 stays disabled with an explanation until a completed detection provides usable correction evidence. The legend-analysis panel can display the saved series report even when no diagnostic image was generated. The reconstructed plot is a review view that connects the current points with straight lines in x-coordinate order.
+
+Large charts with several similar-colour series can take several minutes. The Run indicator shows elapsed time. Ordinary detection allows up to 15 minutes; a timeout is shown explicitly and the complete process output is saved as `pipeline.log` inside the temporary job folder. To reduce processing time, lower the resolution under **Image preparation**, then redraw the plot and legend regions.
 
 ## Opening saved images and JSON files
 

@@ -7,6 +7,7 @@ It never samples inferred template pixels to redefine a series colour.
 from __future__ import annotations
 
 from copy import deepcopy
+from dataclasses import replace
 import math
 
 import cv2
@@ -16,7 +17,7 @@ import color_marker_evidence as evidence_base
 from color_marker_evidence_v2 import _template_regions
 from legend_composition_v46 import Config, fit_legend_composition, render_model
 
-VERSION = 'v46_observed_locator_inverse_legend_composition'
+VERSION = 'v46_observed_locator_inverse_legend_composition_v2_hollow_safe'
 
 
 def full_swatch_box(image, entry, legend_box):
@@ -97,12 +98,27 @@ def enrich_entry(image_bgr, entry, legend_box, cfg=Config()):
         box = full_swatch_box(image,entry,legend_box)
         x0,y0,x1,y1 = box
         raw = image[y0:y1,x0:x1]
-        record, fields = fit_legend_composition(raw[...,::-1],entry['rgb'],cfg)
+        hint = str(entry.get('report', {}).get('shape_hint', '')).lower()
+        shape_evidence = entry.get('report', {}).get('shape_evidence') or {}
+        hollow = hint.startswith(('open_', 'hollow_')) or bool(shape_evidence.get('strong_hollow_evidence'))
+        if hollow:
+            # A filled-only model can explain a thick ring plus its connector
+            # well enough to pass the global fit cutoff. It must not erase the
+            # independently observed hole before scale/window verification.
+            from legend_layered_composition_v46 import fit_layered
+            record, fields = fit_layered(raw[...,::-1], entry['rgb'],
+                                        replace(cfg, enable_open_dashed=True))
+        else:
+            record, fields = fit_legend_composition(raw[...,::-1],entry['rgb'],cfg)
         record.update(version=VERSION,source_swatch_box=list(box),
             crop_policy='Observed connected component intersecting hybrid body, with paper margin',
             template_policy='observed_hybrid_fallback')
         entry['composition'] = record
         if record['status'] != 'supported_simple_shape_model':
+            return entry
+        model_open = record['best_model_name'].startswith('open_')
+        if hollow and not model_open:
+            record['runtime_fallback_reason'] = 'filled_completion_conflicts_with_observed_hollow'
             return entry
         pars = record['best_model']['params']
         lp = record['line_params']
@@ -140,12 +156,22 @@ def enrich_entry(image_bgr, entry, legend_box, cfg=Config()):
                 hidden_pixels_are_observed=False,probability_calibrated=False))
         template['diameter'] = diameter
         template['central_connector'] = centered['hidden_marker_by_line']>.15
+        if model_open:
+            # A transparent hollow key may have a connector through its hole.
+            # Keep observed-paper masks separate; the MODEL's negative space
+            # still has to survive even when source paper covers <70% of it.
+            hole = template['face'] & (soft < .12) & ~template['boundary_uncertain']
+            template['hole_core'] = cv2.erode(hole.astype(np.uint8), np.ones((3,3),np.uint8)) > 0
+            template['hollow_fraction'] = float(hole.sum()/max(int(template['face'].sum()),1))
+            template['provenance']['hole_core_source'] = 'supported_hollow_model_not_observed_paper'
         # A supported filled primitive has no measured paper holes. Keep the
         # completion uncertainty separate from hollow-marker negative evidence.
-        for key in ('hole_core','enclosed_paper','observed_rim','uncertain'):
-            template[key] = np.zeros(soft.shape,bool)
-        template['hollow_fraction'] = 0.
-        centroid_offset = [record['inferred_centroid'][i]-pars['cx' if i==0 else 'cy'] for i in (0,1)]
+        if not model_open:
+            for key in ('hole_core','enclosed_paper','observed_rim','uncertain'):
+                template[key] = np.zeros(soft.shape,bool)
+            template['hollow_fraction'] = 0.
+        centroid = record.get('inferred_centroid') or [pars['cx'], pars['cy']]
+        centroid_offset = [centroid[i]-pars['cx' if i==0 else 'cy'] for i in (0,1)]
         center_info = dict(convention='geometric_bounding_box_center',
             source_geometric_center=source_center,template_geometric_center=[radius,radius],
             source_fractional_offset=[v-round(v) for v in source_center],

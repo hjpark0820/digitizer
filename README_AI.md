@@ -238,7 +238,22 @@ readable messages, never `[object Object]`.
 all curves even when the UI filters to one colour. Correct-saved processing forks
 the saved job and consumes saved evidence without detection.
 
+### Detection time and failures
+
+`DETECTION_TIMEOUT_SECONDS` is 900 for ordinary Colour and B&W requests. AI-assisted OCR retains its separate overall allowance. `/digitize` catches child-process timeouts and returns `ok: false`, `timed_out: true` and a readable summary; valid partial series may still be manually edited, but Step 5 stays disabled. `_response()` persists complete UTF-8 output in `pipeline.log` and returns `log_url`; keep the short inline log too. The Run elapsed-time timer must stop on success, failure and stale responses.
+
+CPU and CUDA candidate-centre selection share `_suppress_ranked_centres()`. Spatial buckets only prune distant comparisons: stable rank order, inclusive distance boundaries, point coordinates and vote-map arithmetic must remain identical to the original greedy rule.
+
 ### Editor contract
+
+`ok` describes automatic detection/correction success; `editable_available` separately
+reports whether the saved image and series data pass validation for manual editing.
+Keep Edit, Step 5 and legend-analysis controls visible after Run. Do not hide all
+actions when inference is uncertain, and do not enable Step 5 merely because manual
+edits exist. `resultCapabilities()` also guards controls after a busy operation ends.
+Unresolved but editable jobs retain session metadata for JSON/history/Excel export.
+The legend panel can show `legend_optional` and its JSON link without a PNG diagnostic.
+
 
 - `initEditor()` guards asynchronous loads so stale responses cannot revive an
   old image. `openEditorView()` switches to a fixed full-window editor;
