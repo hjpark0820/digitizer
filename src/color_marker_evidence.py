@@ -432,6 +432,9 @@ def colour_evidence(crop_bgr, templates):
     pairs = [_membership(crop, t['model']) for t in templates]
     membership = np.stack([p[0] for p in pairs])
     confidence = np.stack([p[1] for p in pairs])
+    from color_palette_identity_v46 import distinguish_inks
+    membership, confidence, identity_report = distinguish_inks(
+        crop, [t['model'] for t in templates], membership, confidence)
     paper_bgr = _paper(crop)
     contrast = np.linalg.norm(paper_bgr-crop.astype(np.float32), axis=-1)
     all_ink = np.clip((contrast-4.)/35., 0., 1.).astype(np.float32)
@@ -442,6 +445,10 @@ def colour_evidence(crop_bgr, templates):
     rgb = np.array([t['rgb'] for t in templates], float)
     distances = np.linalg.norm(rgb[:, None]-rgb[None, :], axis=-1)
     equivalent = (cosines >= math.cos(math.radians(9))) & (distances < 85.)
+    # Nearby hues with distinct tone/saturation are not the same physical ink.
+    from color_palette_identity_v46 import palette_relations
+    same, near = palette_relations([t['model']['bgr'] for t in templates])
+    equivalent[near] = same[near]
     other = np.zeros_like(membership)
     for i in range(len(templates)):
         rivals = np.flatnonzero(~equivalent[i])
@@ -453,7 +460,8 @@ def colour_evidence(crop_bgr, templates):
     return dict(membership=membership, colour_confidence=confidence,
                 other=other, paper=paper, unknown=unknown.astype(np.float32),
                 all_ink=all_ink, equivalent_colours=equivalent,
-                palette_rgb=rgb.astype(np.uint8), paper_bgr=paper_bgr)
+                palette_rgb=rgb.astype(np.uint8), paper_bgr=paper_bgr,
+                palette_identity=identity_report)
 
 
 def prepare_evidence(image_bgr, plot_box, series_specs, max_side=1400):

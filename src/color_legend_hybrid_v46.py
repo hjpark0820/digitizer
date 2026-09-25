@@ -324,14 +324,54 @@ def _right_label(legend,entry,reference_diameter):
     region=legend[top:bottom,left:right]
     if region.size==0:
         return False
-    spread=region.max(axis=2).astype(int)-region.min(axis=2).astype(int)
-    text=(spread<24)&(region.min(axis=2)<160)
+    # Labels can be coloured too. Spatial character structure, not neutrality,
+    # supplies the right-hand text evidence (e.g. multi-line cohort legends).
+    text=region.min(axis=2)<180
     n,_,stats,_=cv2.connectedComponentsWithStats(text.astype(np.uint8),8)
     bodies=[s for s in stats[1:] if s[4]>=3 and s[3]>=max(3,.30*reference_diameter)]
     return len(bodies)>=2 or any(s[2]>=1.2*reference_diameter and s[4]>=10 for s in bodies)
 
 
-def _neutral_row_evidence(legend, entry, reference_diameter, shape, evidence):
+def _anchored_label_run(legend, entry, anchors):
+    """Locate an existing key's first text run, without recognizing its words.
+
+    A local hole/spacing test cannot distinguish '80' or 'BI' from a hollow
+    key. Join character columns across small word spaces, but stop at a real
+    inter-column gutter. Only the first multi-character run after an observed
+    chromatic key is its label; later isolated keys retain their own evidence.
+    Coordinates in this diagnostic are relative to the legend crop.
+    """
+    x,y=entry['center'];h,w=legend.shape[:2]
+    spread=np.ptp(legend.astype(np.int16),axis=2)
+    neutral=(spread<24)&(legend.min(axis=2)<180)
+    for anchor in anchors:
+        diameter=anchor['diameter'];ax,ay=anchor['center']
+        if x<=ax or abs(y-ay)>max(2.,.3*diameter):
+            continue
+        # The observed connector belongs to the key, not to its label.
+        bx,by,_,_=anchor['component_box']
+        _,_,right,_=_tight(anchor['observed'])
+        key_right=max(anchor['body_box'][2],bx+right)
+        radius=max(3.,.65*diameter)
+        top,bottom=max(0,int(ay-radius)),min(h,int(ay+radius+1))
+        occupied=neutral[top:bottom].any(axis=0)
+        columns=np.flatnonzero(occupied & (np.arange(w)>=key_right))
+        if not len(columns) or columns[0]-key_right>4*diameter+15:
+            continue
+        # Estimate a text run, not an unbounded 'everything to the right' box.
+        gaps=np.diff(columns)-1
+        breaks=np.flatnonzero(gaps>=max(4.,diameter))
+        end=int(breaks[0]+1) if len(breaks) else len(columns)
+        run=columns[:end];start,stop=int(run[0]),int(run[-1]+1)
+        character_gaps=int(np.count_nonzero(np.diff(run)>1))
+        if stop-start>=1.4*diameter and character_gaps>=1 and start<=x<stop:
+            return dict(inside=True,label_box=[start,top,stop,bottom],
+                anchor_center=[float(ax),float(ay)],character_gaps=character_gaps,
+                word_gap_limit_px=float(max(4.,diameter)))
+    return dict(inside=False)
+
+
+def _neutral_row_evidence(legend, entry, reference_diameter, shape, evidence, anchors=()):
     """Separate horizontal neutral swatch identity from exact symbol identity.
 
     A triangle's bounding rectangle includes paper corners. Measure fill only
@@ -368,10 +408,13 @@ def _neutral_row_evidence(legend, entry, reference_diameter, shape, evidence):
     if entry['direction'] is None and not shape.startswith('open_'):
         body_supported &= filled
     reasons=[]
+    label_run=_anchored_label_run(legend,entry,anchors)
+    if label_run['inside']:reasons.append('inside_existing_key_label_run')
     if not label:reasons.append('no_independent_right_label')
     if not isolated:reasons.append('insufficient_separation_from_text_or_other_ink')
     if not body_supported:reasons.append('insufficient_observed_interior_or_shape_support')
     return dict(accepted=not reasons,reasons=reasons,right_label=bool(label),
+        anchored_label_run=label_run,
         left_gap_px=int(left_gap),right_gap_px=int(right_gap),minimum_gap_px=min_gap,
         independent_interior_pixels=interior_count,independent_fill=interior_fill,
         shape_uncertain=shape=='unknown_marker',unknown_supported=bool(unknown_supported),
@@ -483,6 +526,7 @@ def _crop_template(legend, entry, origin, slot, rivals):
         prior_used=entry.get('prior_used',False),
         discovery_source=entry.get('discovery_source','observed_colour_body'),
         neutral_row_evidence=entry.get('neutral_row_evidence'),
+        source_structure_box=absolute(entry['structure_box']) if entry.get('structure_box') else None,
         soft_threshold=FOREGROUND_THRESHOLD,
         weak_support_threshold=WEAK_SUPPORT_THRESHOLD,
         colour_reference_contrast=float(model.colour_reference_contrast),
@@ -493,6 +537,89 @@ def _crop_template(legend, entry, origin, slot, rivals):
     return template,report
 
 
+def _source_structure(legend, paper):
+    """Independent full-ink keys; neutral bodies need not share line colour.
+
+    Reuse the BW row/label locator, but sample each body's observed colour.
+    These anchors constrain text ownership, not marker class or plot points.
+    """
+    anchors=[]
+    area=(0,0,legend.shape[1],legend.shape[0])
+    try:boxes=L._automatic_boxes(legend,area)
+    except ValueError as error:
+        if str(error) not in ('No complete graphical legend entries were found',
+                             'No graphical entries with label or column context were found'):raise
+        return []
+    for source_box in boxes:
+        result=None
+        for pad in (0,1,2):
+            a,b,c,d=source_box
+            measured=(max(0,a-pad),max(0,b-pad),min(area[2],c+pad),min(area[3],d+pad))
+            try:result=L._glyph_pixels(legend,measured,return_report=True)
+            except L.LegendEntryError as error:
+                if error.code!='clipped_marker':break
+                continue
+            break
+        if result is None:continue
+        gray,line,glyph,connected,report=result
+        a,b,c,d=glyph;body=legend[b:d,a:c]
+        core=(gray<235)&~line
+        if core.sum()<3:continue
+        model=_model(body[core],paper)
+        support=np.zeros(legend.shape[:2],bool)
+        x0,y0,x1,y1=measured
+        support[y0:y1,x0:x1]=legend[y0:y1,x0:x1].min(axis=2)<235
+        try:entry=_candidate(legend,support,measured,paper,model)
+        except ValueError:continue
+        if model.achromatic:
+            name,_,evidence=_shape(entry['marker'],nuisance=entry['central_line'],return_report=True)
+            structure=_neutral_row_evidence(legend,entry,entry['diameter'],name,evidence)
+            # A full-source connected key can have a differently coloured
+            # line. Its geometric line/body check is independent evidence;
+            # a standalone neutral blob still requires the strict row test.
+            # Short dashed connectors can be confirmed by the colour/body
+            # decomposition even when the BW compact-body policy leaves them
+            # attached. Require a measured hollow body as independent evidence
+            # before using that route; a horizontal text stroke is insufficient.
+            if not structure['accepted']:
+                short_hollow_connector=(entry.get('direction')=='horizontal'
+                    and bool(evidence.get('strong_hollow_evidence')))
+                if not (connected or short_hollow_connector) or not structure['right_label']:continue
+                structure=dict(structure,accepted=True,reasons=[],
+                    policy='full_source_line_body_and_independent_right_label',
+                    original_colour_only_reasons=structure['reasons'])
+            entry['neutral_row_evidence']=structure
+        entry.update(discovery_source='complete_source_key_row_and_body_colour',
+                     structure_box=measured)
+        anchors.append(entry)
+    # The BW locator can still propose a connected word (e.g. mg/m²).
+    # Structural proposals are not exempt from ownership by an earlier key's
+    # measured text run. Resolve that ownership before they define columns.
+    return [entry for entry in anchors
+            if not _anchored_label_run(legend,entry,anchors)['inside']]
+
+
+def _in_structure_label(center, anchors, shape):
+    """Protect label cells, including coloured/multi-line text and neutral keys.
+
+    Real neighbouring key columns and the next key row bound every text cell.
+    A candidate intersecting any observed key can never be rejected as text.
+    """
+    x,y=center;h,w=shape[:2]
+    boxes=[a['structure_box'] for a in anchors if a.get('structure_box')]
+    if any(a-2<=x<c+2 and b-2<=y<d+2 for a,b,c,d in boxes):return False
+    for a,b,c,d in boxes:
+        diameter=d-b
+        # A key column persists across rows. The same-row key can be faint or
+        # missed by this locator while independently visible colour evidence
+        # remains; do not absorb that whole column into its neighbour's label.
+        right=min((aa for aa,bb,cc,dd in boxes if aa>c),default=w)
+        bottom=min((bb for aa,bb,cc,dd in boxes if bb>=d and abs((aa+cc-a-c)/2)<=max(4.,.6*(c-a))),default=h)
+        if c+1<=x<right-2 and max(0,b-2)<=y<bottom:
+            return True
+    return False
+
+
 def _discover_entries(image,legend_area):
     lx,ly,rx,by=_box(legend_area,image)
     legend=image[ly:by,lx:rx]
@@ -501,6 +628,7 @@ def _discover_entries(image,legend_area):
     chromatic=(hsv[...,1]>=30)&(chroma>=18)&(legend.min(axis=2)<242)
     bright=legend.mean(axis=2)>=np.percentile(legend.mean(axis=2),85)
     paper=tuple(int(v) for v in np.median(legend[bright],axis=0))
+    structural=_source_structure(legend,paper)
     candidates=[];rejected=[]
     for support,box in _groups(chromatic):
         try:
@@ -510,6 +638,18 @@ def _discover_entries(image,legend_area):
     candidates,fragments=_remove_fragments(candidates);rejected.extend(fragments)
     candidates,context_rejections,columns=_table_context(candidates,legend)
     rejected.extend(context_rejections)
+    kept=[]
+    for entry in candidates:
+        if _in_structure_label(entry['center'],structural,legend.shape):
+            rejected.append(dict(box=list(entry['body_box']),status='source_label_cell_rejected',
+                reason='Observed body lies in a full-source key label cell'))
+        else:kept.append(entry)
+    candidates=kept
+    for entry in structural:
+        match=next((c for c in candidates if abs(c['center'][0]-entry['center'][0])<.55*entry['diameter']
+                    and abs(c['center'][1]-entry['center'][1])<.55*entry['diameter']),None)
+        if match is None:candidates.append(entry)
+        else:match['structure_box']=entry['structure_box']
     if not candidates:
         return [],rejected+[dict(reason='No trustworthy chromatic marker body; native priors may supply observed neutral keys')]
     anchors=list(candidates)
@@ -528,6 +668,15 @@ def _discover_entries(image,legend_area):
         try:
             entry=_candidate(legend,support,box,paper)
             x,y=entry['center'];diameter=entry['diameter']
+            if _in_structure_label(entry['center'],structural,legend.shape):
+                name,_,evidence=_shape(entry['marker'],nuisance=entry['central_line'],return_report=True)
+                structure=_neutral_row_evidence(legend,entry,diameter,name,evidence,anchors)
+                if 'inside_existing_key_label_run' not in structure['reasons']:
+                    structure['reasons'].append('inside_existing_key_label_run')
+                structure['accepted']=False
+                rejected.append(dict(status='neutral_row_rejected',box=list(entry['body_box']),
+                    neutral_row_evidence=structure))
+                continue
             column=any(abs(x-a['center'][0])<=max(2.5,.4*a['diameter']) for a in anchors)
             row=any(abs(y-a['center'][1])<=max(2.,.3*a['diameter']) and
                     .7*a['diameter']<=diameter<=1.4*a['diameter'] for a in anchors)
@@ -536,10 +685,10 @@ def _discover_entries(image,legend_area):
             if any(abs(x-a['center'][0])<.65*a['diameter'] and abs(y-a['center'][1])<.65*a['diameter'] for a in anchors):
                 continue
             name,_,shape_evidence=_shape(entry['marker'],nuisance=entry['central_line'],return_report=True)
-            if not column:
-                reference=float(np.median([a['diameter'] for a in anchors
-                    if abs(y-a['center'][1])<=max(2.,.3*a['diameter'])]))
-                structure=_neutral_row_evidence(legend,entry,reference,name,shape_evidence)
+            if not column or structural:
+                peers=[a['diameter'] for a in anchors if abs(y-a['center'][1])<=max(2.,.3*a['diameter'])]
+                reference=float(np.median(peers)) if peers else diameter
+                structure=_neutral_row_evidence(legend,entry,reference,name,shape_evidence,anchors)
                 if not structure['accepted']:
                     rejected.append(dict(status='neutral_row_rejected',
                         source_body_box=[v+(lx if i%2==0 else ly) for i,v in enumerate(entry['body_box'])],
@@ -586,12 +735,16 @@ def _native_priors(native_grid, native_palette, native_centres):
     return result
 
 
-def _prior_entry(legend, origin, prior, priors, paper):
+def _prior_entry(legend, origin, prior, priors, paper, anchors=()):
     lx,ly=origin
     cx,cy=prior['x']-lx,prior['y']-ly
     h,w=legend.shape[:2]
     if not (0<=cx<w and 0<=cy<h):
         raise ValueError('Native centre is outside the supplied legend region')
+    if _in_structure_label((cx,cy),anchors,legend.shape):
+        prior['_neutral_rejection']=dict(reasons=['inside_existing_key_label_run'],
+            policy='source_structure_label_cell')
+        return None,'neutral_prior_rejected'
     gaps=[abs(prior['y']-p['y']) for p in priors if abs(prior['y']-p['y'])>4]
     ry=max(6.,min(24.,.46*min(gaps))) if gaps else 17.
     rx=max(12.,min(30.,1.5*ry))
@@ -613,7 +766,7 @@ def _prior_entry(legend, origin, prior, priors, paper):
         try:
             entry=_candidate(legend,full,absolute,paper,model)
         except ValueError:
-            if max(c-a,d-b)>=3*max(1,min(c-a,d-b)) and min(c-a,d-b)<=5:
+            if c-a>=3*max(1,d-b) and d-b<=5:
                 line_only=True
                 line_support=group
             continue
@@ -626,7 +779,7 @@ def _prior_entry(legend, origin, prior, priors, paper):
             continue
         if model.achromatic:
             name, _, shape_evidence = _shape(entry['marker'], nuisance=entry['central_line'], return_report=True)
-            structure = _neutral_row_evidence(legend, entry, diameter, name, shape_evidence)
+            structure = _neutral_row_evidence(legend, entry, diameter, name, shape_evidence, anchors)
             if not structure['accepted']:
                 prior['_neutral_rejection'] = structure
                 continue
@@ -638,7 +791,7 @@ def _prior_entry(legend, origin, prior, priors, paper):
         ys,xs=np.nonzero(support)
         if len(xs)>=6:
             spanx,spany=np.ptp(xs)+1,np.ptp(ys)+1
-            thin=max(spanx,spany)>=4*min(spanx,spany) and min(spanx,spany)<=4
+            thin=spanx>=4*spany and spany<=4
             line_only |= thin
             if thin:
                 line_support=support
@@ -678,11 +831,12 @@ def extract_hybrid_legend(image_bgr, legend_area, native_grid=None,
     bright=legend.mean(axis=2)>=np.percentile(legend.mean(axis=2),85)
     paper=tuple(int(v) for v in np.median(legend[bright],axis=0))
     candidates,rejected=_discover_entries(image_bgr,legend_area)
+    anchors=list(candidates)
     priors=_native_priors(native_grid,native_palette,native_centres)
     merged=[];used=set()
     for prior in priors:
         try:
-            entry,status=_prior_entry(legend,(lx,ly),prior,priors,paper)
+            entry,status=_prior_entry(legend,(lx,ly),prior,priors,paper,anchors)
         except (ValueError,cv2.error) as error:
             entry,status=None,str(error)
         # Native table centres can sit on the connector. Independent body
@@ -694,7 +848,10 @@ def extract_hybrid_legend(image_bgr, legend_area, native_grid=None,
                 continue
             colour_error=np.linalg.norm(_lab(np.asarray(other['model'].core_bgr,np.uint8).reshape(1,1,3))-
                                         _lab(np.asarray(prior['rgb'][::-1],np.uint8).reshape(1,1,3)))
-            if colour_error<55:
+            source_box=other.get('structure_box')
+            same_source_key=bool(source_box and source_box[0]<=prior['x']-lx<source_box[2]
+                                 and source_box[1]<=prior['y']-ly<source_box[3])
+            if colour_error<55 or same_source_key:
                 matches.append((float(colour_error)+(x+lx-prior['x'])**2+(y+ly-prior['y'])**2,i,other))
         if matches:
             _,i,other=min(matches,key=lambda item:item[0]);used.add(i)
@@ -721,6 +878,23 @@ def extract_hybrid_legend(image_bgr, legend_area, native_grid=None,
                abs(entry['center'][1]-m['center'][1])<=.60*max(entry['diameter'],m['diameter']) for m in merged):
             continue
         merged.append(entry)
+    # Native colour priors may measure two fragments of the SAME black body
+    # on a coloured connector. Deduplicate by the independently observed key
+    # rectangle, never by plot-point proximity or shared RGB.
+    unique=[]
+    structure_boxes={tuple(e['structure_box']) for e in candidates if e.get('structure_box')}
+    for entry in merged:
+        x,y=entry['center']
+        owner=next((b for b in sorted(structure_boxes) if b[0]<=x<b[2] and b[1]<=y<b[3]),None)
+        if owner is not None:entry['structure_box']=owner
+        rival=next((e for e in unique if owner is not None and e.get('structure_box')==owner),None)
+        if rival is None:unique.append(entry)
+        else:
+            winner,loser=(entry,rival) if entry['marker_pixels']>rival['marker_pixels'] else (rival,entry)
+            if winner is entry:unique[next(i for i,e in enumerate(unique) if e is rival)]=entry
+            rejected.append(dict(status='same_observed_source_key',box=list(loser['body_box']),
+                reason='Multiple colour fragments belong to one measured legend key'))
+    merged=unique
     merged.sort(key=lambda entry:(entry.get('native_index',len(priors)+1000),entry['center'][1],entry['center'][0]))
     models=[];reports=[]
     for entry in merged:

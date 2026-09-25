@@ -75,10 +75,12 @@ def _polygon_distance(x, y, vertices):
 
 
 def render_model(name, params, line_params, shape, cfg=Config()):
-    """Render union on a fine grid BEFORE blur/pixel averaging.
+    """Render the composition on a fine grid before pixel averaging.
 
     Subpixel boundary coverage is a linear one-fine-pixel ramp, permitting
     continuous optimisation. Triangle centre is its bounding-box centre.
+    Without marker_blur_sigma the legacy union-before-shared-blur path is
+    exact. The optional parameter gives line and marker separate edge spreads.
     """
     ss = int(cfg.supersample)
     if ss < 1:
@@ -98,7 +100,12 @@ def render_model(name, params, line_params, shape, cfg=Config()):
         cx, cy = params['cx'], params['cy']
         rx, ry = params['width'] / 2, params['height'] / 2
         xx, yy = x - cx, y - cy
-        if name in ('circle', 'ellipse', 'open_circle', 'open_ellipse'):
+        if name in ('x_marker', 'plus_marker'):
+            distance=(np.minimum(np.abs(ry*xx-rx*yy),np.abs(ry*xx+rx*yy))/np.hypot(rx,ry)
+                      if name=='x_marker' else np.minimum(np.abs(xx),np.abs(yy)))
+            signed=np.minimum.reduce([float(params['stroke_width'])/2-distance,
+                                      rx-np.abs(xx),ry-np.abs(yy)])
+        elif name in ('circle', 'ellipse', 'open_circle', 'open_ellipse'):
             r = np.sqrt((xx / rx) ** 2 + (yy / ry) ** 2)
             signed = (1 - r) * min(rx, ry)
             outer_signed = signed
@@ -117,16 +124,32 @@ def render_model(name, params, line_params, shape, cfg=Config()):
                 'triangle_down': [(-rx, -ry), (rx, -ry), (0, ry)],
                 'triangle_left': [(-rx, 0), (rx, -ry), (rx, ry)],
                 'triangle_right': [(-rx, -ry), (rx, 0), (-rx, ry)],
-            }[name]
+            }[name.removeprefix('open_')]
             signed = _polygon_distance(xx, yy, vertices)
+            outer_signed = signed
+            if name.startswith('open_'):
+                signed = np.minimum(signed, float(params['stroke_width']) - signed)
         marker = np.clip(.5 + ss * signed, 0, 1)
+    # Optional independent marker edge spread. A fitted thin horizontal line
+    # can have a different raster blur from a hollow marker's sharp outline.
+    # Legacy callers retain the exact original shared-blur rendering below.
+    separate_blur = 'marker_blur_sigma' in params
+    if separate_blur:
+        line_sigma = lp.get('blur_sigma', .4)*ss
+        marker_sigma = float(params['marker_blur_sigma'])*ss
+        line = ndimage.gaussian_filter(line,line_sigma,mode='constant') if line_sigma>0 else line
+        marker = ndimage.gaussian_filter(marker,marker_sigma,mode='constant') if marker_sigma>0 else marker
+    if 'ink_level' in params:
+        marker=np.clip(marker*float(params['ink_level']),0,1)
     union = np.maximum(line, marker)
     if name.startswith('open_') and params.get('interior_mode', 'transparent') == 'paper':
         # A background-filled marker is drawn OVER the connector. Compose on
         # the fine grid before blur: its white interior is not missing ink.
         outer = np.clip(.5 + ss * outer_signed, 0, 1)
+        if separate_blur and marker_sigma>0:
+            outer = ndimage.gaussian_filter(outer,marker_sigma,mode='constant')
         union = np.maximum(line * (1 - outer), marker)
-    sigma = lp.get('blur_sigma', .4) * ss
+    sigma = 0. if separate_blur else lp.get('blur_sigma', .4) * ss
 
     def sample(a):
         a = ndimage.gaussian_filter(a, sigma, mode='constant') if sigma > 0 else a

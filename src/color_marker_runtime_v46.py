@@ -149,12 +149,18 @@ class MarkerRuntime:
         self.diagnostics = report
         evidence = None
         try:
-            from color_group_runtime_v46 import ambiguous_palette, detect as detect_groups
-            if self.use_prepared_templates and ambiguous_palette(entries):
-                print('[v46 color markers] Repeated legend colours: switching to reviewed '
-                      'colour-group BW grid/window and typed group Step 5.', flush=True)
+            from color_group_runtime_v46 import palette_routing, detect as detect_groups
+            routing = palette_routing(entries)
+            use_groups = self.use_prepared_templates and bool(routing['same_ink_pairs'])
+            report['palette_routing'] = dict(routing,
+                selected_backend='color_group_bw' if use_groups else MARKER_VERSION)
+            if use_groups:
+                print('[v46 color markers] Repeated legend inks: separate distinct '
+                      'source inks before colour-group BW grid/window and typed group Step 5.', flush=True)
                 detect_groups(self, env, legend_runtime, plot, legend, report)
                 return
+            print('[v46 color markers] Distinct legend inks: general colour route; '
+                  f"{len(routing['distinct_near_hue_pairs'])} nearby-hue rival pair(s) remain separate.", flush=True)
             report['per_marker_scale_search']=False
             print('[v46 color markers] Hybrid v2: path-density + overlapping grid proposals; '
                   'connector/marker window reconstruction; joint same-colour identities. '
@@ -163,13 +169,20 @@ class MarkerRuntime:
                          for name, entry in zip(names, entries)} if self.use_prepared_templates else None)
             try:
                 evidence = prepare_evidence(image, plot, specs, max_side=0, template_overrides=prepared,
-                                            guide_policy=guide_policy,scale_policy=report['scale_policy'])
+                                            guide_policy=guide_policy,scale_policy=report['scale_policy'],
+                                            palette_recovery='calibrate_complete')
             except ValueError as error:
                 if not str(error).startswith('No usable legend templates:'):
                     raise
                 report.update(status='no_usable_templates', template_errors=[str(error)])
             if evidence is not None:
                 evidence['priors'] = priors
+                report['palette_identity']=evidence.get('palette_identity')
+                report['palette_recovery']=evidence.get('palette_recovery')
+                if report['palette_recovery']:
+                    (destination/'palette_recovery.json').write_text(
+                        json.dumps(_plain(report['palette_recovery']),indent=2),encoding='utf-8')
+                    cv2.imwrite(str(destination/'palette_recovery_phase.png'),evidence['recovery_phase'])
                 report['symbol_scale_calibration']=evidence.get('symbol_scale_calibration')
                 report['marker_recovery_policy']=dict(
                     version='confirmed_T_multicentre_local_blend_v1',
@@ -226,6 +239,10 @@ class MarkerRuntime:
                             selection['rejected'].append(dict(candidate_id=point['candidate_id'],
                                 reason='final_center_outside_plot_or_in_legend'))
                     selection[field] = keep
+                # Excluded plot/legend candidates must never influence a valid
+                # body's representative. Compare after the final ROI filter.
+                from color_joint_body_v46 import consolidate
+                selection = consolidate(evidence, selection)
                 keys = ('id', 'label', 'rgb', 'diameter', 'source_center',
                         'marker_box', 'swatch_box', 'provenance', 'legend_shape_hint', 'legend_shape_evidence',
                         'symbol_scale','legend_diameter','symbol_scale_status','symbol_scale_version')
@@ -253,7 +270,7 @@ class MarkerRuntime:
                 # Keep explicit None entries for line-only/failed identities.
                 templates = dict(prepared or {})
                 templates.update({t['id']:t for t in (evidence or {}).get('templates',[])})
-                self._tentative_handoff(env, legend_runtime, names, plot, legend, templates, report)
+                self._tentative_handoff(env, legend_runtime, names, plot, legend, templates, report, evidence=evidence)
             self.active = True
             legend_runtime.diagnostics.update(
                 scope='observed legend + supported composition feeding hybrid v2 and tentative Step 5',
@@ -273,7 +290,7 @@ class MarkerRuntime:
               f"{report['seconds']:.2f}s. -> color_marker_hybrid_v46.json", flush=True)
 
     @staticmethod
-    def _tentative_handoff(env, legend_runtime, names, plot, legend, templates, report):
+    def _tentative_handoff(env, legend_runtime, names, plot, legend, templates, report, evidence=None):
         """Shared v46 colour evidence -> retained paths -> suppressed candidates.
 
         Active detections and geometric support knots never seed this review
@@ -296,6 +313,9 @@ class MarkerRuntime:
         if a < c and b < d:
             allowed[b:d, a:c] = False
         series, own_masks = [], {}
+        from color_recovery_evidence_v46 import freeze
+        snapshot = freeze(evidence)
+        field_indices = {sid: i for i, sid in enumerate(snapshot['series_ids'])} if snapshot else {}
         for i, (name, entry) in enumerate(zip(names, entries)):
             if not np.allclose(info[i]['rgb'], entry['rgb'], atol=1.):
                 raise RuntimeError('Native colour field RGB no longer corresponds to its legend slot')
@@ -305,6 +325,10 @@ class MarkerRuntime:
                      if np.allclose(other['rgb'], entry['rgb'], atol=1.)]
             own = np.logical_or.reduce([masks[j][y0:y1, x0:x1] for j in peers]) & allowed
             field = np.asarray(soft[i][y0:y1, x0:x1], np.float32) * allowed
+            if name in field_indices:
+                ei = field_indices[name]
+                field = evidence['membership'][ei] * evidence['colour_confidence'][ei] * allowed
+                own = (field >= .22) & allowed & evidence['valid']
             template = templates.get(name)
             diameter = float(template['diameter']) if template is not None else max(
                 2., float(entry.get('report', {}).get('diameter', max(entry['mask'].shape))))
@@ -325,7 +349,8 @@ class MarkerRuntime:
         (destination/'color_tentative_v46.json').write_text(
             json.dumps(_plain(tentative), indent=2), encoding='utf-8')
         payload = export_step5_inputs(destination, image, plot, legend, entries, names,
-            templates, env['all_detections'], tentative, own_masks, env['path_to_segments'])
+            templates, env['all_detections'], tentative, own_masks, env['path_to_segments'],
+            frozen_colour_evidence=snapshot)
         report['tentative'] = dict(version=tentative['version'],
             tentative_candidates=len(tentative['candidates']),
             suppressed_candidates=payload['counts']['tentative_suppressed'],
@@ -333,6 +358,7 @@ class MarkerRuntime:
             active_points_changed=False,
             mathematical_knots_exported=False, seconds=perf_counter()-tick,
             furniture=furniture_report, native_colour_info=info,
+            colour_fields='frozen_recovered_detector_fields' if snapshot else 'legacy_native_masks',
             payload_file='step5_inputs.json', payload_version=payload['version'])
         print(f"[v46 tentative] {payload['counts']['tentative_suppressed']} strong suppressed "
               f"from {len(tentative['candidates'])} tentative candidates; "

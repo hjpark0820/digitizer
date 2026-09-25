@@ -122,7 +122,11 @@ def select_swatch_boxes():
         _p = float(np.median(np.diff(_ry))) if len(_ry) > 1 else max(10.0, (_lb[3] - _lb[1]) / 2.0)
         _hh = max(4, int(round(0.45 * _p)))
         _hw = max(8, int(round(0.9 * _p)))
-        return ([(int(round(c[0])) - _hw, int(round(c[1])) - _hh, int(round(c[0])) + _hw, int(round(c[1])) + _hh) for c in sorted(centres, key=lambda q: (q[0], q[1]))], f'{lbl} (row pitch {_p:.0f}px)')
+        # A pitch-derived box is only a fallback, and must never wrap around
+        # the source array. Prefer measured complete glyph rectangles below.
+        return ([(max(_lb[0],int(round(c[0]))-_hw), max(_lb[1],int(round(c[1]))-_hh),
+                  min(_lb[2],int(round(c[0]))+_hw), min(_lb[3],int(round(c[1]))+_hh))
+                 for c in sorted(centres,key=lambda q:(q[0],q[1]))], f'{lbl} (bounded row pitch {_p:.0f}px)')
     _cands = []
     _ug = globals().get('_LAST_UNIFIED_GRID') or {}
     if _ug.get('cols') and _ug.get('rows') and _ug.get('cells'):
@@ -136,14 +140,35 @@ def select_swatch_boxes():
         _cands.append(_boxes_from([(c[0], c[1]) for c in _rg['cells']], 'raw legend table'))
     try:
         _scan = find_legend_swatches(img, _lb)
-        _cands.append(_boxes_from([((b[0] + b[2]) / 2.0, (b[1] + b[3]) / 2.0) for b in _scan], 'own swatch scan'))
+        _cands.append((_scan, 'own measured swatch scan'))
     except Exception:
         pass
+    # The shared observed-pixel row locator supports multi-column legends and
+    # neutral bodies on coloured lines. Preserve its actual source extents.
+    from bw_legend_v46 import _automatic_boxes, _glyph_pixels, LegendEntryError
+    measured=[]
+    try:source_boxes=_automatic_boxes(img,(_lb[0],_lb[1],_lb[2]+1,_lb[3]+1))
+    except ValueError as error:
+        if str(error) not in ('No complete graphical legend entries were found',
+                             'No graphical entries with label or column context were found'):raise
+        source_boxes=[]
+    for source_box in source_boxes:
+        try:
+            _glyph_pixels(img,source_box)
+        except LegendEntryError:
+            continue
+        a,b,c,d=source_box
+        measured.append((a,b,c-1,d-1))
+    if measured:
+        _cands.insert(0,(measured,'complete observed legend geometry'))
     _cands = [(b, t) for b, t in _cands if b]
     _sw_boxes, _sw_src = (None, 'auto')
     if _cands:
         _exact = [q for q in _cands if len(q[0]) == len(_real0)]
-        _sw_boxes, _sw_src = _exact[0] if _exact else max(_cands, key=lambda q: len(q[0]))
+        # Do not let an already incomplete native palette force a smaller
+        # one-column crop set when source geometry recovered additional keys.
+        _sw_boxes, _sw_src = ((measured,'complete observed legend geometry') if len(measured)>=max(1,len(_real0))
+                             else _exact[0] if _exact else max(_cands,key=lambda q:len(q[0])))
         print(f'  [v46] {len(_sw_boxes)} swatch box(es) from {_sw_src}' + ('' if len(_sw_boxes) == len(_real0) else f'  -- WARNING {len(_real0)} curve(s) expected'))
 
 

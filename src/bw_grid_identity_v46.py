@@ -99,7 +99,7 @@ def body_pixels(template):
 class GridIdentityCompetition:
     def __init__(self,image,templates,plot_area,ignore_regions=(),observed_scale_range=None,
                  silhouette_models=False,body_opening_fraction=.16,occlusion_mask=None,
-                 boundary_priority=False):
+                 boundary_priority=False,colour_observation=None):
         from bw_colour_visibility_v46 import validate_mask
         self.other = validate_mask(occlusion_mask, image.shape[:2])
         self.boundary_priority=bool(boundary_priority)
@@ -128,10 +128,17 @@ class GridIdentityCompetition:
         gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
         self.source_ink=np.clip((255.-gray.astype(np.float32))/191.,0.,1.)
         ink=(gray<180).astype(np.uint8)
+        if colour_observation is not None:
+            colour_observation.validate(image)
+            self.source_ink*=colour_observation.own
+            ink &= (colour_observation.own>=.5).astype(np.uint8)
         valid=np.zeros_like(ink);x0,y0,x1,y1=self.plot;valid[y0:y1,x0:x1]=1
         for a,b,c,d in ignore_regions:valid[b:d,a:c]=0
         if self.other is not None:
             valid[self.other >= .5] = 0
+        if colour_observation is not None:
+            # Low target membership is not itself proof of white paper.
+            valid &= ((colour_observation.own>=.5)|(colour_observation.paper>=.5)).astype(np.uint8)
         ink*=valid
         inside=cv2.distanceTransform(ink,cv2.DIST_L2,5)
         outside=cv2.distanceTransform(1-ink,cv2.DIST_L2,5)
@@ -144,6 +151,7 @@ class GridIdentityCompetition:
         for kernel in kernels:nuisance|=cv2.morphologyEx(ink,cv2.MORPH_OPEN,kernel)
         self.positive=(inside>=1.4)&~nuisance.astype(bool)&valid.astype(bool)
         self.negative=(outside>1.)&valid.astype(bool)
+        if colour_observation is not None:self.negative &= colour_observation.paper>=.5
         self.ink=ink.astype(bool);self.valid=valid.astype(bool)
         self.nuisance=nuisance.astype(bool)
         # A shared, measured body extent prevents an oversized square from

@@ -290,7 +290,8 @@ def _rescale_template(template, scale_x, scale_y):
 
 
 def prepare_evidence(image_bgr, plot_box, series_specs, max_side=1400, *, template_overrides=None,
-                     ignore_furniture=True, guide_policy='legacy_band',scale_policy='fixed_1x'):
+                     ignore_furniture=True, guide_policy='legacy_band',scale_policy='fixed_1x',
+                     palette_recovery='off', frozen_colour_evidence=None):
     """Return the v1 evidence contract plus explicit observed body region masks.
 
     Resize coordinates retain OpenCV's half-pixel source-centre offset. Failed
@@ -302,6 +303,9 @@ def prepare_evidence(image_bgr, plot_box, series_specs, max_side=1400, *, templa
     ``scale_policy='shared_symbol'`` calibrates once after colour/ignore fields
     are built and before proposal extraction. The low-level default stays fixed
     so saved working templates can be reloaded without applying scale twice.
+    ``palette_recovery`` is opt-in for fresh runtime detection. Correction
+    restores ``frozen_colour_evidence`` rather than relearning with scaled
+    templates; legacy callers and saved sessions keep the default off policy.
     """
     image = np.asarray(image_bgr, np.uint8)
     if scale_policy not in ('fixed_1x','shared_symbol'):
@@ -346,7 +350,13 @@ def prepare_evidence(image_bgr, plot_box, series_specs, max_side=1400, *, templa
     if factor < 1:
         for template in templates:
             _rescale_template(template, scale_x, scale_y)
-    result = colour_evidence(crop, templates)
+    if frozen_colour_evidence is not None:
+        if factor != 1. or palette_recovery != 'off':
+            raise ValueError('Frozen colour fields cannot be resized or recalibrated')
+        from color_recovery_evidence_v46 import restore
+        result = restore(frozen_colour_evidence, [str(t['id']) for t in templates], box)
+    else:
+        result = colour_evidence(crop, templates)
     valid = np.ones((h, w), bool)
     excluded = []
     for spec in specs:
@@ -359,6 +369,9 @@ def prepare_evidence(image_bgr, plot_box, series_specs, max_side=1400, *, templa
         if right > left and bottom > top:
             valid[top:bottom, left:right] = False
             excluded.append([left, top, right, bottom])
+    if frozen_colour_evidence is None and palette_recovery != 'off':
+        from color_recovery_evidence_v46 import apply_recovery
+        apply_recovery(crop, templates, result, valid, policy=palette_recovery)
     for key in ('membership', 'colour_confidence', 'other'):
         result[key][:, ~valid] = 0
     result['blend_uncertainty'][:, ~valid] = 0

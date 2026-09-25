@@ -83,7 +83,8 @@ def prepare(image, payload):
     if not templates:
         return None
     evidence = prepare_evidence(image, plot, specs, max_side=0,
-                                template_overrides=templates, guide_policy='model',scale_policy='fixed_1x')
+                                template_overrides=templates, guide_policy='model',scale_policy='fixed_1x',
+                                frozen_colour_evidence=payload.get('frozen_colour_evidence'))
     evidence['priors'] = priors
     return evidence
 

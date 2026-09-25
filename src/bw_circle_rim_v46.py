@@ -9,6 +9,19 @@ import numpy as np
 VERSION='circle-direct-rim-v2'
 
 
+def unmeasurable_core_supported(rim):
+    """Absent core samples are not missing ink. Require direct, distributed rim.
+
+    A contrast/model mismatch may lower recall despite visible gray strokes;
+    actual paper or an absent arc still prevents this route. Hole and round
+    shape guards run separately and retain their vetoes.
+    """
+    return bool(rim.get('core_pixels')==0 and rim.get('visible_fraction',0.)>=.85
+                and rim.get('direct_rim_recall',0.)>=.72
+                and rim.get('paper_loss',1.)<=.05
+                and rim.get('missing_arc_fraction',1.)<=1/12.)
+
+
 def rim_evidence(observed,mask,weight,expected,core,occlusion=None):
     observed=np.asarray(observed,np.float32)
     visible=np.ones_like(observed) if occlusion is None else 1.-np.clip(occlusion,0,1)

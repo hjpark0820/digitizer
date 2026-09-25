@@ -9,7 +9,36 @@ from scipy import optimize
 from legend_composition_v46 import _calibrate, render_model, FAMILIES, _family
 
 
+class LineEvidenceError(ValueError):
+    """Expected lack of independent connector observations for an optional fit."""
+    def __init__(self, code, message):
+        super().__init__(message)
+        self.code=code
+
+
+def bounded_dash_gaps(profile,flank):
+    """Count distinct light gaps bracketed by independent connector ink.
+
+    Two real one-pixel gaps are evidence even when four fully white samples
+    do not exist. Padding, the hollow symbol centre and a single break cannot
+    establish a periodic connector. Antialias shoulders may surround a gap.
+    """
+    x=np.asarray(profile);flank=np.asarray(flank,bool)
+    low=np.flatnonzero((x<.20)&flank)
+    groups=np.split(low,np.flatnonzero(np.diff(low)>1)+1) if len(low) else []
+    count=0
+    for g in groups:
+        a,b=int(g[0]),int(g[-1]);left=max(0,a-3);right=min(len(x),b+4)
+        # Both bright-to-ink transitions must belong to the observed flank.
+        before=np.flatnonzero((x[left:a]>.60)&flank[left:a])+left
+        after=np.flatnonzero((x[b+1:right]>.60)&flank[b+1:right])+b+1
+        if len(before) and len(after) and flank[before[-1]:after[0]+1].all():count+=1
+    return count
+
+
 def line_candidates(alpha,cfg,maximum_dashed=1):
+    if alpha.ndim!=2 or min(alpha.shape)<2 or not np.isfinite(alpha).all():
+        raise ValueError('Line fitting requires a finite 2-D observation of at least 2x2 pixels')
     h,w=alpha.shape;xs=np.arange(w)
     support=alpha>.25
     spans=np.array([np.ptp(np.flatnonzero(col))+1 if col.any() else 0 for col in support.T])
@@ -18,6 +47,9 @@ def line_candidates(alpha,cfg,maximum_dashed=1):
     # Flanks are outside the measured marker bulge, not a fixed crop quarter.
     # Fixed crop quarters miss most short-dash evidence and alias the period.
     flank=(xs<columns[0]-1)|(xs>columns[-1]+1) if len(columns) else (xs<.25*w)|(xs>.75*w)
+    if not flank.any():
+        raise LineEvidenceError('no_independent_line_flanks',
+            'Marker/frame support spans the crop: no independent columns remain to fit a connector')
     profile=alpha[:,flank].mean(axis=1);peak=int(np.argmax(profile))
     use=np.abs(np.arange(h)-peak)<=max(3,h*.15)
     cy=float(np.sum(profile*use*np.arange(h))/max(np.sum(profile*use),1e-9))
@@ -38,7 +70,9 @@ def line_candidates(alpha,cfg,maximum_dashed=1):
         # Otherwise a gap hidden wholly under a filled marker can spuriously
         # win as a "dashed" line with the same visible pixels as a solid one.
         dash_evidence &= (xs>nz[0]+2)&(xs<nz[-1]-2)
-    if (xp[dash_evidence]>.5).sum()>=4 and (xp[dash_evidence]<.2).sum()>=4:
+    repeated_gaps=bounded_dash_gaps(xp,flank)
+    if ((xp[dash_evidence]>.5).sum()>=4 and
+        ((xp[dash_evidence]<.2).sum()>=4 or repeated_gaps>=2)):
         for period in np.arange(5.,max(6.,.8*w),1.):
             for duty in (.35,.50,.65,.80):
                 for phase in np.arange(0,period,1.5):

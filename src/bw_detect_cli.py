@@ -191,7 +191,8 @@ def main():
                          'bw_compute_backend.py', 'bw_gpu_grid_votes.py',
                          'bw_gpu_candidate_centres.py', 'bw_gpu_candidate_verifier.py',
                          'bw_gpu_refinement.py', 'bw_gpu_window_verifier.py',
-                         'bw_gpu_window_fused.py',
+                         'bw_gpu_window_fused.py', 'bw_centered_composite_v46.py',
+                         'bw_observed_raster_v46.py',
                          'occlusion_aware_window_verifier.py') if a.point_backend == 'grid_v46'
                         else ('bw_pipeline.py', '2_point_detection_adaptive_nms_v2.py',
                               '5_correction_v2.py', 'chart_marker_detector_v3.py'))

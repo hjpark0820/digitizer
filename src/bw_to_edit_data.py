@@ -130,7 +130,12 @@ def bw_to_edit_data(
 
     edited = {
         "image": {"width": W, "height": H},
-        "plot_area": [int(ax0), int(ay0), int(ax1), int(ay1)],
+        # Detection may use an exclusive crop edge equal to image size.
+        # The editor's ROI uses inclusive pixels; convert only that boundary.
+        # Calibration anchors retain their measured coordinates, so this
+        # serialization fix does not rescale the data or move any point.
+        "plot_area": [int(ax0), int(ay0), W-1 if ax1 == W else int(ax1),
+                      H-1 if ay1 == H else int(ay1)],
         "calibration": {
             # x: left edge -> x_min, right edge -> x_max
             "x": _calib(ax0, ax1, x_range[0], x_range[1], x_log),

@@ -43,7 +43,11 @@ def _box(box, image):
 
 
 def _components(gray, threshold=235):
-    n, labels, stats, _=cv2.connectedComponentsWithStats((gray<threshold).astype(np.uint8),8)
+    return _support_components(gray<threshold)
+
+
+def _support_components(support):
+    n, labels, stats, _=cv2.connectedComponentsWithStats(support.astype(np.uint8),8)
     return labels,[{'id':i,'box':tuple(map(int,(s[0],s[1],s[0]+s[2],s[1]+s[3]))),
                    'area':int(s[4]),'height':int(s[3])}
                   for i,s in enumerate(stats[1:],1) if s[4]>=5 and s[3]>=4]
@@ -66,6 +70,98 @@ def _frame_ids(labels, components):
     return frames
 
 
+def _legend_components(gray):
+    """Separate verified enclosing border strokes, not attached legend keys.
+
+    Only the discovery support changes. Source grayscale stays untouched.
+    Frame-interior bounds also prevent crop padding from recruiting the border
+    again during model extraction or line/marker composition.
+    """
+    labels,components=_components(gray)
+    frames=_frame_ids(labels,components)
+    if not frames:return labels,components,[]
+    support=gray<235
+    interiors=[]
+    for comp in components:
+        if comp['id'] not in frames:continue
+        a,b,c,d=comp['box'];local=labels[b:d,a:c]==comp['id']
+        limit=max(1,int(math.ceil(.12*min(c-a,d-b))))
+        def thickness(profile):
+            count=0
+            for coverage in profile[:limit]:
+                if coverage<.70:break
+                count+=1
+            return count
+        cols,rows=local.mean(axis=0),local.mean(axis=1)
+        left,right=thickness(cols),thickness(cols[::-1])
+        top,bottom=thickness(rows),thickness(rows[::-1])
+        if min(left,right,top,bottom)==0:
+            # An incomplete/non-rectangular enclosing object is not sufficient
+            # evidence to cut a frame away from a connected graphical key.
+            continue
+        edge=np.zeros_like(local)
+        edge[:top]=True;edge[-bottom:]=True
+        edge[:,:left]=True;edge[:,-right:]=True
+        support[b:d,a:c] &= ~(edge & local)
+        interiors.append((a+left,b+top,c-right,d-bottom))
+    labels,components=_support_components(support)
+    remaining_frames=_frame_ids(labels,components)
+    return labels,[q for q in components if q['id'] not in remaining_frames],interiors
+
+
+def _inside_frame(box, interiors, anchor):
+    """Clip padding to a frame only when the entire measured body is inside."""
+    a,b,c,d=box;e,f,g,h=anchor
+    for left,top,right,bottom in interiors:
+        if left<=e<g<=right and top<=f<h<=bottom:
+            a,b,c,d=max(a,left),max(b,top),min(c,right),min(d,bottom)
+    return a,b,c,d
+
+
+def _repeated_horizontal_body(support):
+    """Return the middle observed body only when three aligned repeats agree.
+
+    Measure the connector BETWEEN bodies; end bodies are not line tails.
+    This is source extent selection, never synthesis of marker pixels.
+    """
+    ys,xs=np.nonzero(support)
+    if not len(xs):return None
+    x0,x1=int(xs.min()),int(xs.max()+1)
+    y0,y1=int(ys.min()),int(ys.max()+1);height=y1-y0
+    if height<3 or x1-x0<4*height:return None
+    spans=np.array([np.ptp(np.flatnonzero(c))+1 if c.any() else 0 for c in support.T])
+    positive=spans[x0:x1][spans[x0:x1]>0]
+    thin=float(np.percentile(positive,30))
+    if height<max(3.,1.6*thin):return None
+    elevated=np.flatnonzero(spans>max(thin+.75,.60*height))
+    runs=np.split(elevated,np.flatnonzero(np.diff(elevated)>1)+1)
+    runs=[r for r in runs if max(2.,.25*height)<=len(r)<=1.5*height]
+    if len(runs)<3:return None
+    expanded=[]
+    for run in runs:
+        a,b=int(run[0]),int(run[-1])+1
+        while a>x0 and spans[a-1]>thin+.75:a-=1
+        while b<x1 and spans[b]>thin+.75:b+=1
+        if b-a>1.5*height:return None
+        expanded.append(np.arange(a,b))
+    runs=expanded
+    centers=np.array([(r[0]+r[-1])/2 for r in runs]);distances=np.diff(centers)
+    if np.ptp(distances)>max(1.,.25*float(np.median(distances))):return None
+    gaps=[]
+    for left,right in zip(runs,runs[1:]):
+        gap=np.arange(left[-1]+1,right[0])
+        if len(gap)<max(2,height) or not np.all((spans[gap]>0)&(spans[gap]<=thin+.5)):return None
+        gaps.extend(gap.tolist())
+    rows=support[:,gaps].mean(axis=1)>=.90
+    if not rows.any():return None
+    ly=np.flatnonzero(rows)
+    for run in runs:
+        yy=np.flatnonzero(support[:,run].any(axis=1))
+        if not len(yy) or yy[0]>=ly[0] or yy[-1]<=ly[-1]:return None
+    middle=runs[int(np.argmin(abs(centers-(x0+x1-1)/2)))]
+    return (max(x0,int(middle[0])-1),y0,min(x1,int(middle[-1])+2),y1),rows
+
+
 def _line_analysis(support):
     """Observed column-span evidence for a marker on a horizontal line.
 
@@ -81,6 +177,10 @@ def _line_analysis(support):
     geometry=dict(width=right-left, height=height, aspect=(right-left)/height)
     def outcome(status, reason, extent=None):
         return dict(status=status, reason=reason, extent=extent, **geometry)
+    repeated=_repeated_horizontal_body(support)
+    if repeated is not None:
+        (a,_,c,_),rows=repeated
+        return outcome('separated','repeated_bodies_with_intervening_connector',(a,c,rows))
     compact=right-left<=1.7*height
     # Short legend connectors can still make an almost-square union. Do not
     # let that union's aspect ratio hide independently thin flanks on a ring.
@@ -162,9 +262,7 @@ def _automatic_boxes(image, legend_area):
     lb=_box(legend_area,image)
     x0,y0,x1,y1=lb
     gray=cv2.cvtColor(image[y0:y1,x0:x1],cv2.COLOR_BGR2GRAY)
-    labels,components=_components(gray)
-    frames=_frame_ids(labels,components)
-    components=[q for q in components if q['id'] not in frames]
+    labels,components,interiors=_legend_components(gray)
     rows=[]
     # Large text/glyph bodies establish rows before small detached fragments.
     for comp in sorted(components,key=lambda c:(-c['height'],c['box'][1],c['box'][0])):
@@ -245,7 +343,15 @@ def _automatic_boxes(image, legend_area):
     boxes=[]
     for comp in sorted(candidates,key=lambda q:(q['row_index'],q['box'][0])):
         a,b,c,d=comp['box']
-        boxes.append((max(x0,x0+a-2),max(y0,y0+b-2),min(x1,x0+c+2),min(y1,y0+d+2)))
+        # Padding is paper context, not permission to import the first label
+        # letter (important when a tiny swatch ends one pixel before its text).
+        neighbors=[q for q in components if q['id']!=comp['id'] and
+                   min(d,q['box'][3])>max(b,q['box'][1])]
+        previous=max((q['box'][2] for q in neighbors if q['box'][2]<=a),default=0)
+        following=min((q['box'][0] for q in neighbors if q['box'][0]>=c),default=x1-x0)
+        a,b,c,d=_inside_frame((max(previous,a-2),max(0,b-2),min(following,c+2),min(y1-y0,d+2)),
+                              interiors,comp['box'])
+        boxes.append((x0+a,y0+b,x0+c,y0+d))
     return boxes
 
 
@@ -258,16 +364,25 @@ def composition_box(image, legend_area, swatch_box, diameter):
     lx,ly,rx,by=_box(legend_area,image)
     a,b,c,d=map(int,swatch_box)
     top,bottom=max(ly,b-3),min(by,d+3)
-    gray=cv2.cvtColor(image[top:bottom,lx:rx],cv2.COLOR_BGR2GRAY)
-    _,components=_components(gray)
-    row=[dict(q,box=(q['box'][0]+lx,q['box'][1]+top,q['box'][2]+lx,q['box'][3]+top)) for q in components]
+    # Full legend context is needed to recognize an enclosing frame: a thin
+    # row slice makes that same frame look like an enormous connected swatch.
+    gray=cv2.cvtColor(image[ly:by,lx:rx],cv2.COLOR_BGR2GRAY)
+    _,components,interiors=_legend_components(gray)
+    all_rows=[dict(q,box=(q['box'][0]+lx,q['box'][1]+ly,q['box'][2]+lx,q['box'][3]+ly)) for q in components]
+    row=[q for q in all_rows if min(d,q['box'][3])-max(b,q['box'][1])>=
+         .6*min(d-b,q['height'])]
     # Discovery boxes contain two padding pixels, which can already overlap
     # the first letter. Re-anchor on the graphical component before growing.
     members=[q for q in row if max(0,min(c,q['box'][2])-max(a,q['box'][0]))>=
              .6*min(c-a,q['box'][2]-q['box'][0])]
     if members:
-        main=max(members,key=lambda q:q['area'])
+        main=min(members,key=lambda q:(abs((q['box'][1]+q['box'][3]-b-d)/2),-q['area']))
         a,c=main['box'][0],main['box'][2]
+        mb,md=main['box'][1],main['box'][3]
+        # Include paper, not fragments of a neighboring legend row.
+        overlap=[q for q in all_rows if min(c,q['box'][2])>max(a,q['box'][0])]
+        top=max(top,max((q['box'][3] for q in overlap if q['box'][3]<=mb),default=ly))
+        bottom=min(bottom,min((q['box'][1] for q in overlap if q['box'][1]>=md),default=by))
     cy=(b+d-1)/2
     def thin(q):
         e,f,g,h=q['box']
@@ -285,7 +400,10 @@ def composition_box(image, legend_area, swatch_box, diameter):
     # essential for scans where the label starts 2 px after the connector.
     previous=max((q['box'][2] for q in row if q['box'][2]<=left),default=lx)
     following=min((q['box'][0] for q in row if q['box'][0]>=right),default=rx)
-    return [max(lx,previous,left-2),top,min(rx,following,right+2),bottom]
+    box=(max(lx,previous,left-2),top,min(rx,following,right+2),bottom)
+    global_interiors=[(e+lx,f+ly,g+lx,h+ly) for e,f,g,h in interiors]
+    anchor=main['box'] if members else swatch_box
+    return list(_inside_frame(box,global_interiors,anchor))
 
 
 def _glyph_pixels(image, box, *, return_report=False):
@@ -343,11 +461,21 @@ def _glyph_pixels(image, box, *, return_report=False):
     # A compact glyph must have a complete source border.  Connected thin
     # tails are allowed to leave the box; a tall cut through the glyph is not.
     touches=[]
+    border_support=support.copy()
+    if analysis['reason']=='repeated_bodies_with_intervening_connector':
+        # The representative middle body must be complete. An end repeat
+        # leaving the supplied swatch is not a cut through the chosen body.
+        border_support[:,:left]=False
+        border_support[:,right:]=False
+    if connected_line:
+        # A confirmed connector may leave the crop. Only BODY ink outside
+        # that band establishes a cut marker, not the endpoint of a dash.
+        border_support[line_rows,:]=False
     for edge_name,local,adjacent,extent in (
-        ('left',support[:,0],image[y0:y1,x0-1:x0] if x0 else None,height),
-        ('right',support[:,-1],image[y0:y1,x1:x1+1] if x1<image.shape[1] else None,height),
-        ('top',support[0,:],image[y0-1:y0,x0:x1] if y0 else None,right-left),
-        ('bottom',support[-1,:],image[y1:y1+1,x0:x1] if y1<image.shape[0] else None,right-left)):
+        ('left',border_support[:,0],image[y0:y1,x0-1:x0] if x0 else None,height),
+        ('right',border_support[:,-1],image[y0:y1,x1:x1+1] if x1<image.shape[1] else None,height),
+        ('top',border_support[0,:],image[y0-1:y0,x0:x1] if y0 else None,right-left),
+        ('bottom',border_support[-1,:],image[y1:y1+1,x0:x1] if y1<image.shape[0] else None,right-left)):
         if local.sum()>.45*extent and adjacent is not None and np.any(cv2.cvtColor(adjacent,cv2.COLOR_BGR2GRAY)<235):
             touches.append(edge_name)
     if touches:
@@ -479,7 +607,21 @@ def extract_legend_models(image, legend_area=None, swatches=None, known_classes=
             raise ValueError(f'Unsupported marker class: {supplied}')
         identity=dict(swatch_id=f'S{entry_index:02}',series_index=entry_index-1)
         try:
-            t,report=_model(image,box,supplied)
+            try:
+                t,report=_model(image,box,supplied)
+            except LegendEntryError as first:
+                if first.code!='clipped_marker':raise
+                # Recover at most two original-pixel border rows/columns.
+                # Large/incomplete glyphs still fail; no threshold is relaxed.
+                for pad in (1,2):
+                    a,b,c,d=box
+                    expanded=(max(0,a-pad),max(0,b-pad),min(image.shape[1],c+pad),min(image.shape[0],d+pad))
+                    try:t,report=_model(image,expanded,supplied)
+                    except LegendEntryError:continue
+                    report['border_recovery']=dict(input_box=box,measured_box=expanded,
+                        padding_px=pad,initial_error=first.code,policy='bounded_source_pixels_revalidated')
+                    break
+                else:raise first
         except LegendEntryError as error:
             reports.append(dict(identity,box=box,class_name='unknown_marker',shape_hint='unknown_marker',
                 classification='unresolved',extraction_status='failed',template_available=False,

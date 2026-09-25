@@ -153,7 +153,7 @@ class GpuCandidateVerifier:
         spatial index; all pixel-level metrics and acceptance decisions are
         calculated in bounded GPU batches. No template/marker thresholds change.
         """
-        from partial_swatch_detector import Detection, _IndexedHypotheses
+        from partial_swatch_detector import Detection, _IndexedHypotheses, _defer_small_hollow_centre_fill
         if len(evidence) != len(centers):
             raise ValueError('Every candidate requires its own voting evidence')
         if grid_step < 1:
@@ -286,6 +286,8 @@ class GpuCandidateVerifier:
                     centre_ok = plot_centre_fill <= .70
                 else:
                     centre_ok = similarity >= .45
+                centre_deferred = ~centre_ok & _defer_small_hollow_centre_fill(self.template)
+                centre_ok = centre_ok | centre_deferred
                 accepted = ((edge_count > 0) & (number(matched) > 0) &
                     (supporting >= (3 if diameter < 9 else 4)) &
                     (supported_sectors >= (3 if diameter < 9 else 4)) & (mismatch_sectors < 3) &
@@ -304,7 +306,7 @@ class GpuCandidateVerifier:
                          .10*similarity+.10*vote+.10*spatial+.07*orientation_strength+
                          .05*signature-.18*(mismatch_sectors.to(torch.float64)/8.))
                 rows = torch.stack((accepted, score, contour_coverage, precision, foreground_coverage,
-                    direct_coverage, plot_centre_fill, similarity, supporting, used_bins, radial, ev[:, 0],asymmetric), 1).cpu().numpy()
+                    direct_coverage, plot_centre_fill, similarity, supporting, used_bins, radial, ev[:, 0],asymmetric,centre_deferred), 1).cpu().numpy()
                 self.stats['used_cuda'] = True
                 self.stats['gpu_batches'] += 1
                 self.stats['max_candidates_per_batch'] = max(self.stats['max_candidates_per_batch'], count)
@@ -327,7 +329,8 @@ class GpuCandidateVerifier:
                         centre_fill=float(row[6]), centre_fill_similarity=float(row[7]),
                         supporting_cells=int(row[8]), orientation_bins=int(row[9]), radial_sectors=int(row[10]),
                         raw_hypotheses=int(row[11]), swatch_id=self.template.swatch_id,
-                        shape_hint=self.template.shape_hint or self.template.name,boundary_evidence=boundary))
+                        shape_hint=self.template.shape_hint or self.template.name,boundary_evidence=boundary,
+                        centre_fill_deferred=bool(row[13])))
         self.stats['scoring_seconds'] += time.perf_counter()-started
         return results
 

@@ -13,17 +13,52 @@ from scipy.ndimage import binary_fill_holes
 from scipy.optimize import least_squares
 
 import partial_swatch_detector as D
-from bw_fill_identity_v46 import describe_fill
+from bw_fill_identity_v46 import describe_fill, observed_hole
 from bw_shared_scale_v46 import calibrate_swatch_scales, SEARCH_SCALES
 from legend_composition_v46 import Config, render_model
 from bw_hollow_boundary_v46 import (eligible as paired_hollow, square_interior_evidence,
                                    VERSION as HOLLOW_BOUNDARY_VERSION)
+from bw_cross_evidence_v46 import eligible as stroke_cross, evidence as cross_evidence, model_for as cross_model
 
-VERSION = 'bw-geometry-then-fill-v4-layered-legend'
+VERSION = 'bw-geometry-then-fill-v5-open-reclassification-cross-ridges'
 FAMILIES = dict(square='square', circle='circle', inv_triangle='triangle_down',
                 triangle='triangle_up', rhombus='diamond')
 CLASSES = dict(square='filled_square', circle='filled_circle', triangle_down='filled_inv_triangle',
                triangle_up='filled_triangle', diamond='filled_rhombus')
+
+
+def supported_open_reclassification(original, report, candidate, fitted_report):
+    """Only independent supported hollow fits may revise an automatic class.
+
+    Explicit user labels are authoritative. Same-class legacy decompositions
+    keep their existing acceptance route; this adds no generic threshold bypass.
+    """
+    if not candidate.model_completed:
+        return False
+    if candidate.name == original.name:
+        return True
+    if report.get('classification') == 'supplied':
+        return False
+    if original.name not in ('open_circle', 'open_square') or candidate.name not in ('open_circle', 'open_square'):
+        return False
+    fit = fitted_report.get('composition', {})
+    best = fit.get('best_model', {})
+    fitted_name={'open_circle':'open_circle','open_ellipse':'open_circle',
+                 'open_square':'open_square','open_rectangle':'open_square'}.get(fit.get('best_model_name'))
+    if fitted_name!=candidate.name:
+        return False
+    cfg = Config()
+    values = [best.get('marker_relative_error'), best.get('mean_absolute_error'),
+              fit.get('winner_other_family_margin'), fit.get('marker_improvement')]
+    # Fitter versions expose improvement under either documented name.
+    if values[-1] is None:
+        values[-1] = fit.get('improvement')
+    if any(v is None or not np.isfinite(v) for v in values):
+        return False
+    err, mae, margin, improvement = values
+    return (fit.get('status') == 'supported_simple_shape_model'
+            and err <= cfg.maximum_marker_relative_error and mae <= cfg.maximum_marker_mae
+            and margin >= cfg.minimum_family_margin and improvement >= cfg.minimum_marker_improvement)
 
 
 def separate_open_ring(original):
@@ -142,6 +177,14 @@ def fill_statistics(values):
                 light=float(np.mean(values<.35)),dark=float(np.mean(values>.75)))
 
 
+def transport_hole(hole,size,scale,dx,dy):
+    """Carry the SOURCE interior region; never select white target pixels."""
+    h,w=hole.shape
+    transform=np.float32([[scale,0,size//2+dx-scale*(w-1)/2],
+                          [0,scale,size//2+dy-scale*(h-1)/2]])
+    return cv2.warpAffine(hole.astype(np.float32),transform,(size,size),flags=cv2.INTER_LINEAR)>.5
+
+
 def compare_fill(expected, observed, count, fraction):
     """Order-independent grayscale statistics, not hatch-pixel correlation."""
     style=expected.get('style','uncertain')
@@ -151,7 +194,8 @@ def compare_fill(expected, observed, count, fraction):
     result=dict(style=style,decision='abstain',reason='insufficient_visible_interior',
                 loss=float(loss),observed=observed,expected_mean=mean,
                 visible_pixels=int(count),visible_fraction=float(fraction),phase_matching=False)
-    if count<4 or fraction<.30:return result
+    minimum_count=2 if expected.get('interior_policy')=='observed_enclosed_paper_excluding_rim' else 4
+    if count<minimum_count or fraction<.30:return result
     if style=='uncertain':
         if not expected.get('opaque_body_supported'):
             result['reason']='legend_fill_unresolved'
@@ -235,24 +279,59 @@ def ring_radial_evidence(observed,available,center,diameter):
 
 class GeometryFirst:
     def __init__(self,image,templates,reports,plot,legend,exclusions):
+        self.full_scene_hollow=False
         self.source=image
         self.originals={t.key:deepcopy(t) for t in templates}
         self.descriptors={t.key:describe_fill(t,r.get('shape_evidence')) for t,r in zip(templates,reports)}
         self.plot=plot;self.exclusions=exclusions;self.counts=Counter();self.details={}
-        self.templates=[];self.reports=[];self.open_keys=set();self.filled_keys=set()
+        self.templates=[];self.reports=[];self.open_keys=set();self.filled_keys=set();self.outer_keys=set()
+        self.outer_scales={}
+        self.outer_models={t.key:t.raw_soft.copy() for t,r in zip(templates,reports)
+            if t.ink.achromatic and t.diameter<=12 and r.get('line_analysis',{}).get('status')=='not_needed'}
         # No transformation if the legend does not contain an independently
         # identified patterned fill or open circle/square. Other BW profiles stay put.
-        eligible=any(d['style']=='patterned' for d in self.descriptors.values()) or any(t.name in ('open_circle','open_square') for t in templates)
+        eligible=any(d['style']=='patterned' for d in self.descriptors.values()) or any(t.name in ('open_circle','open_square') or stroke_cross(t) or getattr(t,'small_hollow_model',None) or getattr(t,'compact_outer_identity',None) for t in templates)
         if not eligible:
             self.templates=templates;self.reports=reports;self.enabled=False;return
         for original,report in zip(templates,reports):
             t=deepcopy(original);r=deepcopy(report);style=self.descriptors[t.key]['style']
-            if t.name in ('open_circle','open_square') and legend is not None:
+            if (style=='open' and self.descriptors[t.key].get('interior_policy')=='observed_enclosed_paper_excluding_rim'
+                    and t.name not in ('open_circle','open_square')):
+                t.observed_hole_region=observed_hole(original)
+            if stroke_cross(t):
+                self.details[t.key]=dict(mode='source_four_arm_cross_ridges',status='supported',
+                    fill_policy='open strokes; no closed-body interior required')
+            elif getattr(t,'compact_outer_identity',None):
+                self.outer_keys.add(t.key)
+                self.details[t.key]=dict(mode='observed_raster_with_outer_identity',status='supported',
+                    fill_policy='measured separately; fixed interior descriptor not shape evidence')
+            elif getattr(t,'small_hollow_model',None):
+                self.open_keys.add(t.key)
+                self.details[t.key]=dict(mode='small_hollow_source_composition',status='supported')
+                # Fill is supported by the native source composition, not by
+                # pretending a handful of pixels is a ten-pixel sample.
+                self.descriptors[t.key]['resolved_by']='small_hollow_source_composition'
+            elif t.name in ('open_circle','open_square') and legend is not None:
                 from bw_composed_legend_v46 import compose_templates
                 new,rr,_=compose_templates(image,legend,[t],[r])
-                if new[0].model_completed and new[0].name==original.name:
+                if supported_open_reclassification(original,r,new[0],rr[0]):
                     t,r=new[0],rr[0];self.open_keys.add(t.key)
                     self.details[t.key]=dict(mode='line_plus_pure_'+t.name,status='supported')
+                    if t.name!=original.name:
+                        r['geometry_reclassification']=dict(previous=original.name,current=t.name,
+                            reason='supported_source_composition_beats_other_shape_families')
+                        self.details[t.key]['reclassification']=r['geometry_reclassification']
+                    hole=binary_fill_holes(t.mask)&~t.mask
+                    if int(hole.sum())<10:
+                        # Reuse the native-raster hollow comparison when a
+                        # successful fitted outline has too few interior
+                        # samples. Do not manufacture an eroded fill sample.
+                        fit=r['composition']
+                        t.small_hollow_model=dict(name=fit['best_model_name'],
+                            params=fit['best_model']['params'],blur_sigma=fit['line_params']['blur_sigma'],
+                            legend_family_margin=fit['winner_other_family_margin'])
+                        r['small_hollow_model']=t.small_hollow_model
+                        self.details[t.key]['mode']='small_hollow_source_composition'
                 else:
                     fallback=separate_open_ring(t) if t.name=='open_circle' else None
                     if fallback is not None:
@@ -278,7 +357,7 @@ class GeometryFirst:
             r['geometry_first']=self.details.get(t.key,dict(mode='observed_fallback'))
             r['fill_evidence']=self.descriptors[t.key]
             self.templates.append(t);self.reports.append(r)
-        self.enabled=bool(self.open_keys or self.filled_keys)
+        self.enabled=bool(self.open_keys or self.filled_keys or self.outer_keys or any(stroke_cross(t) for t in self.templates))
         gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY).astype(np.float32)
         self.darkness=np.clip((255-gray)/255.,0,1)
         # Close only 1-2 pixel internal gaps in an auxiliary search raster.
@@ -291,6 +370,12 @@ class GeometryFirst:
         for a,b,c,d in self.exclusions:self.valid[b:d,a:c]=0
         self.compact_sources={False:(gray<190).astype(np.uint8),True:(closed>.34).astype(np.uint8)}
         self.by_key={t.key:t for t in self.templates}
+        small_models={t.key:t.small_hollow_model for t in self.templates if getattr(t,'small_hollow_model',None)}
+        self.small_sources={}
+        for t in self.templates:
+            if t.key in small_models:
+                t.small_hollow_rivals=small_models
+                self.small_sources[t.key]=D.ink_membership(self.source,t.ink).astype(np.float32)
         # Compete against symbols that actually occur in this legend. Absent
         # polygons are not alternate series labels; generic low-signal/window
         # guards still reject paper, lines and incomplete outlines.
@@ -320,13 +405,33 @@ class GeometryFirst:
             if paired_hollow(t):
                 r['identity_policy']='paired square boundaries and source hole; one shared scale'
             reports[t.key]=r
+        from bw_hollow_scene_fallback_v46 import needs_scene_retry,calibrate_joint
+        # This is a failed-calibration retry, not a broader replacement of
+        # validated native hollow decisions on every chart.
+        if needs_scene_retry(self.templates,reports):
+            reports=calibrate_joint(self.darkness,self.templates,self.valid,reports)
+            self.full_scene_hollow=any(r.get('status')=='joint_scene_verified' for r in reports.values())
+            for r in reports.values():r['full_scene_hollow_retry']=self.full_scene_hollow
         return reports
 
     def anchor_evidence(self,t,q):
         from occlusion_aware_window_verifier import _crop_padded
         scale=q.get('profile_scales',SEARCH_SCALES)[int(np.argmax(q['profile']))]
+        if getattr(t,'small_hollow_model',None):
+            from bw_small_hollow_v46 import evidence
+            e=evidence(self.small_sources[t.key],t,(q['x'],q['y']),scale,self.valid)
+            e['accepted']=e['decision']=='compatible'
+            return e
         side=max(3,round(t.mask.shape[0]*scale))
         mask=cv2.resize(t.mask.astype(np.uint8),(side,side),interpolation=cv2.INTER_NEAREST)
+        if stroke_cross(t):
+            mask=np.pad(mask,max(4,int(np.ceil(t.diameter*scale))))
+            observed=_crop_padded(self.darkness,(q['x'],q['y']),mask.shape[0])
+            valid=_crop_padded(self.valid,(q['x'],q['y']),mask.shape[0]).astype(bool)
+            result=cross_evidence(observed,mask,t.name,valid,(t.ink.paper_gray-t.ink.core_gray)/255.,
+                                 model=cross_model(t),scale=scale)
+            result['accepted']=result['decision']=='compatible'
+            return result
         if paired_hollow(t):
             # Keep real external flanks for independently supported crossing dashes.
             padding=max(4,int(np.ceil(t.diameter*scale)))
@@ -337,6 +442,8 @@ class GeometryFirst:
             evidence['accepted']=evidence['decision']=='compatible'
             return evidence
         region=cv2.distanceTransform(binary_fill_holes(mask).astype(np.uint8),cv2.DIST_L2,5)>=max(1.5,.18*t.diameter*scale)
+        if getattr(t,'observed_hole_region',None) is not None:
+            region=transport_hole(t.observed_hole_region,side,scale,0.,0.)
         observed=_crop_padded(self.darkness,(q['x'],q['y']),side)
         stats=fill_statistics(observed[region])
         evidence=compare_fill(self.descriptors[t.key],stats,int(region.sum()),1.)
@@ -353,12 +460,47 @@ class GeometryFirst:
 
     def assess(self,t,v,record=True):
         """Final, source-only tone plus compact-shape evidence at aligned centre."""
+        if stroke_cross(t):
+            from occlusion_aware_window_verifier import _crop_padded
+            size=v.template_mask.shape[0]
+            observed=_crop_padded(self.darkness,(v.x,v.y),size,fill=0.)
+            valid=_crop_padded(self.valid,(v.x,v.y),size).astype(bool)
+            result=v.compute_diagnostics.get('stroke_cross')
+            if result is None:
+                result=cross_evidence(observed,v.template_mask,t.name,valid,(t.ink.paper_gray-t.ink.core_gray)/255.,
+                                     model=cross_model(t),scale=v.scale*getattr(t,'proposal_scale',1.))
+            result=dict(result)
+            result.update(geometry_required_recall=float(v.required_recall),geometry_decision=v.decision,
+                          compact_outer_iou=None)
+            if result['decision']=='conflict':v.decision='rejected'
+            elif result['decision']=='abstain' and v.decision=='verified':v.decision='ambiguous'
+            if record:self.counts[f'{t.key}:{result["decision"]}']+=1
+            v.compute_diagnostics['geometry_first']=result
+            return result
+        if getattr(t,'small_hollow_model',None):
+            from bw_small_hollow_v46 import evidence
+            result=v.compute_diagnostics.get('small_hollow')
+            if self.full_scene_hollow:
+                from bw_hollow_scene_fallback_v46 import evidence
+                result=evidence(self.small_sources[t.key],t,(v.aligned_x,v.aligned_y),v.scale,self.valid)
+                v.decision=v.compute_diagnostics.get('pre_small_hollow_decision',v.decision)
+            if result is None:
+                result=evidence(self.small_sources[t.key],t,(v.aligned_x,v.aligned_y),v.scale,self.valid)
+            result=dict(result,geometry_required_recall=float(v.required_recall),
+                        geometry_decision=v.decision,compact_outer_iou=None)
+            if result['decision']=='conflict':v.decision='rejected'
+            elif result['decision']=='abstain' and v.decision=='verified':v.decision='ambiguous'
+            if record:self.counts[f'{t.key}:{result["decision"]}']+=1
+            v.compute_diagnostics['geometry_first']=result
+            return result
         key=t.key;mask=v.template_mask
         env=binary_fill_holes(mask).astype(np.uint8)
         diameter=t.diameter*v.scale
         depth=cv2.distanceTransform(env,cv2.DIST_L2,5)
         region=depth>=max(1.5,.18*diameter)
         size=mask.shape[0]
+        if getattr(t,'observed_hole_region',None) is not None:
+            region=transport_hole(t.observed_hole_region,size,v.scale,v.aligned_x-v.x,v.aligned_y-v.y)
         from occlusion_aware_window_verifier import _crop_padded
         observed=_crop_padded(self.darkness,(v.x,v.y),size,fill=0.)
         available=_crop_padded(self.valid,(v.x,v.y),size).astype(bool)
@@ -374,6 +516,18 @@ class GeometryFirst:
                             float(visible.sum()/max(1,region.sum())))
         result.update(geometry_required_recall=float(v.required_recall),
                       geometry_decision=v.decision,source_pixels_unchanged=True)
+        if key in self.outer_keys:
+            from bw_compact_boundary_v46 import evidence
+            scales=dict(self.outer_scales);scales[key]=v.scale
+            outer=evidence(self.darkness,(v.aligned_x,v.aligned_y),key,
+                self.outer_models,scales,self.valid)
+            outer.update(interior_fill_check=result,geometry_required_recall=float(v.required_recall),
+                         geometry_decision=v.decision,compact_outer_iou=None)
+            # Shape success cannot repair missing/contradictory source fill.
+            if result['decision']=='conflict':outer.update(decision='conflict',reason=result['reason'])
+            elif result['decision']=='abstain' and outer['decision']=='compatible':
+                outer.update(decision='abstain',reason=result['reason'])
+            result=outer
         if key in self.open_keys:
             # The existing ring guard measures the actual hole, excluding
             # independently supported crossing strokes. A filled-envelope

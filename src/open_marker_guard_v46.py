@@ -7,6 +7,8 @@ from partial_swatch_detector import ink_membership
 
 def apply_guard(result,template,occlusion=None):
     if not getattr(template,'model_completed',False) or template.marker_kind!='open':return result
+    from bw_small_hollow_v46 import eligible as small_hollow,guard as small_guard
+    if small_hollow(template):return small_guard(result,template,occlusion)
     from bw_hollow_boundary_v46 import eligible, source_darkness, square_interior_evidence
     if eligible(template):
         evidence=square_interior_evidence(source_darkness(result.plot_window),result.template_mask,
@@ -37,11 +39,30 @@ def apply_guard(result,template,occlusion=None):
     if occlusion is not None:visible&=occlusion<.5
     fraction=float(visible.sum()/max(1,hole.sum()))
     ink_fraction=float(membership[visible].mean()) if visible.any() else 1.
-    if visible.sum()<max(4,.20*hole.sum()):status='unobserved'
+    small_evidence=None
+    if (template.name=='open_circle' and diam<=10. and 0<hole.sum()<=9 and
+        0<visible.sum()<4 and fraction>=.20 and ink_fraction<=.10):
+        # A tiny ring may have only one independent white pixel after the
+        # observed crossing strokes are excluded. White evidence is not the
+        # same as no observation; require direct rim and round-boundary proof
+        # before using that smaller native sample. Never invent hole pixels.
+        from bw_circle_boundary_v46 import final_circle_evidence
+        small_evidence=final_circle_evidence(source_darkness(result.plot_window),rendered,
+                                            occlusion=occlusion)
+        rim=result.compute_diagnostics.get('circle_rim',{})
+        small_evidence=dict(small_evidence,direct_rim_recall=rim.get('direct_rim_recall'),
+            paper_loss=rim.get('paper_loss'),minimum_visible_pixels=1,
+            measured_hole_pixels=int(hole.sum()),measured_white_pixels=int(visible.sum()))
+        enough=(small_evidence['decision']=='compatible' and
+                rim.get('direct_rim_recall',0.)>=.90 and rim.get('paper_loss',1.)<=.03)
+    else:enough=False
+    if visible.sum()<max(4,.20*hole.sum()) and not enough:status='unobserved'
     elif ink_fraction>.35:status='filled_interior_conflict'
     else:status='hollow_interior_supported'
     result.compute_diagnostics['open_interior']=dict(status=status,hole_pixels=int(hole.sum()),
         independent_visible_pixels=int(visible.sum()),visible_fraction=fraction,own_ink_fraction=ink_fraction)
+    if small_evidence is not None:
+        result.compute_diagnostics['open_interior']['small_hole_evidence']=small_evidence
     if status=='filled_interior_conflict':result.decision='rejected'
     elif status=='unobserved' and result.decision=='verified':result.decision='ambiguous'
     return result

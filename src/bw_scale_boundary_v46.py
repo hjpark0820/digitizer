@@ -13,7 +13,10 @@ VERSION = 'shared-scale-visible-outline-v1'
 
 
 def eligible(template):
-    return getattr(template, 'marker_kind', '') == 'filled'
+    # X/+ are stored as non-hollow markers for compatibility, but their thin
+    # strokes do not have the inward solid side assumed by this body profile.
+    return (getattr(template, 'marker_kind', '') == 'filled'
+            and getattr(template, 'name', '') not in ('x_marker', 'plus_marker'))
 
 
 def model_samples(template):

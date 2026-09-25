@@ -256,6 +256,13 @@ def build_suppressed(
                 continue
             admission='visible_fragment_other_colour_occlusion'
             priority=1
+        elif (decision == 'ambiguous' and row.get('geometry_first',{}).get('reason')=='small_hollow_overlap_or_model_residual'):
+            g=row['geometry_first'];physical=g.get('physical_residual',{})
+            if (g.get('missing_rim_fraction',1.)>.15 or physical.get('paper_on_rim',1.)>.08
+                    or g.get('marker_improvement',0.)<.012 or g.get('hollow_margin',0.)<.008):
+                reject(index,row,'unsupported_hollow_joint_hypothesis');continue
+            admission='observed_hollow_requires_joint_explanation'
+            priority=1
         elif decision == "ambiguous":
             if wm["minimum_sector_recall"] is None:
                 reject(index, row, "missing_window_sector_evidence")

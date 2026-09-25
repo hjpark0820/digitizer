@@ -229,6 +229,7 @@ def verify_marker_window(
     uncertainty_mask: np.ndarray | None = None,
     search_scales=None,
     lock_aspect: bool = False,
+    colour_observation=None,
 ) -> WindowVerification:
     """Verify a candidate, optionally locking the supplied B&W raster geometry.
 
@@ -245,6 +246,9 @@ def verify_marker_window(
         raise ValueError('window backend must be cpu or cuda')
     if not isinstance(gpu_batch_size, int) or gpu_batch_size <= 0:
         raise ValueError('gpu_batch_size must be a positive integer')
+    if colour_observation is not None:
+        colour_observation.validate(image)
+        if backend!='cpu':raise ValueError('Source colour roles require CPU window verification')
     if uncertainty_mask is not None:
         uncertainty_mask = np.asarray(uncertainty_mask, np.float32)
         if (uncertainty_mask.shape != image.shape[:2] or not np.isfinite(uncertainty_mask).all()
@@ -267,11 +271,11 @@ def verify_marker_window(
             and template.ink.achromatic):
         return _verify_uncertain_marker_window(image, template, x, y,
             fixed_geometry=fixed_geometry, backend=backend, gpu_batch_size=gpu_batch_size,
-            occlusion_mask=occlusion_mask, uncertainty_mask=uncertainty_mask,
+            occlusion_mask=occlusion_mask, uncertainty_mask=uncertainty_mask,colour_observation=colour_observation,
             **_search_options(search_scales,lock_aspect))
     if search_scales is not None or lock_aspect:
         raise ValueError('search_scales/lock_aspect requires the uncertain B&W profile')
-    if occlusion_mask is not None or uncertainty_mask is not None:
+    if occlusion_mask is not None or uncertainty_mask is not None or colour_observation is not None:
         raise ValueError('Explicit colour occlusion requires the uncertain BW profile')
     if backend != 'cpu':
         raise ValueError('CUDA window verification supports only the uncertain B&W profile')
@@ -444,7 +448,7 @@ def _uncertain_scores(support, weight, core, boundary):
     return weighted, core_recall, boundary_recall, score
 
 
-def _uncertain_sector_scores(support, weight, eligibility_weight=None):
+def _uncertain_sector_scores(support, weight, eligibility_weight=None, minimum_sector_mass=1.5):
     """Keep every contour sector in the loss, even across added line ink."""
     yy, xx = np.indices(weight.shape)
     angles = np.arctan2(yy - (weight.shape[0] - 1) / 2,
@@ -457,7 +461,7 @@ def _uncertain_sector_scores(support, weight, eligibility_weight=None):
         total = float(weight[selected].sum())
         # Discounted uncertain ink must not make an entire missing sector
         # disappear below the minimum raster-mass threshold.
-        if float(eligibility[selected].sum()) >= 1.5:
+        if float(eligibility[selected].sum()) >= minimum_sector_mass:
             recalls.append(float(np.sum(support[selected] * weight[selected]) / max(total,1.e-6)))
     if not recalls:
         return 0.0, 0.0
@@ -553,33 +557,42 @@ def _uncertain_cpu_shortlist(membership, nearby, shapes, window_size, maximum_sh
 
 
 def _prepare_uncertain_marker_window(image, template, x, y, fixed_geometry=False,
-                                     search_scales=None, lock_aspect=False):
-    """Original crop, confidence raster, and geometry for scalar or batch search."""
+                                     search_scales=None, lock_aspect=False,colour_observation=None):
+    """Fit every requested raster and translation in the scalar/batch crop.
+
+    A decomposed glyph's diameter may be smaller than its padded raster.
+    Diameter alone must not silently discard larger scale/aspect hypotheses
+    (or leave an empty shortlist). Preserve the historical context window
+    when it already fits; enlarge only its canvas, not the search or scores.
+    """
     diameter = float(template.diameter)
     maximum_shift = max(2, int(round(0.16 * diameter)))
-    window_size = max(17, int(math.ceil(2.4 * diameter)))
+    shapes = _uncertain_template_shapes(template, fixed_geometry=fixed_geometry,
+        **_search_options(search_scales,lock_aspect))
+    largest_raster = max(max(shape[2].shape) for shape in shapes)
+    window_size = max(17, int(math.ceil(2.4 * diameter)),
+                      largest_raster + 2 * maximum_shift + 1)
     if window_size % 2 == 0:
         window_size += 1
     plot_window = _crop_padded(image, (x, y), window_size, fill=255)
-    membership = ink_membership(plot_window, template.ink)
+    membership = (ink_membership(plot_window, template.ink) if colour_observation is None else
+                  _crop_padded(colour_observation.membership(template.ink),(x,y),window_size))
     plot_ink = membership >= 0.45
     nearby = cv2.dilate(membership, np.ones((3, 3), np.uint8))
-    shapes = _uncertain_template_shapes(template, fixed_geometry=fixed_geometry,
-        **_search_options(search_scales,lock_aspect))
     return (diameter, maximum_shift, window_size, plot_window, membership,
             plot_ink, nearby, shapes)
 
 
 def _verify_uncertain_marker_window(image, template, x, y, fixed_geometry=False,
                                     backend='cpu', gpu_batch_size=512, occlusion_mask=None,
-                                    uncertainty_mask=None, search_scales=None, lock_aspect=False):
+                                    uncertainty_mask=None, search_scales=None, lock_aspect=False,colour_observation=None):
     """B&W asymmetric matching with optional certified CUDA rank screening.
 
     All final scores, top-eight ties, missing-ink sectors and decisions retain
     the original NumPy operations. GPU screens ranks, not acceptance rules.
     """
     prepared = _prepare_uncertain_marker_window(image, template, x, y, fixed_geometry,
-        **_search_options(search_scales,lock_aspect))
+        colour_observation=colour_observation,**_search_options(search_scales,lock_aspect))
     _, maximum_shift, window_size, _, membership, _, nearby, shapes = prepared
     compute_stats = {'backend': backend, 'used_cuda': False}
     occlusion = None if occlusion_mask is None else _crop_padded(occlusion_mask,(x,y),window_size)
@@ -688,6 +701,8 @@ def _finalize_uncertain_marker_window(template, x, y, fixed_geometry,
     diameter, _, window_size, plot_window, _, plot_ink, _, _ = prepared
     from bw_circle_boundary_v46 import eligible as circle_eligible
     circular=circle_eligible(template)
+    from bw_cross_evidence_v46 import eligible as cross_eligible, evidence as cross_evidence, model_for as cross_model
+    crossed=cross_eligible(template)
     if circular:
         # Re-rank EVERY whole-body translation with the physical loss; a
         # top-eight list ranked by old neighbour credit is not sufficient.
@@ -710,8 +725,18 @@ def _finalize_uncertain_marker_window(template, x, y, fixed_geometry,
     required_ambiguous = 0.72 if source_diameter < 20 else 0.59
     for item in shortlist:
         shape_support, minimum_sector = _uncertain_sector_scores(item[7], item[6],
-            eligibility_weight=item[14] if len(item)>14 else None)
+            eligibility_weight=item[14] if len(item)>14 else None,
+            minimum_sector_mass=(1.e-6 if getattr(template,'small_hollow_model',None) or crossed else 1.5))
         core_ok = item[11] >= 0.85
+        if circular and not core_ok:
+            from bw_circle_rim_v46 import rim_evidence, unmeasurable_core_supported
+            _,ow,expected,ocore,_=_uncertain_shape(template,item[1],item[2])
+            top=(window_size-item[5].shape[0])//2+item[4]
+            left=(window_size-item[5].shape[1])//2+item[3]
+            ys=slice(top,top+item[5].shape[0]);xs=slice(left,left+item[5].shape[1])
+            rim=rim_evidence(prepared[4][ys,xs],item[5],ow,expected,ocore,
+                             None if occlusion is None else occlusion[ys,xs])
+            core_ok=unmeasurable_core_supported(rim)
         # A high average cannot hide a mostly absent side/corner. Each sector
         # must retain at least half its required ink, including crossed sectors.
         geometry_ok = minimum_sector >= 0.50
@@ -719,12 +744,60 @@ def _finalize_uncertain_marker_window(template, x, y, fixed_geometry,
                     and (not circular or item[13]>=required_verified)
                     else "ambiguous" if item[10] >= required_ambiguous and item[11] >= 0.72
                     else "rejected")
+        if crossed:
+            # A four-arm stroke has few pixels in angular bins, not missing
+            # sides. Measure every nonempty bin AND the source ridges before
+            # choosing a centre. This guard applies without GeometryFirst too.
+            arm=cross_evidence(prepared[4],_place_array(item[5],window_size,item[3],item[4]),
+                               template.name,occlusion=occlusion,model=cross_model(template),
+                               scale=item[1]*getattr(template,'proposal_scale',1.))
+            if arm['decision']=='conflict':decision='rejected'
+            elif arm['decision']=='abstain' and decision=='verified':decision='ambiguous'
+        if circular and getattr(template,'model_completed',False) and diameter*item[1]<=10.:
+            # A crossing bar can pull the ink-only optimum off the white hole.
+            # Evaluate source hole/rim consistency BEFORE selecting the center,
+            # not only after an irreversible center choice. No new translations
+            # or thresholds: the same bounded shortlist and final guard apply.
+            from types import SimpleNamespace
+            from open_marker_guard_v46 import apply_guard
+            from bw_circle_rim_v46 import rim_evidence
+            _,original_weight,expected,original_core,_=_uncertain_shape(template,item[1],item[2])
+            top=(window_size-item[5].shape[0])//2+item[4]
+            left=(window_size-item[5].shape[1])//2+item[3]
+            ys=slice(top,top+item[5].shape[0]);xs=slice(left,left+item[5].shape[1])
+            rim=rim_evidence(prepared[4][ys,xs],item[5],original_weight,expected,original_core,
+                             None if occlusion is None else occlusion[ys,xs])
+            trial=SimpleNamespace(plot_window=plot_window,
+                template_mask=_place_array(item[5],window_size,item[3],item[4]),
+                scale=item[1],decision=decision,compute_diagnostics={'circle_rim':rim})
+            decision=apply_guard(trial,template,occlusion).decision
+            compute_stats['small_circle_center_policy']='source_hole_and_rim_before_center_selection'
         evaluated.append((decision == "verified", item[0], item, decision,
                           shape_support, minimum_sector))
     _, _, best, decision, shape_support, minimum_sector = max(evaluated, key=lambda value: value[:2])
     (_, scale, aspect, dx, dy, mask, weight, support, core, boundary,
      weighted, core_recall, boundary_recall, score) = best[:14]
     rendered = _place_array(mask, window_size, dx, dy)
+    # Keep antialias-tolerant detection recall separate from directly observed
+    # evidence. The legacy numeric core sentinel is used by ranking/calibration;
+    # it must NOT be exported as a measured perfect core or a confidence prior.
+    _, _, expected, _, _ = _uncertain_shape(template, scale, aspect)
+    top=(window_size-mask.shape[0])//2+dy
+    left=(window_size-mask.shape[1])//2+dx
+    observed=prepared[4][top:top+mask.shape[0],left:left+mask.shape[1]]
+    direct=np.minimum(observed/expected,1.)
+    direct_recall=float(np.sum(direct*weight)/max(float(weight.sum()),1.e-6))
+    compute_stats['ink_evidence'] = dict(
+        version='direct_and_tolerant_ink_v1', direct_required_recall=direct_recall,
+        tolerant_required_recall=float(weighted),
+        borrowed_boundary_credit=max(0.,float(weighted)-direct_recall),
+        strict_core_pixels=int(core.sum()),
+        measured_strict_core_recall=float(core_recall) if core.any() else None,
+        strict_core_status='measured' if core.any() else 'unmeasurable',
+        confidence_kind='direct_required_ink_not_probability')
+    if crossed:
+        compute_stats['stroke_cross']=cross_evidence(prepared[4],rendered,template.name,occlusion=occlusion,
+            model=cross_model(template),scale=scale*getattr(template,'proposal_scale',1.))
     metrics = _evaluate_alignment(plot_ink, rendered, diameter * scale)
     metrics.update(score=float(score), required_recall=weighted,
                    missing_fraction=1.0 - weighted)
@@ -740,6 +813,8 @@ def _finalize_uncertain_marker_window(template, x, y, fixed_geometry,
         compute_stats['circle_rim']=rim_evidence(prepared[4][ys,xs],mask,original_weight,
             expected,original_core,None if occlusion is None else occlusion[ys,xs])
         compute_stats['circle_rim']['penalized_score']=float(score)
+        from bw_circle_rim_v46 import unmeasurable_core_supported
+        compute_stats['circle_rim']['unmeasurable_core_supported']=unmeasurable_core_supported(compute_stats['circle_rim'])
     return WindowVerification(
         x=float(x), y=float(y), aligned_x=float(x + dx), aligned_y=float(y + dy),
         scale=float(scale), decision=decision, plot_window=plot_window,

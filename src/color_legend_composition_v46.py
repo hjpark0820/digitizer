@@ -17,7 +17,7 @@ import color_marker_evidence as evidence_base
 from color_marker_evidence_v2 import _template_regions
 from legend_composition_v46 import Config, fit_legend_composition, render_model
 
-VERSION = 'v46_observed_locator_inverse_legend_composition_v2_hollow_safe'
+VERSION = 'v46_observed_locator_inverse_legend_composition_v3_independent_hollow'
 
 
 def full_swatch_box(image, entry, legend_box):
@@ -108,6 +108,20 @@ def enrich_entry(image_bgr, entry, legend_box, cfg=Config()):
             from legend_layered_composition_v46 import fit_layered
             record, fields = fit_layered(raw[...,::-1], entry['rgb'],
                                         replace(cfg, enable_open_dashed=True))
+            if record['status'] == 'unknown_poor_fit':
+                # A partial connector inside the hole does not invalidate the
+                # independently visible rim. Do not loosen fit thresholds or
+                # use the legend label as a shape verdict: all primitive
+                # families compete on one fixed observable pixel domain.
+                retry, retry_fields = fit_layered(raw[...,::-1], entry['rgb'],
+                    replace(cfg, enable_open_dashed=True), connector_independent=True)
+                retry['full_composition_attempt'] = {k:record.get(k) for k in
+                    ('status','best_model_name','best_model','winner_other_family_margin')}
+                if retry['status'] == 'supported_simple_shape_model':
+                    record, fields = retry, retry_fields
+                else:
+                    record['connector_independent_attempt'] = {k:retry.get(k) for k in
+                        ('status','best_model_name','best_model','independent_marker_fraction')}
         else:
             record, fields = fit_legend_composition(raw[...,::-1],entry['rgb'],cfg)
         record.update(version=VERSION,source_swatch_box=list(box),

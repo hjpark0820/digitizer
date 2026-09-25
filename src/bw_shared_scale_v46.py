@@ -51,7 +51,7 @@ def gray_match_map(observed, template, scale, allowed):
 
 
 def calibrate_swatch_scales(image, templates, plot, ignore_regions=(), log_fn=lambda *a:None,
-                            anchor_filter=None, search_scales=None, occlusion_mask=None):
+                            anchor_filter=None, search_scales=None, occlusion_mask=None, colour_observation=None):
     """Return one scale per swatch; default [0.7,1.3], explicit range supported.
 
     Positions in the report explain calibration only and are NOT detections.
@@ -79,7 +79,9 @@ def calibrate_swatch_scales(image, templates, plot, ignore_regions=(), log_fn=la
     for t in templates:
         if t.matching_profile != 'bw_v46_uncertain' or not t.ink.achromatic:
             raise ValueError('Shared symbol calibration requires native uncertain B&W templates')
-        observed = cv2.GaussianBlur(ink_membership(crop,t.ink).astype(np.float32),(3,3),.55)
+        source=(ink_membership(crop,t.ink).astype(np.float32) if colour_observation is None else
+                colour_observation.membership(t.ink)[y0:y1,x0:x1])
+        observed = cv2.GaussianBlur(source,(3,3),.55)
         stack = None
         if observed.size*len(scales) <= 16_000_000:
             stack = np.stack([gray_match_map(observed,t,s,allowed) for s in scales])
@@ -111,7 +113,6 @@ def calibrate_swatch_scales(image, templates, plot, ignore_regions=(), log_fn=la
         if eligible(t):
             # Correlation proposes positions, never finalizes a filled size.
             # Use unblurred source membership for the ink/paper transitions.
-            source=ink_membership(crop,t.ink).astype(np.float32)
             samples=model_samples(t)
             for q in candidates_by_key[t.key]:
                 edge=boundary_profile(source,t,q['x']-x0,q['y']-y0,scales,

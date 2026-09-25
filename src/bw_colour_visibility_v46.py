@@ -19,7 +19,7 @@ def validate_mask(mask, shape):
     return value if value.any() else None
 
 
-def measure(template, membership, other):
+def measure(template, membership, other, paper=None):
     """Measure aligned patches. Unknown pixels are neither white nor own ink."""
     weight = np.asarray(template.valid_weight * template.mask, np.float32)
     total = max(float(weight.sum()), 1.)
@@ -32,7 +32,8 @@ def measure(template, membership, other):
     core = weight * (depth >= max(1.5, .10 * template.diameter))
     core_total = max(float(core.sum()), 1.)
     # Actual missing ink in the deep body is worse than an uncertain outline.
-    core_paper = float((core * visible * (1. - ink)).sum() / core_total)
+    missing = (1.-ink) if paper is None else (1.-ink)*np.asarray(paper,np.float32)
+    core_paper = float((core * visible * missing).sum() / core_total)
     yy, xx = np.indices(weight.shape)
     cy, cx = (np.asarray(weight.shape) - 1.) / 2.
     disk = ((xx-cx)**2 + (yy-cy)**2 <= max(1.5, .22*template.diameter)**2).astype(np.float32)

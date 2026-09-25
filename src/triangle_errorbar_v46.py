@@ -34,13 +34,28 @@ class Config:
 
 def triangle_prior(report, config=Config()):
     """Do not convert an uncertain legend classification into a certain label."""
-    e = report.get('shape_evidence', {})
+    e = report.get('shape_evidence') or {}
     name = report.get('shape_hint', 'unknown_marker')
     scores = e.get('shape_scores', {})
-    fill = e.get('continuous_fill_evidence', {})
-    filled = (e.get('independent_fill', 0) >= config.minimum_interior_fill and
+    fill = e.get('continuous_fill_evidence') or {}
+    # A tiny glyph or connector-excluded interior may have no measurement.
+    # This disables only the filled-triangle prior, not ordinary detection.
+    # In particular, do not turn missing evidence into a fabricated 0 or 1.
+    if e.get('sufficient_fill_evidence') is False:
+        return dict(applicable=False, reason='unmeasurable_interior', legend_label=name)
+    values = []
+    for value in (e.get('independent_fill'), fill.get('mean_membership')):
+        try:
+            value = float(value)
+        except (TypeError, ValueError, OverflowError):
+            return dict(applicable=False, reason='unmeasurable_interior', legend_label=name)
+        if not math.isfinite(value) or not 0 <= value <= 1:
+            return dict(applicable=False, reason='unmeasurable_interior', legend_label=name)
+        values.append(value)
+    independent_fill, mean_membership = values
+    filled = (independent_fill >= config.minimum_interior_fill and
               not e.get('strong_hollow_evidence', False) and
-              fill.get('mean_membership', 0) >= .72)
+              mean_membership >= .72)
     if not filled:
         return dict(applicable=False, reason='filled_interior_not_supported', legend_label=name)
     for shape, orientation in [('triangle', 'up'), ('inv_triangle', 'down')]:

@@ -202,6 +202,12 @@ def index():
     return idx.read_text(encoding="utf-8") if idx.exists() else "<h1>index.html not found</h1>"
 
 
+@app.api_route('/favicon.ico', methods=['GET', 'HEAD'], status_code=204, include_in_schema=False)
+def favicon():
+    # No custom tab icon is provided; acknowledge the browser's automatic request.
+    return Response(status_code=204, headers={'Cache-Control': 'public, max-age=86400'})
+
+
 @app.get('/image_sidecar_v46.js')
 def image_sidecar_script():
     return FileResponse(str(HERE/'image_sidecar_v46.js'),media_type='text/javascript')

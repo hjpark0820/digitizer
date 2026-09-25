@@ -113,6 +113,7 @@ class Detection:
     shape_hint: str = ''
     colour_visibility: dict = field(default_factory=dict)
     boundary_evidence: dict = field(default_factory=dict)
+    centre_fill_deferred: bool = False
 
 
 @dataclass
@@ -747,6 +748,18 @@ def _classify_contour_segments(
     }
 
 
+def _defer_small_hollow_centre_fill(template):
+    """A tiny disk cannot separate a hollow rim from a crossing error bar.
+
+    Only completed BW hollow models have the mandatory source-hole and rim
+    checks downstream. Defer this proposal gate, not the measured score or
+    final identity decision; legacy and colour paths retain their old gates.
+    """
+    return (template.matching_profile == 'bw_v46_uncertain'
+            and template.ink.achromatic and template.model_completed
+            and template.marker_kind == 'open' and template.diameter <= 10.)
+
+
 def _verify_candidate(
     x: float,
     y: float,
@@ -762,6 +775,7 @@ def _verify_candidate(
     _geometry=None,
     _prepared=None,
     occlusion_mask=None,
+    paper_mask=None,
 ) -> Detection | None:
     edge_patch = _extract_aligned_patch(plot_edge, x, y, template.edge.shape)
     membership_patch = _extract_aligned_patch(
@@ -777,7 +791,8 @@ def _verify_candidate(
         if float((patch * template.mask).sum()) / max(int(template.mask.sum()),1) >= .03:
             from bw_colour_visibility_v46 import measure
             other_patch = patch
-            visibility = measure(template, membership_patch, patch)
+            paper=None if paper_mask is None else _extract_aligned_patch(paper_mask,x,y,template.edge.shape)
+            visibility = measure(template, membership_patch, patch, paper=paper)
             if not visibility['candidate_supported']:
                 return None
             # The boundary between own colour and an occluder is not evidence
@@ -925,6 +940,9 @@ def _verify_candidate(
         centre_fill_ok = plot_centre_fill <= 0.70
     else:
         centre_fill_ok = centre_fill_similarity >= 0.45
+    centre_fill_deferred = not centre_fill_ok and _defer_small_hollow_centre_fill(template)
+    if centre_fill_deferred:
+        centre_fill_ok = True
     minimum_cells = required_cells
     minimum_radial = 4
     minimum_span = .48
@@ -984,7 +1002,8 @@ def _verify_candidate(
         - 0.18 * mismatch_sector_fraction
     )
     if visibility:
-        score -= .35*visibility['core_paper_fraction'] + .03*visibility['other_fraction']
+        score -= .35*visibility['core_paper_fraction']
+        if paper_mask is None:score -= .03*visibility['other_fraction']
     # Compatibility (ink can hide a boundary) is not positive shape evidence.
     # Keep proposals, but reward actual ink-to-paper transitions for BW filled
     # identities. The GPU candidate path calls the exact same small helper.
@@ -1011,6 +1030,7 @@ def _verify_candidate(
         swatch_id=template.swatch_id,
         shape_hint=template.shape_hint or template.name,
         colour_visibility=visibility,
+        centre_fill_deferred=centre_fill_deferred,
     )
 
 
@@ -1037,6 +1057,7 @@ def _alignment_objective(
     membership: np.ndarray,
     plot_edge: np.ndarray,
     occlusion_mask=None,
+    paper_mask=None,
 ) -> float:
     edge_patch = _extract_aligned_patch(plot_edge, x, y, template.edge.shape)
     if occlusion_mask is not None:
@@ -1083,7 +1104,8 @@ def _alignment_objective(
     if occlusion_mask is not None:
         other = _extract_aligned_patch(occlusion_mask, x, y, template.edge.shape)
         from bw_colour_visibility_v46 import measure
-        state = measure(template, membership_patch, other)
+        paper=None if paper_mask is None else _extract_aligned_patch(paper_mask,x,y,template.edge.shape)
+        state = measure(template, membership_patch, other,paper=paper)
         if not state['candidate_supported']:
             return -1.
         visible = 1.-other
@@ -1095,7 +1117,8 @@ def _alignment_objective(
         direct_coverage = state['positive_fraction']
         fill_similarity = state['centre_similarity']*state['centre_visible_fraction']
         return (.44*contour_coverage+.23*foreground_coverage+.18*direct_coverage
-                +.15*fill_similarity-.55*state['core_paper_fraction']-.03*state['other_fraction'])
+                +.15*fill_similarity-.55*state['core_paper_fraction']
+                -(0. if paper_mask is not None else .03*state['other_fraction']))
     return (
         0.44 * contour_coverage
         + 0.23 * foreground_coverage
@@ -1112,6 +1135,7 @@ def _refine_candidate_center(
     plot_edge: np.ndarray,
     plot_area: Box,
     occlusion_mask=None,
+    paper_mask=None,
 ) -> tuple[float, float]:
     radius = max(2, int(round(0.30 * template.diameter)))
     x0, y0, x1, y1 = plot_area
@@ -1130,6 +1154,7 @@ def _refine_candidate_center(
                 membership,
                 plot_edge,
                 **({'occlusion_mask':occlusion_mask} if occlusion_mask is not None else {}),
+                **({'paper_mask':paper_mask} if paper_mask is not None else {}),
             )
             if score > best_score:
                 best_score = score
@@ -1289,6 +1314,7 @@ def detect_template(
     compute_baseline: bool = True,
     grid_identity_competitor=None,
     occlusion_mask=None,
+    colour_observation=None,
 ) -> TemplateResult:
     started = time.perf_counter()
     if not 0.0 <= grid_overlap < 1.0:
@@ -1304,8 +1330,11 @@ def detect_template(
     from bw_colour_visibility_v46 import validate_mask
     occlusion_mask = validate_mask(occlusion_mask, image.shape[:2])
     visibility_options = {} if occlusion_mask is None else {'occlusion_mask':occlusion_mask}
+    if colour_observation is not None:
+        colour_observation.validate(image)
+        visibility_options['paper_mask']=colour_observation.paper
     requested_refinement = refinement_backend
-    if occlusion_mask is not None:
+    if occlusion_mask is not None or colour_observation is not None:
         # Grid voting may still run on CUDA. Candidate/refinement kernels do
         # not yet support three-state constraints: explicitly use CPU there.
         refinement_backend = 'cpu'
@@ -1313,12 +1342,12 @@ def detect_template(
     # Call-scoped, single-entry reuse avoids recomputing identical image ink
     # fields for every proposal scale. No persistent/stale image cache exists.
     cache_key = (id(image), image.shape, tuple(sorted(vars(template.ink).items())),
-                 tuple(plot_area), tuple(tuple(b) for b in ignore_regions))
+                 tuple(plot_area), tuple(tuple(b) for b in ignore_regions),id(colour_observation))
     cached = preprocessing_cache is not None and preprocessing_cache.get('key') == cache_key
     if cached:
         membership, membership_mask, plot_edge, plot_orientation = preprocessing_cache['arrays']
     else:
-        membership = ink_membership(image, template.ink)
+        membership = ink_membership(image, template.ink) if colour_observation is None else colour_observation.membership(template.ink).copy()
         for ignore_region in ignore_regions:
             ix0, iy0, ix1, iy1 = ignore_region
             membership[iy0:iy1, ix0:ix1] = 0.0
@@ -1329,6 +1358,10 @@ def detect_template(
         scope[y0:y1, x0:x1] = True
         plot_edge &= scope
         plot_orientation = _edge_orientation(membership)
+        if colour_observation is not None:
+            _,plot_edge,plot_orientation=colour_observation.grid_fields(template.ink)
+            plot_edge &= scope
+            for ix0,iy0,ix1,iy1 in ignore_regions:plot_edge[iy0:iy1,ix0:ix1]=False
         if preprocessing_cache is not None:
             preprocessing_cache.clear()
             preprocessing_cache.update(key=cache_key, arrays=(membership, membership_mask, plot_edge, plot_orientation))
@@ -1392,7 +1425,7 @@ def detect_template(
     geometry = None
     rough_results = None
     candidate_stats = {'backend': 'cpu', 'used_cuda': False, 'preprocessing_cache_hit': cached}
-    if grid_backend == 'cuda' and occlusion_mask is None and any(group[0] for group in candidate_groups):
+    if grid_backend == 'cuda' and occlusion_mask is None and colour_observation is None and any(group[0] for group in candidate_groups):
         from bw_gpu_candidate_verifier import GpuCandidateVerifier
         candidate_groups = [(centers, stride, _IndexedHypotheses(evidence))
                             for centers, stride, evidence in candidate_groups]

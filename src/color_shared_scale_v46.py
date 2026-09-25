@@ -13,7 +13,7 @@ import cv2
 import numpy as np
 from color_hollow_scale_v46 import CONFIG as HOLLOW_CONFIG, is_hollow, outline_evidence, anchor_passes
 
-VERSION = 'colour_shared_symbol_scale_v5_reestimated'
+VERSION = 'colour_shared_symbol_scale_v6_hollow_geometry'
 SCALES = tuple(round(.50+.025*i, 3) for i in range(33))
 CONFIG = dict(minimum_anchors=3, maximum_anchors=7, maximum_candidates=64,
               minimum_correlation=.55, minimum_window_score=.35,
@@ -109,16 +109,30 @@ def _clean_anchor(window, correlation, outline=None):
     return bool(clean or (outline is not None and anchor_passes(window,correlation,outline)))
 
 
-def calibrate(evidence):
+def calibrate(evidence, *, _hollow_geometry=False, _indices=None):
     """Return JSON diagnostics; anchors are calibration evidence, not points."""
     started=perf_counter();reports={}
     valid=np.asarray(evidence['valid'],bool)&(np.asarray(evidence.get('ignore_mask',0))<.1)
     for index,template in enumerate(evidence['templates']):
+        if _indices is not None and index not in _indices:
+            continue
         tick=perf_counter();diameter=float(template['diameter'])
         own=evidence['membership'][index]
         observed=np.maximum(own-evidence['guide_upper'][index],0) if 'guide_upper' in evidence else own
         observed=cv2.GaussianBlur(observed.astype(np.float32),(3,3),.45)
         variants=[scaled_template(template,s) for s in SCALES]
+        if _hollow_geometry:
+            from color_hollow_geometry_scale_v46 import render_scaled
+            variants=[render_scaled(template,v,s) for v,s in zip(variants,SCALES)]
+
+        def inspect_window(variant, x, y):
+            # Integer centres are a large fraction of a small hollow rim.
+            # Refine within half a pixel, then retain THAT centre for all
+            # subsequent outline checks and shared-size validation.
+            offsets=(-.5,0.,.5) if _hollow_geometry and variant['diameter']<12 else (0.,)
+            choices=[(_window(evidence,index,variant,x+dx,y+dy),x+dx,y+dy)
+                     for dx in offsets for dy in offsets]
+            return max(choices,key=lambda q:q[0]['score'])
         retain=observed.size*len(SCALES)<=16_000_000
         stack=[];best=np.full(observed.shape,-1,np.float32)
         for variant in variants:
@@ -145,7 +159,7 @@ def calibrate(evidence):
         hollow=is_hollow(template)
         for i,(x,y) in enumerate(candidates):
             j=int(np.argmax(profiles[i]));sx,sy=map(int,centres[i,j])
-            window=_window(evidence,index,variants[j],sx,sy)
+            window,sx,sy=inspect_window(variants[j],sx,sy)
             outline=outline_evidence(evidence,index,variants[j],sx,sy) if hollow else None
             hollow_clean=anchor_passes(window,float(profiles[i,j]),outline) if hollow else False
             clean=_clean_anchor(window,float(profiles[i,j]),outline)
@@ -200,6 +214,21 @@ def calibrate(evidence):
                 recovery=recover(SCALES,curves,anchors,j,inspect)
                 if recovery['applied']:
                     scale=recovery['scale'];status=recovery['status']
+        if _hollow_geometry and status=='shared_consensus' and scale!=1.:
+            j=SCALES.index(scale)
+            native_j=SCALES.index(1.)
+            validation=[]
+            for i in anchor_indices:
+                sx,sy=map(int,centres[i,j]);win,sx,sy=inspect_window(variants[j],sx,sy)
+                nx,ny=map(int,centres[i,native_j]);native,_,_=inspect_window(variants[native_j],nx,ny)
+                validation.append(dict(x=sx,y=sy,score=win['score'],native_score=native['score'],
+                    accepted=_clean_anchor(win,float(profiles[i,j])),
+                    missing=win['missing'],extra=win['extra']))
+            good=[v for v in validation if v['accepted']]
+            if len(good)<CONFIG['minimum_anchors'] or np.median([v['score']-v['native_score'] for v in good])<.05:
+                scale=1.;status='hollow_geometry_shared_validation_failed'
+            else:
+                status='shared_hollow_geometry_consensus'
         from color_split_body_v46 import review as review_split_body
         split_body=review_split_body(evidence,index,template,dict(scale=scale))
         if split_body['applied']:
@@ -210,6 +239,23 @@ def calibrate(evidence):
             hollow_template=hollow,sparse_hollow_policy=sparse,shared_anchor_validation=validation,
             scale_recovery=recovery,
             search_boundary=proposed in (SCALES[0],SCALES[-1]),split_body=split_body,seconds=perf_counter()-tick)
+        if _hollow_geometry:
+            from color_hollow_geometry_scale_v46 import POLICY
+            reports[str(template['id'])]['render_policy']=POLICY
+        elif status=='insufficient_clean_anchors_fallback_1x':
+            from color_hollow_geometry_scale_v46 import eligible
+            if eligible(template):
+                # No clean raster anchors is distinct from conflicting sizes.
+                # Refit geometry/pen-width only for independently supported
+                # hollow legends, keeping every existing clean-window gate.
+                original=reports[str(template['id'])]
+                retry=calibrate(evidence,_hollow_geometry=True,_indices=(index,))['series'][str(template['id'])]
+                if retry['status']=='shared_hollow_geometry_consensus':
+                    retry['raster_attempt']=original
+                    reports[str(template['id'])]=retry
+                else:
+                    original['hollow_geometry_attempt']=retry
+                reports[str(template['id'])]['seconds']=perf_counter()-tick
     return dict(version=VERSION,policy='shared_symbol',scales=list(SCALES),config=CONFIG.copy(),
         hollow_config=HOLLOW_CONFIG.copy(),series=reports,
         geometry_scope='one isotropic scale per legend identity for grid, window and tentative scoring',
@@ -224,6 +270,9 @@ def apply_shared_scale(evidence):
     for template in evidence['templates']:
         decision=report['series'][str(template['id'])]
         transformed=scaled_template(template,decision['scale'])
+        from color_hollow_geometry_scale_v46 import POLICY,render_scaled
+        if decision.get('render_policy')==POLICY:
+            transformed=render_scaled(template,transformed,decision['scale'])
         transformed.update(symbol_scale=decision['scale'],legend_diameter=float(template['diameter']),
             symbol_scale_status=decision['status'],symbol_scale_version=VERSION)
         templates.append(transformed)

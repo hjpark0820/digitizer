@@ -112,8 +112,8 @@ def _legacy_module(filename):
     return module
 
 
-def prepare_reference(image,plot,legend,points,diameter,*,no_legend=False):
-    """Keep the reviewed v45 preprocessing/segment recipe unchanged."""
+def prepare_reference(image,plot,legend,points,diameter,*,no_legend=False,recover_dashes=False):
+    """Keep v45 defaults; optionally supplement validated v46 short-dash chains."""
     from chart_preprocessing import preprocess
     inclusive=lambda b: (b[0],b[1],b[2]-1,b[3]-1) if b else None
     extra={'auto_legend':False} if no_legend else {}
@@ -121,14 +121,24 @@ def prepare_reference(image,plot,legend,points,diameter,*,no_legend=False):
     gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY); ink=(gray<128).astype('uint8')
     removed=(ink>0)&(np.asarray(prep['clean_fn'](ink))==0)
     reference=image.copy(); reference[removed]=255
-    raw=_legacy_module('3_segment_detection_v2.py').detect_debug(reference,prep_info=prep)['segments']
+    detector=_legacy_module('3_segment_detection_v2.py')
+    debug=detector.detect_debug(reference,prep_info=prep)
+    raw=debug['segments']
+    dash_info=None
+    if recover_dashes:
+        from bw_dash_reference_v46 import recover
+        recovered,dash_info=recover(debug,detector._fit_pca_segment,diameter)
+        raw=[*raw,*recovered]
     grid=clustered_grid(points,diameter)
     refined,refinement_log=_legacy_module('4_segment_refinement.py').refine(raw,grid)
     x0,y0,x1,y1=plot
     crop=cv2.cvtColor(reference[y0:y1,x0:x1],cv2.COLOR_BGR2GRAY)
     _blank_legend(crop,plot,legend)
-    return crop,dict(raw_segments=plain(raw),refined_segments=scope_segments(refined,plot,legend),
+    result=dict(raw_segments=plain(raw),refined_segments=scope_segments(refined,plot,legend),
         reference_segments=scope_segments(raw,plot,legend),grid_xs=grid,refinement_log=plain(refinement_log))
+    if dash_info is not None:
+        result.update(reference_policy=dash_info['version'],dash_recovery=dash_info)
+    return crop,result
 
 
 def _blank_legend(canvas,plot,legend):

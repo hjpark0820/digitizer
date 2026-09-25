@@ -155,11 +155,15 @@ def load_payload(out_dir, image, plot_area, legend_box, names):
                     raise ValueError('Invalid native marker template centre')
                 r.update(marker_alpha=alpha.copy(), template_center=list(map(float, center)))
             hydrated.append(r)
+        from color_recovery_evidence_v46 import hydrate
+        frozen_colours = hydrate(raw.get('frozen_colour_evidence'), arrays,
+            [r['name'] for r in hydrated if r.get('template_key')], [x0, y0, x1+1, y1+1])
     grid = np.asarray(raw.get('grid_xs', []), float)
     if grid.ndim != 1 or not np.isfinite(grid).all() or np.any(grid < x0) or np.any(grid > x1):
         raise ValueError('Invalid source-coordinate Step-5 x grid')
     references=_reference_paths(raw.get('reference_paths'),set(row_names))
     result = dict(raw, curves=hydrated, grid_xs=sorted(set(grid.tolist())),
+                  frozen_colour_evidence=frozen_colours,
                   reference_paths=references,
                   reference_status='embedded_validated_paths' if references else 'no_bound_reference_rerun_detection',
                   suppressed_policy=policy_info())

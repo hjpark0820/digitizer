@@ -1075,6 +1075,11 @@ def swatch_ink_colour(img_bgr, box, chroma_min=60, core_q=85.0):
     nine-colour saturated legend unchanged.
     """
     x0, y0, x1, y1 = [int(v) for v in box]
+    height, width = img_bgr.shape[:2]
+    if not (0 <= x0 <= x1 < width and 0 <= y0 <= y1 < height):
+        # Negative NumPy indices wrap around; they do not mean image padding.
+        # Leave this sample explicitly unmeasured, never sample the wrong ink.
+        return None, None, False
     sub = img_bgr[y0:y1 + 1, x0:x1 + 1, ::-1].astype(np.float64)
     flat = sub.reshape(-1, 3)
     nonwhite = flat[flat.min(1) < 244]
@@ -1202,6 +1207,12 @@ def colour_masks(img_bgr, plot_area, legend_box, swatch_boxes=None, blend_max=0.
             alls.append(f[f.min(1) < 244])
     else:
         inks, cores, achro, boxes, alls = samples
+    if not inks:
+        # Empty discovery is a valid diagnostic outcome. No invented colour,
+        # unbound mag, or argmin over a zero-length palette.
+        if verbose:
+            print('  [colour_masks] no valid in-bounds swatch ink samples')
+        return {}, {}, []
     tols, wide, atols = ([], [], [])
     for i, rgb in enumerate(inks):
         rivals = [r for j, r in enumerate(inks) if j != i]

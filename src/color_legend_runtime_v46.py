@@ -127,6 +127,7 @@ class LegendRuntime:
                                      mask=mask.copy(), raw_bgr=raw,
                                      required_weight=np.asarray(model.required_weight)[domain].copy(),
                                      soft=np.asarray(model.raw_soft)[domain].copy(),
+                                     source_structure_box=report.get('source_structure_box'),
                                      marker_template=True, report=report))
         # A line-only legend item is a valid colour series, but never a marker
         # template. Retain its actually observed narrow support and RGB without

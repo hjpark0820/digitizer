@@ -8,8 +8,22 @@ occlusion merely because it is dark. Insufficient visible interior abstains.
 from collections import Counter
 import cv2
 import numpy as np
+from scipy.ndimage import binary_fill_holes
 
 VERSION = 'bw-fill-tone-identity-v3'
+
+
+def observed_hole(template):
+    """Source-enclosed paper islands, excluding the stroke itself and connector.
+
+    This is a measurement region, NOT added marker ink. A caller must establish
+    independent hollow topology before interpreting the selected paper as fill.
+    """
+    soft=tone_ink(template)
+    peak=max(float(soft.max()),.05)
+    rim=soft>=max(.18,.45*peak)
+    hole=binary_fill_holes(np.pad(rim,1))[1:-1,1:-1]&~rim
+    return hole & ~template.line_nuisance & (soft<.40*peak)
 
 
 def tone_ink(template):
@@ -37,12 +51,22 @@ def interior_mask(template):
 def describe_fill(template, shape_evidence=None):
     region = interior_mask(template)
     soft = tone_ink(template)
+    shape=shape_evidence or {}
+    hole=observed_hole(template)
+    independently_hollow=bool(shape.get('strong_hollow_evidence') and
+                             not shape.get('patterned_internal_evidence') and hole.sum()>=2)
+    old_count=int(region.sum())
+    if independently_hollow:region=hole
     values = soft[region]
     result = dict(version=VERSION, style='uncertain', interior_pixels=int(values.size),
-                  outer_shape=(shape_evidence or {}).get('best_shape', 'unknown'),
+                  outer_shape=shape.get('best_shape', 'unknown'),
+                  shape_uncertain=template.name=='unknown_marker' or shape.get('status')=='uncertain_shape',
+                  fill_uncertain=True,observed_hole_pixels=int(hole.sum()),
+                  interior_policy='observed_enclosed_paper_excluding_rim' if independently_hollow else 'eroded_outer_envelope',
+                  previous_envelope_interior_pixels=old_count,
                   source_pixels_preserved=True,unclipped_gray_available=getattr(template,'source_gray',None) is not None,
                   gray_scale='0=black, 255=white; paper-normalized darkness, no per-marker contrast stretch')
-    if values.size < 10:
+    if values.size < 10 and not independently_hollow:
         return result
     mean, sd = float(values.mean()), float(values.std())
     light = float(np.mean(values < .5))
@@ -55,7 +79,7 @@ def describe_fill(template, shape_evidence=None):
         if len(left) >= 4 and len(right) >= 4:
             splits.append(abs(float(left.mean() - right.mean())))
     split = max(splits, default=0.)
-    if template.name.startswith('open_') and mean < .40:
+    if independently_hollow or (template.name.startswith('open_') and mean < .40):
         style = 'open'
     elif mean >= .90 and light <= .08:
         style = 'solid'
@@ -67,7 +91,7 @@ def describe_fill(template, shape_evidence=None):
         style = 'gray'
     else:
         style = 'uncertain'
-    result.update(style=style, mean_ink=mean, std_ink=sd,
+    result.update(style=style,fill_uncertain=style=='uncertain', mean_ink=mean, std_ink=sd,
                   light_fraction=light, strongest_half_split=split,
                   mean_gray_255=float((1-mean)*255), std_gray_255=sd*255,
                   nonwhite_fraction=float(np.mean(values>.08)),dark_fraction=float(np.mean(values>.80)),

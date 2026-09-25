@@ -287,7 +287,7 @@ def _overview(destination, image, plot, curves):
 
 
 def export_step5_inputs(destination, image, plot, legend, entries, names, templates,
-                       active_by_name, tentative, own_masks, path_to_segments):
+                       active_by_name, tentative, own_masks, path_to_segments, *, frozen_colour_evidence=None):
     """Write a validated Step-5 payload, evidence archive and input overview.
 
     Input boxes are half-open. JSON plot_area/legend_box are inclusive as used
@@ -422,6 +422,11 @@ def export_step5_inputs(destination, image, plot, legend, entries, names, templa
                'Full existing estimated paths are included; ROI, legend exclusions and missing x columns still split pieces.',
                'Original observed/filled flags remain unchanged in reference_paths; inferred geometry is not image evidence.',
                'Colour Step-5 can subsequently propose ADD/REPLACE/DELETE/ACTIVATE; export itself promotes no marker.'])
+    if frozen_colour_evidence is not None:
+        from color_recovery_evidence_v46 import export, validate
+        validate(frozen_colour_evidence,
+                 [r['name'] for r in rows if r['template_key'] is not None], list(plot))
+        payload['frozen_colour_evidence'] = export(frozen_colour_evidence, archive)
     np.savez_compressed(destination/payload['masks_npz'], **archive)
     (destination/'step5_inputs.json').write_text(json.dumps(_plain(payload),indent=2,allow_nan=False),encoding='utf-8')
     _overview(destination,image,inclusive_plot,rows)

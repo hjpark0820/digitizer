@@ -105,7 +105,8 @@ def trial_actions(active, pool, models):
 
 
 def run(active, pool, reference_segments, diameter, plot, legend=None, max_iter=10,
-        evidence_prior_weight=.03, original_points=None):
+        evidence_prior_weight=.03, original_points=None, source_gray=None, source_ignore=None,
+        action_guard=None):
     if not math.isfinite(evidence_prior_weight) or evidence_prior_weight < 0:
         raise ValueError('evidence_prior_weight must be finite and nonnegative')
     active, pool, models = _normalise(active, pool, plot, legend, diameter)
@@ -113,6 +114,12 @@ def run(active, pool, reference_segments, diameter, plot, legend=None, max_iter=
     bridges = bridge_dashes(raw, diameter)
     reference = scoped_segments([*raw, *bridges], plot, legend)
     metric = GlobalSegmentMetric(reference, diameter, plot, legend)
+    endpoint_evidence = None
+    if source_gray is not None:
+        from group_endpoint_guard_v46 import EndpointEvidence
+        endpoint_evidence = EndpointEvidence(source_gray, source_ignore, reference, diameter)
+    elif source_ignore is not None:
+        raise ValueError('source_ignore requires source_gray')
     initial = deepcopy(active); initial_pool = deepcopy(pool); trace = []
     if not metric.available:
         return dict(initial=initial, initial_suppressed=initial_pool, final=active, suppressed=pool,
@@ -145,9 +152,21 @@ def run(active, pool, reference_segments, diameter, plot, legend=None, max_iter=
         for trial in trials:
             if not trial['admissible']:
                 continue
+            if action_guard is not None:
+                evidence = action_guard(trial, before)
+                trial['marker_action_evidence'] = evidence
+                if not evidence['admissible']:
+                    trial.update(admissible=False, reason=evidence['reason'])
+                    continue
             trial['score_after'] = score(trial['points'])
             trial['score_components_after'] = components(trial['points'])
             trial['improvement'] = loss-trial['score_after']
+            if endpoint_evidence is not None and trial['removed']:
+                evidence = endpoint_evidence.check(trial['removed'],before,trial['points'])
+                trial['endpoint_evidence'] = evidence
+                if evidence['protected']:
+                    trial.update(admissible=False,reason='preserve_observed_endpoint_missing_reference')
+                    continue
             if trial['improvement'] > 1e-5:
                 improving.append(trial)
         best = None; focus = None

@@ -13,6 +13,7 @@ VERSION='paired-circle-shape-v2'
 
 def eligible(template):
     return (getattr(template,'model_completed',False)
+            and not getattr(template,'small_hollow_model',None)
             and getattr(template,'name','')=='open_circle'
             and getattr(template,'marker_kind','')=='open'
             and getattr(template,'matching_profile','')=='bw_v46_uncertain'
