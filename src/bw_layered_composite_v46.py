@@ -37,13 +37,16 @@ class Config:
     maximum_centres:int=12000
 
 
-def prepare_source(rec,fields):
+def prepare_source(rec,fields,*,restore_filled_interior=False):
     """Condition observed ink on a measured legend connector, without erasing
     identifiable marker ink. Exactly unidentifiable line/marker pixels retain
     an uncertainty flag and small weight, NOT a claim that they are white.
     """
     o=fields['observed'].astype(np.float32);h,w=o.shape
-    side=max(1,int(.20*w));flanks=np.r_[np.arange(side),np.arange(w-side,w)]
+    # A raster extracted in a measured entry territory (R.extract) reads its
+    # connector flanks there, exactly as its own connector test did.
+    first,last=(rec['territory'][0],rec['territory'][2]) if rec.get('territory') else (0,w)
+    side=max(1,int(.20*(last-first)));flanks=np.r_[np.arange(first,first+side),np.arange(last-side,last)]
     profile=np.quantile(o[:,flanks],.75,axis=1).astype(np.float32)
     nuisance=fields['line_uncertainty'][:,0]
     profile=np.where(nuisance>.01,profile,0.)
@@ -62,6 +65,18 @@ def prepare_source(rec,fields):
     marker=np.where(front&~hidden,np.clip((o-line)/np.maximum(1-line,.08),0,1),o)
     marker[front&~body]=0.
     confidence=spatial*np.where(uncertain,.06,1.)
+    # Same rule as the legend window template (bw_legend_v46._model): when the
+    # legend stage confirmed a SOLID glyph and restored its interior under the
+    # connector, the identity model keeps that observed interior ink too.
+    # Only observed ink >= .25 more than 1.05 px inside the measured body.
+    restored=np.zeros_like(body)
+    if restore_filled_interior:
+        solid=(o>=.25)&body
+        depth=cv2.distanceTransform(np.pad(solid,1).astype(np.uint8),cv2.DIST_L2,5)[1:-1,1:-1]
+        restored=solid&(depth>1.05)&front
+        marker=np.where(restored,o,marker)
+        uncertain=uncertain&~restored
+        confidence=np.where(restored,spatial,confidence)
     peak=max(float(o[body].max()),.05)
     # Enclosed low-ink islands of the original source glyph determine whether
     # a white opaque interior is supported. Never hole-fill target observations.
@@ -80,6 +95,7 @@ def prepare_source(rec,fields):
                   holes=white_holes[b:d,a:c].copy(),localization_weight=fields['target_weight'].copy())
     meta=dict(source_open=bool(white_holes.any()),source_hole_pixels=int(white_holes.sum()),
               uncertain_body_pixels=int(uncertain.sum()),source_line_profile=profile.tolist(),
+              restored_filled_interior_pixels=int(restored.sum()),
               source_pixels_modified=False,shape_class=None,
               note='Conditional source marker estimate; unresolved pixels are NOT observed white.')
     return prepared,meta

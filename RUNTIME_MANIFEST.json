@@ -18,8 +18,8 @@
       "referenced_by": [
         "5_correction_color.py:1552 dynamic filename",
         "5_correction_color.py:959 dynamic filename",
-        "bw_pipeline.py:396 dynamic filename",
-        "bw_step5_v46.py:124 dynamic filename",
+        "bw_pipeline.py:422 dynamic filename",
+        "bw_step5_v46.py:221 dynamic filename",
         "chart_analysis_v46.py:139 dynamic filename",
         "chart_preprocessing.py:1176 dynamic filename",
         "color_step5.py:181 dynamic filename",
@@ -28,11 +28,11 @@
     },
     {
       "path": "src/4_segment_refinement.py",
-      "bytes": 10390,
-      "sha256": "7a681a2670c559575fe0d0c27ba0f90b3b4d0e7d3c0f7bea1588b8d7e25619fc",
+      "bytes": 10659,
+      "sha256": "cddbf807bc0e14466faf3f574051e55a9226c55294bc2c4a28aad9f87b8c0aa5",
       "referenced_by": [
         "5_correction_color.py:1554 dynamic filename",
-        "bw_step5_v46.py:133 dynamic filename",
+        "bw_step5_v46.py:230 dynamic filename",
         "color_path_correction_v46.py:201 dynamic filename",
         "color_path_correction_v46.py:282 dynamic filename",
         "existing distribution",
@@ -64,14 +64,39 @@
       ]
     },
     {
+      "path": "src/automatic_mode_v46.py",
+      "bytes": 13288,
+      "sha256": "3fbd68983a75f96cbed9c4f3a36be7b5d8797fa990ae38945906c63976b1d933",
+      "referenced_by": [
+        "correction_session_v46.py:401",
+        "unified_server.py:294"
+      ]
+    },
+    {
+      "path": "src/bw_ambiguity_candidates_v46.py",
+      "bytes": 18025,
+      "sha256": "14254895f0d5203706640256f11bfc710ee1b67cbe74aeb20edf869561918f4b",
+      "referenced_by": [
+        "bw_pipeline_v46.py:1538"
+      ]
+    },
+    {
+      "path": "src/bw_axis_contact_v46.py",
+      "bytes": 29780,
+      "sha256": "cdb8039b90afb9c51b4c3f1494428ceadd03a13222e23c471f8b09c194da522a",
+      "referenced_by": [
+        "bw_series_correction_v46.py:387"
+      ]
+    },
+    {
       "path": "src/bw_boundary_evidence_v46.py",
       "bytes": 4891,
       "sha256": "682ddc653b2cc4647d2c09b279262bcf12e46c5a7cf2dec02addbc26e3d20be8",
       "referenced_by": [
-        "bw_gpu_candidate_verifier.py:320",
+        "bw_gpu_candidate_verifier.py:324",
         "bw_grid_identity_v46.py:232",
         "existing distribution",
-        "partial_swatch_detector.py:1010"
+        "partial_swatch_detector.py:1156"
       ]
     },
     {
@@ -79,26 +104,38 @@
       "bytes": 17898,
       "sha256": "545e0f7fc461e110f14d432ecfa67ca1b018a26f42b76445eb0a3a16e10931d3",
       "referenced_by": [
-        "bw_detect_cli.py:194 dynamic filename",
+        "bw_detect_cli.py:199 dynamic filename",
         "bw_layered_composite_v46.py:13",
         "bw_local_line_null_v46.py:9",
-        "bw_pipeline_v46.py:900",
+        "bw_pipeline_v46.py:1255",
         "bw_raster_context_v46.py:9",
-        "bw_raster_identity_v46.py:13",
-        "color_neutral_step5_v46.py:15"
+        "bw_raster_identity_v46.py:14",
+        "color_neutral_step5_v46.py:15",
+        "existing distribution"
       ]
     },
     {
       "path": "src/bw_circle_boundary_v46.py",
-      "bytes": 12396,
-      "sha256": "24af47aff09f9cf6a0e8a5cb173fed70f38f8d817141eb335d5f31fa1c5036ac",
+      "bytes": 13615,
+      "sha256": "ea10a663201c624993c356e9316e8ca58fc293998aad86bb5b17e9f3f1ef5341",
       "referenced_by": [
         "bw_circle_scale_v46.py:10",
-        "bw_geometry_first_v46.py:394",
-        "bw_geometry_first_v46.py:572",
+        "bw_geometry_first_v46.py:653",
+        "bw_geometry_first_v46.py:963",
         "existing distribution",
-        "occlusion_aware_window_verifier.py:702",
+        "occlusion_aware_window_verifier.py:745",
         "open_marker_guard_v46.py:49"
+      ]
+    },
+    {
+      "path": "src/bw_circle_outline_identity_v46.py",
+      "bytes": 13936,
+      "sha256": "78dd87c33d044da60a5413c6555f7e6e7c00f949e7319be3fb0ab73f2abe3327",
+      "referenced_by": [
+        "bw_explained_occlusion_v46.py:398",
+        "bw_explained_occlusion_v46.py:69",
+        "bw_legend_shape.py:227",
+        "existing distribution"
       ]
     },
     {
@@ -107,11 +144,11 @@
       "sha256": "d756053deac3e27abb349b04d1994e4a84b729ad3a348197228afdd6d32007c2",
       "referenced_by": [
         "existing distribution",
-        "occlusion_aware_window_verifier.py:539",
-        "occlusion_aware_window_verifier.py:732",
-        "occlusion_aware_window_verifier.py:763",
-        "occlusion_aware_window_verifier.py:809",
-        "occlusion_aware_window_verifier.py:816"
+        "occlusion_aware_window_verifier.py:582",
+        "occlusion_aware_window_verifier.py:786",
+        "occlusion_aware_window_verifier.py:818",
+        "occlusion_aware_window_verifier.py:865",
+        "occlusion_aware_window_verifier.py:872"
       ]
     },
     {
@@ -119,7 +156,7 @@
       "bytes": 7362,
       "sha256": "68bf130da63b343cd6b673fdf7548847c841791932f3b49b419fa8ff65bd2c1d",
       "referenced_by": [
-        "bw_geometry_first_v46.py:396",
+        "bw_geometry_first_v46.py:655",
         "existing distribution"
       ]
     },
@@ -128,13 +165,14 @@
       "bytes": 3177,
       "sha256": "fd6227de2d2860a1b3bf2985eb6c388598667fa25905053411e3f6afbabaff5c",
       "referenced_by": [
+        "bw_final_alignment_v46.py:49",
         "bw_grid_identity_v46.py:103",
-        "bw_pipeline_v46.py:719",
+        "bw_pipeline_v46.py:978",
         "bw_shared_scale_v46.py:69",
         "existing distribution",
-        "partial_swatch_detector.py:1106",
-        "partial_swatch_detector.py:1330",
-        "partial_swatch_detector.py:792"
+        "partial_swatch_detector.py:1268",
+        "partial_swatch_detector.py:1513",
+        "partial_swatch_detector.py:896"
       ]
     },
     {
@@ -142,17 +180,18 @@
       "bytes": 6968,
       "sha256": "40be1fa56e88dc9278dd7b71348fe696103d5da317f6a9d71cdb738c858d3fb4",
       "referenced_by": [
-        "bw_geometry_first_v46.py:520"
+        "bw_geometry_first_v46.py:892",
+        "existing distribution"
       ]
     },
     {
       "path": "src/bw_composed_legend_v46.py",
-      "bytes": 12072,
-      "sha256": "ef1236ac424045ddb9c5c37101fc372b007ee34bcd47f07c00cd2327803bff79",
+      "bytes": 15559,
+      "sha256": "913f71b97af2ce732e0a30f84dede7b055c37600d125bd560ae786aeca477011",
       "referenced_by": [
-        "bw_geometry_first_v46.py:315",
-        "bw_pipeline_v46.py:439",
-        "color_group_bw_v46.py:46",
+        "bw_geometry_first_v46.py:465",
+        "bw_pipeline_v46.py:559",
+        "color_group_bw_v46.py:74",
         "existing distribution"
       ]
     },
@@ -161,8 +200,8 @@
       "bytes": 9070,
       "sha256": "91eab03ff8bf6259b86dcb22a18c490b6a327bb159234966c9d411579128c161",
       "referenced_by": [
-        "bw_detect_cli.py:161",
-        "bw_detect_cli.py:191 dynamic filename",
+        "bw_detect_cli.py:165",
+        "bw_detect_cli.py:196 dynamic filename",
         "bw_pipeline_v46.py:20",
         "existing distribution"
       ]
@@ -172,8 +211,8 @@
       "bytes": 8291,
       "sha256": "77b4e4a9fe56476cc027311a33ca6ccf880b486a9e88e3d0ad95cfdcc8c8c236",
       "referenced_by": [
-        "bw_detect_cli.py:189 dynamic filename",
-        "bw_step5_v46.py:455",
+        "bw_detect_cli.py:194 dynamic filename",
+        "bw_step5_v46.py:769",
         "existing distribution"
       ]
     },
@@ -183,7 +222,8 @@
       "sha256": "4ef0165fc1e74c0e8919fae820005c9efe357ac58c3fc8bf3b6dc13e50d547f5",
       "referenced_by": [
         "bw_geometry_first_v46.py:21",
-        "occlusion_aware_window_verifier.py:704"
+        "existing distribution",
+        "occlusion_aware_window_verifier.py:747"
       ]
     },
     {
@@ -191,38 +231,114 @@
       "bytes": 6943,
       "sha256": "b937c88116356770315331afdc618375b3beae0079df967bba8f7a3d65249738",
       "referenced_by": [
-        "bw_step5_v46.py:129",
-        "color_group_runtime_v46.py:326"
+        "bw_step5_v46.py:226",
+        "color_group_runtime_v46.py:467",
+        "existing distribution"
       ]
     },
     {
       "path": "src/bw_detect_cli.py",
-      "bytes": 29831,
-      "sha256": "a28a3e6f0069b5c9703d92b51e1065d6cc42a1ea012a656ad55d0a3fdaf4a93c",
+      "bytes": 31167,
+      "sha256": "76d04154846136cf53234fad7ca44b1f323b2317834cacff1eb3637514d4d3f9",
       "referenced_by": [
-        "bw_detect_cli.py:186 dynamic filename",
+        "bw_detect_cli.py:190 dynamic filename",
         "existing distribution",
         "run_A4_auto_v46.py:29 dynamic filename",
         "run_A4_auto_v46.py:36 dynamic filename"
       ]
     },
     {
+      "path": "src/bw_explained_occlusion_v46.py",
+      "bytes": 31329,
+      "sha256": "a00ed13cf0e4fa4f4fcc526474ddac57c1a760754e131313cef89e34075578a0",
+      "referenced_by": [
+        "bw_overlap_recheck_v46.py:15",
+        "bw_partial_visibility_v46.py:568",
+        "bw_pipeline_v46.py:1403",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_exterior_line_family_v46.py",
+      "bytes": 8986,
+      "sha256": "75400f1144e4b98b63c7924283de7a15efc5e2517a94062efaa12124bb85c7e2",
+      "referenced_by": [
+        "bw_explained_occlusion_v46.py:93",
+        "bw_hollow_exterior_v46.py:14",
+        "bw_partial_visibility_v46.py:400",
+        "bw_partial_visibility_v46.py:582",
+        "bw_untyped_resolver_v46.py:19",
+        "existing distribution"
+      ]
+    },
+    {
       "path": "src/bw_fill_identity_v46.py",
-      "bytes": 18823,
-      "sha256": "6f78f1ea28758e5e77964778435371ff83f33e8da9304e0d6e144394d1bf9e67",
+      "bytes": 22689,
+      "sha256": "1eaafeddcffee64e07d487a9f66b8b3527fea4e531bb0d234cf90eb669fa7af9",
       "referenced_by": [
         "bw_geometry_first_v46.py:16",
-        "bw_legend_v46.py:590",
-        "bw_pipeline_v46.py:514",
+        "bw_legend_joint_identity_v46.py:28",
+        "bw_legend_v46.py:969",
+        "bw_line_crossed_hollow_v46.py:34",
+        "bw_line_crossed_hollow_v46.py:79",
+        "bw_pipeline_v46.py:660",
+        "color_source_legend_v46.py:128",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_filled_boundary_retention_v46.py",
+      "bytes": 4952,
+      "sha256": "e6cb0c2a207308d151f4ca80e9588d7de25b3a16acec5350ef846be1223219a9",
+      "referenced_by": [
+        "bw_pipeline_v46.py:1516"
+      ]
+    },
+    {
+      "path": "src/bw_filled_contour_identity_v46.py",
+      "bytes": 32034,
+      "sha256": "3eb07df6e26245cbc5a04f0cd87049d508c816f73882e59b13f3741d9d3d1cbd",
+      "referenced_by": [
+        "bw_filled_contour_retry_v46.py:20",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_filled_contour_retry_v46.py",
+      "bytes": 20838,
+      "sha256": "d1d9f511b87b109123fbd9a8b6c48a54248e1ae2ec63a253389b58431116e8c1",
+      "referenced_by": [
+        "bw_filled_contour_selection_v46.py:16",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_filled_contour_selection_v46.py",
+      "bytes": 11649,
+      "sha256": "d86ed1e0ed7c14dee07912ce4ef07e0afdfbbb5ae7c3695da3fcdb6c4c483d91",
+      "referenced_by": [
+        "bw_pipeline_v46.py:1128",
+        "bw_pipeline_v46.py:1140",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_final_alignment_v46.py",
+      "bytes": 5444,
+      "sha256": "dd843b065597d1239556dff1c40053101785e00346dd9d2ae2c449122d454300",
+      "referenced_by": [
+        "bw_pipeline_v46.py:912",
+        "bw_shared_legend_window_v46.py:57",
         "existing distribution"
       ]
     },
     {
       "path": "src/bw_geometry_first_v46.py",
-      "bytes": 37897,
-      "sha256": "3ac42df8e22f83bd4be65fd29668e722c94c70deba2d1c6f7243213fb08cc6bd",
+      "bytes": 63856,
+      "sha256": "b7efd614105c33407f67825538808d0f7a2034e56d42acefd923f188afce70bc",
       "referenced_by": [
-        "bw_pipeline_v46.py:435",
+        "bw_pipeline_v46.py:555",
+        "bw_raster_context_v46.py:156",
         "existing distribution"
       ]
     },
@@ -231,21 +347,21 @@
       "bytes": 20804,
       "sha256": "1e7c0fff1c9c28e44329437baf80b2043296ef667e6ea2cf31fb5cd325868044",
       "referenced_by": [
-        "bw_detect_cli.py:192 dynamic filename",
+        "bw_detect_cli.py:197 dynamic filename",
         "bw_gpu_window_fused.py:90",
         "existing distribution",
-        "partial_swatch_detector.py:1393"
+        "partial_swatch_detector.py:1576"
       ]
     },
     {
       "path": "src/bw_gpu_candidate_verifier.py",
-      "bytes": 23529,
-      "sha256": "e76272054afd1fcd6fd552d662d22684e7c5f7d078e99b14d598e50108737127",
+      "bytes": 24010,
+      "sha256": "dfa8a57491abbb366341b632267cd7f4365ab9bc71a3a3a3cea081b9b22d4368",
       "referenced_by": [
-        "bw_detect_cli.py:192 dynamic filename",
+        "bw_detect_cli.py:197 dynamic filename",
         "existing distribution",
-        "partial_swatch_detector.py:1045",
-        "partial_swatch_detector.py:1429"
+        "partial_swatch_detector.py:1207",
+        "partial_swatch_detector.py:1612"
       ]
     },
     {
@@ -254,9 +370,9 @@
       "sha256": "c51c3846e24452ceb74cfe4779897bfd8e042167cf865430c00899b1dec0b09c",
       "referenced_by": [
         "bw_compute_backend.py:148 module-name string",
-        "bw_detect_cli.py:191 dynamic filename",
+        "bw_detect_cli.py:196 dynamic filename",
         "existing distribution",
-        "partial_swatch_detector.py:1377"
+        "partial_swatch_detector.py:1560"
       ]
     },
     {
@@ -265,12 +381,12 @@
       "sha256": "c28fb507dfc3fcb912676068f68227c53cdba895213548ae3f884fa79166582a",
       "referenced_by": [
         "bw_compute_backend.py:147 module-name string",
-        "bw_detect_cli.py:193 dynamic filename",
+        "bw_detect_cli.py:198 dynamic filename",
         "bw_gpu_candidate_centres.py:25",
         "bw_gpu_candidate_verifier.py:105",
         "bw_gpu_candidate_verifier.py:63",
         "existing distribution",
-        "partial_swatch_detector.py:1508"
+        "partial_swatch_detector.py:1710"
       ]
     },
     {
@@ -278,7 +394,7 @@
       "bytes": 12951,
       "sha256": "6ab50e8b03246e4c128e6a0a39757b99a92e2731e57f32527b233e143bab809e",
       "referenced_by": [
-        "bw_detect_cli.py:194 dynamic filename",
+        "bw_detect_cli.py:199 dynamic filename",
         "bw_gpu_window_verifier.py:166",
         "bw_gpu_window_verifier.py:376",
         "existing distribution"
@@ -290,11 +406,11 @@
       "sha256": "5ff4c9b9afbfdcee54254389ac2f26eb9a8e199df8cfa4f0b542d23e11ac10e2",
       "referenced_by": [
         "bw_compute_backend.py:149 module-name string",
-        "bw_detect_cli.py:193 dynamic filename",
+        "bw_detect_cli.py:198 dynamic filename",
         "bw_gpu_window_fused.py:192",
         "existing distribution",
-        "occlusion_aware_window_verifier.py:605",
-        "occlusion_aware_window_verifier.py:681"
+        "occlusion_aware_window_verifier.py:648",
+        "occlusion_aware_window_verifier.py:724"
       ]
     },
     {
@@ -302,25 +418,44 @@
       "bytes": 18053,
       "sha256": "19c69e0085bca9c38d9b3767cb6869b35af2d05dcf538a76d4671f4f5275fb52",
       "referenced_by": [
-        "bw_detect_cli.py:187 dynamic filename",
-        "bw_pipeline_v46.py:495",
-        "bw_pipeline_v46.py:505",
+        "bw_detect_cli.py:191 dynamic filename",
+        "bw_pipeline_v46.py:641",
+        "bw_pipeline_v46.py:651",
         "existing distribution"
       ]
     },
     {
       "path": "src/bw_grouped_raster_recovery_v46.py",
-      "bytes": 10274,
-      "sha256": "cc9019dd98fcc45299c8ea1f8512ac2d8f671a7325573e80372573ff009ca894",
+      "bytes": 14724,
+      "sha256": "2f07c954780e4da4eb2a1eac4bc259e7cf2fa883a75598ea5afac4d89b2d791b",
       "referenced_by": [
-        "bw_pipeline_v46.py:937",
-        "color_group_relative_identity_v46.py:148"
+        "bw_grouped_scene_recovery_v46.py:18",
+        "bw_pipeline_v46.py:1295",
+        "color_group_relative_identity_v46.py:148",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_grouped_scene_recovery_v46.py",
+      "bytes": 37879,
+      "sha256": "e933b5f3d71e0c3e17abc992a9f02d762ff7ea39ab743866009760f513f9d6f1",
+      "referenced_by": [
+        "bw_pipeline_v46.py:1293"
+      ]
+    },
+    {
+      "path": "src/bw_halftone_screen_v46.py",
+      "bytes": 15909,
+      "sha256": "ce65aa95871306b939ec9bb9298b717bfda9895111ac12f2ccd33e3165503b1c",
+      "referenced_by": [
+        "bw_pipeline.py:278",
+        "bw_raster_identity_v46.py:182"
       ]
     },
     {
       "path": "src/bw_hollow_boundary_v46.py",
-      "bytes": 8044,
-      "sha256": "29702aadb19e7e548221c8794826cb207f7444bdbe09a4d6340e004a2c998995",
+      "bytes": 9893,
+      "sha256": "202275d46d34806b91592a84ef54d29aec6677a6da43cd3e0b8889cc2bcedef2",
       "referenced_by": [
         "bw_circle_scale_v46.py:11",
         "bw_geometry_first_v46.py:19",
@@ -329,12 +464,23 @@
       ]
     },
     {
-      "path": "src/bw_hollow_scene_fallback_v46.py",
-      "bytes": 8403,
-      "sha256": "4a7b5811e642c1e8e61e22cd1858bb5d81c4d118dc15b21da05d785b6d602312",
+      "path": "src/bw_hollow_exterior_v46.py",
+      "bytes": 7224,
+      "sha256": "c9b9ab24d016eeecdac76d873a9ff1c600d1263afeba8ca609ef085f545e753f",
       "referenced_by": [
-        "bw_geometry_first_v46.py:408",
-        "bw_geometry_first_v46.py:484"
+        "bw_hollow_scene_fallback_v46.py:54",
+        "bw_small_hollow_v46.py:94",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_hollow_scene_fallback_v46.py",
+      "bytes": 8902,
+      "sha256": "13a22ae27b24d00f44b79ebbc6c3156cae15b2ff7b03aafef42ec195404feedc",
+      "referenced_by": [
+        "bw_geometry_first_v46.py:669",
+        "bw_geometry_first_v46.py:850",
+        "existing distribution"
       ]
     },
     {
@@ -343,20 +489,33 @@
       "sha256": "8f4fcc70bec21826a7ba86cf9acbf22eabe96e0ecb779186ae1150436abfd818",
       "referenced_by": [
         "existing distribution",
-        "unified_server.py:282"
+        "unified_server.py:338"
+      ]
+    },
+    {
+      "path": "src/bw_joint_raster_window_v46.py",
+      "bytes": 9771,
+      "sha256": "ff3c06cd5f1973bd98e8065e0b6d9c8cfe8afdb95092e1747056e16674c2d24d",
+      "referenced_by": [
+        "bw_shared_legend_window_v46.py:15",
+        "existing distribution"
       ]
     },
     {
       "path": "src/bw_layered_composite_v46.py",
-      "bytes": 22559,
-      "sha256": "087bb904f5f199e7353741c954d726caf2c0cf7bedb3f76e299c54a967a21804",
+      "bytes": 23600,
+      "sha256": "cfdd57f12cf931990a253e7557ae7fd96d27528fc199131b17ae4bd53aa5fcaf",
       "referenced_by": [
         "bw_grouped_raster_recovery_v46.py:11",
-        "bw_pipeline_v46.py:929",
+        "bw_grouped_scene_recovery_v46.py:19",
+        "bw_pipeline_v46.py:1284",
         "bw_raster_context_v46.py:10",
-        "bw_raster_identity_v46.py:12",
+        "bw_raster_identity_v46.py:13",
+        "bw_untyped_resolver_v46.py:20",
+        "bw_visible_marker_v46.py:16",
         "color_group_relative_identity_v46.py:14",
-        "color_neutral_step5_v46.py:12"
+        "color_neutral_step5_v46.py:12",
+        "existing distribution"
       ]
     },
     {
@@ -364,28 +523,60 @@
       "bytes": 6312,
       "sha256": "5e0c393aac849479da05c69cdabbd4efe0b019183d3b905d59efa63e2ab2d36a",
       "referenced_by": [
-        "bw_pipeline.py:580",
-        "bw_pipeline_v46.py:981",
+        "bw_pipeline.py:606",
+        "bw_pipeline_v46.py:1469",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_legend_gray_identity_v46.py",
+      "bytes": 16089,
+      "sha256": "ee3fa9bf0069dfbc434b4d548e1d3ced1e6af499d1ba2efd03e9cba0da84cda9",
+      "referenced_by": [
+        "bw_legend_joint_identity_v46.py:27",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_legend_joint_identity_v46.py",
+      "bytes": 16540,
+      "sha256": "3dbdb7779521056134e12f3f318b2fa2b8a41dc926ba54de00903a985d9e59a1",
+      "referenced_by": [
+        "bw_pipeline_v46.py:538",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_legend_local_completion_v46.py",
+      "bytes": 11017,
+      "sha256": "7ced4c5e9b6ea8b6eb4a379549b77123796bc26f30429ab0ff6b2892b497f718",
+      "referenced_by": [
+        "bw_composed_legend_v46.py:133",
+        "bw_geometry_first_v46.py:117",
+        "bw_geometry_first_v46.py:188",
+        "bw_line_crossed_hollow_v46.py:160",
         "existing distribution"
       ]
     },
     {
       "path": "src/bw_legend_shape.py",
-      "bytes": 11357,
-      "sha256": "a55ace3424aeb7ce2afd9152818f9ab375b5dabb3aeefce9069eee2df2f98a44",
+      "bytes": 13913,
+      "sha256": "532d655e9e767181f8340a4144ba34e0fb89137cbdb320f49fbef4579b3ef6a8",
       "referenced_by": [
-        "bw_pipeline_v46.py:111",
+        "bw_fill_identity_v46.py:79",
+        "bw_pipeline_v46.py:149",
         "color_legend_hybrid_v46.py:17",
         "existing distribution"
       ]
     },
     {
       "path": "src/bw_legend_v46.py",
-      "bytes": 33532,
-      "sha256": "05d2e47e0ef97e1ab0ddd8cb8a52610d10a7a93c7c74f2dd0f0f076f741ecb71",
+      "bytes": 63008,
+      "sha256": "c5db4817d1daef285fd00f1378c757827f54e3bfcb8a48b2f3aff818360c72b8",
       "referenced_by": [
-        "bw_composed_legend_v46.py:32",
-        "bw_pipeline_v46.py:138",
+        "bw_composed_legend_v46.py:33",
+        "bw_halftone_screen_v46.py:209",
+        "bw_pipeline_v46.py:176",
         "color_group_bw_v46.py:12",
         "color_legend_hybrid_v46.py:16",
         "existing distribution",
@@ -393,35 +584,51 @@
       ]
     },
     {
+      "path": "src/bw_line_crossed_hollow_v46.py",
+      "bytes": 8775,
+      "sha256": "b8075d890e490d142d2d8c385f624c5eac46e3f55aab86567c6ab41dc056bcb2",
+      "referenced_by": [
+        "bw_geometry_first_v46.py:452",
+        "bw_legend_v46.py:971",
+        "existing distribution"
+      ]
+    },
+    {
       "path": "src/bw_local_line_null_v46.py",
       "bytes": 4233,
       "sha256": "f8c3ecdfad11c05e47d4539d557cb7f53acd076f351c66601bcba62a6fb200e0",
       "referenced_by": [
-        "color_neutral_step5_v46.py:115"
+        "color_neutral_step5_v46.py:117",
+        "existing distribution"
       ]
     },
     {
       "path": "src/bw_marker_selection.py",
-      "bytes": 6250,
-      "sha256": "9699c263e0b78ea71a900b46abbf0a9913a47ac93b199b6e00067857fb6eedb3",
+      "bytes": 6857,
+      "sha256": "b628db9d70506dd67dd38a73a6ab3b084b54fb3fc4c93f3726aedfc283bdb30c",
       "referenced_by": [
+        "bw_filled_contour_selection_v46.py:17",
         "bw_pipeline_v46.py:18",
+        "bw_raster_identity_v46.py:559",
+        "bw_visible_marker_v46.py:378",
         "existing distribution"
       ]
     },
     {
       "path": "src/bw_observed_raster_v46.py",
-      "bytes": 9138,
-      "sha256": "82bdd6dfcc3c4e28f693468a9fd032c0588583c101a9d19f4522fdfd800bf8ff",
+      "bytes": 10786,
+      "sha256": "704a3cf5f180862a17bb7bdc935386b82ba5457a2303fb7aa801148b0873af00",
       "referenced_by": [
         "bw_centered_composite_v46.py:10",
-        "bw_detect_cli.py:195 dynamic filename",
+        "bw_detect_cli.py:200 dynamic filename",
         "bw_grouped_raster_recovery_v46.py:10",
+        "bw_grouped_scene_recovery_v46.py:20",
         "bw_layered_composite_v46.py:12",
         "bw_observed_scale_v46.py:11",
-        "bw_raster_identity_v46.py:11",
+        "bw_raster_identity_v46.py:12",
         "color_group_relative_identity_v46.py:13",
-        "color_neutral_step5_v46.py:11"
+        "color_neutral_step5_v46.py:11",
+        "existing distribution"
       ]
     },
     {
@@ -429,62 +636,124 @@
       "bytes": 13779,
       "sha256": "ba6a2b0b3dfbd009d4d17cc72317f0b65c8678fc40eee769cb2eea10b99e35b1",
       "referenced_by": [
-        "bw_layered_composite_v46.py:325",
-        "bw_raster_identity_v46.py:75",
-        "color_group_relative_identity_v46.py:62"
+        "bw_layered_composite_v46.py:341",
+        "bw_raster_identity_v46.py:183",
+        "bw_raster_identity_v46.py:261",
+        "color_group_relative_identity_v46.py:62",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_overlap_recheck_v46.py",
+      "bytes": 9132,
+      "sha256": "b32c618abe8bbbdb8be7b5f7e7ab36af614ee029f59e8b1d69560858d5c8cf4e",
+      "referenced_by": [
+        "bw_series_correction_v46.py:439"
+      ]
+    },
+    {
+      "path": "src/bw_partial_source_profiles_v46.py",
+      "bytes": 18114,
+      "sha256": "00bb3593e99b787115658371e7e7532f62b8641beb3e226e5c4b3d4b56a83204",
+      "referenced_by": [
+        "bw_explained_occlusion_v46.py:18",
+        "bw_grouped_scene_recovery_v46.py:21",
+        "bw_partial_visibility_v46.py:104",
+        "bw_partial_visibility_v46.py:201",
+        "bw_partial_visibility_v46.py:594",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_partial_visibility_v46.py",
+      "bytes": 71395,
+      "sha256": "e9194ebadc903bee5ba6db8457d7335e95520df5a3896206d0ba7dd76397725f",
+      "referenced_by": [
+        "bw_explained_occlusion_v46.py:17",
+        "bw_overlap_recheck_v46.py:14",
+        "bw_pipeline_v46.py:1193",
+        "bw_series_correction_v46.py:129",
+        "bw_series_correction_v46.py:461",
+        "bw_step5_v46.py:834",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_pending_identity_v46.py",
+      "bytes": 10664,
+      "sha256": "a5126e05ff8c5f5510db1bd72df46869c6ba233b9a6ddd9ea5cebfeead760de9",
+      "referenced_by": [
+        "bw_ambiguity_candidates_v46.py:132",
+        "bw_step5_v46.py:99"
       ]
     },
     {
       "path": "src/bw_pipeline.py",
-      "bytes": 56512,
-      "sha256": "b980101dd464faa5577d85b3773c838650429f2efc85a021156621694494c128",
+      "bytes": 58855,
+      "sha256": "34d678582d4fb8f2560c47ed2bc061d7f33dcd0e864fa8a150ccc05884358835",
       "referenced_by": [
-        "bw_detect_cli.py:175",
-        "bw_detect_cli.py:186 dynamic filename",
-        "bw_detect_cli.py:197 dynamic filename",
-        "bw_detect_cli.py:278",
+        "bw_detect_cli.py:179",
+        "bw_detect_cli.py:190 dynamic filename",
+        "bw_detect_cli.py:202 dynamic filename",
+        "bw_detect_cli.py:285",
         "bw_to_edit_data.py:35",
         "existing distribution",
-        "unified_server.py:121"
+        "unified_server.py:155"
       ]
     },
     {
       "path": "src/bw_pipeline_v46.py",
-      "bytes": 69420,
-      "sha256": "6ed4d339e4c0bf09a20aca18f438774a1dee633258cfa535db685c3217c25aa9",
+      "bytes": 109745,
+      "sha256": "995c7613b549f14f3323e46385983931ecfa765be9c6fb057affad508e942265",
       "referenced_by": [
-        "bw_detect_cli.py:187 dynamic filename",
-        "bw_legend_v46.py:515",
-        "bw_legend_v46.py:597",
-        "bw_pipeline.py:576",
-        "bw_pipeline.py:587",
-        "bw_pipeline.py:926",
+        "bw_detect_cli.py:191 dynamic filename",
+        "bw_explained_occlusion_v46.py:488",
+        "bw_legend_v46.py:893",
+        "bw_legend_v46.py:977",
+        "bw_partial_visibility_v46.py:1101",
+        "bw_pipeline.py:602",
+        "bw_pipeline.py:614",
+        "bw_pipeline.py:959",
         "color_group_bw_v46.py:13",
-        "color_group_runtime_v46.py:148",
+        "color_group_runtime_v46.py:182",
         "color_marker_runtime_v46.py:96",
+        "color_source_legend_v46.py:88",
         "existing distribution"
       ]
     },
     {
       "path": "src/bw_raster_context_v46.py",
-      "bytes": 8072,
-      "sha256": "eaa502d89d4f464ea858c1a0dcdc2ef8ced7650322c6c894163317efe40146ad",
+      "bytes": 14214,
+      "sha256": "2482d88b83a5c11e2ecc1419cb686d623e3240729cb988f326af8fd3556ad93b",
       "referenced_by": [
-        "bw_grouped_raster_recovery_v46.py:114",
-        "bw_hollow_scene_fallback_v46.py:43",
-        "bw_raster_identity_v46.py:231"
+        "bw_exterior_line_family_v46.py:42",
+        "bw_grouped_raster_recovery_v46.py:137",
+        "bw_hollow_boundary_v46.py:127",
+        "bw_hollow_scene_fallback_v46.py:47",
+        "bw_joint_raster_window_v46.py:13",
+        "bw_raster_identity_v46.py:473",
+        "bw_raster_identity_v46.py:560",
+        "existing distribution"
       ]
     },
     {
       "path": "src/bw_raster_identity_v46.py",
-      "bytes": 14536,
-      "sha256": "beb69d7c313143e627a6096375b0c8945f9785af55cf7a6749b7a6a8ec4079df",
+      "bytes": 49171,
+      "sha256": "d2c038db4fe7eba149bd4578b9d8b9bbc4054ea603681de3342ecbec5d2f4b4a",
       "referenced_by": [
+        "bw_ambiguity_candidates_v46.py:19",
+        "bw_grouped_scene_recovery_v46.py:22",
         "bw_local_line_null_v46.py:10",
-        "bw_pipeline_v46.py:488",
+        "bw_pipeline_v46.py:634",
+        "bw_pipeline_v46.py:702",
+        "bw_pipeline_v46.py:841",
+        "bw_pipeline_v46.py:859",
+        "bw_untyped_resolver_v46.py:21",
         "color_group_relative_identity_v46.py:15",
+        "color_neutral_group_identity_v46.py:41",
         "color_neutral_step5_v46.py:13",
-        "color_neutral_step5_v46.py:14"
+        "color_neutral_step5_v46.py:14",
+        "existing distribution"
       ]
     },
     {
@@ -492,6 +761,7 @@
       "bytes": 4794,
       "sha256": "b7c7afce270cea99801966c182aab2c45d1eefc5bbd0d19cb49e9f1f95948595",
       "referenced_by": [
+        "bw_geometry_first_v46.py:698",
         "bw_shared_scale_v46.py:71",
         "existing distribution"
       ]
@@ -501,27 +771,48 @@
       "bytes": 16443,
       "sha256": "70c1097ac1d80ca1aeee99df8a0f23f7939e13152c2bcbcae2b150dad9e585a6",
       "referenced_by": [
-        "bw_pipeline_v46.py:524",
+        "bw_pipeline_v46.py:670",
         "existing distribution"
       ]
     },
     {
-      "path": "src/bw_series_correction_v46.py",
-      "bytes": 18807,
-      "sha256": "121a782ae867cf68098749e5bec133cbb3b36d4a8b54a2db83c8aa3d2ca7513a",
+      "path": "src/bw_seed_bootstrap_v46.py",
+      "bytes": 18491,
+      "sha256": "fcfdfb3554fba6c3e4664f2cd2b1737e0c410147be0143d139435dba5c6c2c8f",
       "referenced_by": [
-        "bw_detect_cli.py:188 dynamic filename",
-        "bw_detect_cli.py:353 module-name string",
-        "bw_detect_cli.py:370",
-        "bw_pipeline_v46.py:1015",
-        "bw_series_correction_v46.py:317 module-name string",
-        "correction_session_v46.py:454",
-        "correction_session_v46.py:488 module-name string",
+        "bw_seed_route_v46.py:32",
+        "bw_seed_route_v46.py:38",
+        "bw_seed_route_v46.py:92"
+      ]
+    },
+    {
+      "path": "src/bw_seed_route_v46.py",
+      "bytes": 4948,
+      "sha256": "5e043a9a4b8d29befd049070559530d511d21c24ed724aa9d1f0765c8befe575",
+      "referenced_by": [
+        "bw_series_correction_v46.py:354",
+        "bw_series_correction_v46.py:415"
+      ]
+    },
+    {
+      "path": "src/bw_series_correction_v46.py",
+      "bytes": 50713,
+      "sha256": "319b2e3768481b57dbf041d64f40edaa59fbf5a777ab5482d0a9227c14a085a1",
+      "referenced_by": [
+        "bw_detect_cli.py:192 dynamic filename",
+        "bw_detect_cli.py:363 module-name string",
+        "bw_detect_cli.py:380",
+        "bw_pipeline_v46.py:1510",
+        "bw_seed_bootstrap_v46.py:129",
+        "bw_series_correction_v46.py:777 module-name string",
+        "bw_step5_v46.py:705",
+        "correction_session_v46.py:471",
+        "correction_session_v46.py:506 module-name string",
         "existing distribution",
-        "legend_optional_v46/runtime.py:379 module-name string",
-        "legend_optional_v46/runtime.py:404",
-        "legend_optional_v46/runtime.py:415 module-name string",
-        "unified_server.py:463 module-name string"
+        "legend_optional_v46/runtime.py:382 module-name string",
+        "legend_optional_v46/runtime.py:407",
+        "legend_optional_v46/runtime.py:418 module-name string",
+        "unified_server.py:519 module-name string"
       ]
     },
     {
@@ -530,10 +821,10 @@
       "sha256": "bca4ea488660d4c81a3137cd376b86d8ea4c4f7f213ff1cf15e0471d08800d27",
       "referenced_by": [
         "bw_detect_cli.py:27",
-        "bw_detect_cli.py:300",
+        "bw_detect_cli.py:307",
         "bw_pipeline.py:19",
         "bw_to_edit_data.py:24",
-        "correction_session_v46.py:429",
+        "correction_session_v46.py:446",
         "existing distribution"
       ]
     },
@@ -542,8 +833,20 @@
       "bytes": 4970,
       "sha256": "adadafa81a36732ca1c92a4bb76650112977068a06a894c11c40945993095887",
       "referenced_by": [
-        "bw_detect_cli.py:188 dynamic filename",
-        "bw_series_correction_v46.py:15",
+        "bw_detect_cli.py:192 dynamic filename",
+        "bw_seed_bootstrap_v46.py:15",
+        "bw_seed_route_v46.py:10",
+        "bw_series_correction_v46.py:16",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_shared_legend_window_v46.py",
+      "bytes": 11512,
+      "sha256": "d387cdd3065577d25608c9b49e9a7b762907a2e682ecdd154e3594ee5f3235f1",
+      "referenced_by": [
+        "bw_pipeline_v46.py:1330",
+        "bw_pipeline_v46.py:848",
         "existing distribution"
       ]
     },
@@ -554,41 +857,59 @@
       "referenced_by": [
         "bw_circle_scale_v46.py:12",
         "bw_geometry_first_v46.py:17",
-        "bw_pipeline_v46.py:518",
+        "bw_geometry_first_v46.py:697",
+        "bw_pipeline_v46.py:664",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_shared_window_source_v46.py",
+      "bytes": 20224,
+      "sha256": "1e1380ff97d2dddecb1a25d1616de00b93c077dbbbfb25becebca1cc22075927",
+      "referenced_by": [
+        "bw_grouped_scene_recovery_v46.py:107",
+        "bw_grouped_scene_recovery_v46.py:183",
+        "bw_pipeline_v46.py:1315",
+        "bw_pipeline_v46.py:703",
+        "bw_raster_identity_v46.py:228",
+        "bw_raster_identity_v46.py:287",
         "existing distribution"
       ]
     },
     {
       "path": "src/bw_small_hollow_v46.py",
-      "bytes": 8197,
-      "sha256": "ea56e06c57525eabf1d23e2670d7ae47e46330f8c6a281bbcdb05578daa50e41",
+      "bytes": 8945,
+      "sha256": "5350b1d1035acaf19ee7e168f563b994b9eef08f9af393411bde94dae0b14da9",
       "referenced_by": [
         "bw_cross_evidence_v46.py:38",
-        "bw_geometry_first_v46.py:421",
-        "bw_geometry_first_v46.py:481",
+        "bw_geometry_first_v46.py:765",
+        "bw_geometry_first_v46.py:847",
         "bw_hollow_scene_fallback_v46.py:9",
+        "existing distribution",
         "open_marker_guard_v46.py:10"
       ]
     },
     {
       "path": "src/bw_step5_v46.py",
-      "bytes": 32472,
-      "sha256": "34268a291fab56c446085b248bc6a3d066439dde504161c44a9d4d83f329d497",
+      "bytes": 56910,
+      "sha256": "273502f76cf16bb2290c25a596c3d9b5617743647c74411457e6bce45e3a20ca",
       "referenced_by": [
-        "bw_detect_cli.py:188 dynamic filename",
-        "bw_detect_cli.py:241 module-name string",
-        "bw_series_correction_v46.py:13",
+        "bw_detect_cli.py:192 dynamic filename",
+        "bw_detect_cli.py:246 module-name string",
+        "bw_pipeline_v46.py:1381",
+        "bw_pipeline_v46.py:56",
+        "bw_series_correction_v46.py:14",
         "color_group_bw_v46.py:14",
         "color_group_relative_identity_v46.py:194",
         "color_group_runtime_v46.py:19",
-        "color_group_runtime_v46.py:271",
-        "color_group_runtime_v46.py:325",
-        "color_group_runtime_v46.py:351",
+        "color_group_runtime_v46.py:328",
+        "color_group_runtime_v46.py:466",
+        "color_group_runtime_v46.py:492",
         "color_neutral_step5_v46.py:20",
         "correction_session_v46.py:189",
         "existing distribution",
         "group_element_correction_v46.py:14",
-        "unified_server.py:463 module-name string"
+        "unified_server.py:519 module-name string"
       ]
     },
     {
@@ -596,29 +917,38 @@
       "bytes": 6947,
       "sha256": "e72bba934db48886a87f21cc8a0fc24116906413a62d15ffc17668dc559c4d8a",
       "referenced_by": [
-        "bw_detect_cli.py:189 dynamic filename",
-        "bw_step5_v46.py:469",
+        "bw_detect_cli.py:194 dynamic filename",
+        "bw_step5_v46.py:784",
         "existing distribution"
       ]
     },
     {
       "path": "src/bw_suppressed_v46.py",
-      "bytes": 18421,
-      "sha256": "d8d075d01b99e479759e69306fbe34e33e5b11a03ca9f7d9a57999289f490829",
+      "bytes": 21792,
+      "sha256": "9ad100767a81d10a32b7cd27ba194e53d87c75973fedd83252538f01779445cd",
       "referenced_by": [
+        "bw_ambiguity_candidates_v46.py:20",
         "bw_centered_composite_v46.py:310",
         "bw_connection_alignment_v46.py:16",
+        "bw_explained_occlusion_v46.py:19",
+        "bw_geometry_first_v46.py:587",
         "bw_grouped_raster_recovery_v46.py:12",
-        "bw_layered_composite_v46.py:347",
+        "bw_grouped_scene_recovery_v46.py:23",
+        "bw_layered_composite_v46.py:363",
+        "bw_partial_visibility_v46.py:19",
+        "bw_pending_identity_v46.py:18",
         "bw_pipeline_v46.py:19",
-        "bw_series_correction_v46.py:14",
+        "bw_seed_bootstrap_v46.py:16",
+        "bw_series_correction_v46.py:15",
+        "bw_shared_legend_window_v46.py:14",
         "bw_step5_v46.py:25",
         "bw_structural_edits_v46.py:14",
+        "bw_untyped_resolver_v46.py:22",
         "color_group_relative_identity_v46.py:16",
         "color_group_runtime_v46.py:20",
         "existing distribution",
         "group_endpoint_guard_v46.py:10",
-        "legend_optional_v46/runtime.py:344",
+        "legend_optional_v46/runtime.py:347",
         "x_singleton_suppressed_v46.py:13"
       ]
     },
@@ -627,9 +957,41 @@
       "bytes": 7118,
       "sha256": "6f6bbfc7c33eec8045c4c842d33f3842732cb544609117c60992cae1db16df18",
       "referenced_by": [
-        "bw_detect_cli.py:176",
+        "bw_detect_cli.py:180",
         "existing distribution",
-        "unified_server.py:122"
+        "unified_server.py:156"
+      ]
+    },
+    {
+      "path": "src/bw_unknown_candidates_v46.py",
+      "bytes": 22393,
+      "sha256": "4dd5b365ee262bd0a96b128a76a548b10b081c15c1a9af7f01d329787baf2cd3",
+      "referenced_by": [
+        "bw_ambiguity_candidates_v46.py:21",
+        "bw_detect_cli.py:193 dynamic filename",
+        "bw_pipeline_v46.py:1447",
+        "bw_series_correction_v46.py:380",
+        "correction_session_v46.py:194",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_untyped_resolver_v46.py",
+      "bytes": 24633,
+      "sha256": "ec60d7dbe274b45cfc3186af52eb51f5dd32317f24079bdc0a6d1b29fec2413b",
+      "referenced_by": [
+        "bw_detect_cli.py:193 dynamic filename",
+        "bw_pending_identity_v46.py:19",
+        "bw_series_correction_v46.py:677",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_visible_marker_v46.py",
+      "bytes": 24175,
+      "sha256": "6f0e4da6d378944cbea411066813bfc10eb30b1f4e643ccd2b3a651fa406600f",
+      "referenced_by": [
+        "bw_raster_identity_v46.py:502"
       ]
     },
     {
@@ -647,7 +1009,7 @@
       "sha256": "281c349205152506be4423ad9714b7dfa06ddf8902736399920ac4f75afe1bd1",
       "referenced_by": [
         "analysis_session_v46.py:16 dynamic filename",
-        "bw_pipeline_v46.py:44",
+        "bw_pipeline_v46.py:82",
         "color_legend_runtime_v46.py:39 dynamic filename",
         "existing distribution",
         "legend_optional_v46/native_legend.py:131 module-name string"
@@ -659,13 +1021,13 @@
       "sha256": "c114651512bbd010fbdf7e4dc24c67718bb57e985751dc90ea9b577c85a98296",
       "referenced_by": [
         "5_correction_color.py:1573",
-        "bw_pipeline.py:274",
-        "bw_pipeline.py:308",
-        "bw_pipeline.py:384",
-        "bw_pipeline.py:476",
-        "bw_pipeline.py:490",
-        "bw_pipeline.py:922",
-        "bw_step5_v46.py:117",
+        "bw_pipeline.py:300",
+        "bw_pipeline.py:334",
+        "bw_pipeline.py:410",
+        "bw_pipeline.py:502",
+        "bw_pipeline.py:516",
+        "bw_pipeline.py:955",
+        "bw_step5_v46.py:214",
         "existing distribution"
       ]
     },
@@ -680,7 +1042,7 @@
         "color_series_structure_v46.py:15",
         "color_shared_scale_v46.py:98",
         "existing distribution",
-        "triangle_errorbar_v46.py:330"
+        "triangle_errorbar_v46.py:388"
       ]
     },
     {
@@ -699,11 +1061,11 @@
       "bytes": 19058,
       "sha256": "3b227644961f4a14fc7295a128825a039ed16ab7ee639d077871fad36d1ebd9a",
       "referenced_by": [
-        "correction_session_v46.py:514",
+        "correction_session_v46.py:532",
         "existing distribution",
         "legend_optional_v46/cli.py:84",
         "run_A4_color_v46.py:56",
-        "unified_server.py:346 dynamic filename"
+        "unified_server.py:402 dynamic filename"
       ]
     },
     {
@@ -724,17 +1086,17 @@
         "color_series_correction_v46.py:15",
         "color_step5_export_v46.py:400",
         "existing distribution",
-        "legend_optional_v46/runtime.py:295",
+        "legend_optional_v46/runtime.py:298",
         "type3_v46/step5_adapter.py:26"
       ]
     },
     {
       "path": "src/color_group_bw_v46.py",
-      "bytes": 12593,
-      "sha256": "9e2d3393e2bd87581ac25889af6d45ef04a6ab8aa5a5fa6a351f4cf91c723828",
+      "bytes": 20044,
+      "sha256": "b82519ca6325163c7c000b1b3ac98b114a767e5fd946007716c23bfae9f920a4",
       "referenced_by": [
-        "color_group_runtime_v46.py:147",
-        "color_group_runtime_v46.py:68",
+        "color_group_runtime_v46.py:181",
+        "color_group_runtime_v46.py:74",
         "existing distribution"
       ]
     },
@@ -743,21 +1105,22 @@
       "bytes": 12853,
       "sha256": "7de7484558245a39c302daa5ccd0a591b0f0747cb65e1e72945ab2eff817ada4",
       "referenced_by": [
-        "color_group_runtime_v46.py:179",
-        "color_neutral_step5_v46.py:16"
+        "color_group_runtime_v46.py:215",
+        "color_neutral_step5_v46.py:16",
+        "existing distribution"
       ]
     },
     {
       "path": "src/color_group_runtime_v46.py",
-      "bytes": 25851,
-      "sha256": "8da6fb683b6677a3d5654dd02de6e92c089299b3e166fe8182cbd061924f21f9",
+      "bytes": 35574,
+      "sha256": "0203b209d4aadf41f0b0fe5816e4ade1f471a018da337983cb682c304a63339f",
       "referenced_by": [
         "color_correct_cli.py:123",
         "color_correct_cli.py:130",
         "color_marker_runtime_v46.py:152",
-        "color_neutral_step5_v46.py:137",
-        "correction_session_v46.py:201",
-        "correction_session_v46.py:511",
+        "color_neutral_step5_v46.py:139",
+        "correction_session_v46.py:202",
+        "correction_session_v46.py:529",
         "existing distribution",
         "run_A4_color_v46.py:49"
       ]
@@ -770,7 +1133,8 @@
         "color_shared_scale_v46.py:125",
         "color_shared_scale_v46.py:243",
         "color_shared_scale_v46.py:246",
-        "color_shared_scale_v46.py:273"
+        "color_shared_scale_v46.py:273",
+        "existing distribution"
       ]
     },
     {
@@ -793,18 +1157,19 @@
     },
     {
       "path": "src/color_joint_body_v46.py",
-      "bytes": 10272,
-      "sha256": "955a3a7f2809d05ecdcea48bdd71b6a56b903895179f42c651d758de3fa5e58c",
+      "bytes": 15059,
+      "sha256": "8fae544c087f7070a17ff4fcba6e3afbead117d5ec0dd867bc9b229ca7178c42",
       "referenced_by": [
-        "color_marker_runtime_v46.py:244"
+        "color_marker_runtime_v46.py:267",
+        "existing distribution"
       ]
     },
     {
       "path": "src/color_legend_composition_v46.py",
-      "bytes": 16018,
-      "sha256": "80f10880de0b77d31281b41b375df770eb6cb906257274bf5075e0d9a0fbc05f",
+      "bytes": 16548,
+      "sha256": "76f224ea17919c5d7e7d306fc52eecc4cf5c4dc95aff21007e8be3e7d6c81a75",
       "referenced_by": [
-        "color_group_runtime_v46.py:69",
+        "color_group_runtime_v46.py:75",
         "color_legend_runtime_v46.py:77",
         "color_marker_runtime_v46.py:19",
         "existing distribution"
@@ -812,8 +1177,8 @@
     },
     {
       "path": "src/color_legend_hybrid_v46.py",
-      "bytes": 47253,
-      "sha256": "9953d23ba2679f3784bdd32ae29603624276438d458620bb1164caddcd00fbaf",
+      "bytes": 61796,
+      "sha256": "9c813309f126462dbfccc73f4d455eb88beb6f676abc2ba48f4e197ed705a9f1",
       "referenced_by": [
         "color_legend_runtime_v46.py:47 dynamic filename",
         "color_legend_runtime_v46.py:76",
@@ -823,8 +1188,8 @@
     },
     {
       "path": "src/color_legend_runtime_v46.py",
-      "bytes": 19488,
-      "sha256": "37e9d3ebd5af817ff4a1b17759ce4805d9c754767d497f9ce6914806e0a85c52",
+      "bytes": 19876,
+      "sha256": "9c3ea1032dd91c0fb686b71bf0b4e2c242fb2bf6092c50b62d86200dd4588b1e",
       "referenced_by": [
         "color_marker_runtime_v46.py:18",
         "existing distribution",
@@ -844,8 +1209,8 @@
     },
     {
       "path": "src/color_marker_evidence.py",
-      "bytes": 29033,
-      "sha256": "c1ab712f2d997189c0c7f5557b5fa0845822fe7a1b9f3940d642d10e71891510",
+      "bytes": 31215,
+      "sha256": "0f49a12c9701d39c2fbc11bd714b4c0621e2ef79bfdc117a7c3f074e0e399740",
       "referenced_by": [
         "bw_composed_legend_v46.py:7",
         "color_group_bw_v46.py:15",
@@ -853,14 +1218,17 @@
         "color_legend_composition_v46.py:16",
         "color_marker_evidence_v2.py:14",
         "color_marker_hybrid.py:377",
+        "color_neutral_group_identity_v46.py:42",
         "color_neutral_step5_v46.py:18",
+        "color_palette_identity_v46.py:472",
         "color_series_structure_v46.py:12",
+        "color_source_legend_v46.py:11",
         "existing distribution",
         "legend_optional_v46/classifier.py:16",
         "legend_optional_v46/common_ink.py:19",
         "legend_optional_v46/palette_base.py:16",
-        "legend_optional_v46/runtime.py:108",
-        "legend_optional_v46/runtime.py:56",
+        "legend_optional_v46/runtime.py:111",
+        "legend_optional_v46/runtime.py:57",
         "legend_optional_v46/single.py:15",
         "marker_guide_model_v46.py:135"
       ]
@@ -890,11 +1258,11 @@
     },
     {
       "path": "src/color_marker_hybrid_v2.py",
-      "bytes": 11000,
-      "sha256": "3c4b01bb3ae61f129cfcec5f5eba3e7e814dbb33fd42c009bdbe08581be2a3fb",
+      "bytes": 14966,
+      "sha256": "63c9786678a221d9764fd702e280cef834bbfab3f92479e92acc7d0cc3244603",
       "referenced_by": [
         "color_group_runtime_v46.py:38 module-name string",
-        "color_marker_hybrid_v2.py:118 module-name string",
+        "color_marker_hybrid_v2.py:164 module-name string",
         "color_marker_runtime_v46.py:21",
         "color_marker_runtime_v46.py:27 module-name string",
         "existing distribution",
@@ -903,8 +1271,8 @@
     },
     {
       "path": "src/color_marker_runtime_v46.py",
-      "bytes": 28340,
-      "sha256": "cd5def305d39e8b864f5085699e67ef7f46c4473f2cdf2e0873ec45058399aac",
+      "bytes": 29945,
+      "sha256": "bddc871f14d850e3306f4535352328557ba44803652cf39b3957c1d276e4f4b9",
       "referenced_by": [
         "existing distribution",
         "legend_optional_v46/single.py:18",
@@ -913,15 +1281,15 @@
     },
     {
       "path": "src/color_marker_window_v2.py",
-      "bytes": 25319,
-      "sha256": "ec75e3b650ec751d0ae194601b8709a727090b041008f1b21ed7b16c4406b115",
+      "bytes": 26909,
+      "sha256": "819d1aa06fc60918c838093d1d783b8935c2df6374a89028e55920a601f90053",
       "referenced_by": [
         "color_joint_body_v46.py:15",
         "color_marker_hybrid_v2.py:19",
         "color_series_structure_v46.py:14",
         "color_shared_scale_v46.py:97",
         "existing distribution",
-        "triangle_errorbar_v46.py:329"
+        "triangle_errorbar_v46.py:387"
       ]
     },
     {
@@ -936,28 +1304,41 @@
       ]
     },
     {
-      "path": "src/color_neutral_step5_v46.py",
-      "bytes": 20128,
-      "sha256": "6d7d09c0389bd3b6c7b3c280ccefd36c4ce410e46104edc11db416011225d38b",
+      "path": "src/color_neutral_group_identity_v46.py",
+      "bytes": 12810,
+      "sha256": "3ce6fd5d738739af8319ae321af9d31c42ebf69b36f4930f579a757d0287f692",
       "referenced_by": [
-        "color_group_runtime_v46.py:228",
-        "color_group_runtime_v46.py:371",
-        "color_group_runtime_v46.py:396"
+        "bw_pipeline_v46.py:1112"
+      ]
+    },
+    {
+      "path": "src/color_neutral_step5_v46.py",
+      "bytes": 20310,
+      "sha256": "02ef8576a8e14ae3339a73a41c35702a9e0129ec38611921fce70109950fda99",
+      "referenced_by": [
+        "color_group_runtime_v46.py:275",
+        "color_group_runtime_v46.py:517",
+        "color_group_runtime_v46.py:542",
+        "existing distribution"
       ]
     },
     {
       "path": "src/color_palette_identity_v46.py",
-      "bytes": 5472,
-      "sha256": "1d18fb368dc4edaaf660143ccfc7ea8f00db297f9146035775a3a9d0d6a768d7",
+      "bytes": 40519,
+      "sha256": "15076873b09b279a84e95dc450ab968ac9c1e10a7c3e990c60a0570ac93fdb44",
       "referenced_by": [
         "color_group_bw_v46.py:16",
         "color_group_relative_identity_v46.py:18",
         "color_group_runtime_v46.py:33",
-        "color_marker_evidence.py:435",
-        "color_marker_evidence.py:449",
+        "color_marker_evidence.py:467",
+        "color_marker_evidence.py:475",
+        "color_marker_evidence.py:488",
+        "color_marker_runtime_v46.py:183",
+        "color_neutral_group_identity_v46.py:43",
         "color_neutral_step5_v46.py:19",
         "color_recovery_evidence_v46.py:19",
-        "color_source_observation_v46.py:62"
+        "color_source_observation_v46.py:65",
+        "existing distribution"
       ]
     },
     {
@@ -965,8 +1346,9 @@
       "bytes": 12036,
       "sha256": "abcadc1c979bf9ff53ece40711d088f796bb274dd8da0ee3b66dbd77c51c73b6",
       "referenced_by": [
-        "color_group_bw_v46.py:83",
-        "color_recovery_evidence_v46.py:20"
+        "color_group_bw_v46.py:186",
+        "color_recovery_evidence_v46.py:20",
+        "existing distribution"
       ]
     },
     {
@@ -1009,7 +1391,7 @@
         "color_tentative_v46.py:18",
         "existing distribution",
         "legend_optional_v46/classifier.py:17",
-        "legend_optional_v46/runtime.py:275",
+        "legend_optional_v46/runtime.py:278",
         "type3_v46/grid_aware_path_v1.py:6"
       ]
     },
@@ -1060,7 +1442,7 @@
       "bytes": 2271,
       "sha256": "74dd7156c34dfffa3a097b4534f72b36945f81c9a2db663467f8c8105fd555c0",
       "referenced_by": [
-        "color_group_bw_v46.py:92",
+        "color_group_bw_v46.py:198",
         "existing distribution"
       ]
     },
@@ -1071,9 +1453,10 @@
       "referenced_by": [
         "color_marker_evidence_v2.py:356",
         "color_marker_evidence_v2.py:373",
-        "color_marker_runtime_v46.py:316",
+        "color_marker_runtime_v46.py:339",
         "color_step5_export_v46.py:426",
-        "color_step5_payload_v46.py:158"
+        "color_step5_payload_v46.py:158",
+        "existing distribution"
       ]
     },
     {
@@ -1132,12 +1515,31 @@
       ]
     },
     {
-      "path": "src/color_source_observation_v46.py",
-      "bytes": 7324,
-      "sha256": "6f6d10e57aac621d9ee95a4d06d8155311cdc59b2abbd758a3252ef36723bc49",
+      "path": "src/color_source_legend_v46.py",
+      "bytes": 12469,
+      "sha256": "22e7c066a82bdc8560e7e277a22cbe0f86a0f197d42fa2bebf263d1fde9be3ff",
       "referenced_by": [
-        "color_group_bw_v46.py:97",
-        "color_neutral_step5_v46.py:17"
+        "color_group_bw_v46.py:57",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/color_source_line_evidence_v46.py",
+      "bytes": 5379,
+      "sha256": "3029bff4a5137e1a47307e97c1cacf412d0c3fe3362bf8406923d60b00f7c539",
+      "referenced_by": [
+        "bw_pipeline_v46.py:925",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/color_source_observation_v46.py",
+      "bytes": 8155,
+      "sha256": "1936e136b26ef778643b2926ee5904dc6d9480975d890238b1dacaa40e8e1664",
+      "referenced_by": [
+        "color_group_bw_v46.py:203",
+        "color_neutral_step5_v46.py:17",
+        "existing distribution"
       ]
     },
     {
@@ -1168,7 +1570,7 @@
         "color_correct_cli.py:202",
         "color_series_correction_v46.py:219",
         "existing distribution",
-        "unified_server.py:553"
+        "unified_server.py:634"
       ]
     },
     {
@@ -1178,9 +1580,9 @@
       "referenced_by": [
         "color_estimated_path_v46.py:113",
         "color_estimated_path_v46.py:115",
-        "color_marker_runtime_v46.py:300",
+        "color_marker_runtime_v46.py:323",
         "existing distribution",
-        "legend_optional_v46/runtime.py:274",
+        "legend_optional_v46/runtime.py:277",
         "type3_v46/step5_adapter.py:107 dynamic filename"
       ]
     },
@@ -1192,7 +1594,7 @@
         "color_correct_cli.py:175",
         "color_step5.py:988",
         "color_step5_export_v46.py:15",
-        "correction_session_v46.py:210",
+        "correction_session_v46.py:215",
         "existing distribution"
       ]
     },
@@ -1215,7 +1617,7 @@
       "bytes": 18128,
       "sha256": "872e757bd5a664524a4cfae88f994070e4a26c079893c57a8e184e834cc395e4",
       "referenced_by": [
-        "color_marker_runtime_v46.py:299",
+        "color_marker_runtime_v46.py:322",
         "color_series_structure_v46.py:16",
         "existing distribution",
         "type3_v46/pipeline.py:15"
@@ -1227,7 +1629,7 @@
       "sha256": "376737a22c068141d4dd43c3ccbf3d9a87c1ed07af4b8f9142092a8cae386f23",
       "referenced_by": [
         "color_marker_runtime_v46.py:23",
-        "color_marker_window_v2.py:347",
+        "color_marker_window_v2.py:370",
         "existing distribution"
       ]
     },
@@ -1245,11 +1647,11 @@
       "bytes": 8167,
       "sha256": "f47ac72c8dd3e75aef63f456dd55439accf680e2600333f9a4b126cce14b82f9",
       "referenced_by": [
-        "correction_session_v46.py:361",
+        "correction_session_v46.py:371",
         "existing distribution",
-        "unified_server.py:501",
-        "unified_server.py:710",
-        "unified_server.py:739"
+        "unified_server.py:565",
+        "unified_server.py:798",
+        "unified_server.py:827"
       ]
     },
     {
@@ -1258,29 +1660,29 @@
       "sha256": "209827179ffcdd6082fccfec2d8a437269aaa648e9146e348fde640a2449277e",
       "referenced_by": [
         "existing distribution",
-        "unified_server.py:747 dynamic filename"
+        "unified_server.py:835 dynamic filename"
       ]
     },
     {
       "path": "src/correction_session_v46.py",
-      "bytes": 26021,
-      "sha256": "651a94fb6423ddc7e8bfd4ab4469333b095b6dee7795f4794365981720102c66",
+      "bytes": 27382,
+      "sha256": "660596d51ef77b0b4b0d68970e61a49357b24fcd6c6e9d2d73ec2774d18b4064",
       "referenced_by": [
-        "color_group_runtime_v46.py:314",
-        "color_group_runtime_v46.py:353",
+        "color_group_runtime_v46.py:455",
+        "color_group_runtime_v46.py:494",
         "correction_history_v46.py:12",
         "correction_only_cli_v46.py:3",
         "existing distribution",
-        "unified_server.py:485",
-        "unified_server.py:542",
-        "unified_server.py:604",
-        "unified_server.py:622",
-        "unified_server.py:639",
-        "unified_server.py:669",
-        "unified_server.py:677",
-        "unified_server.py:691",
-        "unified_server.py:709",
-        "unified_server.py:722"
+        "unified_server.py:549",
+        "unified_server.py:623",
+        "unified_server.py:692",
+        "unified_server.py:710",
+        "unified_server.py:727",
+        "unified_server.py:757",
+        "unified_server.py:765",
+        "unified_server.py:779",
+        "unified_server.py:797",
+        "unified_server.py:810"
       ]
     },
     {
@@ -1288,8 +1690,8 @@
       "bytes": 12205,
       "sha256": "c3da3225a29a5e6faa30e477dd4eb4521e13e68f57f698238b945d5d444b0cb0",
       "referenced_by": [
-        "color_group_runtime_v46.py:352",
-        "color_neutral_step5_v46.py:294",
+        "color_group_runtime_v46.py:493",
+        "color_neutral_step5_v46.py:296",
         "existing distribution"
       ]
     },
@@ -1298,6 +1700,7 @@
       "bytes": 4577,
       "sha256": "d0163374a64237e56d33cca1e4fb317e4c429a94c2796c411523a31395323081",
       "referenced_by": [
+        "existing distribution",
         "group_element_correction_v46.py:119"
       ]
     },
@@ -1321,8 +1724,8 @@
     },
     {
       "path": "src/index.html",
-      "bytes": 144345,
-      "sha256": "f19909766056651868b4ba4afe09664fb47d6d2a86e9faa5a5b5d399d5eb2123",
+      "bytes": 147226,
+      "sha256": "a6ca2f357f99f7847b6484ef5e4b70db00f5fe036e4d522807202f291f666fb3",
       "referenced_by": [
         "web asset"
       ]
@@ -1337,6 +1740,25 @@
       ]
     },
     {
+      "path": "src/legend_body_context_v46.py",
+      "bytes": 11291,
+      "sha256": "a88bd24151f4b3448ccfec73ea61ecdb205cdb7ad8fce7faa512a4011d1b48c9",
+      "referenced_by": [
+        "bw_legend_v46.py:1068",
+        "bw_legend_v46.py:1097",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/legend_border_v46.py",
+      "bytes": 3131,
+      "sha256": "381f1261cde18ca57ca5ecd03fa9794dd753fe2b10149a95aed9059ff4784ed4",
+      "referenced_by": [
+        "bw_legend_v46.py:841",
+        "existing distribution"
+      ]
+    },
+    {
       "path": "src/legend_composition_v46.py",
       "bytes": 16920,
       "sha256": "3d4aeea0ff2657e8046ac9d6d7825a195e92528d4d2822bf16961dea85322578",
@@ -1344,6 +1766,8 @@
         "bw_composed_legend_v46.py:6",
         "bw_cross_evidence_v46.py:25",
         "bw_geometry_first_v46.py:18",
+        "bw_legend_local_completion_v46.py:178",
+        "bw_line_crossed_hollow_v46.py:14",
         "bw_small_hollow_v46.py:10",
         "color_hollow_geometry_scale_v46.py:31",
         "color_legend_composition_v46.py:18",
@@ -1354,13 +1778,46 @@
       ]
     },
     {
-      "path": "src/legend_layered_composition_v46.py",
-      "bytes": 12104,
-      "sha256": "8f35e6877dad46d42864ffd682ee04abc5c068e7ceea14ed4fe099ddc0a22951",
+      "path": "src/legend_crop_v46.py",
+      "bytes": 4764,
+      "sha256": "ae8fef60a83c2a79ce869b9c37d0a83da649de9bae3c30e85b9ce74a8240352a",
       "referenced_by": [
-        "bw_composed_legend_v46.py:39",
-        "color_legend_composition_v46.py:108",
+        "bw_legend_v46.py:1028",
+        "existing distribution",
+        "legend_frame_v46.py:96"
+      ]
+    },
+    {
+      "path": "src/legend_frame_v46.py",
+      "bytes": 5758,
+      "sha256": "f315d5ea026479329e0795894abc245875d0ae1654ac5c84473838e5f6eb8a43",
+      "referenced_by": [
+        "bw_legend_v46.py:1047",
+        "bw_legend_v46.py:1099",
+        "color_legend_composition_v46.py:19",
         "existing distribution"
+      ]
+    },
+    {
+      "path": "src/legend_layered_composition_v46.py",
+      "bytes": 12317,
+      "sha256": "0062c82308689c0c2249a614ce797ea18d0e6cde2ec06bc8686d70dbb33e1b31",
+      "referenced_by": [
+        "bw_composed_legend_v46.py:40",
+        "bw_composed_legend_v46.py:50",
+        "bw_line_crossed_hollow_v46.py:45",
+        "color_legend_composition_v46.py:115",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/legend_line_independence_v46.py",
+      "bytes": 1832,
+      "sha256": "e2decd435779ad80676353e0c47f41b633b37b5d1e999ee770e93a0001ba525f",
+      "referenced_by": [
+        "color_legend_runtime_v46.py:78",
+        "existing distribution",
+        "legend_optional_v46/runtime.py:56"
       ]
     },
     {
@@ -1369,6 +1826,7 @@
       "sha256": "3c884fc2dd4433b6c1f89803f1d39067974ef5ab58179273e92eea3e359994cb",
       "referenced_by": [
         "bw_composed_legend_v46.py:9",
+        "bw_line_crossed_hollow_v46.py:15",
         "existing distribution",
         "legend_composition_v46.py:202",
         "legend_layered_composition_v46.py:12"
@@ -1388,9 +1846,9 @@
         "legend_optional_v46/common_ink.py:20",
         "legend_optional_v46/common_ink.py:21",
         "legend_optional_v46/palette.py:15",
-        "legend_optional_v46/runtime.py:106",
-        "legend_optional_v46/runtime.py:107",
-        "legend_optional_v46/runtime.py:123",
+        "legend_optional_v46/runtime.py:109",
+        "legend_optional_v46/runtime.py:110",
+        "legend_optional_v46/runtime.py:126",
         "legend_optional_v46/runtime.py:16",
         "legend_optional_v46/runtime.py:53",
         "legend_optional_v46/single.py:20",
@@ -1404,7 +1862,7 @@
       "sha256": "0274d3ad570d3f60d0cd42c9720c139f79fa3e0e811f2cd267c076bd2e977ce0",
       "referenced_by": [
         "existing distribution",
-        "legend_optional_v46/runtime.py:107"
+        "legend_optional_v46/runtime.py:110"
       ]
     },
     {
@@ -1424,7 +1882,7 @@
       "sha256": "f95358986c1b6fb172a37f8d70a346ff0585295ee2836e8ed2bfddc6942d258a",
       "referenced_by": [
         "existing distribution",
-        "legend_optional_v46/runtime.py:123"
+        "legend_optional_v46/runtime.py:126"
       ]
     },
     {
@@ -1476,8 +1934,8 @@
     },
     {
       "path": "src/legend_optional_v46/runtime.py",
-      "bytes": 27442,
-      "sha256": "8ca57d295ae15824201633ccc9036d914cc0a4b3d6624ad50e76e29b324b61fc",
+      "bytes": 27644,
+      "sha256": "fc6a75b952cd9e12d870d27e45866f00eb205bcbdb3f507f2a65bee8e80ae551",
       "referenced_by": [
         "bw_pipeline.py:153",
         "existing distribution",
@@ -1490,7 +1948,7 @@
       "sha256": "2d4006e461285b00646e3a468e015ac988ade467ee2dacdbf76e6dfce5640efd",
       "referenced_by": [
         "existing distribution",
-        "legend_optional_v46/runtime.py:106"
+        "legend_optional_v46/runtime.py:109"
       ]
     },
     {
@@ -1508,8 +1966,9 @@
       "bytes": 4570,
       "sha256": "ad08ccab4c624d838db6d2502b8de37e5ffe0463f6a0da9b821c51ceb557b5bf",
       "referenced_by": [
-        "color_neutral_step5_v46.py:199",
-        "color_neutral_step5_v46.py:217"
+        "color_neutral_step5_v46.py:201",
+        "color_neutral_step5_v46.py:219",
+        "existing distribution"
       ]
     },
     {
@@ -1526,6 +1985,7 @@
       "bytes": 7099,
       "sha256": "ebe8a6d996b513a546aca3b1ece68485f839be56566ca71d511007c2559e6213",
       "referenced_by": [
+        "bw_axis_contact_v46.py:19",
         "color_marker_evidence_v2.py:383",
         "existing distribution",
         "marker_guide_model_v46.py:12"
@@ -1536,26 +1996,30 @@
       "bytes": 5839,
       "sha256": "967fea8f8cc2f9d10727198ff0801a5429ba4c322ad3f033e83b9ef91cf19a3e",
       "referenced_by": [
-        "color_marker_window_v2.py:430",
+        "color_marker_window_v2.py:453",
         "existing distribution"
       ]
     },
     {
       "path": "src/occlusion_aware_window_verifier.py",
-      "bytes": 43884,
-      "sha256": "2c04616ed5a395d32f9d1aba16245d923b10cb6a9a67abd298ded29cbd2f5d92",
+      "bytes": 47195,
+      "sha256": "7842164641fc582b75120c30301fe94258ded4dd1f0aaf20c4aefe440ed32e59",
       "referenced_by": [
         "bw_circle_scale_v46.py:19",
-        "bw_detect_cli.py:196 dynamic filename",
-        "bw_geometry_first_v46.py:418",
-        "bw_geometry_first_v46.py:464",
-        "bw_geometry_first_v46.py:504",
+        "bw_detect_cli.py:201 dynamic filename",
+        "bw_final_alignment_v46.py:17",
+        "bw_final_alignment_v46.py:48",
+        "bw_geometry_first_v46.py:586",
+        "bw_geometry_first_v46.py:762",
+        "bw_geometry_first_v46.py:830",
+        "bw_geometry_first_v46.py:872",
         "bw_gpu_window_verifier.py:305",
         "bw_gpu_window_verifier.py:526",
         "bw_gpu_window_verifier.py:95",
         "bw_pipeline_v46.py:21",
-        "bw_pipeline_v46.py:720",
+        "bw_pipeline_v46.py:979",
         "bw_scale_calibration.py:233",
+        "bw_shared_legend_window_v46.py:13",
         "existing distribution"
       ]
     },
@@ -1564,13 +2028,13 @@
       "bytes": 10566,
       "sha256": "0b6b7fee346ea0b5d14effd423e19e3b4fd913fe50bbdf3a03783d899b050f54",
       "referenced_by": [
-        "bw_pipeline_v46.py:226",
+        "bw_pipeline_v46.py:264",
         "chart_analysis_v46.py:21",
         "chart_analysis_v46.py:22",
         "chart_preprocessing.py:1620",
         "existing distribution",
         "type3_v46/runtime.py:23",
-        "unified_server.py:28"
+        "unified_server.py:29"
       ]
     },
     {
@@ -1578,33 +2042,39 @@
       "bytes": 4202,
       "sha256": "090511469246611c4360add834cb3e7af14809fee9e45f8397d1abda35470282",
       "referenced_by": [
+        "bw_final_alignment_v46.py:39",
         "existing distribution",
-        "occlusion_aware_window_verifier.py:638",
-        "occlusion_aware_window_verifier.py:690",
-        "occlusion_aware_window_verifier.py:762"
+        "occlusion_aware_window_verifier.py:681",
+        "occlusion_aware_window_verifier.py:733",
+        "occlusion_aware_window_verifier.py:817"
       ]
     },
     {
       "path": "src/partial_swatch_detector.py",
-      "bytes": 75472,
-      "sha256": "11786f694ab7502f723ea513602cee36717e87d20c1a3dad9815e720c643e1a7",
+      "bytes": 88353,
+      "sha256": "17631b39516d8eab3c11808df9226c776622c6c27c8cbfa08aa9efae0434f028",
       "referenced_by": [
         "bw_circle_scale_v46.py:13",
         "bw_composed_legend_v46.py:8",
-        "bw_detect_cli.py:190 dynamic filename",
+        "bw_detect_cli.py:195 dynamic filename",
+        "bw_final_alignment_v46.py:47",
         "bw_geometry_first_v46.py:15",
         "bw_gpu_candidate_centres.py:321",
         "bw_gpu_candidate_verifier.py:104",
         "bw_gpu_candidate_verifier.py:156",
-        "bw_gpu_candidate_verifier.py:319",
-        "bw_gpu_candidate_verifier.py:339",
+        "bw_gpu_candidate_verifier.py:323",
+        "bw_gpu_candidate_verifier.py:346",
         "bw_gpu_grid_votes.py:186",
+        "bw_legend_local_completion_v46.py:87",
         "bw_legend_v46.py:15",
+        "bw_line_crossed_hollow_v46.py:118",
         "bw_pipeline_v46.py:17",
         "bw_scale_calibration.py:16",
         "bw_shared_scale_v46.py:12",
-        "bw_small_hollow_v46.py:139",
+        "bw_small_hollow_v46.py:150",
         "color_legend_hybrid_v46.py:15",
+        "color_source_legend_v46.py:12",
+        "color_source_line_evidence_v46.py:10",
         "color_source_observation_v46.py:41",
         "existing distribution",
         "occlusion_aware_window_verifier.py:14",
@@ -1616,11 +2086,11 @@
       "bytes": 1904,
       "sha256": "e2bac4420ca1b82020075f8cf8f88fc602ac2f511204827eb18ca3308afb47d6",
       "referenced_by": [
-        "bw_detect_cli.py:186 dynamic filename",
+        "bw_detect_cli.py:190 dynamic filename",
         "existing distribution",
-        "unified_server.py:111 dynamic filename",
-        "unified_server.py:112 dynamic filename",
-        "unified_server.py:391 dynamic filename"
+        "unified_server.py:145 dynamic filename",
+        "unified_server.py:146 dynamic filename",
+        "unified_server.py:447 dynamic filename"
       ]
     },
     {
@@ -1637,15 +2107,15 @@
       "bytes": 6583,
       "sha256": "87b5a96e7312ec4b51d13029ddc3c15e51f5ad72a262a5c1b14fbe1bc1dfda18",
       "referenced_by": [
-        "correction_session_v46.py:496",
+        "correction_session_v46.py:514",
         "existing distribution",
-        "unified_server.py:725"
+        "unified_server.py:813"
       ]
     },
     {
       "path": "src/triangle_errorbar_v46.py",
-      "bytes": 24469,
-      "sha256": "63c2bd1b2288c6227f6b34560571e9389940d73251ed4525505e79a84d1d0411",
+      "bytes": 28041,
+      "sha256": "64d470fb9afc0943df159f9a893ab0046bfcf75480c2dc18f44109f9f38fea7f",
       "referenced_by": [
         "color_marker_runtime_v46.py:24",
         "color_series_structure_v46.py:17",
@@ -1660,13 +2130,13 @@
       "referenced_by": [
         "color_correct_cli.py:144",
         "color_marker_runtime_v46.py:112",
-        "correction_session_v46.py:206",
-        "correction_session_v46.py:417",
+        "correction_session_v46.py:211",
+        "correction_session_v46.py:434",
         "existing distribution",
-        "legend_optional_v46/runtime.py:109",
-        "legend_optional_v46/runtime.py:233",
-        "legend_optional_v46/runtime.py:385",
-        "legend_optional_v46/runtime.py:57",
+        "legend_optional_v46/runtime.py:112",
+        "legend_optional_v46/runtime.py:236",
+        "legend_optional_v46/runtime.py:388",
+        "legend_optional_v46/runtime.py:58",
         "run_A4_color_v46.py:52",
         "type3_v46/gui_adapter.py:118",
         "type3_v46/path_bar_assignment_guard_v3.py:8",
@@ -1751,11 +2221,11 @@
       "sha256": "567c32fbe1f15118f918ef9c61b780f931e11dd43d8547c54b514034e1605729",
       "referenced_by": [
         "color_correct_cli.py:144",
-        "correction_session_v46.py:206",
-        "correction_session_v46.py:417",
+        "correction_session_v46.py:211",
+        "correction_session_v46.py:434",
         "existing distribution",
-        "legend_optional_v46/runtime.py:233",
-        "legend_optional_v46/runtime.py:385"
+        "legend_optional_v46/runtime.py:236",
+        "legend_optional_v46/runtime.py:388"
       ]
     },
     {
@@ -1852,7 +2322,7 @@
       "sha256": "7c1211ba7ca78e3e2be707890b24c66a6a4abd9e43b0463dd279dcc505ddc04a",
       "referenced_by": [
         "existing distribution",
-        "legend_optional_v46/runtime.py:109",
+        "legend_optional_v46/runtime.py:112",
         "type3_v46/runtime.py:12"
       ]
     },
@@ -1863,7 +2333,7 @@
       "referenced_by": [
         "color_marker_runtime_v46.py:112",
         "existing distribution",
-        "legend_optional_v46/runtime.py:57",
+        "legend_optional_v46/runtime.py:58",
         "run_A4_color_v46.py:52"
       ]
     },
@@ -1907,8 +2377,8 @@
     },
     {
       "path": "src/unified_server.py",
-      "bytes": 40603,
-      "sha256": "04a8b31f06c6b5acb016566763469d12b23deb1d7702e0aa21156a30b38095b3",
+      "bytes": 45797,
+      "sha256": "a7bcb7fa256e95b9aaabf5270f909d94a5500f905d346973406c9966ca422ab8",
       "referenced_by": [
         "existing distribution"
       ]
@@ -1918,9 +2388,9 @@
       "bytes": 9308,
       "sha256": "7203b3a8149567942742300ffd2ce14911a6c1db79b6c80a6de77fec1d9012ea",
       "referenced_by": [
-        "bw_detect_cli.py:190 dynamic filename",
+        "bw_detect_cli.py:195 dynamic filename",
         "bw_step5_v46.py:26",
-        "color_group_runtime_v46.py:149",
+        "color_group_runtime_v46.py:183",
         "existing distribution",
         "group_element_correction_v46.py:15"
       ]

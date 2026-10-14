@@ -153,7 +153,8 @@ class GpuCandidateVerifier:
         spatial index; all pixel-level metrics and acceptance decisions are
         calculated in bounded GPU batches. No template/marker thresholds change.
         """
-        from partial_swatch_detector import Detection, _IndexedHypotheses, _defer_small_hollow_centre_fill
+        from partial_swatch_detector import (Detection, _IndexedHypotheses,
+            _defer_small_hollow_centre_fill, _defer_supported_hollow_centre_fill)
         if len(evidence) != len(centers):
             raise ValueError('Every candidate requires its own voting evidence')
         if grid_step < 1:
@@ -286,7 +287,10 @@ class GpuCandidateVerifier:
                     centre_ok = plot_centre_fill <= .70
                 else:
                     centre_ok = similarity >= .45
-                centre_deferred = ~centre_ok & _defer_small_hollow_centre_fill(self.template)
+                tiny_defer = _defer_small_hollow_centre_fill(self.template)
+                outline_defer = _defer_supported_hollow_centre_fill(self.template,
+                    visible_sectors, supported_sectors, mismatch_sectors)
+                centre_deferred = ~centre_ok & (tiny_defer | outline_defer)
                 centre_ok = centre_ok | centre_deferred
                 accepted = ((edge_count > 0) & (number(matched) > 0) &
                     (supporting >= (3 if diameter < 9 else 4)) &
@@ -323,6 +327,9 @@ class GpuCandidateVerifier:
                         patch=_extract_aligned_patch(self.membership,x,y,self.template.mask.shape)
                         delta,boundary=grid_score_adjustment(self.template,patch,float(row[12]))
                         self.stats['boundary_evidence_backend']='cpu_shared_normal_profiles'
+                    if row[13]:
+                        boundary=dict(boundary,centre_fill_defer_reason=('tiny_completed_hollow'
+                            if tiny_defer else 'supported_completed_hollow_contour'))
                     results.append(Detection(template=self.template.key, x=float(x), y=float(y),
                         score=float(row[1])+delta, contour_coverage=float(row[2]), contour_precision=float(row[3]),
                         foreground_coverage=float(row[4]), direct_foreground_coverage=float(row[5]),

@@ -75,6 +75,7 @@ class LegendRuntime:
         """Lock every downstream list to the exact same accepted-entry order."""
         from color_legend_hybrid_v46 import extract_hybrid_legend
         from color_legend_composition_v46 import enrich_entry
+        from legend_line_independence_v46 import independent_line_rows
 
         self.env = env
         legend_box = env.get('LEGEND_BOX')
@@ -96,7 +97,14 @@ class LegendRuntime:
             raise RuntimeError('v46 hybrid legend extraction failed; no silent detector fallback') from error
         self.diagnostics['rejected'] = _plain(rejected)
         self.diagnostics['hybrid_reports'] = _plain(reports)
-        has_line_entries = any(r.get('status') == 'line_only' and r.get('observed_line_box') for r in rejected)
+        line_rows = [r for r in rejected if r.get('status') == 'line_only' and r.get('observed_line_box')]
+        # The Auto route and final palette must agree about source identity.
+        # A marker rim is not an independent line-series swatch. Explicit
+        # line-only mode retains its marker-free contract.
+        if not self.allow_line_only:
+            line_rows, conflicts = independent_line_rows(line_rows, reports)
+            self.diagnostics['nonindependent_line_evidence'] = _plain(conflicts)
+        has_line_entries = bool(line_rows)
         if self.allow_line_only and has_line_entries:
             # An explicitly marker-free chart consumes observed native line
             # keys only. Extra hybrid shape proposals can be adjacent text;
@@ -132,9 +140,7 @@ class LegendRuntime:
         # A line-only legend item is a valid colour series, but never a marker
         # template. Retain its actually observed narrow support and RGB without
         # manufacturing a marker or taking pixels from a broad text window.
-        for rejection in rejected:
-            if rejection.get('status') != 'line_only' or not rejection.get('observed_line_box'):
-                continue
+        for rejection in line_rows:
             box = tuple(map(int, rejection['observed_line_box']))
             raw = image[box[1]:box[3], box[0]:box[2]].copy()
             mask = np.asarray(rejection['observed_line_mask'], bool)

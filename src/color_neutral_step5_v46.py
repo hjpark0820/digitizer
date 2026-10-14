@@ -67,14 +67,16 @@ class FrozenCompetition(Competition):
         if image.shape[0]*image.shape[1]>1_000_000 or not models or len(models)>10:
             self.report['status']='resource_limit_preserved';return
         for sid,m in models.items():
-            a,b,c,d=map(int,m['legend_box'])
+            # Recovered source bodies must not expand back to a contaminated
+            # full swatch when the saved result is opened for correction.
+            a,b,c,d=map(int,m.get('legend_body_box',m['legend_box']))
             rec,f=R.extract(cv2.cvtColor(image[b:d,a:c],cv2.COLOR_BGR2GRAY))
             if f is None or rec['diameter']>self.cfg.maximum_diameter:return
             scale=float(m.get('effective_diameter',m['source_diameter']))/rec['diameter']
             if not .4<=scale<=2.:return
             self.templates[sid]=(rec,f);self.scales[sid]=scale
             self.prepared[sid],self.source_meta[sid]=L.prepare_source(rec,f)
-            self.colour_fits[sid]=paper_mixture_evidence(image,_swatch_model(image,[a,b,c,d],m.get('rgb')))['fit']
+            self.colour_fits[sid]=paper_mixture_evidence(image,_swatch_model(image,m['legend_box'],m.get('rgb')))['fit']
         self.radius=max(L.variants(r,self.prepared[s],self.scales[s],(0.,0.))[3] for s,(r,_) in self.templates.items())
         self.ready=True
         self.report.update(status='ready',scales=self.scales,common_radius=self.radius)

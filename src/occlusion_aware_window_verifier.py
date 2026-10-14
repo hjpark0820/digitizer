@@ -468,6 +468,49 @@ def _uncertain_sector_scores(support, weight, eligibility_weight=None, minimum_s
     return float(np.mean(np.asarray(recalls) >= 0.5)), float(min(recalls))
 
 
+def _sparse_sector_evidence(support, weight, direct_support, eligibility_weight=None):
+    """Do not mistake an unmeasurable tiny sector for observed missing ink.
+
+    Large sectors retain the historical test. If fewer than six directions
+    meet its absolute mass floor, measure every nonempty SOURCE direction and
+    require distributed direct ink as well. One surviving direction cannot
+    certify a two-dimensional body. Neighbour borrowing cannot satisfy the
+    extra direct-ink requirement.
+    """
+    yy, xx = np.indices(weight.shape)
+    sectors = np.floor((np.arctan2(yy-(weight.shape[0]-1)/2,
+                                    xx-(weight.shape[1]-1)/2)+np.pi)*4/np.pi).astype(int)%8
+    eligibility = weight if eligibility_weight is None else eligibility_weight
+    mass=[]; recalls=[]; direct=[]
+    for sector in range(8):
+        selected=(sectors==sector)&(weight>0)
+        m=float(eligibility[selected].sum());mass.append(m)
+        den=max(float(weight[selected].sum()),1.e-6)
+        recalls.append(float(np.sum(support[selected]*weight[selected])/den))
+        direct.append(float(np.sum(direct_support[selected]*weight[selected])/den))
+    nonempty=np.asarray(mass)>1.e-6
+    old=np.asarray(mass)>=1.5
+    sparse=int(old.sum())<6
+    selected=nonempty if sparse else old
+    vals=np.asarray(recalls)[selected]
+    direct_vals=np.asarray(direct)[selected]
+    total=float(np.sum(eligibility))
+    direct_recall=float(np.sum(direct_support*weight)/max(float(weight.sum()),1.e-6))
+    measurable=bool(not sparse or (nonempty.sum()>=6 and total>=2.0))
+    direct_ok=bool(not sparse or (direct_recall>=.65 and
+        np.count_nonzero(direct_vals>=.35)>=6))
+    shape=float(np.mean(vals>=.5)) if vals.size else 0.
+    minimum=float(vals.min()) if vals.size else 0.
+    return dict(version='source_sparse_sectors_v1',sparse=sparse,
+        status='measured' if measurable else 'insufficient_source_sector_coverage',
+        legacy_eligible_sectors=int(old.sum()),measured_sectors=int(selected.sum()),
+        sector_mass=mass,sector_recall=recalls,direct_sector_recall=direct,
+        source_weight_mass=total,direct_required_recall=direct_recall,
+        shape_support=shape,minimum_sector_recall=minimum,
+        accepted=bool(measurable and direct_ok and minimum>=.50),
+        direct_ink_supported=direct_ok,neighbour_credit_used_for_direct=False)
+
+
 def _place_array(array, window_size, dx, dy, fill=0):
     output = np.full((window_size, window_size), fill, dtype=array.dtype)
     left = (window_size - array.shape[1]) // 2 + dx
@@ -727,6 +770,17 @@ def _finalize_uncertain_marker_window(template, x, y, fixed_geometry,
         shape_support, minimum_sector = _uncertain_sector_scores(item[7], item[6],
             eligibility_weight=item[14] if len(item)>14 else None,
             minimum_sector_mass=(1.e-6 if getattr(template,'small_hollow_model',None) or crossed else 1.5))
+        sector_evidence=None
+        if not getattr(template,'small_hollow_model',None) and not crossed:
+            _,_,sector_expected,_,_=_uncertain_shape(template,item[1],item[2])
+            top=(window_size-item[5].shape[0])//2+item[4]
+            left=(window_size-item[5].shape[1])//2+item[3]
+            raw=prepared[4][top:top+item[5].shape[0],left:left+item[5].shape[1]]
+            sector_evidence=_sparse_sector_evidence(item[7],item[6],np.minimum(raw/sector_expected,1.),
+                eligibility_weight=item[14] if len(item)>14 else None)
+            if sector_evidence['sparse']:
+                shape_support=sector_evidence['shape_support']
+                minimum_sector=sector_evidence['minimum_sector_recall']
         core_ok = item[11] >= 0.85
         if circular and not core_ok:
             from bw_circle_rim_v46 import rim_evidence, unmeasurable_core_supported
@@ -739,7 +793,8 @@ def _finalize_uncertain_marker_window(template, x, y, fixed_geometry,
             core_ok=unmeasurable_core_supported(rim)
         # A high average cannot hide a mostly absent side/corner. Each sector
         # must retain at least half its required ink, including crossed sectors.
-        geometry_ok = minimum_sector >= 0.50
+        geometry_ok = (minimum_sector >= 0.50 and
+                       (sector_evidence is None or sector_evidence['accepted']))
         decision = ("verified" if item[10] >= required_verified and core_ok and geometry_ok
                     and (not circular or item[13]>=required_verified)
                     else "ambiguous" if item[10] >= required_ambiguous and item[11] >= 0.72
@@ -773,8 +828,9 @@ def _finalize_uncertain_marker_window(template, x, y, fixed_geometry,
             decision=apply_guard(trial,template,occlusion).decision
             compute_stats['small_circle_center_policy']='source_hole_and_rim_before_center_selection'
         evaluated.append((decision == "verified", item[0], item, decision,
-                          shape_support, minimum_sector))
-    _, _, best, decision, shape_support, minimum_sector = max(evaluated, key=lambda value: value[:2])
+                          shape_support, minimum_sector,sector_evidence))
+    _, _, best, decision, shape_support, minimum_sector,sector_evidence = max(evaluated, key=lambda value: value[:2])
+    if sector_evidence is not None:compute_stats['sector_evidence']=sector_evidence
     (_, scale, aspect, dx, dy, mask, weight, support, core, boundary,
      weighted, core_recall, boundary_recall, score) = best[:14]
     rendered = _place_array(mask, window_size, dx, dy)

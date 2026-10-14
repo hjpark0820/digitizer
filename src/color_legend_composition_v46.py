@@ -16,6 +16,7 @@ import numpy as np
 import color_marker_evidence as evidence_base
 from color_marker_evidence_v2 import _template_regions
 from legend_composition_v46 import Config, fit_legend_composition, render_model
+from legend_frame_v46 import interior_bounds
 
 VERSION = 'v46_observed_locator_inverse_legend_composition_v3_independent_hollow'
 
@@ -25,10 +26,16 @@ def full_swatch_box(image, entry, legend_box):
 
     Search only the supplied legend, near the identified row; take the connected
     target-colour component intersecting the body, never a broad text window.
+    A measured legend frame stroke is not paper: search and margin stop inside it.
     All returned coordinates are half-open source-image coordinates.
     """
     bx0, by0, bx1, by1 = map(int, entry['box'])
+    # A frame drawn on the legend rectangle would otherwise join the paper
+    # margin. On a pale key, the darker stroke is then calibrated as the key's
+    # ink and every fitted marker alpha shrinks (a sub-0.65 hollow template).
+    inner, _ = interior_bounds(image, legend_box, [entry['box']])
     lx0, ly0, lx1, ly1 = map(int, legend_box)
+    lx0, ly0, lx1, ly1 = max(lx0, inner[0]), max(ly0, inner[1]), min(lx1, inner[2]), min(ly1, inner[3])
     diameter = float(entry.get('report', {}).get('diameter', max(bx1-bx0, by1-by0)))
     pad = max(3, int(math.ceil(.70*diameter)))
     area = evidence_base._box([max(lx0, bx0-3*diameter), max(ly0, by0-pad),

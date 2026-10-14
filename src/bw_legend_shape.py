@@ -66,6 +66,45 @@ def _off_line_shape_scores(envelope, nuisance):
     return scores
 
 
+def observed_interior_support(mask, nuisance=None):
+    """Measure the existing shape classifier's adaptive off-line interior.
+
+    The returned region/envelope are measurement geometry, never new ink.
+    Keeping this policy in one helper lets a source-tone descriptor inspect
+    the same native pixels without treating binary occupancy as brightness.
+    ``geometry`` contains arrays for callers; it is not a JSON descriptor.
+    """
+    observed = np.asarray(mask, dtype=bool)
+    if observed.ndim != 2:
+        raise ValueError('Shape mask must be two-dimensional')
+    line = np.zeros_like(observed) if nuisance is None else np.asarray(nuisance, dtype=bool)
+    if line.shape != observed.shape:
+        raise ValueError('Shape nuisance map must match the observed mask')
+    ey, ex = np.nonzero(observed & ~line)
+    envelope = np.zeros(observed.shape, np.uint8)
+    empty = np.zeros_like(observed)
+    if len(ex) < 5 or len(np.unique(ey)) < 3 or len(np.unique(ex)) < 3:
+        return empty, dict(envelope=envelope, inner=empty.copy(), hull=None,
+                          diameter=0, deepest=0., threshold=0., status='insufficient_evidence')
+    hull = cv2.convexHull(np.column_stack((ex, ey)).astype(np.int32))
+    cv2.fillConvexPoly(envelope, hull, 1)
+    # Padding also makes the result invariant to a tightly cropped square.
+    distance = cv2.distanceTransform(np.pad(envelope, 1), cv2.DIST_L2, 5)[1:-1, 1:-1]
+    diameter = max(int(np.ptp(ex))+1, int(np.ptp(ey))+1)
+    threshold = max(1.5, .15*diameter)
+    inner = distance >= threshold
+    independent = inner & ~line
+    deepest = float(distance[~line].max()) if (~line).any() else 0.
+    for fraction in (.45, .60, .75):
+        candidate_threshold = max(1.5, fraction*deepest)
+        candidate = (distance >= candidate_threshold) & ~line
+        if candidate.sum() >= max(6, int(np.ceil(.12*inner.sum()))):
+            independent = candidate
+            threshold = candidate_threshold
+    return independent, dict(envelope=envelope, inner=inner, hull=hull,
+        diameter=diameter, deepest=deepest, threshold=threshold, status='measured')
+
+
 def classify_observed_shape(mask, nuisance=None):
     """Return (shape_hint, off-line fill fraction, auditable evidence).
 
@@ -92,22 +131,8 @@ def classify_observed_shape(mask, nuisance=None):
               'shape_confidence': 0., 'status': 'insufficient_evidence'}
     if len(ex) < 5 or len(np.unique(ey)) < 3 or len(np.unique(ex)) < 3:
         return 'unknown_marker', float(m.mean()), report
-    hull = cv2.convexHull(np.column_stack((ex, ey)).astype(np.int32))
-    envelope = np.zeros(m.shape, np.uint8)
-    cv2.fillConvexPoly(envelope, hull, 1)
-    # Padding is essential when a square fills its entire crop: otherwise a
-    # distance transform has no outside background from which to measure.
-    distance = cv2.distanceTransform(np.pad(envelope, 1), cv2.DIST_L2, 5)[1:-1, 1:-1]
-    diameter = max(int(np.ptp(ex))+1, int(np.ptp(ey))+1)
-    inner = distance >= max(1.5, .15*diameter)
-    independent = inner & ~line
-    # Prefer the deepest sufficiently supported off-line interior. Thick open
-    # borders must not count as a solid fill merely because the glyph is small.
-    deepest = float(distance[~line].max()) if (~line).any() else 0.
-    for fraction in (.45, .60, .75):
-        candidate = (distance >= max(1.5, fraction*deepest)) & ~line
-        if candidate.sum() >= max(6, int(np.ceil(.12*inner.sum()))):
-            independent = candidate
+    independent, geometry = observed_interior_support(m, line)
+    envelope, inner, hull = geometry['envelope'], geometry['inner'], geometry['hull']
     fill = float(m[independent].mean()) if independent.any() else float(m[evidence].mean())
     count = int(independent.sum())
     enough_fill = count >= max(3, int(np.ceil(.08 * inner.sum())))
@@ -195,6 +220,27 @@ def classify_observed_shape(mask, nuisance=None):
     if not shape_ok:
         report.update(status='uncertain_shape', shape_hint='unknown_marker')
         return 'unknown_marker', fill, report
+    if best == 'circle':
+        # Area overlap can prefer a circle whose interior merely fits inside
+        # a square. Naming a circle additionally needs observed curved outer
+        # transitions. These probes never replace the measured source raster.
+        from bw_circle_outline_identity_v46 import outline_identity
+        outline = outline_identity(m, line)
+        report['outline_identity'] = outline
+        if not outline['circle_supported']:
+            alternative = outline.get('preferred_shape')
+            if alternative in ('square', 'rhombus'):
+                best = alternative
+                runner_up = max((key for key in scores if key!=best),key=scores.get)
+                report.update(best_shape=best, runner_up=runner_up,
+                    shape_margin=scores[best]-scores[runner_up],
+                    shape_confidence=float(scores[best]),
+                    corroborated_shape=best,
+                    shape_override_reason='positive_observed_polygon_not_area_containment')
+            else:
+                report.update(status='uncertain_shape', shape_hint='unknown_marker',
+                    shape_abstention_reason='circle_lacks_positive_observed_arc')
+                return 'unknown_marker', fill, report
     if patterned or (not line.any() and fill>=.65 and solidity<.84):
         report.update(status='patterned_or_nonstandard', shape_hint='unknown_marker')
         return 'unknown_marker', fill, report

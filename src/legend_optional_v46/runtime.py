@@ -53,6 +53,7 @@ def probe_legend(image, plot, legend):
     from .native_legend import extract
     from color_legend_runtime_v46 import native_seeds
     from color_legend_hybrid_v46 import extract_hybrid_legend
+    from legend_line_independence_v46 import independent_line_rows
     from color_marker_evidence import _swatch_model
     from type3_v46.runtime import _labels, reference_role
     native=extract(image,legend,plot)['diagnostics']
@@ -65,6 +66,7 @@ def probe_legend(image, plot, legend):
     # own independently observed plain line. Mixed true marker/line legends
     # retain the marker-bearing route rather than discarding a real swatch.
     line_rows=[r for r in rejected if r.get('status')=='line_only' and r.get('observed_line_box')]
+    line_rows,line_conflicts=independent_line_rows(line_rows,reports)
     native_indices={int(r['native_index']) for r in line_rows}
     covered=bool(centers) and native_indices==set(range(len(centers)))
     associated=[m for m in reports if m.get('native_index') is not None or m.get('native_grid_center') is not None or m.get('prior_used')]
@@ -73,7 +75,8 @@ def probe_legend(image, plot, legend):
         excluded=[dict(id=m.get('swatch_id'),box=m.get('box'),reason='unassociated_colour_body_outside_native_line_cells') for m in reports]
         models=[]
     if models:
-        return dict(kind='marker_legend',entries=[],reports=reports,rejected=rejected)
+        return dict(kind='marker_legend',entries=[],reports=reports,rejected=rejected,
+                    nonindependent_line_evidence=line_conflicts)
     entries=[]
     for r in sorted(rejected,key=lambda q:q.get('native_index',9999)):
         if r.get('status')!='line_only' or not r.get('observed_line_box'):continue

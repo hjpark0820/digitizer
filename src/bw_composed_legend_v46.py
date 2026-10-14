@@ -9,7 +9,8 @@ import partial_swatch_detector as D
 from legend_open_composition_v46 import LineEvidenceError
 
 
-def compose_templates(image,legend,templates,reports, *, crop_policy='padded', small_hollow=False, stroke_crosses=False):
+def compose_templates(image,legend,templates,reports, *, crop_policy='padded', small_hollow=False, stroke_crosses=False,
+                      local_completion=False):
     """Fit the observed union; retain unsupported swatches without forcing shape.
 
     Compact BW discovery boxes already contain the entire connected key and a
@@ -40,6 +41,19 @@ def compose_templates(image,legend,templates,reports, *, crop_policy='padded', s
                 rec,fields=fit_layered(raw[...,::-1],model['bgr'][::-1],cfg,small_hollow=small_hollow,include_cross=stroke_crosses)
             else:
                 rec,fields=fit_legend_composition(raw[...,::-1],model['bgr'][::-1],cfg)
+                if (rec['status']=='unknown_poor_fit' and t.ink.achromatic
+                        and not t.model_completed and r.get('classification')!='supplied'):
+                    # A thin connector and the marker need not have the same
+                    # raster blur or ink level. Refit EVERY shape on the same
+                    # original canvas, preserving all acceptance thresholds,
+                    # line-only/rival comparisons and parameter penalties.
+                    from legend_layered_composition_v46 import fit_layered
+                    retry,retry_fields=fit_layered(raw[...,::-1],model['bgr'][::-1],cfg,
+                        independent_marker_photometry=True)
+                    r['shared_photometry_composition']=rec
+                    r['independent_photometry_attempt']=retry
+                    if retry['status']=='supported_simple_shape_model':
+                        rec,fields=retry,retry_fields
         except LineEvidenceError as error:
             # Optional inverse rendering must not discard a valid observed
             # template, nor let one unresolved connector abort every series.
@@ -94,12 +108,35 @@ def compose_templates(image,legend,templates,reports, *, crop_policy='padded', s
                 t.marker_center[0]+pars['width']/2,t.marker_center[1]+pars['height']/2],model_completed=True,
                 fitted_diameter=t.diameter,source_center=t.marker_center,expected_ink_source='pure marker_alpha in BOTH raw_soft and soft',
                 observed_ink_source='source_gray / observed_source_soft; NOT required template ink')
+            # Keep semantic identity tied to the accepted pixel model. A
+            # previous uncertain envelope vote must not name this triangle a
+            # circle in fill metadata or a downstream fallback.
+            shape_names=dict(circle='circle',ellipse='circle',open_circle='circle',open_ellipse='circle',
+                square='square',rectangle='square',open_square='square',open_rectangle='square',
+                diamond='rhombus',triangle_up='triangle',triangle_down='inv_triangle',
+                open_triangle_up='triangle',open_triangle_down='inv_triangle')
+            if rec['best_model_name'] in shape_names:
+                r['observed_shape_evidence']=deepcopy(r.get('shape_evidence',{}))
+                r['shape_evidence']=dict(r.get('shape_evidence',{}),
+                    best_shape=shape_names[rec['best_model_name']],shape_hint=name,
+                    method='joint_marker_connector_reconstruction',status='classified',
+                    identity_source='supported_joint_marker_connector',
+                    # Do not retain an old circle IoU as the new triangle's
+                    # "confidence". Reconstruction losses are recorded in
+                    # their own units; the old votes remain above for audit.
+                    shape_scores={},shape_confidence=0.,runner_up=None,
+                    shape_margin=None,joint_family_margin=rec['winner_other_family_margin'],
+                    joint_model_loss=rec['best_model']['loss'])
         output.append(t);report_out.append(r)
         figures.append(dict(swatch_id=t.key,raw=raw,record=rec,fields=fields,box=box))
+    if local_completion:
+        from bw_legend_local_completion_v46 import postprocess_composed
+        for i,(original,completed,record,figure) in enumerate(zip(templates,output,report_out,figures)):
+            output[i],report_out[i]=postprocess_composed(original,completed,record,figure)
     return output,report_out,figures
 
 
-def compose_small_hollow(image,legend,templates,reports):
+def compose_small_hollow(image,legend,templates,reports, *, local_completion=False):
     """Resolution-specific inverse composition, never a supplied-shape override.
 
     Fixed ten-pixel fill samples can be impossible for tiny or line-crossed
@@ -110,13 +147,19 @@ def compose_small_hollow(image,legend,templates,reports):
     if legend is None:return templates,reports
     output=[];report_out=[]
     for t,r in zip(templates,reports):
+        if getattr(t,'line_crossed_hollow_model',None):
+            # Native hollow identity already has a validated fit. Keep its
+            # source sampling coordinates until GeometryFirst consumes them;
+            # a second fit would replace the raster but not that native region.
+            output.append(t);report_out.append(r)
+            continue
         interior=r.get('fill_evidence',{}).get('interior_pixels')
         few_samples=interior is not None and interior<10
         if (t.ink.achromatic and (t.diameter<=10 or few_samples) and not t.model_completed and
             r.get('classification')!='supplied' and
             r.get('fill_evidence',{}).get('style') in ('uncertain','open') and
             r.get('line_analysis',{}).get('status')=='separated'):
-            ts,rs,_=compose_templates(image,legend,[t],[r],small_hollow=True)
+            ts,rs,_=compose_templates(image,legend,[t],[r],small_hollow=True,local_completion=local_completion)
             if getattr(ts[0],'small_hollow_model',None):t,r=ts[0],rs[0]
             else:
                 r=deepcopy(r);r['small_hollow_attempt']=rs[0].get('composition')
@@ -124,7 +167,7 @@ def compose_small_hollow(image,legend,templates,reports):
     return output,report_out
 
 
-def compose_compact_unknowns(image, legend, templates, reports):
+def compose_compact_unknowns(image, legend, templates, reports, *, local_completion=False):
     """Try existing line-union-marker fitting BEFORE requiring a known class.
 
     Only previously unclassified compact keys enter this recovery. Patterned
@@ -138,6 +181,9 @@ def compose_compact_unknowns(image, legend, templates, reports):
         return templates,reports
     output=[];report_out=[]
     for t,r in zip(templates,reports):
+        if getattr(t,'line_crossed_hollow_model',None):
+            output.append(t);report_out.append(r)
+            continue
         # A native tiny hollow outline may look patterned when its own rim
         # enters a fixed interior sample. Resolve OUTER identity independently,
         # but keep the observed raster and size: a completed tiny triangle can
@@ -148,7 +194,8 @@ def compose_compact_unknowns(image, legend, templates, reports):
             and not shape.get('strong_hollow_evidence') and not shape.get('patterned_internal_evidence')
             and shape.get('convex_occupancy',1.)<.77
             and max(shape.get('cross_scores',{}).values(),default=0.)>=.5):
-            ts,rs,_=compose_templates(image,legend,[t],[r],crop_policy='observed_swatch',stroke_crosses=True)
+            ts,rs,_=compose_templates(image,legend,[t],[r],crop_policy='observed_swatch',stroke_crosses=True,
+                                      local_completion=local_completion)
             if ts[0].name in ('x_marker','plus_marker') and ts[0].model_completed:
                 t,r=ts[0],rs[0]
                 r['cross_legend_recovery']=dict(previous='unknown_marker',current=t.name,
@@ -160,7 +207,7 @@ def compose_compact_unknowns(image, legend, templates, reports):
             and r.get('line_analysis',{}).get('status')=='not_needed'
             and shape.get('strong_hollow_evidence') and not shape.get('patterned_internal_evidence')
             and shape.get('best_shape') in ('triangle','inv_triangle')):
-            _,attempt,_=compose_templates(image,legend,[t],[r],small_hollow=True)
+            _,attempt,_=compose_templates(image,legend,[t],[r],small_hollow=True,local_completion=local_completion)
             fit=attempt[0]['composition'];name=fit.get('best_model_name')
             if (fit.get('status')=='supported_simple_shape_model'
                 and name in ('open_triangle_up','open_triangle_down')
@@ -177,7 +224,7 @@ def compose_compact_unknowns(image, legend, templates, reports):
             and r.get('line_analysis',{}).get('status')=='not_needed'
             and r.get('fill_evidence',{}).get('style') not in ('patterned','partial'))
         if eligible:
-            ts,rs,_=compose_templates(image,legend,[t],[r],crop_policy='observed_swatch')
+            ts,rs,_=compose_templates(image,legend,[t],[r],crop_policy='observed_swatch',local_completion=local_completion)
             t,r=ts[0],rs[0]
             r['compact_composition_attempted']=True
         output.append(t);report_out.append(r)

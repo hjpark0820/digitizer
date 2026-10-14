@@ -70,17 +70,17 @@ def _frame_ids(labels, components):
     return frames
 
 
-def _legend_components(gray):
+def _legend_components(gray, threshold=235):
     """Separate verified enclosing border strokes, not attached legend keys.
 
     Only the discovery support changes. Source grayscale stays untouched.
     Frame-interior bounds also prevent crop padding from recruiting the border
     again during model extraction or line/marker composition.
     """
-    labels,components=_components(gray)
+    labels,components=_components(gray,threshold)
     frames=_frame_ids(labels,components)
     if not frames:return labels,components,[]
-    support=gray<235
+    support=gray<threshold
     interiors=[]
     for comp in components:
         if comp['id'] not in frames:continue
@@ -116,6 +116,30 @@ def _inside_frame(box, interiors, anchor):
         if left<=e<g<=right and top<=f<h<=bottom:
             a,b,c,d=max(a,left),max(b,top),min(c,right),min(d,bottom)
     return a,b,c,d
+
+
+def _trim_unconnected_padding(image, box, crop):
+    """Bounds of a padded ``crop`` that stop before ink unrelated to ``box``.
+
+    Padding is paper context, not permission to import the label's first
+    letter or the next legend row: the grown margin ends before strong ink
+    whose 8-connected component (inside the crop) does not reach the
+    supplied box. Components below the 5-pixel floor are ignored. Sides
+    left/right are settled first, then top/bottom over the kept columns.
+    """
+    a,b,c,d=box;e,f,g,h=crop
+    gray=cv2.cvtColor(image[f:h,e:g],cv2.COLOR_BGR2GRAY)
+    n,labels,stats,_=cv2.connectedComponentsWithStats((gray<235).astype(np.uint8),8)
+    own=np.unique(labels[b-f:d-f,a-e:c-e])
+    separate=[i for i in range(1,n) if i not in own and stats[i,cv2.CC_STAT_AREA]>=5]
+    ys,xs=np.nonzero(np.isin(labels,separate))
+    xs,ys=xs+e,ys+f
+    if np.any(xs<a):e=int(xs[xs<a].max())+1
+    if np.any(xs>=c):g=int(xs[xs>=c].min())
+    kept=(xs>=e) & (xs<g)
+    if np.any(kept & (ys<b)):f=int(ys[kept & (ys<b)].max())+1
+    if np.any(kept & (ys>=d)):h=int(ys[kept & (ys>=d)].min())
+    return e,f,g,h
 
 
 def _repeated_horizontal_body(support):
@@ -251,7 +275,162 @@ def _line_extent(support):
     return _line_analysis(support)['extent']
 
 
-def _automatic_boxes(image, legend_area):
+def _legend_row_bodies(row, height, labels):
+    """Ignore repeated small connector fragments for entry ownership only."""
+    bodies=sorted([q for q in row if q['height']>=max(4,.32*height)],key=lambda q:q['box'][0])
+    connector_ids=set()
+    for index,body in enumerate(bodies):
+        a,b,c,d=body['box'];body_height=d-b
+        compact=.35*body_height<=c-a<=1.85*body_height
+        line=None if compact else _line_extent(labels==body['id'])
+        thin_line=bool(line is not None and np.count_nonzero(line[2])<=.35*body_height)
+        if not (compact or thin_line):continue
+        fragments=[]
+        for direction in (-1,1):
+            edge=a if direction<0 else c
+            for other in (bodies[:index][::-1] if direction<0 else bodies[index+1:]):
+                e,f,g,h=other['box']
+                gap=edge-g if direction<0 else e-edge
+                if (h-f>.55*body_height or g-e>1.25*body_height or
+                    abs((f+h-b-d)/2)>.20*body_height or gap>.8*body_height):break
+                fragments.append(other)
+                edge=e if direction<0 else g
+        # One small neighbour can be a real compact key or the first label
+        # letter. A repeated, centered thin run is connector evidence.
+        if len(fragments)>=2:
+            connector_ids.update(q['id'] for q in fragments)
+    return [q for q in bodies if q['id'] not in connector_ids]
+
+
+def _graphical_label_cells(rows, candidates, labels):
+    """Resolve occupied key/label cells before admitting graphical templates.
+
+    A connected word can pass the line/body test. Once a row has a key, nearby
+    ink therefore belongs to its label until spacing, an independently thin
+    connector, or an already established graphical column proves another key.
+    Columns are evidence, never a required rectangular inventory: a row may
+    have any number of cells, and an isolated horizontal row remains valid.
+    """
+    entries=[]
+    for candidate in candidates:
+        row=sorted(rows[candidate['row_index']],key=lambda q:q['box'][0])
+        height=candidate['row_height']
+        bodies=_legend_row_bodies(row,height,labels)
+        index=next(i for i,q in enumerate(bodies) if q['id']==candidate['id'])
+        a,b,c,d=candidate['box']
+        previous=bodies[index-1] if index else None
+        following=bodies[index+1] if index+1<len(bodies) else None
+        before=a-previous['box'][2] if previous else None
+        after=following['box'][0]-c if following else None
+        # Estimate character/word spacing from the row's actual components.
+        # Use only short gaps: gaps between independent entries must not make
+        # ordinary words look like another graphical column.
+        short_gaps=[right['box'][0]-left['box'][2] for left,right in zip(bodies,bodies[1:])
+                    if 0<=right['box'][0]-left['box'][2]<=.5*height]
+        word_gap=float(np.median(short_gaps)) if short_gaps else .20*height
+        separation=max(2.,.65*height,1.8*word_gap)
+        line=_line_extent(labels==candidate['id'])
+        thin_line=bool(line is not None and np.count_nonzero(line[2])<=.35*(d-b))
+        # Positive label evidence is measured immediately after this body.
+        # A near-touching trailing letter of the same word is not a label.
+        own_label=bool(following is not None and after>=max(2.,.12*height))
+        leading=previous is None
+        boundary=bool(before is not None and before>=separation)
+        connector_boundary=bool(thin_line and own_label and before is not None
+                                and before>max(2.,.30*height))
+        accepted=leading or (boundary and own_label) or connector_boundary
+        reason=('row_leading_graphical_key' if leading else
+                'independent_key_and_label_gap' if boundary and own_label else
+                'thin_connector_with_independent_label' if connector_boundary else
+                'inside_previous_label_cell')
+        entries.append(dict(candidate=candidate,accepted=accepted,reason=reason,
+                            preceding_gap=before,following_gap=after,
+                            cell_gap_threshold=float(separation),thin_connector=thin_line,
+                            independent_label=own_label))
+    # A tightly packed or label-free row can borrow column evidence only from
+    # keys already justified independently. Unchecked text cannot establish a
+    # column by repeating itself in several labels.
+    anchors=[entry for entry in entries if entry['accepted']]
+    for entry in entries:
+        if entry['accepted']:continue
+        q=entry['candidate']
+        peers=[p['candidate'] for p in anchors
+               if p['candidate']['row_index']!=q['row_index']
+               and abs(p['candidate']['center']-q['center'])<=.25*max(p['candidate']['height'],q['height'])
+               and .55*p['candidate']['height']<=q['height']<=1.8*p['candidate']['height']]
+        if peers and (entry['independent_label'] or q['row_bodies']==1):
+            entry.update(accepted=True,reason='supported_graphical_column')
+    accepted=[entry['candidate'] for entry in entries if entry['accepted']]
+    cells=[]
+    for row_index,row in enumerate(rows):
+        keys=sorted([q for q in accepted if q['row_index']==row_index],key=lambda q:q['box'][0])
+        for key_index,key in enumerate(keys):
+            right=keys[key_index+1]['box'][0] if key_index+1<len(keys) else float('inf')
+            text=[q for q in row if key['box'][2]<=q['box'][0]<right]
+            text_box=([min(q['box'][0] for q in text),min(q['box'][1] for q in text),
+                       max(q['box'][2] for q in text),max(q['box'][3] for q in text)] if text else None)
+            cells.append(dict(component_id=key['id'],row_index=row_index,key_index=key_index,
+                              graphical_box=list(key['box']),label_box=text_box))
+    diagnostic=dict(policy='observed_graphical_label_cells_v1',rectangular_grid_required=False,
+                    inferred_empty_cells=False,source_pixels_modified=False,cells=cells,
+                    row_counts=[sum(c['row_index']==i for c in cells) for i in range(len(rows))],
+                    candidates=[{**{k:v for k,v in entry.items() if k!='candidate'},
+                                 'component_id':entry['candidate']['id'],
+                                 'row_index':entry['candidate']['row_index'],
+                                 'box':list(entry['candidate']['box'])} for entry in entries])
+    return accepted,diagnostic
+
+
+def _dense_graphical_anchor(support):
+    """Independent compact solid ink, not merely a taller first capital.
+
+    Tight text spacing alone is ambiguous. Require one dense, near-isometric
+    body to establish a new column; other keys in that column can be hollow.
+    This is discovery evidence, not a fill or shape label for the model.
+    """
+    h,w=support.shape
+    if not (h and w and .8*h<=w<=1.25*h and support.mean()>=.68):return False
+    # Bold capitals such as M can be dense overall while retaining notches
+    # through their centre. The anchor needs independently solid central ink.
+    core=support[h//4:h-h//4,w//4:w-w//4]
+    return bool(core.size and core.mean()>=.95)
+
+
+def _tight_column_seeds(rows, labels):
+    """Corroborate close key/text gaps without treating repeated text as keys.
+
+    This corroborated proposal route requires at least three independent rows:
+    a compact leading body, shorter following text, and consistent key centres.
+    It does not waive the subsequent label-cell or source-glyph checks.
+    """
+    possible=[]
+    for ri,row in enumerate(rows):
+        height=float(np.percentile([q['height'] for q in row],70))
+        bodies=_legend_row_bodies(sorted(row,key=lambda q:q['box'][0]),height,labels)
+        if len(bodies)<2:continue
+        key,text=bodies[:2]
+        a,b,c,d=key['box'];e,f,g,h=text['box']
+        if (not .55*(d-b)<=c-a<=1.5*(d-b) or d-b<1.15*(h-f)
+                or not 0<e-c<=.5*(d-b)
+                or max(q['box'][2] for q in bodies[1:])-e<.6*(d-b)):
+            continue
+        possible.append(dict(key,center=(a+c)/2,row_height=height,
+                             row_index=ri,row_bodies=len(bodies)))
+    accepted=[]
+    for key in possible:
+        peers=[p for p in possible if
+               abs(p['center']-key['center'])<=.25*max(p['height'],key['height'])
+               and .65*key['height']<=p['height']<=1.5*key['height']]
+        anchored=any(_dense_graphical_anchor(
+            labels[p['box'][1]:p['box'][3],p['box'][0]:p['box'][2]]==p['id']) for p in peers)
+        if len({p['row_index'] for p in peers})>=3 and anchored:
+            accepted.append(key)
+    return accepted
+
+
+def _automatic_boxes_core(image, legend_area, *, return_layout=False,
+                          label_direction='right', discovery_threshold=235,
+                          tight_columns=False):
     """Find every graphical entry using rows, label gaps and glyph centres.
 
     A row need not repeat in another row: horizontal legends are valid.  The
@@ -262,7 +441,11 @@ def _automatic_boxes(image, legend_area):
     lb=_box(legend_area,image)
     x0,y0,x1,y1=lb
     gray=cv2.cvtColor(image[y0:y1,x0:x1],cv2.COLOR_BGR2GRAY)
-    labels,components,interiors=_legend_components(gray)
+    # Only discovery geometry is reflected. Returned crops and final models
+    # always refer to the unchanged, unreflected source image.
+    if label_direction=='left':gray=gray[:,::-1].copy()
+    labels,components,interiors=(_legend_components(gray) if discovery_threshold==235
+                                else _legend_components(gray,discovery_threshold))
     rows=[]
     # Large text/glyph bodies establish rows before small detached fragments.
     for comp in sorted(components,key=lambda c:(-c['height'],c['box'][1],c['box'][0])):
@@ -288,7 +471,7 @@ def _automatic_boxes(image, legend_area):
     for row_index,row in enumerate(rows):
         row=sorted(row,key=lambda q:q['box'][0])
         row_h=float(np.percentile([q['height'] for q in row],70))
-        bodies=[q for q in row if q['height']>=max(4,.32*row_h)]
+        bodies=_legend_row_bodies(row,row_h,labels)
         right=None
         last_graphic=-2
         for i,comp in enumerate(bodies):
@@ -317,6 +500,10 @@ def _automatic_boxes(image, legend_area):
                                        row_bodies=len(bodies)))
                 last_graphic=i
             right=max(c,right or c)
+    if tight_columns:
+        seeds=_tight_column_seeds(rows,labels)
+        existing={q['id'] for q in candidates}
+        candidates.extend(q for q in seeds if q['id'] not in existing)
     if not candidates:
         raise ValueError('No complete graphical legend entries were found')
     # Rows with unusually small detached bodies can be recovered only when
@@ -340,8 +527,12 @@ def _automatic_boxes(image, legend_area):
                  for p in candidates))]
     if not candidates:
         raise ValueError('No graphical entries with label or column context were found')
+    candidates,layout=_graphical_label_cells(rows,candidates,labels)
+    if not candidates:
+        raise ValueError('No graphical entries with label or column context were found')
     boxes=[]
-    for comp in sorted(candidates,key=lambda q:(q['row_index'],q['box'][0])):
+    ordered_candidates=sorted(candidates,key=lambda q:(q['row_index'],q['box'][0]))
+    for comp in ordered_candidates:
         a,b,c,d=comp['box']
         # Padding is paper context, not permission to import the first label
         # letter (important when a tiny swatch ends one pixel before its text).
@@ -349,10 +540,160 @@ def _automatic_boxes(image, legend_area):
                    min(d,q['box'][3])>max(b,q['box'][1])]
         previous=max((q['box'][2] for q in neighbors if q['box'][2]<=a),default=0)
         following=min((q['box'][0] for q in neighbors if q['box'][0]>=c),default=x1-x0)
+        if discovery_threshold<235:
+            # Strong-support text can have a one-pixel pale fringe. Keep that
+            # fringe outside a tightly packed key crop without cutting any
+            # of the independently measured graphical body itself.
+            if 0<following-c<=3:following=max(c,following-1)
+            if 0<a-previous<=3:previous=min(a,previous+1)
         a,b,c,d=_inside_frame((max(previous,a-2),max(0,b-2),min(following,c+2),min(y1-y0,d+2)),
                               interiors,comp['box'])
+        if label_direction=='left':a,c=x1-x0-c,x1-x0-a
         boxes.append((x0+a,y0+b,x0+c,y0+d))
+    if label_direction=='left':
+        # Preserve normal source reading order within each discovered row.
+        ordered=sorted(zip(ordered_candidates,boxes),key=lambda pair:(pair[0]['row_index'],pair[1][0]))
+        boxes=[box for _,box in ordered]
+    if return_layout:
+        # Diagnostics use the same source coordinates as returned crop boxes.
+        for item in layout['cells']:
+            for field in ('graphical_box','label_box'):
+                if item[field] is not None:
+                    a,b,c,d=item[field]
+                    if label_direction=='left':a,c=x1-x0-c,x1-x0-a
+                    item[field]=[x0+a,y0+b,x0+c,y0+d]
+            if label_direction=='left':item['label_direction']='left'
+        layout['cells'].sort(key=lambda item:(item['row_index'],item['graphical_box'][0]))
+        for ri in range(len(rows)):
+            for ki,item in enumerate(c for c in layout['cells'] if c['row_index']==ri):
+                item['key_index']=ki
+        for item in layout['candidates']:
+            a,b,c,d=item['box']
+            if label_direction=='left':a,c=x1-x0-c,x1-x0-a
+            item['box']=[x0+a,y0+b,x0+c,y0+d]
+        layout['legend_area']=list(lb)
+        return boxes,layout
     return boxes
+
+
+def _automatic_boxes(image, legend_area, *, return_layout=False):
+    """Keep established discovery; recover independently corroborated layouts.
+
+    Never lower final marker acceptance thresholds. A second discovery support
+    can separate a weak gray bridge to text, but extraction still consumes the
+    original grayscale pixels inside the measured body territory.
+    """
+    requested=_box(legend_area,image)
+    primary=None
+    original_error=None
+    try:
+        primary=_automatic_boxes_core(image,requested,return_layout=True)
+    except ValueError as error:
+        if not str(error).startswith(('No complete graphical legend entries',
+                                       'No graphical entries with label or column context')):
+            raise
+        original_error=error
+    def result(value):
+        return value if return_layout else value[0]
+    # A wrong directional interpretation may return SOME cells by assigning
+    # a marker to the next column's distant label and dropping terminal keys.
+    # Reconsider only this measured contradiction, not every valid layout.
+    reverse_suspect=False
+    tight_suspect=False
+    if primary is not None:
+        cells=primary[1]['cells']
+        accepted=[q for q in primary[1]['candidates'] if q['accepted']]
+        distant=[q for q in accepted if q['preceding_gap'] is not None and
+                 q['following_gap'] is not None and q['preceding_gap']>=2 and
+                 q['following_gap']>max(4*(q['box'][3]-q['box'][1]),3*q['preceding_gap'])]
+        terminal=any(not q['accepted'] and q['following_gap'] is None
+                     for q in primary[1]['candidates'])
+        reverse_suspect=terminal and len(distant)>=2 and len(distant)>=.6*len(accepted)
+        tall=[c for c in cells if c['label_box'] is not None and
+              c['graphical_box'][3]-c['graphical_box'][1]>=
+              1.1*(c['label_box'][3]-c['label_box'][1])]
+        clipped=any(a<=requested[0] or b<=requested[1] or
+                    c>=requested[2] or d>=requested[3]
+                    for a,b,c,d in (q['graphical_box'] for q in cells))
+        wide=any(c-a>1.45*(d-b) for a,b,c,d in (q['graphical_box'] for q in cells))
+        tight_suspect=len(tall)>=3 and len(tall)>=.65*len(cells) and (clipped or wide)
+        if not (reverse_suspect or tight_suspect):return result(primary)
+    x0,y0,x1,y1=requested
+    gray=cv2.cvtColor(image[y0:y1,x0:x1],cv2.COLOR_BGR2GRAY)
+    _,components,_=_legend_components(gray)
+    height=float(np.median([q['height'] for q in components])) if components else 0.
+    touches=any(a==0 or b==0 or c==x1-x0 or d==y1-y0
+                for a,b,c,d in (q['box'] for q in components))
+    pad=min(12,max(3,int(math.ceil(.5*height)))) if touches else 0
+    expanded=(max(0,x0-pad),max(0,y0-pad),min(image.shape[1],x1+pad),min(image.shape[0],y1+pad))
+    attempts=[(requested,'left',235,False)] if primary is None or reverse_suspect else []
+    for area in dict.fromkeys((expanded,requested)) if primary is None or tight_suspect else ():
+        for direction in ('right','left'):
+            # Two observations must corroborate a stable key column. The 220
+            # support only breaks weak bridges; it is not the marker raster.
+            attempts.append((area,direction,220,True))
+    for area,direction,threshold,tight in attempts:
+        try:
+            boxes,layout=_automatic_boxes_core(image,area,return_layout=True,
+                label_direction=direction,discovery_threshold=threshold,tight_columns=tight)
+        except ValueError as error:
+            if str(error).startswith(('No complete graphical legend entries',
+                                      'No graphical entries with label or column context')):
+                continue
+            raise
+        cells=layout['cells']
+        labelled=[c for c in cells if c['label_box'] is not None]
+        if len(labelled)<3 or len({c['row_index'] for c in labelled})<2:
+            continue
+        # No external neighbouring legend may be recruited by crop expansion.
+        if not all(x0<=(c['graphical_box'][0]+c['graphical_box'][2])/2<x1 and
+                   y0<=(c['graphical_box'][1]+c['graphical_box'][3])/2<y1 for c in cells):
+            continue
+        if tight:
+            supported=[]
+            for cell in labelled:
+                a,b,c,d=cell['graphical_box'];e,f,g,h=cell['label_box']
+                peers=[p for p in labelled if p['row_index']!=cell['row_index'] and
+                       abs((p['graphical_box'][0]+p['graphical_box'][2]-a-c)/2)<=.25*(d-b)]
+                if d-b>=1.1*(h-f) and len(peers)>=2:supported.append(cell)
+            if len(supported)<3 or len(supported)<.65*len(cells):continue
+            if not any(_dense_graphical_anchor(cv2.cvtColor(image[b:d,a:c],cv2.COLOR_BGR2GRAY)<threshold)
+                       for a,b,c,d in (cell['graphical_box'] for cell in supported)):
+                continue
+        if primary is not None:
+            old_cells=primary[1]['cells']
+            if direction=='left' and reverse_suspect:
+                def gaps(items):
+                    values=[]
+                    for item in items:
+                        if item['label_box'] is None:continue
+                        a,b,c,d=item['graphical_box'];e,f,g,h=item['label_box']
+                        values.append(max(e-c,a-g,0)/max(1,d-b))
+                    return float(np.median(values)) if values else float('inf')
+                # More occupied cells plus much more local label ownership
+                # must agree; a mirrored text row alone cannot win.
+                if len(cells)<=len(old_cells) or gaps(cells)>=.4*gaps(old_cells):continue
+            else:
+                # A bridge/crop repair must preserve the existing key inventory
+                # and overlap every old body; expansion cannot invent entries.
+                if len(cells)!=len(old_cells):continue
+                consistent=True
+                for old,new in zip(old_cells,cells):
+                    a,b,c,d=old['graphical_box'];e,f,g,h=new['graphical_box']
+                    overlap=max(0,min(c,g)-max(a,e))*max(0,min(d,h)-max(b,f))
+                    if overlap<.65*min((c-a)*(d-b),(g-e)*(h-f)):consistent=False
+                if not consistent:continue
+        layout['recovery']=dict(policy='corroborated_directional_key_columns_v1',
+            requested_legend_area=list(requested),observed_context_area=list(area),
+            label_direction=direction,discovery_threshold=threshold,
+            tight_column_evidence=tight,source_pixels_modified=False,
+            final_model_thresholds_changed=False,
+            initial_error=str(original_error) if original_error is not None else None,
+            previous_layout_suspect='directional_ownership' if reverse_suspect else
+                                    'tight_column_bridge_or_clipping' if tight_suspect else None)
+        return result((boxes,layout))
+    if primary is not None:return result(primary)
+    raise original_error
 
 
 def composition_box(image, legend_area, swatch_box, diameter):
@@ -406,12 +747,14 @@ def composition_box(image, legend_area, swatch_box, diameter):
     return list(_inside_frame(box,global_interiors,anchor))
 
 
-def _glyph_pixels(image, box, *, return_report=False):
+def _glyph_pixels(image, box, *, return_report=False, context=None, geometry=None, entries=None):
     """Whole observed glyph extent; horizontal line crossings stay observable.
 
     Only outside tails estimate a line nuisance band.  The complete union of
     elevated column spans keeps both sides of an open glyph, and one additional
     ambiguity column is retained on each side.  No internal stroke is erased.
+    ``entries`` (original swatch box and the other supplied boxes) lets the
+    border test tell this marker's own ink from an adjacent legend row.
     """
     x0,y0,x1,y1=box
     gray=cv2.cvtColor(image[y0:y1,x0:x1],cv2.COLOR_BGR2GRAY)
@@ -441,15 +784,30 @@ def _glyph_pixels(image, box, *, return_report=False):
     ys,xs=np.nonzero(support)
     top,bottom=int(ys.min()),int(ys.max())+1
     left,right=int(xs.min()),int(xs.max())+1
+    # Extent of this entry's own connected ink (glyph plus any attached
+    # connector), excluding frames and unjoined components. Recorded only.
+    entry_ink_box=[x0+left,y0+top,x0+right,y0+bottom]
     height=bottom-top
     line_rows=np.zeros(gray.shape[0],bool)
     # Both the gate and the decomposition use the SAME strong support. Pale
     # antialias pixels still extend the returned source crop, but a single pale
     # column cannot turn "no separation needed" into "invalid swatch".
     analysis=_line_analysis(strong_support)
+    if geometry is not None:
+        # A fallback can locate a body using independent source flanks/row
+        # context. Geometry changes the measured extent, never the gray pixels.
+        gx0,gy0,gx1,gy1=map(int,geometry['glyph_box'])
+        if (geometry.get('source_pixels_modified') is not False or
+                not (x0<=gx0<gx1<=x1 and y0<=gy0<gy1<=y1)):
+            raise ValueError('Invalid source-context glyph geometry')
+        top,bottom=gy0-y0,gy1-y0
+        left,right=gx0-x0,gx1-x0
+        height=bottom-top
+        line_rows=np.isin(np.arange(y0,y1),geometry['line_rows'])
+        analysis=dict(geometry['line_analysis'],extent=(left,right,line_rows))
     line_report={k:v for k,v in analysis.items() if k!='extent'}
     line_report.update(support='strong_gray_lt_235', extended_width=right-left,
-                       extended_height=height)
+                       extended_height=height, entry_ink_box=entry_ink_box)
     if analysis['status']=='invalid':
         raise LegendEntryError(analysis['reason'],
             f'Line-only or text-contaminated legend entry at {box}: {analysis["reason"]}')
@@ -462,6 +820,10 @@ def _glyph_pixels(image, box, *, return_report=False):
     # tails are allowed to leave the box; a tall cut through the glyph is not.
     touches=[]
     border_support=support.copy()
+    if geometry is not None:
+        body_window=np.zeros_like(border_support)
+        body_window[top:bottom,left:right]=True
+        border_support &= body_window
     if analysis['reason']=='repeated_bodies_with_intervening_connector':
         # The representative middle body must be complete. An end repeat
         # leaving the supplied swatch is not a cut through the chosen body.
@@ -476,7 +838,23 @@ def _glyph_pixels(image, box, *, return_report=False):
         ('right',border_support[:,-1],image[y0:y1,x1:x1+1] if x1<image.shape[1] else None,height),
         ('top',border_support[0,:],image[y0-1:y0,x0:x1] if y0 else None,right-left),
         ('bottom',border_support[-1,:],image[y1:y1+1,x0:x1] if y1<image.shape[0] else None,right-left)):
-        if local.sum()>.45*extent and adjacent is not None and np.any(cv2.cvtColor(adjacent,cv2.COLOR_BGR2GRAY)<235):
+        from legend_border_v46 import continues
+        if (local.sum()>.45*extent and adjacent is not None and
+                continues(image,box,edge_name,border_support,frame_context=context,
+                          entries=entries)):
+            termination=(geometry or {}).get('row_terminations',{}).get(edge_name,{})
+            # A measured weak valley BETWEEN two supplied legend row centres
+            # can retain one shared AA row without merging the next body.
+            # Dark cuts and unspecified edges never receive this exception.
+            if (edge_name in ('top','bottom') and
+                    termination.get('policy')=='between_key_ink_valley_v1' and
+                    termination.get('row')==(y0 if edge_name=='top' else y1-1) and
+                    termination.get('source_pixels_modified') is False and
+                    termination.get('relative_depth',1.)<=.45 and
+                    termination.get('inward_darkness',0.) >=
+                        termination.get('mean_darkness',255.)+
+                        max(3.,.05*termination.get('own_peak_darkness',255.))):
+                continue
             touches.append(edge_name)
     if touches:
         raise LegendEntryError('clipped_marker', f'Incomplete marker touches {"/".join(touches)} swatch boundary: expand {box}')
@@ -510,10 +888,11 @@ def _independent_fill(mask, nuisance):
     return bool(enough and fill>=.80),fill
 
 
-def _model(image, box, supplied=None):
+def _model(image, box, supplied=None, *, context=None, geometry=None, entries=None):
     # Lazy import avoids a module cycle: bw_pipeline_v46 is the public adapter.
     from bw_pipeline_v46 import _shape
-    gray,line,glyph_box,connected_line,line_report=_glyph_pixels(image,box,return_report=True)
+    gray,line,glyph_box,connected_line,line_report=_glyph_pixels(
+        image,box,return_report=True,context=context,geometry=geometry,entries=entries)
     paper=float(np.percentile(cv2.cvtColor(image[box[1]:box[3],box[0]:box[2]],cv2.COLOR_BGR2GRAY),95))
     paper=max(paper,float(gray.max()),235.)
     ink_pixels=gray[gray<min(235,paper-8)]
@@ -589,16 +968,18 @@ def _model(image, box, supplied=None):
             'matching_profile':'bw_v46_uncertain'}
     from bw_fill_identity_v46 import describe_fill
     report['fill_evidence'] = describe_fill(t, shape_evidence)
-    return t,report
+    from bw_line_crossed_hollow_v46 import infer_line_crossed_hollow
+    return infer_line_crossed_hollow(image,t,report)
 
 
 def extract_legend_models(image, legend_area=None, swatches=None, known_classes=None):
     """Return complete B&W ``SwatchTemplate`` models and auditable reports."""
     from bw_pipeline_v46 import CLASSES
     explicit=swatches is not None
-    entries=swatches if explicit else [(None,b) for b in _automatic_boxes(image,legend_area)]
+    entries=list(swatches) if explicit else [(None,b) for b in _automatic_boxes(image,legend_area)]
     templates=[]
     reports=[]
+    frame_context=None
     for entry_index,(supplied,box) in enumerate(entries,1):
         # Invalid caller coordinates/classes must still fail loudly. Only an
         # expected extraction failure of a valid source entry is recoverable.
@@ -606,27 +987,139 @@ def extract_legend_models(image, legend_area=None, swatches=None, known_classes=
         if supplied and supplied.replace('diamond','rhombus') not in CLASSES:
             raise ValueError(f'Unsupported marker class: {supplied}')
         identity=dict(swatch_id=f'S{entry_index:02}',series_index=entry_index-1)
+        # Every crop of this entry, including recovery crops, is judged
+        # against the same original box and the other supplied entries.
+        territory=dict(entry=box,peers=[tuple(map(int,q[1])) for i,q in enumerate(entries)
+                                        if i!=entry_index-1])
         try:
             try:
-                t,report=_model(image,box,supplied)
+                t,report=_model(image,box,supplied,entries=territory)
             except LegendEntryError as first:
-                if first.code!='clipped_marker':raise
+                if first.code not in ('clipped_marker','line_without_marker_bulge'):raise
                 # Recover at most two original-pixel border rows/columns.
-                # Large/incomplete glyphs still fail; no threshold is relaxed.
-                for pad in (1,2):
+                # Preserve the established result for previously recoverable
+                # clipped keys before trying the new directed completion.
+                recovered=False
+                for pad in ((1,2) if first.code=='clipped_marker' else ()):
                     a,b,c,d=box
                     expanded=(max(0,a-pad),max(0,b-pad),min(image.shape[1],c+pad),min(image.shape[0],d+pad))
-                    try:t,report=_model(image,expanded,supplied)
+                    try:t,report=_model(image,expanded,supplied,entries=territory)
                     except LegendEntryError:continue
+                    # The accepted padding must not carry a label letter or
+                    # another row into the observed raster. Trimming follows
+                    # acceptance, so it never changes which recovery applies;
+                    # an invalid trimmed crop keeps the accepted one.
+                    padded=expanded
+                    trimmed=_trim_unconnected_padding(image,box,expanded)
+                    if trimmed!=expanded:
+                        try:
+                            t,report=_model(image,trimmed,supplied,entries=territory)
+                            expanded=trimmed
+                        except LegendEntryError:
+                            pass
                     report['border_recovery']=dict(input_box=box,measured_box=expanded,
                         padding_px=pad,initial_error=first.code,policy='bounded_source_pixels_revalidated')
+                    if expanded!=padded:
+                        report['border_recovery']['unconnected_ink_trim']=dict(padded_box=padded,
+                            source_pixels_modified=False)
+                    recovered=True
                     break
-                else:raise first
+                if not recovered:
+                    from legend_crop_v46 import completion_candidates
+                    candidates,completion=completion_candidates(image,box,[q[1] for q in entries])
+                    for expanded in candidates:
+                        try:t,report=_model(image,expanded,supplied,entries=territory)
+                        except LegendEntryError:continue
+                        # Keep the recovered body tied to the original entry,
+                        # not a neighbouring marker newly entering the crop.
+                        cx,cy=t.marker_center
+                        if not (box[0]<=cx<box[2] and box[1]<=cy<box[3]):continue
+                        report['border_recovery']=dict(input_box=box,measured_box=expanded,
+                            padding_px=max(box[1]-expanded[1],expanded[3]-box[3]),
+                            initial_error=first.code,policy=completion['policy'],completion=completion)
+                        recovered=True
+                        break
+                if not recovered:raise first
         except LegendEntryError as error:
-            reports.append(dict(identity,box=box,class_name='unknown_marker',shape_hint='unknown_marker',
-                classification='unresolved',extraction_status='failed',template_available=False,
-                extraction_error=str(error),extraction_error_code=error.code,supplied_class=supplied))
-            continue
+            recovered=False
+            if legend_area is not None and error.code in (
+                    'clipped_marker','line_without_marker_bulge','no_compact_marker_bulge'):
+                from legend_frame_v46 import interior_bounds, recovery_candidates
+                if frame_context is None:
+                    frame_context=interior_bounds(image,legend_area,[q[1] for q in entries])
+                bounds,frame_report=frame_context
+                if frame_report['bands']:
+                    candidates,completion=recovery_candidates(image,box,bounds,[q[1] for q in entries])
+                    for expanded in candidates:
+                        try:t,report=_model(image,expanded,supplied,context=frame_report,
+                                            entries=territory)
+                        except LegendEntryError:continue
+                        # If ignoring a verified frame is what made a wide
+                        # compact swatch pass, its whole connector may still
+                        # have been counted as marker body. Prefer a separately
+                        # measured bilateral body, never a forced shape label.
+                        gx0,gy0,gx1,gy1=report['glyph_box']
+                        if not report['connected_line'] and gx1-gx0>1.35*(gy1-gy0):
+                            needs_body=False
+                            try:_glyph_pixels(image,expanded,entries=territory)
+                            except LegendEntryError as border_error:
+                                needs_body=border_error.code=='clipped_marker'
+                            if needs_body:
+                                from legend_body_context_v46 import recovery_candidates as body_candidates
+                                bodies,body_context=body_candidates(image,box,[q[1] for q in entries],
+                                    bounds=bounds,frame_report=frame_report)
+                                for body in bodies:
+                                    if body['glyph_box'][2]-body['glyph_box'][0]>=.8*(gx1-gx0):continue
+                                    try:
+                                        refined,refined_report=_model(image,tuple(body['crop_box']),supplied,
+                                            context=frame_report,geometry=body,entries=territory)
+                                    except LegendEntryError:continue
+                                    refined_report['context_body_recovery']=dict(input_box=box,
+                                        initial_error='frame_adjacent_connector_counted_as_body',
+                                        measurement=body,diagnostic=body_context,source_pixels_modified=False)
+                                    t,report=refined,refined_report
+                                    break
+                        cx,cy=t.marker_center
+                        if not (box[0]<=cx<box[2] and box[1]<=cy<box[3]):continue
+                        # Trimming a frame must not turn the whole short
+                        # connector into a compact "marker". The independently
+                        # measured body has to end before a removed side frame.
+                        gx0,_,gx1,_=report['glyph_box']
+                        if bounds[0] and gx0<=bounds[0]:continue
+                        if bounds[2]<image.shape[1] and gx1>=bounds[2]:continue
+                        report['frame_recovery']=dict(input_box=box,measured_box=expanded,
+                            initial_error=error.code,context=frame_report,completion=completion,
+                            source_pixels_modified=False)
+                        recovered=True
+                        break
+            if not recovered and error.code in ('clipped_marker','line_without_marker_bulge',
+                    'no_compact_marker_bulge','implausible_extent'):
+                from legend_body_context_v46 import recovery_candidates as body_candidates
+                if frame_context is None:
+                    from legend_frame_v46 import interior_bounds
+                    frame_context=interior_bounds(image,legend_area,[q[1] for q in entries])
+                bounds,frame_report=frame_context
+                proposals,body_diagnostic=body_candidates(image,box,[q[1] for q in entries],
+                    bounds=bounds,frame_report=frame_report)
+                for proposal in proposals:
+                    expanded=tuple(proposal['crop_box'])
+                    try:
+                        t,report=_model(image,expanded,supplied,context=frame_report,geometry=proposal,
+                                        entries=territory)
+                    except LegendEntryError:
+                        continue
+                    cx,cy=t.marker_center
+                    if not (box[0]<=cx<box[2] and box[1]<=cy<box[3]):continue
+                    report['context_body_recovery']=dict(initial_error=error.code,
+                        input_box=box,measurement=proposal,diagnostic=body_diagnostic,
+                        source_pixels_modified=False)
+                    recovered=True
+                    break
+            if not recovered:
+                reports.append(dict(identity,box=box,class_name='unknown_marker',shape_hint='unknown_marker',
+                    classification='unresolved',extraction_status='failed',template_available=False,
+                    extraction_error=str(error),extraction_error_code=error.code,supplied_class=supplied))
+                continue
         t.swatch_id=f'S{entry_index:02}'
         t.shape_hint=t.name
         report.update(identity,extraction_status='usable',template_available=True)

@@ -21,7 +21,7 @@ def family(name):
 
 
 def fit_layered(crop_rgb, nominal_rgb=None, cfg=Config(enable_open_dashed=True), *, small_hollow=False,
-                connector_independent=False, include_cross=False):
+                connector_independent=False, include_cross=False, independent_marker_photometry=False):
     alpha, fg, bg, colour_error = _calibrate(crop_rgb, nominal_rgb)
     h, w = alpha.shape
     lines, flank = line_candidates(alpha, cfg, maximum_dashed=1 if include_cross else 2)
@@ -134,20 +134,22 @@ def fit_layered(crop_rgb, nominal_rgb=None, cfg=Config(enable_open_dashed=True),
                     # pixel bounds could turn a shrunken "hollow" model solid.
                     initial.append(.15)
                     low.append(.02); high.append(.40)
-                if connector_independent or include_cross:
+                free_blur = connector_independent or include_cross or independent_marker_photometry
+                free_level = include_cross or independent_marker_photometry
+                if free_blur:
                     initial.append(.20); low.append(.03); high.append(1.)
-                if include_cross:
+                if free_level:
                     initial.append(.85);low.append(.25);high.append(1.25)
 
                 def unpack(v):
                     p = dict(cx=float(v[0]), cy=float(v[1]), width=float(v[2]),
                              height=float(v[2] if equal else v[3]))
                     if stroked:
-                        stroke = v[-3] if include_cross else v[-2] if connector_independent else v[-1]
+                        stroke = v[-3] if free_level else v[-2] if free_blur else v[-1]
                         p.update(stroke_width=float(stroke*min(p['width'],p['height'])), interior_mode=mode)
-                    if connector_independent or include_cross:
-                        p['marker_blur_sigma'] = float(v[-2] if include_cross else v[-1])
-                    if include_cross:p['ink_level']=float(v[-1])
+                    if free_blur:
+                        p['marker_blur_sigma'] = float(v[-2] if free_level else v[-1])
+                    if free_level:p['ink_level']=float(v[-1])
                     return p
 
                 def residual(v):
@@ -196,6 +198,7 @@ def fit_layered(crop_rgb, nominal_rgb=None, cfg=Config(enable_open_dashed=True),
                template_policy='pure_model_marker_if_supported',
                connector_independent=bool(connector_independent),
                cross_hypotheses_enabled=bool(include_cross),
+               independent_marker_photometry=bool(independent_marker_photometry),
                independent_marker_fraction=measured_marker_fraction,
                connector_unknown_pixels=int(connector_unknown.sum()),
                caveats=['Synthesized hidden pixels are not observed evidence.',

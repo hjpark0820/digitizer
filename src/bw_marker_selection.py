@@ -87,6 +87,25 @@ def footprint_overlap(left,right):
     return float(max(0.,intersection)/min(area_a,area_b))
 
 
+def same_body_reason(candidate,kept):
+    """Whether two verified fits claim ONE physical body, whatever their series.
+
+    This is the cross-identity duplicate geometry of duplicate_reason. The raster
+    identity stage uses the same definition to decide the identity of such a body
+    once, jointly, instead of leaving it to a rank comparison here.
+    """
+    distance=math.hypot(candidate['aligned_x']-kept['aligned_x'],
+                        candidate['aligned_y']-kept['aligned_y'])
+    da,db=candidate['effective_diameter'],kept['effective_diameter']
+    if distance<=max(2.,.25*min(da,db)):
+        return 'same_centre_different_type'
+    overlap=footprint_overlap(candidate,kept)
+    if overlap is None:
+        # Compatibility for explicit synthetic/legacy records without masks.
+        return 'legacy_centre_duplicate' if distance<=.65*min(da,db) else None
+    return 'shared_marker_footprint' if overlap>=.55 else None
+
+
 def duplicate_reason(candidate,kept):
     distance=math.hypot(candidate['aligned_x']-kept['aligned_x'],
                         candidate['aligned_y']-kept['aligned_y'])
@@ -96,13 +115,7 @@ def duplicate_reason(candidate,kept):
         # different diameters. A minimum radius lets the smaller fit escape.
         radius=max(2.,.88*(da+db)/2)
         return 'same_type_neighbour' if distance<=radius else None
-    if distance<=max(2.,.25*min(da,db)):
-        return 'same_centre_different_type'
-    overlap=footprint_overlap(candidate,kept)
-    if overlap is None:
-        # Compatibility for explicit synthetic/legacy records without masks.
-        return 'legacy_centre_duplicate' if distance<=.65*min(da,db) else None
-    return 'shared_marker_footprint' if overlap>=.55 else None
+    return same_body_reason(candidate,kept)
 
 
 def select_verified(records):

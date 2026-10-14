@@ -9,7 +9,7 @@ import cv2
 import numpy as np
 from scipy.ndimage import binary_fill_holes
 
-VERSION = 'paired-square-inner-outer-v1'
+VERSION = 'paired-square-inner-outer-v2-exterior-caps'
 
 
 def eligible(template):
@@ -94,6 +94,7 @@ def square_interior_evidence(observed, mask, available=None, occlusion=None):
     if min(ix, iy) < 2.:
         return result
     contrasts, supported, observable = [], [], []
+    exterior_cover=None; exterior_records=[]; exterior_reprobes=[]
     def sample(array, x, y):
         return cv2.remap(np.asarray(array, np.float32), np.float32(x)[None,:],
                          np.float32(y)[None,:], cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT)[0]
@@ -121,6 +122,30 @@ def square_interior_evidence(observed, mask, available=None, occlusion=None):
                 seen &= bool(np.all(sample(valid,sx,sy)>.99))
             outside, rim, inside = values
             c = min(rim-outside, rim-inside)
+            if seen and c<.25 and rim>=.4 and rim-inside>=.25 and outside>rim-.25:
+                if exterior_cover is None:
+                    from bw_raster_context_v46 import external_strokes
+                    exterior_cover,exterior_records=external_strokes(
+                        observed,envelope,finite_exterior=True,available=valid)
+                old_band=bands[0]
+                nuisance=sample(exterior_cover,bx+nx*old_band,by+ny*old_band)
+                # Only a measured exterior cap can trigger a bounded paper
+                # re-probe. Do not move the rim/hole or search for their best
+                # alignment, and never manufacture white from hidden pixels.
+                if np.count_nonzero(nuisance>.20)>=3:
+                    distances=np.arange(-max(8.,.35*max(rx,ry)*2),-1.49,.5)
+                    sx,sy=bx+nx*distances,by+ny*distances
+                    paper=sample(observed,sx,sy)
+                    free=(sample(valid,sx,sy)>.99)&(sample(exterior_cover,sx,sy)<.10)
+                    # A cap may touch a rim: independently visible paper on
+                    # its far side remains exterior evidence, not missing ink.
+                    if free.sum()>=3 and np.ptp(distances[free])>=1.:
+                        replacement=float(np.median(paper[free]))
+                        exterior_reprobes.append(dict(side=side,tangent_fraction=float(f),
+                            previous_outside=float(outside),measured_outside=replacement,
+                            paper_samples=int(free.sum()),maximum_distance=float(-distances.min())))
+                        outside=replacement
+                        c=min(rim-outside,rim-inside)
             cs.append(c); vs.append(seen); ss.append(seen and c>=.25 and rim>=.4)
         contrasts.append(cs); supported.append(ss); observable.append(vs)
     support = np.asarray(supported, bool)
@@ -141,6 +166,7 @@ def square_interior_evidence(observed, mask, available=None, occlusion=None):
         paired_support=float(support.mean()), side_support=side_support.tolist(),
         paired_boundaries_supported=bool(paired), profile_contrasts=contrasts,
         observable_profiles=int(np.sum(observable)), total_profiles=36,
+        exterior_strokes=exterior_records,exterior_paper_reprobes=exterior_reprobes,
         crossing=crossing, crossing_exempt_pixels=int(exemption.sum()),
         model_outer_radii=[float(rx),float(ry)],model_inner_radii=[float(ix),float(iy)])
     if count < max(4,.30*safe_hole.sum()):

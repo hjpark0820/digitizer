@@ -60,11 +60,11 @@
   pre.log { font-size:11px; color:#555; background:#f4f4f4; padding:8px;
             border-radius:6px; max-height:140px; overflow:auto; white-space:pre-wrap; }
   .spinner { display:none; font-size:14px; color:var(--accent); }
-  .modeseg { display:inline-flex; background:var(--surface-0,#f1efe8); border:1px solid var(--border); border-radius:10px; padding:3px; gap:3px; margin-top:6px; }
-  .modebtn { display:flex; align-items:center; gap:7px; padding:8px 16px; border:2px solid transparent; background:transparent; color:var(--muted,#6b6b6b); border-radius:8px; cursor:pointer; font-size:13px; font-weight:500; transition:all .15s; }
+  .modeseg { display:flex; background:var(--surface-0,#f1efe8); border:1px solid var(--border); border-radius:10px; padding:3px; gap:3px; margin-top:6px; }
+  .modeseg .modebtn { flex:1; display:flex; align-items:center; justify-content:center; gap:5px; padding:8px 7px; border:2px solid transparent; background:transparent; color:var(--muted,#6b6b6b); border-radius:8px; cursor:pointer; font-size:12px; font-weight:500; transition:all .15s; }
   .modebtn svg { display:block; }
   .modebtn:hover { color:#333; }
-  .modebtn-on { background:#fff; color:var(--accent); border-color:var(--accent); font-weight:600; box-shadow:0 1px 4px rgba(24,95,165,.2); }
+  .modeseg .modebtn-on { background:#fff; color:var(--accent); border-color:var(--accent); font-weight:600; box-shadow:0 1px 4px rgba(24,95,165,.2); }
   .modebtn-on::after { content:"\2713"; font-size:12px; font-weight:700; margin-left:2px; }
   .toolrow { display:flex; gap:6px; margin:8px 0 4px; }
   .toolbtn { flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:8px 6px; border:1px solid var(--border); background:#fff; color:#333; border-radius:8px; cursor:pointer; font-size:12px; font-weight:500; white-space:nowrap; transition:all .12s; }
@@ -148,19 +148,21 @@
         <input id="fileInput" type="file" accept="image/png,image/jpeg">
       </label>
 
-      <div class="tool" style="margin-top:10px;">
+      <div class="tool" style="margin-top:10px; flex-direction:column; align-items:stretch; gap:2px;">
         <span style="font-size:13px; font-weight:600;">Mode:</span>
-        <div class="modeseg">
-          <button id="modeColor" data-mode="color" class="modebtn modebtn-on">
+        <div class="modeseg" role="group" aria-label="Detection mode">
+          <button id="modeAuto" data-mode="auto" class="modebtn modebtn-on" aria-pressed="true">Automatic</button>
+          <button id="modeColor" data-mode="color" class="modebtn" aria-pressed="false">
             <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="5" cy="6" r="2.6" fill="#e24b4a"/><circle cx="10.5" cy="9.5" r="2.6" fill="#1d9e75"/><circle cx="8" cy="5" r="2.6" fill="#378add" opacity="0.9"/></svg>
             Colour
           </button>
-          <button id="modeBw" data-mode="bw" class="modebtn">
+          <button id="modeBw" data-mode="bw" class="modebtn" aria-pressed="false">
             <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="5" cy="8" r="2.4" fill="#2c2c2a"/><rect x="8.4" y="5.6" width="4.6" height="4.6" fill="none" stroke="#2c2c2a" stroke-width="1.3"/></svg>
             B&amp;W
           </button>
         </div>
       </div>
+      <p id="modeSelectionHint" class="hint">Automatic chooses Colour or B&amp;W from the plot ink. Draw the plot area before running. Use Colour or B&amp;W to choose manually.</p>
 
       <details id="bwImagePrep" class="image-prep" aria-label="Image preparation">
         <summary>Image preparation</summary>
@@ -184,7 +186,7 @@
           <button type="button" data-rotation="1" title="Rotate 1 degree clockwise">↷ 1° CW</button>
         </div>
         <div class="prep-row"><button type="button" id="bwResetImage">Reset to original</button><span id="bwImageAngle" class="hint">0° clockwise</span></div>
-        <p class="hint" style="margin-bottom:0;">Available in Colour and B&amp;W. Prepare the image before drawing regions. Each image change starts from the original upload, clears regions/results, and requires redrawing. Switching modes keeps the prepared image and regions. Rotation expands onto white so nothing is clipped. Reducing resolution can lose small-marker detail.</p>
+        <p class="hint" style="margin-bottom:0;">Available in every mode. Prepare the image before drawing regions. Each image change starts from the original upload, clears regions/results, and requires redrawing. Switching modes keeps the prepared image and regions. Rotation expands onto white so nothing is clipped. Reducing resolution can lose small-marker detail.</p>
         <div id="bwImageStatus" class="hint" role="status" aria-live="polite"></div>
       </details>
 
@@ -233,6 +235,7 @@
     <!-- Right: result -->
     <div class="panel" id="result" style="min-width:320px; display:none;">
       <div id="summary" role="status" style="font-size:14px; margin-bottom:10px;"></div>
+      <p id="resultModeSelection" class="hint" role="status" hidden></p>
       <details id="inferenceDiagnostic" style="display:none; margin-bottom:10px;">
         <summary>Detection status and log</summary>
         <a id="inferenceDiagnosticLink" target="_blank" rel="noopener">Open v46 series inference diagnostic</a>
@@ -407,7 +410,7 @@
 // never becomes the source for another preparation request.
 class BwImageState {
   constructor() {
-    this.mode = 'color'; this.serial = 0; this.revision = 0; this.busy = null;
+    this.mode = 'auto'; this.serial = 0; this.revision = 0; this.busy = null;
     this.originalBlob = null; this.currentBlob = null;
     this.originalSize = null; this.currentSize = null;
     this.percent = 100; this.angle = 0;
@@ -459,7 +462,7 @@ class BwImageState {
     this.currentSize = this.originalSize ? {...this.originalSize} : null;
   }
   setMode(mode) {
-    if (!['bw', 'color'].includes(mode)) throw new Error('Unknown mode.');
+    if (!['auto', 'bw', 'color'].includes(mode)) throw new Error('Unknown mode.');
     if (this.busy) throw new Error('Wait for the current operation to finish.');
     if (mode === this.mode) return false;
     // Preparation and pixel geometry are shared by both detectors. Changing
@@ -484,7 +487,7 @@ let tool = null;
 let boxes = { legend: null, plot: null, scale: null };
 let drag = null;
 let fileBlob = null;
-let APP_MODE = 'color';                // 'color' | 'bw'
+let APP_MODE = 'auto';                 // Requested next-run mode: 'auto' | 'color' | 'bw'.
 const imageState = new BwImageState();
 let originalImage = null;
 let originalUrl = null;
@@ -516,7 +519,7 @@ function syncImageControls() {
   const stopPolicy = document.getElementById('step5StopPolicy');
   if (stopPolicy) stopPolicy.disabled = busy || !capabilities.correctable;
   document.getElementById('bwCorrectIters').disabled = busy || !capabilities.correctable || stopPolicy?.value === 'auto';
-  for (const id of ['fileInput', 'modeColor', 'modeBw', 'correctionImage', 'correctionData', 'loadCorrection', 'chooseImageFolder', 'folderImage', 'openFolderImage']) document.getElementById(id).disabled = busy;
+  for (const id of ['fileInput', 'modeAuto', 'modeColor', 'modeBw', 'correctionImage', 'correctionData', 'loadCorrection', 'chooseImageFolder', 'folderImage', 'openFolderImage']) document.getElementById(id).disabled = busy;
   document.getElementById('openFolderImage').disabled = busy || !editImageNames.includes(document.getElementById('folderImage').value);
   document.getElementById('browseFolderImages').disabled = busy || !editImageNames.length;
   document.getElementById('saveCorrection').disabled = busy || !window._lastJobId;
@@ -545,6 +548,8 @@ function clearDetectionState() {
   clearEditorState();
   document.getElementById('resultsHistory').innerHTML = '';
   document.getElementById('summary').textContent = '';
+  document.getElementById('resultModeSelection').textContent = '';
+  document.getElementById('resultModeSelection').hidden = true;
   document.getElementById('masksGrid').innerHTML = '';
   document.getElementById('downloadXlsx').removeAttribute('href');
   for (const id of ['result', 'diagBox', 'masksBox', 'correctItersWrap', 'step5MethodHint', 'inferenceDiagnostic']) {
@@ -729,8 +734,14 @@ function setMode(m) {
   if (imageState.busy || m === APP_MODE) return;
   imageState.setMode(m);
   APP_MODE = m;
-  document.getElementById('modeColor').classList.toggle('modebtn-on', m === 'color');
-  document.getElementById('modeBw').classList.toggle('modebtn-on', m === 'bw');
+  for (const [id, mode] of [['modeAuto', 'auto'], ['modeColor', 'color'], ['modeBw', 'bw']]) {
+    document.getElementById(id).classList.toggle('modebtn-on', m === mode);
+    document.getElementById(id).setAttribute('aria-pressed', String(m === mode));
+  }
+  document.getElementById('modeSelectionHint').textContent = m === 'auto'
+    ? 'Automatic chooses Colour or B&W from the plot ink. Draw the plot area before running. Use Colour or B&W to choose manually.'
+    : m === 'bw' ? 'B&W selected manually. Draw the plot area before running.'
+    : 'Colour selected manually. A plot area is required when no legend is selected.';
   const bw = (m === 'bw');
   document.getElementById('bwPanel').style.display = bw ? 'block' : 'none';
   // Legend region: colour uses it for the palette; B&W extracts and classifies
@@ -742,6 +753,7 @@ function setMode(m) {
   updateInfo();
   syncImageControls();
 }
+document.getElementById('modeAuto').addEventListener('click', () => setMode('auto'));
 document.getElementById('modeColor').addEventListener('click', () => setMode('color'));
 document.getElementById('modeBw').addEventListener('click', () => setMode('bw'));
 
@@ -1190,7 +1202,7 @@ canvas.addEventListener('pointerup', e => {
 
 function updateInfo() {
   document.getElementById('legendSelectionHint').textContent = boxes.legend
-    ? 'Legend selected: use legend entries and plot evidence. To infer one series without a legend, click Clear and redraw only the plot area.'
+    ? 'Legend selected: use legend entries and plot evidence.' + (!boxes.plot && APP_MODE !== 'color' ? ' Draw the plot area before running.' : '') + ' To infer one series without a legend, click Clear and redraw only the plot area.'
     : 'No legend selected: automatically infer one series from plot.' + (boxes.plot ? '' : ' Draw the plot area before running.');
 }
 
@@ -1244,14 +1256,16 @@ function parseAxisValue(s) {
 async function runDigitize(withCorrect) {
   if (withCorrect) return runSavedCorrection();
   if (!fileBlob || !imgLoaded || imageState.busy) return;
-  if (!boxes.plot && (APP_MODE === 'bw' || !boxes.legend)) {
-    alert('Draw a plot area before running. Without a legend, v46 infers one series inside the plot area.');
+  if (!boxes.plot && (APP_MODE !== 'color' || !boxes.legend)) {
+    alert(APP_MODE === 'auto'
+      ? 'Draw a plot area before running. Automatic uses the plot ink to choose Colour or B&W.'
+      : 'Draw a plot area before running. Without a legend, v46 infers one series inside the plot area.');
     return;
   }
   const fd = new FormData();
   fd.append('image', fileBlob);
   fd.append('mode', APP_MODE);
-  if (APP_MODE === 'color') fd.append('color_series_mode', 'auto');
+  if (APP_MODE !== 'bw') fd.append('color_series_mode', 'auto');
   if (boxes.legend) fd.append(APP_MODE === 'bw' ? 'legend_area' : 'legend_box', boxes.legend.join(','));
   if (boxes.plot)   fd.append('plot_area',  boxes.plot.join(','));
   let xMin = parseAxisValue(document.getElementById('xMin').value);
@@ -1328,6 +1342,9 @@ function presentResult(data, withCorrect = false) {
     document.getElementById('result').style.display = 'block';
     document.getElementById('summary').textContent = data.summary ||
       (data.ok ? 'Detection complete.' : 'Detection or correction did not complete.');
+    const modeSelection = document.getElementById('resultModeSelection');
+    modeSelection.textContent = resultModeSelectionText(data);
+    modeSelection.hidden = !modeSelection.textContent;
     const inference = data.legend_optional;
     const diagnosticWrap = document.getElementById('inferenceDiagnostic');
     diagnosticWrap.style.display = inference || !data.ok ? 'block' : 'none';
@@ -1502,6 +1519,22 @@ function currentEdForSave() {
   return ED && window._editorJobId === window._lastJobId ? ED : null;
 }
 
+function resolvedResultMode(data = window.lastData) {
+  // The selected button controls future detection. Saved evidence belongs to
+  // the detector that produced the current job, including an Automatic run.
+  if (!['color', 'bw'].includes(data?.mode)) throw new Error('The current result has no resolved Colour/B&W mode. Run detection again or reload the saved result.');
+  return data.mode;
+}
+
+function resultModeSelectionText(data) {
+  if (!['color', 'bw'].includes(data?.mode)) return '';
+  const label = data.mode === 'color' ? 'Colour' : 'B&W';
+  const prefix = data.requested_mode === 'auto' ? 'Automatic → ' + label
+    : data.requested_mode === data.mode ? label + ' (manual)'
+    : data.operation === 'import' ? 'Saved detection mode: ' + label : 'Detection mode: ' + label;
+  return prefix + (data.mode_selection?.reason ? '. ' + data.mode_selection.reason : '');
+}
+
 function responseErrorMessage(detail) {
   if(Array.isArray(detail))return detail.map(responseErrorMessage).filter(Boolean).join('\n');
   if(detail && typeof detail==='object') {
@@ -1538,7 +1571,7 @@ async function saveCurrentFile(kind) {
   try {
     const response = await checkedResponse(await fetch('/correction-session/'+(kind==='excel'?'excel':'export'), {
       method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({job_id:window._lastJobId,mode:APP_MODE,edit_data:currentEdForSave()})}));
+      body:JSON.stringify({job_id:window._lastJobId,mode:resolvedResultMode(),edit_data:currentEdForSave()})}));
     const blob = await response.blob();
     if (!imageState.current(token)) return;
     const url = URL.createObjectURL(blob), link = document.createElement('a');
@@ -1678,7 +1711,8 @@ async function loadCorrectionPair(imageFile,dataFile,useSavedVersion=false) {
     if (!imageState.current(token)) { URL.revokeObjectURL(url); return; }
     await sidecar.bind(imageFile);
     // Replace the displayed job only after BOTH files and the returned image validate.
-    imageState.finish(token); setMode(data.mode); clearImageGeometry(); revokePreparedUrl();
+    // Loading saved evidence does not change the mode requested for a new run.
+    imageState.finish(token); clearImageGeometry(); revokePreparedUrl();
     if (originalUrl) URL.revokeObjectURL(originalUrl);
     originalUrl=url; originalImage=loaded;
     const upload=imageState.upload(blob);
@@ -1711,12 +1745,12 @@ async function runSavedCorrection() {
   const stopPolicy=document.getElementById('step5StopPolicy')?.value || 'manual';
   const iterations=stopPolicy==='auto' ? 20 : Number(document.getElementById('bwCorrectIters').value);
   if (!Number.isInteger(iterations) || iterations<1 || iterations>50) { alert('Iterations must be 1–50.'); return; }
-  const request={job_id:window._lastJobId,mode:APP_MODE,iterations,stop_policy:stopPolicy,edit_data:currentEdForSave()};
   const token=imageState.begin('correction'); syncImageControls();
   const spinner=document.getElementById('spinner'); spinner.textContent=stopPolicy==='auto'
     ? 'Automatic Step 5 — stop when no admissible improvement remains; maximum 20 per series. Detection skipped…'
     : 'Running saved-evidence Step 5 — detection skipped…'; spinner.style.display='block';
   try {
+    const request={job_id:window._lastJobId,mode:resolvedResultMode(),iterations,stop_policy:stopPolicy,edit_data:currentEdForSave()};
     const data=await (await checkedResponse(await fetch('/correct-saved',{
       method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(request)}))).json();
     if (!imageState.current(token)) return;
@@ -1931,6 +1965,10 @@ function buildCurvePicker() {
     b.innerHTML = '<span class="swatch" style="background:' + rgbCss(c.rgb) +
                   ';border:1px solid #999;"></span> ' + escapeText(c.label || c.name);
     b.className = (edViewFilter === i) ? 'active' : '';
+    if (c.detection_status === 'unavailable') {
+      b.appendChild(document.createTextNode(' [manual only]'));
+      b.title = c.correction_unavailable_reason || 'Legend marker unavailable; automatic correction disabled for this series.';
+    }
     b.onclick = () => { edViewFilter = i; edSel = i; edSelPt = null; buildCurvePicker(); drawEditor(); recompute(); };
     box.appendChild(b);
   });

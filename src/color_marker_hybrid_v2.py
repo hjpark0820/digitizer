@@ -61,6 +61,25 @@ def _novel_fraction(a,b):
     return unique/max(mass,1.e-8),unique
 
 
+def _neutral_tone_fields(evidence,si,cache):
+    """Key si's own/other/confidence with the neutral-tone multiplier applied (cached per key).
+
+    Ink removed from the key's own support becomes rival ink through the
+    unchanged 'other' equation, so it can only excuse missing marker ink, never
+    support it. Existing 'other' evidence is kept (maximum)."""
+    if si not in cache:
+        gate=evidence['neutral_tone_gate'][si]
+        own=np.asarray(evidence['membership'][si],np.float32)*gate
+        confidence=None if evidence.get('colour_confidence') is None else np.asarray(evidence['colour_confidence'][si],np.float32)*gate
+        other=np.asarray(evidence['other'][si],np.float32)
+        rivals=np.flatnonzero(~np.asarray(evidence['equivalent_colours'][si],bool))
+        if len(rivals):
+            rival=np.max(evidence['membership'][rivals]*evidence['colour_confidence'][rivals],axis=0)
+            other=np.maximum(other,rival*np.clip((rival-own-.08)/.35,0.,1.)).astype(np.float32)
+        cache[si]=(own.astype(np.float32),other,confidence)
+    return cache[si]
+
+
 def _mutually_independent(p,q,cfg):
     d=min(p['diameter'],q['diameter'])
     for a,b in [(p,q),(q,p)]:
@@ -76,6 +95,11 @@ def analyze_evidence(evidence,*,window_config=None,proposal_config=None):
         retain_alternative_centres=True,paper_contradiction_weight=PAPER_CENTER_WEIGHT))
     candidates=[];lookup={};window_seconds=0.;footprints={}
     index_by_id={str(t['id']):i for i,t in enumerate(evidence['templates'])}
+    # Same-colour shape competition. 'identity_rivals' may add physically
+    # verified same-ink twins; evidence planes keep equivalent_colours.
+    identity_rivals=evidence.get('identity_rivals',evidence['equivalent_colours'])
+    tone_gate=evidence.get('neutral_tone_gate');tone_cache={}
+    toned_keys=set() if tone_gate is None else {i for i in range(len(tone_gate)) if float(tone_gate[i].min())<1.}
     for p in raw['candidates']:
         key=(p['series_id'],round(p['x'],4),round(p['y'],4))
         if key in lookup:
@@ -90,13 +114,35 @@ def analyze_evidence(evidence,*,window_config=None,proposal_config=None):
                              **window_kwargs(evidence, si),
                              guide_model=None if 'guide_membership' not in evidence else
                                  (evidence['guide_membership'][si],evidence['guide_lower'][si],evidence['guide_upper'][si]))
+        tone_check=None
+        if si in toned_keys:
+            # Consistency check: is most of this candidate's support ink that its own
+            # (neutral) key cannot have produced - darker than any pixel of its legend
+            # glyph and explained by a darker neutral key? Only then is the candidate
+            # re-verified with that ink treated as another key's (occluding) ink.
+            footprint=_ink_footprint(evidence['membership'][si],t,p['x'],p['y'])
+            total=sum(footprint.values())
+            kept=sum(v*float(tone_gate[si][py,px]) for (px,py),v in footprint.items())
+            tone_check=dict(support=round(total,4),support_kept=round(kept,4),reverified=False)
+            if total-kept>kept:
+                own,other,confidence=_neutral_tone_fields(evidence,si,tone_cache)
+                kwargs=window_kwargs(evidence, si)
+                if confidence is not None:kwargs['target_confidence']=confidence
+                tone_check.update(reverified=True,score_before=float(window['score']))
+                window=verify_window(own,other,t,p['x'],p['y'],config=window_config,debug=False,
+                                     ignore_mask=evidence.get('ignore_mask'),**kwargs,
+                                     guide_model=None if 'guide_membership' not in evidence else
+                                         (evidence['guide_membership'][si],evidence['guide_lower'][si],evidence['guide_upper'][si]))
         window_seconds+=perf_counter()-begin
         c=dict(p,candidate_id=len(candidates),window=_plain(window),score=float(window['score']))
+        if tone_check is not None:c['neutral_tone_check']=tone_check
         if 'symbol_scale' in t:
             c.update(symbol_scale=t['symbol_scale'],legend_diameter=t['legend_diameter'],
                      window_template_diameter=float(t['diameter']),scale_policy='shared_symbol')
         c['rival_series']=[str(q['id']) for j,q in enumerate(evidence['templates'])
-                           if j!=si and evidence['equivalent_colours'][si,j]]
+                           if j!=si and identity_rivals[si,j]]
+        if evidence.get('thin_twins',{}).get(si):
+            c['thin_twin_series']=[str(evidence['templates'][j]['id']) for j in evidence['thin_twins'][si]]
         c['independent_evidence']={}
         lookup[key]=len(candidates);candidates.append(c)
         if c['rival_series']:
@@ -164,6 +210,19 @@ def select_candidates(candidates,*,config=None,threshold=None,joint=True,line_ga
                     ambiguous['alternative_series']=sorted(set(ambiguous['alternative_series'])|{p['series_id']})
                     ambiguous['competing_palette']=sorted(set(ambiguous['competing_palette'])|set(p.get('rival_series',[])))
                     rejected.append({'candidate_id':p['candidate_id'],'reason':'already_ambiguous_identity'})
+            continue
+        # Measured same-ink twins: the thin key is the solid key's ink at partial
+        # coverage, so a solid body explains every pixel of an outline drawn on
+        # it while the outline leaves the filled interior unexplained. When the
+        # solid twin's body itself passed the window score, its claim replaces
+        # the thin twin's claim on the same, non-independent ink.
+        thin=[q for q in conflicts if q['series_id'] in p.get('thin_twin_series',[])]
+        if thin and len(thin)==len(conflicts):
+            for q in thin:
+                accepted.remove(q)
+                rejected.append({'candidate_id':q['candidate_id'],'reason':'thin_twin_outline_explained_by_solid_twin_body',
+                                 'winner':p['candidate_id']})
+            accepted.append(p)
             continue
         q=max(conflicts,key=lambda z:z['score'])
         if q['score']-p['score']<cfg.identity_ambiguity_margin:

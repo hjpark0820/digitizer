@@ -16,12 +16,12 @@ import numpy as np
 
 import partial_swatch_detector as D
 from bw_marker_selection import select_verified
-from bw_suppressed_v46 import WINDOW_METRICS, build_suppressed, encode_marker_mask
+from bw_suppressed_v46 import WINDOW_METRICS, build_suppressed, encode_marker_mask, overlap_hypothesis_reason
 from bw_compute_backend import resolve_compute_backends, is_cuda_runtime_error
 from occlusion_aware_window_verifier import verify_marker_window, verify_marker_windows_many
 
 VERSION = 'bw-grid-v46'
-PRODUCTION_PROFILE = 'shared-scale-observed-raster-fill-grouped-recovery-v6'
+PRODUCTION_PROFILE = 'shared-scale-independent-raster-sequential-v12-visible-first'
 LEGACY_PROPOSAL_SCALES = (.90, .94, .98, 1., 1.04, 1.08, 1.12)
 # Compatibility constant for old explicit experiments; no longer a set of
 # production proposals. The new production profile calibrates once per swatch.
@@ -33,11 +33,49 @@ CLASSES = ['filled_circle', 'open_circle', 'filled_square', 'open_square',
 
 
 def production_detection_options():
-    """Shared GUI/CLI B&W profile; standalone experiments may override options."""
+    """GUI/CLI sequential profile; shared appearance stays experimental.
+
+    Exact source transport does not certify recovery-body extent or context.
+    Preserve independent raster extraction until that contract is validated.
+    """
     return dict(scale_policy='shared_symbol', window_scale_reference='legend',
                 grid_identity_competition=True, geometry_first=True,
                 centered_x_composite=True,layered_marker_composite=True,
-                observed_raster_identity=True)
+                observed_raster_identity=True,joint_raster_window=False,shared_legend_source=False,
+                untyped_suppressed=True,legend_local_completion=True,
+                legend_joint_identity=True,visible_first_detection=True)
+
+
+def _retire_exact_suppressed_promotions(pool, additions):
+    """Move one typed hypothesis from suppressed to active, not a radius NMS.
+
+    Use the same coordinate identity as Step 5. Nearby or different-swatch
+    hypotheses remain available for real overlapping markers. Full retired
+    records are returned for the caller's diagnostic, never silently dropped.
+    """
+    from bw_step5_v46 import key
+    pending = {}
+    for point in pool['suppressed']:
+        pending.setdefault(key(point), []).append(point)
+    blocked = [dict(proposed_point=dict(point),
+                    conflicting_suppressed=[dict(p) for p in pending.get(key(point), [])],
+                    reason='same_hypothesis_class_metadata_conflict')
+               for point in additions if any(p.get('class_name') != point.get('class_name')
+                   for p in pending.get(key(point), []))]
+    blocked_keys = {key(row['proposed_point']) for row in blocked}
+    additions[:] = [p for p in additions if key(p) not in blocked_keys]
+    promoted = {key(point): point for point in additions}
+    retained, retired = [], []
+    for point in pool['suppressed']:
+        active = promoted.get(key(point))
+        if active is None:
+            retained.append(point)
+        else:
+            retired.append(dict(suppressed_point=dict(point),
+                promoted_to_point_id=active.get('point_id'),
+                reason='same_typed_hypothesis_promoted_to_active'))
+    pool['suppressed'] = retained
+    return retired, blocked
 
 
 def _legend_functions():
@@ -282,7 +320,13 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
                   window_image=None, window_uncertainty_mask=None,
                   window_search_scales=None, geometry_first=False,colour_observation=None,
                   centered_x_composite=False,layered_marker_composite=False,
-                  observed_raster_identity=False):
+                  observed_raster_identity=False,joint_raster_window=False,
+                  partial_hollow_visibility=False,partial_hollow_strategy='legacy',
+                  untyped_suppressed=False,explained_marker_occlusion=False,
+                  filled_contour_identity=False,shared_legend_source=False,
+                  legend_local_completion=False,legend_joint_identity=False,
+                  ambiguity_suppressed=False,grouped_partial_scene=False,neutral_group_identity=False,
+                  visible_first_detection=False):
     """Detect with the existing per-candidate scale/aspect search by default.
 
     ``conservative`` locks each swatch to one explicitly approved size (or 1x).
@@ -301,6 +345,14 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
     Shared-symbol fitting supplies its per-swatch locks internally instead.
     The GUI and shared B&W CLI pass ``production_detection_options()``; direct
     experiment calls retain their previous defaults unless explicitly changed.
+    ``ambiguity_suppressed`` is opt-in: preserve bounded unresolved raster
+    hypotheses with source-bound pending identity evidence. It never changes
+    active detections; Step 5 must resolve the evidence before activation.
+    ``grouped_partial_scene`` is an experimental grouped recovery extension:
+    freeze already verified markers, keep the grouped line family, and compare
+    unresolved target/donor/line scenes with source-bound partial profiles.
+    This replaces the separate partial recovery pass, not native validation.
+    Production defaults and colour/prepared routes are unchanged.
     ``fill_identity`` tests separate soft-interior evidence at grid and window
     stages; it is experimental and does not change the GUI production default.
     ``geometry_first`` uses filled envelopes for patterned-marker proposals,
@@ -326,6 +378,36 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
     uses a common source-raster ROI. Non-X recovery reuses that comparator and
     can replace an existing identity only with stronger evidence at both centers.
     Other-colour/prepared routes retain their existing final competition.
+    ``visible_first_detection`` rechecks full-window-verified
+    native BW candidates rejected by final raster identity. Direct observed
+    shape/interior evidence may excuse exterior clutter, never missing marker
+    ink or unresolved rival identity. It is not an axis-only or Step 5 option.
+    Earlier grid/window failures, joint-window and colour routes are unchanged.
+    The native BW production profile enables it; bare experimental calls keep
+    the opt-in default, and colour-group adapters explicitly disable it.
+    ``joint_raster_window`` opts into a shared-legend native BW window decision.
+    Native boundary/fill measurements and all-swatch/line-null differences use
+    one approved scale and physical registration. No independent legend/scale
+    extraction or post-window identity filter follows. New raster recovery
+    proposals use that same decision; unsupported routes retain legacy paths.
+    ``partial_hollow_visibility`` opts into bounded native hollow-square
+    recovery: visible-profile fit and coverage are separate, followed by an
+    independently anchored neighbour/line explanation. Ordinary sequential
+    decisions and production defaults are unchanged. No reference points enter
+    this path; accepted additions carry source-bound evidence for Step 5.
+    ``partial_hollow_strategy='evidence_reuse'`` preserves compact upstream
+    boundary/seed evidence for the opt-in recovery. The legacy strategy remains
+    available for controlled comparisons; neither strategy enables recovery.
+    ``explained_marker_occlusion`` additionally revisits saved grid candidates
+    behind independently verified markers, including the same swatch. It needs
+    the opt-in source_raster partial route. Existing active points are frozen;
+    only a source-bound two-body comparison can exempt a near donor from the
+    duplicate guard. GUI/CLI defaults remain unchanged.
+    ``filled_contour_identity`` opts into raw-legend angular brightness ranking
+    of filled circle/square/up/down triangle alternatives. C3/C4 retain phase.
+    Only already verified records at one exact center can exchange existing
+    ranks, after the unchanged raster/line-null gates. Unknown labels remain
+    unknown; no missing hypothesis is promoted. Native B&W only, default off.
     ``window_occlusion_mask`` is image-aligned other-colour visibility [0,1];
     despite its historical name it also reaches candidate/centre/identity checks.
     Nonzero masks use CPU candidate, centre and window scoring and cannot supply
@@ -335,6 +417,18 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
     supplies positive ink or completely exempts a missing required pixel.
     """
     started = time.perf_counter()
+    # neutral_group_identity: colour-group route only (color_group_bw_v46.detection_options for a group of
+    # several achromatic keys sharing one ink image). See color_neutral_group_identity_v46.
+    if neutral_group_identity and (prepared_templates is None or colour_observation is not None):
+        raise ValueError('neutral_group_identity requires prepared neutral colour-group templates')
+    if partial_hollow_strategy not in {'legacy','evidence_reuse','source_raster'}:
+        raise ValueError('Unknown partial hollow recovery strategy')
+    if grouped_partial_scene and (partial_hollow_visibility or explained_marker_occlusion):
+        raise ValueError('Grouped partial scene replaces separate partial/explained recovery; do not enable both')
+    if grouped_partial_scene and not (layered_marker_composite and observed_raster_identity):
+        raise ValueError('Grouped partial scene requires layered_marker_composite and observed_raster_identity')
+    if explained_marker_occlusion and not (partial_hollow_visibility and partial_hollow_strategy=='source_raster'):
+        raise ValueError('Explained marker occlusion requires partial_hollow_visibility and source_raster')
     if colour_observation is not None:
         colour_observation.validate(image)
         if geometry_first:raise ValueError('Source colour roles require native prepared colour templates')
@@ -427,6 +521,32 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
         for t,r in zip(templates,report):
             if t.matching_profile!='bw_v46_uncertain' or not t.ink.achromatic or t.key!=r.get('swatch_id'):
                 raise ValueError('Prepared templates must preserve the native BW profile and swatch IDs')
+    # Native BW only: prepared colour groups retain their own reviewed source
+    # contracts. These options are explicit per-call state, never monkeypatches.
+    native_legend = (prepared_templates is None and colour_observation is None
+        and window_occlusion_mask is None and window_uncertainty_mask is None
+        and all(t.ink.achromatic for t in templates))
+    local_legend_enabled = bool(legend_local_completion and native_legend)
+    joint_legend_report = dict(enabled=bool(legend_joint_identity),
+        status='disabled' if not legend_joint_identity else 'prepared_or_colour_route_unchanged')
+    if legend_joint_identity and native_legend and known_classes:
+        # The extractor already filtered the roster. A missing peer is not
+        # evidence for joint identity, and corrected classes must not escape
+        # the caller's explicit class restriction.
+        joint_legend_report['status']='explicit_class_filter_unchanged'
+    if legend_joint_identity and native_legend and not known_classes:
+        from bw_legend_joint_identity_v46 import resolve_legend_sources
+        templates,report,joint_legend_report = resolve_legend_sources(image,templates,report)
+        joint_legend_report.update(enabled=True,status='completed')
+        log_fn(f'[v46 legend identity] source-gray joint check: '
+               f'{len(joint_legend_report["changed_ids"])} identities corrected; original source pixels retained')
+    # Capture original source center/extent before optional model composition.
+    # The contour adapter samples the untouched image, not reconstructed alpha.
+    if filled_contour_identity:
+        from copy import copy
+        contour_source_templates = [copy(t) for t in templates]
+    else:
+        contour_source_templates = []
     legend_seconds = time.perf_counter()-stage_started
     stage_started = time.perf_counter()
     exclusions = [tuple(legend_area)] if legend_area is not None else [t.swatch_box for t in templates]
@@ -438,10 +558,12 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
         report_by_id={r['swatch_id']:r for r in report}
         from bw_composed_legend_v46 import compose_compact_unknowns,compose_small_hollow
         templates,small_reports=compose_small_hollow(
-            image,legend_area,templates,[report_by_id[t.key] for t in templates])
+            image,legend_area,templates,[report_by_id[t.key] for t in templates],
+            local_completion=local_legend_enabled)
         report_by_id.update({r['swatch_id']:r for r in small_reports})
         templates,composed_reports=compose_compact_unknowns(
-            image,legend_area,templates,[report_by_id[t.key] for t in templates])
+            image,legend_area,templates,[report_by_id[t.key] for t in templates],
+            local_completion=local_legend_enabled)
         transformed={r['swatch_id']:r for r in composed_reports}
         report=[transformed.get(r['swatch_id'],r) for r in report]
         attempted=[r for r in composed_reports if r.get('compact_composition_attempted')]
@@ -450,7 +572,8 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
             log_fn(f'[v46 compact legend] line + marker fits: {len(attempted)}; '
                    f'supported pure markers: {adopted}; observed fallbacks: {len(attempted)-adopted}')
         report_by_id={r['swatch_id']:r for r in report}
-        controller = GeometryFirst(image,templates,[report_by_id[t.key] for t in templates],pa,legend_area,exclusions)
+        controller = GeometryFirst(image,templates,[report_by_id[t.key] for t in templates],pa,legend_area,exclusions,
+                                   local_completion=local_legend_enabled)
         if controller.enabled:
             geometry=controller
             templates=geometry.templates
@@ -483,8 +606,31 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
     raster_competition=None
     raster_report={'status':'disabled'}
     raster_final_enabled=False
-    if (observed_raster_identity and prepared_templates is None and colour_observation is None
-            and window_occlusion_mask is None and window_uncertainty_mask is None):
+    raster_eligible = (observed_raster_identity and prepared_templates is None and colour_observation is None
+            and window_occlusion_mask is None and window_uncertainty_mask is None)
+    shared_window_requested = bool(joint_raster_window and raster_eligible
+        and scale_policy == 'shared_symbol' and use_legend_windows
+        and not fixed_window_geometry and compute_requested['window'] != 'cuda'
+        and all(t.ink.achromatic for t in templates))
+    shared_source_requested = bool((shared_legend_source or shared_window_requested) and raster_eligible
+        and scale_policy == 'shared_symbol' and use_legend_windows
+        and not fixed_window_geometry and all(t.ink.achromatic for t in templates))
+    source_contract_report = dict(enabled=bool(shared_legend_source), status='not_applicable',
+        requested=shared_source_requested)
+    completed_source_ids=[t.key for t in templates if getattr(t,'model_completed',False)]
+    if shared_source_requested and not shared_window_requested and completed_source_ids:
+        # Required-ink geometry and measured grayscale appearance are different
+        # contracts. A completed alpha is useful for windows but has not been
+        # validated as a drop-in source for the existing layered recovery bank.
+        # Keep the whole competing roster native; never mix size conventions
+        # per rival or silently claim the preserved legacy source is consistent.
+        shared_source_requested=False
+        source_contract_report.update(status='legacy_preserved_completed_appearance_unvalidated',
+            source_reextracted=True,comparison_complete=False,
+            completed_source_ids=completed_source_ids,
+            reason='inferred_required_ink_is_not_validated_observed_recovery_appearance',
+            mismatch_count=None,model_consistency_resolved=False)
+    if raster_eligible and not shared_source_requested:
         from bw_raster_identity_v46 import Competition
         raster_competition=Competition(image,pa,exclusions,templates,legend_reports=report)
         raster_report=raster_competition.report
@@ -552,6 +698,25 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
             entry['scale_status']=calibration[name]['status']
             entry['applied_scale']=calibration[name]['applied_scale']
             entry['series_index']=series_indices[name]
+    if shared_source_requested:
+        from bw_raster_identity_v46 import Competition
+        from bw_shared_window_source_v46 import build_source_models, audit_source_models
+        try:
+            shared_sources=build_source_models(templates,geometry=geometry,legend_reports=report)
+            raster_competition=Competition(image,pa,exclusions,templates,legend_reports=report,
+                source_models=shared_sources,approved_scales=approved_scales)
+            source_contract_report=audit_source_models(templates, shared_sources, raster_competition)
+            if source_contract_report.get('mismatch_count', 0):
+                raise ValueError('authoritative legend transport mismatch')
+        except (ValueError, TypeError, KeyError) as exc:
+            # Preserve runnable legacy behavior, but never call a fallback
+            # source-consistent. Every fallback is visible in cohort audits.
+            source_contract_report=dict(enabled=True,status='legacy_fallback',
+                source_reextracted=True,error_type=type(exc).__name__,reason=str(exc))
+            raster_competition=Competition(image,pa,exclusions,templates,legend_reports=report)
+            shared_window_requested=False
+        raster_report=raster_competition.report
+        raster_final_enabled=raster_competition.ready
     # Preserve unmodified image ink: do not delete errorbar strokes through markers.
     scale_policy_seconds = time.perf_counter()-stage_started
     stage_started = time.perf_counter()
@@ -578,6 +743,21 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
             # experiment comparison; the immutable, call-scoped image cache
             # also avoids repeated preprocessing on the CPU path.
             compute_options.update(compute_baseline=False, preprocessing_cache=preprocessing_cache)
+            capture_partial = ((partial_hollow_visibility and partial_hollow_strategy in {'evidence_reuse','source_raster'})
+                and prepared_templates is None and colour_observation is None
+                and window_occlusion_mask is None and window_uncertainty_mask is None)
+            # Preserve a narrowly supported, rejected grid seed without making
+            # it an ordinary detection. A later confirmed foreground owner
+            # must explain its missing fill before Step 5 can activate it.
+            capture_filled_occlusion = (prepared_templates is None and
+                colour_observation is None and window_occlusion_mask is None and
+                window_uncertainty_mask is None and t.name.startswith('filled_'))
+            if capture_filled_occlusion:
+                compute_options['capture_filled_occlusion_evidence'] = True
+            if capture_partial:
+                compute_options['capture_partial_evidence'] = True
+                if partial_hollow_strategy=='source_raster':
+                    compute_options['partial_evidence_shapes'] = 'all_source'
             if colour_observation is not None:compute_options['colour_observation']=colour_observation
             if window_occlusion_mask is not None:
                 compute_options['occlusion_mask'] = window_occlusion_mask
@@ -608,6 +788,9 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
                     compute_baseline=False,preprocessing_cache=preprocessing_cache,
                     **({'occlusion_mask':window_occlusion_mask} if window_occlusion_mask is not None else {}),
                     **({'colour_observation':colour_observation} if colour_observation is not None else {}),
+                    **({'capture_partial_evidence':True} if capture_partial else {}),
+                    **({'partial_evidence_shapes':'all_source'} if capture_partial and partial_hollow_strategy=='source_raster' else {}),
+                    **({'capture_filled_occlusion_evidence':True} if capture_filled_occlusion else {}),
                     **({'grid_identity_competitor':identity_competitor} if identity_competitor is not None else {}))
             if grid_fallback_reason:
                 for field in ('grid_diagnostics','refinement_diagnostics','candidate_diagnostics','clustering_diagnostics'):
@@ -645,7 +828,55 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
         window_search_options={'search_scales':{k:(s,) for k,s in approved_scales.items()},
                                'lock_aspect':True}
 
-    if window_backend == 'cuda':
+    joint_windows=None
+    joint_report={'status':'disabled'}
+    if joint_raster_window:
+        if compute_requested['window']=='cuda':
+            joint_report=dict(status='legacy_fallback',reason='explicit_cuda_window_request')
+        elif not shared_window_requested:
+            joint_report=dict(status='legacy_fallback',reason='requires_native_bw_shared_symbol_legend_windows')
+        elif not raster_final_enabled:
+            joint_report=dict(status='legacy_fallback',reason=raster_report.get('status','unavailable'))
+            if shared_window_requested:
+                from bw_raster_identity_v46 import Competition
+                raster_competition=Competition(image,pa,exclusions,templates,legend_reports=report)
+                source_contract_report=dict(enabled=True,status='legacy_fallback',
+                    source_reextracted=True,reason='shared_raster_unavailable')
+                raster_report=raster_competition.report
+                raster_final_enabled=raster_competition.ready
+        else:
+            from bw_shared_legend_window_v46 import verify_candidates,ResourceLimit
+            proposals=[dict(asdict(d),template=r.template.key,proposal_scale=r.template.proposal_scale)
+                       for r in results for d in r.detections]
+            try:
+                joint_windows=verify_candidates(raster_competition,image,proposals,templates,pa,exclusions,
+                    geometry=geometry,fill_competitor=fill_competitor,
+                    approved_scales=approved_scales,minimum_recall=min_required_recall)
+            except ResourceLimit as exc:
+                joint_report=dict(status='legacy_fallback',reason=str(exc))
+                # Atomic fallback must also restore the legacy comparator;
+                # never combine half a new decision with the old post-filter.
+                from bw_raster_identity_v46 import Competition
+                raster_competition=Competition(image,pa,exclusions,templates,legend_reports=report)
+                source_contract_report=dict(enabled=True,status='legacy_fallback',
+                    source_reextracted=True,reason='joint_window_resource_limit: '+str(exc))
+                raster_report=raster_competition.report
+                raster_final_enabled=raster_competition.ready
+            else:
+                records=joint_windows['records'];verified=joint_windows['verified']
+                measured_geometry=joint_windows['measured_geometry'];window_stats=joint_windows['window_stats']
+                joint_report=joint_windows['report']
+                raster_competition.report.update(status='completed_in_joint_window',
+                    window_decision_source=joint_report['version'],centres=joint_report['centres'],
+                    verified_input=len(records),retained=len(verified),seconds=joint_report['seconds'],
+                    comparisons=[p['raster_identity'] for p in records if 'raster_identity' in p])
+                raster_report=raster_competition.report
+                window_backend='cpu'
+                compute_selected={**compute_selected,'window':'cpu'}
+            log_fn(f'[v46 unified window] {joint_report["status"]}; '
+                   f'retained={len(verified)}; {joint_report.get("reason", "one raster decision")}')
+
+    if window_backend == 'cuda' and joint_windows is None:
         # Preserve template/proposal/candidate order while batching independent
         # windows. This removes the old per-candidate CPU->GPU->CPU call chain.
         requests = [(window_template(r), d.x, d.y, fixed_window_geometry)
@@ -659,7 +890,7 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
             window_fallback_reason = f'{type(error).__name__}: {error}'
             compute_fallbacks.append({'stage':'window','from':'cuda','to':'cpu','reason':window_fallback_reason})
             log_fn(f'[v46 compute] auto CUDA window batch failed; original CPU windows: {window_fallback_reason}')
-    for r in results:
+    for r in ([] if joint_windows is not None else results):
         for d in r.detections:
             window_options = ({'backend': window_backend, 'gpu_batch_size': gpu_batch_size}
                               if window_backend != 'cpu' and not window_fallback_reason else {})
@@ -674,7 +905,29 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
                                       fixed_geometry=fixed_window_geometry, **window_options))
             if geometry is not None:
                 geometry.assess(window_template(r),v)
+            # The ink-only translation optimum can move into a different
+            # colour or off a tiny marker. A replacement must pass the SAME
+            # window at its locked center before any record/mask is exported.
+            if window_occlusion_mask is not None and getattr(v,'template_mask',None) is not None:
+                from bw_final_alignment_v46 import preserve_visible_seed
+                v=preserve_visible_seed(window_image,window_template(r),(d.x,d.y),v,
+                    occlusion_mask=window_occlusion_mask,uncertainty_mask=window_uncertainty_mask,
+                    colour_observation=colour_observation,
+                    assess=None if geometry is None else geometry.assess,
+                    verification_image=None if geometry is None else geometry.image_for(r.template))
             absolute_scale = v.scale * (1. if use_legend_windows else r.template.proposal_scale)
+            # Source-colour recovery can retain an imperfect observed glyph.
+            # A curve alone must not become a marker simply by fitting that
+            # raster. Fit nuisance strokes outside the body, then veto only
+            # a fully explained body; occluded/uncertain cases remain intact.
+            source_template=by_key[r.template.key]
+            if (v.decision=='verified' and getattr(source_template,'source_colour_body',None)):
+                from color_source_line_evidence_v46 import body_line_evidence
+                line_body=body_line_evidence(window_image,source_template,v.aligned_x,v.aligned_y,
+                    scale=absolute_scale,occlusion_mask=window_occlusion_mask)
+                v.compute_diagnostics['source_line_body']=line_body
+                if line_body['applicable'] and not line_body['supported']:
+                    v.decision='ambiguous'
             diagnostic = getattr(v, 'compute_diagnostics', {})
             if window_fallback_reason:
                 diagnostic = {**diagnostic, 'backend':'cpu','used_cuda':False,'fallback_reason':window_fallback_reason}
@@ -705,6 +958,12 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
                 record['colour_uncertainty'] = diagnostic['colour_uncertainty']
             if 'ink_evidence' in diagnostic:
                 record['ink_evidence'] = diagnostic['ink_evidence']
+            if 'final_alignment' in diagnostic:
+                record['final_alignment'] = diagnostic['final_alignment']
+            if 'source_line_body' in diagnostic:
+                record['source_line_body']=diagnostic['source_line_body']
+                if not diagnostic['source_line_body']['supported']:
+                    record['deferred_reason']='source_patch_explained_by_exterior_line'
             for key in WINDOW_METRICS:
                 value = getattr(v,key,None)
                 record[key] = None if value is None else float(value)
@@ -763,13 +1022,13 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
                     record['decision'] = 'ambiguous'
                     record['deferred_reason'] = fill['reason']
                     fill_competitor.counts['window_deferred'] += 1
-            if v.decision in {'verified','ambiguous'}:
+            if v.decision in {'verified','ambiguous'} or overlap_hypothesis_reason(record):
                 rendered = getattr(v,'template_mask',None)
                 measured_geometry[len(records)] = {
                     'mask':(geometry.appearance(window_template(r),v) if geometry is not None else
                             r.template.mask if rendered is None else rendered),
-                    'marker_offset_x':0. if rendered is None else float(v.aligned_x-d.x),
-                    'marker_offset_y':0. if rendered is None else float(v.aligned_y-d.y),
+                    'marker_offset_x':0. if rendered is None else float(v.aligned_x-v.x),
+                    'marker_offset_y':0. if rendered is None else float(v.aligned_y-v.y),
                 }
             records.append(record)
             if record.get('exclusion_reason') == 'interior_fill_conflict':
@@ -828,7 +1087,7 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
                 rendered=r.template.mask
                 cx,cy=v.aligned_x,v.aligned_y
             else:
-                cx,cy=record['x'],record['y']
+                cx,cy=v.x,v.y
             yy,xx=np.nonzero(rendered)
             if len(xx)>=3:
                 hull=cv2.convexHull(np.column_stack((xx,yy)).astype(np.int32)).reshape(-1,2)
@@ -836,10 +1095,50 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
                                 int(round(cy))-rendered.shape[0]//2])
                 record['footprint_polygon']=hull.tolist()
             verified.append(record)
-    if raster_final_enabled:
-        verified=raster_competition.filter_records(verified)
+    if raster_final_enabled and joint_windows is None:
+        # This policy belongs only to the sequential native BW detector. Do
+        # not enable inherited colour comparators or grouped recovery scores.
+        raster_competition.cfg=replace(raster_competition.cfg,
+            visible_first_detection=bool(visible_first_detection and raster_eligible))
+        raster_competition.report['config']=asdict(raster_competition.cfg)
+        if filled_contour_identity:
+            verified=raster_competition.filter_records(verified,preserve_supported_alternatives=True)
+        else:
+            verified=raster_competition.filter_records(verified)
         raster_report=raster_competition.report
         log_fn(f'[v46 raster identity] {raster_report["status"]}; retained={len(verified)}')
+    neutral_identity_report = {'status':'disabled'}
+    if neutral_group_identity:
+        from color_neutral_group_identity_v46 import withdraw_refuted
+        unobserved=np.zeros(window_image.shape[:2],np.float32)
+        for plane in (window_occlusion_mask,window_uncertainty_mask):
+            if plane is not None:unobserved=np.maximum(unobserved,plane)
+        verified,neutral_identity_report=withdraw_refuted(window_image,pa,exclusions,templates,report,
+            verified,unobserved,log_fn=log_fn)
+    contour_report = dict(status='disabled', enabled=False, seconds=0., changed_centers=0)
+    if filled_contour_identity:
+        if (prepared_templates is not None or colour_observation is not None
+                or window_occlusion_mask is not None or window_uncertainty_mask is not None):
+            contour_report.update(status='prepared_or_colour_route_unchanged', enabled=True)
+        elif not raster_final_enabled or raster_report.get('status') not in ('completed', 'completed_in_joint_window'):
+            contour_report.update(status='completed_raster_verification_required_unchanged', enabled=True)
+        else:
+            contour_started = time.perf_counter()
+            try:
+                from bw_filled_contour_selection_v46 import rerank_verified
+                verified, contour_report = rerank_verified(image, contour_source_templates, verified)
+            except Exception as exc:
+                # Optional identity evidence cannot invalidate a native run.
+                # The adapter commits rank changes only after all comparisons.
+                contour_report.update(status='failed_native_preserved', enabled=True,
+                    seconds=time.perf_counter()-contour_started,
+                    error_type=type(exc).__name__, error=str(exc))
+        log_fn(f'[v46 filled angular identity] {contour_report["status"]}; '
+               f'reranked centers={contour_report["changed_centers"]}; {contour_report["seconds"]:.3f}s')
+        # This always runs, including optional comparator exceptions. Temporary
+        # alternatives must never leak into active points without a decision.
+        from bw_filled_contour_selection_v46 import finalize_supported_alternatives
+        verified=finalize_supported_alternatives(verified,contour_report)
     window_and_records_seconds = time.perf_counter()-stage_started
     stage_started = time.perf_counter()
     def attach_geometry(point, record):
@@ -851,6 +1150,15 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
             marker_scale=float(record['window_scale']),marker_aspect=float(record['aspect_ratio']),
             source_diameter=float(template.diameter),
             effective_diameter=float(template.diameter*record['window_scale']))
+        if 'joint_window' in record:
+            point.update(joint_window=record['joint_window'],raster_identity=record['raster_identity'],
+                observed_raster_scale=record['observed_raster_scale'],
+                observed_raster_diameter=record['observed_raster_diameter'])
+        if record.get('visible_first_detection_retention') == 'direct_visible_source_marker':
+            # Provenance is not a Step 5 acceptance certificate. Correction
+            # must independently evaluate its actions against original ink.
+            point['visible_first_detection'] = record['visible_first_detection']
+            point['pre_visible_first_center'] = record['pre_visible_first_center']
 
     for record in select_verified(verified):
         template=by_key[record['template']]
@@ -866,13 +1174,42 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
                      'point_id':f'P{len(kept)+1:03d}','original_detection':True,
                      'candidate_index':record['candidate_index']}
         attach_geometry(point,record)
-        if fill_competitor is not None:
+        if fill_competitor is not None and 'fill_identity' in record:
             point['fill_identity'] = record['fill_identity']
             point['fill_style'] = fill_competitor.descriptors[template.key]['style']
-        if geometry is not None:
+        if geometry is not None and 'geometry_first' in record:
             point['fill_identity']=record['geometry_first']
             point['fill_style']=geometry.descriptors[template.key]['style']
+        if 'filled_contour_identity' in record:
+            point['filled_contour_identity'] = record['filled_contour_identity']
         kept.append(point)
+    strict_native_count = len(kept)
+    partial_report = dict(status='disabled', added=0, seconds=0.)
+    if partial_hollow_visibility:
+        if (prepared_templates is not None or colour_observation is not None
+                or window_occlusion_mask is not None or window_uncertainty_mask is not None):
+            partial_report['status'] = 'prepared_or_colour_route_unchanged'
+        else:
+            from bw_partial_visibility_v46 import recover as recover_partial
+            # Only the frozen strict native roster may explain an overlap.
+            # A rescued point must never authorize another rescued point.
+            partial_started = time.perf_counter()
+            try:
+                reuse_options = (dict(strategy=partial_hollow_strategy,
+                    grid_evidence=[entry for result in results
+                        for entry in getattr(result,'partial_evidence',[])])
+                    if partial_hollow_strategy!='legacy' else {})
+                additions, partial_report = recover_partial(image, pa, exclusions,
+                    templates, approved_scales, kept, records, series_indices,
+                    log_fn=log_fn, **reuse_options)
+            except Exception as exc:
+                additions=[]
+                partial_report=dict(status='recovery_failed_native_preserved',added=0,
+                    seconds=time.perf_counter()-partial_started,
+                    error_type=type(exc).__name__,error=str(exc))
+            kept.extend(additions)
+        log_fn(f'[v46 partial visibility] {partial_report["status"]}; '
+               f'added={partial_report["added"]}; {partial_report["seconds"]:.3f}s')
     # Preserve the reviewed experiment's legacy reference diameter for
     # suppression/Step-5 thresholds; physical sizes live in effective_diameter.
     d_est = float(np.median([t.diameter*(approved_scales[t.key] if fixed_window_geometry else 1.)
@@ -881,16 +1218,34 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
                 'shape_hint':t.shape_hint or t.name, 'class_idx':series_indices[t.key],
                 'shape_idx':CLASSES.index(t.name)} for t in templates}
     pool = build_suppressed(records,kept,pa,exclusions,default_diameter=d_est,
-                            swatch_metadata=metadata)
+                            swatch_metadata=metadata,
+                            retain_overlap_hypotheses=(prepared_templates is None and
+                                colour_observation is None and window_occlusion_mask is None and
+                                window_uncertainty_mask is None))
     for point in pool['suppressed']:
         point['original_detection'] = False
         attach_geometry(point,records[point['candidate_index']])
         outer=records[point['candidate_index']].get('geometry_first',{})
         if outer.get('version')=='compact-source-outer-identity-v1':
             point['outer_identity_evidence']=outer
-        if fill_competitor is not None:
+        if fill_competitor is not None and 'fill_identity' in records[point['candidate_index']]:
             point['fill_identity'] = records[point['candidate_index']]['fill_identity']
-    native_kept_count = len(kept)
+    # Partial-source rows have no native candidate_index: append AFTER export.
+    # Failed source scenes keep a guarded hypothesis; verified heavily occluded
+    # scenes retain their source-bound certificate for Step 5.
+    partial_suppressed=[]
+    for point in partial_report.get('suppressed',[]):
+        if any(q.get('swatch_id')==point.get('swatch_id') and
+            math.hypot(q['cx']-point['cx'],q['cy']-point['cy'])<.45*point['effective_diameter']
+            for q in [*kept,*pool['suppressed']]):
+            continue
+        pool['suppressed'].append(point);partial_suppressed.append(point)
+    if partial_suppressed:
+        from collections import Counter
+        pool['summary'].update(suppressed_count=len(pool['suppressed']),
+            partial_source_count=len(partial_suppressed),
+            admission_counts=dict(Counter(p['admission_reason'] for p in pool['suppressed'])))
+    native_kept_count = strict_native_count
     composite_report = {'status':'disabled','added':0,'seconds':0.}
     if centered_x_composite:
         if (prepared_templates is not None or colour_observation is not None
@@ -934,12 +1289,59 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
                     layered_cfg.minimum_independent_visible,min_required_recall))
             try:
                 if raster_final_enabled:
-                    from bw_grouped_raster_recovery_v46 import recover as recover_grouped
+                    if grouped_partial_scene:
+                        from bw_grouped_scene_recovery_v46 import recover as recover_grouped
+                    else:
+                        from bw_grouped_raster_recovery_v46 import recover as recover_grouped
+                    source_tone_guard=None
+                    if geometry is not None and scale_policy!='per_candidate':
+                        # The marker's own locked geometric scale. Geometry
+                        # templates share the original legend pixel grid, so
+                        # it applies to originals[key] directly. The raster
+                        # competitor's diameter is a marker+connector body.
+                        # A 1x fallback is an assumption, not a measurement.
+                        def measured(status):
+                            return status=='approved' or (scale_policy=='shared_symbol' and
+                                not str(status).endswith('fallback_1x') and status!='insufficient_evidence')
+                        measured_scales={k:(s if measured(calibration[k].get('status')) else None)
+                                         for k,s in approved_scales.items()}
+                        source_tone_guard=lambda key,x,y,diameter,occupied=(): geometry.source_open_tone_at(
+                            key,x,y,measured_scales[key],occupied=occupied)
+                    shared_recovery_options={}
+                    donor_source_errors=[]
+                    if grouped_partial_scene:
+                        # Reproduce the native active marker's measured appearance,
+                        # not the filled silhouette used to search for its geometry.
+                        from bw_shared_window_source_v46 import build_source_models
+                        donor_source_started=time.perf_counter()
+                        donor_sources={}
+                        for donor_template in templates:
+                            try:
+                                donor_sources.update(build_source_models(
+                                    [donor_template],geometry=geometry,legend_reports=report))
+                            except Exception as donor_exc:
+                                donor_source_errors.append(dict(swatch_id=donor_template.key,
+                                    error_type=type(donor_exc).__name__,error=str(donor_exc)))
+                        shared_recovery_options['donor_source_models']=donor_sources
+                        donor_source_seconds=time.perf_counter()-donor_source_started
+                    # Shared sources require the existing physical recovery
+                    # guard in sequential mode too, not only joint windows.
+                    if raster_competition.report.get('source_model_policy')=='shared_native_window':
+                        from bw_shared_legend_window_v46 import recovery_guard
+                        shared_recovery_options['window_guard']=recovery_guard(
+                            raster_competition,image,templates,geometry=geometry,
+                            fill_competitor=fill_competitor,minimum_recall=min_required_recall)
                     additions,layered_report=recover_grouped(raster_competition,pa,exclusions,
-                        templates,kept,records,series_indices,log_fn=log_fn,minimum_visible=min_required_recall)
+                        templates,kept,records,series_indices,log_fn=log_fn,minimum_visible=min_required_recall,
+                        source_tone_guard=source_tone_guard,**shared_recovery_options)
+                    if grouped_partial_scene:
+                        layered_report['donor_source_model_errors']=donor_source_errors
+                        layered_report['donor_source_model_seconds']=donor_source_seconds
                 else:
                     additions,layered_report=recover_layered(image,pa,exclusions,templates,kept,
                         series_indices,cfg=layered_cfg,log_fn=log_fn,legend_reports=report)
+                    if grouped_partial_scene:
+                        layered_report['grouped_scene_unavailable_reason']=raster_report.get('status','raster_competitor_unavailable')
             except Exception as exc:
                 # An optional rescue must not discard a successful native run.
                 # Preserve the diagnostic, never present failure as completion.
@@ -951,19 +1353,105 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
                 # Atomic replacement only after successful scoring/export.
                 # Full previous records remain in the diagnostic for recovery.
                 kept[:]=[p for p in kept if p.get('point_id') not in replaced]
+            # A scene-supported second body must not retire nearby hypotheses
+            # merely by radius. Preserve the legacy policy for legacy additions.
+            scene_additions=[p for p in additions if p.get('grouped_scene_evidence')]
+            scene_ids={id(p) for p in scene_additions}
+            legacy_additions=[p for p in additions if id(p) not in scene_ids]
+            if scene_additions:
+                retired,blocked=_retire_exact_suppressed_promotions(pool,scene_additions)
+                layered_report['scene_retired_suppressed']=retired
+                layered_report['scene_blocked_promotions']=blocked
+                additions=legacy_additions+scene_additions
+                layered_report['added']=len(additions)
+                retained_scene_ids={p['point_id'] for p in scene_additions}
+                original_scene_ids=set(layered_report.get('scene_added_ids',[]))
+                layered_report['accepted']=[p for p in layered_report.get('accepted',[])
+                    if p.get('point_id') not in original_scene_ids or p.get('point_id') in retained_scene_ids]
+                layered_report['scene_added_ids']=sorted(retained_scene_ids)
+                layered_report['scene_added']=len(scene_additions)
             kept.extend(additions)
             redundant=[p for p in pool['suppressed'] if any(
                 p.get('swatch_id')==q.get('swatch_id') and
-                math.hypot(p['cx']-q['cx'],p['cy']-q['cy'])<.45*q['effective_diameter'] for q in additions)]
+                math.hypot(p['cx']-q['cx'],p['cy']-q['cy'])<.45*q['effective_diameter'] for q in legacy_additions)]
             redundant_ids={id(p) for p in redundant}
             pool['suppressed']=[p for p in pool['suppressed'] if id(p) not in redundant_ids]
             layered_report['superseded_suppressed_ids']=[p.get('point_id') for p in redundant]
+            if grouped_partial_scene:
+                from bw_step5_v46 import key as hypothesis_key
+                existing_hypotheses={hypothesis_key(p) for p in [*kept,*pool['suppressed']]}
+                scene_pending=[]
+                for p in layered_report.get('suppressed',[]):
+                    identity=hypothesis_key(p)
+                    if identity in existing_hypotheses:
+                        continue
+                    pool['suppressed'].append(p);scene_pending.append(p)
+                    existing_hypotheses.add(identity)
+                layered_report['scene_pending_exported']=len(scene_pending)
             from collections import Counter
             pool['summary'].update(active_count=len(kept),suppressed_count=len(pool['suppressed']),
                 admission_counts=dict(Counter(p['admission_reason'] for p in pool['suppressed'])),
                 layered_superseded_count=len(redundant))
         log_fn(f'[v46 layered] {layered_report["status"]}; added={layered_report["added"]}; '
                f'{layered_report["seconds"]:.3f}s; replaced={len(layered_report.get("replaced_point_ids",[]))}')
+    explained_report=dict(status='disabled',added=0,seconds=0.)
+    if explained_marker_occlusion:
+        if (prepared_templates is not None or colour_observation is not None
+                or window_occlusion_mask is not None or window_uncertainty_mask is not None):
+            explained_report['status']='prepared_or_colour_route_unchanged'
+        else:
+            from bw_explained_occlusion_v46 import recover as recover_explained,validate_certificate as validate_explained
+            explained_started=time.perf_counter()
+            try:
+                # Run after every existing recovery. A later legacy pass must
+                # not replace a frozen donor or drop a certified same-body pair.
+                additions,explained_report=recover_explained(image,pa,exclusions,templates,
+                    approved_scales,kept,records,series_indices,log_fn=log_fn)
+            except Exception as exc:
+                additions=[]
+                explained_report=dict(status='recovery_failed_native_preserved',added=0,
+                    seconds=time.perf_counter()-explained_started,error_type=type(exc).__name__,error=str(exc))
+            retired, blocked = _retire_exact_suppressed_promotions(pool, additions)
+            kept.extend(additions)
+            explained_report['promotion_conflicts'] = blocked
+            explained_report['added'] = len(additions)
+            blocked_ids = {row['proposed_point'].get('point_id') for row in blocked}
+            explained_report['accepted'] = [row for row in explained_report.get('accepted', [])
+                if row.get('point_id') not in blocked_ids]
+            explained_report['promoted_suppressed_hypotheses'] = retired
+            explained_report['superseded_suppressed_ids'] = [
+                row['suppressed_point'].get('point_id') for row in retired]
+            explained_suppressed=[]
+            for point in explained_report.get('suppressed',[]):
+                verification=validate_explained(image,point,kept)
+                if not verification.get('valid'):
+                    continue
+                donors=set(verification.get('explained_neighbor_ids',[]))
+                if any(q.get('swatch_id')==point.get('swatch_id') and q.get('point_id') not in donors
+                    and math.hypot(q['cx']-point['cx'],q['cy']-point['cy'])<.45*point['effective_diameter']
+                    for q in [*kept,*pool['suppressed']]):
+                    continue
+                pool['suppressed'].append(point);explained_suppressed.append(point)
+            from collections import Counter
+            pool['summary'].update(active_count=len(kept),suppressed_count=len(pool['suppressed']),
+                explained_occlusion_count=len(explained_suppressed),
+                explained_occlusion_promoted_count=len(retired),
+                admission_counts=dict(Counter(p['admission_reason'] for p in pool['suppressed'])))
+        log_fn(f'[v46 explained occlusion] {explained_report["status"]}; '
+               f'added={explained_report["added"]}; {explained_report["seconds"]:.3f}s')
+    # Preserve marker-like *regions* separately from typed hypotheses. A
+    # failed identity fit must not erase independent marker-existence evidence.
+    # Colour/prepared routes retain their reviewed ownership semantics.
+    untyped_report = dict(regions=[], summary=dict(status='disabled', seconds=0.))
+    if untyped_suppressed and prepared_templates is None and colour_observation is None and window_occlusion_mask is None:
+        from bw_unknown_candidates_v46 import build_regions
+        untyped_started = time.perf_counter()
+        untyped_report = build_regions(image,pa,exclusions,records,kept,
+            {sid:dict(meta,effective_diameter=float(meta['source_diameter']*approved_scales[sid]))
+             for sid,meta in metadata.items()})
+        untyped_report['summary']['seconds'] = time.perf_counter()-untyped_started
+        log_fn(f'[v46 untyped] {len(untyped_report["regions"])} unresolved marker regions; '
+               'not active detections or assigned series')
     # Actual template pixels and a compact plot overlay for the existing UI.
     selection_seconds = time.perf_counter()-stage_started
     stage_started = time.perf_counter()
@@ -998,28 +1486,100 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
                                  img_bgr=layered_overlay,output_filename='v46_layered_markers.png'))
     log_fn(f'[v46] {native_kept_count} native full-window points + {composite_report["added"]} centered-X rescues; '
            f'{layered_report["added"]} layered-marker rescues; '
+           f'{partial_report["added"]} partial-visibility rescues; '
+           f'{explained_report["added"]} explained-occlusion rescues; '
            f'{len(pool["suppressed"])} typed suppressed hypotheses; no ViT inference')
     if window_backend == 'cuda':
         fallbacks = sum(not row.get('used_cuda', False) for row in window_stats)
         log_fn(f'[v46 compute] CUDA window screening: {len(window_stats)-fallbacks}/{len(window_stats)}; exact CPU fallbacks: {fallbacks}')
     point_timings = dict(backend_setup_seconds=backend_setup_seconds,
         legend_seconds=legend_seconds,scale_policy_seconds=scale_policy_seconds,
-        grid_models_seconds=grid_models_seconds,window_and_records_seconds=window_and_records_seconds,
-        selection_seconds=selection_seconds-composite_report['seconds']-layered_report['seconds'],
+        grid_models_seconds=grid_models_seconds,
+        window_and_records_seconds=window_and_records_seconds-contour_report['seconds'],
+        filled_contour_identity_seconds=contour_report['seconds'],
+        selection_seconds=selection_seconds-composite_report['seconds']-layered_report['seconds']-partial_report['seconds']-explained_report['seconds']-untyped_report['summary']['seconds'],
         centered_x_seconds=composite_report['seconds'],legend_panels_seconds=time.perf_counter()-stage_started,
         layered_marker_seconds=layered_report['seconds'],
+        partial_hollow_seconds=partial_report['seconds'],
+        explained_occlusion_seconds=explained_report['seconds'],
+        untyped_region_seconds=untyped_report['summary']['seconds'],
         total_seconds=time.perf_counter()-started,
         timing_scope='Sequential detect_points wall time; per-model/window diagnostics are nested')
     log_fn('[v46 timing] '+', '.join(f'{key}={value:.3f}s' for key,value in point_timings.items()
                                   if key.endswith('_seconds')))
     from bw_series_correction_v46 import template_evidence
     correction_models=template_evidence(templates,approved_scales,report)
-    return {'kept':kept,'suppressed':pool['suppressed'], 'mode_xs':np.array([]),
+    filled_boundary_report = dict(status='not_applicable', added=0, seconds=0.,
+                                 active_points_modified=False)
+    if (prepared_templates is None and colour_observation is None and
+            window_occlusion_mask is None and window_uncertainty_mask is None):
+        from bw_filled_boundary_retention_v46 import retain as retain_filled_boundary
+        boundary_started = time.perf_counter()
+        additions, filled_boundary_report = retain_filled_boundary(
+            results, correction_models, kept, pool['suppressed'],
+            pa, exclusions, series_indices)
+        pool['suppressed'].extend(additions)
+        filled_boundary_report['seconds'] = time.perf_counter()-boundary_started
+        from collections import Counter
+        pool['summary'].update(suppressed_count=len(pool['suppressed']),
+            filled_boundary_hypothesis_count=len(additions),
+            admission_counts=dict(Counter(p.get('admission_reason','unknown')
+                for p in pool['suppressed'])))
+        log_fn(f'[v46 filled boundary] {len(additions)} retained grid seeds; '
+               'not active; independent foreground verification required')
+    point_timings['filled_boundary_retention_seconds'] = filled_boundary_report['seconds']
+    point_timings['total_seconds'] = time.perf_counter()-started
+    ambiguity_report=dict(status='disabled',active_points_modified=False)
+    if ambiguity_suppressed:
+        if (prepared_templates is not None or colour_observation is not None
+                or window_occlusion_mask is not None or window_uncertainty_mask is not None):
+            ambiguity_report['status']='prepared_or_colour_route_unchanged'
+        else:
+            from bw_ambiguity_candidates_v46 import build_pending
+            ambiguity_started=time.perf_counter()
+            pending=build_pending(image,pa,exclusions,kept,pool['suppressed'],records,
+                layered_report,correction_models,untyped_report['regions'])
+            pool['suppressed']=pending['suppressed']
+            untyped_report['regions']=pending['regions']
+            ambiguity_report=pending['report']
+            ambiguity_report['seconds']=time.perf_counter()-ambiguity_started
+            from collections import Counter
+            pool['summary'].update(suppressed_count=len(pool['suppressed']),
+                admission_counts=dict(Counter(p.get('admission_reason','unknown')
+                    for p in pool['suppressed'])))
+            point_timings['ambiguity_suppressed_seconds']=ambiguity_report['seconds']
+            point_timings['total_seconds']=time.perf_counter()-started
+            log_fn(f"[v46 ambiguity] pending pool={len(pool['suppressed'])}; "
+                f"{ambiguity_report['seconds']:.3f}s; active unchanged")
+    return {'kept':kept,'suppressed':pool['suppressed'], 'untyped_suppressed':untyped_report['regions'], 'mode_xs':np.array([]),
             'd_est':d_est,
             'diagnostics':{'backend':VERSION,'grid_fraction':grid_fraction,'grid_overlap':grid_overlap,
                            'centered_x_composite':composite_report,
                            'layered_marker_composite':layered_report,
+                           'grouped_partial_scene':dict(requested=bool(grouped_partial_scene),
+                               implemented=bool(layered_report.get('scene_recovery')),
+                               status=(layered_report.get('scene_recovery',{}).get('status')
+                                   if layered_report.get('scene_recovery') else
+                                   layered_report.get('grouped_scene_unavailable_reason',layered_report.get('status'))
+                                   if grouped_partial_scene else 'disabled')),
                            'observed_raster_identity':raster_report,
+                           'visible_first_detection':dict(requested=bool(visible_first_detection),
+                               scope='sequential_native_bw_post_window_identity',
+                               earlier_grid_and_window_tests_unchanged=True,
+                               report=raster_report.get('visible_first_detection',
+                                   {'status':'not_applicable' if visible_first_detection else 'disabled'})),
+                           'neutral_group_identity':neutral_identity_report,
+                           'ambiguity_suppressed':ambiguity_report,
+                           'filled_boundary_retention':filled_boundary_report,
+                           'filled_contour_identity':contour_report,
+                           'joint_raster_window':joint_report,
+                           'legend_source_contract':source_contract_report,
+                           'legend_joint_identity':joint_legend_report,
+                           'legend_local_completion':dict(enabled=local_legend_enabled,
+                               requested=bool(legend_local_completion),
+                               policy='connector_local_observed_raster' if local_legend_enabled else 'unchanged'),
+                           'partial_hollow_visibility':partial_report,
+                           'explained_marker_occlusion':explained_report,
                            'correction_marker_evidence':correction_models,
                            'colour_visibility_policy':(colour_observation.report['version'] if colour_observation is not None else 'bw_three_state_visibility_v1' if window_occlusion_mask is not None else None),
                            'source_observation':(colour_observation.report if colour_observation is not None else None),
@@ -1029,6 +1589,7 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
                            'geometry_window_identity_competition':(geometry_identity_competitor.report()
                                if geometry_identity_competitor is not None else {'enabled':False}),
                            'suppressed_pool':pool['summary'],
+                           'untyped_suppressed':untyped_report,
                            'suppressed_rejections':pool['rejected'],
                            'point_pipeline_timings':point_timings,
                            'template_timings':[{'swatch_id':r.template.swatch_id,
@@ -1044,7 +1605,8 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
                                'scale':r.template.proposal_scale,
                                **getattr(r,'grid_diagnostics',{})} for r in results],
                            'window_models':window_stats,
-                           'window_dispatch':'multi_window_batch' if window_backend=='cuda' and not window_fallback_reason else 'scalar_cpu',
+                           'window_dispatch':('joint_observed_raster_cpu' if joint_windows is not None else
+                               'multi_window_batch' if window_backend=='cuda' and not window_fallback_reason else 'scalar_cpu'),
                            'candidate_models':[{'swatch_id':r.template.swatch_id,
                                'scale':r.template.proposal_scale,
                                **getattr(r,'candidate_diagnostics',{})} for r in results],

@@ -63,11 +63,18 @@ def match_rows(templates, entries, names):
     return {templates[i].key: names[j] for i, j in zip(rows, cols)}
 
 
-def validated_legend_groups(image, plot, legend, entries, names, observation_policy='legacy'):
-    """Retain the accepted GUI roster; only BW shape measurement is repeated."""
+def validated_legend_groups(image, plot, legend, entries, names, observation_policy='legacy',
+                            *, return_availability=False):
+    """Retain every GUI identity, with explicit expected measurement failures.
+
+    Legacy callers keep the strict two-value contract. The runtime requests
+    availability and may process the measured subset without renumbering it.
+    Invalid or contradictory identities remain errors in either mode.
+    """
     from color_group_bw_v46 import prepare_groups
     from color_legend_composition_v46 import full_swatch_box
-    if len(entries)!=len(names) or len({e['id'] for e in entries})!=len(entries):
+    if (not entries or len(entries)!=len(names) or len({e['id'] for e in entries})!=len(entries)
+            or len(set(names))!=len(names) or any(not isinstance(n,str) or not n for n in names)):
         raise ValueError('Invalid validated colour legend identities')
     swatches=[]
     for entry in entries:
@@ -84,26 +91,53 @@ def validated_legend_groups(image, plot, legend, entries, names, observation_pol
         swatches.append((None,box))  # Do not force a supplied shape class.
     groups,diagnostics=prepare_groups(image,plot,legend,group_policy='hue_family',composition=True,
         ownership_policy='uncertainty_v1',grid_evidence='confirmed',
-        palette_recovery='calibrate_complete',swatches=swatches,observation_policy=observation_policy)
+        palette_recovery='calibrate_complete',swatches=swatches,observation_policy=observation_policy,
+        identity_entries=entries,neutral_geometry_policy='shared_source')
     templates=[t for g in groups for t in g['templates']]
     # Explicit extraction IDs are assigned before any per-entry failure or
     # colour grouping. Do not renumber survivors or silently relabel a series.
     expected={f'S{i+1:02}':names[i] for i in range(len(entries))}
     observed=[t.key for t in templates]
-    if len(set(observed))!=len(observed) or set(observed)!=set(expected):
-        missing=[dict(gui_id=e['id'],name=names[i],extraction=next(
-            (r for r in diagnostics if r.get('swatch_id')==f'S{i+1:02}'),None))
-            for i,e in enumerate(entries) if f'S{i+1:02}' not in observed]
+    if len(set(observed))!=len(observed) or not set(observed)<=set(expected):
+        raise ValueError('BW returned duplicate or unknown validated colour legend identities')
+    missing=[dict(gui_id=e['id'],name=names[i],extraction_id=f'S{i+1:02}',extraction=next(
+        (r for r in diagnostics if r.get('swatch_id')==f'S{i+1:02}'),None))
+        for i,e in enumerate(entries) if f'S{i+1:02}' not in observed]
+    if missing and not return_availability:
         raise ValueError(f'Validated colour legend could not be measured by BW: {missing}')
+    if any(not q['extraction'] or q['extraction'].get('extraction_status')!='failed' for q in missing):
+        raise ValueError('Missing colour legend identity has no expected extraction-failure diagnostic')
     # Geometry remains a consistency check, not the source of row identity.
-    if match_rows(templates,entries,names)!=expected:
+    indices=[i for i in range(len(entries)) if f'S{i+1:02}' in observed]
+    active_mapping={f'S{i+1:02}':names[i] for i in indices}
+    if templates and match_rows(templates,[entries[i] for i in indices],
+                                [names[i] for i in indices])!=active_mapping:
         raise ValueError('BW template centre disagrees with its validated legend identity')
     for g in groups:
+        if len(g['templates'])!=len(g['reports']):
+            raise ValueError('Colour-group templates and reports are not aligned')
         for t,r in zip(g['templates'],g['reports']):
+            if r.get('swatch_id',t.key)!=t.key:
+                raise ValueError('Colour-group template/report identities disagree')
             i=int(t.key[1:])-1
             r.update(gui_legend_id=entries[i]['id'],gui_curve_name=names[i],
                      legend_roster_source='validated_colour_legend')
-    return groups,expected
+    active_names=[names[i] for i in indices]
+    unavailable=[]
+    for q in missing:
+        extraction=q['extraction']
+        unavailable.append(dict(q,status='unavailable',template_available=False,
+            correction_available=False,stage='legend_measurement',
+            reason_code=extraction.get('extraction_error_code','legend_measurement_failed'),
+            reason=extraction.get('extraction_error','Observed legend marker could not be measured.')))
+    by_name={q['name']:q for q in unavailable}
+    statuses={n:deepcopy(by_name[n]) if n in by_name else dict(name=n,gui_id=entries[i]['id'],
+        extraction_id=f'S{i+1:02}',status='available',template_available=True,correction_available=True)
+        for i,n in enumerate(names)}
+    availability=dict(status='completed' if not unavailable else 'partial' if active_names else 'unavailable',
+        active_names=active_names,unavailable_series=unavailable,series_status=statuses,
+        correction_available=bool(active_names),availability_policy='explicit_legend_subset_v1')
+    return (groups,expected,availability) if return_availability else (groups,expected)
 
 
 def binding(image):
@@ -154,13 +188,15 @@ def detect(runtime, env, legend_runtime, plot, legend, report):
     # User-reviewed Opicinumab route: retain pale source ink, then compare
     # group identities on one observation with boundary-verified raster scale.
     observation_policy,relative_identity_policy=detection_policies()
-    groups, mapping = validated_legend_groups(image,plot,legend,entries,names,observation_policy=observation_policy)
+    groups, mapping, availability = validated_legend_groups(image,plot,legend,entries,names,
+        observation_policy=observation_policy,return_availability=True)
     report['legend_roster_source']='validated_colour_legend'
     state = dict(version=VERSION, image=binding(image), plot_box=list(plot), legend_box=list(legend),
                  names=names, groups=[], series_models={}, total_correction_runs=0,
                  observation_policy=observation_policy,relative_identity_policy=relative_identity_policy,
                  legend_roster_source='validated_colour_legend',
                  legend_bindings=[dict(gui_id=e['id'],name=n) for e,n in zip(entries,names)])
+    state.update(deepcopy(availability))
     recovery=groups[0].get('palette_recovery',{}) if groups else {}
     state['palette_recovery']=deepcopy(recovery)
     save(destination/'palette_recovery.json',recovery)
@@ -205,10 +241,16 @@ def detect(runtime, env, legend_runtime, plot, legend, report):
                 marker_mask=encode_marker_mask(t.mask),marker_offset_x=0.,marker_offset_y=0.)
             state['series_models'][name]['rgb'] = list(e['rgb'])
             state['series_models'][name]['legend_box'] = list(t.swatch_box)
+            source_body=getattr(t,'source_colour_body',None)
+            if source_body:
+                state['series_models'][name]['legend_body_box']=list(source_body['source_box'])
+                state['series_models'][name]['legend_body_provenance']=deepcopy(r.get('source_colour_body',{}))
             membership[name] = 1-reference_gray[plot[1]:plot[3],plot[0]:plot[2]]/255.
         state['groups'].append(dict(id=g['id'], names=group_names, diameter=float(result['d_est']),
             gray=_pack_reference(reference_gray),
             ignore=_pack_reference(np.uint8(g['occlusion']>.5)), runtime=None,
+            palette_competitor_ids=g.get('palette_competitor_ids'),
+            unavailable_palette_ids=g.get('unavailable_palette_ids'),
             source_observation=(observation.report if observation is not None else None),
             role_maps=({role:_pack_reference(np.uint8(255*getattr(observation,role))) for role in ('own','other','paper')} if observation is not None else None)))
         group_reports.append(dict(id=g['id'], names=group_names, active=len(result['kept']),
@@ -217,16 +259,24 @@ def detect(runtime, env, legend_runtime, plot, legend, report):
             source_observation=(observation.report if observation is not None else None),
             colour_visibility_policy=result['diagnostics'].get('colour_visibility_policy'),
             palette_identity=g.get('palette_identity'),
+            palette_competitor_ids=g.get('palette_competitor_ids'),
+            unavailable_palette_ids=g.get('unavailable_palette_ids'),
             composition=[dict(id=mapping[t.key], policy=r.get('template_policy'),
                               model=r.get('composition',{}).get('best_model_name')) for t,r in zip(g['templates'],g['reports'])]))
     # One frozen plot-wide pool, including targets in other colour groups.
-    pool, overlap = generate(points,pool,state['series_models'],plot,legend)
+    if state['series_models']:
+        pool, overlap = generate(points,pool,state['series_models'],plot,legend)
+    else:
+        overlap=dict(status='unavailable',reason='no_measured_target_templates',added=[])
     state.update(P_current=points,S_current=pool,overlap=overlap,original_points=deepcopy(points))
     # Neutral groups have no chromatic relative-identity pass. Recheck their
     # observed marker bodies against original-source connectors, not a binary
     # group mask that treats every nearby black stroke as marker evidence.
     from color_neutral_step5_v46 import review_neutral_detections
-    points,pool,neutral_report=review_neutral_detections(image,state,points,pool)
+    if state['series_models']:
+        points,pool,neutral_report=review_neutral_detections(image,state,points,pool)
+    else:
+        neutral_report=dict(status='unavailable',reason='no_measured_target_templates')
     state.update(P_current=points,S_current=pool,original_points=deepcopy(points),
                  neutral_body_review=neutral_report)
     save(destination/'neutral_body_review.json',neutral_report)
@@ -238,7 +288,10 @@ def detect(runtime, env, legend_runtime, plot, legend, report):
     converted = [dict(p, series_id=p['swatch_id'],x_px=p['cx'],y_px=p['cy'],
                       score=float(p.get('confidence',0.)),candidate_id=p.get('point_id',f'group_{i}'))
                  for i,p in enumerate(points)]
-    report.update(version=VERSION,status='completed',same_colour_bw_v3=True,
+    report.update(deepcopy(availability))
+    report.update(version=VERSION,same_colour_bw_v3=True,
+        template_errors=[dict(series_id=q['name'],gui_id=q['gui_id'],extraction_id=q['extraction_id'],
+            reason_code=q['reason_code'],error=q['reason']) for q in availability['unavailable_series']],
         selection_config=None,guide_policy='group_bw_native',
         ownership_policy=('source_rgb_colour_roles_v1' if observation_policy=='source_roles' else 'uncertainty_v1'),
         relative_identity_policy=relative_identity_policy,
@@ -253,16 +306,20 @@ def detect(runtime, env, legend_runtime, plot, legend, report):
         mask_note='Distinct source inks retain brightness/saturation before BW matching. '
                   'Truly same-ink shapes share a group mask, not a colour-only series identity.')
     ordered = sorted(templates,key=lambda t:names.index(t['id']))
-    evidence = dict(templates=ordered,membership=np.stack([membership[n] for n in names]),
-                    valid=np.ones((plot[3]-plot[1],plot[2]-plot[0]),bool))
+    evidence = (dict(templates=ordered,membership=np.stack([membership[t['id']] for t in ordered]),
+                    valid=np.ones((plot[3]-plot[1],plot[2]-plot[0]),bool)) if ordered else None)
     runtime._handoff(env,entries,names,plot,evidence,report)
     runtime._draw_templates(image,evidence,destination)
     runtime.group_backend = True
     runtime.active = True
     legend_runtime.diagnostics.update(downstream_marker_version=VERSION,
+        downstream_marker_status=availability['status'],
+        unavailable_marker_series=len(availability['unavailable_series']),
         scope='Colour-family ownership + pure line/symbol composition + full BW grid/window; typed segment correction')
     legend_runtime._save()
-    print(f'[v46 colour groups] {len(groups)} groups; {len(points)} active; {len(pool)} suppressed hypotheses. GUI/Step-5 state saved.',flush=True)
+    print(f'[v46 colour groups] {availability["status"]}: {len(groups)} groups; '
+          f'{len(availability["active_names"])}/{len(names)} measured series; '
+          f'{len(points)} active; {len(pool)} suppressed hypotheses. GUI/Step-5 state saved.',flush=True)
 
 
 def validate(state, image, ed):
@@ -272,12 +329,71 @@ def validate(state, image, ed):
     plot = _box(state['plot_box'],image.shape); legend = _box(state['legend_box'],image.shape)
     if list(ed['plot_area']) != [plot[0],plot[1],plot[2]-1,plot[3]-1]:
         raise ValueError('Colour-group correction plot ROI mismatch')
-    if sorted(c['name'] for c in ed['curves']) != sorted(state['names']):
+    names=state['names']
+    if not names or any(not isinstance(n,str) or not n for n in names) or len(set(names))!=len(names):
+        raise ValueError('Invalid colour-group legend identities')
+    if sorted(c['name'] for c in ed['curves']) != sorted(names):
         raise ValueError('Colour-group correction legend identities mismatch')
-    if sorted(n for g in state['groups'] for n in g['names']) != sorted(state['names']):
+    active_names=state.get('active_names',names)
+    if len(set(active_names))!=len(active_names) or not set(active_names)<=set(names):
+        raise ValueError('Invalid active colour-group identities')
+    if 'active_names' in state:
+        if state.get('availability_policy')!='explicit_legend_subset_v1':
+            raise ValueError('Unsupported colour-group availability policy')
+        unavailable=state.get('unavailable_series',[])
+        missing=[q['name'] for q in unavailable]
+        if len(set(missing))!=len(missing) or set(missing)&set(active_names) or set(missing)|set(active_names)!=set(names):
+            raise ValueError('Invalid colour-group availability partition')
+        statuses=state.get('series_status',{})
+        if set(statuses)!=set(names):
+            raise ValueError('Missing colour-group per-series availability')
+        bindings=state.get('legend_bindings',[])
+        if ([q['name'] for q in bindings]!=names or len({q['gui_id'] for q in bindings})!=len(names)):
+            raise ValueError('Invalid colour-group legend bindings')
+        for i,name in enumerate(names):
+            row=statuses[name];usable=name in active_names
+            if (row.get('name')!=name or row.get('gui_id')!=bindings[i]['gui_id']
+                    or row.get('extraction_id')!=f'S{i+1:02}'
+                    or row.get('status')!=('available' if usable else 'unavailable')
+                    or row.get('template_available') is not usable
+                    or row.get('correction_available') is not usable):
+                raise ValueError('Contradictory colour-group series availability')
+        if any(q!=statuses[q['name']] or not q.get('reason_code') for q in unavailable):
+            raise ValueError('Invalid unavailable colour-group diagnostic')
+        outcome='completed' if not missing else 'partial' if active_names else 'unavailable'
+        if state.get('status')!=outcome or state.get('correction_available') is not bool(active_names):
+            raise ValueError('Contradictory colour-group completion status')
+    if sorted(n for g in state['groups'] for n in g['names']) != sorted(active_names):
         raise ValueError('Invalid colour-group roster')
-    if set(state['series_models']) != set(state['names']):
+    if set(state['series_models']) != set(active_names):
         raise ValueError('Missing colour-group target templates')
+    # Source-body coordinates are correction evidence, not editable display
+    # metadata. Validate them before NumPy slicing can wrap negative indices
+    # or silently truncate a forged/fractional imported crop.
+    for model in state['series_models'].values():
+        if 'legend_body_box' not in model:
+            continue  # Existing complete sessions predate source-body recovery.
+        def source_box(value):
+            try:coords=np.asarray(value,dtype=float)
+            except (TypeError,ValueError):
+                raise ValueError('Invalid saved source-body coordinates') from None
+            if (coords.shape!=(4,) or not np.isfinite(coords).all()
+                    or np.any(coords!=np.rint(coords))):
+                raise ValueError('Invalid saved source-body coordinates')
+            return _box(coords,image.shape)
+        body=source_box(model['legend_body_box'])
+        swatch=source_box(model.get('legend_box'))
+        provenance=model.get('legend_body_provenance') or {}
+        crop=source_box(provenance.get('source_crop_box'))
+        if (provenance.get('version')!='source_colour_body_with_context_v1'
+                or provenance.get('source_pixels_modified') is not False
+                or provenance.get('marker_box')!=list(body)
+                or not (crop[0]<=body[0]<body[2]<=crop[2] and crop[1]<=body[1]<body[3]<=crop[3])
+                or not (swatch[0]<=(body[0]+body[2]-1)/2<swatch[2]
+                        and swatch[1]<=(body[1]+body[3]-1)/2<swatch[3])):
+            raise ValueError('Saved source body disagrees with its legend provenance')
+    if len({g['id'] for g in state['groups']})!=len(state['groups']):
+        raise ValueError('Duplicate colour-group IDs')
     for g in state['groups']:
         if not g['id'].startswith('G') or not g['id'][1:].isdigit():
             raise ValueError('Invalid group ID')
@@ -285,24 +401,49 @@ def validate(state, image, ed):
         active=[p for p in state['P_current'] if p['swatch_id'] in g['names']]
         pool=[p for p in state['S_current'] if p['swatch_id'] in g['names']]
         _normalise(active,pool,plot,legend,g['diameter'])
-    if any(p['swatch_id'] not in state['names'] for p in state['P_current']+state['S_current']):
+    if any(p['swatch_id'] not in active_names for p in
+           state['P_current']+state['S_current']+state.get('original_points',[])):
         raise ValueError('Unknown colour-group point identity')
     return state
 
 
 def update_edit(ed, state):
     """Shape identity is independent of RGB; never join equal-colour curves."""
+    active_names=state.get('active_names',list(state['series_models']))
     for c in ed['curves']:
-        name=c['name']; model=state['series_models'][name]
+        name=c['name']
+        if name not in active_names:
+            # No automatic model exists for this identity. Keep coordinates
+            # entered by the user; correction must never manufacture a model
+            # for those points or silently delete the manual-only row.
+            unavailable=deepcopy(state.get('series_status',{}).get(name,{}))
+            c.update(swatch_id=name,detection_status='unavailable',correction_available=False,
+                     extraction_diagnostic=unavailable,
+                     correction_unavailable_reason=unavailable.get('reason','Legend marker unavailable.'))
+            c.pop('marker_class',None)
+            c['reconstruction']=dict(model='linear',anchors=deepcopy(c['points']),points=deepcopy(c['points']),
+                status='manual_only_unavailable_legend_model')
+            continue
+        model=state['series_models'][name]
         ps=sorted([p for p in state['P_current'] if p['swatch_id']==name],key=lambda p:(p['cx'],p['cy']))
         metadata=('point_id','candidate_id','tentative','state','evidence_supported','original_detection','source',
                   'confidence','confidence_kind','marker_confidence','detector_confidence','detector_confidence_kind')
-        c.update(swatch_id=name,marker_class=model['class_name'],
+        c.update(swatch_id=name,marker_class=model['class_name'],detection_status='available',correction_available=True,
                  points=[dict({k:p[k] for k in metadata if k in p},x=float(p['cx']),y=float(p['cy'])) for p in ps])
+        c.pop('correction_unavailable_reason',None)
+        c.pop('extraction_diagnostic',None)
         c.pop('reconstruction',None)
         c['reconstruction']=dict(model='linear',anchors=deepcopy(c['points']),points=deepcopy(c['points']),
             status='typed_marker_chords_not_extracted_path')
-    ed.update(detector_backend=VERSION,correction_backend='colour_group_bw_elements',correction_available=True)
+    ed.update(detector_backend=VERSION,correction_backend='colour_group_bw_elements',
+        correction_available=bool(active_names),detection_status=state.get('status','completed'),
+        active_names=list(active_names),unavailable_series=deepcopy(state.get('unavailable_series',[])),
+        series_status=deepcopy(state.get('series_status',{})),
+        correction_scope='measured_series_only')
+    if active_names:
+        ed.pop('correction_unavailable_reason',None)
+    else:
+        ed['correction_unavailable_reason']='No legend marker model is available; saved series support manual editing only.'
 
 
 def finalize_outputs(env):
@@ -353,9 +494,14 @@ def correct_saved(folder,image,ed,iterations):
     from correction_session_v46 import draw_overlay
     folder=Path(folder)
     state=validate(json.loads((folder/STATE_FILE).read_text(encoding='utf-8')),image,ed)
+    active_names=state.get('active_names',state['names'])
+    if not active_names:
+        raise ValueError('Colour-group Step 5 is unavailable: no measured target templates; manual points are preserved')
     active=[]
     for c in ed['curves']:
         name=c['name']
+        if name not in active_names:
+            continue
         old=[p for p in state['P_current'] if p['swatch_id']==name]
         for i,p in enumerate(c['points']):
             exact=next((q for q in old if abs(q['cx']-p['x'])<1e-6 and abs(q['cy']-p['y'])<1e-6),None)

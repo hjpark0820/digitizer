@@ -22,12 +22,27 @@ class Config:
     top_anchors: int = 6
 
 
-def extract(gray, cfg=Config(), *, connected_line=None):
+def extract(gray, cfg=Config(), *, connected_line=None, territory=None, body_bounds=None):
     """Keep every crop gray value; estimate reliability separately, not ink.
 
     Dark pixels identify the connector row and body extent only. They do not
     replace the grayscale scoring target with a binary silhouette. A source
     connector is not subtracted (subtraction would fabricate white holes).
+
+    ``territory`` (x0, y0, x1, y1 in crop pixels, end-exclusive) is the
+    caller's measured extent of this entry's own connected ink (marker plus
+    attached connector). Without it the crop edges stand in for that extent:
+    the connector test reads the outer 20% of the CROP columns and every crop
+    pixel may seed the body. With it, the connector test reads the outer 20%
+    of the territory columns (where an attached connector ends) and only
+    territory pixels identify the connector band and seed the body. Every
+    gray value, the paper/contrast estimate, the scoring target and its 2-px
+    observed exterior keep their crop definitions.
+
+    ``body_bounds`` (same convention) is the caller's measured glyph box. It
+    further restricts where body seeds may lie (the connector test is not
+    affected), so ink inside the entry but outside its glyph (a connector
+    stub the connector test cannot confirm) does not become marker body.
     """
     gray = np.asarray(gray, np.float32)
     if gray.ndim != 2 or min(gray.shape) < 4 or not np.isfinite(gray).all():
@@ -40,9 +55,15 @@ def extract(gray, cfg=Config(), *, connected_line=None):
     contrast = max(24., paper-float(np.percentile(dark, 10)))
     observed = np.clip((paper-gray)/255., 0, 1)
     relative = np.clip((paper-gray)/contrast, 0, 1)
-    side = max(1, int(.20*w))
-    flank = np.r_[np.arange(side), np.arange(w-side, w)]
-    profile = np.quantile(relative[:, flank], .75, axis=1)
+    scan, first, last = relative, 0, w
+    if territory is not None:
+        tx0, ty0, tx1, ty1 = map(int, territory)
+        scan = np.zeros_like(relative)
+        scan[ty0:ty1, tx0:tx1] = relative[ty0:ty1, tx0:tx1]
+        first, last = tx0, tx1
+    side = max(1, int(.20*(last-first)))
+    flank = np.r_[np.arange(first, first+side), np.arange(last-side, last)]
+    profile = np.quantile(scan[:, flank], .75, axis=1)
     # Upstream "not separated" can mean a compact STRONG component even
     # though the raw crop retains a pale/dashed connector. Override that hint
     # only with observed tails beyond the off-band body on both sides, and a
@@ -55,13 +76,13 @@ def extract(gray, cfg=Config(), *, connected_line=None):
     while hi < h-1 and band[hi+1]: hi += 1
     protruding = False
     if connected_line is False and float(profile.max()) > .12:
-        off = relative.copy(); off[lo:hi+1] = 0
+        off = scan.copy(); off[lo:hi+1] = 0
         sums = off.sum(axis=0)
         body_cols = np.flatnonzero(sums > max(.25*float(sums.max()), .20))
         if len(body_cols) >= 2:
             left, right = int(body_cols[0]), int(body_cols[-1])
             rows = np.flatnonzero(off[:, left:right+1].max(axis=1) > .20)
-            tail = relative[lo:hi+1].max(axis=0) > .12
+            tail = scan[lo:hi+1].max(axis=0) > .12
             protruding = bool(len(rows) >= 2 and rows[0] < lo and rows[-1] > hi
                 and np.count_nonzero(tail[:max(0,left-1)]) >= 2
                 and np.count_nonzero(tail[right+2:]) >= 2)
@@ -77,18 +98,23 @@ def extract(gray, cfg=Config(), *, connected_line=None):
         peak = h//2
         nuisance = np.zeros(h, np.float32)
         reliability = np.ones(h, np.float32)
-    independent = relative*reliability[:, None]
+    independent = scan*reliability[:, None]
     if has_line or connected_line is None:
-        independent[:, :side] = 0
-        independent[:, w-side:] = 0
-    col = independent.sum(axis=0)
+        independent[:, :first+side] = 0
+        independent[:, last-side:] = 0
+    located = independent
+    if body_bounds is not None:
+        bx0, by0, bx1, by1 = map(int, body_bounds)
+        located = np.zeros_like(independent)
+        located[by0:by1, bx0:bx1] = independent[by0:by1, bx0:bx1]
+    col = located.sum(axis=0)
     cols = np.flatnonzero(col > max(.25*float(col.max()), .20))
     seed = independent > .20
     if len(cols) < 2 or independent.sum() < cfg.minimum_visible_mass:
         return dict(status='no_independent_body', paper=paper), None
     # Quantiles bound the strongest central evidence without naming its shape.
     x0, x1 = int(cols[0]), int(cols[-1])
-    rows = np.flatnonzero(independent[:, x0:x1+1].max(axis=1) > .20)
+    rows = np.flatnonzero(located[:, x0:x1+1].max(axis=1) > .20)
     if len(rows) < 2:
         return dict(status='line_only_or_unresolved_body', paper=paper), None
     y0, y1 = int(rows[0]), int(rows[-1])
@@ -121,6 +147,10 @@ def extract(gray, cfg=Config(), *, connected_line=None):
                visible_ink_energy=float(np.sum(weight*observed**2)),
                class_name=None, completed_pixels=0, source_raster_exact=True,
                note='Pixel darkness is not a calibrated ink probability. No shape label used.')
+    if territory is not None:
+        rec['territory'] = [int(v) for v in territory]
+    if body_bounds is not None:
+        rec['body_bounds'] = [int(v) for v in body_bounds]
     return rec, fields
 
 

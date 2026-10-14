@@ -21,7 +21,7 @@ MAX_PIXELS = 40_000_000
 NPZ = 'color_step5_evidence_v46.npz'
 JSON_FILES = ('step5_inputs.json', 'color_correction_state.json', 'correction_state.json',
               'type3_detection_v46.json', 'legend_optional_v46.json', 'step5_stop_report.json',
-              'color_group_state_v46.json')
+              'color_group_state_v46.json', 'mode_selection_v46.json')
 SAFE_ID = re.compile(r'^[A-Za-z0-9_-][A-Za-z0-9_.-]{0,100}$')
 
 
@@ -190,18 +190,23 @@ def bw_context(state, image):
     _box(plot,image.shape); _box(legend,image.shape)
     diameter = float((state.get(runtime_key) or {}).get('diameter',15.))
     _normalise(state['P_current'],state['S_current'],plot,legend,diameter)
+    if state.get('U_current'):
+        from bw_unknown_candidates_v46 import validate_regions
+        validate_regions(image,state['U_current'],plot,[legend] if legend else [])
     return dict(plot=plot,legend=legend,runtime_key=runtime_key,diameter=diameter)
 
 
 def capability(folder, image, ed):
     """Missing evidence is manual-only; corrupt evidence is an error."""
     folder = Path(folder)
-    if ed.get('correction_available') is False:
-        return None, ed.get('correction_unavailable_reason') or 'Saved run does not support automatic Step 5.'
     from color_group_runtime_v46 import STATE_FILE, VERSION as GROUP_VERSION, validate as validate_groups
     if ed.get('detector_backend') == GROUP_VERSION or (folder/STATE_FILE).exists():
-        validate_groups(read(folder/STATE_FILE),image,ed)
+        group_state=validate_groups(read(folder/STATE_FILE),image,ed)
+        if not group_state.get('active_names',group_state['names']) or ed.get('correction_available') is False:
+            return None, ed.get('correction_unavailable_reason') or 'No measured legend models; manual editing only.'
         return 'color_group_bw', None
+    if ed.get('correction_available') is False:
+        return None, ed.get('correction_unavailable_reason') or 'Saved run does not support automatic Step 5.'
     if (folder/'type3_detection_v46.json').exists():
         from type3_v46.gui_adapter import validate_detection
         validate_detection(read(folder/'type3_detection_v46.json'),image,ed)
@@ -279,6 +284,11 @@ def excel_bytes(ed):
     meta = wb.create_sheet('calibration')
     meta.append(['field', 'value'])
     meta.append(['points', 'Active points only. Suppressed hypotheses are retained in the correction JSON.'])
+    if ed.get('detection_status'):
+        meta.append(['detection_status', ed['detection_status']])
+        meta.append(['correction_scope', ed.get('correction_scope','all measured series')])
+        for series in ed.get('unavailable_series',[]):
+            meta.append(['unavailable: '+series['name'], series.get('reason','Legend marker unavailable')])
     meta.append(['pixel_coordinates', 'Paired image pixels: origin at top left, x rightward, y downward.'])
     meta.append(['data_coordinates', 'Axis-calibrated values; blank when calibration is unavailable or normalized only.'])
     meta.append(['image_width', ed['image']['width']])
@@ -385,6 +395,13 @@ def import_session(image_bytes, data_bytes, folder, mode='color', version_id=Non
     else:
         ed = validate_edit(value,image)
         artifacts = {}
+        if mode == 'auto':
+            # Legacy edit JSON has no saved engine. Only this fallback needs
+            # routing; paired/history packages always retain their saved mode.
+            from automatic_mode_v46 import select_detection_mode
+            selection = dict(select_detection_mode(image, ed.get('plot_area')), requested_mode='auto')
+            mode = selection['mode']
+            artifacts['mode_selection_v46.json'] = {'encoding':'json', 'data':selection}
     if mode not in ('bw','color'):
         raise ValueError('Unknown saved mode')
     folder = Path(folder)
@@ -479,9 +496,10 @@ def run_bw_saved(folder,image,ed,iterations):
         plot_area=context['plot'],legend_box=context['legend'],d_est=context['diameter'],max_iter=iterations,
         connection_alignment=True,structural_edits=True,
         marker_evidence=state.get('marker_evidence'),
+        init_untyped=state.get('U_current'),
         init_state=previous,no_legend=bool((previous or {}).get('binding',{}).get('explicit_no_legend') or
             (state.get('backend')=='v46_legend_optional' and context['legend'] is None)))
-    state.update(P_current=result['P_current'],S_current=result['S_current'])
+    state.update(P_current=result['P_current'],S_current=result['S_current'],U_current=result.get('U_current',[]))
     state[context['runtime_key']] = result['runtime_state']
     save(folder/'correction_state.json',state)
     sync_bw_series(ed,result['P_current'],state.get('series_catalog',[]))

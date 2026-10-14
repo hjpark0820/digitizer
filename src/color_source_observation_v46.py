@@ -51,19 +51,27 @@ class ColourObservation:
         return np.rint(255-(255-self.gray)*self.own).astype(np.uint8)
 
 
-def build_observations(image, models, group_indices, templates):
+def build_observations(image, models, group_indices, templates, *, group_hollow=None, member_models=None):
     """Classify native pixels; narrowly recognise thin-key paper mixtures.
 
     Distinct orange/brown or light/dark inks remain separate. A weak, hollow
     key may borrow a stronger chromatic ray only when its measured colour is
     almost collinear with that ink's white-paper mixture. This is shared
     observation support, never a series-ID merge or a marker-shape assignment.
+    ``member_models`` (one list per group) fits every group against the inks
+    its member keys actually use (maximum), not their median: a vivid filled
+    key and its thin-stroke twin both lie off the averaged ray.
     """
     from color_palette_identity_v46 import paper_mixture_evidence
     n=len(models);aliases=np.eye(n,dtype=bool);reasons=[]
+    if group_hollow is not None and len(group_hollow)!=n:
+        raise ValueError('Hollow-group evidence must align with the full palette')
+    if member_models is not None and len(member_models)!=n:
+        raise ValueError('Member palette models must align with the full palette')
     for i,model in enumerate(models):
         if model['achromatic']:continue
-        hollow=all(templates[k].marker_kind=='open' for k in group_indices[i])
+        hollow=(bool(group_indices[i]) and all(templates[k].marker_kind=='open' for k in group_indices[i])
+                if group_hollow is None else bool(group_hollow[i]))
         if not hollow:continue
         background=np.asarray(model.get('paper_bgr',[255.,255.,255.]),float)
         a=background-np.asarray(model['bgr'],float);na=np.linalg.norm(a)
@@ -85,7 +93,9 @@ def build_observations(image, models, group_indices, templates):
     paper=np.clip((16.-contrast)/10.,0,1).astype(np.float32)
     # A pale antialiased edge follows the same ink/paper ray. Absolute chroma
     # is NOT an identity test; it falls with alpha even for a perfect match.
-    fits=np.asarray([paper_mixture_evidence(image,m)['fit'] for m in models],np.float32)
+    fits=np.asarray([paper_mixture_evidence(image,m)['fit'] if member_models is None or not member_models[i] else
+                     np.max([paper_mixture_evidence(image,k)['fit'] for k in member_models[i]],axis=0)
+                     for i,m in enumerate(models)],np.float32)
     neutral=paper_mixture_evidence(image,dict(bgr=[0.,0.,0.],paper_bgr=background))['fit']
     # Low-contrast near-neutral pixels are unknown, not occluding black ink.
     # Dark observed neutral ink still has to explain the pixel better than

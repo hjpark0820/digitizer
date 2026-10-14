@@ -121,6 +121,10 @@ def main():
                     help='CUDA batch limit for center/window alignments or grid edge pixels')
     ap.add_argument('--diagnostic-detail', action='store_true', default=None,
                     help='render detailed intermediate diagnostic images (grid v46 default is lightweight)')
+    ap.add_argument('--filled-contour-identity', action='store_true',
+                    help='opt-in C3/C4 angular brightness ranking of already verified native B&W filled-marker alternatives')
+    ap.add_argument('--visible-first-detection', action=argparse.BooleanOptionalAction, default=True,
+                    help='native BW detection: verify direct marker shape before rejecting exterior clutter (default: on; use --no-visible-first-detection to disable)')
     ap.add_argument('--swatches-json', default='',
                     help='JSON list of [class_name, [x0,y0,x1,y1]]; exclusive right/bottom')
     ap.add_argument("--errorbars", default="")
@@ -186,6 +190,7 @@ def main():
         _build_files = (('run_A4_auto_v46.py', 'bw_detect_cli.py', 'bw_pipeline.py',
                          'bw_pipeline_v46.py', 'bw_grid_identity_v46.py',
                          'bw_step5_v46.py', 'bw_series_correction_v46.py', 'bw_series_structure_v46.py',
+                         'bw_unknown_candidates_v46.py', 'bw_untyped_resolver_v46.py',
                          'bw_structural_edits_v46.py', 'bw_connection_alignment_v46.py',
                          'x_singleton_suppressed_v46.py', 'partial_swatch_detector.py',
                          'bw_compute_backend.py', 'bw_gpu_grid_votes.py',
@@ -251,6 +256,8 @@ def main():
         grid_fraction=a.grid_fraction, grid_overlap=a.grid_overlap,
         refinement_backend=a.refinement_backend, gpu_batch_size=a.gpu_batch_size,
         grid_backend=a.grid_backend, window_backend=a.window_backend,
+        filled_contour_identity=a.filled_contour_identity,
+        visible_first_detection=a.visible_first_detection,
         swatches=(json.loads(a.swatches_json) if a.swatches_json else None),
         skip_point_detection=bool(_prev_state),
         img_bgr=img, plot_area_px=pa, legend_area_px=_p4(a.legend_area),
@@ -324,6 +331,9 @@ def main():
                 json.dump({'format_version': BW_STATE_VERSION, 'binding': _binding,
                            'point_backend': a.point_backend, 'state_origin': _what,
                            "P_current": _plain(_P), "S_current": _plain(_S),
+                           'U_current': _json_ready((_runtime_state or {}).get('U_current',
+                               (_prev_state or {}).get('U_current',
+                               ((result.get('grid_diagnostics') or {}).get('untyped_suppressed') or {}).get('regions',[])))),
                            'series_catalog': catalog,
                            'marker_evidence': ((result.get('grid_diagnostics') or {}).get('correction_marker_evidence')
                                or (_prev_state or {}).get('marker_evidence',{})),
@@ -382,6 +392,8 @@ def main():
                     connection_alignment=True, structural_edits=True,
                     marker_evidence=((result.get('grid_diagnostics') or {}).get('correction_marker_evidence')
                         or (_prev_state or {}).get('marker_evidence')),
+                    init_untyped=((_prev_state or {}).get('U_current') if _prev_state else
+                        ((result.get('grid_diagnostics') or {}).get('untyped_suppressed') or {}).get('regions',[])),
                     log_fn=_safe_log,
                 )
                 if not isinstance(r5.get('runtime_state'), dict):
@@ -504,6 +516,8 @@ def main():
         'pipeline_timing_scope': result.get('pipeline_timing_scope'),
         'point_pipeline_timings': (result.get('grid_diagnostics') or {}).get('point_pipeline_timings', {}),
         'settings': {'point_backend': a.point_backend, 'gpu_batch_size': a.gpu_batch_size,
+                     'filled_contour_identity_requested': a.filled_contour_identity,
+                     'visible_first_detection_requested': a.visible_first_detection,
                      'diagnostic_detail_requested': a.diagnostic_detail, 'skip_segments': a.skip_segments,
                      'diagnostic_detail': result.get('diagnostic_detail', a.diagnostic_detail), 'image_shape': [H, W],
                      'plot_area': list(pa), 'legend_area': _p4(a.legend_area)},

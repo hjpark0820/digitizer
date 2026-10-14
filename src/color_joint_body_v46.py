@@ -50,7 +50,24 @@ def clusters(points, fraction):
         yield [points[i] for i in sorted(group)]
 
 
-def compare_group(evidence, index, points, *, config=None, debug=False):
+def compare_group(evidence, index, points, *, config=None, debug=False, neighbours=()):
+    """Prune same-series candidates by comparing subsets on one canvas.
+
+    ``neighbours``: the series' other verified centres outside this group. They
+    are used only by the connector consistency check below; without them the
+    decision is the original one.
+
+    Connector consistency check (gated, rescue only): the external annulus in
+    which the connector is fitted can contain another verified marker of the
+    same series. Measured as a stroke, that body yields a 'connector' as wide as
+    the marker, which, extrapolated across the group, can explain a verified
+    marker away. A pruning is re-examined only when (a) the fitted connector lies
+    on such a neighbouring body and (b) the connector, not the kept markers,
+    explains most of a removed candidate's own ink (more than remains). The
+    connector is then refitted with the neighbouring bodies excluded, exactly as
+    the group's own bodies already are, and a candidate is kept only if that
+    refit no longer removes it. Nothing else of the original decision changes.
+    """
     cfg = config or JointBodyConfig()
     t = evidence['templates'][index]
     report = dict(candidate_ids=[p['candidate_id'] for p in points], series_id=t['id'],
@@ -101,61 +118,103 @@ def compare_group(evidence, index, points, *, config=None, debug=False):
     domain = cv2.dilate((all_faces>.1).astype(np.uint8), np.ones((5,5),np.uint8)).astype(np.float32)*valid
     yy, xx = np.mgrid[-r:r+1,-r:r+1]
     radius = np.hypot(xx, yy)
-    external = (radius>=inner) & (radius<=outer) & (valid>.95)
-    line, fits, confidence = _connector(np.maximum(observed-guide,0), other,
-        valid*(all_faces<.1), external, inner, outer, d, WindowConfig())
-    nuisance = np.maximum(line, guide)
     mass = max(float(a.sum()), 1.)  # Never changes with marker count.
     missing_weight = np.maximum((1-other)*(1-.65*blend), 1.75*paper)
     grad = lambda x: cv2.morphologyEx(x,cv2.MORPH_GRADIENT,np.ones((3,3),np.uint8))
     obs_boundary = grad(observed)
-    tests = []
-    model_cache = {}
-    for n in range(1,len(points)+1):
-        for ids in combinations(range(len(points)),n):
-            marker = np.maximum.reduce([maps[i] for i in ids])
-            models = [('through', np.maximum(nuisance,marker))]
-            if hole.any():
-                union_face = np.maximum.reduce([faces[i] for i in ids])
-                models.append(('opaque_hollow_face',np.maximum(nuisance*(1-union_face),marker)))
-            choices = []
-            for composition, model in models:
-                deficit = np.maximum(model-observed,0)*missing_weight
-                extra = np.maximum(observed-model,0)
-                pixel_loss = float(((deficit+extra)*domain).sum())/mass
-                edge_loss = float((np.abs(grad(model)-obs_boundary)*domain*(1-other)).sum())/mass
-                image_loss = pixel_loss+cfg.boundary_weight*edge_loss
-                choices.append((image_loss,composition,model,pixel_loss,edge_loss))
-            image_loss, composition, model, pixel_loss, edge_loss = min(choices,key=lambda z:z[0])
-            row = dict(indices=list(ids),candidate_ids=[points[i]['candidate_id'] for i in ids],
-                       count=n,image_loss=image_loss,pixel_loss=pixel_loss,boundary_loss=edge_loss,
-                       objective=image_loss+cfg.marker_cost*n,composition=composition)
-            tests.append(row)
-            if debug: model_cache[tuple(ids)] = model
-    winner = min(tests,key=lambda q:(q['objective'],q['count'],q['candidate_ids']))
-    full = tests[-1]
-    single = min((q for q in tests if q['count']==1),key=lambda q:q['objective'])
-    gain = full['objective']-winner['objective']
-    # An almost invisible group or a bad one-body model must not collapse merely
-    # because we prefer fewer markers. Keep all original hypotheses on abstention.
-    support = [float(np.minimum(np.maximum(observed-nuisance,0),m).sum())/mass for m in maps]
-    selected_support = min(support[i] for i in winner['indices'])
-    reliable = (selected_support >= cfg.minimum_own_support and
-                winner['image_loss']/winner['count'] <= cfg.maximum_single_loss)
-    applied = winner['count']<len(points) and gain>=cfg.minimum_improvement and reliable
-    kept = winner['candidate_ids'] if applied else report['candidate_ids']
-    report.update(applied=applied, reason='joint_body_simplification' if applied else
-        'insufficient_visible_body_preserve' if not reliable else 'no_clear_simplification',
-        kept_ids=kept, removed_ids=[p['candidate_id'] for p in points if p['candidate_id'] not in kept],
-        best=winner, best_single=single, full=full, improvement=gain, own_support=support,
-        crop_origin=origin.tolist(), diameter=d, marker_mass=mass, shared_domain_pixels=float(domain.sum()),
-        line_confidence=confidence, line_count=len(fits), models_evaluated=len(tests),
-        same_pixels_and_denominator=True, source_pixels_changed=False,
-        top_models=sorted(tests,key=lambda q:q['objective'])[:10])
+
+    def decide(excluded):
+        """The original subset comparison; ``excluded`` (0/1) removes bodies from connector fitting."""
+        external = (radius>=inner) & (radius<=outer) & (valid>.95) & (excluded<.5)
+        line, fits, confidence = _connector(np.maximum(observed-guide,0), other,
+            valid*(all_faces<.1)*(excluded<.5), external, inner, outer, d, WindowConfig())
+        nuisance = np.maximum(line, guide)
+        tests = []
+        model_cache = {}
+        for n in range(1,len(points)+1):
+            for ids in combinations(range(len(points)),n):
+                marker = np.maximum.reduce([maps[i] for i in ids])
+                models = [('through', np.maximum(nuisance,marker))]
+                if hole.any():
+                    union_face = np.maximum.reduce([faces[i] for i in ids])
+                    models.append(('opaque_hollow_face',np.maximum(nuisance*(1-union_face),marker)))
+                choices = []
+                for composition, model in models:
+                    deficit = np.maximum(model-observed,0)*missing_weight
+                    extra = np.maximum(observed-model,0)
+                    pixel_loss = float(((deficit+extra)*domain).sum())/mass
+                    edge_loss = float((np.abs(grad(model)-obs_boundary)*domain*(1-other)).sum())/mass
+                    image_loss = pixel_loss+cfg.boundary_weight*edge_loss
+                    choices.append((image_loss,composition,model,pixel_loss,edge_loss))
+                image_loss, composition, model, pixel_loss, edge_loss = min(choices,key=lambda z:z[0])
+                row = dict(indices=list(ids),candidate_ids=[points[i]['candidate_id'] for i in ids],
+                           count=n,image_loss=image_loss,pixel_loss=pixel_loss,boundary_loss=edge_loss,
+                           objective=image_loss+cfg.marker_cost*n,composition=composition)
+                tests.append(row)
+                if debug: model_cache[tuple(ids)] = model
+        winner = min(tests,key=lambda q:(q['objective'],q['count'],q['candidate_ids']))
+        full = tests[-1]
+        single = min((q for q in tests if q['count']==1),key=lambda q:q['objective'])
+        gain = full['objective']-winner['objective']
+        # An almost invisible group or a bad one-body model must not collapse merely
+        # because we prefer fewer markers. Keep all original hypotheses on abstention.
+        support = [float(np.minimum(np.maximum(observed-nuisance,0),m).sum())/mass for m in maps]
+        selected_support = min(support[i] for i in winner['indices'])
+        reliable = (selected_support >= cfg.minimum_own_support and
+                    winner['image_loss']/winner['count'] <= cfg.maximum_single_loss)
+        applied = winner['count']<len(points) and gain>=cfg.minimum_improvement and reliable
+        kept = winner['candidate_ids'] if applied else report['candidate_ids']
+        return dict(applied=applied, reason='joint_body_simplification' if applied else
+            'insufficient_visible_body_preserve' if not reliable else 'no_clear_simplification',
+            kept_ids=kept, removed_ids=[p['candidate_id'] for p in points if p['candidate_id'] not in kept],
+            best=winner, best_single=single, full=full, improvement=gain, own_support=support,
+            line_confidence=confidence, line_count=len(fits), models_evaluated=len(tests),
+            top_models=sorted(tests,key=lambda q:q['objective'])[:10]), dict(
+            line=line, nuisance=nuisance, model_cache=model_cache, external=external)
+
+    result, state = decide(np.zeros(shape, np.float32))
+    reach = r+body_radius+1
+    near = [q for q in neighbours if abs(q['x']-middle[0]) <= reach and abs(q['y']-middle[1]) <= reach]
+    check = dict(neighbour_bodies=len(near), line_on_neighbour_body=False, line_explained_removed=[],
+                 rescued_ids=[])
+    if result['removed_ids'] and result['line_count'] and near:
+        neighbour_faces = np.maximum.reduce([stamp(face, center, q['x']-origin[0], q['y']-origin[1], shape)
+                                             for q in near])
+        on_body = bool(((state['line'] > .08) & state['external'] & (neighbour_faces > .1)).any())
+        bare = np.maximum(observed-guide, 0)
+        without_line = {p['candidate_id']: float(np.minimum(bare, maps[i]).sum())/mass for i, p in enumerate(points)}
+        position = {p['candidate_id']: i for i, p in enumerate(points)}
+        # The connector explains more of this candidate's own ink than remains.
+        line_explains = lambda cid, support: without_line[cid]-support[position[cid]] > support[position[cid]]
+        explained = [cid for cid in result['removed_ids'] if line_explains(cid, result['own_support'])]
+        check.update(line_on_neighbour_body=on_body, line_explained_removed=explained)
+        if on_body and explained:
+            refit, _ = decide((neighbour_faces > .1).astype(np.float32))
+            # Rescue only when the cause disappears: with the neighbouring bodies
+            # excluded, no fitted connector touches the candidate any more (its
+            # support equals its line-free support, up to float rounding) and the
+            # refitted comparison keeps it. A connector that still reaches the
+            # candidate after the refit is a real stroke; the original pruning stands.
+            untouched = lambda cid: without_line[cid]-refit['own_support'][position[cid]] <= 1e-6*max(without_line[cid], 1.)
+            rescued = [cid for cid in explained if cid not in refit['removed_ids'] and untouched(cid)]
+            check.update(refit=dict(line_confidence=refit['line_confidence'], line_count=refit['line_count'],
+                                    removed_ids=refit['removed_ids'], own_support=refit['own_support']),
+                         rescued_ids=rescued)
+            if rescued:
+                kept = [p['candidate_id'] for p in points if p['candidate_id'] not in result['removed_ids']
+                        or p['candidate_id'] in rescued]
+                applied = len(kept) < len(points)
+                result.update(kept_ids=kept, removed_ids=[c for c in result['removed_ids'] if c not in rescued],
+                              applied=applied, reason='joint_body_simplification' if applied else
+                              'connector_measured_on_neighbour_body_preserve')
+    report.update(result)
+    report.update(crop_origin=origin.tolist(), diameter=d, marker_mass=mass, shared_domain_pixels=float(domain.sum()),
+                  neighbour_connector_check=check, same_pixels_and_denominator=True, source_pixels_changed=False)
     if debug:
-        report['maps'] = dict(observed=observed,other=other,paper=paper,domain=domain,nuisance=nuisance,
-                            single=model_cache[tuple(single['indices'])],
-                            best=model_cache[tuple(winner['indices'])],full=model_cache[tuple(full['indices'])])
+        mc = state['model_cache']
+        report['maps'] = dict(observed=observed,other=other,paper=paper,domain=domain,nuisance=state['nuisance'],
+                            single=mc[tuple(result['best_single']['indices'])],
+                            best=mc[tuple(result['best']['indices'])],full=mc[tuple(result['full']['indices'])])
     return report
 
 
@@ -171,7 +230,12 @@ def consolidate(evidence, selection, *, config=None):
     reports=[]; removed=set()
     for group in clusters(selection['points'],cfg.neighbourhood_diameter):
         if len(group)<2: continue
-        report=compare_group(evidence,indices[str(group[0]['series_id'])],group,config=cfg)
+        members={p['candidate_id'] for p in group}
+        # The series' other verified centres: input to the connector consistency check only.
+        neighbours=[q for q in selection['points'] if q['series_id']==group[0]['series_id']
+                    and q['candidate_id'] not in members]
+        report=compare_group(evidence,indices[str(group[0]['series_id'])],group,config=cfg,
+                             neighbours=neighbours)
         reports.append(report); removed.update(report.get('removed_ids',[]))
     result=dict(selection,points=[p for p in selection['points'] if p['candidate_id'] not in removed],
                 rejected=list(selection['rejected']))

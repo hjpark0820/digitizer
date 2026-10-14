@@ -1,0 +1,1690 @@
+{
+  "description": "40 intentionally selected easy/high-performing synthetic examples, not a representative benchmark.",
+  "provenance": "Matplotlib-rendered look-alike synthetic charts; perturbed or simulated data and redrawn legends. Not original clinical measurements.",
+  "protocol": "Native PNG resolution; current public runtime; Automatic mode; supplied plot/legend boxes and manual numeric axis calibration; CPU; Step 5 auto (20-iteration cap). Ground-truth points used only after inference.",
+  "metric": "One-to-one same-series center matching within 5 source pixels. Series mapped by legend boxes/unique labels, not point positions.",
+  "timing": "Single-run wall seconds with up to four concurrent single-thread jobs; not an isolated performance benchmark.",
+  "runtime_id": "097fd91605c0a469d47ba18503410f4be28218dc5e2d3aa6a20a9c9954a0aee2",
+  "examples": [
+    {
+      "file": "er_bw__ansuvimab_1_2_0__p01__v5.png",
+      "source_id": "er__ansuvimab_1_2_0__p01__v5",
+      "category": "er_bw",
+      "sha256": "f2f2f1ca31860b93f1c5cc6d7bdf9d4e559b2f4f6bca6c7ad09633debd1b9165",
+      "plot_area": [
+        101,
+        34,
+        558,
+        371
+      ],
+      "legend_area": [
+        322,
+        216,
+        509,
+        289
+      ],
+      "axis_calibration": {
+        "x_min": 78.35055994633727,
+        "x_max": 131848.80762054722,
+        "x_log": true,
+        "y_min": -9.722785094248138,
+        "y_max": 150.95013880424165,
+        "y_log": false
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 21,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 21,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 8.80136629997287,
+      "step5_seconds": 4.904551699990407
+    },
+    {
+      "file": "er_bw__datopotamab_deruxtecan_1_1_0__p04__v7.png",
+      "source_id": "er__datopotamab_deruxtecan_1_1_0__p04__v7",
+      "category": "er_bw",
+      "sha256": "60dbb82efc926a5cbbf99e3ba5962bffd5d74d92a1ab2d77c78a8611054b36e2",
+      "plot_area": [
+        185,
+        57,
+        1025,
+        618
+      ],
+      "legend_area": [
+        933,
+        65,
+        1196,
+        197
+      ],
+      "axis_calibration": {
+        "x_min": 0.0010055891781778573,
+        "x_max": 105.31263998982547,
+        "x_log": true,
+        "y_min": -0.2688172043011434,
+        "y_max": 150.53763440860214,
+        "y_log": false
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 12.454193300101906,
+      "step5_seconds": 2.5792061999673024
+    },
+    {
+      "file": "er_bw__panitumumab_1_1_0__p01__v2.png",
+      "source_id": "er__panitumumab_1_1_0__p01__v2",
+      "category": "er_bw",
+      "sha256": "a4b1f975e1c40dbd05369399cc1374dc5ac82e1516fb6cf9804849877a2386b7",
+      "plot_area": [
+        143,
+        42,
+        799,
+        465
+      ],
+      "legend_area": [
+        203,
+        347,
+        384,
+        409
+      ],
+      "axis_calibration": {
+        "x_min": 0.009891176204636585,
+        "x_max": 104.53794624322612,
+        "x_log": true,
+        "y_min": 0.11973988149613905,
+        "y_max": 0.3611980741987392,
+        "y_log": false
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 12,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 12,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 8.34085729997605,
+      "step5_seconds": 4.262348600081168
+    },
+    {
+      "file": "er_bw__etrolizumab_1_1_1__p01__v1.png",
+      "source_id": "er__etrolizumab_1_1_1__p01__v1",
+      "category": "er_bw",
+      "sha256": "01cd6490fe639378e9dfd534d8c8cc402bad180e9d1131b1c0de7c91816c6a77",
+      "plot_area": [
+        59,
+        22,
+        326,
+        242
+      ],
+      "legend_area": [
+        65,
+        54,
+        179,
+        88
+      ],
+      "axis_calibration": {
+        "x_min": 0.0009486137541770472,
+        "x_max": 1374.9561541628477,
+        "x_log": true,
+        "y_min": -1.148049457777482,
+        "y_max": 50.09979803185317,
+        "y_log": false
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because no coherent coloured series ink was found in the inspected regions.",
+      "detection": {
+        "tp": 17,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 17,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 18.61520679993555,
+      "step5_seconds": 2.2354486000258476
+    },
+    {
+      "file": "er_bw__daclizumab_1_1_0__p01__v0.png",
+      "source_id": "er__daclizumab_1_1_0__p01__v0",
+      "category": "er_bw",
+      "sha256": "f872ab59911f84161a93597c934e9e4b439b572708cb83d18dc6aed484e11b3f",
+      "plot_area": [
+        37,
+        16,
+        250,
+        167
+      ],
+      "legend_area": [
+        2,
+        209,
+        239,
+        269
+      ],
+      "axis_calibration": {
+        "x_min": 0.0004390455510746281,
+        "x_max": 144.74622981843163,
+        "x_log": true,
+        "y_min": -10.317460317460345,
+        "y_max": 109.52380952380956,
+        "y_log": false
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 4.227640600060113,
+      "step5_seconds": 1.6644988000625744
+    },
+    {
+      "file": "er_bw__tabalumab_1_2_1__p01__v1.png",
+      "source_id": "er__tabalumab_1_2_1__p01__v1",
+      "category": "er_bw",
+      "sha256": "57a6d840dd88c32fd7059262e7e18d3163b7f339b345a7328664881bbea84991",
+      "plot_area": [
+        214,
+        67,
+        1183,
+        742
+      ],
+      "legend_area": [
+        657,
+        82,
+        1182,
+        256
+      ],
+      "axis_calibration": {
+        "x_min": -83.84,
+        "x_max": 1084.0,
+        "x_log": false,
+        "y_min": -12.088917215423862,
+        "y_max": 12022.276739994017,
+        "y_log": false
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 15,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 15,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 24.408531899913214,
+      "step5_seconds": 7.683717899955809
+    },
+    {
+      "file": "er_bw__iscalimab_2_5_0__p02__v2.png",
+      "source_id": "er__iscalimab_2_5_0__p02__v2",
+      "category": "er_bw",
+      "sha256": "772678ba2e7d2dfe92e662f0406a1a33c1924596ac7398da2ef2932e713640f6",
+      "plot_area": [
+        66,
+        31,
+        365,
+        340
+      ],
+      "legend_area": [
+        397,
+        162,
+        546,
+        223
+      ],
+      "axis_calibration": {
+        "x_min": 9.95461873386408e-05,
+        "x_max": 107.70785809993312,
+        "x_log": true,
+        "y_min": -1.5594786245942203,
+        "y_max": 121.16232069798384,
+        "y_log": false
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 23,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 23,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 52.399993899976835,
+      "step5_seconds": 1.5604792999802157
+    },
+    {
+      "file": "er_bw__datopotamab_deruxtecan_1_1_0__p02__v1.png",
+      "source_id": "er__datopotamab_deruxtecan_1_1_0__p02__v1",
+      "category": "er_bw",
+      "sha256": "9154088227f7cc294663178d605b357c9a5a7cadb400197a42d53567e09639f6",
+      "plot_area": [
+        185,
+        57,
+        1025,
+        618
+      ],
+      "legend_area": [
+        951,
+        994,
+        1230,
+        1126
+      ],
+      "axis_calibration": {
+        "x_min": 0.0009924922335431063,
+        "x_max": 104.76523578825916,
+        "x_log": true,
+        "y_min": -0.3229707216709983,
+        "y_max": 150.72684724028588,
+        "y_log": false
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 8.85238020005636,
+      "step5_seconds": 2.4167889999225736
+    },
+    {
+      "file": "er_bw__atezolizumab_2_1_1__p01__v0.png",
+      "source_id": "er__atezolizumab_2_1_1__p01__v0",
+      "category": "er_bw",
+      "sha256": "6207192ac9e3be9613fcc1385a6a68335debfac0399c8022b9f61f3cd6589adc",
+      "plot_area": [
+        75,
+        28,
+        418,
+        303
+      ],
+      "legend_area": [
+        89,
+        26,
+        374,
+        54
+      ],
+      "axis_calibration": {
+        "x_min": 1.003871650933817e-06,
+        "x_max": 114.4786673264732,
+        "x_log": true,
+        "y_min": -20.37377641230232,
+        "y_max": 80.06940314092887,
+        "y_log": false
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 3.7937692999839783,
+      "step5_seconds": 1.5991297999862581
+    },
+    {
+      "file": "er_bw__ulocuplumab_1_1_1__p01__v2.png",
+      "source_id": "er__ulocuplumab_1_1_1__p01__v2",
+      "category": "er_bw",
+      "sha256": "07e33f38f08c4080800339ca9c6adeedbeb2e8c520d1a24dfc46658dedad2ecc",
+      "plot_area": [
+        149,
+        52,
+        836,
+        592
+      ],
+      "legend_area": [
+        245,
+        129,
+        449,
+        256
+      ],
+      "axis_calibration": {
+        "x_min": 0.0009690444353762964,
+        "x_max": 1025.6403361668251,
+        "x_log": true,
+        "y_min": -11.404997527381019,
+        "y_max": 552.2389270440096,
+        "y_log": false
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 23,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9787234042553191
+      },
+      "step5": {
+        "tp": 23,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9787234042553191
+      },
+      "detection_seconds": 55.35427959996741,
+      "step5_seconds": 5.896021599997766
+    },
+    {
+      "file": "er_color__perenostobart_1_1_0__p02__v8.png",
+      "source_id": "er__perenostobart_1_1_0__p02__v8",
+      "category": "er_color",
+      "sha256": "9c6ee03bfbb44ebbee6a2012605a38d10913a31dde49658e9ba0c28a7d0a0282",
+      "plot_area": [
+        132,
+        40,
+        730,
+        438
+      ],
+      "legend_area": [
+        132,
+        31,
+        380,
+        100
+      ],
+      "axis_calibration": {
+        "x_min": 0.00019674755876892614,
+        "x_max": 1131.5910537418167,
+        "x_log": true,
+        "y_min": -8.911838605356934,
+        "y_max": 2517.375111469929,
+        "y_log": false
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 22,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 22,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 18.018916900036857,
+      "step5_seconds": 7.169097100035287
+    },
+    {
+      "file": "er_color__amatuximab_1_1_1__p01__v1.png",
+      "source_id": "er__amatuximab_1_1_1__p01__v1",
+      "category": "er_color",
+      "sha256": "87c20aeaa9aa5f44a8befe422f99997f4e74c4d8004e59128da904296451ec67",
+      "plot_area": [
+        84,
+        36,
+        463,
+        392
+      ],
+      "legend_area": [
+        94,
+        51,
+        348,
+        138
+      ],
+      "axis_calibration": {
+        "x_min": 0.10000000000000031,
+        "x_max": 61.20187194900881,
+        "x_log": true,
+        "y_min": -20.010226063997834,
+        "y_max": 10005.92885095583,
+        "y_log": false
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 8.942640600027516,
+      "step5_seconds": 3.118139600032009
+    },
+    {
+      "file": "er_color__dalotuzumab_1_1_0__p02__v3.png",
+      "source_id": "er__dalotuzumab_1_1_0__p02__v3",
+      "category": "er_color",
+      "sha256": "6903616b7f3a0f3f42c5ae8c1afb142947b70898aa4d7a22ab2eb41654ac2854",
+      "plot_area": [
+        118,
+        43,
+        650,
+        464
+      ],
+      "legend_area": [
+        658,
+        53,
+        1029,
+        176
+      ],
+      "axis_calibration": {
+        "x_min": -1.187,
+        "x_max": 51.34,
+        "x_log": false,
+        "y_min": -0.44599437920184926,
+        "y_max": 115.5545352538103,
+        "y_log": false
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 17,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 17,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 19.7368183999788,
+      "step5_seconds": 8.75664090004284
+    },
+    {
+      "file": "er_color__imalumab_1_1_4__p01__v3.png",
+      "source_id": "er__imalumab_1_1_4__p01__v3",
+      "category": "er_color",
+      "sha256": "045ea42eb5100dd979d50356920a29d490d7431f31959f363d06cda7a0ea640a",
+      "plot_area": [
+        115,
+        52,
+        634,
+        568
+      ],
+      "legend_area": [
+        155,
+        60,
+        330,
+        170
+      ],
+      "axis_calibration": {
+        "x_min": 0.00992679235410355,
+        "x_max": 137.67825647314808,
+        "x_log": true,
+        "y_min": 397200.0,
+        "y_max": 4007000.0,
+        "y_log": false
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 26,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 26,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 25.448584600002505,
+      "step5_seconds": 11.944573600078002
+    },
+    {
+      "file": "er_color__mepolizumab_reslizumab_1_1_1__p01__v0.png",
+      "source_id": "er__mepolizumab_reslizumab_1_1_1__p01__v0",
+      "category": "er_color",
+      "sha256": "ccdd77fd05a20f9b467d664eb54f28c4bb3eee7f1bb1575bf4a6c4347fd7204d",
+      "plot_area": [
+        303,
+        31,
+        1938,
+        1133
+      ],
+      "legend_area": [
+        1978,
+        93,
+        2390,
+        221
+      ],
+      "axis_calibration": {
+        "x_min": 0.31455872563348614,
+        "x_max": 32242.417076397793,
+        "x_log": true,
+        "y_min": 27270.0,
+        "y_max": 60080000.0,
+        "y_log": false
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 16,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 16,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 55.90813629992772,
+      "step5_seconds": 16.67678740003612
+    },
+    {
+      "file": "er_color__talacotuzumab_1_2_1__p01__v9.png",
+      "source_id": "er__talacotuzumab_1_2_1__p01__v9",
+      "category": "er_color",
+      "sha256": "201fd0946e71893642206ae1fcd3a7f560e03ffcc4a3cd53ded661c13e272ec1",
+      "plot_area": [
+        103,
+        30,
+        571,
+        328
+      ],
+      "legend_area": [
+        598,
+        76,
+        945,
+        218
+      ],
+      "axis_calibration": {
+        "x_min": 6.473465558018231e-05,
+        "x_max": 1503.345480140946,
+        "x_log": true,
+        "y_min": 0.7500000000000004,
+        "y_max": 3.0075757575757582,
+        "y_log": false
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 24,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 24,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 14.937736300053075,
+      "step5_seconds": 6.88011909998022
+    },
+    {
+      "file": "er_color__etokimab_1_1_2__p01__v2.png",
+      "source_id": "er__etokimab_1_1_2__p01__v2",
+      "category": "er_color",
+      "sha256": "5afec70810d968bf3d58f44429f199846a6faeac751aa4dfe0f36ab72a49f664",
+      "plot_area": [
+        236,
+        72,
+        1314,
+        793
+      ],
+      "legend_area": [
+        1089,
+        80,
+        1922,
+        342
+      ],
+      "axis_calibration": {
+        "x_min": 9.808895589682007e-14,
+        "x_max": 1.0326816986357121e-07,
+        "x_log": true,
+        "y_min": 1.0642400295532468,
+        "y_max": 156.19754796317892,
+        "y_log": false
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 24,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 24,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 49.39607240003534,
+      "step5_seconds": 8.493929799995385
+    },
+    {
+      "file": "er_color__brii-196_1_2_0__p02__v3.png",
+      "source_id": "er__brii-196_1_2_0__p02__v3",
+      "category": "er_color",
+      "sha256": "77c1ff7cb4d298e373fec5cd180690111dd144078bf6358564576e092b18784f",
+      "plot_area": [
+        118,
+        36,
+        656,
+        395
+      ],
+      "legend_area": [
+        688,
+        68,
+        836,
+        189
+      ],
+      "axis_calibration": {
+        "x_min": 0.0009902868290219467,
+        "x_max": 109.29689938192203,
+        "x_log": true,
+        "y_min": -15.183479921442867,
+        "y_max": 106.0122177486373,
+        "y_log": false
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 25,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 25,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 16.04682689998299,
+      "step5_seconds": 5.079978300025687
+    },
+    {
+      "file": "er_color__rovalpituzumab_1_1_1__p01__v6.png",
+      "source_id": "er__rovalpituzumab_1_1_1__p01__v6",
+      "category": "er_color",
+      "sha256": "bb935456aae01eb383d265491e806475ca98bb6abb733072a705c7c6fa0e122b",
+      "plot_area": [
+        112,
+        26,
+        688,
+        411
+      ],
+      "legend_area": [
+        360,
+        2,
+        699,
+        91
+      ],
+      "axis_calibration": {
+        "x_min": 9.919227995867e-05,
+        "x_max": 10.354744786754647,
+        "x_log": true,
+        "y_min": -0.22891586559009625,
+        "y_max": 120.18423566094192,
+        "y_log": false
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 15,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.967741935483871
+      },
+      "step5": {
+        "tp": 16,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 12.657062400016002,
+      "step5_seconds": 2.8968167999992147
+    },
+    {
+      "file": "er_color__bebtelovimab_1_1_1__p01__v0.png",
+      "source_id": "er__bebtelovimab_1_1_1__p01__v0",
+      "category": "er_color",
+      "sha256": "132f89e8a188dff7c87671a235cd2ea86e3164d92e4a8b22186f0b94bdcecce3",
+      "plot_area": [
+        90,
+        40,
+        840,
+        432
+      ],
+      "legend_area": [
+        817,
+        51,
+        905,
+        99
+      ],
+      "axis_calibration": {
+        "x_min": 1.0009389217510263,
+        "x_max": 1031.939509710417,
+        "x_log": true,
+        "y_min": -0.2604166666666572,
+        "y_max": 101.82291666666673,
+        "y_log": false
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 14,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9655172413793104
+      },
+      "step5": {
+        "tp": 15,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 17.335552099975757,
+      "step5_seconds": 3.510963700013235
+    },
+    {
+      "file": "pk_bw__prolgolimab1__p01__v6.png",
+      "source_id": "pk__prolgolimab1__p01__v6",
+      "category": "pk_bw",
+      "sha256": "6fc471e44c26088bcbce7ebf89262d412922bda0e5ae9b7554a2ae3885cc89ab",
+      "plot_area": [
+        127,
+        15,
+        725,
+        415
+      ],
+      "legend_area": [
+        154,
+        2,
+        371,
+        99
+      ],
+      "axis_calibration": {
+        "x_min": 5.526293749878265,
+        "x_max": 26.47370625012173,
+        "x_log": false,
+        "y_min": 0.6250000000000568,
+        "y_max": 250.62500000000006,
+        "y_log": false
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 13,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 13,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 9.066626999992877,
+      "step5_seconds": 3.077033100067638
+    },
+    {
+      "file": "pk_bw__cusatuzumab1__p01__v6.png",
+      "source_id": "pk__cusatuzumab1__p01__v6",
+      "category": "pk_bw",
+      "sha256": "35846cf9b6ab6ce0f1b69d4878ca75f0f8f7dabffd1a87a422cf2ab0b202c329",
+      "plot_area": [
+        124,
+        20,
+        687,
+        427
+      ],
+      "legend_area": [
+        317,
+        392,
+        665,
+        420
+      ],
+      "axis_calibration": {
+        "x_min": -9.213540362745391,
+        "x_max": 394.9912802620715,
+        "x_log": false,
+        "y_min": -12.280701754386428,
+        "y_max": 701.7543859649119,
+        "y_log": false
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 3.246502900030464,
+      "step5_seconds": 1.1170011000940576
+    },
+    {
+      "file": "pk_bw__motavizumab1__p02__v0.png",
+      "source_id": "pk__motavizumab1__p02__v0",
+      "category": "pk_bw",
+      "sha256": "cd24a3aeb73cf70e806a0001b52fb4b2a4598830fbe737cf9343e66e1d646f50",
+      "plot_area": [
+        72,
+        19,
+        399,
+        235
+      ],
+      "legend_area": [
+        77,
+        18,
+        199,
+        46
+      ],
+      "axis_calibration": {
+        "x_min": -0.3684210526315468,
+        "x_max": 240.57894736842104,
+        "x_log": false,
+        "y_min": 0.9968104310966497,
+        "y_max": 1011.2694486320354,
+        "y_log": true
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 27,
+        "fp": 0,
+        "fn": 4,
+        "f1": 0.9310344827586207
+      },
+      "step5": {
+        "tp": 30,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9836065573770492
+      },
+      "detection_seconds": 7.969861799967475,
+      "step5_seconds": 4.310740699991584
+    },
+    {
+      "file": "pk_bw__motavizumab1__p04__v1.png",
+      "source_id": "pk__motavizumab1__p04__v1",
+      "category": "pk_bw",
+      "sha256": "9c5fe3bff43cb62a768cd8e225e6d08ae62998d829f5246f03af0030ab9e1888",
+      "plot_area": [
+        71,
+        22,
+        393,
+        236
+      ],
+      "legend_area": [
+        76,
+        22,
+        175,
+        44
+      ],
+      "axis_calibration": {
+        "x_min": 0.07484258532086585,
+        "x_max": 240.07418123699705,
+        "x_log": false,
+        "y_min": 1.0000282092655546,
+        "y_max": 10086.24564378147,
+        "y_log": true
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because no coherent coloured series ink was found in the inspected regions.",
+      "detection": {
+        "tp": 29,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9830508474576272
+      },
+      "step5": {
+        "tp": 29,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9830508474576272
+      },
+      "detection_seconds": 5.388939899974503,
+      "step5_seconds": 2.1014243999961764
+    },
+    {
+      "file": "pk_bw__amubarvimab1__p02__v0.png",
+      "source_id": "pk__amubarvimab1__p02__v0",
+      "category": "pk_bw",
+      "sha256": "831b6e3dc74d139221d4912d58c90092825a64113bc9abb4aed6d60c3ec5e11f",
+      "plot_area": [
+        55,
+        0,
+        303,
+        165
+      ],
+      "legend_area": [
+        220,
+        0,
+        308,
+        66
+      ],
+      "axis_calibration": {
+        "x_min": -3.278688524590045,
+        "x_max": 200.00000000000006,
+        "x_log": false,
+        "y_min": 3032.6213059195065,
+        "y_max": 3032621.3059195187,
+        "y_log": true
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 23,
+        "fp": 0,
+        "fn": 2,
+        "f1": 0.9583333333333334
+      },
+      "step5": {
+        "tp": 24,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9795918367346939
+      },
+      "detection_seconds": 15.79833849996794,
+      "step5_seconds": 3.613075100001879
+    },
+    {
+      "file": "pk_bw__garadacimab1__p02__v4.png",
+      "source_id": "pk__garadacimab1__p02__v4",
+      "category": "pk_bw",
+      "sha256": "81a1b72d39f7b3a5b05d26d1a0b761ded598124672f65d98680102b1a4e7572e",
+      "plot_area": [
+        69,
+        40,
+        708,
+        383
+      ],
+      "legend_area": [
+        482,
+        5,
+        566,
+        83
+      ],
+      "axis_calibration": {
+        "x_min": -4.520833333333341,
+        "x_max": 88.66666666666663,
+        "x_log": false,
+        "y_min": 0.06544401581002739,
+        "y_max": 173.3884738530109,
+        "y_log": true
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 35,
+        "fp": 0,
+        "fn": 2,
+        "f1": 0.9722222222222222
+      },
+      "step5": {
+        "tp": 35,
+        "fp": 0,
+        "fn": 2,
+        "f1": 0.9722222222222222
+      },
+      "detection_seconds": 23.45422840001993,
+      "step5_seconds": 3.402517299982719
+    },
+    {
+      "file": "pk_bw__panitumumab1__p01__v3.png",
+      "source_id": "pk__panitumumab1__p01__v3",
+      "category": "pk_bw",
+      "sha256": "cd3876c1e6429d8c72686b5374c183a911e5ca27b0caf5c30195c439837b6fe3",
+      "plot_area": [
+        83,
+        38,
+        456,
+        411
+      ],
+      "legend_area": [
+        102,
+        328,
+        308,
+        395
+      ],
+      "axis_calibration": {
+        "x_min": -0.7000000000000011,
+        "x_max": 21.058333333333337,
+        "x_log": false,
+        "y_min": 0.7943282347242805,
+        "y_max": 1019.3734859388748,
+        "y_log": true
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 13,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9629629629629629
+      },
+      "step5": {
+        "tp": 13,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9629629629629629
+      },
+      "detection_seconds": 31.49889229994733,
+      "step5_seconds": 7.585834400029853
+    },
+    {
+      "file": "pk_bw__ganitumab1__p01__v4.png",
+      "source_id": "pk__ganitumab1__p01__v4",
+      "category": "pk_bw",
+      "sha256": "116c00018d855b56685485db942b91c7551d74a6e3ee7feb600810ff095fc613",
+      "plot_area": [
+        90,
+        5,
+        772,
+        483
+      ],
+      "legend_area": [
+        542,
+        31,
+        740,
+        135
+      ],
+      "axis_calibration": {
+        "x_min": 1.0251254690246094,
+        "x_max": 60.01165239143171,
+        "x_log": false,
+        "y_min": 1.0175048440543846,
+        "y_max": 1018.9600032787197,
+        "y_log": true
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 51,
+        "fp": 0,
+        "fn": 4,
+        "f1": 0.9622641509433962
+      },
+      "step5": {
+        "tp": 51,
+        "fp": 0,
+        "fn": 4,
+        "f1": 0.9622641509433962
+      },
+      "detection_seconds": 93.08368409995455,
+      "step5_seconds": 1.7635908999945968
+    },
+    {
+      "file": "pk_bw__xentuzumab1__p07__v3.png",
+      "source_id": "pk__xentuzumab1__p07__v3",
+      "category": "pk_bw",
+      "sha256": "e07d7114e215b9f8ff3eb3b7fcaa12c7f33c8de802a0c3a258fb573f39cac910",
+      "plot_area": [
+        183,
+        42,
+        1013,
+        461
+      ],
+      "legend_area": [
+        508,
+        552,
+        673,
+        573
+      ],
+      "axis_calibration": {
+        "x_min": -14.624640421166873,
+        "x_max": 1512.3665897777423,
+        "x_log": false,
+        "y_min": -0.011418712990965252,
+        "y_max": 0.4499666654124553,
+        "y_log": false
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 11,
+        "fp": 1,
+        "fn": 0,
+        "f1": 0.9565217391304348
+      },
+      "step5": {
+        "tp": 11,
+        "fp": 1,
+        "fn": 0,
+        "f1": 0.9565217391304348
+      },
+      "detection_seconds": 43.5517343999818,
+      "step5_seconds": 1.0941310999915004
+    },
+    {
+      "file": "pk_bw__atezolizumab1__p01__v9.png",
+      "source_id": "pk__atezolizumab1__p01__v9",
+      "category": "pk_bw",
+      "sha256": "16e3307619a69086555a405dc400011996fdcdc8a575cb6417e2aaab71b6ff7e",
+      "plot_area": [
+        68,
+        13,
+        517,
+        261
+      ],
+      "legend_area": [
+        433,
+        24,
+        515,
+        63
+      ],
+      "axis_calibration": {
+        "x_min": -0.3157288366369002,
+        "x_max": 21.428025951937236,
+        "x_log": false,
+        "y_min": 14.634146341463406,
+        "y_max": 619.5121951219512,
+        "y_log": false
+      },
+      "automatic_selected": "bw",
+      "automatic_reason": "B&W was selected because the measured legend marker bodies are neutral; connector colour does not determine marker mode.",
+      "detection": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9523809523809523
+      },
+      "step5": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9523809523809523
+      },
+      "detection_seconds": 27.315479999990202,
+      "step5_seconds": 2.6463549999753013
+    },
+    {
+      "file": "pk_color__andecaliximab1__p01__v2.png",
+      "source_id": "pk__andecaliximab1__p01__v2",
+      "category": "pk_color",
+      "sha256": "6d227f2c5e54cae88f2f4d8512dc73911618244e352861508ed87ccd4a9107f9",
+      "plot_area": [
+        163,
+        42,
+        1191,
+        733
+      ],
+      "legend_area": [
+        951,
+        2,
+        1262,
+        119
+      ],
+      "axis_calibration": {
+        "x_min": -0.015932733394333543,
+        "x_max": 14.025038421562268,
+        "x_log": false,
+        "y_min": 0.009907641963846301,
+        "y_max": 2075.8398292336087,
+        "y_log": true
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 21,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 21,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 42.37801939994097,
+      "step5_seconds": 13.895347299985588
+    },
+    {
+      "file": "pk_color__itepekimab1__p02__v2.png",
+      "source_id": "pk__itepekimab1__p02__v2",
+      "category": "pk_color",
+      "sha256": "9bff35bb7cb4ad798d06884eacf62aff62f9194f3f244b1b58cefbbb4fe77247",
+      "plot_area": [
+        111,
+        36,
+        614,
+        392
+      ],
+      "legend_area": [
+        197,
+        476,
+        612,
+        531
+      ],
+      "axis_calibration": {
+        "x_min": -3.6780020567646403,
+        "x_max": 256.6094482008277,
+        "x_log": false,
+        "y_min": 0.005397900825746593,
+        "y_max": 1830.614289181671,
+        "y_log": true
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 21,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 21,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 15.883416799944825,
+      "step5_seconds": 8.183655399945565
+    },
+    {
+      "file": "pk_color__cetuximab1__p02__v5.png",
+      "source_id": "pk__cetuximab1__p02__v5",
+      "category": "pk_color",
+      "sha256": "cebabe95946302fbf352dcad0f07c2a1e78b2633a76f47c77d65d15a71979199",
+      "plot_area": [
+        102,
+        41,
+        674,
+        443
+      ],
+      "legend_area": [
+        368,
+        30,
+        644,
+        85
+      ],
+      "axis_calibration": {
+        "x_min": -1.8844232914136398,
+        "x_max": 72.03543280802269,
+        "x_log": false,
+        "y_min": -0.12882285952600103,
+        "y_max": 5.003475014568473,
+        "y_log": false
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 17,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 17,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 11.884300400037318,
+      "step5_seconds": 3.066019899910316
+    },
+    {
+      "file": "pk_color__axatilimab1__p01__v2.png",
+      "source_id": "pk__axatilimab1__p01__v2",
+      "category": "pk_color",
+      "sha256": "00b775cecb4d10b7d85afa7ddc5dfc35ae249aa17d21ac42d4a758628af12abe",
+      "plot_area": [
+        57,
+        13,
+        738,
+        364
+      ],
+      "legend_area": [
+        489,
+        0,
+        738,
+        38
+      ],
+      "axis_calibration": {
+        "x_min": -5.603844388156759,
+        "x_max": 503.25248056712917,
+        "x_log": false,
+        "y_min": 0.008653969472749545,
+        "y_max": 16.857571999855036,
+        "y_log": true
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 13,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 13,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 11.053865600028075,
+      "step5_seconds": 4.667845799936913
+    },
+    {
+      "file": "pk_color__lifastuzumab2__p02__v3.png",
+      "source_id": "pk__lifastuzumab2__p02__v3",
+      "category": "pk_color",
+      "sha256": "9d8c55967726b50301b32ba711ea81ecf627f4a8680d1af4dfbcb627019c4757",
+      "plot_area": [
+        61,
+        5,
+        336,
+        279
+      ],
+      "legend_area": [
+        206,
+        9,
+        325,
+        41
+      ],
+      "axis_calibration": {
+        "x_min": -146.01869158878492,
+        "x_max": 4171.73831775701,
+        "x_log": false,
+        "y_min": 0.747338659296503,
+        "y_max": 2574.398906639208,
+        "y_log": true
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 20,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 20,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 6.308309499989264,
+      "step5_seconds": 1.4225827000336722
+    },
+    {
+      "file": "pk_color__ociperlimab1__p01__v4.png",
+      "source_id": "pk__ociperlimab1__p01__v4",
+      "category": "pk_color",
+      "sha256": "d7ce4f3a0a4d98d153020c54876053cf4237b7dc5fa3822362a448509bfeffdb",
+      "plot_area": [
+        101,
+        83,
+        970,
+        471
+      ],
+      "legend_area": [
+        150,
+        8,
+        847,
+        32
+      ],
+      "axis_calibration": {
+        "x_min": 2.6502098007181156e-15,
+        "x_max": 28.03225806451613,
+        "x_log": false,
+        "y_min": 0.10049209116292107,
+        "y_max": 1231.958766751999,
+        "y_log": true
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 27,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 27,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 30.474354900070466,
+      "step5_seconds": 11.79060990002472
+    },
+    {
+      "file": "pk_color__tarextumab1__p03__v2.png",
+      "source_id": "pk__tarextumab1__p03__v2",
+      "category": "pk_color",
+      "sha256": "e19c5fc79f3ea1a8922a81d5641438acd7f2e4852deebcfaf8caf6dec7b1b456",
+      "plot_area": [
+        78,
+        27,
+        486,
+        296
+      ],
+      "legend_area": [
+        499,
+        43,
+        648,
+        72
+      ],
+      "axis_calibration": {
+        "x_min": -1.936975343910703,
+        "x_max": 57.936975343910674,
+        "x_log": false,
+        "y_min": 1.0466512108254267,
+        "y_max": 482.1346193585796,
+        "y_log": true
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 17,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 17,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 6.609096099971794,
+      "step5_seconds": 1.6815474999602884
+    },
+    {
+      "file": "pk_color__belantamab1__p04__v1.png",
+      "source_id": "pk__belantamab1__p04__v1",
+      "category": "pk_color",
+      "sha256": "2919be45f571948b735e34fefc2188bb214cf854547156f3a0a91d3d80a1a8e4",
+      "plot_area": [
+        69,
+        22,
+        381,
+        234
+      ],
+      "legend_area": [
+        296,
+        23,
+        380,
+        54
+      ],
+      "axis_calibration": {
+        "x_min": 7.5075267779600505,
+        "x_max": 21.55249445141368,
+        "x_log": false,
+        "y_min": 685.0,
+        "y_max": 60250.5,
+        "y_log": false
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9090909090909091
+      },
+      "step5": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "detection_seconds": 9.229644200066105,
+      "step5_seconds": 2.8827642000978813
+    },
+    {
+      "file": "pk_color__itepekimab1_F2__p02__v1.png",
+      "source_id": "pk__itepekimab1_F2__p02__v1",
+      "category": "pk_color",
+      "sha256": "80b0ca0ca099861822ffc3dd9717189ea51a3c39194ccd0ffe0a2bd260258a6c",
+      "plot_area": [
+        107,
+        36,
+        592,
+        392
+      ],
+      "legend_area": [
+        186,
+        471,
+        531,
+        558
+      ],
+      "axis_calibration": {
+        "x_min": -3.6603121901218074,
+        "x_max": 256.734103595423,
+        "x_log": false,
+        "y_min": -1.2938944970561101e-05,
+        "y_max": 0.00026345653951078817,
+        "y_log": false
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 31,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9841269841269841
+      },
+      "step5": {
+        "tp": 31,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9841269841269841
+      },
+      "detection_seconds": 14.505952899926342,
+      "step5_seconds": 6.654071999946609
+    },
+    {
+      "file": "pk_color__adintrevimab1__p01__v7.png",
+      "source_id": "pk__adintrevimab1__p01__v7",
+      "category": "pk_color",
+      "sha256": "40cbeb3fbd93ab47b1e897fb9999b35f498cbd8785892bcf136696aa9ee8bd33",
+      "plot_area": [
+        115,
+        2,
+        1706,
+        555
+      ],
+      "legend_area": [
+        143,
+        10,
+        1333,
+        41
+      ],
+      "axis_calibration": {
+        "x_min": -35.796200000000006,
+        "x_max": 377.25091477987417,
+        "x_log": false,
+        "y_min": 2.280863111965135,
+        "y_max": 1246.523929408506,
+        "y_log": true
+      },
+      "automatic_selected": "color",
+      "automatic_reason": "Colour was selected because the legend contains coloured marker ink.",
+      "detection": {
+        "tp": 28,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "step5": {
+        "tp": 27,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.9818181818181818
+      },
+      "detection_seconds": 42.35786710004322,
+      "step5_seconds": 17.93114230001811
+    }
+  ]
+}

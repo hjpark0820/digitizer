@@ -123,7 +123,20 @@ refers to the machine running the browser, not automatically the remote agent.
 `index.html` stores the rectangles in browser state (`boxes.plot` and
 `boxes.legend`). The user presses **Run** after choosing regions and reviewing
 axis values. The UI then posts the image and coordinates to `/digitize`.
-For Colour the legend field is `legend_box`; for B&W it is `legend_area`.
+The GUI and `/digitize` default to `mode=auto`; explicit `color` and `bw` are
+manual overrides. Automatic requires `plot_area`, inspects working-image pixels
+with `automatic_mode_v46.select_detection_mode`, and dispatches the same existing
+engines. For Colour and Automatic the GUI legend field is `legend_box`; for B&W
+it is `legend_area`. Automatic accepts either spelling, rejecting conflicting boxes.
+The response `mode` is always the resolved `color`/`bw`; `requested_mode` and
+`mode_selection` retain the choice and pixel evidence. `mode_selection_v46.json`
+survives saved-session export/import and Step 5 forks. The GUI's requested button
+never becomes a saved engine name. Paired imports retain their saved mode; only
+legacy unpaired JSON needs the current choice as a fallback.
+Automatic favours measured legend marker colour over connector colour, rejects
+isolated colour noise/subpixel fringes, then falls back to coherent plot colour.
+No legend plus coloured connectors remains ambiguous; keep manual overrides.
+The CLI dispatcher still accepts explicit `--mode color`/`--mode bw` unchanged.
 All web rectangles use inclusive `x0,y0,x1,y1` working-image pixels.
 The server validates them against the uploaded raster.
 
@@ -147,6 +160,7 @@ review and preserve the original image together with the saved JSON.
 | --- | --- |
 | `src/ocr_bridge_v46.py` | Tesseract adapter and local AI snippet/answer queue; protocol in `src/AI_OCR.md` |
 | `src/unified_server.py` | FastAPI routes, AI OCR request/image/answer endpoints, image preparation, detector/correction child processes, job responses, saved-session import/export |
+| `src/automatic_mode_v46.py` | Lightweight, model-free Colour/B&W selection from selected plot and legend pixels; never replaces manual overrides |
 | `src/index.html` | HTML/CSS and inline JavaScript; image preparation, result history, folder previews, fixed editor, canvas drawing, exports |
 | `src/image_sidecar_v46.js` | Browser folder/file handles, original-image binding, same-stem JSON pairing, history merge and writes |
 | `src/run_A4_auto_v46.py` | Shared v46 dispatcher: Colour → `run_A4_color_v46.py`; B&W → `bw_detect_cli.py` with `grid_v46` |

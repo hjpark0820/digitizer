@@ -184,14 +184,37 @@ def _fit_line(observed, other, valid, seed, inner, outer, diameter):
     longitudinal = xx*math.cos(angle)+yy*math.sin(angle)
     perpendicular = -xx*math.sin(angle)+yy*math.cos(angle)-offset
     rendered = amplitude*np.clip(.5*width+.5-np.abs(perpendicular), 0., 1.)
+    detached = False
     if side:
         # An external ray fixes its direction and width, but cannot reveal
         # where it ends underneath the candidate. Extrapolate across the
-        # whole body instead of inventing a cap at the candidate centre.
-        rendered *= np.clip(side*longitudinal+inner+.5, 0., 1.)
+        # whole body instead of inventing a cap at the candidate centre --
+        # but only for a stroke observed to reach the body. If the profiles
+        # next to the body were observable (valid, not covered by rival ink)
+        # yet showed no such stroke for more than one sampling step, the ink
+        # is a detached object in the annulus (e.g. a neighbouring marker),
+        # not a connector entering this candidate: render it only where it
+        # was measured. Occluded or invalid profiles are unmeasured, not a
+        # gap, and keep the extrapolation.
+        step = max(outer-inner-2., 0.)/6.
+        nearest = float(np.min(np.abs(records[:, 0])))
+        if nearest-(inner+1.) > step+1e-6:
+            skipped = [a for a in np.linspace(inner+1, outer-1, 7) if a < nearest-1e-6]
+            across = np.arange(offset-.5*width, offset+.5*width+.25, .5, dtype=np.float32)
+            vx, vy = math.cos(angle), math.sin(angle)
+            centre = (observed.shape[0]-1)/2
+            along = side*np.asarray(skipped, np.float32)
+            mx = (centre+along[:, None]*vx-across[None, :]*vy).astype(np.float32)
+            my = (centre+along[:, None]*vy+across[None, :]*vx).astype(np.float32)
+            covered = cv2.remap(other, mx, my, cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT)
+            available = cv2.remap(valid, mx, my, cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT)
+            detached = bool(len(skipped) and np.all(covered.mean(axis=1) <= .25) and
+                            np.all(available.min(axis=1) > .95))
+        start = nearest-step if detached else -inner
+        rendered *= np.clip(side*longitudinal-start+.5, 0., 1.)
     return dict(map=rendered.astype(np.float32), angle=float(angle), offset=offset,
                 width=width, amplitude=amplitude, confidence=float(confidence),
-                side=side, cross_sections=len(records))
+                side=side, cross_sections=len(records), detached_stub=bool(detached))
 
 
 def _connector(observed, other, valid, external, inner, outer, diameter, config):

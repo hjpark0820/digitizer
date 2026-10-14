@@ -371,7 +371,113 @@ def _anchored_label_run(legend, entry, anchors):
     return dict(inside=False)
 
 
-def _neutral_row_evidence(legend, entry, reference_diameter, shape, evidence, anchors=()):
+def _flank_gaps(legend, left, right, top, bottom, minimum, source=None):
+    """Blank columns between [left,right) and the nearest other ink, rows [top,bottom).
+
+    The supplied legend rectangle is a user crop, not a paper boundary. When no
+    ink lies between the body and a crop edge, the columns beyond that edge are
+    unobserved, not ink: keep measuring on the source image (same rows) until
+    ``minimum`` blank columns are established, ink is met, or the image ends.
+    A crop that cuts through a preceding word therefore still finds that word.
+    Without ``source`` the crop edge ends the measurement, as before.
+    """
+    h,w=legend.shape[:2]
+    occupied=(legend[top:bottom].min(axis=2)<180).any(axis=0)
+    before=np.flatnonzero(occupied[:left]);after=np.flatnonzero(occupied[right:])
+    left_gap=left-int(before[-1])-1 if len(before) else left
+    right_gap=int(after[0]) if len(after) else w-right
+    if source is not None:
+        image,lx,ly=source
+        rows=slice(ly+top,ly+bottom)
+        if not len(before) and left_gap<minimum:
+            x=lx-1
+            while x>=0 and left_gap<minimum and not (image[rows,x].min(axis=-1)<180).any():
+                left_gap+=1;x-=1
+        if not len(after) and right_gap<minimum:
+            x=lx+w
+            while x<image.shape[1] and right_gap<minimum and not (image[rows,x].min(axis=-1)<180).any():
+                right_gap+=1;x+=1
+    return left_gap,right_gap
+
+
+def _neutral_connector_context(legend, entry, reference_diameter, anchors, source=None):
+    """Measure a column-clipped neutral handle against its original context.
+
+    Column scope locates a body, but its artificial sides are not ink ends.
+    Follow only the measured neutral shade along the measured horizontal line
+    band. A handle touching the crop edge is *not* accepted unless the source
+    image beyond the crop shows paper there (measured by _flank_gaps, so a
+    handle that continues past the crop meets its own ink) or that edge
+    contains an independently long, dark vertical axis. No pixels or template
+    bounds are changed; the result only supplies separation evidence.
+    """
+    if entry.get('direction') != 'horizontal' or not entry['model'].achromatic:
+        return None
+    a,b,c,d=entry['body_box'];cx,cy=entry['center'];diameter=entry['diameter']
+    h,w=legend.shape[:2]
+    if min(a,b)<1 or c>=w or d>=h:
+        return None
+    # An independently observed key in another row establishes this column.
+    # Never relax text ownership for a single neutral blob or same-row word.
+    peers=[p for p in anchors if abs(cx-p['center'][0])<=max(2.5,.4*p['diameter'])
+           and abs(cy-p['center'][1])>max(diameter,p['diameter'])]
+    if not peers:
+        return None
+    bx,by,_,_=entry['component_box']
+    rows=np.flatnonzero(entry['central_line'].any(axis=1))+by
+    if not len(rows) or len(rows)>max(3.,.40*diameter):
+        return None
+    core=np.asarray(entry['model'].core_bgr,float)
+    paper=np.asarray(entry['model'].paper_bgr,float)
+    reference=max(8.,float(np.linalg.norm(paper-core)))
+    pixels=legend.astype(float)
+    # Shade consistency prevents a gray key from following a black axis or
+    # letter. This uses observed source ink, not a darker-is-always-better mask.
+    same=(np.ptp(pixels,axis=2)<24)&(np.linalg.norm(pixels-core,axis=2)<=.30*reference)
+    along=same[rows].any(axis=0)
+    if not along[a:c].all():
+        return None
+    left,right=a,c
+    while left>0 and along[left-1]:left-=1
+    while right<w and along[right]:right+=1
+    if (a-left<2 or right-c<2 or right-left>6*diameter):
+        return None
+    radius=max(3.,.65*reference_diameter)
+    top,bottom=max(0,int(cy-radius)),min(h,int(cy+radius+1))
+    # Both flanks must remain thin source lines. Another compact body or a
+    # text stroke attached to the handle is not mere connector continuation.
+    outside=same[top:bottom].copy()
+    line_top,line_bottom=int(rows.min()),int(rows.max()+1)
+    outside[max(0,line_top-top):min(bottom-top,line_bottom-top)]=False
+    flank=np.r_[np.arange(left,a),np.arange(c,right)]
+    if outside[:,flank].sum()>max(2,.15*len(flank)):
+        return None
+    minimum=max(3,int(round(.45*reference_diameter)))
+    gaps=list(_flank_gaps(legend,left,right,top,bottom,minimum,source))
+    axis=None
+    # Only the outer left edge can play the source-axis boundary role. A dark
+    # vertical letter within the legend cannot grant this exception.
+    if left<=2 and gaps[0]<minimum:
+        dark=(legend.min(axis=2)<100)&(np.ptp(legend.astype(int),axis=2)<24)
+        outside_rows=np.ones(h,bool);outside_rows[max(0,b-2):min(h,d+2)]=False
+        for x in range(min(w,3)):
+            yy=np.flatnonzero(dark[:,x]&outside_rows)
+            runs=np.split(yy,np.flatnonzero(np.diff(yy)>1)+1) if len(yy) else []
+            if len(yy)>=2*diameter and max((len(r) for r in runs),default=0)>=diameter:
+                axis=dict(x=int(x),independent_vertical_pixels=int(len(yy)),
+                          longest_vertical_run=int(max(len(r) for r in runs)))
+                break
+    accepted=(gaps[0]>=minimum or axis is not None) and gaps[1]>=minimum
+    return dict(accepted=bool(accepted),policy='observed_neutral_handle_context_v1',
+        coordinate_convention='legend-relative half-open xyxy',
+        source_handle_box=[int(left),line_top,int(right),line_bottom],
+        measured_body_box=list(map(int,entry['body_box'])),
+        left_gap_px=int(gaps[0]),right_gap_px=int(gaps[1]),minimum_gap_px=minimum,
+        left_axis_boundary=axis,independent_column_centres=[list(map(float,p['center'])) for p in peers],
+        source_pixels_modified=False,template_pixels_reconstructed=False)
+
+
+def _neutral_row_evidence(legend, entry, reference_diameter, shape, evidence, anchors=(), source=None):
     """Separate horizontal neutral swatch identity from exact symbol identity.
 
     A triangle's bounding rectangle includes paper corners. Measure fill only
@@ -387,11 +493,8 @@ def _neutral_row_evidence(legend, entry, reference_diameter, shape, evidence, an
     h,w=legend.shape[:2];cy=entry['center'][1]
     radius=max(3.,.65*reference_diameter)
     top,bottom=max(0,int(cy-radius)),min(h,int(cy+radius+1))
-    occupied=(legend[top:bottom].min(axis=2)<180).any(axis=0)
-    left=np.flatnonzero(occupied[:a]);right=np.flatnonzero(occupied[c:])
-    left_gap=a-int(left[-1])-1 if len(left) else a
-    right_gap=int(right[0]) if len(right) else w-c
     min_gap=max(3,int(round(.45*reference_diameter)))
+    left_gap,right_gap=_flank_gaps(legend,a,c,top,bottom,min_gap,source)
     label=_right_label(legend,entry,reference_diameter)
     isolated=left_gap>=min_gap and right_gap>=min_gap
     interior_count=int(evidence.get('independent_interior_pixels',0))
@@ -407,8 +510,12 @@ def _neutral_row_evidence(legend, entry, reference_diameter, shape, evidence, an
     body_supported=(shape!='unknown_marker' or unknown_supported)
     if entry['direction'] is None and not shape.startswith('open_'):
         body_supported &= filled
-    reasons=[]
     label_run=_anchored_label_run(legend,entry,anchors)
+    context=None
+    if not isolated and label and body_supported and filled and shape!='unknown_marker' and not label_run['inside']:
+        context=_neutral_connector_context(legend,entry,reference_diameter,anchors,source)
+        isolated=bool(context and context['accepted'])
+    reasons=[]
     if label_run['inside']:reasons.append('inside_existing_key_label_run')
     if not label:reasons.append('no_independent_right_label')
     if not isolated:reasons.append('insufficient_separation_from_text_or_other_ink')
@@ -418,6 +525,7 @@ def _neutral_row_evidence(legend, entry, reference_diameter, shape, evidence, an
         left_gap_px=int(left_gap),right_gap_px=int(right_gap),minimum_gap_px=min_gap,
         independent_interior_pixels=interior_count,independent_fill=interior_fill,
         shape_uncertain=shape=='unknown_marker',unknown_supported=bool(unknown_supported),
+        connector_context=context,
         policy='isolated_row_key_plus_right_label_and_observed_envelope_interior',
         template_pixels_reconstructed=False)
 
@@ -526,6 +634,7 @@ def _crop_template(legend, entry, origin, slot, rivals):
         prior_used=entry.get('prior_used',False),
         discovery_source=entry.get('discovery_source','observed_colour_body'),
         neutral_row_evidence=entry.get('neutral_row_evidence'),
+        label_cell_release=entry.get('label_cell_release'),
         source_structure_box=absolute(entry['structure_box']) if entry.get('structure_box') else None,
         soft_threshold=FOREGROUND_THRESHOLD,
         weak_support_threshold=WEAK_SUPPORT_THRESHOLD,
@@ -537,7 +646,61 @@ def _crop_template(legend, entry, origin, slot, rivals):
     return template,report
 
 
-def _source_structure(legend, paper):
+def _broken_connector(legend, entry):
+    """Dashed or dotted connector evidence for a compact neutral key.
+
+    A dashed/dotted legend line is drawn as separate collinear fragments, so a
+    connected-component line analysis cannot see it: the key component keeps
+    a one-sided tail or none, and 2-px dots fall below the BW component floor.
+    Model such a line as one: from each end of the key's own observed ink,
+    chain detached fragments that are thin, centred on the key and separated by
+    short gaps, stopping at the first component that is not (label text, the
+    next key) or at a longer gap. Fragment geometry is the BW connector-fragment
+    rule of _legend_row_bodies (height <= .55 x body height, centre within
+    .20 x body height, length <= 1.25 x body height, gap <= .8 x body height);
+    a fragment needs two pixels. Both sides must carry such a line on one
+    common row band, so a centred dash beside a letter is not a line.
+    This is evidence only: no pixel, body or template bound is changed.
+    """
+    a,b,c,d=entry['body_box'];height=d-b;centre=(b+d)/2
+    bx,by,_,_=entry['component_box']
+    x0,y0,x1,y1=_tight(entry['observed'])
+    ink=legend.min(axis=2)<180
+    if entry['model'].achromatic:
+        ink&=np.ptp(legend.astype(np.int16),axis=2)<24
+    n,labels,stats,_=cv2.connectedComponentsWithStats(ink.astype(np.uint8),8)
+    window=labels[by+y0:by+y1,bx+x0:bx+x1]
+    own=set(np.unique(window[entry['observed'][y0:y1,x0:x1]]).tolist())-{0}
+    if not own:
+        return dict(accepted=False,reason='no_own_component')
+    xs=[stats[i,0] for i in own]+[stats[i,0]+stats[i,2] for i in own]
+    ends=(min(min(xs),bx+x0),max(max(xs),bx+x1))
+    pieces=[(int(s[0]),int(s[1]),int(s[0]+s[2]),int(s[1]+s[3])) for i,s in enumerate(stats) if i and i not in own
+            and s[4]>=2 and min(s[1]+s[3],d)>max(s[1],b)]
+    sides={}
+    for name,direction in (('left',-1),('right',1)):
+        edge=ends[0] if direction<0 else ends[1]
+        ordered=sorted((p for p in pieces if (p[2]<=edge if direction<0 else p[0]>=edge)),
+                       key=lambda p:-p[2] if direction<0 else p[0])
+        chain=[]
+        for e,f,g,h in ordered:
+            gap=edge-g if direction<0 else e-edge
+            thin=(h-f<=.55*height and abs((f+h)/2-centre)<=.20*height and g-e<=1.25*height)
+            if gap>.8*height or not thin:
+                break
+            chain.append([e,f,g,h]);edge=e if direction<0 else g
+        sides[name]=chain
+    fragments=sides['left']+sides['right']
+    band=(max((p[1] for p in fragments),default=0),min((p[3] for p in fragments),default=0))
+    accepted=bool(sides['left'] and sides['right'] and band[0]<band[1])
+    return dict(accepted=accepted,policy='collinear_broken_connector_v1',
+        coordinate_convention='legend-relative half-open xyxy',
+        left_fragments=sides['left'],right_fragments=sides['right'],
+        common_band_rows=[int(band[0]),int(band[1])] if fragments else None,
+        source_pixels_modified=False)
+
+
+def _source_structure(legend, paper, source=None):
     """Independent full-ink keys; neutral bodies need not share line colour.
 
     Reuse the BW row/label locator, but sample each body's observed colour.
@@ -573,7 +736,7 @@ def _source_structure(legend, paper):
         except ValueError:continue
         if model.achromatic:
             name,_,evidence=_shape(entry['marker'],nuisance=entry['central_line'],return_report=True)
-            structure=_neutral_row_evidence(legend,entry,entry['diameter'],name,evidence)
+            structure=_neutral_row_evidence(legend,entry,entry['diameter'],name,evidence,source=source)
             # A full-source connected key can have a differently coloured
             # line. Its geometric line/body check is independent evidence;
             # a standalone neutral blob still requires the strict row test.
@@ -581,13 +744,20 @@ def _source_structure(legend, paper):
             # decomposition even when the BW compact-body policy leaves them
             # attached. Require a measured hollow body as independent evidence
             # before using that route; a horizontal text stroke is insufficient.
+            # A dashed/dotted connector is a line too, although it is not one
+            # connected component (see _broken_connector).
             if not structure['accepted']:
                 short_hollow_connector=(entry.get('direction')=='horizontal'
                     and bool(evidence.get('strong_hollow_evidence')))
-                if not (connected or short_hollow_connector) or not structure['right_label']:continue
+                broken=None
+                if not (connected or short_hollow_connector):
+                    broken=_broken_connector(legend,entry)
+                if not (connected or short_hollow_connector or broken['accepted']) or not structure['right_label']:continue
                 structure=dict(structure,accepted=True,reasons=[],
                     policy='full_source_line_body_and_independent_right_label',
                     original_colour_only_reasons=structure['reasons'])
+                if broken is not None:
+                    structure['broken_connector']=broken
             entry['neutral_row_evidence']=structure
         entry.update(discovery_source='complete_source_key_row_and_body_colour',
                      structure_box=measured)
@@ -599,16 +769,22 @@ def _source_structure(legend, paper):
             if not _anchored_label_run(legend,entry,anchors)['inside']]
 
 
-def _in_structure_label(center, anchors, shape):
-    """Protect label cells, including coloured/multi-line text and neutral keys.
+def _key_cell_boxes(anchors):
+    """Observed key rectangles that own (and bound) label cells.
 
-    Real neighbouring key columns and the next key row bound every text cell.
-    A candidate intersecting any observed key can never be rejected as text.
+    Full-source structural keys, plus chromatic key bodies that colour evidence
+    released from another key's label cell (see _independent_colour_key).
     """
+    return [a.get('structure_box') or a.get('key_cell_box') for a in anchors
+            if a.get('structure_box') or a.get('key_cell_box')]
+
+
+def _label_cell_owner(center, anchors, shape):
+    """Index into _key_cell_boxes(anchors) of the label cell containing center."""
     x,y=center;h,w=shape[:2]
-    boxes=[a['structure_box'] for a in anchors if a.get('structure_box')]
-    if any(a-2<=x<c+2 and b-2<=y<d+2 for a,b,c,d in boxes):return False
-    for a,b,c,d in boxes:
+    boxes=_key_cell_boxes(anchors)
+    if any(a-2<=x<c+2 and b-2<=y<d+2 for a,b,c,d in boxes):return None
+    for index,(a,b,c,d) in enumerate(boxes):
         diameter=d-b
         # A key column persists across rows. The same-row key can be faint or
         # missed by this locator while independently visible colour evidence
@@ -616,8 +792,61 @@ def _in_structure_label(center, anchors, shape):
         right=min((aa for aa,bb,cc,dd in boxes if aa>c),default=w)
         bottom=min((bb for aa,bb,cc,dd in boxes if bb>=d and abs((aa+cc-a-c)/2)<=max(4.,.6*(c-a))),default=h)
         if c+1<=x<right-2 and max(0,b-2)<=y<bottom:
-            return True
-    return False
+            return index
+    return None
+
+
+def _in_structure_label(center, anchors, shape):
+    """Protect label cells, including coloured/multi-line text and neutral keys.
+
+    Real neighbouring key columns and the next key row bound every text cell.
+    A candidate intersecting any observed key can never be rejected as text.
+    """
+    return _label_cell_owner(center, anchors, shape) is not None
+
+
+def _independent_colour_key(legend, entry, owner):
+    """Is a chromatic body inside ``owner``'s label cell itself a legend key?
+
+    The grayscale row locator decides key versus label continuation with one
+    paper-gap rule and cannot see colour, so its label cell must not veto a body
+    whose colour shows it is not part of that label. Coloured labels are still
+    protected: a label written in its key's colour, or a label whose own ink
+    has this body's colour, keeps ownership of its glyphs. Required evidence:
+      * a chromatic body (not a neutral glyph) whose colour differs from the
+        owning key's colour, checked both ways with the same hue-direction
+        membership (_strong_support) used for every colour key;
+      * the owning label's ink between the key and this body is mostly not of
+        this body's colour (a glyph of a coloured word shares the word's ink);
+      * a key-sized body: .7-1.4 x the owning key's diameter, the same row-key
+        size range used for neutral row keys;
+      * its own right-hand label (the same test as for out-of-column keys).
+    Returns diagnostics; never changes pixels or the body measurement.
+    """
+    model=entry['model'];rival=owner['model']
+    if model.achromatic:
+        return dict(accepted=False,reason='neutral_body')
+    colour=lambda bgr:np.asarray(bgr,np.uint8).reshape(1,1,3)
+    same_colour=bool(_strong_support(colour(rival.core_bgr),model)[0,0] or
+                     (not rival.achromatic and _strong_support(colour(model.core_bgr),rival)[0,0]))
+    diameter_ratio=float(entry['diameter'])/max(1.,float(owner['diameter']))
+    ox0,oy0,ox1,oy1=owner.get('structure_box') or owner.get('key_cell_box')
+    bx,by,_,_=entry['component_box']
+    x0,y0,x1,y1=_tight(entry['observed'])
+    left=bx+x0
+    top,bottom=max(0,min(oy0,by+y0)),min(legend.shape[0],max(oy1,by+y1))
+    region=legend[top:bottom,ox1:max(ox1,left-1)]
+    ink=region.min(axis=2)<180 if region.size else np.zeros((0,0),bool)
+    own=_strong_support(region,model)&ink if region.size else ink
+    ink_pixels=int(ink.sum());own_pixels=int(own.sum())
+    foreign_label=ink_pixels>0 and own_pixels<.5*ink_pixels
+    label=_right_label(legend,entry,owner['diameter'])
+    accepted=(not same_colour and .7<=diameter_ratio<=1.4 and foreign_label and label)
+    return dict(accepted=bool(accepted),policy='colour_key_bounds_grayscale_label_cell_v1',
+        same_colour_as_owner=same_colour,diameter_ratio=diameter_ratio,
+        preceding_label_ink_px=ink_pixels,preceding_label_ink_in_body_colour_px=own_pixels,
+        right_label=bool(label),owner_box=[int(v) for v in (ox0,oy0,ox1,oy1)],
+        source_pixels_modified=False)
 
 
 def _discover_entries(image,legend_area):
@@ -628,7 +857,8 @@ def _discover_entries(image,legend_area):
     chromatic=(hsv[...,1]>=30)&(chroma>=18)&(legend.min(axis=2)<242)
     bright=legend.mean(axis=2)>=np.percentile(legend.mean(axis=2),85)
     paper=tuple(int(v) for v in np.median(legend[bright],axis=0))
-    structural=_source_structure(legend,paper)
+    source=(image,lx,ly)
+    structural=_source_structure(legend,paper,source)
     candidates=[];rejected=[]
     for support,box in _groups(chromatic):
         try:
@@ -638,13 +868,27 @@ def _discover_entries(image,legend_area):
     candidates,fragments=_remove_fragments(candidates);rejected.extend(fragments)
     candidates,context_rejections,columns=_table_context(candidates,legend)
     rejected.extend(context_rejections)
-    kept=[]
-    for entry in candidates:
-        if _in_structure_label(entry['center'],structural,legend.shape):
+    kept=[];bounds=list(structural)
+    # Reading order: a key released from its neighbour's cell owns the cell
+    # after it, so glyphs of its own (possibly coloured) label stay protected.
+    for entry in sorted(candidates,key=lambda e:(e['center'][0],e['center'][1])):
+        owner=_label_cell_owner(entry['center'],bounds,legend.shape)
+        if owner is None:
+            kept.append(entry);continue
+        boxes=_key_cell_boxes(bounds)
+        owner_entry=next(a for a in bounds if (a.get('structure_box') or a.get('key_cell_box'))==boxes[owner])
+        release=_independent_colour_key(legend,entry,owner_entry)
+        if release['accepted']:
+            bx,by,_,_=entry['component_box'];x0,y0,x1,y1=_tight(entry['observed'])
+            a,b,c,d=entry['body_box']
+            entry.update(key_cell_box=(min(a,bx+x0),min(b,by+y0),max(c,bx+x1),max(d,by+y1)),
+                         label_cell_release=release)
+            bounds.append(entry);kept.append(entry)
+        else:
             rejected.append(dict(box=list(entry['body_box']),status='source_label_cell_rejected',
-                reason='Observed body lies in a full-source key label cell'))
-        else:kept.append(entry)
-    candidates=kept
+                reason='Observed body lies in a full-source key label cell',label_cell_release=release))
+    order={id(e):i for i,e in enumerate(candidates)}
+    candidates=sorted(kept,key=lambda e:order[id(e)])
     for entry in structural:
         match=next((c for c in candidates if abs(c['center'][0]-entry['center'][0])<.55*entry['diameter']
                     and abs(c['center'][1]-entry['center'][1])<.55*entry['diameter']),None)
@@ -668,9 +912,9 @@ def _discover_entries(image,legend_area):
         try:
             entry=_candidate(legend,support,box,paper)
             x,y=entry['center'];diameter=entry['diameter']
-            if _in_structure_label(entry['center'],structural,legend.shape):
+            if _in_structure_label(entry['center'],bounds,legend.shape):
                 name,_,evidence=_shape(entry['marker'],nuisance=entry['central_line'],return_report=True)
-                structure=_neutral_row_evidence(legend,entry,diameter,name,evidence,anchors)
+                structure=_neutral_row_evidence(legend,entry,diameter,name,evidence,anchors,source)
                 if 'inside_existing_key_label_run' not in structure['reasons']:
                     structure['reasons'].append('inside_existing_key_label_run')
                 structure['accepted']=False
@@ -688,7 +932,7 @@ def _discover_entries(image,legend_area):
             if not column or structural:
                 peers=[a['diameter'] for a in anchors if abs(y-a['center'][1])<=max(2.,.3*a['diameter'])]
                 reference=float(np.median(peers)) if peers else diameter
-                structure=_neutral_row_evidence(legend,entry,reference,name,shape_evidence,anchors)
+                structure=_neutral_row_evidence(legend,entry,reference,name,shape_evidence,anchors,source)
                 if not structure['accepted']:
                     rejected.append(dict(status='neutral_row_rejected',
                         source_body_box=[v+(lx if i%2==0 else ly) for i,v in enumerate(entry['body_box'])],
@@ -836,6 +1080,10 @@ def extract_hybrid_legend(image_bgr, legend_area, native_grid=None,
     merged=[];used=set()
     for prior in priors:
         try:
+            # Separation here still ends at the crop edge. Source-extended gaps
+            # (_flank_gaps) decide whether a key exists in the structural and
+            # discovery routes; here they would only let an edge key's native
+            # prior replace the template of a body those routes already found.
             entry,status=_prior_entry(legend,(lx,ly),prior,priors,paper,anchors)
         except (ValueError,cv2.error) as error:
             entry,status=None,str(error)
@@ -855,6 +1103,8 @@ def extract_hybrid_legend(image_bgr, legend_area, native_grid=None,
                 matches.append((float(colour_error)+(x+lx-prior['x'])**2+(y+ly-prior['y'])**2,i,other))
         if matches:
             _,i,other=min(matches,key=lambda item:item[0]);used.add(i)
+            if entry is not None and other.get('label_cell_release') and not entry.get('label_cell_release'):
+                entry['label_cell_release']=other['label_cell_release']
             if entry is None or entry['diameter']<.80*other['diameter'] or entry['marker_pixels']<.70*other['marker_pixels']:
                 # A washed-out/native colour is a prior, not authority to
                 # erase observed body pixels. Keep the independent body and
@@ -885,7 +1135,13 @@ def extract_hybrid_legend(image_bgr, legend_area, native_grid=None,
     structure_boxes={tuple(e['structure_box']) for e in candidates if e.get('structure_box')}
     for entry in merged:
         x,y=entry['center']
-        owner=next((b for b in sorted(structure_boxes) if b[0]<=x<b[2] and b[1]<=y<b[3]),None)
+        # A vertical axis can join several key rows into one full-ink box.
+        # Box containment alone must not merge independently measured bodies
+        # from different rows. Ownership also needs the original key's row.
+        owner=next((b for b in sorted(structure_boxes) if b[0]<=x<b[2] and b[1]<=y<b[3]
+            and any(tuple(anchor.get('structure_box',()))==b
+                and abs(y-anchor['center'][1])<=.75*max(entry['diameter'],anchor['diameter'])
+                for anchor in candidates)),None)
         if owner is not None:entry['structure_box']=owner
         rival=next((e for e in unique if owner is not None and e.get('structure_box')==owner),None)
         if rival is None:unique.append(entry)

@@ -121,6 +121,29 @@ def _window_metrics(row: Mapping[str, Any], detail: Any) -> dict[str, float | No
     return values
 
 
+def overlap_hypothesis_reason(row: Mapping[str, Any]) -> str | None:
+    """Retain supported ink as a hypothesis, never excuse missing boundary ink.
+
+    Only a verified identity loser or a hollow-interior conflict may enter.
+    Actual occlusion requires a later source-bound foreground comparison.
+    """
+    exclusion = row.get('exclusion_reason')
+    interior = row.get('open_interior') or {}
+    identity = row.get('decision') == 'verified' and exclusion == 'grid_identity_conflict'
+    hollow = (str(row.get('class_name', '')).startswith('open_') and
+        row.get('decision') == 'rejected' and exclusion in (None, '') and
+        interior.get('reason') == 'unexplained_ink_in_observed_hole')
+    if not (identity or hollow) or row.get('excluded_by_confidence_floor'):
+        return None
+    gates = dict(score=.68, required_recall=.92, strict_core_recall=.85,
+                 boundary_recall=.85, minimum_sector_recall=.80,
+                 supporting_cells=4, radial_sectors=5)
+    if any(_number(row.get(k)) is None or float(row[k]) < minimum
+           for k, minimum in gates.items()):
+        return None
+    return 'verified_identity_overlap_alternative' if identity else 'supported_rim_interior_unexplained'
+
+
 def build_suppressed(
     candidates: Sequence[Mapping[str, Any]],
     active_points: Sequence[Mapping[str, Any]],
@@ -131,6 +154,7 @@ def build_suppressed(
     swatch_metadata: Mapping[str, Mapping[str, Any]] | None = None,
     window_details: Mapping[int, Any] | None = None,
     policy: SuppressedPolicy | None = None,
+    retain_overlap_hypotheses: bool = False,
 ) -> dict[str, Any]:
     """Build JSON-compatible S candidates without modifying supplied records.
 
@@ -201,7 +225,8 @@ def build_suppressed(
         if row.get("excluded_by_confidence_floor") or row.get("exclusion_reason") == "confidence_floor":
             reject(index, row, "explicit_confidence_floor")
             continue
-        if row.get("exclusion_reason") not in (None, "", "verified_duplicate", "identity_ambiguous"):
+        overlap_reason = overlap_hypothesis_reason(row) if retain_overlap_hypotheses else None
+        if row.get("exclusion_reason") not in (None, "", "verified_duplicate", "identity_ambiguous") and not overlap_reason:
             reject(index, row, "explicit_exclusion", [str(row["exclusion_reason"])])
             continue
 
@@ -220,7 +245,30 @@ def build_suppressed(
         wm = _window_metrics(row, details.get(index))
         gm = {key: _number(row.get(key)) for key in GRID_METRICS}
         decision = row.get("decision")
-        if decision == "verified" and row.get("exclusion_reason") == "identity_ambiguous":
+        shared_window = row.get('joint_window') or {}
+        if overlap_reason:
+            admission = overlap_reason
+            priority = 1
+        elif (decision == 'ambiguous' and row.get('exclusion_reason') == 'identity_ambiguous'
+                and shared_window.get('version') == 'shared-legend-single-window-v2'):
+            # The shared verifier emits one final state. An unresolved label
+            # must not erase a separately verified physical marker, but an
+            # unsupported body/missing rim must never borrow this admission.
+            checks = shared_window.get('checks') or {}
+            supported = (shared_window.get('native_measurement_state') == 'verified'
+                and shared_window.get('marker_support_passed') is True
+                and all(checks.get(k) is True for k in (
+                    'required_ink_and_outline', 'fill_consistent',
+                    'legend_model_supported', 'confidence_floor')))
+            if not supported:
+                reject(index, row, 'unsupported_shared_window_identity')
+                continue
+            if wm['required_recall'] is None:
+                reject(index, row, 'missing_window_recall')
+                continue
+            admission = 'verified_identity_ambiguous'
+            priority = 2
+        elif decision == "verified" and row.get("exclusion_reason") == "identity_ambiguous":
             # Marker existence passed the unchanged window test; only its
             # legend identity remains unresolved. No active competitor needed.
             if wm['required_recall'] is None:
@@ -320,6 +368,10 @@ def build_suppressed(
             "overlapping_active_other_swatches": near_other,
             "occlusion_claim": False,
             "identity_selection": deepcopy(row.get('identity_selection')),
+            # Preserve the comparison which caused identity deferral. These
+            # diagnostics are informational and do not alter pool admission.
+            "raster_identity": deepcopy(row.get('raster_identity')),
+            "raster_deferred_reason": row.get('raster_deferred_reason'),
             "colour_visibility": deepcopy(row.get('window_colour_visibility')),
             "alignment": {"seed_x": _number(row.get("x")), "seed_y": _number(row.get("y")),
                           "aligned_x": x, "aligned_y": y,
@@ -329,6 +381,12 @@ def build_suppressed(
             value = row.get(key, meta.get(key))
             if value is not None:
                 item[key] = int(value)
+        if overlap_reason:
+            item['overlap_hypothesis'] = dict(version='typed-overlap-retention-v1',
+                reason=overlap_reason, original_decision=decision,
+                original_exclusion=row.get('exclusion_reason'),
+                requires_independent_foreground=True, active_authority=False,
+                open_interior=deepcopy(row.get('open_interior')))
         admitted.append(item)
 
     merged = []

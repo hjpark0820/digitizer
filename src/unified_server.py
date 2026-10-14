@@ -1,6 +1,7 @@
 """
-Unified digitizer server — one FastAPI app, two modes.
+Unified digitizer server — one FastAPI app, two engines and automatic routing.
 
+  mode=auto  : choose colour/B&W from the selected plot and legend pixels (default)
   mode=color : v46 hybrid legend / automatic line-key source classification
   mode=bw    : v46 legend-grid B&W point detector
   no legend  : both modes -> v46 source-only single-series inference
@@ -37,6 +38,39 @@ JOBS_ROOT.mkdir(exist_ok=True)
 # restore the built-in filters (it just stops setting NO_OUTLIER_FILTER).
 COLOR_OUTLIER_FILTER = False
 DETECTION_TIMEOUT_SECONDS = 900  # Multi-series native-resolution runs can exceed five minutes.
+
+
+def _configure_console_streams():
+    """Prefer UTF-8 for the standalone server, including redirected consoles."""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding='utf-8', errors='backslashreplace')
+        except (AttributeError, OSError, ValueError, TypeError):
+            # Embedded ASGI hosts and captured/closed streams may not support it.
+            pass
+
+
+def _console_print(*values, sep=' ', end='\n', flush=False):
+    """Console mirroring must not invalidate an otherwise successful request.
+
+    Keep the original Unicode log for _response()/pipeline.log. Only escape the
+    console copy when an embedding host has kept a legacy encoding such as CP949.
+    A disconnected output pipe is likewise not a detection failure.
+    """
+    message = sep.join(str(value) for value in values)
+    stream = sys.stdout
+    try:
+        print(message, end=end, flush=flush, file=stream)
+    except UnicodeError:
+        try:
+            encoding = getattr(stream, 'encoding', None) or 'ascii'
+            escaped = message.encode(encoding, errors='backslashreplace').decode(encoding)
+            print(escaped, end=end, flush=flush, file=stream)
+        except (UnicodeError, LookupError, OSError, ValueError):
+            pass
+    except (OSError, ValueError):
+        pass
+
 
 app = FastAPI(title="Unified Chart Digitizer")
 
@@ -157,6 +191,7 @@ def _validate_uploaded_rois(in_path, regions):
                 f"Invalid {field} ROI {value!r} for image width={width}, height={height}: "
                 f"inclusive coordinates require 0 <= x0 < x1 <= {width - 1} and "
                 f"0 <= y0 < y1 <= {height - 1}. Reselect the region on the current image.")
+    return raster
 
 
 def _optional_diagnostic(out_dir):
@@ -216,7 +251,7 @@ def image_sidecar_script():
 @app.post("/digitize")
 async def digitize(
     image: UploadFile = File(...),
-    mode: str = Form("color"),                 # "color" | "bw"
+    mode: str = Form("auto"),                  # "auto" | "color" | "bw"
     # shared
     plot_area: str = Form(""),
     x_min: str = Form(""), x_max: str = Form(""),
@@ -235,6 +270,17 @@ async def digitize(
     correct_iters: str = Form(""),             # "" = default cap; else max iteration count
     prev_job: str = Form(""),                  # previous job id -> continue Step-5 from its state
 ):
+    if mode not in ('auto', 'color', 'bw'):
+        raise HTTPException(400, 'Unknown detection mode: choose auto, color or bw')
+    requested_mode = mode
+    if mode == 'auto':
+        if _parse4(plot_area, 'plot_area') is None:
+            raise HTTPException(400, 'Automatic mode requires a selected plot area')
+        # The browser sends legend_box in Auto; accept the BW spelling for API
+        # clients too. Resolve the alias before selecting an engine, not after.
+        if legend_box.strip() and legend_area.strip() and _parse4(legend_box, 'legend_box') != _parse4(legend_area, 'legend_area'):
+            raise HTTPException(400, 'Automatic mode received conflicting legend rectangles')
+        legend_box = legend_area = legend_box.strip() or legend_area.strip()
     job_id = uuid.uuid4().hex[:12]
     job_dir = JOBS_ROOT / job_id
     out_dir = job_dir / "out"
@@ -243,7 +289,17 @@ async def digitize(
     with in_path.open("wb") as f:
         shutil.copyfileobj(image.file, f)
     legend_field, legend_value = ("legend_area", legend_area) if mode == "bw" else ("legend_box", legend_box)
-    _validate_uploaded_rois(in_path, (("plot_area", plot_area), (legend_field, legend_value)))
+    raster = _validate_uploaded_rois(in_path, (("plot_area", plot_area), (legend_field, legend_value)))
+    if mode == 'auto':
+        from automatic_mode_v46 import select_detection_mode
+        selection = await run_in_threadpool(select_detection_mode, raster,
+            _parse4(plot_area, 'plot_area'), _parse4(legend_value, legend_field))
+        mode = selection['mode']
+    else:
+        selection = {'mode': mode, 'reason': 'Manual mode selected; automatic routing was not used.'}
+    selection = dict(selection, requested_mode=requested_mode)
+    (out_dir / 'mode_selection_v46.json').write_text(json.dumps(selection, indent=2), encoding='utf-8')
+    _console_print(f"[unified] {requested_mode} -> {mode}: {selection['reason']}", flush=True)
     # input copy the front-end can display
     shutil.copyfile(in_path, out_dir / "input.png")
 
@@ -319,7 +375,7 @@ def _run_color(job_id, in_path, out_dir, plot_area, legend_box,
     _env = _ocr_env(out_dir)
     if not COLOR_OUTLIER_FILTER:
         _env["NO_OUTLIER_FILTER"] = "1"
-    print(f"[unified] colour job: correct={correct!r} iters={correct_iters!r} "
+    _console_print(f"[unified] colour job: correct={correct!r} iters={correct_iters!r} "
           f"prev_job={prev_job!r}  outlier_filter="
           f"{'ON' if COLOR_OUTLIER_FILTER else 'OFF (replaced by Step-5)'}", flush=True)
     proc = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace',
@@ -328,7 +384,7 @@ def _run_color(job_id, in_path, out_dir, plot_area, legend_box,
     # Surface the pipeline's own stdout (incl. DEBUG_LABELS [labels] lines) to the
     # server console. capture_output=True otherwise swallows it into the buffer, so
     # nothing prints in the terminal even when DEBUG_LABELS=1 is set.
-    print(_log, flush=True)
+    _console_print(_log, flush=True)
     ok = proc.returncode == 0 and (out_dir / "edit_data.json").exists()
     diagnostic = _optional_diagnostic(out_dir)
     if diagnostic is not None and diagnostic.get('status') != 'completed':
@@ -337,7 +393,7 @@ def _run_color(job_id, in_path, out_dir, plot_area, legend_box,
     # v46 colour uses path-shape correction, P0 protection and saved hypothesis
     # identity. Every supported colour run uses the same v46 correction contract.
     if not _truthy(correct):
-        print("[unified] colour Step-5 not requested (correct not set)", flush=True)
+        _console_print("[unified] colour Step-5 not requested (correct not set)", flush=True)
     if ok and _truthy(correct) and (diagnostic or {}).get('correction_available') is False:
         _log += '\n[color Step-5 unavailable; detection output preserved] ' + diagnostic.get(
             'correction_unavailable_reason', 'No validated correction reference is available.') + '\n'
@@ -353,11 +409,11 @@ def _run_color(job_id, in_path, out_dir, plot_area, legend_box,
             _prev = JOBS_ROOT / prev_job.strip() / "out" / "color_correction_state.json"
             if _prev.exists():
                 ccmd += ["--prev-state", str(_prev)]
-        print("[unified] colour Step-5:", " ".join(ccmd), flush=True)
+        _console_print("[unified] colour Step-5:", " ".join(ccmd), flush=True)
         cproc = subprocess.run(ccmd, capture_output=True, text=True, encoding='utf-8', errors='replace',
                                timeout=_ocr_timeout(900), env=_env)
         _clog = (cproc.stdout or "") + (cproc.stderr or "")
-        print(_clog, flush=True)
+        _console_print(_clog, flush=True)
         _log += "\n---- colour Step-5 ----\n" + _clog
         if cproc.returncode != 0:
             # A valid detection file is not evidence that correction succeeded.
@@ -408,15 +464,15 @@ def _run_bw(job_id, in_path, out_dir, plot_area, legend_area, known_classes,
     # extracted legend series (especially unknown_marker). The CLI's explicit
     # --classes option remains available outside this web GUI.
     if known_classes.strip():
-        print("[unified] BW: ignored deprecated known_classes; using automatic legend classification", flush=True)
+        _console_print("[unified] BW: ignored deprecated known_classes; using automatic legend classification", flush=True)
     if conf.strip():          cmd += ["--conf", conf.strip()]
     # Marker detection tolerates connecting/errorbar ink as occlusion, so the
     # point stage does not erase those pixels. Requested SSIM Step-5 separately
     # runs the v45 segment extractor on its own comparison reference image.
     if has_errorbars.strip():
-        print('[unified] BW: ignored deprecated has_errorbars; segment/errorbar detection is disabled', flush=True)
+        _console_print('[unified] BW: ignored deprecated has_errorbars; segment/errorbar detection is disabled', flush=True)
     if scale.strip():
-        print('[unified] BW: ignored deprecated detector scale; using the prepared image at 1x', flush=True)
+        _console_print('[unified] BW: ignored deprecated detector scale; using the prepared image at 1x', flush=True)
     if _truthy(correct):      cmd += ["--correct"]
     if correct_iters.strip(): cmd += ["--correct-iters", correct_iters.strip()]
     if _truthy(correct) and prev_job.strip():
@@ -443,15 +499,15 @@ def _run_bw(job_id, in_path, out_dir, plot_area, legend_area, known_classes,
         else:
             cmd += ["--prev-state", str(_prev)]
 
-    print("[unified] BW subprocess:", " ".join(cmd))
+    _console_print("[unified] BW subprocess:", " ".join(cmd))
     proc = subprocess.run(cmd, capture_output=True, text=True,
                           encoding="utf-8", errors="replace", timeout=_ocr_timeout(DETECTION_TIMEOUT_SECONDS), env=_ocr_env(out_dir))
     # Echo the child's output to the server console so failures are visible.
     if proc.stdout:
-        print("---- bw_detect_cli stdout ----\n" + proc.stdout)
+        _console_print("---- bw_detect_cli stdout ----\n" + proc.stdout)
     if proc.stderr:
-        print("---- bw_detect_cli stderr ----\n" + proc.stderr)
-    print(f"---- bw_detect_cli exit code: {proc.returncode} ----")
+        _console_print("---- bw_detect_cli stderr ----\n" + proc.stderr)
+    _console_print(f"---- bw_detect_cli exit code: {proc.returncode} ----")
     ok = proc.returncode == 0 and (out_dir / "edit_data.json").exists()
     diagnostic = _optional_diagnostic(out_dir)
     if diagnostic is not None and diagnostic.get('status') != 'completed':
@@ -479,6 +535,14 @@ def _response(job_id, out_dir, mode, ok, log):
         p = out_dir / name
         return f"/result/{job_id}/{name}" if p.exists() else None
     diagnostic = _optional_diagnostic(out_dir)
+    try:
+        selection = json.loads((out_dir / 'mode_selection_v46.json').read_text(encoding='utf-8'))
+        if (not isinstance(selection, dict) or selection.get('mode') != mode or
+                selection.get('requested_mode') not in ('auto', 'color', 'bw') or
+                not isinstance(selection.get('reason'), str)):
+            selection = None
+    except (OSError, ValueError):
+        selection = None
     editable = False
     editing_reason = 'No editable series were saved. Adjust the plot/legend selection and run detection again.'
     if (out_dir/'edit_data.json').exists() and (out_dir/'input.png').exists():
@@ -508,6 +572,14 @@ def _response(job_id, out_dir, mode, ok, log):
         meta_path.write_text(json.dumps(meta),encoding='utf-8')
     triangle_guard = _triangle_errorbar_diagnostic(out_dir) if mode == 'color' else None
     group_backend = (out_dir/'color_group_state_v46.json').exists()
+    group_availability = None
+    if group_backend:
+        # A successful subprocess may contain only a measured subset. Keep
+        # that distinction visible through GUI/export/import rather than
+        # labelling unavailable legend rows as successful zero-point series.
+        group_state = json.loads((out_dir/'color_group_state_v46.json').read_text(encoding='utf-8'))
+        group_availability = {key:group_state.get(key) for key in
+            ('status','active_names','unavailable_series','series_status','correction_available')}
     # Advertise only files that exist. The BW renderer uses different artifacts
     # from the legacy colour table diagnostic; the UI must not guess filenames.
     if mode == 'bw':
@@ -537,6 +609,15 @@ def _response(job_id, out_dir, mode, ok, log):
         if not ok and diagnostic.get('status') == 'completed':
             summary += ' Detection or correction failed; inspect the log.'
     export_error = None
+    if group_availability and group_availability.get('status') in ('partial','unavailable'):
+        missing = group_availability.get('unavailable_series') or []
+        active = group_availability.get('active_names') or []
+        summary = (f"Detection {group_availability['status']}: {len(active)} measured series, "
+                   f"{len(missing)} unavailable legend models. "
+                   "Step 5 uses measured series only; unavailable rows remain editable.")
+        if missing:
+            summary += ' ' + '; '.join(str(q.get('name',q.get('series_id','?'))) + ': ' +
+                str(q.get('reason',q.get('reason_code','unavailable'))) for q in missing)
     if ok or editable:
         try:
             from correction_session_v46 import save_outputs
@@ -554,11 +635,15 @@ def _response(job_id, out_dir, mode, ok, log):
     colour_objective=settings_summary(out_dir) if mode=='color' else None
     return JSONResponse({
         "job_id": job_id, "mode": mode, "ok": ok,
+        "requested_mode": selection.get('requested_mode') if selection else None,
+        "mode_selection": selection,
+        "mode_selection_url": url('mode_selection_v46.json'),
         "editable_available": editable,
         "editing_unavailable_reason": editing_reason,
         "result_version": {k:meta.get(k) for k in ('version_id','version_kind','created_at','iterations','stop_policy')},
         "summary": summary,
         "correction_backend": 'colour_group_bw_elements' if group_backend else None,
+        "detection_availability": group_availability,
         "step5_stop": stop_report,
         "color_step5_objective": colour_objective,
         "step5_stop_url": url('step5_stop_report.json') if stop_report else None,
@@ -573,9 +658,12 @@ def _response(job_id, out_dir, mode, ok, log):
         "legend_overlay_url": legend_overlay,
         "legend_diagnostic_kind": legend_kind if legend_diagnostic or legend_overlay else None,
         "step5_available": bool(ok) and (diagnostic or {}).get('correction_available', True) and
+                           (group_availability or {}).get('correction_available', True) is not False and
                            ('engine' not in meta or meta['engine'] is not None),
         "correction_only": bool(meta.get('detection_skipped')),
         "correction_unavailable_reason": meta.get('manual_only_reason') or
+            ('No measured legend models; manual editing only.' if group_availability and
+                group_availability.get('status') == 'unavailable' else None) or
             (diagnostic or {}).get('correction_unavailable_reason') or
             (None if ok else 'Automatic detection did not complete; review the analysis and adjust the plot/legend selection before Step 5.'),
         "paired_image_url": f'/correction-image/{job_id}' if editable else None,
@@ -618,7 +706,7 @@ async def _session_request(request):
 
 @app.post('/correction-session/import')
 def import_correction_session(image: UploadFile = File(...), data_file: UploadFile = File(...),
-                              mode: str = Form('color'), version_id: str = Form('')):
+                              mode: str = Form('auto'), version_id: str = Form('')):
     from correction_session_v46 import import_session, MAX_IMAGE, MAX_JSON
     job = uuid.uuid4().hex[:12]
     out = JOBS_ROOT / job / 'out'
@@ -777,6 +865,7 @@ def result(job_id: str, filename: str):
 
 
 if __name__ == "__main__":
+    _configure_console_streams()
     import argparse
     import uvicorn
     parser = argparse.ArgumentParser(description='Start the v46 chart editor')
@@ -786,5 +875,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.ai_ocr:
         os.environ['CHARTOCODE_OCR_MODE'] = 'auto-agent'
-    print("colour pipeline:", _pick_color_pipeline())
+    _console_print("colour pipeline:", _pick_color_pipeline())
     uvicorn.run(app, host=args.host, port=args.port)

@@ -215,7 +215,9 @@ def run_detection(img_bgr: np.ndarray,
                   gpu_batch_size: int = 512,
                   grid_backend=None,
                   window_backend=None,
-                  diagnostic_detail: bool | None = None) -> dict:
+                  diagnostic_detail: bool | None = None,
+                  filled_contour_identity: bool = False,
+                  visible_first_detection: bool = True) -> dict:
     """
     Run the chartocode2 pipeline restricted to the user-specified areas.
     B&W computation defaults to automatic CUDA availability selection, with
@@ -261,6 +263,30 @@ def run_detection(img_bgr: np.ndarray,
     _orig_img_bgr      = img_bgr          # keep original for overlay
     _orig_plot_area_px = plot_area_px     # keep original for overlay
     _orig_legend_px    = legend_area_px   # keep original for overlay
+
+    # ── Bitonal halftone screen: tone map only when the legend proves it ─────
+    # A periodic dot screen makes every exact-pixel test measure the screen
+    # phase instead of the glyph. detect_screen is only a candidate test (it
+    # also fires on regular bitonal grids/hatches); the one-period tone map
+    # replaces the source pixels for every v46 stage ONLY when the legend shows
+    # that the source pixels fail to resolve a marker, the tone map resolves
+    # every marker, and it agrees with every marker the source resolves.
+    # Otherwise the unchanged source path runs. Overlays/legend OCR keep
+    # _orig_img_bgr either way.
+    _halftone_screen = None
+    if point_backend == 'grid_v46':
+        from bw_halftone_screen_v46 import detect_screen as _detect_screen, tone_map_decision as _tone_map_decision
+        _halftone_screen = _detect_screen(img_bgr)
+        if _halftone_screen['detected']:
+            img_bgr, _halftone_screen = _tone_map_decision(img_bgr, _halftone_screen, legend_area_px, swatches)
+            _gate = _halftone_screen.get('legend_gate') or {}
+            log_fn(f"[v46 halftone] bitonal periodic screen candidate: period {_halftone_screen['period']} px, "
+                   f"lattice contrast {_halftone_screen['lattice_contrast']:.0f}, "
+                   f"energy share {_halftone_screen['screen_energy_share']:.4f}; legend gate: {_gate.get('reason')}; "
+                   + ("detection reads the one-period tone map, overlays keep source pixels"
+                      if _halftone_screen['tone_map_used'] else "source pixels used"))
+        else:
+            log_fn(f"[v46 halftone] no bitonal screen ({_halftone_screen['reason']}); source pixels used")
 
     # ── [point-diag] echo the user-specified areas so they can be verified ────
     log_fn(f"[input] image {img_bgr.shape[1]}x{img_bgr.shape[0]}  "
@@ -581,7 +607,8 @@ def run_detection(img_bgr: np.ndarray,
             _diag_steps.extend(legend_diagnostic_steps(img_bgr, legend_area_px, templates, swatch_report))
             result2 = {'suppressed':[], 'mode_xs':np.array([]),
                        'diagnostics':{'backend':VERSION,'swatches':swatch_report,
-                                      'candidates':[],'resumed_from_state':True}}
+                                      'candidates':[],'resumed_from_state':True,
+                                      'halftone_screen':_halftone_screen}}
             _d_override_used = float(np.median([t.diameter for t in templates]))
     elif point_backend == 'grid_v46':
         from bw_pipeline_v46 import detect_points, production_detection_options, PRODUCTION_PROFILE
@@ -589,6 +616,10 @@ def run_detection(img_bgr: np.ndarray,
             (name, tuple(int(round(v*_upscale)) for v in box)) for name,box in swatches]
         # Deliberately read original/scaled ink, not the stem-erased ViT image.
         log_fn(f'[v46 matching profile] {PRODUCTION_PROFILE} (automatic)')
+        detection_options = production_detection_options()
+        # Explicit OFF remains available for paired comparisons. Merge before
+        # expansion so the production default and override cannot collide.
+        detection_options['visible_first_detection'] = bool(visible_first_detection)
         result2 = detect_points(img_bgr, plot_area_px, legend_area_px,
                                 known_classes=known_classes, swatches=scaled_swatches,
                                 grid_fraction=grid_fraction, grid_overlap=grid_overlap,
@@ -596,8 +627,10 @@ def run_detection(img_bgr: np.ndarray,
                                 refinement_backend=refinement_backend,
                                 gpu_batch_size=gpu_batch_size,
                                 grid_backend=grid_backend, window_backend=window_backend,
-                                log_fn=log_fn, **production_detection_options())
+                                filled_contour_identity=filled_contour_identity,
+                                log_fn=log_fn, **detection_options)
         result2['diagnostics']['matching_profile'] = PRODUCTION_PROFILE
+        result2['diagnostics']['halftone_screen'] = _halftone_screen
         kept = result2['kept']
         _d_override_used = result2['d_est']
         _diag_steps.extend(result2['diag_steps'])

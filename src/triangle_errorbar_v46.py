@@ -209,13 +209,71 @@ def compare_cap(window, template, prior, config=Config(), debug=False):
     cap_support,cap_mass=support(cap_region)
     stem_support,stem_mass=support(stem_region)
     confidence=min(cap_support,stem_support)*min(1.,cap_mass/max(1.,.025*d*d))*min(1.,stem_mass/max(1.,.04*d*d))
+    # The hypothesis is an error-bar END: a finite cap terminates its stem.
+    # Same-colour stem ink continuing beyond the fitted cap, for one cap
+    # thickness, contradicts it (the fitted "cap" is then a glyph edge on a
+    # bar that runs through, e.g. a down-triangle's flat top). Ink already
+    # explained by the frozen connector/guide model is not stem evidence,
+    # and ink spread over the cap flanks (a crossing line or body) is not a
+    # stem either. The measured unobserved fraction scales the confidence.
+    cap_outer=cap_y-cap_width/2
+    extension_length=max(2.,cap_width)
+    extension=amplitude*_rectangle(xx,yy,cx-stem_width/2,cx+stem_width/2,
+                                    cap_outer-extension_length,cap_outer,sigma)
+    beyond=(extension>=.5*amplitude)&(t<.25*amplitude)&(valid>.95)
+    flank_region=((abs(xx-cx)>=stem_width/2+1.)&(abs(xx-cx)<=max(half_length,stem_width/2+2.))&
+                  (yy>=cap_outer-extension_length)&(yy<=cap_outer)&(t<.25*amplitude)&(valid>.95))
+    unexplained=np.maximum(observed-np.maximum(fixed,guide_high),0)
+    continuation=0.
+    if beyond.sum()>=2:
+        stem_beyond=float(np.minimum(unexplained,extension)[beyond].sum())/max(float(extension[beyond].sum()),1e-6)
+        flank_beyond=float(unexplained[flank_region].mean()) if flank_region.any() else 0.
+        continuation=float(np.clip(stem_beyond-flank_beyond/max(amplitude,1e-6),0.,1.))
+    # An error bar is a finite segment. The continuation contradicts an END
+    # cap here only if the bar's real end is observed: walking outward along
+    # the stem axis, the stem must stop (a fully observed row without stem
+    # ink) inside the window. Ink that runs out of the window (an axis, a
+    # curve, a long line next to the cap) cannot be told from a bar, so the
+    # test abstains and the cap keeps its fitted confidence.
+    bar_end_observed=False
+    if continuation>0:
+        core=(abs(xx-cx)<=max(.65,stem_width/2))
+        for r in np.arange(np.floor(cap_outer-extension_length),float(yy.min())-.5,-1.):
+            row=core&(yy==r)
+            if not row.any():
+                continue
+            if float(valid[row].min())<=.95:
+                break
+            if float(unexplained[row].max())<.25*amplitude:
+                bar_end_observed=True
+                break
+        if not bar_end_observed:
+            continuation=0.
+    end_cap_confidence=confidence*(1.-continuation)
+    result['stem_beyond_cap']=dict(fraction=continuation,pixels=int(beyond.sum()),
+        length_px=float(extension_length),confidence_before=float(confidence),
+        bar_end_observed=bar_end_observed)
+    bar_confidence=confidence
+    confidence=end_cap_confidence
     t_admitted = confidence >= config.minimum_t_confidence or not config.gate_unconfirmed_t
     # An uncertain T is not a certain nuisance, but discarding a partly
     # supported cap entirely can resurrect real error bars. Use its measured
     # cap/stem confidence as a bounded soft amplitude, never as marker credit.
     # This weight is a heuristic, not a calibrated probability.
     t_weight=1. if t_admitted else float(np.clip(confidence,0.,1.))
-    h0=np.maximum(fixed,t*t_weight);h1=np.maximum(h0,marker)
+    nuisance_t=t*t_weight
+    if continuation>0:
+        # Stem ink continuing past the cap contradicts only the END-cap reading
+        # of the cap stroke; it confirms the bar itself. The bar therefore stays
+        # nuisance at its pre-continuation weight, extended through the observed
+        # continuation; only the cap stroke loses weight (a down-triangle's flat
+        # top fitted as a cap is glyph ink, a bar through the glyph is not).
+        bar_admitted=bar_confidence>=config.minimum_t_confidence or not config.gate_unconfirmed_t
+        bar_weight=1. if bar_admitted else float(np.clip(bar_confidence,0.,1.))
+        bar=amplitude*_rectangle(xx,yy,cx-stem_width/2,cx+stem_width/2,cap_outer-extension_length,1.85*d,sigma)
+        nuisance_t=np.maximum(nuisance_t,bar*bar_weight).astype(np.float32)
+        result['stem_beyond_cap']['bar_weight']=bar_weight
+    h0=np.maximum(fixed,nuisance_t);h1=np.maximum(h0,marker)
     # Restrict the decision to the glyph body, including its blur halo.
     domain=(np.hypot(xx,yy)<=.95*d).astype(np.float32)*valid
     mass=max(float((marker*valid).sum()),1.)

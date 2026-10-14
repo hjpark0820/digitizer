@@ -5,7 +5,7 @@ small-hole-closed search raster. Their hatch phase is never a matching target.
 Final fill identity is measured on the original grayscale image. Supported
 open-circle legends use the existing line + marker inverse-rendering fitter.
 """
-from copy import deepcopy
+from copy import copy, deepcopy
 from collections import Counter
 import cv2
 import numpy as np
@@ -13,14 +13,21 @@ from scipy.ndimage import binary_fill_holes
 from scipy.optimize import least_squares
 
 import partial_swatch_detector as D
-from bw_fill_identity_v46 import describe_fill, observed_hole
+from bw_fill_identity_v46 import describe_fill, observed_hole, interior_mask, tone_ink
 from bw_shared_scale_v46 import calibrate_swatch_scales, SEARCH_SCALES
 from legend_composition_v46 import Config, render_model
 from bw_hollow_boundary_v46 import (eligible as paired_hollow, square_interior_evidence,
                                    VERSION as HOLLOW_BOUNDARY_VERSION)
 from bw_cross_evidence_v46 import eligible as stroke_cross, evidence as cross_evidence, model_for as cross_model
 
-VERSION = 'bw-geometry-then-fill-v5-open-reclassification-cross-ridges'
+VERSION = 'bw-geometry-then-fill-v6-source-observation-boundary'
+# Pixel localisation uncertainty between a caller's centre and the legend
+# template canvas centre; a source-hole veto must hold at every placement.
+ALIGNMENT_TOLERANCE = 1
+# Shared-scale anchors: another legend series explains a site when its own
+# criterion is at least this much better there (see identified_anchor_evidence).
+IDENTITY_MARGIN = .015
+PAIRED_HOLLOW_SCALES = tuple(round(.5+.025*i,3) for i in range(33))
 FAMILIES = dict(square='square', circle='circle', inv_triangle='triangle_down',
                 triangle='triangle_up', rhombus='diamond')
 CLASSES = dict(square='filled_square', circle='filled_circle', triangle_down='filled_inv_triangle',
@@ -61,7 +68,7 @@ def supported_open_reclassification(original, report, candidate, fitted_report):
             and margin >= cfg.minimum_family_margin and improvement >= cfg.minimum_marker_improvement)
 
 
-def separate_open_ring(original):
+def separate_open_ring(original, *, local_completion=False):
     """Infer a ring across the independently observed horizontal line band.
 
     The connector may be irregularly dashed in a scanned image. Its phase
@@ -102,10 +109,14 @@ def separate_open_ring(original):
     t.diameter=float(max(p['width'],p['height']))
     t.marker_kind='open';t.interior_fill=0.
     t.model_completed=True
-    return t,dict(mode='line_band_plus_inferred_open_ring',status='supported',params=p,
+    detail=dict(mode='line_band_plus_inferred_open_ring',status='supported',params=p,
         contrast=float(fit.x[5]),fit_rmse=rmse,line_rows=np.flatnonzero(line_rows).tolist(),
         line_phase_not_matched=True,hidden_arc_is_inferred=True,fitted_diameter=t.diameter,
         original_union_diameter=original.diameter,source_center=list(t.marker_center))
+    if local_completion:
+        from bw_legend_local_completion_v46 import postprocess_geometry
+        t,detail=postprocess_geometry(original,t,detail,path='separate_open_ring')
+    return t,detail
 
 
 def ring_fill_descriptor(original,ring,shape_evidence=None):
@@ -132,10 +143,15 @@ def ring_fill_descriptor(original,ring,shape_evidence=None):
     return descriptor
 
 
-def silhouette_template(original, report):
+def silhouette_template(original, report, *, local_completion=False):
     """Fit only the outer envelope; internal hatch pixels do not enter loss."""
     t = deepcopy(original)
     evidence = report.get('shape_evidence', {})
+    if t.name=='unknown_marker' and evidence.get('status')!='classified':
+        # A high area-overlap score is only a proposal when the observed
+        # outline rejected its identity. Do not turn that abstention back into
+        # a named solid silhouette (e.g. a line-crossed triangle into a circle).
+        return None
     family = FAMILIES.get(evidence.get('best_shape'))
     if family is None or evidence.get('shape_confidence', 0) < .75:
         return None
@@ -166,8 +182,12 @@ def silhouette_template(original, report):
     # Keep the source size convention. One common scale still applies to all
     # markers of this swatch, and appearance is sampled in source coordinates.
     t.model_completed=True
-    return t,dict(family=family,params=p,fit_rmse=float(np.sqrt(np.mean(fit.fun**2))),
+    detail=dict(family=family,params=p,fit_rmse=float(np.sqrt(np.mean(fit.fun**2))),
                   source='legend outer envelope, not hatch phase',silhouette_is_inferred=True)
+    if local_completion:
+        from bw_legend_local_completion_v46 import postprocess_geometry
+        t,detail=postprocess_geometry(original,t,detail,path='silhouette_template')
+    return t,detail
 
 
 def fill_statistics(values):
@@ -175,6 +195,57 @@ def fill_statistics(values):
     if not values.size:return dict(mean=0.,std=0.,light=1.,dark=0.)
     return dict(mean=float(values.mean()),std=float(values.std()),
                 light=float(np.mean(values<.35)),dark=float(np.mean(values>.75)))
+
+
+def limited_source_fill_descriptor(template, descriptor):
+    """Preserve measured tone when too few source pixels can name a fill type.
+
+    Four to nine original interior pixels can test tone compatibility without
+    establishing 'filled' or 'open'. Their label remains uncertain, and no
+    inferred geometry supplies missing source pixels.
+    """
+    out=dict(descriptor)
+    if out.get('style')!='uncertain' or out.get('interior_pixels',0)>=10:
+        return out
+    if getattr(template,'source_gray',None) is None:return out
+    region=interior_mask(template)
+    values=tone_ink(template)[region]
+    if not 4<=values.size<10:return out
+    stats=fill_statistics(values)
+    out.update(limited_source_tone=stats,limited_source_pixels=int(values.size),
+               limited_source_policy='measured_tone_not_a_fill_class',
+               mean_ink=stats['mean'],std_ink=stats['std'])
+    return out
+
+
+def source_hole_mixed_tone_evidence(expected, observed, count, fraction):
+    """A certain source paper hole cannot silently become a mixed dark body.
+
+    This is a narrow contradiction check, NOT positive shape/marker evidence.
+    A dark/gray/poorly observed source, a uniform target tone, or fewer than
+    three target samples cannot trigger this additional veto.
+    """
+    certain=bool(expected.get('style')=='open' and
+        expected.get('interior_policy')=='observed_enclosed_paper_excluding_rim' and
+        expected.get('observed_hole_pixels',0)>=4 and expected.get('interior_pixels',0)>=4 and
+        expected.get('mean_ink',1.)<=.12 and expected.get('std_ink',1.)<=.10 and
+        expected.get('light_fraction',0.)>=.90)
+    out=dict(version='source_open_mixed_tone_v1',decision='abstain',
+        reason='source_hole_not_independently_certain',eligible=certain,
+        observed=observed,visible_pixels=int(count),visible_fraction=float(fraction),
+        source_mean=expected.get('mean_ink'),source_std=expected.get('std_ink'),
+        source_hole_pixels=expected.get('observed_hole_pixels',0),
+        shape_inferred=False,positive_marker_evidence=False)
+    if not certain:return out
+    if count<3 or fraction<.60:
+        out['reason']='insufficient_observed_source_hole';return out
+    excess=float(observed['mean']-expected['mean_ink'])
+    mixed=bool(excess>.15 and observed['dark']>=.15 and
+               observed['std']>max(.20,float(expected['std_ink'])+.15))
+    out.update(decision='conflict' if mixed else 'compatible',
+        reason='mixed_dark_ink_in_source_paper_hole' if mixed else 'no_source_hole_mixed_tone_contradiction',
+        excess_mean=excess)
+    return out
 
 
 def transport_hole(hole,size,scale,dx,dy):
@@ -194,10 +265,24 @@ def compare_fill(expected, observed, count, fraction):
     result=dict(style=style,decision='abstain',reason='insufficient_visible_interior',
                 loss=float(loss),observed=observed,expected_mean=mean,
                 visible_pixels=int(count),visible_fraction=float(fraction),phase_matching=False)
-    minimum_count=2 if expected.get('interior_policy')=='observed_enclosed_paper_excluding_rim' else 4
+    limited=bool(expected.get('limited_source_tone') is not None and
+                 expected.get('limited_source_pixels',0)>=4)
+    minimum_count=2 if expected.get('interior_policy')=='observed_enclosed_paper_excluding_rim' or limited else 4
     if count<minimum_count or fraction<.30:return result
     if style=='uncertain':
         if not expected.get('opaque_body_supported'):
+            source=expected.get('limited_source_tone')
+            if source is not None and expected.get('limited_source_pixels',0)>=4 and fraction>=.60:
+                # Compare observed distributions, never infer a shape/fill
+                # class from target darkness. Missing/excess ink still vetoes.
+                differences={k:abs(float(source[k])-float(observed[k])) for k in ('mean','std','light','dark')}
+                conflict=(differences['mean']>.15 or differences['std']>.20 or
+                          differences['light']>.25 or differences['dark']>.25)
+                result.update(decision='conflict' if conflict else 'compatible',
+                    reason='limited_source_tone_mismatch' if conflict else 'limited_source_tone_supported',
+                    source_tone=source,tone_differences=differences,
+                    fill_class_changed=False,source_sample_pixels=expected['limited_source_pixels'])
+                return result
             result['reason']='legend_fill_unresolved'
             return result
         # Keep the uncertain tone label: independent opaque-body evidence can
@@ -207,6 +292,11 @@ def compare_fill(expected, observed, count, fraction):
         conflict=observed['mean']<.74 or observed['light']>.20
     elif style=='open':
         conflict=observed['mean']>.30
+        mixed=source_hole_mixed_tone_evidence(expected,observed,count,fraction)
+        result['source_hole_mixed_tone']=mixed
+        if mixed['decision']=='conflict':
+            result.update(decision='conflict',reason=mixed['reason'])
+            return result
     elif style in ('patterned','gray','partial'):
         conflict=(observed['mean']>.86 or observed['mean']<.15 or abs(mean-observed['mean'])>.30)
     else:return result
@@ -277,12 +367,63 @@ def ring_radial_evidence(observed,available,center,diameter):
                 method='source_ink_ridge_between_lighter_radial_neighbours')
 
 
+def ring_perimeter_evidence(observed,mask,available,center,required):
+    """Distinguish observed missing ink from an unavailable perimeter.
+
+    The complete-observation rule remains eleven of twelve supported sectors.
+    Unavailable source/protected pixels supply neither white contradiction nor
+    positive ink. A partial observation never upgrades a marker to active here:
+    source coverage and angular spread describe a reviewable hypothesis only.
+    This is not an occlusion renderer or permission to excuse visible paper.
+    """
+    mask=np.asarray(mask,dtype=bool);available=np.asarray(available,dtype=bool)
+    yy,xx=np.indices(mask.shape);mx,my=center
+    sector=np.floor((np.arctan2(yy-my,xx-mx)+np.pi)*12/(2*np.pi)).astype(int)%12
+    arc=[];counts=[];visible_counts=[];eligible=[]
+    for k in range(12):
+        expected=mask&(sector==k);pixels=expected&available
+        total=int(expected.sum());visible=int(pixels.sum())
+        counts.append(total);visible_counts.append(visible)
+        # No source samples is unknown, not a zero-darkness (white) sample.
+        arc.append(float(observed[pixels].mean()) if visible else None if total else 0.)
+        eligible.append(bool(total and visible>=max(1,.50*total)))
+    observed_good=[k for k in range(12) if arc[k] is not None and arc[k]>=required]
+    eligible_good=[k for k in observed_good if eligible[k]]
+    measured=[k for k in range(12) if eligible[k]]
+    failures=[k for k in measured if arc[k]<required]
+    full=not bool((mask&~available).any())
+    coverage=float((mask&available).sum()/max(1,mask.sum()))
+    # Coverage is independent of match quality; a tiny surviving arc is not
+    # sufficient even if every one of its observed pixels agrees perfectly.
+    quadrants=sorted({k//3 for k in eligible_good})
+    coverage_ok=coverage>=.55 and len(measured)>=8 and len(quadrants)>=3
+    if full:
+        decision='compatible' if len(observed_good)>=11 else 'conflict'
+        reason='complete_ring_perimeter' if decision=='compatible' else 'incomplete_ring_perimeter'
+    elif len(failures)>=2:
+        decision='conflict';reason='incomplete_ring_perimeter'
+    else:
+        decision='abstain'
+        reason='unobserved_ring_perimeter' if coverage_ok else 'insufficient_observed_ring_perimeter'
+    return dict(ring_sector_ink=arc,ring_supported_sectors=len(observed_good),ring_sector_threshold=float(required),
+        ring_observation=dict(version='source-observable-perimeter-v1',decision=decision,reason=reason,
+            expected_pixels=counts,observed_pixels=visible_counts,eligible_sectors=measured,
+            supported_eligible_sectors=eligible_good,observed_missing_sectors=failures,
+            independently_supported_quadrants=quadrants,observed_fraction=coverage,
+            observation_complete=full,coverage_sufficient_for_review=bool(coverage_ok),
+            minimum_review_coverage=.55,minimum_review_sectors=8,minimum_review_quadrants=3,
+            minimum_sector_observed_fraction=.50,full_observation_required_supported_sectors=11,
+            unavailable_pixels_are_missing_ink=False,partial_observation_can_promote=False))
+
+
 class GeometryFirst:
-    def __init__(self,image,templates,reports,plot,legend,exclusions):
+    def __init__(self,image,templates,reports,plot,legend,exclusions, *, local_completion=False):
         self.full_scene_hollow=False
         self.source=image
         self.originals={t.key:deepcopy(t) for t in templates}
-        self.descriptors={t.key:describe_fill(t,r.get('shape_evidence')) for t,r in zip(templates,reports)}
+        self.source_hole_descriptors={t.key:describe_fill(t,r.get('shape_evidence')) for t,r in zip(templates,reports)}
+        self.descriptors={t.key:limited_source_fill_descriptor(t,describe_fill(t,r.get('shape_evidence')))
+                          for t,r in zip(templates,reports)}
         self.plot=plot;self.exclusions=exclusions;self.counts=Counter();self.details={}
         self.templates=[];self.reports=[];self.open_keys=set();self.filled_keys=set();self.outer_keys=set()
         self.outer_scales={}
@@ -290,11 +431,13 @@ class GeometryFirst:
             if t.ink.achromatic and t.diameter<=12 and r.get('line_analysis',{}).get('status')=='not_needed'}
         # No transformation if the legend does not contain an independently
         # identified patterned fill or open circle/square. Other BW profiles stay put.
-        eligible=any(d['style']=='patterned' for d in self.descriptors.values()) or any(t.name in ('open_circle','open_square') or stroke_cross(t) or getattr(t,'small_hollow_model',None) or getattr(t,'compact_outer_identity',None) for t in templates)
+        eligible=any(d['style']=='patterned' for d in self.descriptors.values()) or any(t.name in ('open_circle','open_square') or stroke_cross(t) or getattr(t,'small_hollow_model',None) or getattr(t,'compact_outer_identity',None) or getattr(t,'line_crossed_hollow_model',None) for t in templates)
         if not eligible:
             self.templates=templates;self.reports=reports;self.enabled=False;return
         for original,report in zip(templates,reports):
             t=deepcopy(original);r=deepcopy(report);style=self.descriptors[t.key]['style']
+            if self.descriptors[t.key].get('limited_source_tone') is not None:
+                t.observed_tone_region=interior_mask(original)
             if (style=='open' and self.descriptors[t.key].get('interior_policy')=='observed_enclosed_paper_excluding_rim'
                     and t.name not in ('open_circle','open_square')):
                 t.observed_hole_region=observed_hole(original)
@@ -305,6 +448,13 @@ class GeometryFirst:
                 self.outer_keys.add(t.key)
                 self.details[t.key]=dict(mode='observed_raster_with_outer_identity',status='supported',
                     fill_policy='measured separately; fixed interior descriptor not shape evidence')
+            elif getattr(t,'line_crossed_hollow_model',None):
+                from bw_line_crossed_hollow_v46 import complete_hollow_geometry
+                t,r=complete_hollow_geometry(t,r,local_completion=local_completion)
+                self.open_keys.add(t.key)
+                self.details[t.key]=dict(mode='native_line_crossed_hollow_composition',status='supported',
+                    semantic_fill='open',proposal_geometry='fitted_hollow_outline',
+                    fill_policy='original native paper pixels; never synthesized interior')
             elif getattr(t,'small_hollow_model',None):
                 self.open_keys.add(t.key)
                 self.details[t.key]=dict(mode='small_hollow_source_composition',status='supported')
@@ -313,7 +463,7 @@ class GeometryFirst:
                 self.descriptors[t.key]['resolved_by']='small_hollow_source_composition'
             elif t.name in ('open_circle','open_square') and legend is not None:
                 from bw_composed_legend_v46 import compose_templates
-                new,rr,_=compose_templates(image,legend,[t],[r])
+                new,rr,_=compose_templates(image,legend,[t],[r],local_completion=local_completion)
                 if supported_open_reclassification(original,r,new[0],rr[0]):
                     t,r=new[0],rr[0];self.open_keys.add(t.key)
                     self.details[t.key]=dict(mode='line_plus_pure_'+t.name,status='supported')
@@ -333,7 +483,7 @@ class GeometryFirst:
                         r['small_hollow_model']=t.small_hollow_model
                         self.details[t.key]['mode']='small_hollow_source_composition'
                 else:
-                    fallback=separate_open_ring(t) if t.name=='open_circle' else None
+                    fallback=separate_open_ring(t,local_completion=local_completion) if t.name=='open_circle' else None
                     if fallback is not None:
                         t,detail=fallback;self.open_keys.add(t.key);self.details[t.key]=detail
                         r.update(composition=rr[0].get('composition'),template_policy='pure_ring_with_measured_line_nuisance',
@@ -346,15 +496,42 @@ class GeometryFirst:
                     self.details[t.key]['compact_line_recovery']=(t.name=='open_circle' and analysis.get('status')=='separated'
                         and analysis.get('aspect',float('inf'))<=1.7)
                     r.update(fitted_diameter=t.diameter,source_center=list(t.marker_center))
-            elif not t.model_completed and (style in ('solid','patterned','gray','partial') or
-                                            self.descriptors[t.key].get('opaque_body_supported')):
-                fitted=silhouette_template(t,r)
+            elif (not t.model_completed and
+                  not self.descriptors[t.key].get('source_interior_support',{}).get('applied') and
+                  (style in ('solid','patterned','gray','partial') or
+                   self.descriptors[t.key].get('opaque_body_supported'))):
+                # Newly adequate native tone samples authorize a source fill
+                # comparison, not replacement of observed proposal geometry.
+                # Keep that support repair independent of silhouette fitting.
+                fitted=silhouette_template(t,r,local_completion=local_completion)
                 if fitted is not None:
                     t,fit=fitted;self.filled_keys.add(t.key)
                     r.update(class_name=t.name,shape_hint=t.name,template_policy='filled_geometry_then_original_fill',
                         original_class=original.name,geometry_model=fit)
                     self.details[t.key]=dict(mode='filled_geometry_then_fill_distribution',style=style,**fit)
+            if (t.name=='open_square' and t.key not in self.open_keys and style=='open' and
+                    self.descriptors[t.key].get('interior_policy')=='observed_enclosed_paper_excluding_rim'):
+                # A square left on the original legend canvas is measured on
+                # the same paper-only SOURCE hole as its descriptor. The eroded
+                # outline would include the square's own rim. Refitted squares
+                # keep their paired boundary / small-hollow evidence instead.
+                t.observed_hole_region=observed_hole(original)
             r['geometry_first']=self.details.get(t.key,dict(mode='observed_fallback'))
+            if (t.key in self.open_keys and t.name=='open_circle' and
+                    not getattr(t,'small_hollow_model',None)):
+                # Preserve observed SOURCE paper islands before the fitted
+                # ring's erosion can reduce them to zero/one target pixel.
+                # No source hole means no new hollow evidence.
+                source_hole=observed_hole(original)
+                if source_hole.sum()>=2 and report.get('shape_evidence',{}).get('strong_hollow_evidence'):
+                    h,w=t.mask.shape;oh,ow=source_hole.shape
+                    dx=t.marker_center[0]-original.marker_center[0]
+                    dy=t.marker_center[1]-original.marker_center[1]
+                    transform=np.float32([[1,0,(w-ow)/2-dx],[0,1,(h-oh)/2-dy]])
+                    t.source_hollow_region=cv2.warpAffine(source_hole.astype(np.float32),transform,(w,h))>.5
+                    t.source_hollow_mean=float(tone_ink(original)[source_hole].mean())
+                    r['source_hole_transport']=dict(source_pixels=int(source_hole.sum()),
+                        transported_pixels=int(t.source_hollow_region.sum()),source_pixels_modified=False)
             r['fill_evidence']=self.descriptors[t.key]
             self.templates.append(t);self.reports.append(r)
         self.enabled=bool(self.open_keys or self.filled_keys or self.outer_keys or any(stroke_cross(t) for t in self.templates))
@@ -368,6 +545,11 @@ class GeometryFirst:
         self.valid=np.zeros(self.darkness.shape,np.uint8)
         a,b,c,d=self.plot;self.valid[b:d,a:c]=1
         for a,b,c,d in self.exclusions:self.valid[b:d,a:c]=0
+        # ROI bounds candidate centres and calibration proposals, not the
+        # source pixels belonging to an otherwise in-ROI marker. Keep the
+        # proposal mask unchanged so off-plot labels cannot become anchors.
+        self.observation_valid=np.ones(self.darkness.shape,np.uint8)
+        for a,b,c,d in self.exclusions:self.observation_valid[b:d,a:c]=0
         self.compact_sources={False:(gray<190).astype(np.uint8),True:(closed>.34).astype(np.uint8)}
         self.by_key={t.key:t for t in self.templates}
         small_models={t.key:t.small_hollow_model for t in self.templates if getattr(t,'small_hollow_model',None)}
@@ -386,6 +568,83 @@ class GeometryFirst:
     def image_for(self,t):
         return self.geometry_image if t.key in self.filled_keys else self.source
 
+    def source_open_tone_at(self,key,x,y,scale=1.,occupied=()):
+        """Source-hole contradiction check for recovered/final BW points.
+
+        ``scale`` is relative to ``self.originals[key].diameter``. It is not
+        relative to an inferred ring or the independent raster competitor.
+        ``None`` means no measured scale: an assumed size cannot veto.
+        Only conflict is a veto; abstain/compatible never create a point.
+        ``(x, y)`` is the caller's marker centre, so the observed hole's own
+        centre (not the legend crop canvas centre) is placed there. Pixel
+        residuals remain; every placement within ALIGNMENT_TOLERANCE px must
+        conflict before a veto.
+        ``occupied`` lists other series' detected points (``cx``, ``cy``,
+        ``marker_mask``, offsets). Their measured footprints are excluded
+        like independent lines; covering too much of the hole abstains.
+        """
+        from occlusion_aware_window_verifier import _crop_padded
+        from bw_suppressed_v46 import decode_marker_mask
+        original=self.originals[key]
+        expected=self.source_hole_descriptors[key]
+        base=dict(scale_reference='original_observed_legend_template',
+            source_diameter=float(original.diameter),applied_scale=None if scale is None else float(scale))
+        preliminary=source_hole_mixed_tone_evidence(expected,fill_statistics([]),0,0.)
+        if not preliminary['eligible']:return dict(preliminary,**base)
+        if scale is None:return dict(preliminary,reason='geometric_scale_not_measured',**base)
+        if not np.isfinite(scale) or scale<=0:raise ValueError('Source-hole scale must be finite and positive')
+        diameter=original.diameter*scale
+        tolerance=ALIGNMENT_TOLERANCE
+        size=max(9,int(np.ceil(max(original.mask.shape)*scale+2*diameter)))|1
+        observed=_crop_padded(self.darkness,(x,y),size,fill=0.)
+        available=_crop_padded(self.valid,(x,y),size).astype(bool)
+        foreign=np.zeros((size,size),bool);left=int(round(x))-size//2;top=int(round(y))-size//2
+        for q in occupied:
+            ink=decode_marker_mask(q['marker_mask']).astype(np.uint8);ys,xs=np.nonzero(ink)
+            if len(xs)<3:continue
+            body=np.zeros_like(ink)
+            cv2.fillConvexPoly(body,cv2.convexHull(np.column_stack((xs,ys)).astype(np.int32)),1)
+            body=cv2.dilate(body,np.ones((3,3),np.uint8)).astype(bool)
+            # Same raster placement as the saved point, including seed offsets.
+            qx=int(round(q['cx']-q.get('marker_offset_x',0.)))-body.shape[1]//2-left
+            qy=int(round(q['cy']-q.get('marker_offset_y',0.)))-body.shape[0]//2-top
+            a,b=max(0,qx),max(0,qy);c,d=min(size,qx+body.shape[1]),min(size,qy+body.shape[0])
+            if c>a and d>b:foreign[b:d,a:c]|=body[b-qy:d-qy,a-qx:c-qx]
+        # Same independently long H/V stroke policy as assess(); a fitted
+        # nuisance model is never allowed to excuse arbitrary dark pixels.
+        binary=(observed>=.35).astype(np.uint8)
+        length=max(7,int(round(1.25*diameter)))|1
+        strokes=np.zeros_like(binary)
+        for kernel in (np.ones((1,length),np.uint8),np.ones((length,1),np.uint8)):
+            strokes|=cv2.morphologyEx(binary,cv2.MORPH_OPEN,kernel)
+        thin=strokes.astype(bool)&(cv2.distanceTransform(binary,cv2.DIST_L2,5)<=1.4)
+        source_hole=observed_hole(original);placements=[]
+        # An observed legend crop need not be centred on its marker. Only
+        # whole pixels are corrected; the placement search covers the rest.
+        ys,xs=np.nonzero(source_hole);h,w=source_hole.shape
+        ox=float(np.round(scale*((w-1)/2-(xs.min()+xs.max())/2))) if len(xs) else 0.
+        oy=float(np.round(scale*((h-1)/2-(ys.min()+ys.max())/2))) if len(ys) else 0.
+        rank={'compatible':0,'abstain':1,'conflict':2}
+        for dy in range(-tolerance,tolerance+1):
+            for dx in range(-tolerance,tolerance+1):
+                # The crop starts at the rounded centre; keep the remainder.
+                hole=transport_hole(source_hole,size,scale,x-int(round(x))+ox+dx,y-int(round(y))+oy+dy)
+                visible=hole&available&~thin&~foreign
+                result=source_hole_mixed_tone_evidence(expected,fill_statistics(observed[visible]),
+                    int(visible.sum()),float(visible.sum()/max(1,hole.sum())))
+                result.update(transported_hole_pixels=int(hole.sum()),
+                    independent_line_pixels_excluded=int((hole&available&thin).sum()),
+                    other_series_marker_pixels_excluded=int((hole&available&~thin&foreign).sum()),
+                    alignment_offset=[dx,dy])
+                placements.append(result)
+        result=min(placements,key=lambda r:(rank[r['decision']],abs(r['alignment_offset'][0])+abs(r['alignment_offset'][1]),
+                                            r.get('excess_mean',0.)))
+        result.update(base,center=[float(x),float(y)],alignment_tolerance_px=tolerance,
+            hole_centre_offset=[float(ox),float(oy)],
+            conflicting_placements=sum(r['decision']=='conflict' for r in placements),placements=len(placements),
+            occupying_point_ids=[q.get('point_id') for q in occupied])
+        return result
+
     def calibrate(self,log_fn):
         reports={}
         # Separate size from identity: duplicate outer shapes must not veto one
@@ -395,13 +654,15 @@ class GeometryFirst:
             if paired_circle(t):
                 from bw_circle_scale_v46 import calibrate_circle_scale
                 reports[t.key]=calibrate_circle_scale(self.source,t,self.plot,self.exclusions,log_fn,
-                    window_check=lambda template,result:self.assess(template,result,record=False))
+                    window_check=self._assess_calibration)
                 continue
+            general=not (getattr(t,'small_hollow_model',None) or stroke_cross(t) or paired_hollow(t))
             r=calibrate_swatch_scales(self.image_for(t),[t],self.plot,self.exclusions,log_fn,
-                anchor_filter=self.anchor_evidence,
-                **({'search_scales':tuple(round(.5+.025*i,3) for i in range(33))}
-                   if paired_hollow(t) else {}))[t.key]
+                anchor_filter=self.identified_anchor_evidence if general else self.anchor_evidence,
+                **({'search_scales':PAIRED_HOLLOW_SCALES} if paired_hollow(t) else {}))[t.key]
             r['identity_policy']='geometry_only; fill identity evaluated after center/size'
+            if general:
+                r['identity_policy']+='; anchors another legend series explains better are excluded'
             if paired_hollow(t):
                 r['identity_policy']='paired square boundaries and source hole; one shared scale'
             reports[t.key]=r
@@ -413,6 +674,89 @@ class GeometryFirst:
             self.full_scene_hollow=any(r.get('status')=='joint_scene_verified' for r in reports.values())
             for r in reports.values():r['full_scene_hollow_retry']=self.full_scene_hollow
         return reports
+
+    def _assess_calibration(self,t,v):
+        # Calibration retains its original ROI-limited observations. The
+        # final source-window fix must not recruit labels outside the plot
+        # as new size evidence. A shallow view avoids mutating shared state.
+        context=copy(self)
+        context.observation_valid=self.valid
+        context._legacy_calibration_perimeter=True
+        return context.assess(t,v,record=False)
+
+    def site_scores(self,u,x,y):
+        """u's own calibration criteria at one plot site (x, y).
+
+        Same observation (image_for(u), u's ink), scales and +/-2 px peak
+        window as calibrate_swatch_scales: gray correlation for every template,
+        outer-boundary quality for boundary-eligible ones. The correlation is
+        evaluated on a plot-clipped window that holds every template footprint
+        of that peak window, so it equals the full-plot map there up to float32
+        rounding (which can flip gray_match_map's ink gate exactly at its bound).
+        """
+        from bw_shared_scale_v46 import gray_match_map
+        from bw_scale_boundary_v46 import eligible, profile, model_samples
+        a,b,c,d=self.plot
+        cache=self.__dict__.setdefault('_calibration_sources',{})
+        if u.key not in cache:
+            source=D.ink_membership(self.image_for(u)[b:d,a:c],u.ink).astype(np.float32)
+            allowed=np.ones(source.shape,bool)
+            for e,f,g,h in self.exclusions:
+                left,right=max(0,e-a),min(c,g)-a
+                top,bottom=max(0,f-b),min(d,h)-b
+                if left<right and top<bottom:allowed[top:bottom,left:right]=False
+            cache[u.key]=(source,cv2.GaussianBlur(source,(3,3),.55),allowed,
+                          model_samples(u) if eligible(u) else None)
+        source,observed,allowed,samples=cache[u.key]
+        scales=PAIRED_HOLLOW_SCALES if paired_hollow(u) else SEARCH_SCALES
+        x,y=int(x)-a,int(y)-b
+        radius=int(np.ceil(max(u.raw_soft.shape)*max(scales)))//2+6
+        top,left=max(0,y-radius),max(0,x-radius);yy,xx=y-top,x-left
+        window=np.s_[top:y+radius+1,left:x+radius+1]
+        correlation=np.array([gray_match_map(observed[window],u,s,allowed[window])
+                              [max(0,yy-2):yy+3,max(0,xx-2):xx+3].max() for s in scales])
+        result=dict(scales=scales,correlation=correlation)
+        if eligible(u):
+            edge=profile(source,u,x,y,scales,valid=allowed,samples=samples)
+            result.update(boundary=np.asarray(edge['profile'],np.float32),
+                          boundary_quality=float(edge.get('quality',-1.)))
+        return result
+
+    def identified_anchor_evidence(self,t,q):
+        """Fill evidence plus cross-series identity for a general-branch anchor.
+
+        calibrate() measures one legend series at a time, so the identity margin
+        inside calibrate_swatch_scales has no rivals there. Another series
+        explains a site better when its own criterion beats this series' by
+        IDENTITY_MARGIN AND its own anchor evidence accepts the site at its best
+        scale for that criterion: outer-boundary quality between two
+        boundary-eligible templates, gray correlation otherwise. Equal scores
+        never veto, so identical silhouettes (one shape, different fills) cannot
+        reject each other's sites; the fill evidence separates them.
+        """
+        evidence=self.anchor_evidence(t,q)
+        if not evidence['accepted']:return evidence
+        own=self.site_scores(t,q['x'],q['y']);rivals=[]
+        for u in self.templates:
+            if u.key==t.key:continue
+            other=self.site_scores(u,q['x'],q['y'])
+            if 'boundary' in own and 'boundary' in other:
+                criterion,mine,theirs,curve=('outer_boundary',own['boundary_quality'],
+                                             other['boundary_quality'],other['boundary'])
+            else:
+                criterion,mine,theirs,curve=('gray_correlation',float(own['correlation'].max()),
+                                             float(other['correlation'].max()),other['correlation'])
+            if theirs<mine+IDENTITY_MARGIN:continue
+            site=dict(x=q['x'],y=q['y'],profile=[float(v) for v in curve],quality=theirs)
+            if other['scales'] is not SEARCH_SCALES:site['profile_scales']=list(other['scales'])
+            explained=self.anchor_evidence(u,site)
+            rivals.append(dict(key=u.key,criterion=criterion,own_score=mine,rival_score=theirs,
+                               rival_scale=float(other['scales'][int(np.argmax(curve))]),
+                               rival_accepted=bool(explained['accepted']),rival_decision=explained.get('decision')))
+        evidence['cross_series_identity']=dict(margin=IDENTITY_MARGIN,rivals=rivals)
+        if any(r['rival_accepted'] for r in rivals):
+            evidence.update(accepted=False,reason='another_legend_series_explains_site')
+        return evidence
 
     def anchor_evidence(self,t,q):
         from occlusion_aware_window_verifier import _crop_padded
@@ -444,9 +788,30 @@ class GeometryFirst:
         region=cv2.distanceTransform(binary_fill_holes(mask).astype(np.uint8),cv2.DIST_L2,5)>=max(1.5,.18*t.diameter*scale)
         if getattr(t,'observed_hole_region',None) is not None:
             region=transport_hole(t.observed_hole_region,side,scale,0.,0.)
-        observed=_crop_padded(self.darkness,(q['x'],q['y']),side)
-        stats=fill_statistics(observed[region])
-        evidence=compare_fill(self.descriptors[t.key],stats,int(region.sum()),1.)
+        # Same independently long H/V stroke exclusion as assess(). A crop
+        # only one marker wide cannot show that an error bar extends past the
+        # marker, so strokes are found with one diameter of context; the
+        # measured region stays the centre, i.e. the unpadded crop.
+        diameter=t.diameter*scale;padding=max(4,int(np.ceil(diameter)))
+        wide=_crop_padded(self.darkness,(q['x'],q['y']),side+2*padding,fill=0.)
+        binary=(wide>=.35).astype(np.uint8)
+        length=max(7,int(round(1.25*diameter)))|1
+        strokes=np.zeros_like(binary)
+        for kernel in (np.ones((1,length),np.uint8),np.ones((length,1),np.uint8)):
+            strokes|=cv2.morphologyEx(binary,cv2.MORPH_OPEN,kernel)
+        centre=slice(padding,padding+side)
+        thin=(strokes.astype(bool)&(cv2.distanceTransform(binary,cv2.DIST_L2,5)<=1.4))[centre,centre]
+        observed=wide[centre,centre]
+        available=_crop_padded(self.valid,(q['x'],q['y']),side).astype(bool)
+        visible=region&available&~thin
+        # Unlike source_open_tone_at, no ALIGNMENT_TOLERANCE placement search:
+        # there a veto deletes a point, here acceptance sets a whole series'
+        # scale. Excusing the veto at any 1 px shift admitted paper next to a
+        # dash as a sole anchor. The unexplained ink is judged at the peak.
+        evidence=compare_fill(self.descriptors[t.key],fill_statistics(observed[visible]),int(visible.sum()),
+                              float(visible.sum()/max(1,region.sum())))
+        evidence.update(independent_line_pixels_excluded=int((region&available&thin).sum()),
+                        stroke_context_padding=padding)
         # Scale anchors must be cleaner than final overlapping candidates.
         # A bright open centre, for example, is not a filled body's anchor.
         evidence['accepted']=evidence['decision']=='compatible'
@@ -460,11 +825,12 @@ class GeometryFirst:
 
     def assess(self,t,v,record=True):
         """Final, source-only tone plus compact-shape evidence at aligned centre."""
+        observation_valid=getattr(self,'observation_valid',self.valid)
         if stroke_cross(t):
             from occlusion_aware_window_verifier import _crop_padded
             size=v.template_mask.shape[0]
             observed=_crop_padded(self.darkness,(v.x,v.y),size,fill=0.)
-            valid=_crop_padded(self.valid,(v.x,v.y),size).astype(bool)
+            valid=_crop_padded(observation_valid,(v.x,v.y),size).astype(bool)
             result=v.compute_diagnostics.get('stroke_cross')
             if result is None:
                 result=cross_evidence(observed,v.template_mask,t.name,valid,(t.ink.paper_gray-t.ink.core_gray)/255.,
@@ -482,10 +848,10 @@ class GeometryFirst:
             result=v.compute_diagnostics.get('small_hollow')
             if self.full_scene_hollow:
                 from bw_hollow_scene_fallback_v46 import evidence
-                result=evidence(self.small_sources[t.key],t,(v.aligned_x,v.aligned_y),v.scale,self.valid)
+                result=evidence(self.small_sources[t.key],t,(v.aligned_x,v.aligned_y),v.scale,observation_valid)
                 v.decision=v.compute_diagnostics.get('pre_small_hollow_decision',v.decision)
             if result is None:
-                result=evidence(self.small_sources[t.key],t,(v.aligned_x,v.aligned_y),v.scale,self.valid)
+                result=evidence(self.small_sources[t.key],t,(v.aligned_x,v.aligned_y),v.scale,observation_valid)
             result=dict(result,geometry_required_recall=float(v.required_recall),
                         geometry_decision=v.decision,compact_outer_iou=None)
             if result['decision']=='conflict':v.decision='rejected'
@@ -501,9 +867,11 @@ class GeometryFirst:
         size=mask.shape[0]
         if getattr(t,'observed_hole_region',None) is not None:
             region=transport_hole(t.observed_hole_region,size,v.scale,v.aligned_x-v.x,v.aligned_y-v.y)
+        elif getattr(t,'observed_tone_region',None) is not None:
+            region=transport_hole(t.observed_tone_region,size,v.scale,v.aligned_x-v.x,v.aligned_y-v.y)
         from occlusion_aware_window_verifier import _crop_padded
         observed=_crop_padded(self.darkness,(v.x,v.y),size,fill=0.)
-        available=_crop_padded(self.valid,(v.x,v.y),size).astype(bool)
+        available=_crop_padded(observation_valid,(v.x,v.y),size).astype(bool)
         binary=(observed>=.35).astype(np.uint8)
         # Independently extending thin lines are nuisance, never a hatch phase.
         length=max(7,int(round(1.25*diameter)))|1
@@ -515,12 +883,16 @@ class GeometryFirst:
         result=compare_fill(self.descriptors[key],fill_statistics(observed[visible]),int(visible.sum()),
                             float(visible.sum()/max(1,region.sum())))
         result.update(geometry_required_recall=float(v.required_recall),
-                      geometry_decision=v.decision,source_pixels_unchanged=True)
+                      geometry_decision=v.decision,source_pixels_unchanged=True,
+                      source_observation=dict(version='source-observation-boundary-v1',
+                          proposal_roi_unchanged=True,
+                          original_pixels_outside_roi_measurable=observation_valid is not self.valid,
+                          excluded_pixels_supply_evidence=False,source_pixels_modified=False))
         if key in self.outer_keys:
             from bw_compact_boundary_v46 import evidence
             scales=dict(self.outer_scales);scales[key]=v.scale
             outer=evidence(self.darkness,(v.aligned_x,v.aligned_y),key,
-                self.outer_models,scales,self.valid)
+                self.outer_models,scales,observation_valid)
             outer.update(interior_fill_check=result,geometry_required_recall=float(v.required_recall),
                          geometry_decision=v.decision,compact_outer_iou=None)
             # Shape success cannot repair missing/contradictory source fill.
@@ -549,21 +921,40 @@ class GeometryFirst:
                               loss=float(hollow['own_ink_fraction']))
             elif not paired_hollow(t) and hollow.get('status')=='unobserved':
                 result.update(decision='abstain',reason='unobserved_hollow_interior')
+                source_hole=getattr(t,'source_hollow_region',None)
+                if source_hole is not None:
+                    carried=transport_hole(source_hole,size,v.scale,v.aligned_x-v.x,v.aligned_y-v.y)
+                    seen=carried&available&~thin
+                    count=int(seen.sum());fraction=float(count/max(1,carried.sum()))
+                    mean=float(observed[seen].mean()) if count else None
+                    supported=bool(count>=2 and fraction>=.60 and mean<=.25 and
+                                   abs(mean-t.source_hollow_mean)<=.15)
+                    result['source_hollow_tone']=dict(visible_pixels=count,visible_fraction=fraction,
+                        observed_mean=mean,source_mean=t.source_hollow_mean,supported=supported,
+                        policy='transport_observed_source_paper_not_inferred_ring_erosion')
+                    if supported:
+                        result.update(decision='compatible',reason='observed_source_hole_tone_supported')
             if long_hole is not None and long_hole['count']>=4 and long_hole['mean']>.30:
                 result.update(decision='conflict',reason='ink_inside_hole_not_explained_by_crossing_line')
             # A white interior alone is not a ring. Require ink distributed
             # around its perimeter, including sectors away from T/cross arms.
-            yy,xx=np.indices(mask.shape);mx=size//2+v.aligned_x-v.x;my=size//2+v.aligned_y-v.y
-            sector=np.floor((np.arctan2(yy-my,xx-mx)+np.pi)*12/(2*np.pi)).astype(int)%12
-            arc=[]
-            for k in range(12):
-                pixels=mask&available&(sector==k)
-                arc.append(float(observed[pixels].mean()) if pixels.any() else 0.)
+            mx=size//2+v.aligned_x-v.x;my=size//2+v.aligned_y-v.y
             required=max(.10,.22*(255-t.ink.core_gray)/255.)
-            good=sum(a>=required for a in arc)
-            result.update(ring_sector_ink=arc,ring_supported_sectors=good,ring_sector_threshold=required)
-            if good<11:
-                result.update(decision='conflict',reason='incomplete_ring_perimeter')
+            perimeter=ring_perimeter_evidence(observed,mask,available,(mx,my),required)
+            if getattr(self,'_legacy_calibration_perimeter',False):
+                # This repair is a final-candidate measurement change only.
+                # Preserve calibration's historical zero-for-outside-ROI
+                # perimeter and conflict state, not merely its search area.
+                arc=[0. if value is None else value for value in perimeter['ring_sector_ink']]
+                good=sum(value>=required for value in arc)
+                perimeter.update(ring_sector_ink=arc,ring_supported_sectors=good)
+                perimeter['ring_observation'].update(decision='compatible' if good>=11 else 'conflict',
+                    reason='complete_ring_perimeter' if good>=11 else 'incomplete_ring_perimeter',
+                    unavailable_pixels_are_missing_ink=True,legacy_calibration_perimeter=True)
+            result.update(perimeter)
+            ring=perimeter['ring_observation']
+            if ring['decision']=='conflict' or (ring['decision']=='abstain' and result['decision']!='conflict'):
+                result.update(decision=ring['decision'],reason=ring['reason'])
             if self.details.get(key,{}).get('compact_line_recovery'):
                 radial=ring_radial_evidence(observed,available,(mx,my),diameter)
                 result['radial_ring']=radial

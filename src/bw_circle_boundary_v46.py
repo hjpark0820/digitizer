@@ -115,8 +115,35 @@ def boundary_profiles(observed,center,outer,inner,available=None,occlusion=None,
                 independent_radius_per_ray=False,unknown_is_positive=False)
 
 
+# Minimum size of a hole piece relative to the largest enclosed paper
+# component. Any value between ~0.03 and ~0.5 separates stroke dropouts from
+# connector-split hole pieces; it is a robustness cut, not a tuned score gate.
+HOLE_COMPONENT_FRACTION=.10
+
+
+def _ring_hole(env,mask):
+    """Enclosed paper that forms the ring's hole, without speck dropouts.
+
+    An observed-raster template (fax/halftone texture) keeps isolated 1-2 px
+    paper dropouts INSIDE the stroke. They are enclosed paper too, but they are
+    not the hole: one speck near the outer edge stretches a bounding box over
+    all enclosed paper almost to the outer radius, so the rim and inside rays
+    are then both sampled within the stroke. The hole may still be split by a
+    connector or error bar into a few comparable pieces, so keep every
+    enclosed component that is not negligible next to the largest one
+    (dropouts are ~1% of it, split pieces ~25-100%).
+    """
+    from scipy.ndimage import label
+    hole=env&~mask
+    labels,count=label(hole)
+    if count<=1:return hole
+    sizes=np.bincount(labels.ravel())[1:]
+    keep=np.flatnonzero(sizes>=HOLE_COMPONENT_FRACTION*sizes.max())+1
+    return np.isin(labels,keep)
+
+
 def geometry(mask):
-    mask=np.asarray(mask,bool);env=binary_fill_holes(mask);hole=env&~mask
+    mask=np.asarray(mask,bool);env=binary_fill_holes(mask);hole=_ring_hole(env,mask)
     yy,xx=np.nonzero(env);hy,hx=np.nonzero(hole)
     if len(hx)<6 or len(xx)<12:return None
     return (((xx.min()+xx.max())/2.,(yy.min()+yy.max())/2.),

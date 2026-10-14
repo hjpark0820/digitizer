@@ -1,7 +1,7 @@
-"""Bounded source-scene retry for all-unanchored tiny hollow BW legends.
+"""Bounded source-scene retry for unresolved tiny hollow BW legends.
 
-Not the default verifier: activated only after zero reliable anchors for every
-legend identity and at least three jointly verified sites for a retry scale.
+Not the default verifier: every legend identity must lack multi-site scale
+consensus, followed by at least three jointly verified sites for a retry scale.
 No reference labels, file names, or synthesized target ink are used.
 """
 import cv2
@@ -12,9 +12,13 @@ VERSION="small-hollow-scene-fallback-v1"
 
 
 def needs_scene_retry(templates,reports):
+    # One or two anchors are not a calibrated scale consensus. Improving a
+    # connector model can uncover those weak anchors; this must not disable
+    # the common-scene validation still needed by all unresolved identities.
+    unresolved={'no_reliable_anchor_fallback_1x','weak_consensus'}
     return bool(len(templates)>=2 and set(reports)=={t.key for t in templates}
                 and all(eligible(t) for t in templates)
-                and all(r.get('status')=='no_reliable_anchor_fallback_1x' for r in reports.values()))
+                and all(r.get('status') in unresolved for r in reports.values()))
 
 
 def evidence(observed,template,center,scale=1.,available=None,occlusion=None,*,envelope=None):
@@ -47,8 +51,12 @@ def evidence(observed,template,center,scale=1.,available=None,occlusion=None,*,e
     measured,strokes=external_strokes(np.where(seen,source,0.),roi)
     base=np.clip(measured/max(float(source.max()),.25),0,1)
     lines=len(strokes)
+    from bw_hollow_exterior_v46 import exterior_background
+    base,background=exterior_background(source,roi,seen,base)
+    if background['adopted']:lines=len(background['segments'])
     out=dict(version=VERSION,decision='abstain',reason='insufficient_small_body_visibility',
-             loss=1.,source_pixels_unchanged=True,crossing_strokes=lines)
+             loss=1.,source_pixels_unchanged=True,crossing_strokes=lines,
+             exterior_background=background)
     if np.mean(seen[roi])<.90:return out
     roi &= seen
     losses={};filled_losses={};missing_rims={};physical={}

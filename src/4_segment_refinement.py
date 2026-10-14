@@ -6,8 +6,9 @@ Refine raw detected segments using the x-grid from Stage 1b (KDE mode_xs).
 Two operations are applied in order:
 
   1. SHORT-SEGMENT PRUNING
-     Segments whose x-span is smaller than `min_span_frac * grid_step` are
-     treated as marker-blob fragments and removed.
+     Segments whose Euclidean length is smaller than
+     `min_span_frac * grid_step` are treated as short fragments and removed.
+     Length is orientation-independent: long steep/vertical segments survive.
      Default: min_span_frac = 0.5  →  threshold = 0.5 × median_grid_step
 
   2. CUT AT GRID BOUNDARIES
@@ -202,7 +203,7 @@ def refine(segments: list[tuple],
 
     Only two operations are applied (endpoint snapping has been removed):
 
-      Step 1 — Prune short fragments whose x-span < min_span_frac * grid_step.
+      Step 1 — Prune fragments whose length < min_span_frac * grid_step.
       Step 2 — Cut segments that straddle multiple grid cells at every grid
                column boundary, then prune any resulting sub-segments that are
                too short.
@@ -216,7 +217,8 @@ def refine(segments: list[tuple],
     ----------
     segments     : list of (x1, y1, x2, y2) tuples
     grid_xs      : sorted list of grid x-column centres (from mode_xs)
-    min_span_frac: segments with x-span < min_span_frac * step are pruned
+    min_span_frac: legacy keyword retained for caller compatibility; segments
+                   with Euclidean length < min_span_frac * step are pruned
 
     Returns
     -------
@@ -224,7 +226,7 @@ def refine(segments: list[tuple],
     log          : dict with diagnostic information
     """
     step     = grid_step(grid_xs)
-    min_span = min_span_frac * step
+    min_length = min_span_frac * step
 
     boundaries = _grid_boundaries(grid_xs)
 
@@ -233,8 +235,7 @@ def refine(segments: list[tuple],
 
     # ── Step 1: prune short (fragment) segments ───────────────────────────────
     for seg in segments:
-        xspan = _seg_xspan(seg)
-        if xspan < min_span:
+        if _seg_len(seg) < min_length:
             pruned_short.append(seg)
         else:
             kept_before_cut.append(seg)
@@ -252,14 +253,16 @@ def refine(segments: list[tuple],
     cut_segs_kept: list[tuple] = []
     cut_segs_pruned: list[tuple] = []
     for seg in cut_segs:
-        if _seg_xspan(seg) < min_span:
+        if _seg_len(seg) < min_length:
             cut_segs_pruned.append(seg)
         else:
             cut_segs_kept.append(seg)
 
     log = {
         'step': step,
-        'min_span_threshold': min_span,
+        'pruning_metric': 'euclidean_length',
+        'min_length_threshold': min_length,
+        'min_span_threshold': min_length,  # legacy diagnostic key (same cutoff)
         'snap_tol': 0.0,           # snapping disabled
         'boundaries': boundaries,
         'n_input': len(segments),

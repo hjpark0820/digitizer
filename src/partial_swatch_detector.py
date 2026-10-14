@@ -115,6 +115,12 @@ class Detection:
     boundary_evidence: dict = field(default_factory=dict)
     centre_fill_deferred: bool = False
 
+    @property
+    def centre_fill_defer_reason(self) -> str:
+        # Keep unchanged native/legacy Detection dictionaries byte-compatible.
+        # Only an actually deferred hypothesis gains diagnostic metadata.
+        return self.boundary_evidence.get('centre_fill_defer_reason', '')
+
 
 @dataclass
 class TemplateResult:
@@ -132,6 +138,70 @@ class TemplateResult:
     candidate_diagnostics: dict = field(default_factory=dict)
     clustering_diagnostics: dict = field(default_factory=dict)
     performance_diagnostics: dict = field(default_factory=dict)
+    # Opt-in compact evidence from the native verifier, never full-image masks.
+    partial_evidence: list[dict] = field(default_factory=list)
+    # Rejected raw seeds only; never consumed by native detection/refinement.
+    filled_occlusion_evidence: list[dict] = field(default_factory=list)
+
+
+class _PartialEvidenceCollector:
+    """Bounded, diagnostic-only reuse of native open-square candidate evidence.
+
+    Repeated overlap phases at the same centre replace one record, rather than
+    counting their repeated pixels as new evidence. Native verification and
+    selection never read this collector.
+    """
+
+    def __init__(self, template, max_records=512):
+        self.template = template
+        self.max_records = max_records
+        self.records = {}
+        self.context = {}
+        self.dropped = 0
+
+    def set_context(self, stage, seed_x, seed_y, supporting_cells=0,
+                    density=0., grid_stride=0):
+        self.context = dict(stage=stage,
+            coordinate_space='refined' if stage == 'refined' else 'raw_clustered_seed',
+            seed_x=float(seed_x), seed_y=float(seed_y),
+            seed_support=dict(supporting_cells=int(supporting_cells),
+                density=float(density), grid_stride=int(grid_stride)))
+
+    def __call__(self, record):
+        row = dict(version='native-partial-evidence-v1',
+            template=self.template.key, shape_hint=self.template.shape_hint or self.template.name,
+            proposal_scale=float(self.template.proposal_scale),
+            diameter=float(self.template.diameter), **self.context, **record)
+        key = (row['stage'], round(row['x'], 4), round(row['y'], 4))
+        old = self.records.get(key)
+        if old is not None:
+            if row['seed_support']['density'] <= old['seed_support']['density']:
+                return
+        elif len(self.records) >= self.max_records:
+            self.dropped += 1
+            return
+        self.records[key] = row
+
+    def gpu_seed(self, x, y, detection):
+        self(dict(x=float(x), y=float(y), native_passed=detection is not None,
+            rejection='native_gpu_rejected' if detection is None else None,
+            score=None if detection is None else float(detection.score),
+            sectors=[], metrics={}, evidence_status='raw_seed_only_gpu'))
+
+
+def _filled_occlusion_records(template, collector):
+    """Keep a failed centre-fill test only when every native outline gate passed."""
+    if (collector is None or not template.ink.achromatic or
+            not str(template.shape_hint or template.name).startswith('filled_') or
+            template.matching_profile != 'bw_v46_uncertain'):
+        return []
+    return [dict(row, contract='raw_filled_boundary_requires_foreground_v1',
+                 native_active_eligible=False, center_policy='unrefined_grid_seed')
+            for row in collector.records.values()
+            if row.get('stage') in ('rough', 'clustered_seed')
+            and row.get('native_passed') is False
+            and row.get('rejection') == 'centre_fill'
+            and row.get('evidence_status') == 'native_verifier']
 
 
 def parse_box(text: str) -> Box:
@@ -760,6 +830,30 @@ def _defer_small_hollow_centre_fill(template):
             and template.marker_kind == 'open' and template.diameter <= 10.)
 
 
+def _defer_supported_hollow_centre_fill(template, visible_sectors,
+                                       supported_sectors, mismatch_sectors):
+    """Preserve an outline-supported hypothesis whose small centre is crossed.
+
+    Visible boundary transitions, not just ink-compatible occlusion, must span
+    at least half the eight sectors. Required rim ink must support three
+    quarters of the sectors with no contradictory missing-rim sector. All
+    normal coverage, orientation, score and later identity gates still apply.
+    A completed small-hollow model supplies the mandatory downstream hollow,
+    filled and line-only comparison; an observed/colour template cannot opt in.
+
+    Counts may be scalars, NumPy arrays or CUDA tensors. Keep one predicate for
+    CPU and batched GPU verification without copying image patches to CPU.
+    """
+    eligible = (template.matching_profile == 'bw_v46_uncertain'
+                and template.ink.achromatic and template.model_completed
+                and template.marker_kind == 'open'
+                and bool(getattr(template, 'small_hollow_model', None)))
+    if not eligible:
+        return False
+    return ((visible_sectors >= 4) & (supported_sectors >= 6)
+            & (mismatch_sectors == 0))
+
+
 def _verify_candidate(
     x: float,
     y: float,
@@ -776,7 +870,17 @@ def _verify_candidate(
     _prepared=None,
     occlusion_mask=None,
     paper_mask=None,
+    partial_evidence_collector=None,
 ) -> Detection | None:
+    def capture(rejection, *, contour=None, metrics=None, score=None):
+        if partial_evidence_collector is not None:
+            partial_evidence_collector(dict(
+                x=float(x), y=float(y), native_passed=rejection is None,
+                rejection=rejection, score=None if score is None else float(score),
+                sectors=[] if contour is None else [dict(s) for s in contour['sectors']],
+                metrics={} if metrics is None else metrics,
+                evidence_status='native_verifier' if contour is not None else 'early_rejection'))
+
     edge_patch = _extract_aligned_patch(plot_edge, x, y, template.edge.shape)
     membership_patch = _extract_aligned_patch(
         membership, x, y, template.edge.shape
@@ -794,6 +898,7 @@ def _verify_candidate(
             paper=None if paper_mask is None else _extract_aligned_patch(paper_mask,x,y,template.edge.shape)
             visibility = measure(template, membership_patch, patch, paper=paper)
             if not visibility['candidate_supported']:
+                capture('other_colour_visibility')
                 return None
             # The boundary between own colour and an occluder is not evidence
             # of the marker's external outline.
@@ -801,6 +906,7 @@ def _verify_candidate(
             membership_patch = membership_patch * (1.-patch)
             _prepared = None
     if not edge_patch.any():
+        capture('no_plot_edge')
         return None
 
     distance_to_plot = None if _prepared is not None else cv2.distanceTransform(
@@ -865,6 +971,12 @@ def _verify_candidate(
 
     matched_y, matched_x = np.nonzero(template_match)
     if len(matched_x) == 0:
+        capture('no_template_contour_match', contour=contour_evidence,
+                metrics=dict(contour_coverage=contour_coverage,
+                    foreground_coverage=foreground_coverage,
+                    direct_foreground_coverage=direct_foreground_coverage,
+                    centre_fill=plot_centre_fill,
+                    centre_fill_similarity=centre_fill_similarity))
         return None
 
     foreground_y, foreground_x = np.nonzero(foreground_match)
@@ -940,7 +1052,16 @@ def _verify_candidate(
         centre_fill_ok = plot_centre_fill <= 0.70
     else:
         centre_fill_ok = centre_fill_similarity >= 0.45
-    centre_fill_deferred = not centre_fill_ok and _defer_small_hollow_centre_fill(template)
+    centre_fill_defer_reason = ''
+    if not centre_fill_ok:
+        if _defer_small_hollow_centre_fill(template):
+            centre_fill_defer_reason = 'tiny_completed_hollow'
+        elif _defer_supported_hollow_centre_fill(template,
+                len(contour_evidence['visible_sectors']),
+                len(contour_evidence['supported_sectors']),
+                len(contour_evidence['mismatch_sectors'])):
+            centre_fill_defer_reason = 'supported_completed_hollow_contour'
+    centre_fill_deferred = bool(centre_fill_defer_reason)
     if centre_fill_deferred:
         centre_fill_ok = True
     minimum_cells = required_cells
@@ -973,6 +1094,31 @@ def _verify_candidate(
         or direct_foreground_coverage < minimum_direct_coverage
         or not centre_fill_ok
     ):
+        if partial_evidence_collector is not None:
+            failed = [name for name, passed in (
+                ('supporting_cells', supporting_cells >= minimum_cells),
+                ('supported_sectors', len(contour_evidence['supported_sectors']) >= minimum_supported_sectors),
+                ('mismatch_sectors', len(contour_evidence['mismatch_sectors']) < 3),
+                ('orientation_bins', used_orientation_bins >= minimum_orientation_bins),
+                ('radial_sectors', radial_sectors >= minimum_radial),
+                ('horizontal_span', horizontal_span >= minimum_span * template.diameter),
+                ('vertical_span', vertical_span >= minimum_span * template.diameter),
+                ('contour_coverage', contour_coverage >= minimum_contour_coverage),
+                ('foreground_coverage', foreground_coverage >= minimum_foreground_coverage),
+                ('direct_foreground_coverage', direct_foreground_coverage >= minimum_direct_coverage),
+                ('centre_fill', centre_fill_ok)) if not passed]
+            capture('|'.join(failed), contour=contour_evidence,
+                metrics=dict(contour_coverage=contour_coverage, contour_precision=contour_precision,
+                    foreground_coverage=foreground_coverage,
+                    direct_foreground_coverage=direct_foreground_coverage,
+                    centre_fill=plot_centre_fill, centre_fill_similarity=centre_fill_similarity,
+                    centre_fill_deferred=bool(centre_fill_deferred),
+                    centre_fill_defer_reason=centre_fill_defer_reason,
+                    supporting_cells=int(supporting_cells), orientation_bins=used_orientation_bins,
+                    radial_sectors=radial_sectors, raw_hypotheses=len(nearby_hypotheses),
+                    visible_fraction=contour_evidence['visible_fraction'],
+                    occluded_fraction=contour_evidence['occluded_fraction'],
+                    mismatch_fraction=contour_evidence['mismatch_fraction']))
         return None
 
     effective_hypotheses = len(nearby_hypotheses) / overlap_multiplicity
@@ -1011,6 +1157,22 @@ def _verify_candidate(
     boundary_delta, boundary_evidence = grid_score_adjustment(
         template, membership_patch, asymmetric_contour_support, other_patch)
     score += boundary_delta
+    if centre_fill_deferred:
+        boundary_evidence = dict(boundary_evidence,
+                                 centre_fill_defer_reason=centre_fill_defer_reason)
+    if partial_evidence_collector is not None:
+        capture(None, contour=contour_evidence, score=score,
+            metrics=dict(contour_coverage=contour_coverage, contour_precision=contour_precision,
+                foreground_coverage=foreground_coverage,
+                direct_foreground_coverage=direct_foreground_coverage,
+                centre_fill=plot_centre_fill, centre_fill_similarity=centre_fill_similarity,
+                centre_fill_deferred=bool(centre_fill_deferred),
+                centre_fill_defer_reason=centre_fill_defer_reason,
+                supporting_cells=int(supporting_cells), orientation_bins=used_orientation_bins,
+                radial_sectors=radial_sectors, raw_hypotheses=len(nearby_hypotheses),
+                visible_fraction=contour_evidence['visible_fraction'],
+                occluded_fraction=contour_evidence['occluded_fraction'],
+                mismatch_fraction=contour_evidence['mismatch_fraction']))
     return Detection(
         template=template.key,
         x=float(x),
@@ -1315,6 +1477,10 @@ def detect_template(
     grid_identity_competitor=None,
     occlusion_mask=None,
     colour_observation=None,
+    *,
+    capture_partial_evidence: bool = False,
+    capture_filled_occlusion_evidence: bool = False,
+    partial_evidence_shapes: str = 'open_square',
 ) -> TemplateResult:
     started = time.perf_counter()
     if not 0.0 <= grid_overlap < 1.0:
@@ -1327,6 +1493,23 @@ def detect_template(
         raise ValueError('gpu_batch_size must be a positive integer')
     if not isinstance(compute_baseline, bool):
         raise ValueError('compute_baseline must be Boolean')
+    if not isinstance(capture_partial_evidence, bool):
+        raise ValueError('capture_partial_evidence must be Boolean')
+    if not isinstance(capture_filled_occlusion_evidence, bool):
+        raise ValueError('capture_filled_occlusion_evidence must be Boolean')
+    if partial_evidence_shapes not in {'open_square','all_source'}:
+        raise ValueError('Unknown partial evidence shape scope')
+    capture_filled = bool(capture_filled_occlusion_evidence and template.ink.achromatic
+        and str(template.shape_hint or template.name).startswith('filled_')
+        and occlusion_mask is None and colour_observation is None)
+    partial_collector = (_PartialEvidenceCollector(template)
+        if (capture_partial_evidence or capture_filled) and template.ink.achromatic
+        and template.matching_profile == 'bw_v46_uncertain'
+        and (capture_filled or partial_evidence_shapes == 'all_source' or
+             ((template.shape_hint or template.name) == 'open_square'
+              and template.marker_kind == 'open')) else None)
+    capture_options = ({} if partial_collector is None else
+                       {'partial_evidence_collector': partial_collector})
     from bw_colour_visibility_v46 import validate_mask
     occlusion_mask = validate_mask(occlusion_mask, image.shape[:2])
     visibility_options = {} if occlusion_mask is None else {'occlusion_mask':occlusion_mask}
@@ -1446,7 +1629,11 @@ def detect_template(
         candidate_stats.update(visibility_policy='bw_three_state_visibility_v1', cpu_reason='other_colour_visibility')
         refinement_stats.update(requested_backend=requested_refinement, cpu_reason='other_colour_visibility')
     for group_candidates, group_stride, group_hypotheses in candidate_groups:
-        for x, y, _, _ in group_candidates:
+        for x, y, seed_cells, seed_density in group_candidates:
+            if partial_collector is not None:
+                partial_collector.set_context(
+                    'clustered_seed' if rough_results is not None else 'rough',
+                    x, y, seed_cells, seed_density, group_stride)
             rough_detection = next(rough_results) if rough_results is not None else _verify_candidate(
                 x,
                 y,
@@ -1459,7 +1646,18 @@ def detect_template(
                 group_stride,
                 group_hypotheses,
                 **visibility_options,
+                **capture_options,
             )
+            if partial_collector is not None and rough_results is not None:
+                if (capture_filled and rough_detection is None and
+                        len(partial_collector.records) < partial_collector.max_records):
+                    # CPU diagnostic replay supplies the SAME boundary gates;
+                    # its return value cannot change native CUDA acceptance.
+                    _verify_candidate(x, y, template, membership, plot_edge,
+                        plot_orientation, plot_area, grid_step, group_stride,
+                        group_hypotheses, **capture_options)
+                else:
+                    partial_collector.gpu_seed(x, y, rough_detection)
             if rough_detection is None:
                 continue
             refinement_stats['seed_count'] += 1
@@ -1482,6 +1680,9 @@ def detect_template(
                 # verification pass; only center alignment uses the CPU.
                 cpu_aligned.append((refined_x, refined_y, group_stride, group_hypotheses))
                 continue
+            if partial_collector is not None:
+                partial_collector.set_context('refined', x, y, seed_cells,
+                                              seed_density, group_stride)
             detection = _verify_candidate(
                 refined_x,
                 refined_y,
@@ -1494,6 +1695,7 @@ def detect_template(
                 group_stride,
                 group_hypotheses,
                 **visibility_options,
+                **capture_options,
             )
             if detection is not None:
                 verified.append(detection)
@@ -1517,15 +1719,27 @@ def detect_template(
                 batch_size=gpu_batch_size, verifier=candidate_verifier, geometry=geometry)
             verified.extend(d for d in detections if d is not None)
         else:
-            for (x, y), (_, _, group_stride, group_hypotheses) in zip(aligned, pending_refinement, strict=True):
+            for (x, y), (seed_x, seed_y, group_stride, group_hypotheses) in zip(aligned, pending_refinement, strict=True):
+                if partial_collector is not None:
+                    partial_collector.set_context('refined', seed_x, seed_y,
+                                                  grid_stride=group_stride)
                 detection = _verify_candidate(x, y, template, membership, plot_edge,
-                    plot_orientation, plot_area, grid_step, group_stride, group_hypotheses)
+                    plot_orientation, plot_area, grid_step, group_stride, group_hypotheses,
+                    **capture_options)
                 if detection is not None:
                     verified.append(detection)
     if candidate_verifier is not None:
         candidate_stats.update(candidate_verifier.stats)
         candidate_stats['spatial_index_queries'] = sum(h.queries for _, _, h in candidate_groups)
         candidate_stats['spatial_index_examined'] = sum(h.examined for _, _, h in candidate_groups)
+    if partial_collector is not None:
+        candidate_stats['partial_evidence'] = dict(
+            captured=len(partial_collector.records), dropped=partial_collector.dropped,
+            max_records=partial_collector.max_records,
+            contour_capture=('failed_filled_seed_cpu_diagnostic_other_seeds_raw_gpu'
+                if candidate_verifier is not None and capture_filled else
+                'raw_seed_only_gpu' if candidate_verifier is not None else 'native_verifier'),
+            evidence_changes_native_decisions=False)
     candidate_refinement_seconds = time.perf_counter() - stage_started
     stage_started = time.perf_counter()
     if defer_nms:
@@ -1572,6 +1786,8 @@ def detect_template(
         candidate_diagnostics=candidate_stats,
         clustering_diagnostics=clustering_stats,
         performance_diagnostics=performance,
+        partial_evidence=[] if partial_collector is None else list(partial_collector.records.values()),
+        filled_occlusion_evidence=_filled_occlusion_records(template, partial_collector) if capture_filled else [],
     )
 
 

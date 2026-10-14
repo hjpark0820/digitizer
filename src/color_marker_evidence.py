@@ -86,6 +86,38 @@ def _swatch_model(image, box, rgb=None):
                            paper_bgr=_paper(image[y0:y1, x0:x1]))
 
 
+# Scale (ptp units) of the chroma penalty of a near-neutral key's membership.
+NEUTRAL_CHROMA_SIGMA = 18.
+
+
+def _neutral_chroma_deviation(pixels, key_bgr):
+    """Chroma NOT explained by a near-neutral key's own tint, in ptp units.
+
+    A near-neutral key may itself be tinted (slate/blue-grey). Its own ink
+    keeps that tint on dense strokes but loses it on thin strokes and pale
+    edges (chroma blurs into paper while luminance stays). The accepted set
+    is therefore the segment from zero chroma to the key's chroma vector;
+    only the deviation from that segment is penalised. A tint of a different
+    hue is still penalised by its full chroma.
+
+    The tint is credited only when the absolute penalty REJECTS the key's own
+    ink, i.e. the key's tint exceeds the penalty scale (ptp > sigma, own-ink
+    fit < exp(-1/2)). A key whose tint is within the penalty scale already
+    passes the absolute rule on its own strokes; crediting its small tint
+    would only widen it towards other, paler inks of the same hue (a
+    blue-black key claiming a pale blue-grey marker). Such keys keep exactly
+    the previous absolute-ptp penalty.
+    """
+    key = np.asarray(key_bgr, np.float32)
+    if float(np.ptp(key)) <= NEUTRAL_CHROMA_SIGMA:
+        return np.ptp(pixels, axis=-1)
+    k = key-key.mean()
+    q = pixels-pixels.mean(axis=-1, keepdims=True)
+    norm = float(k@k)
+    t = np.clip((q@k)/norm, 0., 1.)
+    return np.ptp(q-t[..., None]*k, axis=-1)
+
+
 def _membership(image, model):
     if not model['achromatic']:
         return chromatic_evidence(image, model['paper_bgr'], model['bgr'],
@@ -110,7 +142,7 @@ def _membership(image, model):
     # darkening is allowed, gross overshoot is an independent colour error.
     fit *= np.exp(-.5*(np.maximum(alpha-1.35, 0)/.30)**2)
     if model['achromatic']:
-        fit *= np.exp(-.5*(np.ptp(pixels, axis=-1)/18.)**2)
+        fit *= np.exp(-.5*(_neutral_chroma_deviation(pixels, model['bgr'])/NEUTRAL_CHROMA_SIGMA)**2)
     strength = np.clip(alpha, 0., 1.)
     fit *= np.clip((magnitude-3.)/10., 0., 1.)
     return (strength*fit).astype(np.float32), fit.astype(np.float32)
@@ -435,6 +467,13 @@ def colour_evidence(crop_bgr, templates):
     from color_palette_identity_v46 import distinguish_inks
     membership, confidence, identity_report = distinguish_inks(
         crop, [t['model'] for t in templates], membership, confidence)
+    # Neutral keys of distinct tone (e.g. grey and black): where a key's support is
+    # ink darker than anything its own legend glyph shows and a darker neutral key
+    # observes it. Only a per-key multiplier is stored; the fields are unchanged and
+    # the multiplier is applied to a candidate only when the candidate's evidence
+    # fails the consistency check in color_marker_hybrid_v2.analyze_evidence.
+    from color_palette_identity_v46 import neutral_tone_gate
+    tone_gate, identity_report['neutral_tones'] = neutral_tone_gate(crop, templates, membership)
     paper_bgr = _paper(crop)
     contrast = np.linalg.norm(paper_bgr-crop.astype(np.float32), axis=-1)
     all_ink = np.clip((contrast-4.)/35., 0., 1.).astype(np.float32)
@@ -457,11 +496,14 @@ def colour_evidence(crop_bgr, templates):
             # Ambiguous blended pixels cannot excuse absent required ink.
             other[i] = rival*np.clip((rival-membership[i]-.08)/.35, 0., 1.)
     unknown = all_ink*(1.-np.max(confidence, axis=0))
-    return dict(membership=membership, colour_confidence=confidence,
-                other=other, paper=paper, unknown=unknown.astype(np.float32),
-                all_ink=all_ink, equivalent_colours=equivalent,
-                palette_rgb=rgb.astype(np.uint8), paper_bgr=paper_bgr,
-                palette_identity=identity_report)
+    result = dict(membership=membership, colour_confidence=confidence,
+                  other=other, paper=paper, unknown=unknown.astype(np.float32),
+                  all_ink=all_ink, equivalent_colours=equivalent,
+                  palette_rgb=rgb.astype(np.uint8), paper_bgr=paper_bgr,
+                  palette_identity=identity_report)
+    if tone_gate is not None:
+        result['neutral_tone_gate'] = tone_gate
+    return result
 
 
 def prepare_evidence(image_bgr, plot_box, series_specs, max_side=1400):

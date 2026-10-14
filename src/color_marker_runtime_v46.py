@@ -177,6 +177,29 @@ class MarkerRuntime:
                 report.update(status='no_usable_templates', template_errors=[str(error)])
             if evidence is not None:
                 evidence['priors'] = priors
+                # Thin keys measured as their solid twin's ink (mixing test) compete
+                # with that twin for the same observed marker, by shape, as same-colour
+                # keys already do. Route and evidence planes are unchanged.
+                from color_palette_identity_v46 import mixing_twin_pairs
+                twins, twin_report = mixing_twin_pairs(image, entries)
+                report['same_ink_twins'] = dict(pairs=twins, mixing_family=twin_report,
+                    scope='same-observed-marker shape competition only')
+                if twins:
+                    position = {str(t['id']): k for k, t in enumerate(evidence['templates'])}
+                    rivals = np.array(evidence['equivalent_colours'], bool)
+                    for a, c in twins:
+                        u, v = position.get(names[a]), position.get(names[c])
+                        if u is not None and v is not None:
+                            rivals[u, v] = rivals[v, u] = True
+                    evidence['identity_rivals'] = rivals
+                    # (solid, thin) roles of the measured twins: a thin key IS the solid
+                    # key's ink at partial coverage, so a filled body explains its outline.
+                    thin_twins = {}
+                    for s, t in ((twin_report or {}).get('added_pairs') or []):
+                        u, v = position.get(names[s]), position.get(names[t])
+                        if u is not None and v is not None:
+                            thin_twins.setdefault(u, []).append(v)
+                    evidence['thin_twins'] = thin_twins
                 report['palette_identity']=evidence.get('palette_identity')
                 report['palette_recovery']=evidence.get('palette_recovery')
                 if report['palette_recovery']:

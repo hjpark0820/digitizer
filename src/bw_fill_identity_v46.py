@@ -10,7 +10,7 @@ import cv2
 import numpy as np
 from scipy.ndimage import binary_fill_holes
 
-VERSION = 'bw-fill-tone-identity-v3'
+VERSION = 'bw-fill-tone-identity-v4-shared-source-support'
 
 
 def observed_hole(template):
@@ -48,24 +48,86 @@ def interior_mask(template):
     return (distance >= max(1.5, .18 * template.diameter)) & ~template.line_nuisance
 
 
-def describe_fill(template, shape_evidence=None):
+def source_interior_mask(template, shape_evidence=None):
+    """Add measured shape support only for a sample-starved filled source.
+
+    Existing sufficient interiors and all hollow/patterned/unknown sources
+    keep their old region. The ten-sample tone requirement is NOT reduced.
+    Support depends on observed geometry, never which gray pixels are dark.
+    The old interior is retained so new support cannot hide a contradiction.
+    """
     region = interior_mask(template)
+    count = int(region.sum())
+    provenance = dict(policy='eroded_outer_envelope', applied=False,
+        previous_pixels=count, selected_pixels=count, minimum_tone_pixels=10,
+        reason='existing_interior_sufficient' if count >= 10 else 'no_supported_shape_interior')
+    shape = shape_evidence or {}
+    expected_name = 'filled_' + str(shape.get('best_shape', ''))
+    if (count >= 10 or getattr(template, 'source_gray', None) is None or
+            getattr(template, 'model_completed', False) or
+            getattr(template, 'line_crossed_hollow_region', None) is not None or
+            template.name != expected_name or not template.name.startswith('filled_') or
+            shape.get('status') != 'classified' or not shape.get('sufficient_fill_evidence') or
+            shape.get('shape_confidence', 0.) < .75 or shape.get('independent_fill', 0.) < .85 or
+            shape.get('strong_hollow_evidence') or shape.get('patterned_internal_evidence')):
+        return region, provenance
+    # Even a small measured paper island prevents a binary filled label from
+    # expanding support across a possibly thick, unresolved hollow marker.
+    if observed_hole(template).any():
+        provenance['reason'] = 'observed_source_paper_hole'
+        return region, provenance
+    from bw_legend_shape import observed_interior_support
+    shared, geometry = observed_interior_support(template.mask, template.line_nuisance)
+    shared_count = int(shared.sum())
+    shared_fill = float(np.asarray(template.mask, bool)[shared].mean()) if shared_count else 0.
+    provenance.update(shape_interior_pixels=shared_count,
+        shape_diameter=geometry['diameter'], shape_depth_threshold=geometry['threshold'],
+        shape_binary_occupancy=shared_fill, template_diameter=float(template.diameter))
+    # A descriptor for a different/scaled/reconstructed mask cannot license
+    # new observations. Both support count and binary occupancy must replay.
+    if (geometry['status'] != 'measured' or shared_count != shape.get('independent_interior_pixels') or
+            abs(shared_fill-float(shape.get('independent_fill', -1.))) > 1.e-6):
+        provenance['reason'] = 'shape_support_does_not_replay'
+        return region, provenance
+    combined = (region | shared) & ~template.line_nuisance
+    if int(combined.sum()) < 10:
+        provenance['reason'] = 'shared_support_still_insufficient'
+        return region, provenance
+    provenance.update(policy='shared_observed_shape_interior', applied=True,
+        selected_pixels=int(combined.sum()), added_pixels=int((combined & ~region).sum()),
+        reason='same_native_shape_support_with_original_gray',
+        old_interior_retained=True, source_pixels_modified=False)
+    return combined, provenance
+
+
+def describe_fill(template, shape_evidence=None):
+    region, support = source_interior_mask(template, shape_evidence)
     soft = tone_ink(template)
     shape=shape_evidence or {}
     hole=observed_hole(template)
     independently_hollow=bool(shape.get('strong_hollow_evidence') and
                              not shape.get('patterned_internal_evidence') and hole.sum()>=2)
-    old_count=int(region.sum())
-    if independently_hollow:region=hole
+    old_count=support['previous_pixels']
+    native_hollow=getattr(template,'line_crossed_hollow_region',None)
+    if native_hollow is not None:
+        # The competing line/body fit supplied a region in the UNCHANGED
+        # source raster. Its native paper pixels were independently checked;
+        # no ideal white template pixels enter the fill measurement.
+        region=np.asarray(native_hollow,bool)
+        independently_hollow=True
+    elif independently_hollow:region=hole
     values = soft[region]
     result = dict(version=VERSION, style='uncertain', interior_pixels=int(values.size),
                   outer_shape=shape.get('best_shape', 'unknown'),
                   shape_uncertain=template.name=='unknown_marker' or shape.get('status')=='uncertain_shape',
                   fill_uncertain=True,observed_hole_pixels=int(hole.sum()),
-                  interior_policy='observed_enclosed_paper_excluding_rim' if independently_hollow else 'eroded_outer_envelope',
+                  interior_policy='observed_enclosed_paper_excluding_rim' if independently_hollow else support['policy'],
                   previous_envelope_interior_pixels=old_count,
+                  source_interior_support=support,
                   source_pixels_preserved=True,unclipped_gray_available=getattr(template,'source_gray',None) is not None,
                   gray_scale='0=black, 255=white; paper-normalized darkness, no per-marker contrast stretch')
+    if native_hollow is not None:
+        result['hollow_evidence_source']='native_line_and_hollow_model_competition'
     if values.size < 10 and not independently_hollow:
         return result
     mean, sd = float(values.mean()), float(values.std())

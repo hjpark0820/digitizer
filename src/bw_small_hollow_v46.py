@@ -61,7 +61,7 @@ def _bank(name,width,height,stroke,blur,scale,size):
     return np.stack(rows)
 
 
-def evidence(observed,template,center,scale=1.,available=None,occlusion=None):
+def evidence(observed,template,center,scale=1.,available=None,occlusion=None,*,exterior_profiles=False):
     """Symmetric whole-body comparison on a common observed region."""
     observed=np.asarray(observed,np.float32)
     if observed.ndim!=2 or not np.isfinite(observed).all():
@@ -82,10 +82,21 @@ def evidence(observed,template,center,scale=1.,available=None,occlusion=None):
     xs=xx+float(center[0])-c;ys=yy+float(center[1])-c
     source=cv2.remap(observed,xs,ys,cv2.INTER_LINEAR,borderMode=cv2.BORDER_CONSTANT)
     seen=cv2.remap(valid.astype(np.float32),xs,ys,cv2.INTER_LINEAR)>.99
-    base,lines=nuisance(source,(c,c),diameter,seen)
     roi=(abs(xx-c)<=diameter/2+1)&(abs(yy-c)<=diameter/2+1)
+    base,lines=nuisance(source,(c,c),diameter,seen)
+    # The finite profile is a scene-retry model, not a replacement for a
+    # resolved native identity or its calibration objective. Near other
+    # markers, lower exterior error alone need not improve body identity.
+    # The explicit opt-in is for diagnostics; production retry uses the
+    # shared scene verifier and its own filled/rival/line-only comparisons.
+    background=dict(adopted=False,reason='native_identity_model_preserved',segments=[])
+    if exterior_profiles:
+        from bw_hollow_exterior_v46 import exterior_background
+        base,background=exterior_background(source,roi,seen,base)
+        if background['adopted']:lines=len(background['segments'])
     out=dict(version=VERSION,decision='abstain',reason='insufficient_small_body_visibility',
-             loss=1.,source_pixels_unchanged=True,crossing_strokes=lines)
+             loss=1.,source_pixels_unchanged=True,crossing_strokes=lines,
+             exterior_background=background)
     if np.mean(seen[roi])<.90:return out
     roi &= seen
     losses={};filled_losses={};missing_rims={};physical={}
