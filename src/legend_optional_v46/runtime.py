@@ -322,8 +322,15 @@ def save_result(image_path,out_dir,result,*,x_range=None,y_range=None,x_log=Fals
     plot=result['plot_box'];mode=result['mode']
     result.update(source_image_path=str(Path(image_path).resolve()),source_sha256=hashlib.sha256(Path(image_path).read_bytes()).hexdigest())
     destination=Path(out_dir);destination.mkdir(parents=True,exist_ok=True)
-    cal=calibration(plot,x_range,y_range,x_log,y_log)
-    result['calibration_warning']='Axis ranges not supplied: uncalibrated pixel distances, not recovered data units' if x_range is None or y_range is None else None
+    from axis_calibration_v46 import resolve_calibration
+    # The optional-legend route uses exclusive ROI bounds; its historical
+    # calibration anchors are the last included pixels, unchanged here.
+    axis_result=resolve_calibration(image,[plot[0],plot[1],plot[2]-1,plot[3]-1],
+        *(x_range if x_range is not None else (None,None)),
+        *(y_range if y_range is not None else (None,None)),x_log,y_log)
+    cal=axis_result['calibration']
+    result['calibration_warning']=' '.join(a.get('warning','') for a in cal.values() if a.get('warning')) or None
+    write(destination/'axis_calibration.json',axis_result)
     if result.get('_type3') is not None:
         typed=result['_type3'];typed.update(source_image_path=result['source_image_path'],source_sha256=result['source_sha256'])
         write(destination/'type3_detection_v46.json',typed)
@@ -331,7 +338,9 @@ def save_result(image_path,out_dir,result,*,x_range=None,y_range=None,x_log=Fals
         payload=export_marker_payload(destination,image,result)
         result['step5_suppressed_admission']=payload['counts']
     write(destination/'legend_optional_v46.json',result)
-    write(destination/'edit_data.json',edit_data(image,result,cal))
+    edited=edit_data(image,result,cal)
+    edited['calibration_diagnostics']=axis_result['diagnostics']
+    write(destination/'edit_data.json',edited)
     cv2.imwrite(str(destination/'data_points_overlay.png'),overlay(image,result))
     print(f"[v46 optional legend] {result['status']}: {result.get('route','unresolved')}; "
           f"{len(result.get('points',[]))} active / {len(result.get('suppressed_points',[]))} suppressed. {result['reason']}",flush=True)

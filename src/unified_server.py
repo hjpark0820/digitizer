@@ -450,11 +450,12 @@ def _run_bw(job_id, in_path, out_dir, plot_area, legend_area, known_classes,
     cmd = [sys.executable, str(cli), str(in_path), str(out_dir),
            "--mode", "bw", "--skip-segments",
            "--plot-area", plot_area.strip()]
-    for flag, value, default in (("--x-min", x_min, "0"), ("--x-max", x_max, "1"),
-                                 ("--y-min", y_min, "0"), ("--y-max", y_max, "1")):
-        # New single-series inference keeps pixel units when no scale was supplied.
-        if value.strip() or legend is not None:
-            cmd += [flag, value.strip() or default]
+    for flag, value in (("--x-min", x_min), ("--x-max", x_max),
+                        ("--y-min", y_min), ("--y-max", y_max)):
+        # Omitted limits request axis OCR in either legend workflow. A zero
+        # explicitly supplied by the user is still a valid manual override.
+        if value.strip():
+            cmd += [flag, value.strip()]
     if legend is None:       cmd += ["--no-legend"]
     if legend_area.strip():   cmd += ["--legend-area", legend_area.strip()]
     if _truthy(x_log):        cmd += ["--x-log"]
@@ -544,6 +545,8 @@ def _response(job_id, out_dir, mode, ok, log):
     except (OSError, ValueError):
         selection = None
     editable = False
+    calibration = None
+    calibration_diagnostics = None
     editing_reason = 'No editable series were saved. Adjust the plot/legend selection and run detection again.'
     if (out_dir/'edit_data.json').exists() and (out_dir/'input.png').exists():
         from correction_session_v46 import read, validate_edit
@@ -551,7 +554,10 @@ def _response(job_id, out_dir, mode, ok, log):
             raster = cv2.imread(str(out_dir/'input.png'))
             if raster is None:
                 raise ValueError('The paired image could not be decoded')
-            validate_edit(read(out_dir/'edit_data.json'), raster)
+            saved_edit = read(out_dir/'edit_data.json')
+            validate_edit(saved_edit, raster)
+            calibration = saved_edit.get('calibration')
+            calibration_diagnostics = saved_edit.get('calibration_diagnostics')
             editable, editing_reason = True, None
         except (OSError, ValueError, TypeError, KeyError, AttributeError) as error:
             editing_reason = 'Saved data cannot be edited: '+str(error)
@@ -642,6 +648,8 @@ def _response(job_id, out_dir, mode, ok, log):
         "editing_unavailable_reason": editing_reason,
         "result_version": {k:meta.get(k) for k in ('version_id','version_kind','created_at','iterations','stop_policy')},
         "summary": summary,
+        "calibration": calibration,
+        "calibration_diagnostics": calibration_diagnostics,
         "correction_backend": 'colour_group_bw_elements' if group_backend else None,
         "detection_availability": group_availability,
         "step5_stop": stop_report,

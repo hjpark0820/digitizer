@@ -44,8 +44,7 @@ def parser(default_mode):
 
 def _bounds(a,axis):
     lo,hi=getattr(a,axis+'_min'),getattr(a,axis+'_max')
-    if (lo is None)!=(hi is None):raise ValueError(f'Both {axis}-min and {axis}-max must be supplied together')
-    return None if lo is None else [lo,hi]
+    return None if lo is None and hi is None else [lo,hi]
 
 
 def maybe_run(argv, *, default_mode='color'):

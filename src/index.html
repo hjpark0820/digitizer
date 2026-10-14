@@ -198,22 +198,25 @@
       <p id="legendSelectionHint" class="hint" role="status">No legend selected: automatically infer one series from plot. Draw the plot area before running.</p>
 
       <hr style="border:none; border-top:1px solid var(--border); margin:16px 0;">
+      <div style="font-size:13px; font-weight:600;">Axis values</div>
+      <p class="hint" id="axisAutoHint">Leave limits blank to read axis labels automatically (OCR: optical character recognition). Entered limits override automatic values. Blank limits use automatic linear/log detection; tick a log box to force a logarithmic axis. Automatic above chooses Colour or B&amp;W; axis reading works in every mode.</p>
+      <div class="axisgrid" aria-describedby="axisAutoHint">
+        <label>x min <input id="xMin" type="text" inputmode="text" placeholder="auto"></label>
+        <label>x max <input id="xMax" type="text" inputmode="text" placeholder="auto"></label>
+        <label>y min <input id="yMin" type="text" inputmode="text" placeholder="auto; e.g. 1e-15"></label>
+        <label>y max <input id="yMax" type="text" inputmode="text" placeholder="auto"></label>
+      </div>
+      <div class="axischecks">
+        <label><input id="xLog" type="checkbox"> x log scale</label>
+        <label><input id="yLog" type="checkbox"> y log scale</label>
+      </div>
       <label style="font-size:13px;"><input id="useScaleBox" type="checkbox"> Use a separate <b>scale box</b> (optional)</label>
       <div id="scaleBoxPanel" style="display:none; margin-top:8px;">
         <div style="margin-bottom:8px;">
           <button id="btnScale" data-tool="scale" class="toolbtn"><span class="swatch" style="background:#e08a1e"></span>Draw scale box</button>
           <span id="scaleBoxInfo" class="hint" style="margin-left:8px;">drag the box exactly on the axes</span>
         </div>
-        <div class="axisgrid">
-          <label>x min <input id="xMin" type="text" inputmode="text" placeholder="auto"></label>
-          <label>x max <input id="xMax" type="text" inputmode="text" placeholder="auto"></label>
-          <label>y min <input id="yMin" type="text" inputmode="text" placeholder="e.g. 1e-15 or 10^-15"></label>
-          <label>y max <input id="yMax" type="text" inputmode="text" placeholder="auto"></label>
-        </div>
-        <div class="axischecks">
-          <label><input id="xLog" type="checkbox"> x log scale</label>
-          <label><input id="yLog" type="checkbox"> y log scale</label>
-        </div>
+        <p class="hint">For a separate scale box, enter all four limits above and select the log settings. The limits describe the scale box edges. Without a separate box, the limits describe the plot area edges.</p>
       </div>
 
       <div id="bwPanel" style="display:none; margin-top:14px; padding-top:12px; border-top:1px dashed var(--border);">
@@ -236,6 +239,7 @@
     <div class="panel" id="result" style="min-width:320px; display:none;">
       <div id="summary" role="status" style="font-size:14px; margin-bottom:10px;"></div>
       <p id="resultModeSelection" class="hint" role="status" hidden></p>
+      <p id="resultCalibrationStatus" class="hint" role="status" style="white-space:pre-line;" hidden></p>
       <details id="inferenceDiagnostic" style="display:none; margin-bottom:10px;">
         <summary>Detection status and log</summary>
         <a id="inferenceDiagnosticLink" target="_blank" rel="noopener">Open v46 series inference diagnostic</a>
@@ -550,6 +554,8 @@ function clearDetectionState() {
   document.getElementById('summary').textContent = '';
   document.getElementById('resultModeSelection').textContent = '';
   document.getElementById('resultModeSelection').hidden = true;
+  document.getElementById('resultCalibrationStatus').textContent = '';
+  document.getElementById('resultCalibrationStatus').hidden = true;
   document.getElementById('masksGrid').innerHTML = '';
   document.getElementById('downloadXlsx').removeAttribute('href');
   for (const id of ['result', 'diagBox', 'masksBox', 'correctItersWrap', 'step5MethodHint', 'inferenceDiagnostic']) {
@@ -1345,6 +1351,9 @@ function presentResult(data, withCorrect = false) {
     const modeSelection = document.getElementById('resultModeSelection');
     modeSelection.textContent = resultModeSelectionText(data);
     modeSelection.hidden = !modeSelection.textContent;
+    const calibrationStatus = document.getElementById('resultCalibrationStatus');
+    calibrationStatus.textContent = data.edit_data_url ? axisCalibrationText(data.calibration) : '';
+    calibrationStatus.hidden = !calibrationStatus.textContent;
     const inference = data.legend_optional;
     const diagnosticWrap = document.getElementById('inferenceDiagnostic');
     diagnosticWrap.style.display = inference || !data.ok ? 'block' : 'none';
@@ -1535,6 +1544,23 @@ function resultModeSelectionText(data) {
   return prefix + (data.mode_selection?.reason ? '. ' + data.mode_selection.reason : '');
 }
 
+function axisCalibrationText(calibration) {
+  const number = value => Number.isFinite(value) ? String(Number(value.toPrecision(7))) : '?';
+  return ['x', 'y'].map(name => {
+    const axis = calibration && calibration[name];
+    const prefix = name.toUpperCase() + ': ';
+    if (!axis) return prefix + 'no axis calibration — coordinates are pixels.';
+    const range = number(axis.v0) + ' to ' + number(axis.v1);
+    if (axis.kind === 'pixel' || axis.status === 'needs_calibration') {
+      return prefix + 'uncalibrated — pixel distance (' + range + '). ' +
+        (axis.warning || 'Axis values could not be confirmed; enter both limits to set data units.');
+    }
+    const source = ({automatic: 'automatic', manual: 'manual', user_supplied: 'manual',
+      mixed: 'automatic + manual override'})[axis.source] || 'saved calibration';
+    return prefix + source + ' · ' + range + ' (' + (axis.log ? 'log' : 'linear') + ').';
+  }).join('\n');
+}
+
 function responseErrorMessage(detail) {
   if(Array.isArray(detail))return detail.map(responseErrorMessage).filter(Boolean).join('\n');
   if(detail && typeof detail==='object') {
@@ -1721,9 +1747,13 @@ async function loadCorrectionPair(imageFile,dataFile,useSavedVersion=false) {
     document.getElementById('useScaleBox').checked=false; scaleBoxUpdate();
     for (const axis of ['x','y']) {
       const a=saved.calibration && saved.calibration[axis];
-      document.getElementById(axis+'Min').value=a ? a.v0 : '';
-      document.getElementById(axis+'Max').value=a ? a.v1 : '';
-      document.getElementById(axis+'Log').checked=!!(a && a.log);
+      // Saved OCR results remain automatic on the next detection run. Pixel
+      // fallback distances must never become user-supplied physical units.
+      const manual=a && a.kind!=='pixel' && a.status!=='needs_calibration' &&
+        !['automatic','mixed','pixel','uncalibrated_pixel_distance'].includes(a.source);
+      document.getElementById(axis+'Min').value=manual ? a.v0 : '';
+      document.getElementById(axis+'Max').value=manual ? a.v1 : '';
+      document.getElementById(axis+'Log').checked=!!(manual && a.log);
     }
     showImage(loaded,blob); updateInfo(); presentResult(data); syncImageControls();
     document.getElementById('bwResolution').value='100';
@@ -2144,9 +2174,7 @@ function recompute() {
   drawTable(rows);
   window._edRows = rows;
   document.getElementById('edStatus').textContent =
-    rows.length + ' points' + (!cal ? ' (no axis calibration — values are pixels)'
-      : [cal.x, cal.y].some(axis => axis.kind === 'pixel')
-        ? ' (' + ['x', 'y'].filter(axis => cal[axis].kind === 'pixel').join(', ') + ' in pixels)' : '');
+    rows.length + ' points · ' + axisCalibrationText(cal).replace(/\n/g, ' ');
 }
 document.getElementById('edRecompute').onclick = recompute;
 

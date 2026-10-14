@@ -161,6 +161,7 @@ review and preserve the original image together with the saved JSON.
 | `src/ocr_bridge_v46.py` | Tesseract adapter and local AI snippet/answer queue; protocol in `src/AI_OCR.md` |
 | `src/unified_server.py` | FastAPI routes, AI OCR request/image/answer endpoints, image preparation, detector/correction child processes, job responses, saved-session import/export |
 | `src/automatic_mode_v46.py` | Lightweight, model-free Colour/B&W selection from selected plot and legend pixels; never replaces manual overrides |
+| `src/axis_calibration_v46.py` | Shared numeric tick OCR and conservative per-axis linear/log fitting; manual overrides and explicit pixel fallback |
 | `src/index.html` | HTML/CSS and inline JavaScript; image preparation, result history, folder previews, fixed editor, canvas drawing, exports |
 | `src/image_sidecar_v46.js` | Browser folder/file handles, original-image binding, same-stem JSON pairing, history merge and writes |
 | `src/run_A4_auto_v46.py` | Shared v46 dispatcher: Colour → `run_A4_color_v46.py`; B&W → `bw_detect_cli.py` with `grid_v46` |
@@ -224,6 +225,30 @@ converts pixels to values without changing the source points. User-submitted web
 ROIs use inclusive right/bottom bounds within `width-1`, `height-1`; several
 internal v46 geometry helpers use half-open bounds. Convert at existing boundaries
 rather than changing one convention globally.
+
+Blank X/Y limits request `axis_calibration_v46.resolve_calibration()` in the B&W,
+colour and no-legend export paths. The server must omit blank CLI limits, not
+replace them with 0 and 1. Each axis is independent: both manual limits skip OCR
+and use linear mapping unless the log flag is set; a partial manual input is
+preserved only when a compatible automatic fit supplies the missing bound.
+Automatic fits need three distinct supporting labels and reject contradictory
+or ambiguous scales. Failed axes retain editable marker pixels and export local
+pixel distances with `kind: pixel`, `status: needs_calibration` and a warning.
+Do not describe those distances as physical units or score them as estimated data.
+
+`axis_calibration.json` and saved `edit_data.json` preserve calibration sources,
+diagnostics and warnings. GUI result/table status displays the calibration;
+imported automatic values must not silently become new manual overrides. Saved
+Step-5 correction reuses calibration rather than rereading axis labels. The GUI
+axis fields remain visible; the optional scale box still requires all four manual
+limits and transforms them to the plot-edge convention. Preserve full numerical
+precision in coordinate exports, especially small concentration values.
+
+Printed log-concentration values are returned in their printed units, not silently
+exponentiated. Categorical/multiple-row axes, difficult exponents/decimals and
+decreasing scales may need manual confirmation. Automatic detector mode selection
+and automatic numeric axis calibration are independent features. The shared reader
+uses the existing OCR bridge; it must stay import-safe without Tesseract or CUDA.
 
 Resolution/rotation creates a new working image and invalidates incompatible
 selections and results. Original image binding and prepared-image evidence are

@@ -44,6 +44,11 @@ def _prepare_image_and_palette():
     USER_X_MAX = _parse_num(_args.x_max)
     USER_Y_MIN = _parse_num(_args.y_min)
     USER_Y_MAX = _parse_num(_args.y_max)
+    for _axis_arg, _parsed_value in (('x_min', USER_X_MIN), ('x_max', USER_X_MAX),
+                                     ('y_min', USER_Y_MIN), ('y_max', USER_Y_MAX)):
+        if getattr(_args, _axis_arg) is not None and (
+                _parsed_value is None or not np.isfinite(_parsed_value)):
+            _ap.error('--' + _axis_arg.replace('_', '-') + ' must be a finite number')
     USER_X_LOG = bool(_args.x_log)
     USER_Y_LOG = bool(_args.y_log)
     if not _args.image:
@@ -266,43 +271,27 @@ def _export_results():
     with open(json_path, 'w') as f:
         json.dump({'detections': all_detections_out, 'tcaps': {k: all_tcaps_out.get(k, []) for k in all_detections_out}, 'walk_nodes': all_walk_nodes}, f, indent=2)
     print(f'\nJSON: {json_path}')
-    try:
-        _cal = calibrate_from_axes(img, list(AXIS_ROWS), list(AXIS_COLS), PLOT_AREA)
-    except Exception as _e:
-        _cal = None
-        print(f'  [calibration skipped: {_e}]')
-    _x2v = _cal['x2v'] if _cal else None
-    _y2v = _cal['y2v'] if _cal else None
-    _coords = _cal['coords'] if _cal else None
-    _has_manual = any((v is not None for v in (USER_X_MIN, USER_X_MAX, USER_Y_MIN, USER_Y_MAX))) or USER_X_LOG or USER_Y_LOG
-    if PLOT_AREA is not None and _has_manual:
-        _pa_x0, _pa_y0, _pa_x1, _pa_y1 = PLOT_AREA
-        _oc = _coords or {}
-        _xlo = USER_X_MIN if USER_X_MIN is not None else _oc.get('x_min')
-        _xhi = USER_X_MAX if USER_X_MAX is not None else _oc.get('x_max')
-        _xlog = USER_X_LOG or _oc.get('x_kind') == 'log'
-        _ylo = USER_Y_MIN if USER_Y_MIN is not None else _oc.get('y_min')
-        _yhi = USER_Y_MAX if USER_Y_MAX is not None else _oc.get('y_max')
-        _ylog = USER_Y_LOG or _oc.get('y_kind') == 'log'
-        _nx2v, _xkind = _make_p2v(_pa_x0, _pa_x1, _xlo, _xhi, _xlog)
-        _ny2v, _ykind = _make_p2v(_pa_y1, _pa_y0, _ylo, _yhi, _ylog)
-        _user_x = USER_X_MIN is not None or USER_X_MAX is not None or USER_X_LOG
-        _user_y = USER_Y_MIN is not None or USER_Y_MAX is not None or USER_Y_LOG
-        if _user_x and _nx2v is not None:
-            _x2v = _nx2v
-        if _user_y and _ny2v is not None:
-            _y2v = _ny2v
-        if _x2v is not None and _y2v is not None:
-            _fx_lo = _xlo if _user_x and _nx2v is not None else _oc.get('x_min')
-            _fx_hi = _xhi if _user_x and _nx2v is not None else _oc.get('x_max')
-            _fy_lo = _ylo if _user_y and _ny2v is not None else _oc.get('y_min')
-            _fy_hi = _yhi if _user_y and _ny2v is not None else _oc.get('y_max')
-            _fx_kind = _xkind if _user_x and _nx2v is not None else _oc.get('x_kind', 'linear')
-            _fy_kind = _ykind if _user_y and _ny2v is not None else _oc.get('y_kind', 'linear')
-            _coords = {'x_min': _fx_lo, 'x_max': _fx_hi, 'y_min': _fy_lo, 'y_max': _fy_hi, 'x_kind': _fx_kind, 'y_kind': _fy_kind}
-            print(f'  Calibration: X[{_fx_lo},{_fx_hi}] {_fx_kind}  Y[{_fy_lo},{_fy_hi}] {_fy_kind}  (manual where given)')
-        else:
-            print('  [manual calibration incomplete; using OCR values where available]')
+    # The GUI and both detector routes share the same independent-axis OCR,
+    # manual override and explicit pixel-fallback contract.
+    from axis_calibration_v46 import resolve_calibration
+    _axis_result = resolve_calibration(img, PLOT_AREA, USER_X_MIN, USER_X_MAX,
+                                      USER_Y_MIN, USER_Y_MAX, USER_X_LOG, USER_Y_LOG)
+    _axis_calibration = _axis_result['calibration']
+    def _axis_mapping(_a):
+        def _map(_p):
+            _f = (_p - _a['p0']) / (_a['p1'] - _a['p0'])
+            if _a['log']:
+                return float(10 ** (np.log10(_a['v0']) + _f *
+                                   (np.log10(_a['v1']) - np.log10(_a['v0']))))
+            return float(_a['v0'] + _f * (_a['v1'] - _a['v0']))
+        return _map
+    _x2v = _axis_mapping(_axis_calibration['x'])
+    _y2v = _axis_mapping(_axis_calibration['y'])
+    _coords = {key: value for _name, _a in _axis_calibration.items()
+               for key, value in ((_name+'_min', _a['v0']), (_name+'_max', _a['v1']),
+                                  (_name+'_kind', _a['kind']))}
+    with open(os.path.join(OUT_DIR, 'axis_calibration.json'), 'w', encoding='utf-8') as _ef:
+        json.dump(_axis_result, _ef, indent=2)
     _curve_rgb = {}
     _pal_map = {}
     try:
@@ -328,19 +317,7 @@ def _export_results():
         else:
             _curve_rgb[_cname] = (0, 0, 0)
     _CURVE_LABEL = _V46_MARKERS.labels(_curve_labels, globals(), _V46_LEGEND)
-    from calibration_guard_v46 import guard_calibration as _v46_guard_calibration, annotate_edit_data as _v46_annotate_edit_data
-    _v46_guard_calibration(globals())
     _norm_fallback = False
-    if (_x2v is None or _y2v is None) and PLOT_AREA is not None:
-        _pfx0, _pfy0, _pfx1, _pfy1 = PLOT_AREA
-        if _pfx1 != _pfx0 and _pfy1 != _pfy0:
-            if _x2v is None:
-                _x2v = lambda px, a=_pfx0, b=_pfx1: float((px - a) / (b - a))
-            if _y2v is None:
-                _y2v = lambda py, a=_pfy1, b=_pfy0: float((py - a) / (b - a))
-            _norm_fallback = True
-            _coords = {'x_min': 0.0, 'x_max': 1.0, 'y_min': 0.0, 'y_max': 1.0, 'x_kind': 'normalized', 'y_kind': 'normalized'}
-            print('  Calibration: none -> normalized [0,1] over plot area')
     try:
         import openpyxl
         from openpyxl.styles import Font, PatternFill
@@ -364,8 +341,12 @@ def _export_results():
                 _px, _py = (_p['x'], _p['y'])
                 _dx = _x2v(_px) if _x2v else None
                 _dy = _y2v(_py) if _y2v else None
-                _ws.append([_label, round(_dx, 4) if _dx is not None else None, round(_dy, 6) if _dy is not None else None])
+                # Keep numeric precision: a valid automatically read micro-
+                # concentration must not become zero through decimal rounding.
+                _ws.append([_label, _dx, _dy])
                 _rownum += 1
+                for _numeric_column in (2, 3):
+                    _ws.cell(_rownum, _numeric_column).number_format = '0.000000E+00'
                 _cell = _ws.cell(_rownum, 1)
                 _cell.fill = PatternFill('solid', start_color=_hexcol)
                 _cell.font = Font(color=_txtcol)
@@ -390,12 +371,13 @@ def _export_results():
             _pax0, _pay0, _pax1, _pay1 = PLOT_AREA
             _xk = (_coords or {}).get('x_kind', 'linear')
             _yk = (_coords or {}).get('y_kind', 'linear')
-            _ed['calibration'] = {'x': {'p0': int(_pax0), 'p1': int(_pax1), 'v0': float(_x2v(_pax0)), 'v1': float(_x2v(_pax1)), 'log': _xk == 'log', 'kind': _xk}, 'y': {'p0': int(_pay1), 'p1': int(_pay0), 'v0': float(_y2v(_pay1)), 'v1': float(_y2v(_pay0)), 'log': _yk == 'log', 'kind': _yk}}
+            _ed['calibration'] = _axis_calibration
+            _ed['calibration_diagnostics'] = _axis_result['diagnostics']
         for _cname, _pts in all_detections_out.items():
             _rgb = _curve_rgb.get(_cname, (0, 0, 0))
             _ed['curves'].append({'name': _cname, 'label': _CURVE_LABEL.get(_cname, _cname), 'rgb': [int(_rgb[0]), int(_rgb[1]), int(_rgb[2])], 'points': [{'x': int(_p['x']), 'y': int(_p['y'])} for _p in _pts]})
         with open(os.path.join(OUT_DIR, 'edit_data.json'), 'w') as _ef:
-            json.dump(_v46_annotate_edit_data(_ed, globals()), _ef)
+            json.dump(_ed, _ef)
         print('  [edit data -> edit_data.json]')
     except Exception as _e:
         print(f'  [edit data skipped: {_e}]')

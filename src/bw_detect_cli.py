@@ -102,8 +102,8 @@ def main():
     ap.add_argument("out_dir")
     ap.add_argument("--plot-area", required=True)
     ap.add_argument("--legend-area", '--legend-box', default="")
-    ap.add_argument("--x-min", default="0"); ap.add_argument("--x-max", default="1")
-    ap.add_argument("--y-min", default="0"); ap.add_argument("--y-max", default="1")
+    ap.add_argument("--x-min", type=float); ap.add_argument("--x-max", type=float)
+    ap.add_argument("--y-min", type=float); ap.add_argument("--y-max", type=float)
     ap.add_argument("--x-log", action="store_true")
     ap.add_argument("--y-log", action="store_true")
     ap.add_argument("--classes", default="")
@@ -218,8 +218,18 @@ def main():
         print("[bw-cli] ERROR: could not read image"); sys.exit(2)
     H, W = img.shape[:2]
     pa = _p4(a.plot_area)
-    xr = (float(a.x_min), float(a.x_max))
-    yr = (float(a.y_min), float(a.y_max))
+    # Keep absent limits absent until axis OCR. A fabricated 0..1 range looks
+    # like real data in the editor and prevents automatic calibration entirely.
+    from axis_calibration_v46 import resolve_calibration
+    axis_result = resolve_calibration(img, pa, a.x_min, a.x_max, a.y_min, a.y_max,
+                                      a.x_log, a.y_log, log_fn=_safe_log)
+    axis_calibration = axis_result['calibration']
+    xr = (axis_calibration['x']['v0'], axis_calibration['x']['v1'])
+    yr = (axis_calibration['y']['v0'], axis_calibration['y']['v1'])
+    a.x_log = axis_calibration['x']['log']
+    a.y_log = axis_calibration['y']['log']
+    with open(os.path.join(a.out_dir, 'axis_calibration.json'), 'w', encoding='utf-8') as f:
+        json.dump(axis_result, f, indent=2)
     kc = [c.strip() for c in a.classes.split(",") if c.strip()]
     if not kc:
         kc = None if a.point_backend == 'grid_v46' else list(BW_ALL_CLASSES)
@@ -489,6 +499,8 @@ def main():
 
     _t_save0 = _tmod.perf_counter()
     ed = bw_to_edit_data.bw_to_edit_data(result, pa, xr, yr, a.x_log, a.y_log, (W, H))
+    ed['calibration'] = axis_calibration
+    ed['calibration_diagnostics'] = axis_result['diagnostics']
     if result.get('grid_diagnostics') is not None:
         with open(os.path.join(a.out_dir, 'v46_grid_diagnostics.json'), 'w', encoding='utf-8') as f:
             json.dump(result['grid_diagnostics'], f, indent=2)
@@ -508,6 +520,7 @@ def main():
     _timing = {
         'pipeline_imports_seconds': _imports_seconds,
         'image_read_seconds': _image_read_seconds,
+        'axis_calibration_seconds': axis_result['seconds'],
         'run_detection_seconds': _detection_seconds,
         'post_detection_seconds': _tmod.perf_counter()-_t_post0,
         'output_save_seconds': _tmod.perf_counter()-_t_save0,
