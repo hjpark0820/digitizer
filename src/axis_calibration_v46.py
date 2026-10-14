@@ -380,7 +380,8 @@ def fit_axis_candidates(candidates, p0, p1, force_log=False):
 
 
 def resolve_calibration(image, plot_area, x_min=None, x_max=None, y_min=None,
-                        y_max=None, x_log=False, y_log=False, log_fn=print):
+                        y_max=None, x_log=False, y_log=False, log_fn=print,
+                        _fast_context=True):
     """Resolve each axis independently; blank bounds request automatic OCR.
 
     Complete manual bounds skip OCR and default to linear unless ``*_log`` is
@@ -401,6 +402,19 @@ def resolve_calibration(image, plot_area, x_min=None, x_max=None, y_min=None,
     if not (0 <= left < right <= width and 0 <= top < bottom <= height):
         raise ValueError('plot_area must be a non-empty rectangle inside the image.')
     plot_area = (left, top, right, bottom)
+    if _fast_context:
+        try:
+            from .fast_detection_v46 import calibration_source, working_calibration
+        except ImportError:
+            from fast_detection_v46 import calibration_source, working_calibration
+        source = calibration_source(image, plot_area)
+        if source is not None:
+            original, source_box, info = source
+            result = resolve_calibration(original, source_box, x_min, x_max, y_min,
+                                         y_max, x_log, y_log, log_fn, _fast_context=False)
+            result = working_calibration(result, info)
+            result['seconds'] = float(time.perf_counter() - started)
+            return result
     bounds = {'x': (_manual_value(x_min, 'x_min'), _manual_value(x_max, 'x_max')),
               'y': (_manual_value(y_min, 'y_min'), _manual_value(y_max, 'y_max'))}
     for axis, forced in (('x', x_log), ('y', y_log)):

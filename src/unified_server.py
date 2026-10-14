@@ -83,6 +83,11 @@ def _ocr_env(out_dir):
     env = os.environ.copy()
     env['PYTHONIOENCODING'] = 'utf-8'
     env['PYTHONUNBUFFERED'] = '1'
+    from fast_detection_v46 import CONTEXT_ENV, METADATA_FILE
+    # Never inherit another job's coordinate/axis context from the server host.
+    env.pop(CONTEXT_ENV, None)
+    if (out_dir / METADATA_FILE).exists() and (out_dir / 'source_input.png').exists():
+        env[CONTEXT_ENV] = str((out_dir / METADATA_FILE).resolve())
     if ocr_bridge_v46.agent_enabled():
         _OCR_JOBS.add(out_dir.parent.name)
         env['CHARTOCODE_OCR_DIR'] = str((out_dir / 'ocr').resolve())
@@ -269,6 +274,7 @@ async def digitize(
     correct: str = Form(""),                   # "", "1" = run mode-specific Step-5 correction
     correct_iters: str = Form(""),             # "" = default cap; else max iteration count
     prev_job: str = Form(""),                  # previous job id -> continue Step-5 from its state
+    fast_detection: str = Form(""),            # opt-in native working-image cap, both engines
 ):
     if mode not in ('auto', 'color', 'bw'):
         raise HTTPException(400, 'Unknown detection mode: choose auto, color or bw')
@@ -300,8 +306,30 @@ async def digitize(
     selection = dict(selection, requested_mode=requested_mode)
     (out_dir / 'mode_selection_v46.json').write_text(json.dumps(selection, indent=2), encoding='utf-8')
     _console_print(f"[unified] {requested_mode} -> {mode}: {selection['reason']}", flush=True)
-    # input copy the front-end can display
-    shutil.copyfile(in_path, out_dir / "input.png")
+    # Keep the uploaded/selection image untouched; each result is paired with
+    # its own native working raster so editing and saved Step 5 stay coherent.
+    from fast_detection_v46 import prepare_job, METADATA_FILE, pixel_hash
+    enabled = _truthy(fast_detection)
+    if _truthy(correct) and prev_job.strip():
+        previous_out = _job_output(prev_job.strip())
+        previous_info = previous_out / METADATA_FILE
+        enabled = bool(json.loads(previous_info.read_text(encoding='utf-8')).get('enabled')) if previous_info.exists() else False
+    try:
+        working_path, regions, speed = prepare_job(raster, in_path, out_dir,
+            dict(plot_area=plot_area, legend_box=legend_box if mode == 'color' else '',
+                 legend_area=legend_area if mode == 'bw' else ''), enabled)
+    except ValueError as error:
+        raise HTTPException(400, str(error)) from error
+    plot_area, legend_box, legend_area = (regions[name] for name in ('plot_area', 'legend_box', 'legend_area'))
+    in_path = working_path
+    if in_path != out_dir / 'input.png':
+        shutil.copyfile(in_path, out_dir / 'input.png')
+    if _truthy(correct) and prev_job.strip():
+        previous_raster = cv2.imread(str(previous_out / 'input.png'))
+        if previous_raster is None or pixel_hash(previous_raster) != speed['working_sha256']:
+            raise HTTPException(409, 'Previous correction uses different image pixels/resolution. Use saved Step 5 or run detection again.')
+    _console_print(f"[unified] Fast detection {'ON' if enabled else 'OFF'}: "
+                   f"{speed['source_size']} -> {speed['working_size']}", flush=True)
 
     try:
         if mode == "bw":
@@ -536,6 +564,11 @@ def _response(job_id, out_dir, mode, ok, log):
         p = out_dir / name
         return f"/result/{job_id}/{name}" if p.exists() else None
     diagnostic = _optional_diagnostic(out_dir)
+    from fast_detection_v46 import METADATA_FILE
+    try:
+        speed = json.loads((out_dir / METADATA_FILE).read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        speed = None
     try:
         selection = json.loads((out_dir / 'mode_selection_v46.json').read_text(encoding='utf-8'))
         if (not isinstance(selection, dict) or selection.get('mode') != mode or
@@ -644,6 +677,7 @@ def _response(job_id, out_dir, mode, ok, log):
         "requested_mode": selection.get('requested_mode') if selection else None,
         "mode_selection": selection,
         "mode_selection_url": url('mode_selection_v46.json'),
+        "fast_detection": speed,
         "editable_available": editable,
         "editing_unavailable_reason": editing_reason,
         "result_version": {k:meta.get(k) for k in ('version_id','version_kind','created_at','iterations','stop_policy')},

@@ -70,16 +70,17 @@
       "referenced_by": [
         "correction_session_v46.py:401",
         "existing distribution",
-        "unified_server.py:294"
+        "unified_server.py:300"
       ]
     },
     {
       "path": "src/axis_calibration_v46.py",
-      "bytes": 22223,
-      "sha256": "1e5bce79e1cb3aac095cfe312087f0d084439a308dbb929d5ecdb264121b044a",
+      "bytes": 22955,
+      "sha256": "92235b956dab2c7a991ccc75007878a6d952ab6cdc94e324138d81f7bf48de92",
       "referenced_by": [
         "bw_detect_cli.py:223",
         "color_pipeline_v46.py:276",
+        "existing distribution",
         "legend_optional_v46/runtime.py:325"
       ]
     },
@@ -505,7 +506,7 @@
       "sha256": "8f4fcc70bec21826a7ba86cf9acbf22eabe96e0ecb779186ae1150436abfd818",
       "referenced_by": [
         "existing distribution",
-        "unified_server.py:338"
+        "unified_server.py:366"
       ]
     },
     {
@@ -716,7 +717,7 @@
         "bw_detect_cli.py:295",
         "bw_to_edit_data.py:35",
         "existing distribution",
-        "unified_server.py:155"
+        "unified_server.py:160"
       ]
     },
     {
@@ -832,7 +833,7 @@
         "legend_optional_v46/runtime.py:391 module-name string",
         "legend_optional_v46/runtime.py:416",
         "legend_optional_v46/runtime.py:427 module-name string",
-        "unified_server.py:520 module-name string"
+        "unified_server.py:548 module-name string"
       ]
     },
     {
@@ -929,7 +930,7 @@
         "correction_session_v46.py:189",
         "existing distribution",
         "group_element_correction_v46.py:14",
-        "unified_server.py:520 module-name string"
+        "unified_server.py:548 module-name string"
       ]
     },
     {
@@ -979,7 +980,7 @@
       "referenced_by": [
         "bw_detect_cli.py:180",
         "existing distribution",
-        "unified_server.py:156"
+        "unified_server.py:161"
       ]
     },
     {
@@ -1085,7 +1086,7 @@
         "existing distribution",
         "legend_optional_v46/cli.py:83",
         "run_A4_color_v46.py:56",
-        "unified_server.py:402 dynamic filename"
+        "unified_server.py:430 dynamic filename"
       ]
     },
     {
@@ -1591,7 +1592,7 @@
         "color_correct_cli.py:202",
         "color_series_correction_v46.py:219",
         "existing distribution",
-        "unified_server.py:640"
+        "unified_server.py:673"
       ]
     },
     {
@@ -1670,9 +1671,9 @@
       "referenced_by": [
         "correction_session_v46.py:371",
         "existing distribution",
-        "unified_server.py:571",
-        "unified_server.py:806",
-        "unified_server.py:835"
+        "unified_server.py:604",
+        "unified_server.py:840",
+        "unified_server.py:869"
       ]
     },
     {
@@ -1681,29 +1682,41 @@
       "sha256": "209827179ffcdd6082fccfec2d8a437269aaa648e9146e348fde640a2449277e",
       "referenced_by": [
         "existing distribution",
-        "unified_server.py:843 dynamic filename"
+        "unified_server.py:877 dynamic filename"
       ]
     },
     {
       "path": "src/correction_session_v46.py",
-      "bytes": 27382,
-      "sha256": "660596d51ef77b0b4b0d68970e61a49357b24fcd6c6e9d2d73ec2774d18b4064",
+      "bytes": 27409,
+      "sha256": "37795a5226fa5c72a4983d9b5ed0e9fb9488f963d2fe3dca3c420df41b383713",
       "referenced_by": [
         "color_group_runtime_v46.py:455",
         "color_group_runtime_v46.py:494",
         "correction_history_v46.py:12",
         "correction_only_cli_v46.py:3",
         "existing distribution",
-        "unified_server.py:552",
-        "unified_server.py:629",
-        "unified_server.py:700",
-        "unified_server.py:718",
-        "unified_server.py:735",
-        "unified_server.py:765",
-        "unified_server.py:773",
-        "unified_server.py:787",
-        "unified_server.py:805",
-        "unified_server.py:818"
+        "unified_server.py:585",
+        "unified_server.py:662",
+        "unified_server.py:734",
+        "unified_server.py:752",
+        "unified_server.py:769",
+        "unified_server.py:799",
+        "unified_server.py:807",
+        "unified_server.py:821",
+        "unified_server.py:839",
+        "unified_server.py:852"
+      ]
+    },
+    {
+      "path": "src/fast_detection_v46.py",
+      "bytes": 5503,
+      "sha256": "d920dc80670d88c5d3f5f90152f3022f25965cc92255522c74cd37974761f1fb",
+      "referenced_by": [
+        "axis_calibration_v46.py:407",
+        "axis_calibration_v46.py:409",
+        "unified_server.py:311",
+        "unified_server.py:567",
+        "unified_server.py:86"
       ]
     },
     {
@@ -1745,8 +1758,8 @@
     },
     {
       "path": "src/index.html",
-      "bytes": 149477,
-      "sha256": "d1e3ecfd3e39f5e22a61cf40808f0b2152bac5b677e676b4f32a1c33b7a16b22",
+      "bytes": 155708,
+      "sha256": "8324c90357fa271186b57412494ccc9de17653900e6bd0f1963b0aec8415ed45",
       "referenced_by": [
         "web asset"
       ]
@@ -2111,9 +2124,9 @@
       "referenced_by": [
         "bw_detect_cli.py:190 dynamic filename",
         "existing distribution",
-        "unified_server.py:145 dynamic filename",
-        "unified_server.py:146 dynamic filename",
-        "unified_server.py:447 dynamic filename"
+        "unified_server.py:150 dynamic filename",
+        "unified_server.py:151 dynamic filename",
+        "unified_server.py:475 dynamic filename"
       ]
     },
     {
@@ -2132,7 +2145,7 @@
       "referenced_by": [
         "correction_session_v46.py:514",
         "existing distribution",
-        "unified_server.py:821"
+        "unified_server.py:855"
       ]
     },
     {
@@ -2400,8 +2413,8 @@
     },
     {
       "path": "src/unified_server.py",
-      "bytes": 46120,
-      "sha256": "f25e53111ec2be124b20d708d40b3e70e4dd31a9a890ced7a9d102c00cfa9635",
+      "bytes": 48315,
+      "sha256": "329e7b5362a19d62dee8e3fd1eadb2f514545bb5064157bb46928f9ca7a52689",
       "referenced_by": [
         "existing distribution"
       ]

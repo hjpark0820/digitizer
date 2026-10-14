@@ -49,6 +49,11 @@
   #edCoordinates { margin-top:8px; font-size:12px; }
   #edCoordinates summary { cursor:pointer; }
   #edTableWrap { max-height:23vh; overflow:auto; margin-top:6px; }
+  #resultsTableWrap { max-height:320px; overflow:auto; border:1px solid var(--border); border-radius:6px; }
+  .coordinate-table { border-collapse:collapse; font-size:12px; width:100%; }
+  .coordinate-table th { position:sticky; top:0; background:#305496; color:#fff; padding:6px 8px; text-align:left; white-space:nowrap; }
+  .coordinate-table td { border-bottom:1px solid #e5e5e5; padding:4px 8px; white-space:nowrap; }
+  .coordinate-table tbody tr:nth-child(even) { background:#f4f7fb; }
   #editScroll { width:100%; flex:1; min-height:0; overflow:scroll; border:1px solid var(--border); border-radius:8px; background:#fff; overscroll-behavior:contain; }
   #editSurface { position:relative; }
   #editCanvas { display:block; position:absolute; max-width:none; border:0; border-radius:0; }
@@ -224,6 +229,8 @@
         <p id="bwAutoLegendHint" class="hint" style="margin-top:8px;">No legend selected: infer one series from plot. A plot area is required. With a selected legend, marker shapes are classified automatically from the legend; uncertain shapes remain <code>unknown_marker</code>. Without a legend, v46 checks the plot for markers or a line-only series and reports uncertain evidence.</p>
       </div>
 
+      <label style="display:block; margin-top:14px; font-size:13px;"><input id="fastDetection" type="checkbox" aria-describedby="fastDetectionHint"> Fast detection</label>
+      <p id="fastDetectionHint" class="hint">For the next Run, limit the detection image to 1400 px on its longest side. Your upload and selected boxes stay unchanged. Axis labels are read from the original image. Results, editing and Step 5 use the reduced working image and its pixel coordinates. Small markers may lose detail; no full-resolution refinement is applied.</p>
       <button id="run" disabled>Run</button>
       <div class="spinner" id="spinner">Processing... (this can take up to a minute)</div>
       <div id="aiOcrHint" class="hint" hidden>AI OCR enabled: if Tesseract is unavailable, detection waits for the operating Claude/Codex agent to read image snippets and submit answers. Keep the agent running.</div>
@@ -239,7 +246,14 @@
     <div class="panel" id="result" style="min-width:320px; display:none;">
       <div id="summary" role="status" style="font-size:14px; margin-bottom:10px;"></div>
       <p id="resultModeSelection" class="hint" role="status" hidden></p>
+      <p id="resultFastDetection" class="hint" role="status" hidden></p>
       <p id="resultCalibrationStatus" class="hint" role="status" style="white-space:pre-line;" hidden></p>
+      <section id="resultsData" aria-labelledby="resultsDataTitle" hidden>
+        <h2 id="resultsDataTitle" style="font-size:14px; margin:14px 0 4px;">Extracted data — current result</h2>
+        <p id="resultsDataStatus" class="hint" role="status" style="white-space:pre-line;"></p>
+        <div id="resultsTableWrap" role="region" aria-label="Extracted coordinates spreadsheet" tabindex="0"></div>
+        <p class="hint">Read-only preview of active points; suppressed candidates are not included. Use Save Excel to download, or Correct data points to edit.</p>
+      </section>
       <details id="inferenceDiagnostic" style="display:none; margin-bottom:10px;">
         <summary>Detection status and log</summary>
         <a id="inferenceDiagnosticLink" target="_blank" rel="noopener">Open v46 series inference diagnostic</a>
@@ -523,7 +537,7 @@ function syncImageControls() {
   const stopPolicy = document.getElementById('step5StopPolicy');
   if (stopPolicy) stopPolicy.disabled = busy || !capabilities.correctable;
   document.getElementById('bwCorrectIters').disabled = busy || !capabilities.correctable || stopPolicy?.value === 'auto';
-  for (const id of ['fileInput', 'modeAuto', 'modeColor', 'modeBw', 'correctionImage', 'correctionData', 'loadCorrection', 'chooseImageFolder', 'folderImage', 'openFolderImage']) document.getElementById(id).disabled = busy;
+  for (const id of ['fileInput', 'modeAuto', 'modeColor', 'modeBw', 'fastDetection', 'correctionImage', 'correctionData', 'loadCorrection', 'chooseImageFolder', 'folderImage', 'openFolderImage']) document.getElementById(id).disabled = busy;
   document.getElementById('openFolderImage').disabled = busy || !editImageNames.includes(document.getElementById('folderImage').value);
   document.getElementById('browseFolderImages').disabled = busy || !editImageNames.length;
   document.getElementById('saveCorrection').disabled = busy || !window._lastJobId;
@@ -554,8 +568,14 @@ function clearDetectionState() {
   document.getElementById('summary').textContent = '';
   document.getElementById('resultModeSelection').textContent = '';
   document.getElementById('resultModeSelection').hidden = true;
+  document.getElementById('resultFastDetection').textContent = '';
+  document.getElementById('resultFastDetection').hidden = true;
   document.getElementById('resultCalibrationStatus').textContent = '';
   document.getElementById('resultCalibrationStatus').hidden = true;
+  window._resultsTableSerial = (window._resultsTableSerial || 0) + 1;
+  document.getElementById('resultsData').hidden = true;
+  document.getElementById('resultsDataStatus').textContent = '';
+  document.getElementById('resultsTableWrap').innerHTML = '';
   document.getElementById('masksGrid').innerHTML = '';
   document.getElementById('downloadXlsx').removeAttribute('href');
   for (const id of ['result', 'diagBox', 'masksBox', 'correctItersWrap', 'step5MethodHint', 'inferenceDiagnostic']) {
@@ -1271,6 +1291,7 @@ async function runDigitize(withCorrect) {
   const fd = new FormData();
   fd.append('image', fileBlob);
   fd.append('mode', APP_MODE);
+  fd.append('fast_detection', String(document.getElementById('fastDetection').checked));
   if (APP_MODE !== 'bw') fd.append('color_series_mode', 'auto');
   if (boxes.legend) fd.append(APP_MODE === 'bw' ? 'legend_area' : 'legend_box', boxes.legend.join(','));
   if (boxes.plot)   fd.append('plot_area',  boxes.plot.join(','));
@@ -1351,6 +1372,16 @@ function presentResult(data, withCorrect = false) {
     const modeSelection = document.getElementById('resultModeSelection');
     modeSelection.textContent = resultModeSelectionText(data);
     modeSelection.hidden = !modeSelection.textContent;
+    // Describe the saved job, never the checkbox for the next detection run.
+    const fastStatus = document.getElementById('resultFastDetection');
+    const fast = data.fast_detection;
+    const sizeText = size => Array.isArray(size) && size.length === 2 ? size.join(' × ') + ' px' : 'unknown size';
+    fastStatus.textContent = fast ? (fast.enabled
+      ? (fast.applied
+        ? 'Fast detection: ' + sizeText(fast.source_size) + ' → ' + sizeText(fast.working_size) + '. Results, editing and Step 5 use the reduced working image coordinates.'
+        : 'Fast detection requested: no resizing needed (longest side ≤ ' + fast.max_side + ' px).')
+      : 'Normal detection: fast downsampling is off.') : '';
+    fastStatus.hidden = !fastStatus.textContent;
     const calibrationStatus = document.getElementById('resultCalibrationStatus');
     calibrationStatus.textContent = data.edit_data_url ? axisCalibrationText(data.calibration) : '';
     calibrationStatus.hidden = !calibrationStatus.textContent;
@@ -1397,6 +1428,7 @@ function presentResult(data, withCorrect = false) {
     else _pair.img.style.display = 'none';
     const _editUrl = data.edit_data_url ||
       (data.job_id ? ('/result/' + data.job_id + '/edit_data.json') : null);
+    loadResultsTable(_editUrl, resultCurrent);
     if (_editUrl) renderReconInto(_editUrl, _pair.canvas);
     if (_editUrl && data.ok) showSuppressedReview(_editUrl, _pair.wrap,
       data.input_url || (data.job_id ? '/result/'+data.job_id+'/input.png' : null));
@@ -1737,7 +1769,8 @@ async function loadCorrectionPair(imageFile,dataFile,useSavedVersion=false) {
     if (!imageState.current(token)) { URL.revokeObjectURL(url); return; }
     await sidecar.bind(imageFile);
     // Replace the displayed job only after BOTH files and the returned image validate.
-    // Loading saved evidence does not change the mode requested for a new run.
+    // Loading saved evidence does not change the mode or Fast detection option
+    // requested for a new run. Step 5 uses the imported job's saved settings.
     imageState.finish(token); clearImageGeometry(); revokePreparedUrl();
     if (originalUrl) URL.revokeObjectURL(originalUrl);
     originalUrl=url; originalImage=loaded;
@@ -1780,6 +1813,8 @@ async function runSavedCorrection() {
     ? 'Automatic Step 5 — stop when no admissible improvement remains; maximum 20 per series. Detection skipped…'
     : 'Running saved-evidence Step 5 — detection skipped…'; spinner.style.display='block';
   try {
+    // Do not send the next-run Fast detection checkbox: the saved job owns its
+    // working resolution, coordinate transforms and correction evidence.
     const request={job_id:window._lastJobId,mode:resolvedResultMode(),iterations,stop_policy:stopPolicy,edit_data:currentEdForSave()};
     const data=await (await checkedResponse(await fetch('/correct-saved',{
       method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(request)}))).json();
@@ -2161,17 +2196,14 @@ document.getElementById('edReset').onclick = () => {
 function recompute() {
   if (!ED) return;
   const cal = ED.calibration && ED.calibration.x && ED.calibration.y ? ED.calibration : null;
-  const rows = [];
-  ED.curves.forEach(c => {
-    const label = c.label || c.name;
-    c.points.slice().sort((a, b) => a.x - b.x).forEach(p => {
-      let dx = null, dy = null;
-      if (cal) { dx = pxToData(p.x, cal.x); dy = pxToData(p.y, cal.y); }
-      rows.push({ label, name: c.name || label, swatch_id: c.swatch_id || '', rgb: c.rgb, px: p.x, py: p.y, dx, dy, curve: c, hypothesis: p.state === 'active_hypothesis' });
-    });
-  });
+  const rows = coordinateRows(ED);
   drawRecon(rows);
-  drawTable(rows);
+  drawTable(rows, ED.calibration);
+  if (window._editorJobId && window._editorJobId === window._lastJobId) {
+    // A slow saved-data response must not overwrite live manual edits.
+    window._resultsTableSerial = (window._resultsTableSerial || 0) + 1;
+    showResultsTable(ED, rows);
+  }
   window._edRows = rows;
   document.getElementById('edStatus').textContent =
     rows.length + ' points · ' + axisCalibrationText(cal).replace(/\n/g, ' ');
@@ -2531,27 +2563,90 @@ function makeResultPair(label, accent) {
   return { wrap, img, canvas };
 }
 
-function drawTable(rows) {
-  const wrap = document.getElementById('edTableWrap');
-  let html = '<table style="border-collapse:collapse; font-size:12px; width:100%;">' +
-    '<tr style="position:sticky; top:0; background:#305496; color:#fff;">' +
-    '<th style="padding:4px 8px; text-align:left;">curve (legend label)</th>' +
-    '<th style="padding:4px 8px;">data_x</th><th style="padding:4px 8px;">data_y</th>' +
-    '<th style="padding:4px 8px;">px</th><th style="padding:4px 8px;">py</th></tr>';
-  rows.forEach(r => {
-    const chip = '<span class="swatch" style="background:' + rgbCss(r.rgb) +
-                 ';border:1px solid #999; vertical-align:middle; margin-right:5px;"></span>';
-    const dx = r.dx == null ? '' : (+r.dx).toPrecision(4);
-    const dy = r.dy == null ? '' : (+r.dy).toPrecision(4);
-    html += '<tr style="border-bottom:1px solid #eee;">' +
-      '<td style="padding:3px 8px;">' + chip + escapeText(r.label) + '</td>' +
-      '<td style="padding:3px 8px; text-align:right;">' + dx + '</td>' +
-      '<td style="padding:3px 8px; text-align:right;">' + dy + '</td>' +
-      '<td style="padding:3px 8px; text-align:right; color:#999;">' + r.px + '</td>' +
-      '<td style="padding:3px 8px; text-align:right; color:#999;">' + r.py + '</td></tr>';
+function coordinateRows(ed) {
+  const rows = [], cal = ed.calibration || {};
+  (ed.curves || []).forEach((curve, seriesIndex) => {
+    const label = curve.label || curve.name || 'Series ' + (seriesIndex + 1);
+    (curve.points || []).slice().sort((a, b) => a.x - b.x).forEach((point, pointIndex) => {
+      rows.push({label, name: curve.name || label, swatch_id: curve.swatch_id || '',
+        point: point.id || point.point_id || String(pointIndex + 1),
+        rgb: curve.rgb || [70, 70, 70], px: point.x, py: point.y,
+        dx: cal.x ? pxToData(point.x, cal.x) : null,
+        dy: cal.y ? pxToData(point.y, cal.y) : null,
+        curve, hypothesis: point.state === 'active_hypothesis', state: point.state || 'active'});
+    });
   });
-  html += '</table>';
-  wrap.innerHTML = html;
+  return rows;
+}
+
+function coordinateAxisHeading(name, axis) {
+  if (!axis) return name.toUpperCase() + ' (image px)';
+  if (axis.kind === 'pixel' || axis.status === 'needs_calibration') return name.toUpperCase() +
+    (axis.pixel_units === 'source_image_pixels' ? ' (source-image pixel distance; uncalibrated)' : ' (pixel distance; uncalibrated)');
+  return name.toUpperCase() + ' (axis units)';
+}
+
+function drawCoordinateTable(rows, wrap, calibration) {
+  const cal = calibration || {};
+  const table = document.createElement('table'); table.className = 'coordinate-table';
+  const head = document.createElement('thead'), headings = document.createElement('tr');
+  for (const text of ['Series (legend label)', 'Point', coordinateAxisHeading('x', cal.x),
+    coordinateAxisHeading('y', cal.y), 'Image x (px)', 'Image y (px)', 'State']) {
+    const cell = document.createElement('th'); cell.scope = 'col'; cell.textContent = text; headings.appendChild(cell);
+  }
+  head.appendChild(headings); table.appendChild(head);
+  const body = document.createElement('tbody');
+  const number = value => Number.isFinite(value) ? value.toPrecision(4) : '—';
+  for (const row of rows) {
+    const tr = document.createElement('tr');
+    const values = [row.label, row.point || '', number(cal.x ? row.dx : row.px),
+      number(cal.y ? row.dy : row.py), row.px, row.py,
+      row.hypothesis ? 'active hypothesis' : row.state || 'active'];
+    values.forEach((value, index) => {
+      const cell = document.createElement('td'); cell.textContent = String(value ?? '');
+      if (index >= 2 && index <= 5) cell.style.textAlign = 'right';
+      tr.appendChild(cell);
+    });
+    body.appendChild(tr);
+  }
+  if (!rows.length) {
+    const tr = document.createElement('tr'), cell = document.createElement('td');
+    cell.colSpan = 7; cell.textContent = 'No active points in this result.'; tr.appendChild(cell); body.appendChild(tr);
+  }
+  table.appendChild(body); wrap.replaceChildren(table);
+}
+
+function drawTable(rows, calibration = ED?.calibration) {
+  drawCoordinateTable(rows, document.getElementById('edTableWrap'), calibration);
+}
+
+function showResultsTable(ed, rows = coordinateRows(ed)) {
+  const curves = ed.curves || [];
+  const empty = curves.filter(curve => !(curve.points || []).length);
+  document.getElementById('resultsData').hidden = false;
+  document.getElementById('resultsDataStatus').textContent = rows.length + ' active points · ' + curves.length + ' series. ' +
+    (empty.length ? empty.length + ' series with no active points: ' + empty.map(curve => curve.label || curve.name || 'Unnamed series').join(', ') + '.\n' : '\n') +
+    axisCalibrationText(ed.calibration);
+  drawCoordinateTable(rows, document.getElementById('resultsTableWrap'), ed.calibration);
+}
+
+async function loadResultsTable(editUrl, valid = currentResultGuard()) {
+  const serial = window._resultsTableSerial = (window._resultsTableSerial || 0) + 1;
+  const current = () => valid() && serial === window._resultsTableSerial;
+  document.getElementById('resultsData').hidden = !editUrl;
+  document.getElementById('resultsTableWrap').replaceChildren();
+  document.getElementById('resultsDataStatus').textContent = editUrl ? 'Loading extracted coordinates…' : '';
+  if (!editUrl) return;
+  try {
+    const response = await fetch(editUrl + (editUrl.includes('?') ? '&' : '?') + 't=' + Date.now());
+    if (!current()) return;
+    if (!response.ok) throw new Error('Saved coordinates could not be loaded.');
+    const ed = await response.json();
+    if (!current()) return;
+    showResultsTable(ed);
+  } catch (error) {
+    if (current()) document.getElementById('resultsDataStatus').textContent = 'Coordinates preview unavailable: ' + error.message;
+  }
 }
 
 document.getElementById('edCsv').onclick = () => {

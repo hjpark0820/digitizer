@@ -162,6 +162,7 @@ review and preserve the original image together with the saved JSON.
 | `src/unified_server.py` | FastAPI routes, AI OCR request/image/answer endpoints, image preparation, detector/correction child processes, job responses, saved-session import/export |
 | `src/automatic_mode_v46.py` | Lightweight, model-free Colour/B&W selection from selected plot and legend pixels; never replaces manual overrides |
 | `src/axis_calibration_v46.py` | Shared numeric tick OCR and conservative per-axis linear/log fitting; manual overrides and explicit pixel fallback |
+| `src/fast_detection_v46.py` | Optional 1,400-pixel working-image cap, inclusive region transforms, source/working provenance and original-resolution axis-reading context |
 | `src/index.html` | HTML/CSS and inline JavaScript; image preparation, result history, folder previews, fixed editor, canvas drawing, exports |
 | `src/image_sidecar_v46.js` | Browser folder/file handles, original-image binding, same-stem JSON pairing, history merge and writes |
 | `src/run_A4_auto_v46.py` | Shared v46 dispatcher: Colour → `run_A4_color_v46.py`; B&W → `bw_detect_cli.py` with `grid_v46` |
@@ -255,6 +256,19 @@ selections and results. Original image binding and prepared-image evidence are
 separate. Match source fingerprints, dimensions, series identities and calibration
 when importing; never accept an unrelated JSON just because the filename matches.
 
+The optional GUI **Fast detection** checkbox is a separate next-Run preference,
+off by default. `/digitize` resolves Automatic Colour/B&W using source pixels,
+then `fast_detection_v46.prepare_job()` caps the longest side at 1,400 pixels.
+The upload and selected source boxes remain unchanged; the server maps regions
+and pairs every result, edit and Step-5 operation with the reduced working image.
+Do not scale saved point coordinates a second time. Small images are not enlarged.
+`fast_detection_v46.json` retains pixel hashes, dimensions and actual X/Y factors.
+Axis OCR uses the hash-validated source image through a job-scoped environment
+context, then maps only calibration pixel anchors. Numeric units and manual
+overrides remain unchanged. Uncalibrated pixel distances remain source-image
+pixel distances and must be labelled accordingly. Saved-only Step 5 reuses the
+working image and calibration; the checkbox cannot resize an existing session.
+
 Suppressed candidates and inferred hypotheses are evidence, not automatically
 observed measurements. Preserve their provenance and serialized state. Missing or
 uncertain detection evidence must not silently invoke an obsolete detector.
@@ -284,6 +298,13 @@ the saved job and consumes saved evidence without detection.
 CPU and CUDA candidate-centre selection share `_suppress_ranked_centres()`. Spatial buckets only prune distant comparisons: stable rank order, inclusive distance boundaries, point coordinates and vote-map arithmetic must remain identical to the original greedy rule.
 
 ### Editor contract
+
+The results page exposes a read-only **Extracted data — current result** table
+without opening the editor. `coordinateRows()` and `drawCoordinateTable()` are
+shared with the editor so calibration and formatting stay consistent. Preserve
+calibration warnings, active/hypothesis labels, empty-series information and
+stale-response guards. Suppressed candidates do not appear as extracted data.
+Detection, Step 5, import and same-job edits update the current-result table.
 
 `ok` describes automatic detection/correction success; `editable_available` separately
 reports whether the saved image and series data pass validation for manual editing.

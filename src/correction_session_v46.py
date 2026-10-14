@@ -21,7 +21,7 @@ MAX_PIXELS = 40_000_000
 NPZ = 'color_step5_evidence_v46.npz'
 JSON_FILES = ('step5_inputs.json', 'color_correction_state.json', 'correction_state.json',
               'type3_detection_v46.json', 'legend_optional_v46.json', 'step5_stop_report.json',
-              'color_group_state_v46.json', 'mode_selection_v46.json')
+              'color_group_state_v46.json', 'mode_selection_v46.json', 'fast_detection_v46.json')
 SAFE_ID = re.compile(r'^[A-Za-z0-9_-][A-Za-z0-9_.-]{0,100}$')
 
 
