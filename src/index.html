@@ -138,6 +138,24 @@
   .saved-edit > summary { cursor:pointer; font-size:14px; font-weight:600; }
   .saved-edit[open] > summary { margin-bottom:12px; }
   .saved-edit input[type="file"] { max-width:100%; }
+  .ai-picker { max-width:960px; margin-bottom:24px; }
+  .ai-picker[hidden] { display:none; }
+  .ai-picker h2 { margin:0 0 8px; font-size:16px; }
+  .ai-picker .ai-actions { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .ai-picker button, .ai-picker a { padding:8px 12px; border:1px solid var(--border); border-radius:7px; background:#fff; font:inherit; font-size:13px; }
+  .ai-picker button { cursor:pointer; }
+  .ai-picker button:disabled { cursor:default; }
+  .ai-picker .ai-primary { background:var(--accent); color:white; border-color:var(--accent); }
+  .ai-picker ul { margin:8px 0 14px; padding-left:22px; max-height:180px; overflow:auto; font-size:13px; }
+  .ai-picker li, .ai-picker p { overflow-wrap:anywhere; }
+  .ai-picker .ai-batch { margin-top:18px; border-top:1px solid var(--border); padding-top:14px; }
+  .ai-picker h3 { margin:0 0 8px; font-size:14px; }
+  .ai-picker .ai-table-wrap { overflow:auto; margin:10px 0; }
+  .ai-picker table { width:100%; border-collapse:collapse; font-size:13px; }
+  .ai-picker th, .ai-picker td { text-align:left; padding:8px; border-bottom:1px solid #e5e5e5; vertical-align:top; }
+  .ai-picker td:first-child { max-width:450px; overflow-wrap:anywhere; }
+  .ai-picker a { display:inline-block; color:#185FA5; text-decoration:none; white-space:nowrap; }
+  body.agent-input-mode #manualDetectionControls, body.agent-input-mode #manualDetectionPreview { display:none; }
 </style>
 </head>
 <body>
@@ -146,9 +164,29 @@
   <p class="sub">Upload an image and draw the plot area. Select a legend when available, or leave the legend empty to infer one series from the plot.</p>
   <button id="resumeEditor" type="button" hidden>Resume editing →</button>
 
+  <section id="aiFilePicker" class="panel ai-picker" aria-labelledby="aiFilePickerTitle" hidden>
+    <h2 id="aiFilePickerTitle">Images to digitize</h2>
+    <p class="hint">Choose PNG or JPEG plots. Your AI agent selects the plot and legend regions and reads the text.</p>
+    <div class="ai-actions">
+      <button id="aiChooseImages" type="button">Choose images</button>
+      <button id="aiChooseFolder" type="button">Choose folder (includes subfolders)</button>
+      <input id="aiImagesInput" type="file" accept=".png,.jpg,.jpeg,image/png,image/jpeg" multiple hidden>
+      <input id="aiFolderInput" type="file" accept=".png,.jpg,.jpeg,image/png,image/jpeg" webkitdirectory directory multiple hidden>
+    </div>
+    <p id="aiSelectionCount" class="hint" role="status">No images selected.</p>
+    <ul id="aiSelectedFiles" aria-label="Selected images" hidden></ul>
+    <div class="ai-actions">
+      <button id="aiStartDigitization" class="ai-primary" type="button" disabled>Start digitization</button>
+      <button id="aiClearSelection" type="button" disabled>Clear selection</button>
+    </div>
+    <p id="aiAgentStatus" class="hint" role="status" aria-live="polite"></p>
+    <p id="aiSubmissionStatus" class="hint" role="status" aria-live="polite"></p>
+    <div id="aiBatchResults" hidden></div>
+  </section>
+
   <div class="row">
     <!-- Left: controls -->
-    <div class="panel controls">
+    <div class="panel controls" id="manualDetectionControls">
       <label class="file">New detection: choose image
         <input id="fileInput" type="file" accept="image/png,image/jpeg">
       </label>
@@ -238,7 +276,7 @@
     </div>
 
     <!-- Middle: canvas -->
-    <div class="panel canvaswrap">
+    <div class="panel canvaswrap" id="manualDetectionPreview">
       <canvas id="canvas" width="600" height="400"></canvas>
     </div>
 
@@ -1337,9 +1375,12 @@ async function runDigitize(withCorrect) {
   const runTimer = setInterval(updateRunElapsed, 1000);
   document.getElementById('spinner').style.display = 'block';
   try {
-    const res = await fetch('/digitize', { method: 'POST', body: fd });
+    // The operating agent chooses OCR in chat; manual Run still uses the drawn regions.
+    const ocrMode = await window.AgentWorkflowV46?.getOcrMode();
     if (!imageState.current(runToken)) return;
-    if (!res.ok) throw new Error(await res.text());
+    if (ocrMode) fd.append('ocr_mode', ocrMode);
+    const res = await checkedResponse(await fetch('/digitize', { method: 'POST', body: fd }));
+    if (!imageState.current(runToken)) return;
     const data = await res.json();
     if (!imageState.current(runToken)) return;
     presentResult(data, withCorrect);
@@ -1354,10 +1395,6 @@ async function runDigitize(withCorrect) {
     }
   }
 }
-
-fetch('/ocr/requests').then(response => response.ok ? response.json() : null)
-  .then(data => { document.getElementById('aiOcrHint').hidden = !data?.enabled; })
-  .catch(() => {});
 
 function presentResult(data, withCorrect = false) {
     clearEditorState();
@@ -1576,6 +1613,22 @@ function resultModeSelectionText(data) {
   return prefix + (data.mode_selection?.reason ? '. ' + data.mode_selection.reason : '');
 }
 
+function coordinateUnitMetadata(axis) {
+  // OCR may recognize a label even when numeric tick calibration fails. Never
+  // attach that physical unit to pixel distances or normalized coordinates.
+  if (!axis) return {unit: '', status: 'unavailable', note: ''};
+  if (axis.kind === 'pixel' || axis.status === 'needs_calibration') {
+    return {unit: '', status: 'uncalibrated', note: ''};
+  }
+  if (axis.kind === 'normalized') return {unit: '', status: 'normalized', note: ''};
+  const unit = typeof axis.unit === 'string' ? axis.unit.trim() : '';
+  if (axis.unit_status === 'recognized' && unit) return {unit, status: 'recognized', note: ''};
+  const note = ({ambiguous: 'unit ambiguous', not_detected: 'unit not detected',
+    unavailable: 'unit recognition unavailable', recognized: 'unit not confirmed'})[axis.unit_status] || '';
+  return {unit: '', status: axis.unit_status === 'recognized' ? 'unavailable' :
+    (['ambiguous', 'not_detected', 'unavailable'].includes(axis.unit_status) ? axis.unit_status : ''), note};
+}
+
 function axisCalibrationText(calibration) {
   const number = value => Number.isFinite(value) ? String(Number(value.toPrecision(7))) : '?';
   return ['x', 'y'].map(name => {
@@ -1587,9 +1640,14 @@ function axisCalibrationText(calibration) {
       return prefix + 'uncalibrated — pixel distance (' + range + '). ' +
         (axis.warning || 'Axis values could not be confirmed; enter both limits to set data units.');
     }
+    if (axis.kind === 'normalized') {
+      return prefix + 'normalized coordinates (' + range + ') — axis values are not calibrated.';
+    }
     const source = ({automatic: 'automatic', manual: 'manual', user_supplied: 'manual',
       mixed: 'automatic + manual override'})[axis.source] || 'saved calibration';
-    return prefix + source + ' · ' + range + ' (' + (axis.log ? 'log' : 'linear') + ').';
+    const metadata = coordinateUnitMetadata(axis);
+    return prefix + source + ' · ' + range + (metadata.unit ? ' ' + metadata.unit : '') +
+      ' (' + (axis.log ? 'log' : 'linear') + ')' + (metadata.note ? ' · ' + metadata.note : '') + '.';
   }).join('\n');
 }
 
@@ -2583,7 +2641,9 @@ function coordinateAxisHeading(name, axis) {
   if (!axis) return name.toUpperCase() + ' (image px)';
   if (axis.kind === 'pixel' || axis.status === 'needs_calibration') return name.toUpperCase() +
     (axis.pixel_units === 'source_image_pixels' ? ' (source-image pixel distance; uncalibrated)' : ' (pixel distance; uncalibrated)');
-  return name.toUpperCase() + ' (axis units)';
+  if (axis.kind === 'normalized') return name.toUpperCase() + ' (normalized; uncalibrated)';
+  const metadata = coordinateUnitMetadata(axis);
+  return name.toUpperCase() + ' (' + (metadata.unit || 'axis units') + ')';
 }
 
 function drawCoordinateTable(rows, wrap, calibration) {
@@ -2593,6 +2653,10 @@ function drawCoordinateTable(rows, wrap, calibration) {
   for (const text of ['Series (legend label)', 'Point', coordinateAxisHeading('x', cal.x),
     coordinateAxisHeading('y', cal.y), 'Image x (px)', 'Image y (px)', 'State']) {
     const cell = document.createElement('th'); cell.scope = 'col'; cell.textContent = text; headings.appendChild(cell);
+  }
+  for (const [index, axis] of [[2, cal.x], [3, cal.y]]) {
+    const detail = axis && [axis.label, axis.unit_warning].filter(Boolean).join('\n');
+    if (detail) headings.children[index].title = detail;
   }
   head.appendChild(headings); table.appendChild(head);
   const body = document.createElement('tbody');
@@ -2649,21 +2713,30 @@ async function loadResultsTable(editUrl, valid = currentResultGuard()) {
   }
 }
 
-document.getElementById('edCsv').onclick = () => {
-  const rows = window._edRows || [];
+function coordinateCsv(rows, calibration) {
   const hasSwatchIds = rows.some(r => r.swatch_id);
-  let csv = (hasSwatchIds ? 'swatch_id,' : '') + 'curve,data_x,data_y,pixel_x,pixel_y\n';
+  const cal = calibration || {};
+  const x = coordinateUnitMetadata(cal.x), y = coordinateUnitMetadata(cal.y);
+  const quoted = value => '"' + String(value ?? '').replace(/"/g, '""') + '"';
+  let csv = (hasSwatchIds ? 'swatch_id,' : '') +
+    'curve,data_x,data_y,pixel_x,pixel_y,x_unit,y_unit,x_unit_status,y_unit_status\n';
   rows.forEach(r => {
-    const lab = '"' + String(r.label).replace(/"/g, '""') + '"';
-    const values = [lab, r.dx == null ? '' : r.dx, r.dy == null ? '' : r.dy, r.px, r.py];
-    if (hasSwatchIds) values.unshift('"' + String(r.swatch_id || '').replace(/"/g, '""') + '"');
+    const values = [quoted(r.label), r.dx == null ? '' : r.dx, r.dy == null ? '' : r.dy,
+      r.px, r.py, quoted(x.unit), quoted(y.unit), quoted(x.status), quoted(y.status)];
+    if (hasSwatchIds) values.unshift(quoted(r.swatch_id));
     csv += values.join(',') + '\n';
   });
+  return csv;
+}
+
+document.getElementById('edCsv').onclick = () => {
+  const csv = coordinateCsv(window._edRows || [], ED && ED.calibration);
   const blob = new Blob([csv], { type: 'text/csv' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob); a.download = 'corrected_data.csv'; a.click();
 };
 syncImageControls();
 </script>
+<script src="/agent_workflow.js"></script>
 </body>
 </html>

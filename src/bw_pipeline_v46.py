@@ -326,7 +326,7 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
                   filled_contour_identity=False,shared_legend_source=False,
                   legend_local_completion=False,legend_joint_identity=False,
                   ambiguity_suppressed=False,grouped_partial_scene=False,neutral_group_identity=False,
-                  visible_first_detection=False):
+                  visible_first_detection=False,corner_identity_audit=False):
     """Detect with the existing per-candidate scale/aspect search by default.
 
     ``conservative`` locks each swatch to one explicitly approved size (or 1x).
@@ -385,6 +385,12 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
     Earlier grid/window failures, joint-window and colour routes are unchanged.
     The native BW production profile enables it; bare experimental calls keep
     the opt-in default, and colour-group adapters explicitly disable it.
+    ``corner_identity_audit`` is default-OFF shadow instrumentation. It records
+    fixed-source corner/arc evidence after all detection decisions, without
+    changing candidate records, active points, or suppressed points. Its exact
+    window geometry sidecar is captured separately, including ambiguous windows
+    that never receive a selection footprint. Diagnostic failures do not fail
+    detection and are explicitly reported in the audit output.
     ``joint_raster_window`` opts into a shared-legend native BW window decision.
     Native boundary/fill measurements and all-swatch/line-null differences use
     one approved scale and physical registration. No independent legend/scale
@@ -814,6 +820,8 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
     # Keep only small measured masks until selection. Do not retain the full
     # WindowVerification image arrays or perform a second verification pass.
     measured_geometry = {}
+    corner_geometries = {} if corner_identity_audit else None
+    corner_geometry_capture_seconds = 0.
     batch_windows = None
     window_fallback_reason = None
     def window_template(result):
@@ -1030,6 +1038,28 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
                     'marker_offset_x':0. if rendered is None else float(v.aligned_x-v.x),
                     'marker_offset_y':0. if rendered is None else float(v.aligned_y-v.y),
                 }
+            if corner_identity_audit and record['class_name'] in (
+                    'open_circle','filled_circle','open_square','filled_square'):
+                corner_capture_started=time.perf_counter()
+                # Read the actual rendered mask before selection. In particular,
+                # ambiguous candidates have no later footprint_polygon. The
+                # rendered mask already contains its alignment offset, so place
+                # it at the original window anchor, never aligned_x/y twice.
+                try:
+                    from bw_corner_audit_v46 import geometry_from_mask
+                    corner_mask=getattr(v,'template_mask',None)
+                    corner_anchor=(v.x,v.y)
+                    corner_provenance='exact_window_template_mask'
+                    if corner_mask is None:
+                        corner_mask=r.template.mask
+                        corner_anchor=(v.aligned_x,v.aligned_y)
+                        corner_provenance='proposal_source_mask_at_aligned_center_fallback'
+                    corner_geometries[len(records)]=geometry_from_mask(corner_mask,corner_anchor,
+                        open_marker=record['class_name'].startswith('open_'),provenance=corner_provenance)
+                except Exception as error:
+                    corner_geometries[len(records)]=dict(provenance='window_geometry_capture_error',
+                        error=f'{type(error).__name__}: {error}')
+                corner_geometry_capture_seconds += time.perf_counter()-corner_capture_started
             records.append(record)
             if record.get('exclusion_reason') == 'interior_fill_conflict':
                 continue
@@ -1551,9 +1581,45 @@ def detect_points(image, plot_area, legend_area=None, known_classes=None,
             point_timings['total_seconds']=time.perf_counter()-started
             log_fn(f"[v46 ambiguity] pending pool={len(pool['suppressed'])}; "
                 f"{ambiguity_report['seconds']:.3f}s; active unchanged")
+    corner_report=None
+    if corner_identity_audit:
+        corner_started=time.perf_counter()
+        try:
+            from bw_corner_audit_v46 import audit_records
+            if (prepared_templates is not None or colour_observation is not None
+                    or window_occlusion_mask is not None or window_uncertainty_mask is not None):
+                corner_report=dict(status='not_applicable',enabled=True,
+                    reason='native_bw_source_swatch_shadow_only',shadow_only=True,
+                    active_points_modified=False,suppressed_points_modified=False,records_modified=False)
+            else:
+                corner_available=(geometry.observation_valid if geometry is not None else None)
+                if corner_available is None:
+                    corner_available=np.ones(image.shape[:2],np.uint8)
+                    for ax,ay,bx,by in exclusions:corner_available[ay:by,ax:bx]=0
+                corner_report=audit_records(image,records,report,geometries=corner_geometries,
+                    available=corner_available)
+                corner_report['availability_policy']='source_image_except_legend_exclusions_not_proposal_roi'
+                corner_report['exact_geometry_sidecar_records']=len(corner_geometries)
+        except Exception as error:
+            corner_report=dict(status='error',enabled=True,shadow_only=True,
+                error=f'{type(error).__name__}: {error}',active_points_modified=False,
+                suppressed_points_modified=False,records_modified=False)
+        point_timings['corner_identity_audit_seconds']=time.perf_counter()-corner_started
+        point_timings['corner_geometry_capture_seconds']=corner_geometry_capture_seconds
+        point_timings['corner_identity_total_seconds']=(corner_geometry_capture_seconds+
+            point_timings['corner_identity_audit_seconds'])
+        point_timings['window_and_records_seconds']=max(0.,
+            point_timings['window_and_records_seconds']-corner_geometry_capture_seconds)
+        corner_report['geometry_capture_seconds']=corner_geometry_capture_seconds
+        corner_report['total_shadow_seconds']=point_timings['corner_identity_total_seconds']
+        corner_report['timing_scope']='total_shadow_seconds = per-window source geometry capture + final read-only audit'
+        point_timings['total_seconds']=time.perf_counter()-started
+        log_fn(f"[v46 corner shadow] {corner_report['status']}; "
+            f"measured={corner_report.get('measured_records',0)}; selection unchanged")
     return {'kept':kept,'suppressed':pool['suppressed'], 'untyped_suppressed':untyped_report['regions'], 'mode_xs':np.array([]),
             'd_est':d_est,
             'diagnostics':{'backend':VERSION,'grid_fraction':grid_fraction,'grid_overlap':grid_overlap,
+                           **({'corner_identity_audit':corner_report} if corner_identity_audit else {}),
                            'centered_x_composite':composite_report,
                            'layered_marker_composite':layered_report,
                            'grouped_partial_scene':dict(requested=bool(grouped_partial_scene),

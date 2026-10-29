@@ -21,8 +21,62 @@ MAX_PIXELS = 40_000_000
 NPZ = 'color_step5_evidence_v46.npz'
 JSON_FILES = ('step5_inputs.json', 'color_correction_state.json', 'correction_state.json',
               'type3_detection_v46.json', 'legend_optional_v46.json', 'step5_stop_report.json',
-              'color_group_state_v46.json', 'mode_selection_v46.json', 'fast_detection_v46.json')
+              'color_group_state_v46.json', 'mode_selection_v46.json', 'fast_detection_v46.json',
+              'ocr_settings.json')
 SAFE_ID = re.compile(r'^[A-Za-z0-9_-][A-Za-z0-9_.-]{0,100}$')
+UNIT_METADATA_KEYS = ('unit', 'unit_status', 'unit_source', 'unit_text', 'label', 'unit_warning')
+_UNIT_STATUSES = {'recognized', 'ambiguous', 'not_detected', 'unavailable'}
+_XML_CONTROL = re.compile(r'[\x00-\x08\x0b\x0c\x0e-\x1f]')
+
+
+def _unit_metadata(axis):
+    """Normalize optional imported OCR text without changing calibration numbers."""
+    axis = axis or {}
+    def text(key, maximum):
+        value = axis.get(key)
+        if not isinstance(value, str):
+            return None
+        return _XML_CONTROL.sub('', value).strip()[:maximum] or None
+    status = axis.get('unit_status')
+    if not isinstance(status, str) or status not in _UNIT_STATUSES:
+        status = 'not_detected'
+    unit = text('unit', 128) if status == 'recognized' else None
+    if status == 'recognized' and not unit:
+        status = 'not_detected'
+    return dict(unit=unit, unit_status=status,
+                unit_source='ocr' if axis.get('unit_source') == 'ocr' else None,
+                unit_text=text('unit_text', 512), label=text('label', 1024),
+                unit_warning=text('unit_warning', 2048) or '')
+
+
+def axis_export_units(axis):
+    """Unit accompanying numeric values, plus their export calibration status.
+
+    OCR evidence is retained separately even when calibration is unavailable.
+    A physical unit must never be attached to a pixel/normalized coordinate.
+    """
+    if not axis:
+        return None, 'uncalibrated'
+    if axis.get('kind') == 'normalized':
+        return None, 'normalized'
+    if axis.get('kind') == 'pixel' or axis.get('status') == 'needs_calibration':
+        return None, 'uncalibrated'
+    metadata = _unit_metadata(axis)
+    return metadata['unit'], metadata['unit_status']
+
+
+def append_axis_metadata(sheet, calibration):
+    """Write raw axis/unit evidence independently of the exported value units."""
+    for name in ('x', 'y'):
+        axis = (calibration or {}).get(name)
+        sheet.append([name+'_scale', (axis.get('kind') or ('log10' if axis.get('log') else 'linear'))
+                      if axis else 'unavailable'])
+        for key in ('p0', 'p1', 'v0', 'v1', 'status', 'source', 'warning'):
+            sheet.append([name+'_'+key, axis.get(key) if axis else None])
+        metadata = _unit_metadata(axis)
+        for key in UNIT_METADATA_KEYS:
+            sheet.append([name+'_'+key, metadata[key]])
+        sheet.append([name+'_export_unit_status', axis_export_units(axis)[1]])
 
 
 def read(path):
@@ -122,7 +176,13 @@ def validate_edit(ed, image):
                 raise ValueError('Incomplete saved axis calibration')
             if a['p0'] == a['p1'] or (a.get('log') and min(a['v0'],a['v1']) <= 0):
                 raise ValueError('Invalid saved axis calibration')
-    return deepcopy(ed)
+    result = deepcopy(ed)
+    for name in ('x', 'y'):
+        axis = (result.get('calibration') or {}).get(name) or {}
+        # Old correction sessions remain valid without synthetic OCR metadata.
+        if any(key in axis for key in UNIT_METADATA_KEYS):
+            axis.update(_unit_metadata(axis))
+    return result
 
 
 def edited_data(base, proposed, image):
@@ -142,6 +202,18 @@ def edited_data(base, proposed, image):
         row['points'] = [dict(deepcopy(old.get((p['x'],p['y']),{})),x=p['x'],y=p['y']) for p in new['points']]
         row['label'] = new.get('label', row.get('label',row['name']))
     result['calibration'] = proposed.get('calibration')
+    for name in ('x', 'y'):
+        axis = (result['calibration'] or {}).get(name)
+        if axis is None:
+            continue
+        original = (base.get('calibration') or {}).get(name) or {}
+        # Older editor clients send numeric calibration only. Retain the
+        # observed axis labels unless the client explicitly replaces them.
+        for key in UNIT_METADATA_KEYS:
+            if key not in axis and key in original:
+                axis[key] = deepcopy(original[key])
+        if any(key in axis for key in UNIT_METADATA_KEYS):
+            axis.update(_unit_metadata(axis))
     return result
 
 
@@ -273,12 +345,16 @@ def excel_bytes(ed):
     wb = Workbook()
     ws = wb.active
     ws.title = 'data_points'
-    ws.append(['series_id', 'series_label', 'point_index', 'pixel_x', 'pixel_y', 'data_x', 'data_y'])
+    ws.append(['series_id', 'series_label', 'point_index', 'pixel_x', 'pixel_y', 'data_x', 'data_y',
+               'x_unit', 'y_unit', 'x_unit_status', 'y_unit_status'])
     cal = ed.get('calibration') or {}
+    x_unit, x_status = axis_export_units(cal.get('x'))
+    y_unit, y_status = axis_export_units(cal.get('y'))
     for curve in ed['curves']:
         for index, point in enumerate(sorted(curve['points'], key=lambda p:(p['x'],p['y'])), 1):
             ws.append([curve['name'], curve.get('label',curve['name']), index, point['x'], point['y'],
-                       value(point['x'],cal.get('x')), value(point['y'],cal.get('y'))])
+                       value(point['x'],cal.get('x')), value(point['y'],cal.get('y')),
+                       x_unit, y_unit, x_status, y_status])
     ws.auto_filter.ref = ws.dimensions
     ws.freeze_panes = 'C2'
     meta = wb.create_sheet('calibration')
@@ -290,16 +366,15 @@ def excel_bytes(ed):
         for series in ed.get('unavailable_series',[]):
             meta.append(['unavailable: '+series['name'], series.get('reason','Legend marker unavailable')])
     meta.append(['pixel_coordinates', 'Paired image pixels: origin at top left, x rightward, y downward.'])
-    meta.append(['data_coordinates', 'Axis-calibrated values; blank when calibration is unavailable or normalized only.'])
+    meta.append(['data_coordinates', 'Axis-calibrated values; blank without calibration or for normalized-only axes. '
+                 'Pixel fallback values are local pixels and have no physical unit.'])
+    meta.append(['physical_units', 'OCR-recognized labels in the original axis units; no conversion between units is applied. '
+                 'Unit columns are blank for pixel/normalized axes; raw unit evidence remains below.'])
     meta.append(['image_width', ed['image']['width']])
     meta.append(['image_height', ed['image']['height']])
     meta.append(['plot_area', ', '.join(map(str,ed['plot_area']))])
-    for name in ('x','y'):
-        axis = cal.get(name)
-        meta.append([name+'_scale', (axis.get('kind') or ('log10' if axis.get('log') else 'linear')) if axis else 'unavailable'])
-        for key in ('p0','p1','v0','v1'):
-            meta.append([name+'_'+key, axis[key] if axis else None])
-    for sheet, widths in ((ws,[20,48,16,18,18,20,20]),(meta,[24,100])):
+    append_axis_metadata(meta, cal)
+    for sheet, widths in ((ws,[20,48,16,18,18,20,20,18,18,22,22]),(meta,[28,100])):
         sheet.sheet_view.showGridLines = False
         for row in sheet:
             for cell in row:

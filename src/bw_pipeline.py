@@ -217,7 +217,8 @@ def run_detection(img_bgr: np.ndarray,
                   window_backend=None,
                   diagnostic_detail: bool | None = None,
                   filled_contour_identity: bool = False,
-                  visible_first_detection: bool = True) -> dict:
+                  visible_first_detection: bool = True,
+                  corner_identity_audit: bool = False) -> dict:
     """
     Run the chartocode2 pipeline restricted to the user-specified areas.
     B&W computation defaults to automatic CUDA availability selection, with
@@ -226,6 +227,8 @@ def run_detection(img_bgr: np.ndarray,
     ``diagnostic_detail`` enables full-size segment/error-bar diagnostic panels.
     None defaults to False for grid_v46 and True for legacy ViT. Compact mode
     still retains input, legend-template and original-image final overlays.
+    ``corner_identity_audit`` is default-OFF native BW shadow diagnostics only;
+    it never changes detected or suppressed points.
 
     Returns
     -------
@@ -628,6 +631,7 @@ def run_detection(img_bgr: np.ndarray,
                                 gpu_batch_size=gpu_batch_size,
                                 grid_backend=grid_backend, window_backend=window_backend,
                                 filled_contour_identity=filled_contour_identity,
+                                corner_identity_audit=corner_identity_audit,
                                 log_fn=log_fn, **detection_options)
         result2['diagnostics']['matching_profile'] = PRODUCTION_PROFILE
         result2['diagnostics']['halftone_screen'] = _halftone_screen

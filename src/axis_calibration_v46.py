@@ -16,8 +16,10 @@ import numpy as np
 
 try:
     from . import ocr_bridge_v46 as ocr
+    from .axis_units_v46 import read_axis_units, unit_metadata
 except ImportError:
     import ocr_bridge_v46 as ocr
+    from axis_units_v46 import read_axis_units, unit_metadata
 
 
 _SUPERSCRIPTS = str.maketrans('⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺', '0123456789-+')
@@ -384,8 +386,9 @@ def resolve_calibration(image, plot_area, x_min=None, x_max=None, y_min=None,
                         _fast_context=True):
     """Resolve each axis independently; blank bounds request automatic OCR.
 
-    Complete manual bounds skip OCR and default to linear unless ``*_log`` is
-    true. A partial manual axis keeps the explicit bound and reads the missing
+    Complete manual bounds skip numeric-tick OCR and default to linear unless
+    ``*_log`` is true; axis-title unit OCR remains independent. A partial manual
+    axis keeps the explicit bound and reads the missing
     bound/scale from ticks. Invalid manual values raise ``ValueError``. Failed
     automatic axes return an explicit pixel mapping instead of a guessed 0–1
     data range. ``p0/v0`` is left or bottom; ``p1/v1`` is right or top.
@@ -426,7 +429,7 @@ def resolve_calibration(image, plot_area, x_min=None, x_max=None, y_min=None,
         warning = ''
         if low is not None and high is not None:
             kind, source = ('log' if forced else 'linear'), 'manual'
-            reason = 'Both bounds supplied manually; OCR skipped.'
+            reason = 'Both bounds supplied manually; numeric-tick OCR skipped.'
         else:
             evidence.update(read_axis_candidates(image, plot_area, axis))
             fitted, reason = fit_axis_candidates(evidence['candidates'], p0, p1, force_log=forced)
@@ -450,6 +453,12 @@ def resolve_calibration(image, plot_area, x_min=None, x_max=None, y_min=None,
         status = 'needs_calibration' if kind == 'pixel' else 'accepted'
         calibration[axis] = dict(p0=float(p0), p1=float(p1), v0=float(low), v1=float(high),
                                  log=kind == 'log', kind=kind, status=status, source=source, warning=warning)
+        # Unit text is independent evidence; never changes tick fits or values.
+        # Manual numeric bounds still allow title reading. Fast detection calls
+        # this on the original raster before remapping only the pixel anchors.
+        units = read_axis_units(image, plot_area, axis)
+        calibration[axis].update(unit_metadata(units))
+        evidence['unit_recognition'] = units
         diagnostics[axis] = dict(evidence, status=status, source=source, kind=kind,
                                  reason=reason, warning=warning,
                                  manual_bounds=list(bounds[axis]))

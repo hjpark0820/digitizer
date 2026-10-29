@@ -322,10 +322,13 @@ def _export_results():
         import openpyxl
         from openpyxl.styles import Font, PatternFill
         from openpyxl.utils import get_column_letter
+        from correction_session_v46 import axis_export_units, append_axis_metadata
         _wb = openpyxl.Workbook()
         _ws = _wb.active
         _ws.title = 'data_points'
-        _hdr = ['curve', 'data_x', 'data_y']
+        _hdr = ['curve', 'data_x', 'data_y', 'x_unit', 'y_unit', 'x_unit_status', 'y_unit_status']
+        _x_unit, _x_unit_status = axis_export_units(_axis_calibration.get('x'))
+        _y_unit, _y_unit_status = axis_export_units(_axis_calibration.get('y'))
         _ws.append(_hdr)
         for _c in range(1, len(_hdr) + 1):
             _ws.cell(1, _c).font = Font(bold=True, color='FFFFFF')
@@ -343,7 +346,7 @@ def _export_results():
                 _dy = _y2v(_py) if _y2v else None
                 # Keep numeric precision: a valid automatically read micro-
                 # concentration must not become zero through decimal rounding.
-                _ws.append([_label, _dx, _dy])
+                _ws.append([_label, _dx, _dy, _x_unit, _y_unit, _x_unit_status, _y_unit_status])
                 _rownum += 1
                 for _numeric_column in (2, 3):
                     _ws.cell(_rownum, _numeric_column).number_format = '0.000000E+00'
@@ -360,6 +363,20 @@ def _export_results():
         _ws.column_dimensions['A'].width = 26
         _ws.column_dimensions['B'].width = 14
         _ws.column_dimensions['C'].width = 14
+        for _col in ('D', 'E', 'F', 'G'):
+            _ws.column_dimensions[_col].width = 22
+        _meta = _wb.create_sheet('calibration')
+        _meta.append(['field', 'value'])
+        _meta.append(['physical_units', 'OCR-recognized labels in the original axis units; no conversion between units. '
+                      'Pixel/normalized coordinates have blank unit columns; evidence is retained below.'])
+        append_axis_metadata(_meta, _axis_calibration)
+        _meta.column_dimensions['A'].width = 28
+        _meta.column_dimensions['B'].width = 100
+        for _sheet in (_ws, _meta):
+            for _cells in _sheet:
+                for _cell in _cells:
+                    if isinstance(_cell.value, str):
+                        _cell.data_type = 's'
         _xlsx_path = os.path.join(OUT_DIR, 'data_points.xlsx')
         _wb.save(_xlsx_path)
         print(f'Excel: {_xlsx_path}')

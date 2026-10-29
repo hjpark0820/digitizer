@@ -1,29 +1,68 @@
 # Local AI OCR handoff (v46)
 
 OCR means reading text from an image. All v46 runtime OCR calls use
-`ocr_bridge_v46.py`: Tesseract remains the first choice. In AI mode, if its
-executable is unavailable or its OCR call fails, the exact image snippet is
-saved as a PNG and the worker waits for the operating Codex/Claude agent.
+`ocr_bridge_v46.py`. The selected engine determines who reads the text:
+`tesseract` uses the external executable, `agent` always requests the operating
+agent's image reading, and `auto-agent` tries Tesseract before using the agent
+when the executable is unavailable or its call fails. Agent requests save the
+exact image snippet as a PNG and wait for the operating Codex/Claude agent.
 The agent reads the PNG with its image tool, submits JSON, and the **same
 waiting operation continues** with that text or those word boxes.
 
 This is a local handoff, not a bundled AI model. The agent must actively service
 requests with image-viewing and local file/HTTP tools. Python cannot invoke the
-current conversation's vision capability by itself. No API key, recursive
+current conversation's vision capability by itself. A separately configured
+host scheduler may resume the operating agent for queued AI-mode batches, as
+described under **Automatic chat wake-up** in [AI_WORKFLOW.md](AI_WORKFLOW.md).
+The same OCR API works across compatible agents; waking an idle conversation
+requires host-specific support and is not provided by the OCR bridge.
+No API key, recursive
 assistant CLI, model download or paid vision API is used. WebFetch alone cannot
 view local files reliably or perform this workflow.
 
 ## Start and operate
 
-Packaged app: `python run.py --ai-ocr --port 8000`.
-Research source: `python src/unified_server.py --ai-ocr --host 127.0.0.1 --port 8000`.
-Keep the server and agent running; let the user upload a chart, draw Plot area
-and Legend, and press Run in the browser. Start the server/long-running HTTP
+First follow [AI_WORKFLOW.md](AI_WORKFLOW.md). Ask in the conversation whether
+the user will draw regions or wants the agent to identify them. AI regions
+automatically use agent vision OCR; do not ask an OCR question on that route.
+Only for manual regions, ask whether OCR should use/install Tesseract or use
+agent vision, unless already answered. Apply the choice through CLI/API; the
+GUI has no OCR or region-mode selector. In agent-region
+mode the user chooses multiple PNG/JPEG files or a folder (including subfolders)
+in the AI-mode picker, reviews the file list and starts the batch. Do not ask a
+path question. Preserve a folder/file scope already supplied in chat as
+an optional direct API route. Do not silently change either workflow choice.
+
+Packaged app with explicit AI OCR: `python run.py --ocr-engine agent --port 8000`.
+Research source: `python src/unified_server.py --ocr-engine agent --host 127.0.0.1 --port 8000`.
+Add `--region-mode agent` when the agent will identify regions; use
+`--region-mode manual` when the user will draw them. `--agent-workflow` remains
+a compatibility alias for agent regions. Plain `run.py` starts manual regions
+with Tesseract, regardless of prior stored choices. Use
+`--ocr-engine tesseract` for manual regions with Tesseract. For manual regions,
+`--ocr-engine auto-agent` is an optional Tesseract-first fallback; the legacy
+`--ai-ocr` flag retains that fallback. AI regions imply `--ocr-engine agent`;
+explicit Tesseract/fallback flags with AI regions are rejected.
+
+Keep the server and agent running. In manual-region mode the user uploads a
+chart, draws Plot area and Legend, and presses Run. Agent-region and folder
+batch operation use the same OCR queue; their image/region protocol is in
+[AI_WORKFLOW.md](AI_WORKFLOW.md). After an agent-region launch, remain active
+and monitor status/requests while the user selects GUI inputs and starts the
+batch, unless a supported automatic wake-up has already been registered and
+verified. Once a job starts, remain active through its terminal state rather
+than waiting for the next scheduled wake-up to answer OCR.
+Heartbeats must reflect an agent actually available to answer; do not
+leave a heartbeat-only process claiming unattended AI availability. Report and
+return when all selected tasks have terminal states. Start the server/long-running HTTP
 request in the environment's supported background process so the agent remains
 free to answer OCR. Do not block waiting for `/digitize` before checking OCR.
 Use a free port instead of stopping the user's existing server.
 
-1. Poll `GET http://127.0.0.1:8000/ocr/requests` while the operation runs. Use
+1. Send `POST /agent-workflow/heartbeat` with `{"agent_id":"YOUR_SESSION_ID"}`
+   while working, including during long image inspection. Heartbeats remain
+   current for 90 seconds; sending one about every 30 seconds prevents a stale
+   agent status. Poll `GET http://127.0.0.1:8000/ocr/requests` while the operation runs. Use
    short tool calls and reasonable polling intervals (for example 1–2 seconds).
    The response contains `enabled` and a `requests` list for this server only.
    Each request identifies its `job_id`, original `source_image_path`, snippet
@@ -35,7 +74,10 @@ Use a free port instead of stopping the user's existing server.
    of that snippet, including any existing padding/upscaling, not the full plot.
 3. Read only visible text, retaining signs, decimal points, exponents, units and
    Greek letters. Use the requested Tesseract `config` as context (for example,
-   a numeric tick crop), not as permission to invent missing characters.
+   a numeric tick crop), not as permission to invent missing characters. Inspect
+   the actual chart as well when identifying its axes, titles and units. Do not
+   copy ground truth, example manifests, previous result JSON, filenames or
+   reference data as OCR answers. Missing or ambiguous units remain unknown.
 4. POST JSON to `answer_url`, copying `request_id` and `image_sha256` exactly:
 
    Text request (`operation: "text"`):

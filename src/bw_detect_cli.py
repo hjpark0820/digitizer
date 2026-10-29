@@ -125,6 +125,8 @@ def main():
                     help='opt-in C3/C4 angular brightness ranking of already verified native B&W filled-marker alternatives')
     ap.add_argument('--visible-first-detection', action=argparse.BooleanOptionalAction, default=True,
                     help='native BW detection: verify direct marker shape before rejecting exterior clutter (default: on; use --no-visible-first-detection to disable)')
+    ap.add_argument('--corner-identity-audit', action='store_true',
+                    help='default-OFF native BW shadow corner/arc diagnostics; does not change detection or Step 5 decisions')
     ap.add_argument('--swatches-json', default='',
                     help='JSON list of [class_name, [x0,y0,x1,y1]]; exclusive right/bottom')
     ap.add_argument("--errorbars", default="")
@@ -268,6 +270,7 @@ def main():
         grid_backend=a.grid_backend, window_backend=a.window_backend,
         filled_contour_identity=a.filled_contour_identity,
         visible_first_detection=a.visible_first_detection,
+        corner_identity_audit=a.corner_identity_audit,
         swatches=(json.loads(a.swatches_json) if a.swatches_json else None),
         skip_point_detection=bool(_prev_state),
         img_bgr=img, plot_area_px=pa, legend_area_px=_p4(a.legend_area),
@@ -531,6 +534,7 @@ def main():
         'settings': {'point_backend': a.point_backend, 'gpu_batch_size': a.gpu_batch_size,
                      'filled_contour_identity_requested': a.filled_contour_identity,
                      'visible_first_detection_requested': a.visible_first_detection,
+                     **({'corner_identity_audit_requested': True} if a.corner_identity_audit else {}),
                      'diagnostic_detail_requested': a.diagnostic_detail, 'skip_segments': a.skip_segments,
                      'diagnostic_detail': result.get('diagnostic_detail', a.diagnostic_detail), 'image_shape': [H, W],
                      'plot_area': list(pa), 'legend_area': _p4(a.legend_area)},

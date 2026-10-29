@@ -9,6 +9,9 @@ workspace or assume its absolute paths, `experiments/` or `models/` are availabl
 ## Start and dependencies
 
 Use Python 3.12 and `python -m pip install -r requirements.txt`, then `python run.py`.
+A plain launch selects manual GUI regions and Tesseract, independently of
+stored workflow settings. It does not require an agent or a chat questionnaire.
+Agent choices are supplied through CLI/API when an agent is operating the app.
 The launcher resolves `src` relative to itself and binds to `127.0.0.1:8000` by
 default. `--port` selects another port; use an unused port for tests and stop only
 the server you started. Direct `src/unified_server.py` execution retains its
@@ -23,145 +26,190 @@ Do not make OCR or CUDA a prerequisite for importing the web server.
 
 ## Operating this app for a user from Codex or Claude Code
 
+Read [src/AI_WORKFLOW.md](src/AI_WORKFLOW.md) before starting a digitization task.
+That guide defines startup choices, verified Tesseract setup, region and OCR
+queues, folder scope, the active service loop, and required human review.
+
 When the user asks you to run digitization, carry out setup and launch the app;
 do not stop at explaining installation commands. Use the repository URL and
 destination supplied by the user. Clone/download that repository into the local
 workspace if it is not already available; otherwise use the existing checkout
 and preserve its edits. Do not invent a GitHub URL or require the research repo.
 
-Read this guide and `README.md`, create a local Python 3.12 virtual environment,
-and install `requirements.txt` using that environment's Python. On Windows:
+Ask the region question first **in the conversation**, and ask about OCR only
+for manual regions, skipping every answer
+already supplied:
+
+1. **Regions:** "Would you like to select the plot and legend regions yourself,
+   or have the AI agent identify them?"
+
+   Include this timing note with the question, before the user chooses:
+   "AI selection reduces manual work but usually takes longer than selecting the regions yourself in the GUI."
+   Offer **Select regions myself — usually faster** and
+   **Let the AI agent select regions — less manual work, usually slower**.
+
+2. Only for manual regions: "Should I use Tesseract, installing it if it is missing, or read the text
+   with my AI vision tools?"
+
+Ask the region question first. AI regions automatically use the operating
+agent's vision OCR, without another question. Ask about Tesseract versus agent
+OCR only if manual regions were chosen and the OCR answer is not already known.
+Do not ask for paths. Apply the resulting choice through
+CLI/API. In agent-region mode, open the AI-mode GUI input picker: **Choose images**
+accepts multiple PNG/JPG/JPEG files; **Choose folder (includes subfolders)**
+includes nested images. The user reviews the selected names/count and presses
+**Start digitization**. Selection alone does not upload; **Clear selection**
+resets the list. The GUI has no region-mode or OCR selectors. Manual-region mode
+keeps the existing image picker and Plot area/Legend controls.
+If the user already supplied a folder/files and scope in chat, preserve that
+instruction and use the batch API without asking again. Never invent a folder.
+Install Tesseract only when the manual-region route selects it, then verify it.
+
+Create a local Python 3.12 virtual environment and install `requirements.txt`
+using its Python. On Windows:
 
 ```powershell
 py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe run.py --ai-ocr --port 8000
 ```
 
-On macOS/Linux use `python3.12 -m venv .venv`,
-`.venv/bin/python -m pip install -r requirements.txt`, and
-`.venv/bin/python run.py --ai-ocr --port 8000`. Installation was verified on Windows;
-resolve platform-specific installation failures before claiming readiness.
-If the port is occupied, choose another available port rather than stopping an
-unrelated process. Keep the server alive while the user interacts, verify
-`/openapi.json` using local HTTP tools, and give the exact local URL. Use the
-agent's supported background process mechanism; Windows background helpers
-should start without opening an unwanted terminal window.
+On macOS/Linux use `python3.12 -m venv .venv` and
+`.venv/bin/python -m pip install -r requirements.txt`. Installation was verified
+on Windows; resolve platform-specific failures before claiming readiness.
 
-### Tesseract unavailable: operate the real AI OCR bridge
+After the user chooses AI regions, agent vision OCR is automatic. Launch:
 
-**Start `python run.py --ai-ocr` when operating with image-viewing tools.** Read
-[src/AI_OCR.md](src/AI_OCR.md) before running detection. The v46 runtime now
-exports its actual OCR snippets when Tesseract is missing or fails. View those
-PNGs and submit text or word boxes; the waiting detector consumes your answer
-and continues the same operation. Do not merely describe the text in chat.
+```powershell
+.\.venv\Scripts\python.exe run.py --region-mode agent --ocr-engine agent --port 8000
+```
 
-Keep the long-running server/detection request in the background while you poll
-`GET /ocr/requests`, inspect each PNG, and POST validated JSON to its `answer_url`.
-The guide gives exact schemas and equivalent file-only commands. Sequential
-requests can appear after earlier ones are answered; keep servicing the queue
-until detection/correction itself completes. A temporary empty queue is not a
-completion signal. Keep each request bound to its job, source image and hash.
+Use `--region-mode manual` when the user will draw the regions, and
+`--ocr-engine tesseract` only for the manual-region route when Tesseract was chosen.
+AI regions imply agent OCR; explicit Tesseract/fallback flags with AI regions
+are rejected, including `--agent-workflow --ai-ocr`.
+On macOS/Linux use `.venv/bin/python run.py` with the same flags. A plain
+`run.py` starts manual regions and Tesseract every time, even after a previous
+agent session. The user does not repeat those choices in the browser.
 
-Tesseract remains first choice. Importing `pytesseract` does not prove that the
-executable works; the bridge checks it and catches OCR execution failures.
-The bridge does not judge whether successfully returned Tesseract text is
-correct. `CHARTOCODE_OCR_MODE=agent` explicitly forces agent OCR when needed.
-No API key, paid vision service or second assistant process is required.
-Python cannot itself call the current conversation: **the operating agent must
-actively answer the queue**. A README instruction alone does not run the agent.
+`--agent-workflow` remains an alias for `--region-mode agent` and conflicts with
+explicit manual mode. `--ocr-engine auto-agent` tries Tesseract and requests
+agent OCR only on missing/failed execution; it does not judge text accuracy.
+`--ai-ocr` is a legacy alias for that fallback and conflicts with a different
+explicit OCR engine. Explicit agent OCR is never replaced by Tesseract.
+For a server already owned by this task, the agent can apply the resolved region/OCR
+settings through `POST /agent-workflow/settings` and verify them through status.
 
-Use only clearly visible text. Preserve signs, decimals, exponents, units and
-legend-to-swatch identities. Word boxes use snippet pixels, not chart pixels.
-For unreadable snippets submit `status: "unreadable"`, then ask for necessary
-missing values; never invent numbers or submit empty answers without inspection.
-Missing answers time out explicitly after 300 seconds by default. If the current
-agent cannot view images, use ordinary mode with Tesseract or manual axis values.
+Use a free port instead of stopping an unrelated process. Keep the server
+running in the environment's supported background mechanism; on Windows start
+helpers without an unwanted terminal window. Verify `/openapi.json` and
+`/agent-workflow/status`, then give or open the exact local URL.
 
-Review AI-read labels and calibration with the user. Manual axis ranges must
-match the selected plot edges. Use the optional **scale box** when readable ticks
-are inside the plot, so the UI converts their ranges to the plot boundaries.
-Direct HTTP calls must use converted plot-edge ranges. Retain series IDs,
-coordinates and evidence, and visibly identify unknown/pixel-unit calibration.
+### Keep the operating agent active
 
-### Let the user draw plot and legend regions
+Send `POST /agent-workflow/heartbeat` while operating the app. After the
+region choice, launch and open the AI-mode picker. Keep polling
+`GET /agent-workflow/status` for GUI-created batches and service
+`GET /agent-workflow/requests` plus `GET /ocr/requests` as work arrives.
+The GUI uploads selected images through `/agent-workflow/batches/upload` only
+when the user presses **Start digitization**. It always uses `ocr_mode: "agent"`,
+`region_mode: "agent"`, and the existing Automatic detector. There are no browser
+controls for region mode or OCR. For an input scope already given
+in chat, `/agent-workflow/batches` remains an alternative using the supplied
+folder and optional relative `files` list.
 
-The existing `src/index.html` already provides user-controlled rectangles.
-Open the running page, let the user choose the image, and ask them to press
-**Plot area** and drag over the plotting region, then **Legend** and drag over
-the legend if one exists. Use the application's buttons/canvas, not browser
-annotation mode. Let the user retain control when they asked to select regions.
-After image preparation or changing the image, have them reselect the regions.
+After launch, stay active and send heartbeats while monitoring status for
+GUI-created batches and servicing region/OCR requests. Do not finish with a
+"ready" message while the user is selecting inputs. The GUI can queue images
+while an agent is inactive, but displays queued/waiting status and never sends
+agent heartbeats. A heartbeat must represent an agent actually available to
+answer, not a heartbeat-only background process. The program cannot summon
+this conversation or perform unattended AI vision. After every selected task
+has a terminal state, report the results and return.
 
-Choose the browser handoff according to the actual agent environment:
+For manual regions with AI OCR, keep polling while the user uploads a chart,
+draws regions and presses Run in the existing GUI. Do not block on a long
+`/digitize` response before answering OCR.
+
+View each actual chart before selecting regions and each actual OCR snippet
+before answering. Copy request hashes and use the returned answer URLs.
+Do not use ground truth, synthetic manifests, saved result JSON or expected
+values to supply regions or OCR. The existing pipeline reads numeric ticks,
+labels and units; preserve unknown or ambiguous values as unknown.
+Read [src/AI_OCR.md](src/AI_OCR.md) for the exact text/word-box schema.
+
+Keep servicing both queues and checking the batch until every selected image
+has a terminal state. Requests appear sequentially; a temporary empty queue is
+not completion. Report output paths and completed, failed and review counts.
+Give each completed image its explicit review link in chat, using returned IDs:
+`http://127.0.0.1:PORT/?batch=BATCH_ID&item=ITEM_ID`. The link loads only that
+result in the existing GUI. The picker's **Review** action uses the same link;
+**Download batch results (.zip)** provides the batch download. Never guess the newest job.
+Portable image/JSON pairs still open through the existing Edit saved results
+controls. Give the batch snapshot's `review_dir` so the user can select the flat
+`review/` folder through **Edit saved results → Choose edit folder**, browse its
+matching PNG/JSON pairs, edit and save. Retries preserve prior pairs with a job
+suffix; the ZIP includes `review/`. Check each item's `review_error` before
+claiming a pair is ready. Keep the explicit per-image links as well.
+The application cannot call the current agent conversation itself. Image and
+local HTTP/file tools are required; no API key or second assistant is needed.
+
+### Manual selection and browser handoff
+
+When the user chooses manual regions, open the running page and let the user
+choose the image, press **Plot area**, and drag around the plot. Use **Legend**
+for a visible legend. Use the application's canvas, not browser annotation mode.
+After changing/preparing the image, reselect the regions. Selecting a rectangle
+alone does not send it to the AI conversation; **Run** submits it to `/digitize`.
+The workflow API queues separate explicit agent-region requests; it does not
+read arbitrary unsent browser rectangles.
+
+Choose the browser handoff according to the tools actually available:
 
 | Environment | User-facing route |
 | --- | --- |
-| Codex in a desktop app with the built-in browser available | Open the local URL visibly in that browser (for example via `open_in_codex` when that tool is exposed). The user selects the image and draws on the page. |
-| Codex CLI / an IDE without a built-in browser | Give the local URL for the user's normal Chrome/Edge browser. Browser automation requires an available browser integration; web search/fetch alone is insufficient. |
-| Claude Code with browser integration | Use its connected Chrome/Chromium browser; `claude --chrome` / `/chrome` are documented entry points when supported and configured. The user can interact with the visible page. |
-| Claude Code without browser integration | Give the same local URL for the user to open manually. The app does not require an agent browser extension for human use. |
+| Codex desktop with an available built-in browser | Open the local URL visibly, for example with `open_in_codex` when exposed. |
+| Codex CLI / an IDE without browser integration | Give the local URL for the user's Chrome/Edge browser. |
+| Claude Code with browser integration | Use its configured connected browser. |
+| Claude Code without browser integration | Give the local URL for the user to open manually. |
 
-Codex desktop browser operation and local-page previews are described in the
-[official browser documentation](https://learn.chatgpt.com/docs/browser?surface=app).
-Claude Code's setup requirements and local-server interaction are described in
-[Claude Code with Chrome](https://code.claude.com/docs/en/chrome). Check the tools
-available in the current session rather than assuming every CLI has a webview.
-Let the user operate file pickers when the agent cannot automate uploads.
+Check the current tools rather than assuming every CLI has a browser. The
+[Codex browser documentation](https://learn.chatgpt.com/docs/browser?surface=app)
+and [Claude Code Chrome guide](https://code.claude.com/docs/en/chrome) describe
+their integrations. Let the user operate file pickers when the agent cannot.
+WebFetch retrieves content; it cannot collect canvas drag selections or replace
+viewing the actual image. A cloud fetcher may not reach the user's localhost.
+Use supported port forwarding for remote servers: localhost belongs to the
+machine running the browser.
 
-**WebFetch is a content-retrieval tool, not an interactive browser.** It does not
-give the user a canvas, process drag gestures or substitute for JavaScript page
-execution. Anthropic documents this distinction in its
-[web fetch guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool).
-Fetching `index.html` or `/docs` is not a completed region-selection interaction.
-Cloud fetchers may also be unable to reach the user's localhost. If the server
-runs remotely, use the environment's supported port forwarding; `localhost`
-refers to the machine running the browser, not automatically the remote agent.
+### Regions, calibration and required review
 
-### How selected regions reach detection and the AI
+All web rectangles use inclusive `x0,y0,x1,y1` working-image pixels and are
+validated against the raster. The GUI's manual boxes remain `boxes.plot` and
+`boxes.legend`; Colour uses `legend_box`, B&W uses `legend_area`, and Automatic
+accepts either spelling while rejecting conflicts. Automatic requires a plot
+area and resolves Colour/B&W from working-image pixels through
+`automatic_mode_v46.select_detection_mode`. The resolved response `mode` is
+`color` or `bw`; `requested_mode` and `mode_selection` preserve the choice and
+evidence. Saved sessions and Step 5 retain the detector that produced them.
+Do not confuse agent region selection with automatic detector selection.
 
-`index.html` stores the rectangles in browser state (`boxes.plot` and
-`boxes.legend`). The user presses **Run** after choosing regions and reviewing
-axis values. The UI then posts the image and coordinates to `/digitize`.
-The GUI and `/digitize` default to `mode=auto`; explicit `color` and `bw` are
-manual overrides. Automatic requires `plot_area`, inspects working-image pixels
-with `automatic_mode_v46.select_detection_mode`, and dispatches the same existing
-engines. For Colour and Automatic the GUI legend field is `legend_box`; for B&W
-it is `legend_area`. Automatic accepts either spelling, rejecting conflicting boxes.
-The response `mode` is always the resolved `color`/`bw`; `requested_mode` and
-`mode_selection` retain the choice and pixel evidence. `mode_selection_v46.json`
-survives saved-session export/import and Step 5 forks. The GUI's requested button
-never becomes a saved engine name. Paired imports retain their saved mode; only
-legacy unpaired JSON needs the current choice as a fallback.
-Automatic favours measured legend marker colour over connector colour, rejects
-isolated colour noise/subpixel fringes, then falls back to coherent plot colour.
-No legend plus coloured connectors remains ambiguous; keep manual overrides.
-The CLI dispatcher still accepts explicit `--mode color`/`--mode bw` unchanged.
-All web rectangles use inclusive `x0,y0,x1,y1` working-image pixels.
-The server validates them against the uploaded raster.
-
-Selecting a rectangle alone does not send it to the AI conversation or persist
-it through an API. There is currently no dedicated pending-selection endpoint
-or browser-to-chat callback. Do not claim WebFetch can read unsent rectangles.
-After **Run**, use the returned job/result URLs through available browser tools,
-or let the user save the image-linked JSON and provide its path. Resume from that
-identified result, rather than guessing which unrelated temporary job is newest.
-If you need rectangles before **Run**, use the connected browser's supported
-state-inspection capability or ask the user for the coordinates.
-
-A missing legend means the current no-legend route infers **one series**; it is
-not permission to assume an arbitrary number of hidden legend entries. Plot
-selection remains required for this route. Show the overlay/reconstruction for
-review and preserve the original image together with the saved JSON.
+A missing legend takes the existing one-series route. Do not invent extra
+series. Human review/correction is required in the existing GUI: check the
+plot/legend, labels, overlay, reconstructed plot, coordinate table, calibration
+and units before using the data. Retain unknown/pixel calibration visibly.
+Manual ranges refer to plot edges; use the optional scale box for interior
+ticks. Preserve original images and image-linked JSON, IDs and evidence.
 
 ## Runtime map
 
 | Component | Responsibility and connections |
 | --- | --- |
-| `src/ocr_bridge_v46.py` | Tesseract adapter and local AI snippet/answer queue; protocol in `src/AI_OCR.md` |
+| `src/ocr_bridge_v46.py` | Selected Tesseract/agent OCR and local snippet/answer queue; protocol in `src/AI_OCR.md` |
+| `src/AI_WORKFLOW.md` | Startup choices, region and folder-batch API, active agent service loop, and human review |
 | `src/unified_server.py` | FastAPI routes, AI OCR request/image/answer endpoints, image preparation, detector/correction child processes, job responses, saved-session import/export |
 | `src/automatic_mode_v46.py` | Lightweight, model-free Colour/B&W selection from selected plot and legend pixels; never replaces manual overrides |
 | `src/axis_calibration_v46.py` | Shared numeric tick OCR and conservative per-axis linear/log fitting; manual overrides and explicit pixel fallback |
+| `src/axis_units_v46.py` | Independent axis-title OCR and conservative unit recognition; does not change calibrated values |
 | `src/fast_detection_v46.py` | Optional 1,400-pixel working-image cap, inclusive region transforms, source/working provenance and original-resolution axis-reading context |
 | `src/index.html` | HTML/CSS and inline JavaScript; image preparation, result history, folder previews, fixed editor, canvas drawing, exports |
 | `src/image_sidecar_v46.js` | Browser folder/file handles, original-image binding, same-stem JSON pairing, history merge and writes |
@@ -229,8 +277,9 @@ rather than changing one convention globally.
 
 Blank X/Y limits request `axis_calibration_v46.resolve_calibration()` in the B&W,
 colour and no-legend export paths. The server must omit blank CLI limits, not
-replace them with 0 and 1. Each axis is independent: both manual limits skip OCR
-and use linear mapping unless the log flag is set; a partial manual input is
+replace them with 0 and 1. Each axis is independent: both manual limits skip numeric-tick OCR
+and use linear mapping unless the log flag is set. Axis-title/unit OCR remains
+independent and may still request an agent answer. A partial manual input is
 preserved only when a compatible automatic fit supplies the missing bound.
 Automatic fits need three distinct supporting labels and reject contradictory
 or ambiguous scales. Failed axes retain editable marker pixels and export local
@@ -244,6 +293,18 @@ Step-5 correction reuses calibration rather than rereading axis labels. The GUI
 axis fields remain visible; the optional scale box still requires all four manual
 limits and transforms them to the plot-edge convention. Preserve full numerical
 precision in coordinate exports, especially small concentration values.
+
+Axis-title unit recognition is independent of numeric calibration, including
+when both bounds were entered manually. `axis_units_v46.read_axis_units()` uses
+the selected OCR engine; it preserves readable unit text and explicit
+`recognized`, `ambiguous`, `not_detected` or `unavailable` status. It does not
+convert values between units or repair tick fits. `index.html` displays recognized
+units in calibrated coordinate-table headings, with `axis units` when the unit
+is unknown. Pixel/normalized headings stay explicitly uncalibrated.
+`correction_session_v46.axis_export_units()` keeps physical units off
+pixel/normalized values. CSV/Excel exports carry separate `x_unit`, `y_unit`,
+`x_unit_status` and `y_unit_status` columns; saved JSON and Excel calibration
+metadata retain the raw unit evidence even when calibration is unavailable.
 
 Printed log-concentration values are returned in their printed units, not silently
 exponentiated. Categorical/multiple-row axes, difficult exponents/decimals and
@@ -370,8 +431,8 @@ The broader optional-legend suite passes 111/113; the two failures still expect
 `bw_step5_v46` instead of the existing `bw_series_correction_v46` engine name.
 Both failures were reproduced on the untouched pre-migration runtime.
 
-AI OCR bridge verification: missing-Tesseract fallback, native Tesseract preference,
+AI OCR bridge verification: missing-Tesseract fallback, Tesseract preference in auto-agent mode,
 word-box validation, image binding, timeout behavior and live HTTP answer handling
-are covered by focused tests. Agent OCR is opt-in; ordinary runs do not wait for an agent.
+are covered by focused tests. Agent OCR is opt-in; Tesseract-only runs do not wait for an agent.
 The old path-server test still expects v45 dispatch compatibility; that failure
 was reproduced on the pre-OCR distribution and does not describe the v46-only contract.

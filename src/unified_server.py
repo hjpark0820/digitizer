@@ -13,13 +13,18 @@ The v46 B&W point stage does not need torch, timm or trained model weights.
 """
 from __future__ import annotations
 import json
+import hashlib
+import io
 import math
 import os
 import shutil
 import subprocess
 import sys
 import tempfile
+import threading
+import time
 import uuid
+from contextvars import ContextVar
 from pathlib import Path
 
 import cv2
@@ -77,43 +82,102 @@ app = FastAPI(title="Unified Chart Digitizer")
 # lazy singletons for the B&W path
 _BW = {"run_detection": None, "adapter": None}
 _OCR_JOBS = set()  # Only expose requests created by this server instance.
+_JOB_OUTPUTS = {}  # Durable workflow jobs are registered explicitly, never by URL paths.
+_JOB_DESTINATION = ContextVar('digitizer_job_destination', default=None)
+_WORKFLOW_ITEM = ContextVar('digitizer_workflow_item', default=None)
+_HEALTH_LOCK = threading.Lock()
+_HEALTH_CACHE = {}
+
+
+def _register_job(job_id, out_dir):
+    _JOB_OUTPUTS[job_id] = Path(out_dir).resolve()
+    # Only _ocr_env registers a live OCR worker. Restored results may contain
+    # abandoned pending requests from an interrupted process; never reissue those.
+
+
+def _job_ocr_mode(out_dir):
+    try:
+        mode = json.loads((Path(out_dir) / 'ocr_settings.json').read_text(encoding='utf-8'))['mode']
+    except (OSError, ValueError, KeyError, TypeError):
+        try:
+            mode = json.loads((Path(out_dir) / 'session_meta.json').read_text(encoding='utf-8')).get('ocr_mode')
+        except (OSError, ValueError, TypeError):
+            mode = None
+    return mode if mode in ('tesseract', 'agent', 'auto-agent') else os.environ.get('CHARTOCODE_OCR_MODE', '').lower()
+
+
+def _save_ocr_mode(out_dir, mode):
+    mode = mode if mode in ('tesseract', 'agent', 'auto-agent') else 'tesseract'
+    Path(out_dir).mkdir(parents=True, exist_ok=True)
+    (Path(out_dir) / 'ocr_settings.json').write_text(json.dumps({'mode': mode}), encoding='utf-8')
+    return mode
+
+
+def _tesseract_health():
+    """Probe the executable, never install software or mutate OCR availability."""
+    with _HEALTH_LOCK:
+        if time.monotonic() - _HEALTH_CACHE.get('at', -100) < 15:
+            return dict(_HEALTH_CACHE['value'])
+        try:
+            import pytesseract
+            command = pytesseract.pytesseract.tesseract_cmd
+            process = subprocess.run([command, '--version'], capture_output=True, text=True,
+                                     encoding='utf-8', errors='replace', timeout=5)
+            available = process.returncode == 0
+            value = dict(available=available, version=(process.stdout or '').splitlines()[0] if available else None,
+                         error=None if available else 'Tesseract executable returned an error')
+        except (ImportError, OSError, subprocess.SubprocessError, IndexError) as error:
+            value = dict(available=False, version=None, error=str(error))
+        _HEALTH_CACHE.update(at=time.monotonic(), value=value)
+        return dict(value)
 
 
 def _ocr_env(out_dir):
     env = os.environ.copy()
     env['PYTHONIOENCODING'] = 'utf-8'
     env['PYTHONUNBUFFERED'] = '1'
+    # Selection belongs to this job's child process. Concurrent requests cannot
+    # change each other's OCR backend or inherited handoff directory.
+    mode = _job_ocr_mode(out_dir)
+    env['CHARTOCODE_OCR_MODE'] = mode
+    env.pop('CHARTOCODE_OCR_DIR', None)
     from fast_detection_v46 import CONTEXT_ENV, METADATA_FILE
     # Never inherit another job's coordinate/axis context from the server host.
     env.pop(CONTEXT_ENV, None)
     if (out_dir / METADATA_FILE).exists() and (out_dir / 'source_input.png').exists():
         env[CONTEXT_ENV] = str((out_dir / METADATA_FILE).resolve())
-    if ocr_bridge_v46.agent_enabled():
+    if mode in ('agent', 'auto-agent'):
         _OCR_JOBS.add(out_dir.parent.name)
         env['CHARTOCODE_OCR_DIR'] = str((out_dir / 'ocr').resolve())
     return env
 
 
-def _ocr_timeout(normal):
-    return 3600 if ocr_bridge_v46.agent_enabled() else normal
+def _ocr_timeout(normal, out_dir=None):
+    mode = _job_ocr_mode(out_dir) if out_dir else os.environ.get('CHARTOCODE_OCR_MODE', '').lower()
+    return 3600 if mode in ('agent', 'auto-agent') else normal
 
 
 def _ocr_directory(job_id):
     if job_id not in _OCR_JOBS:
         raise HTTPException(404, 'No AI OCR job with this ID on this server')
-    return JOBS_ROOT / job_id / 'out' / 'ocr'
+    return _job_output(job_id) / 'ocr'
 
 
 @app.get('/ocr/requests')
 def ocr_requests():
     requests = []
     for job_id in tuple(_OCR_JOBS):
-        for item in ocr_bridge_v46.pending_requests(_ocr_directory(job_id)):
+        try:
+            directory = _ocr_directory(job_id)
+            source = str(_job_output(job_id) / 'input.png')
+        except (HTTPException, OSError):
+            continue
+        for item in ocr_bridge_v46.pending_requests(directory):
             requests.append(dict(item, job_id=job_id,
-                                 source_image_path=str(JOBS_ROOT / job_id / 'out' / 'input.png'),
+                                 source_image_path=source,
                                  image_url=f'/ocr/{job_id}/{item["request_id"]}/image',
                                  answer_url=f'/ocr/{job_id}/{item["request_id"]}/answer'))
-    return JSONResponse(dict(enabled=ocr_bridge_v46.agent_enabled(), requests=requests),
+    return JSONResponse(dict(enabled=ocr_bridge_v46.agent_enabled() or bool(_OCR_JOBS), requests=requests),
                         headers={'Cache-Control': 'no-store'})
 
 
@@ -141,6 +205,7 @@ async def ocr_answer(job_id: str, request_id: str, request: Request):
         raise HTTPException(404, 'OCR request not found') from error
     except (ValueError, TypeError) as error:
         raise HTTPException(400, str(error)) from error
+    _WORKFLOW.heartbeat('operating-agent')
     return {'accepted': True, 'request_id': request_id}
 
 
@@ -253,6 +318,11 @@ def image_sidecar_script():
     return FileResponse(str(HERE/'image_sidecar_v46.js'),media_type='text/javascript')
 
 
+@app.get('/agent_workflow.js')
+def agent_workflow_script():
+    return FileResponse(str(HERE / 'agent_workflow.js'), media_type='text/javascript')
+
+
 @app.post("/digitize")
 async def digitize(
     image: UploadFile = File(...),
@@ -275,9 +345,16 @@ async def digitize(
     correct_iters: str = Form(""),             # "" = default cap; else max iteration count
     prev_job: str = Form(""),                  # previous job id -> continue Step-5 from its state
     fast_detection: str = Form(""),            # opt-in native working-image cap, both engines
+    ocr_mode: str = Form(""),                  # per-job backend; blank preserves legacy launch defaults
 ):
     if mode not in ('auto', 'color', 'bw'):
         raise HTTPException(400, 'Unknown detection mode: choose auto, color or bw')
+    if ocr_mode not in ('', 'tesseract', 'agent', 'auto-agent'):
+        raise HTTPException(400, 'ocr_mode must be tesseract, agent or auto-agent')
+    if ocr_mode and _WORKFLOW_ITEM.get() is None:
+        agent_required = ocr_mode == 'agent' or ocr_mode == 'auto-agent' and not _tesseract_health()['available']
+        if agent_required and not _WORKFLOW.agent_status()['active']:
+            raise HTTPException(409, 'Agent OCR is selected but no operating agent is connected. Have the agent send a heartbeat and service /ocr/requests, then run again.')
     requested_mode = mode
     if mode == 'auto':
         if _parse4(plot_area, 'plot_area') is None:
@@ -288,9 +365,15 @@ async def digitize(
             raise HTTPException(400, 'Automatic mode received conflicting legend rectangles')
         legend_box = legend_area = legend_box.strip() or legend_area.strip()
     job_id = uuid.uuid4().hex[:12]
-    job_dir = JOBS_ROOT / job_id
+    job_dir = (_JOB_DESTINATION.get() or JOBS_ROOT) / job_id
     out_dir = job_dir / "out"
     out_dir.mkdir(parents=True, exist_ok=True)
+    _register_job(job_id, out_dir)
+    selected_ocr = ocr_mode or (_job_ocr_mode(_job_output(prev_job.strip())) if _truthy(correct) and prev_job.strip()
+                              else os.environ.get('CHARTOCODE_OCR_MODE', 'tesseract').lower())
+    _save_ocr_mode(out_dir, selected_ocr)
+    if _WORKFLOW_ITEM.get():
+        _WORKFLOW.job_started(*_WORKFLOW_ITEM.get(), job_id)
     in_path = job_dir / "input.png"
     with in_path.open("wb") as f:
         shutil.copyfileobj(image.file, f)
@@ -407,7 +490,7 @@ def _run_color(job_id, in_path, out_dir, plot_area, legend_box,
           f"prev_job={prev_job!r}  outlier_filter="
           f"{'ON' if COLOR_OUTLIER_FILTER else 'OFF (replaced by Step-5)'}", flush=True)
     proc = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace',
-                          timeout=_ocr_timeout(DETECTION_TIMEOUT_SECONDS), env=_env)
+                          timeout=_ocr_timeout(DETECTION_TIMEOUT_SECONDS, out_dir), env=_env)
     _log = (proc.stdout or "") + (proc.stderr or "")
     # Surface the pipeline's own stdout (incl. DEBUG_LABELS [labels] lines) to the
     # server console. capture_output=True otherwise swallows it into the buffer, so
@@ -434,12 +517,12 @@ def _run_color(job_id, in_path, out_dir, plot_area, legend_box,
         if legend_box.strip():   ccmd += ["--legend-area", legend_box.strip()]
         if correct_iters.strip():ccmd += ["--correct-iters", correct_iters.strip()]
         if prev_job.strip():
-            _prev = JOBS_ROOT / prev_job.strip() / "out" / "color_correction_state.json"
+            _prev = _job_output(prev_job.strip()) / "color_correction_state.json"
             if _prev.exists():
                 ccmd += ["--prev-state", str(_prev)]
         _console_print("[unified] colour Step-5:", " ".join(ccmd), flush=True)
         cproc = subprocess.run(ccmd, capture_output=True, text=True, encoding='utf-8', errors='replace',
-                               timeout=_ocr_timeout(900), env=_env)
+                               timeout=_ocr_timeout(900, out_dir), env=_env)
         _clog = (cproc.stdout or "") + (cproc.stderr or "")
         _console_print(_clog, flush=True)
         _log += "\n---- colour Step-5 ----\n" + _clog
@@ -506,7 +589,7 @@ def _run_bw(job_id, in_path, out_dir, plot_area, legend_area, known_classes,
     if correct_iters.strip(): cmd += ["--correct-iters", correct_iters.strip()]
     if _truthy(correct) and prev_job.strip():
         # continue Step-5 from the previous job's saved correction state
-        previous_out = JOBS_ROOT / prev_job.strip() / "out"
+        previous_out = _job_output(prev_job.strip())
         previous_diagnostic = _optional_diagnostic(previous_out)
         state_name = ('color_correction_state.json' if previous_diagnostic and
                       previous_diagnostic.get('chart_kind') == 'line-only' else 'correction_state.json')
@@ -530,7 +613,7 @@ def _run_bw(job_id, in_path, out_dir, plot_area, legend_area, known_classes,
 
     _console_print("[unified] BW subprocess:", " ".join(cmd))
     proc = subprocess.run(cmd, capture_output=True, text=True,
-                          encoding="utf-8", errors="replace", timeout=_ocr_timeout(DETECTION_TIMEOUT_SECONDS), env=_ocr_env(out_dir))
+                          encoding="utf-8", errors="replace", timeout=_ocr_timeout(DETECTION_TIMEOUT_SECONDS, out_dir), env=_ocr_env(out_dir))
     # Echo the child's output to the server console so failures are visible.
     if proc.stdout:
         _console_print("---- bw_detect_cli stdout ----\n" + proc.stdout)
@@ -600,6 +683,7 @@ def _response(job_id, out_dir, mode, ok, log):
     if not meta_path.exists() and (ok or editable):
         meta_path.write_text(json.dumps({'mode':mode}),encoding='utf-8')
     meta = json.loads(meta_path.read_text(encoding='utf-8')) if meta_path.exists() else {}
+    meta['ocr_mode'] = _job_ocr_mode(out_dir) or 'tesseract'
     if ok or editable:
         from correction_history_v46 import now
         meta.setdefault('version_id',job_id)
@@ -674,6 +758,7 @@ def _response(job_id, out_dir, mode, ok, log):
     colour_objective=settings_summary(out_dir) if mode=='color' else None
     return JSONResponse({
         "job_id": job_id, "mode": mode, "ok": ok,
+        "ocr_mode": meta['ocr_mode'],
         "requested_mode": selection.get('requested_mode') if selection else None,
         "mode_selection": selection,
         "mode_selection_url": url('mode_selection_v46.json'),
@@ -724,7 +809,7 @@ def _job_output(job_id):
     import re
     if not re.fullmatch(r'[a-f0-9]{12}',str(job_id)):
         raise HTTPException(400,'Invalid job ID')
-    folder = JOBS_ROOT / job_id / 'out'
+    folder = _JOB_OUTPUTS.get(job_id, JOBS_ROOT / job_id / 'out')
     if not folder.is_dir() or folder.is_symlink():
         raise HTTPException(404,'Saved job is unavailable; load the paired image and correction JSON')
     return folder
@@ -860,10 +945,12 @@ async def correct_saved_session(request: Request):
     iterations = config['max_iterations']
     meta = read(source/'session_meta.json') if (source/'session_meta.json').exists() else {}
     job = uuid.uuid4().hex[:12]
-    out = JOBS_ROOT / job / 'out'
+    out = (source.parent.parent if data.get('job_id') in _JOB_OUTPUTS else JOBS_ROOT) / job / 'out'
     try:
         package = export_session(source,meta.get('mode',data.get('mode','color')),data.get('edit_data'))
         info = import_session((source/'input.png').read_bytes(),json.dumps(package,allow_nan=False).encode(),out)
+        _register_job(job, out)
+        _save_ocr_mode(out, _job_ocr_mode(source))
         if not info['engine']:
             raise ValueError(info['reason'])
         from correction_history_v46 import now
@@ -880,7 +967,7 @@ async def correct_saved_session(request: Request):
     from starlette.concurrency import run_in_threadpool
     try:
         proc = await run_in_threadpool(subprocess.run,cmd,capture_output=True,text=True,
-                                      encoding='utf-8',errors='replace',timeout=_ocr_timeout(900),env=_ocr_env(out))
+                                      encoding='utf-8',errors='replace',timeout=_ocr_timeout(900, out),env=_ocr_env(out))
         log = (proc.stdout or '')+(proc.stderr or '')
         status = read(out/'correction_only_status.json') if (out/'correction_only_status.json').exists() else {}
         ok = proc.returncode == 0 and status.get('completed') is True
@@ -900,10 +987,90 @@ async def correct_saved_session(request: Request):
 
 @app.get("/result/{job_id}/{filename}")
 def result(job_id: str, filename: str):
-    path = JOBS_ROOT / job_id / "out" / filename
-    if not path.exists():
+    folder = _job_output(job_id)
+    if Path(filename).name != filename or '/' in filename or '\\' in filename:
+        raise HTTPException(400, 'Invalid result filename')
+    path = folder / filename
+    if not path.is_file() or path.is_symlink() or not path.resolve().is_relative_to(folder.resolve()):
         raise HTTPException(404, "not found")
     return FileResponse(str(path))
+
+
+def _workflow_ocr_pending(jobs_dir):
+    count = 0
+    for job_id in tuple(_OCR_JOBS):
+        try:
+            out = _job_output(job_id)
+            if out.is_relative_to(Path(jobs_dir).resolve()):
+                count += len(ocr_bridge_v46.pending_requests(out / 'ocr'))
+        except (HTTPException, OSError, ValueError):
+            continue
+    return count
+
+
+async def _workflow_run(batch, item):
+    """Use the exact /digitize path and response, with a durable output root."""
+    options, regions = batch['options'], item['regions']
+    destination = _JOB_DESTINATION.set(Path(batch['output_dir']) / 'jobs')
+    current_item = _WORKFLOW_ITEM.set((batch['batch_id'], item['item_id']))
+    box = lambda value: ','.join(str(v) for v in value) if value is not None else ''
+    try:
+        payload = Path(item['image_path']).read_bytes()
+        if hashlib.sha256(payload).hexdigest() != item['image_sha256']:
+            raise HTTPException(409, 'The source snapshot changed after region selection; create a new batch')
+        with io.BytesIO(payload) as stream:
+            upload = UploadFile(filename=item['name'], file=stream)
+            response = await digitize(image=upload, mode=options['mode'], plot_area=box(regions['plot_area']),
+                legend_box=box(regions['legend_box']), legend_area=box(regions['legend_box']),
+                x_min='', x_max='', y_min='', y_max='', x_log='', y_log='', color_series_mode='auto',
+                known_classes='', has_errorbars='', conf='', scale='', correct='1' if options['correct'] else '',
+                correct_iters='', prev_job='', fast_detection='1' if options['fast_detection'] else '',
+                ocr_mode=options['ocr_mode'])
+        return json.loads(response.body)
+    finally:
+        _WORKFLOW_ITEM.reset(current_item)
+        _JOB_DESTINATION.reset(destination)
+
+
+from agent_workflow import AgentWorkflow, attach_routes
+_WORKFLOW = AgentWorkflow(_workflow_run, _register_job, _workflow_ocr_pending, _tesseract_health)
+attach_routes(app, _WORKFLOW)
+_STARTUP_CONFIGURED = False
+
+
+@app.on_event('startup')
+def _start_workflow_worker():
+    if not _STARTUP_CONFIGURED:
+        configure_startup()
+    _WORKFLOW.start()
+
+
+@app.on_event('shutdown')
+def _stop_workflow_worker():
+    _WORKFLOW.stop()
+
+
+def configure_startup(ocr_mode=None, agent_workflow=False, region_mode=None):
+    """Apply choices collected in chat/CLI; ordinary launches use manual/Tesseract.
+
+    Persisted choices from older GUI setup versions are reset at launch. Explicit
+    API settings remain available for the current session; existing batch options
+    and per-job OCR settings are never changed by this startup configuration.
+    """
+    global _STARTUP_CONFIGURED
+    if region_mode not in (None, 'manual', 'agent'):
+        raise ValueError('region_mode must be manual or agent')
+    if agent_workflow and region_mode == 'manual':
+        raise ValueError('--agent-workflow conflicts with --region-mode manual')
+    selected_regions = region_mode or ('agent' if agent_workflow else 'manual')
+    selected_ocr = ('agent' if selected_regions == 'agent' else 'tesseract') if ocr_mode is None else ocr_mode
+    if selected_ocr not in ('tesseract', 'agent', 'auto-agent'):
+        raise ValueError('Unknown OCR engine')
+    if selected_regions == 'agent' and selected_ocr != 'agent':
+        raise ValueError('Agent-selected regions require --ocr-engine agent; omit --ocr-engine or select --region-mode manual')
+    os.environ['CHARTOCODE_OCR_MODE'] = selected_ocr
+    _WORKFLOW.settings({'region_mode': selected_regions, 'ocr_mode': selected_ocr})
+    _STARTUP_CONFIGURED = True
 
 
 if __name__ == "__main__":
@@ -912,10 +1079,20 @@ if __name__ == "__main__":
     import uvicorn
     parser = argparse.ArgumentParser(description='Start the v46 chart editor')
     parser.add_argument('--ai-ocr', action='store_true', help='Use the operating AI agent when Tesseract is unavailable')
+    parser.add_argument('--ocr-engine', choices=('tesseract', 'agent', 'auto-agent'), help='OCR backend for manual regions (default: tesseract); agent regions require agent OCR')
+    parser.add_argument('--region-mode', choices=('manual', 'agent'), help='Region selection chosen in chat or CLI (default: manual)')
+    parser.add_argument('--agent-workflow', action='store_true', help='Legacy alias for --region-mode agent')
     parser.add_argument('--host', default='0.0.0.0')
     parser.add_argument('--port', type=int, default=8000)
     args = parser.parse_args()
-    if args.ai_ocr:
-        os.environ['CHARTOCODE_OCR_MODE'] = 'auto-agent'
+    if args.ai_ocr and args.ocr_engine not in (None, 'auto-agent'):
+        parser.error('--ai-ocr conflicts with --ocr-engine other than auto-agent')
+    if args.agent_workflow and args.region_mode == 'manual':
+        parser.error('--agent-workflow conflicts with --region-mode manual')
+    try:
+        configure_startup(args.ocr_engine or ('auto-agent' if args.ai_ocr else None),
+                          args.agent_workflow, args.region_mode)
+    except ValueError as error:
+        parser.error(str(error))
     _console_print("colour pipeline:", _pick_color_pipeline())
     uvicorn.run(app, host=args.host, port=args.port)
