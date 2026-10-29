@@ -157,7 +157,7 @@ and units along with the calibration before using exported measurements.
 
 ## Synthetic examples
 
-[examples/](examples/) contains 40 selected synthetic plots in one flat folder: 10 PK B&W, 10 PK colour, 10 ER B&W and 10 ER colour. Filename prefixes identify each category. The [example guide](examples/README.md) and [manifest](examples/examples_manifest.json) provide the tested plot/legend regions, calibration, current detection/Step-5 scores and timing. These are curated demonstration cases, not a representative benchmark or clinical measurements.
+[examples/](examples/) contains 40 selected synthetic plots in one flat folder: 10 PK B&W, 10 PK colour, 10 ER B&W and 10 ER colour. Filename prefixes identify each category. The [example guide](examples/README.md) and [manifest](examples/examples_manifest.json) provide the tested plot/legend regions, calibration, scores before and after automatic correction, and timing. These are curated demonstration cases, not a representative benchmark or clinical measurements.
 
 ## Opening saved images and JSON files
 
