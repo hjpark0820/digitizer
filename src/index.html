@@ -48,6 +48,23 @@
   .editor-footer { flex-shrink:0; }
   #edCoordinates { margin-top:8px; font-size:12px; }
   #edCoordinates summary { cursor:pointer; }
+  #edMetadata { border:1px solid var(--border); border-radius:8px; background:#fff; padding:7px 10px; font-size:13px; }
+  #edMetadata summary { cursor:pointer; font-weight:600; }
+  .ed-metadata-content { display:grid; grid-template-columns:minmax(260px,1fr) minmax(220px,1fr); gap:16px; margin-top:8px; }
+  .ed-axis-row { display:grid; grid-template-columns:1fr 1fr auto; gap:8px; align-items:end; margin:6px 0; }
+  .ed-axis-row label, .ed-series-name { display:flex; flex-direction:column; gap:3px; min-width:0; }
+  #edMetadata input[type=text] { width:100%; min-width:0; box-sizing:border-box; padding:5px 7px; border:1px solid var(--border); border-radius:5px; }
+  .ed-axis-row .ed-log { flex-direction:row; align-items:center; padding-bottom:5px; }
+  .ed-axis-text-row { display:grid; grid-template-columns:2fr 1fr; gap:8px; margin:6px 0 10px; }
+  .ed-axis-text-row label { display:flex; flex-direction:column; gap:3px; min-width:0; }
+  #edAxisGuideReadout { flex-shrink:0; display:flex; flex-wrap:wrap; gap:4px 16px; padding:5px 8px; font-size:12px; background:#fff; border:1px solid var(--border); border-radius:5px; max-height:65px; overflow:auto; overflow-wrap:anywhere; }
+  #edAxisGuideReadout[hidden] { display:none; }
+  .ed-axis-x { color:#1463b8; }
+  .ed-axis-y { color:#b45309; }
+  #edSeriesNames { display:grid; gap:6px; max-height:125px; overflow:auto; padding-right:4px; }
+  .ed-series-name span { display:flex; align-items:center; gap:6px; }
+  #edMetadataStatus { margin-left:8px; }
+  @media(max-width:750px) { .ed-metadata-content { grid-template-columns:1fr; gap:8px; } }
   #edTableWrap { max-height:23vh; overflow:auto; margin-top:6px; }
   #resultsTableWrap { max-height:320px; overflow:auto; border:1px solid var(--border); border-radius:6px; }
   .coordinate-table { border-collapse:collapse; font-size:12px; width:100%; }
@@ -410,6 +427,36 @@
       <span class="hint" id="edStatus"></span>
     </div>
     <p class="hint">Left-drag empty space to pan · drag a dot to move it · click empty space to add a point · Delete removes the selected dot. Pan lets you drag anywhere. +/&#8722; or Ctrl+scroll zooms; Fit shows the whole image.</p>
+    <details id="edMetadata">
+      <summary>Axis ranges &amp; series names</summary>
+      <div class="ed-metadata-content">
+        <div>
+          <div class="hint">The original image shows the selected box: <span style="color:#1463b8">blue = X</span>, <span style="color:#b45309">orange = Y</span>. Values preview as you type; Apply updates the data.</div>
+          <div class="ed-axis-row ed-axis-x">
+            <label>X min (left)<input id="edXMin" type="text" inputmode="decimal" placeholder="e.g. 0 or 1e-3"></label>
+            <label>X max (right)<input id="edXMax" type="text" inputmode="decimal"></label>
+            <label class="ed-log"><input id="edXLog" type="checkbox">Log X</label>
+          </div>
+          <div class="ed-axis-text-row ed-axis-x">
+            <label>X axis name<input id="edXLabel" type="text" maxlength="500" placeholder="e.g. Time"></label>
+            <label>X unit<input id="edXUnit" type="text" maxlength="128" placeholder="e.g. h"></label>
+          </div>
+          <div class="ed-axis-row ed-axis-y">
+            <label>Y min (bottom)<input id="edYMin" type="text" inputmode="decimal"></label>
+            <label>Y max (top)<input id="edYMax" type="text" inputmode="decimal"></label>
+            <label class="ed-log"><input id="edYLog" type="checkbox">Log Y</label>
+          </div>
+          <div class="ed-axis-text-row ed-axis-y">
+            <label>Y axis name<input id="edYLabel" type="text" maxlength="500" placeholder="e.g. Concentration"></label>
+            <label>Y unit<input id="edYUnit" type="text" maxlength="128" placeholder="e.g. ng/mL"></label>
+          </div>
+          <p class="hint">Unchecked = linear. Logarithmic bounds must be positive.</p>
+          <p class="hint">Names and units label the data; changing a unit does not convert numerical values.</p>
+        </div>
+        <div><p class="hint">Correct names read from the legend. Saved JSON, CSV and Excel use these names.</p><div id="edSeriesNames"></div></div>
+      </div>
+      <div class="tool" style="margin-top:8px;"><button id="edApplyMetadata" type="button">Apply changes</button><span id="edMetadataStatus" class="hint" role="status" aria-live="polite"></span></div>
+    </details>
     </div>
     <div class="editor-plots">
       <div class="canvaswrap">
@@ -419,6 +466,7 @@
             <canvas id="editCanvas" width="600" height="400" tabindex="0" aria-label="Editable plot"></canvas>
           </div>
         </div>
+        <div id="edAxisGuideReadout" aria-label="Axis midpoint preview" hidden></div>
       </div>
       <div class="canvaswrap">
         <div class="hint" id="editorReconCaption">Reconstructed plot (live)</div>
@@ -591,7 +639,7 @@ function syncImageControls() {
     document.getElementById(id).disabled = busy;
   }
   document.getElementById('openEditor').disabled = busy || !capabilities.editable;
-  document.querySelectorAll('#editor button').forEach(el => { el.disabled = busy; });
+  document.querySelectorAll('#editor button, #edMetadata input').forEach(el => { el.disabled = busy; });
   syncFolderNavigation();
   const dims = size => size ? `${size.width} × ${size.height} px` : '—';
   document.getElementById('bwImageDimensions').textContent =
@@ -917,6 +965,7 @@ function markFolderResultSaved() {
 }
 
 function hasUnsavedFolderChanges() {
+  if (editorMetadataDirty()) return true;
   if(!window._lastJobId)return false;
   if(savedFolderState?.jobId!==window._lastJobId)return true;
   const edits=currentEdForSave();
@@ -1617,11 +1666,12 @@ function coordinateUnitMetadata(axis) {
   // OCR may recognize a label even when numeric tick calibration fails. Never
   // attach that physical unit to pixel distances or normalized coordinates.
   if (!axis) return {unit: '', status: 'unavailable', note: ''};
+  if (axis.kind === 'normalized') return {unit: '', status: 'normalized', note: ''};
   if (axis.kind === 'pixel' || axis.status === 'needs_calibration') {
     return {unit: '', status: 'uncalibrated', note: ''};
   }
-  if (axis.kind === 'normalized') return {unit: '', status: 'normalized', note: ''};
   const unit = typeof axis.unit === 'string' ? axis.unit.trim() : '';
+  if (axis.unit_status === 'manual') return {unit, status:'manual', note:unit ? '' : 'unit not specified'};
   if (axis.unit_status === 'recognized' && unit) return {unit, status: 'recognized', note: ''};
   const note = ({ambiguous: 'unit ambiguous', not_detected: 'unit not detected',
     unavailable: 'unit recognition unavailable', recognized: 'unit not confirmed'})[axis.unit_status] || '';
@@ -1636,12 +1686,13 @@ function axisCalibrationText(calibration) {
     const prefix = name.toUpperCase() + ': ';
     if (!axis) return prefix + 'no axis calibration — coordinates are pixels.';
     const range = number(axis.v0) + ' to ' + number(axis.v1);
+    if (axis.kind === 'normalized') {
+      return prefix + 'relative position (' + range + ') — axis calibration required. ' +
+        (axis.warning || 'Enter both limits and the linear/log setting to recover axis values.');
+    }
     if (axis.kind === 'pixel' || axis.status === 'needs_calibration') {
       return prefix + 'uncalibrated — pixel distance (' + range + '). ' +
         (axis.warning || 'Axis values could not be confirmed; enter both limits to set data units.');
-    }
-    if (axis.kind === 'normalized') {
-      return prefix + 'normalized coordinates (' + range + ') — axis values are not calibrated.';
     }
     const source = ({automatic: 'automatic', manual: 'manual', user_supplied: 'manual',
       mixed: 'automatic + manual override'})[axis.source] || 'saved calibration';
@@ -1683,6 +1734,7 @@ async function checkedResponse(response) {
 
 async function saveCurrentFile(kind) {
   if (!window._lastJobId || imageState.busy) return;
+  if (!applyEditorMetadata()) return;
   const token = imageState.begin('save'); syncImageControls();
   try {
     const response = await checkedResponse(await fetch('/correction-session/'+(kind==='excel'?'excel':'export'), {
@@ -1701,6 +1753,7 @@ async function saveCurrentFile(kind) {
 
 async function saveCorrection() {
   if(!window._lastJobId || imageState.busy)return;
+  if(!applyEditorMetadata())return;
   if(!sidecar.source) { alert('Load the original image before saving a linked JSON.'); return; }
   if(!window.showDirectoryPicker) { alert('Same-folder saving is unavailable in this browser. Open the GUI in Chrome or Edge on localhost.'); return; }
   const token=imageState.begin('save');syncImageControls();
@@ -1838,10 +1891,10 @@ async function loadCorrectionPair(imageFile,dataFile,useSavedVersion=false) {
     document.getElementById('useScaleBox').checked=false; scaleBoxUpdate();
     for (const axis of ['x','y']) {
       const a=saved.calibration && saved.calibration[axis];
-      // Saved OCR results remain automatic on the next detection run. Pixel
-      // fallback distances must never become user-supplied physical units.
-      const manual=a && a.kind!=='pixel' && a.status!=='needs_calibration' &&
-        !['automatic','mixed','pixel','uncalibrated_pixel_distance'].includes(a.source);
+      // Saved OCR results remain automatic on the next detection run. Pixel or
+      // normalized fallbacks must never become user-supplied physical units.
+      const manual=a && !['pixel','normalized'].includes(a.kind) && a.status!=='needs_calibration' &&
+        !['automatic','mixed','pixel','normalized','uncalibrated_pixel_distance'].includes(a.source);
       document.getElementById(axis+'Min').value=manual ? a.v0 : '';
       document.getElementById(axis+'Max').value=manual ? a.v1 : '';
       document.getElementById(axis+'Log').checked=!!(manual && a.log);
@@ -1858,6 +1911,7 @@ async function loadCorrectionPair(imageFile,dataFile,useSavedVersion=false) {
 }
 
 async function runSavedCorrection() {
+  if (!applyEditorMetadata()) return;
   if (!window._lastJobId || imageState.busy) return;
   if (!resultCapabilities(window.lastData).correctable) {
     alert(window.lastData?.correction_unavailable_reason || 'Step 5 needs a completed detection with saved correction evidence. Manual editing is still available.');
@@ -1948,6 +2002,7 @@ let edGesture = null;
 let edTool = 'edit';
 let editorReturnScroll = 0, editorReturnFocus = null, editorBodyOverflow = '';
 let edViewFilter = null;   // null = show all symbols; otherwise a curve index (show only that symbol)
+let edMetadataBaseline = null;
 const edCanvas = document.getElementById('editCanvas');
 const edCtx = edCanvas.getContext('2d');
 
@@ -1990,6 +2045,179 @@ function pxToData(px, ax) {
   return v0 + t * (v1 - v0);
 }
 
+function editorPlotBounds(ed) {
+  const p = ed && ed.plot_area;
+  if (!Array.isArray(p) || p.length !== 4 || !p.every(Number.isFinite) ||
+      !(p[0] >= 0 && p[1] >= 0 && p[2] > p[0] && p[3] > p[1]) ||
+      p[2] >= ed.image.width || p[3] >= ed.image.height) {
+    throw new Error('The saved plot area is invalid. Reload the paired image and result.');
+  }
+  return p;
+}
+
+function editorAxisName(axis) {
+  let label = typeof axis?.label === 'string' ? axis.label.trim() : '';
+  const unit = typeof axis?.unit === 'string' ? axis.unit.trim() : '';
+  if (unit) {
+    for (const suffix of ['('+unit+')', '['+unit+']']) {
+      if (label.endsWith(suffix)) { label=label.slice(0,-suffix.length).trim(); break; }
+    }
+    if (label===unit) label='';
+  }
+  return label;
+}
+
+function editorAxisFormValues(ed) {
+  const p = editorPlotBounds(ed), values = {};
+  for (const name of ['x', 'y']) {
+    const axis = ed.calibration && ed.calibration[name];
+    const anchors = name === 'x' ? [p[0], p[2]] : [p[3], p[1]];
+    const calibrated = axis && axis.kind !== 'pixel' && axis.kind !== 'normalized' && axis.status !== 'needs_calibration';
+    const ends = calibrated ? anchors.map(v => pxToData(v, axis)) : [];
+    values[name] = {min: ends.length && ends.every(Number.isFinite) ? String(ends[0]) : '',
+      max: ends.length && ends.every(Number.isFinite) ? String(ends[1]) : '', log: !!(calibrated && axis.log),
+      label:editorAxisName(axis), unit:typeof axis?.unit === 'string' ? axis.unit.trim() : ''};
+  }
+  return values;
+}
+
+function prepareEditorMetadata(ed, form, baseline) {
+  const plot = editorPlotBounds(ed);
+  if (form.labels.length !== ed.curves.length) throw new Error('The series list changed. Reopen the editor.');
+  const labels = form.labels.map((label, i) => {
+    if (typeof label !== 'string' || !label.trim()) throw new Error('Enter a name for series ' + (i + 1) + '.');
+    return label.trim();
+  });
+  let calibration = ed.calibration;
+  const axesChanged = [], axisTextChanged = [];
+  for (const name of ['x', 'y']) {
+    const previous=baseline.axes[name];
+    const value = {...previous,...form.axes[name]}, label = name.toUpperCase();
+    const numericChanged=['min','max','log'].some(key=>value[key]!==previous[key]);
+    const textChanged=['label','unit'].some(key=>value[key]!==previous[key]);
+    if (!numericChanged && !textChanged) continue;
+    if (calibration===ed.calibration) calibration=JSON.parse(JSON.stringify(ed.calibration || {}));
+    const [p0, p1] = name === 'x' ? [plot[0], plot[2]] : [plot[3], plot[1]];
+    if (textChanged) {
+      for (const key of ['label','unit']) {
+        const limit=key==='unit'?128:500;
+        if (typeof value[key]!=='string' || value[key].length>limit) throw new Error(label+' axis '+(key==='unit'?'unit':'name')+' must be text of at most '+limit+' characters.');
+      }
+      const axis=calibration[name] || {p0,p1,v0:0,v1:1,log:false,kind:'normalized',status:'needs_calibration',source:'normalized',warning:'Relative position only. Enter both axis bounds to calibrate.'};
+      const unit=value.unit.trim();
+      calibration[name]={...axis,label:value.label.trim(),label_source:'manual',unit,
+        unit_status:'manual',unit_source:'manual',unit_warning:''};
+      axisTextChanged.push(name);
+    }
+    if (!numericChanged) continue;
+    if (!String(value.min).trim() || !String(value.max).trim()) throw new Error('Enter both ' + label + ' axis bounds.');
+    const v0 = Number(value.min), v1 = Number(value.max);
+    if (!Number.isFinite(v0) || !Number.isFinite(v1)) throw new Error(label + ' axis bounds must be finite numbers.');
+    if (v1 <= v0) throw new Error(label + ' maximum must be greater than its minimum.');
+    if (value.log && v0 <= 0) throw new Error('Both ' + label + ' bounds must be positive for a logarithmic axis.');
+    const axis = {...calibration[name], p0, p1, v0, v1, log: !!value.log,
+      kind: value.log ? 'log' : 'linear', status: 'accepted', source: 'manual', warning: ''};
+    delete axis.pixel_units;
+    for (const curve of ed.curves) {
+      for (const point of curve.points) {
+        const number = pxToData(point[name], axis);
+        if (!Number.isFinite(number) || (axis.log && number <= 0)) {
+          throw new Error(label + ' bounds produce values outside the supported numeric range.');
+        }
+      }
+    }
+    calibration[name] = axis;
+    axesChanged.push(name);
+  }
+  if (axesChanged.length || axisTextChanged.length) {
+    for (const name of ['x', 'y']) {
+      if (calibration[name]) continue;
+      const [p0, p1] = name === 'x' ? [plot[0], plot[2]] : [plot[3], plot[1]];
+      calibration[name] = {p0, p1, v0: 0, v1: 1, log: false,
+        kind: 'normalized', status: 'needs_calibration', source: 'normalized', warning: 'Relative position only. Enter both axis bounds to calibrate.'};
+    }
+  }
+  return {calibration, labels, axesChanged, axisTextChanged,
+    namesChanged: labels.some((label, i) => label !== (ed.curves[i].label || ed.curves[i].name))};
+}
+
+function readEditorMetadataForm() {
+  const axes = {};
+  for (const name of ['x', 'y']) {
+    const id = 'ed' + name.toUpperCase();
+    axes[name] = {min: document.getElementById(id + 'Min').value,
+      max: document.getElementById(id + 'Max').value, log: document.getElementById(id + 'Log').checked,
+      label:document.getElementById(id+'Label').value, unit:document.getElementById(id+'Unit').value};
+  }
+  return {axes, labels: Array.from(document.querySelectorAll('#edSeriesNames input'), input => input.value)};
+}
+
+function syncEditorMetadata() {
+  const axes = editorAxisFormValues(ED);
+  for (const name of ['x', 'y']) {
+    const id = 'ed' + name.toUpperCase();
+    document.getElementById(id + 'Min').value = axes[name].min;
+    document.getElementById(id + 'Max').value = axes[name].max;
+    document.getElementById(id + 'Log').checked = axes[name].log;
+    document.getElementById(id + 'Label').value = axes[name].label;
+    document.getElementById(id + 'Unit').value = axes[name].unit;
+  }
+  const names = document.getElementById('edSeriesNames'); names.replaceChildren();
+  ED.curves.forEach((curve, i) => {
+    const row = document.createElement('label'); row.className = 'ed-series-name';
+    const caption = document.createElement('span'), swatch = document.createElement('span');
+    swatch.className = 'swatch'; swatch.style.background = rgbCss(curve.rgb);
+    caption.append(swatch, document.createTextNode('Series ' + (i + 1)));
+    const input = document.createElement('input'); input.type = 'text'; input.value = curve.label || curve.name;
+    input.setAttribute('aria-label', 'Series ' + (i + 1) + ' name');
+    row.append(caption, input); names.appendChild(row);
+  });
+  edMetadataBaseline = readEditorMetadataForm();
+  document.getElementById('edMetadataStatus').textContent = '';
+}
+
+function editorMetadataDirty() {
+  return !!(ED && window._editorJobId === window._lastJobId && edMetadataBaseline &&
+    JSON.stringify(readEditorMetadataForm()) !== JSON.stringify(edMetadataBaseline));
+}
+
+function applyEditorMetadata() {
+  if (!editorMetadataDirty()) return true;
+  if (imageState.busy || folderNavigationBusy) return false;
+  const status = document.getElementById('edMetadataStatus');
+  try {
+    const change = prepareEditorMetadata(ED, readEditorMetadataForm(), edMetadataBaseline);
+    // Validate every field before mutating the current result. Evidence and IDs stay intact.
+    ED.calibration = change.calibration;
+    ED.curves.forEach((curve, i) => { curve.label = change.labels[i]; });
+    syncEditorMetadata(); buildCurvePicker(); recompute();
+    status.style.color = '';
+    status.textContent = 'Applied to the current result. Save JSON to keep these edits.';
+    return true;
+  } catch (error) {
+    document.getElementById('edMetadata').open = true;
+    status.style.color = '#b42318'; status.textContent = error.message;
+    return false;
+  }
+}
+
+document.getElementById('edApplyMetadata').onclick = applyEditorMetadata;
+document.getElementById('edMetadata').addEventListener('input', () => {
+  const status = document.getElementById('edMetadataStatus'); status.style.color = '';
+  status.textContent = 'Pending changes — Apply, or save/export to apply them.';
+  drawEditor();
+});
+document.getElementById('edMetadata').addEventListener('toggle', () => {
+  if (!ED) return;
+  if (document.getElementById('edMetadata').open) requestAnimationFrame(fitEditorView);
+  else drawEditor();
+});
+document.getElementById('edMetadata').addEventListener('focusin', drawEditor);
+document.getElementById('edMetadata').addEventListener('focusout', () => requestAnimationFrame(drawEditor));
+document.getElementById('edMetadata').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.preventDefault(); applyEditorMetadata(); }
+});
+
 async function initEditor(data, valid = currentResultGuard()) {
   if (imageState.busy || !valid()) return false;
   const loadSerial = ++editorLoadSerial;
@@ -2004,6 +2232,7 @@ async function initEditor(data, valid = currentResultGuard()) {
   if (!current()) return false;
   ED = nextED; edImg = nextImage;
   window._editorJobId = window._lastJobId;
+  syncEditorMetadata();
   cancelEditorGesture();
   edSel = 0; edSelPt = null; edViewFilter = null;
   // Folder navigation owns a separate lock while the new editor is opening.
@@ -2097,6 +2326,80 @@ function buildCurvePicker() {
   });
 }
 
+function editorAxisGuide(ed, axes, scale, viewX, viewY) {
+  const p = editorPlotBounds(ed);
+  const box = [p[0]*scale-viewX, p[1]*scale-viewY, p[2]*scale-viewX, p[3]*scale-viewY];
+  const format = v => Number(v.toPrecision(5)).toString();
+  const guides = {};
+  for (const name of ['x', 'y']) {
+    const axis = axes[name], lo = String(axis.min).trim(), hi = String(axis.max).trim();
+    const min = Number(lo), max = Number(hi);
+    const valid = !!lo && !!hi && Number.isFinite(min) && Number.isFinite(max) && max > min && (!axis.log || min > 0);
+    const middle = valid ? (axis.log ? Math.pow(10, (Math.log10(min)+Math.log10(max))/2) : min/2+max/2) : null;
+    const end = value => !String(value).trim() ? 'not set' : Number.isFinite(Number(value)) ? format(Number(value)) : 'invalid';
+    guides[name] = {min:end(axis.min), max:end(axis.max), middle:middle === null ? null : format(middle), valid, log:!!axis.log};
+  }
+  return {box, axes:guides};
+}
+
+function drawEditorAxisGuide() {
+  const readout=document.getElementById('edAxisGuideReadout');
+  if(readout)readout.hidden=!document.getElementById('edMetadata').open;
+  if (!document.getElementById('edMetadata').open) return;
+  let guide;
+  const draft=readEditorMetadataForm().axes;
+  try { guide=editorAxisGuide(ED,draft,edScale,edViewX,edViewY); }
+  catch (_) { if(readout)readout.textContent='Plot-area preview unavailable.'; return; }
+  const [left,top,right,bottom]=guide.box, ctx=edCtx, W=edCanvas.width, H=edCanvas.height;
+  const blue='#1463b8', orange='#b45309', active=document.activeElement?.id || '';
+  ctx.save();
+  // Everything uses the same image-to-viewport transform as the editable points.
+  function line(x1,y1,x2,y2,colour,focused) {
+    ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);
+    ctx.strokeStyle='rgba(255,255,255,.9)';ctx.lineWidth=focused?7:5;ctx.stroke();
+    ctx.strokeStyle=colour;ctx.lineWidth=focused?4:2;ctx.setLineDash([7,4]);ctx.stroke();ctx.setLineDash([]);
+  }
+  line(left,top,left,bottom,blue,active==='edXMin');
+  line(right,top,right,bottom,blue,active==='edXMax');
+  line(left,top,right,top,orange,active==='edYMax');
+  line(left,bottom,right,bottom,orange,active==='edYMin');
+  function badge(text,ax,ay,x,y,colour,align='left') {
+    // An offscreen edge must not appear to correspond to the viewport boundary.
+    if(ax<0 || ay<0 || ax>W || ay>H)return;
+    ctx.font='600 12px system-ui, sans-serif';ctx.textBaseline='middle';ctx.textAlign='left';
+    const width=Math.min(W-4,ctx.measureText(text).width+14), height=23;
+    if(align==='right')x-=width;
+    else if(align==='center')x-=width/2;
+    x=Math.max(2,Math.min(W-width-2,x));y=Math.max(2,Math.min(H-height-2,y));
+    ctx.strokeStyle=colour;ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(ax,ay);
+    ctx.lineTo(Math.max(x,Math.min(x+width,ax)),Math.max(y,Math.min(y+height,ay)));ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.95)';ctx.fillRect(x,y,width,height);ctx.strokeRect(x,y,width,height);
+    ctx.fillStyle=colour;ctx.fillText(text,x+7,y+height/2,width-14);
+    ctx.beginPath();ctx.arc(ax,ay,3,0,Math.PI*2);ctx.fill();
+  }
+  const x=guide.axes.x,y=guide.axes.y;
+  // Prefer the top margin for X badges so the source's bottom tick labels stay readable.
+  const xAbove=top>=32, xOutside=xAbove || bottom+55<H;
+  const xAnchorY=xAbove?top:bottom, xLabelY=xAbove?top-31:xOutside?bottom+30:bottom-27;
+  badge('Y max = '+y.max,left,top,left+10,top+7,y.valid?orange:'#b42318');
+  badge('Y min = '+y.min,left,bottom,left+10,bottom-(xOutside?31:58),y.valid?orange:'#b42318');
+  badge('X min = '+x.min,left,xAnchorY,left,xLabelY,x.valid?blue:'#b42318');
+  badge('X max = '+x.max,right,xAnchorY,right,xLabelY,x.valid?blue:'#b42318','right');
+  // Midpoint information lives outside the image, never across source ticks or titles.
+  if(readout) {
+    readout.replaceChildren();
+    for(const name of ['x','y']) {
+      const item=document.createElement('span'), a=guide.axes[name], form=draft[name];
+      const unit=String(form.unit || '').trim(), label=String(form.label || '').trim();
+      item.style.color=name==='x'?blue:orange;
+      item.textContent=name.toUpperCase()+(label?' · '+label:'')+': midpoint '+
+        (a.middle===null?'not available':a.middle)+(unit?' '+unit:'')+' ('+(a.log?'log':'linear')+')';
+      readout.appendChild(item);
+    }
+  }
+  ctx.restore();
+}
+
 function drawEditor() {
   if (!ED) return;
   const sc=document.getElementById('editScroll');
@@ -2128,6 +2431,7 @@ function drawEditor() {
       edCtx.stroke();
     });
   });
+  drawEditorAxisGuide();
 }
 
 function edPos(e) {
@@ -2266,7 +2570,7 @@ function recompute() {
   document.getElementById('edStatus').textContent =
     rows.length + ' points · ' + axisCalibrationText(cal).replace(/\n/g, ' ');
 }
-document.getElementById('edRecompute').onclick = recompute;
+document.getElementById('edRecompute').onclick = () => { if (applyEditorMetadata()) recompute(); };
 
 // Saved reference diagnostics may compare the active anchors that the server
 // evaluated. The point-preview renderer below does not display that reference.
@@ -2396,6 +2700,12 @@ function drawRecon(rows) {
   if (!rows.length) return;
   let xmin = Math.min(...xs), xmax = Math.max(...xs),
       ymin = Math.min(...ys), ymax = Math.max(...ys);
+  // Reflect the calibrated plot edges, rather than tightening to the detected points.
+  if (cal && ED.plot_area) {
+    const [left, top, right, bottom] = ED.plot_area;
+    xmin = pxToData(left, cal.x); xmax = pxToData(right, cal.x);
+    ymin = pxToData(bottom, cal.y); ymax = pxToData(top, cal.y);
+  }
   const fx = v => {
     let t;
     if (xlog) t = (Math.log10(v) - Math.log10(xmin)) / ((Math.log10(xmax) - Math.log10(xmin)) || 1);
@@ -2415,17 +2725,18 @@ function drawRecon(rows) {
   const visibleRows = edViewFilter === null ? rows : rows.filter(r => r.curve === ED.curves[edViewFilter]);
   const byLabel = {};
   visibleRows.forEach(r => {
-    const key = r.swatch_id || (r.curve && r.curve.reconstruction ? r.name : r.label);
+    const key = r.swatch_id || r.name || r.label;
     (byLabel[key] = byLabel[key] || []).push(r);
   });
   Object.values(byLabel).forEach(list => {
     drawSeriesReconstruction(c, list, fx, fy, useData, cal);
   });
   c.fillStyle = '#333'; c.font = '10px sans-serif';
-  c.fillText(('' + (Math.round(xmin * 100) / 100)), M.l, M.t + H + 12);
-  c.fillText(('' + (Math.round(xmax * 100) / 100)), M.l + W - 24, M.t + H + 12);
-  c.fillText('' + (Math.round(ymax * 100) / 100), 2, M.t + 8);
-  c.fillText('' + (Math.round(ymin * 100) / 100), 2, M.t + H);
+  const tickLabel = v => (Math.abs(v) >= 1e5 || (v !== 0 && Math.abs(v) < 1e-3)) ? v.toExponential(2) : String(Number(v.toPrecision(5)));
+  c.fillText(tickLabel(xmin), M.l, M.t + H + 12);
+  c.fillText(tickLabel(xmax), M.l + W - 24, M.t + H + 12);
+  c.fillText(tickLabel(ymax), 2, M.t + 8);
+  c.fillText(tickLabel(ymin), 2, M.t + H);
 }
 
 // Standalone reconstruction render (no editor state) — draws edit_data points to
@@ -2468,10 +2779,11 @@ function drawReconStandalone(rows, cv, imgW, imgH, cal, bounds) {
     drawSeriesReconstruction(c, list, fx, fy, useData, cal);
   });
   c.fillStyle = '#333'; c.font = '10px sans-serif';
-  c.fillText('' + (Math.round(xmin * 100) / 100), M.l, M.t + H + 12);
-  c.fillText('' + (Math.round(xmax * 100) / 100), M.l + W - 24, M.t + H + 12);
-  c.fillText('' + (Math.round(ymax * 100) / 100), 2, M.t + 8);
-  c.fillText('' + (Math.round(ymin * 100) / 100), 2, M.t + H);
+  const tickLabel = v => (Math.abs(v) >= 1e5 || (v !== 0 && Math.abs(v) < 1e-3)) ? v.toExponential(2) : String(Number(v.toPrecision(5)));
+  c.fillText(tickLabel(xmin), M.l, M.t + H + 12);
+  c.fillText(tickLabel(xmax), M.l + W - 24, M.t + H + 12);
+  c.fillText(tickLabel(ymax), 2, M.t + 8);
+  c.fillText(tickLabel(ymin), 2, M.t + H);
 }
 
 async function showSuppressedReview(editUrl, parent, inputUrl) {
@@ -2639,11 +2951,11 @@ function coordinateRows(ed) {
 
 function coordinateAxisHeading(name, axis) {
   if (!axis) return name.toUpperCase() + ' (image px)';
+  if (axis.kind === 'normalized') return name.toUpperCase() + ' (relative position; uncalibrated)';
   if (axis.kind === 'pixel' || axis.status === 'needs_calibration') return name.toUpperCase() +
     (axis.pixel_units === 'source_image_pixels' ? ' (source-image pixel distance; uncalibrated)' : ' (pixel distance; uncalibrated)');
-  if (axis.kind === 'normalized') return name.toUpperCase() + ' (normalized; uncalibrated)';
   const metadata = coordinateUnitMetadata(axis);
-  return name.toUpperCase() + ' (' + (metadata.unit || 'axis units') + ')';
+  return (editorAxisName(axis) || name.toUpperCase()) + ' (' + (metadata.unit || 'axis units') + ')';
 }
 
 function drawCoordinateTable(rows, wrap, calibration) {
@@ -2719,10 +3031,11 @@ function coordinateCsv(rows, calibration) {
   const x = coordinateUnitMetadata(cal.x), y = coordinateUnitMetadata(cal.y);
   const quoted = value => '"' + String(value ?? '').replace(/"/g, '""') + '"';
   let csv = (hasSwatchIds ? 'swatch_id,' : '') +
-    'curve,data_x,data_y,pixel_x,pixel_y,x_unit,y_unit,x_unit_status,y_unit_status\n';
+    'curve,data_x,data_y,pixel_x,pixel_y,x_unit,y_unit,x_unit_status,y_unit_status,x_label,y_label\n';
   rows.forEach(r => {
     const values = [quoted(r.label), r.dx == null ? '' : r.dx, r.dy == null ? '' : r.dy,
-      r.px, r.py, quoted(x.unit), quoted(y.unit), quoted(x.status), quoted(y.status)];
+      r.px, r.py, quoted(x.unit), quoted(y.unit), quoted(x.status), quoted(y.status),
+      quoted(cal.x?.label || ''),quoted(cal.y?.label || '')];
     if (hasSwatchIds) values.unshift(quoted(r.swatch_id));
     csv += values.join(',') + '\n';
   });
@@ -2730,6 +3043,7 @@ function coordinateCsv(rows, calibration) {
 }
 
 document.getElementById('edCsv').onclick = () => {
+  if (!applyEditorMetadata()) return;
   const csv = coordinateCsv(window._edRows || [], ED && ED.calibration);
   const blob = new Blob([csv], { type: 'text/csv' });
   const a = document.createElement('a');

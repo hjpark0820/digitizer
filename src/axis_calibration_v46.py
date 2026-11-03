@@ -1,8 +1,8 @@
 """Conservative, independent numeric calibration of the two chart axes.
 
 Only NumPy, OpenCV and the existing OCR bridge are needed; importing this module
-does not import the analysis pipeline or initialize its models. Pixel fallbacks
-are explicit and measure distance from the left/bottom edge of the plot.
+does not import the analysis pipeline or initialize its models. Failed axes use
+explicit unitless 0–1 relative positions across the plot and still require calibration.
 """
 from __future__ import annotations
 
@@ -390,8 +390,9 @@ def resolve_calibration(image, plot_area, x_min=None, x_max=None, y_min=None,
     ``*_log`` is true; axis-title unit OCR remains independent. A partial manual
     axis keeps the explicit bound and reads the missing
     bound/scale from ticks. Invalid manual values raise ``ValueError``. Failed
-    automatic axes return an explicit pixel mapping instead of a guessed 0–1
-    data range. ``p0/v0`` is left or bottom; ``p1/v1`` is right or top.
+    automatic axes return a unitless 0–1 relative-position mapping marked as
+    needing calibration, never an accepted data range. ``p0/v0`` is left or
+    bottom; ``p1/v1`` is right or top. Original pixel anchors are retained.
     """
     started = time.perf_counter()
     if image is None or not hasattr(image, 'shape') or len(image.shape) < 2:
@@ -447,10 +448,12 @@ def resolve_calibration(image, plot_area, x_min=None, x_max=None, y_min=None,
                 evidence.update(inliers=fitted['inliers'], fit={k: v for k, v in fitted.items() if k != 'inliers'})
                 reason = f"Accepted {len(fitted['inliers'])} numeric ticks as a {kind} scale."
             else:
-                low, high, kind, source = 0.0, float(abs(p1 - p0)), 'pixel', 'pixel'
+                low, high, kind, source = 0.0, 1.0, 'normalized', 'normalized'
                 details = (' ' + '; '.join(evidence['errors'])) if evidence['errors'] else ''
-                warning = f'{axis.upper()} axis requires calibration: {reason}{details} Exporting local pixel coordinates.'
-        status = 'needs_calibration' if kind == 'pixel' else 'accepted'
+                warning = (f'{axis.upper()} axis requires calibration: {reason}{details} '
+                           'Exporting unitless relative positions (0-1 over the selected plot area), '
+                           'not calibrated axis values.')
+        status = 'needs_calibration' if kind == 'normalized' else 'accepted'
         calibration[axis] = dict(p0=float(p0), p1=float(p1), v0=float(low), v1=float(high),
                                  log=kind == 'log', kind=kind, status=status, source=source, warning=warning)
         # Unit text is independent evidence; never changes tick fits or values.

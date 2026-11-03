@@ -272,7 +272,7 @@ def _export_results():
         json.dump({'detections': all_detections_out, 'tcaps': {k: all_tcaps_out.get(k, []) for k in all_detections_out}, 'walk_nodes': all_walk_nodes}, f, indent=2)
     print(f'\nJSON: {json_path}')
     # The GUI and both detector routes share the same independent-axis OCR,
-    # manual override and explicit pixel-fallback contract.
+    # manual override and explicitly uncalibrated normalized-fallback contract.
     from axis_calibration_v46 import resolve_calibration
     _axis_result = resolve_calibration(img, PLOT_AREA, USER_X_MIN, USER_X_MAX,
                                       USER_Y_MIN, USER_Y_MAX, USER_X_LOG, USER_Y_LOG)
@@ -354,10 +354,18 @@ def _export_results():
                 _cell.fill = PatternFill('solid', start_color=_hexcol)
                 _cell.font = Font(color=_txtcol)
         _ws.append([])
-        if _coords and _coords.get('x_kind') == 'normalized':
-            _ws.append(['calibration', 'normalized [0,1] over plot area (no axis values)'])
-        elif _coords:
-            _ws.append(['calibration', f'X[{_coords['x_min']:.4g},{_coords['x_max']:.4g}] {_coords['x_kind']}', f'Y[{_coords['y_min']:.4g},{_coords['y_max']:.4g}] {_coords['y_kind']}'])
+        if _coords:
+            # Each axis can fail independently; a relative X axis must not
+            # hide valid numerical Y values (or vice versa).
+            _axis_summaries = []
+            for _axis_name in ('x', 'y'):
+                _axis_info = _axis_calibration[_axis_name]
+                _axis_text = (f'{_axis_name.upper()}[{_axis_info["v0"]:.4g},'
+                              f'{_axis_info["v1"]:.4g}] {_axis_info["kind"]}')
+                if _axis_info['kind'] == 'normalized':
+                    _axis_text += ' (relative position; axis calibration required)'
+                _axis_summaries.append(_axis_text)
+            _ws.append(['calibration', *_axis_summaries])
         else:
             _ws.append(['calibration', 'not available'])
         _ws.column_dimensions['A'].width = 26

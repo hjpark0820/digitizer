@@ -132,7 +132,7 @@ and editing controls described below.
 1. Select a PNG or JPEG using **New detection: choose image**.
 2. Leave **Automatic** selected (the default), or choose **Colour / B&W** to override it. If needed, adjust the image resolution or rotation under **Image preparation**.
 3. Select the plotting region with **Plot area**. If the chart has a legend, select it with **Legend**. Running without a legend assumes **one data series**.
-4. Leave the X/Y limits blank to read numeric tick labels automatically. The app independently chooses a linear or logarithmic scale for each axis. Axis fields are always visible: enter both limits to override an axis manually, and enable its logarithmic option when appropriate. Manual limits refer to the selected plot edges. To calibrate from interior ticks instead, enable **Use a separate scale box (optional)**, draw that box and enter all four values. Uncertain automatic readings return explicitly labelled pixel coordinates with a calibration warning, not a guessed 0–1 data range.
+4. Leave the X/Y limits blank to read numeric tick labels automatically. The app independently chooses a linear or logarithmic scale for each axis. Axis fields are always visible: enter both limits to override an axis manually, and enable its logarithmic option when appropriate. Manual limits refer to the selected plot edges. To calibrate from interior ticks instead, enable **Use a separate scale box (optional)**, draw that box and enter all four values. When automatic reading fails, only the failed axis uses dimensionless 0–1 relative positions: left to right for X and bottom to top for Y. It remains labelled uncalibrated and receives no physical units. Enter both bounds and the linear/log setting to recover axis values; original marker pixels are retained.
 5. Automatic inspects the selected legend and plot pixels and chooses the Colour or B&W detector. A plot area is required. Results show the selected detector and reason. Colour charts then automatically infer whether the plot uses markers or lines.
 6. Optionally enable **Fast detection** before Run. It limits the detection image to 1,400 pixels on its longest side without changing your upload or selected boxes. Axis labels are read from the original image. Small markers may lose detail; leave the option off for full-resolution detection.
 7. Press **Run**, then review the overlay, reconstructed plot and **Extracted data — current result** spreadsheet directly on the results page. Opening Edit is not required to view coordinates. The table refreshes after detection and Step 5, shows active points only, and labels uncalibrated axes explicitly.
@@ -188,6 +188,18 @@ Pressing Edit switches from the previous workspace to a dedicated editing view. 
 | Back / Resume editing | Switch views within the current page while preserving edits, zoom, and scroll position |
 
 `Back` does not save changes to a file. Press **Save result versions (.json)** before refreshing the page or closing the browser.
+
+### Correct axis ranges and series names
+
+In the editing view, expand **Axis ranges & series names**. The original image then highlights the saved plot box, with blue X boundaries and orange Y boundaries matching the input fields. Endpoint labels preview the entered ranges as you type; midpoint values appear in a separate wrapping strip below the image, keeping the source ticks and axis titles visible. Opening the controls fits the whole image; zoom and pan retain alignment. The overlay is visual only and is removed when the controls are collapsed.
+
+- Enter **X min (left)** and **X max (right)** at the edges of the saved plot area, and **Y min (bottom)** and **Y max (top)**. Check **Log X** or **Log Y** for a logarithmic axis; unchecked means linear. Both limits must be positive for a log axis. Scientific notation such as `1e-3` is accepted.
+- Edit **X axis name**, **X unit**, **Y axis name**, and **Y unit** to correct OCR text. Edited names and units appear in the coordinate headings and saved JSON; CSV/Excel retain separate `x_label`, `y_label`, `x_unit`, and `y_unit` fields. Blank text clears an incorrect name or unit. A unit edit alone does not calibrate a relative-position or pixel axis, or convert units.
+- Correct each series name read from the legend. These display names are used in the coordinate table and JSON/CSV/Excel exports; series identities and point coordinates are retained.
+- Click **Apply changes** to update the reconstruction and numerical table without rerunning detection or OCR. Saving/exporting also applies valid pending changes. Invalid or incomplete changes are shown in the editor and must be corrected before saving.
+- Press **Save result versions (.json)** to keep the changes in the editable history. **Back** alone does not save. Earlier saved versions remain intact. **Reset to loaded result** restores the loaded names, calibration and points.
+
+Manual calibration changes numerical values, not the selected plot rectangle or marker pixels. Axis names and units can be corrected separately; confirm them against the source figure. Changing a unit label does not rescale numerical values. A logarithmic setting means logarithmically spaced displayed values, not automatically exponentiating an axis already labelled in log units.
 
 ## Saved formats
 

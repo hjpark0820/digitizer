@@ -218,7 +218,10 @@ def detect(image, plot, legend=None, *, mode='color', series_mode='auto', probe=
 def calibration(plot, x_range=None, y_range=None, x_log=False, y_log=False):
     def axis(p0,p1,bounds,log):
         if bounds is None:
-            return dict(p0=float(p0),p1=float(p1),v0=0.,v1=float(abs(p1-p0)),log=False,kind='pixel',source='uncalibrated_pixel_distance')
+            return dict(p0=float(p0),p1=float(p1),v0=0.,v1=1.,log=False,
+                kind='normalized',source='normalized',status='needs_calibration',
+                warning='Axis calibration required: values are unitless relative positions '
+                        '(0-1 over the selected plot area), not calibrated axis values.')
         lo,hi=map(float,bounds)
         if not np.isfinite([lo,hi]).all() or lo==hi or (log and min(lo,hi)<=0):
             raise ValueError('Axis limits must be finite, distinct and positive for log axes')

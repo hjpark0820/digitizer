@@ -208,7 +208,7 @@ ticks. Preserve original images and image-linked JSON, IDs and evidence.
 | `src/AI_WORKFLOW.md` | Startup choices, region and folder-batch API, active agent service loop, and human review |
 | `src/unified_server.py` | FastAPI routes, AI OCR request/image/answer endpoints, image preparation, detector/correction child processes, job responses, saved-session import/export |
 | `src/automatic_mode_v46.py` | Lightweight, model-free Colour/B&W selection from selected plot and legend pixels; never replaces manual overrides |
-| `src/axis_calibration_v46.py` | Shared numeric tick OCR and conservative per-axis linear/log fitting; manual overrides and explicit pixel fallback |
+| `src/axis_calibration_v46.py` | Shared numeric tick OCR and conservative per-axis linear/log fitting; manual overrides and explicitly uncalibrated 0–1 fallback |
 | `src/axis_units_v46.py` | Independent axis-title OCR and conservative unit recognition; does not change calibrated values |
 | `src/fast_detection_v46.py` | Optional 1,400-pixel working-image cap, inclusive region transforms, source/working provenance and original-resolution axis-reading context |
 | `src/index.html` | HTML/CSS and inline JavaScript; image preparation, result history, folder previews, fixed editor, canvas drawing, exports |
@@ -282,9 +282,14 @@ and use linear mapping unless the log flag is set. Axis-title/unit OCR remains
 independent and may still request an agent answer. A partial manual input is
 preserved only when a compatible automatic fit supplies the missing bound.
 Automatic fits need three distinct supporting labels and reject contradictory
-or ambiguous scales. Failed axes retain editable marker pixels and export local
-pixel distances with `kind: pixel`, `status: needs_calibration` and a warning.
-Do not describe those distances as physical units or score them as estimated data.
+or ambiguous scales. Failed axes retain editable marker pixels and export dimensionless 0–1
+relative positions with `kind: normalized`, `source: normalized`,
+`status: needs_calibration` and a warning. X maps left to right and Y bottom
+to top across the selected plot box. Each other successfully calibrated axis
+keeps its values. CSV/Excel include the relative values and original pixel
+positions, with physical-unit columns blank for normalized axes. Explicit manual
+bounds can restore data values. Do not treat the fallback as accepted calibration;
+legacy saved pixel mappings remain unchanged. Positions outside the box are not clipped.
 
 `axis_calibration.json` and saved `edit_data.json` preserve calibration sources,
 diagnostics and warnings. GUI result/table status displays the calibration;
@@ -395,6 +400,14 @@ The legend panel can show `legend_optional` and its JSON link without a PNG diag
   Do not overwrite the saved Step-5 reference or fit state with this visualization.
 - Folder preview navigation and the editor's loaded file are independent.
   Unsaved-change and busy guards must survive switching adjacent files.
+
+### Human editing of calibration and series labels
+
+The editor's **Axis ranges & series names** controls modify the current session without detection or OCR. While expanded, `drawEditorAxisGuide()` previews draft axis bounds on the original image using the same zoom/pan transform as point handles. `editorAxisGuide()` derives boundaries from `plot_area` and midpoint values from the selected linear/log mapping without modifying calibration. Offscreen anchors are omitted rather than pinned to misleading viewport positions. Calibration anchors always use the saved `plot_area`: X maps left to right and Y maps bottom to top. The UI validates finite increasing endpoints and positive log values, and supports each axis independently. `prepareEditorMetadata()` validates the complete form before applying changes; `applyEditorMetadata()` refreshes reconstruction/table and is called before saves, exports and saved-only correction so pending valid edits are included.
+
+Names edit `curve.label` only. Keep `curve.name`, `swatch_id`, marker pixels and detector evidence unchanged, including when two display names match. `correction_session_v46.edited_data()` marks edited axes manual/accepted and replaces stale active OCR diagnostics while retaining the original OCR evidence and unit metadata. Unchanged calibration remains intact; an existing uncalibrated other axis retains its saved mapping; newly created fallback axes use normalized 0–1 coordinates and remain uncalibrated. JSON history records calibration/label-only edits as a new manual version. CSV/Excel recompute values using the current mapping and use the edited labels.
+
+Axis text edits use `calibration.x/y.label` and `unit`, with `label_source: manual` and `unit_status/unit_source: manual`. Text-only edits preserve numeric calibration and do not rescale points; clearing text is supported. `coordinateAxisHeading()` shows the current name and unit, and CSV/Excel append `x_label` and `y_label` after existing columns. Pixel/normalized outputs still have no physical-unit columns. Original OCR evidence is retained in text diagnostics. Midpoint previews are rendered in `edAxisGuideReadout` below the image, never painted over source ticks or titles.
 
 ## Verification when changing code
 

@@ -346,7 +346,11 @@ the original image alongside it; Excel/CSV exports do not replace that evidence.
 
 Units must come from readable axis/title text, with missing or ambiguous units
 left unknown. Preserve printed log units rather than silently exponentiating.
-Failed calibration remains explicitly labelled in pixel units until corrected.
+Failed axes use dimensionless 0–1 relative positions across the selected plot
+area and remain explicitly uncalibrated until corrected. X increases from left
+to right and Y from bottom to top; the original marker pixels are retained.
+An independently calibrated other axis keeps its recovered values. Legacy saved
+pixel fallbacks keep their recorded mapping.
 Recognized units appear in the GUI coordinate-table headings, such as `X (h)`.
 An unrecognized unit leaves the calibrated heading as `X (axis units)`; it does
 not supply a unit by assumption. CSV/Excel exports retain separate unit and
