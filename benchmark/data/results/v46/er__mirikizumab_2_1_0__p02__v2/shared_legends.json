@@ -1,0 +1,108 @@
+{
+ "panel_id": "er__mirikizumab_2_1_0__p02__v2",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "color02",
+   "native_swatch_id": "S01",
+   "bbox": [
+    11,
+    36,
+    62,
+    85
+   ],
+   "native_body_bbox": [
+    11,
+    36,
+    56,
+    79
+   ],
+   "class_name": "unknown_marker",
+   "rgb": [
+    205,
+    52,
+    36
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s01",
+   "label": "SERENITY",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__mirikizumab_2_1_0__p02__v2/shared_legend_crops/legend_01.png",
+   "image_size": [
+    51,
+    49
+   ],
+   "sha256": "0a22dd96d1c507324114a94fb30436c739c685e833d963d0622c47a340d95bcf",
+   "source_native_legend_id": "color02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__mirikizumab_2_1_0__p02__v2/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    11,
+    36,
+    62,
+    85
+   ],
+   "bbox_original": [
+    11,
+    36,
+    62,
+    85
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "color02": "s01"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "color02",
+    "series_id": "s01",
+    "iou": 0.5991404011461318,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   }
+  ],
+  "unmatched_annotations": [
+   "s02"
+  ],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "SERENITY",
+   "bbox": [
+    0,
+    31,
+    67,
+    77
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "VIVID-1",
+   "bbox": [
+    1,
+    86,
+    58,
+    114
+   ]
+  }
+ ],
+ "input_sha256": "7a5b8e6fe3c0620d0574d14b887f9d3b5e68f1e6bd8fd51d9329e37d01a1ff4e",
+ "source_sha256": "7a5b8e6fe3c0620d0574d14b887f9d3b5e68f1e6bd8fd51d9329e37d01a1ff4e",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.006331899989163503
+}

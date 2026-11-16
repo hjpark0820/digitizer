@@ -1,0 +1,263 @@
+{
+ "panel_id": "er__utomilumab_1_1_2__p01__v2",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "color02",
+   "native_swatch_id": "S01",
+   "bbox": [
+    120,
+    11,
+    184,
+    36
+   ],
+   "native_body_bbox": [
+    143,
+    14,
+    160,
+    33
+   ],
+   "class_name": "filled_rhombus",
+   "rgb": [
+    14,
+    122,
+    16
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s01",
+   "label": "Urelumab",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__utomilumab_1_1_2__p01__v2/shared_legend_crops/legend_01.png",
+   "image_size": [
+    64,
+    25
+   ],
+   "sha256": "248fc7a9aa381ad681f248effa24bcb89c35b7f3cdd491940ddf6f9357e6ae0e",
+   "source_native_legend_id": "color02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__utomilumab_1_1_2__p01__v2/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    120,
+    11,
+    184,
+    36
+   ],
+   "bbox_original": [
+    120,
+    11,
+    184,
+    36
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color03",
+   "native_swatch_id": "S02",
+   "bbox": [
+    120,
+    52,
+    184,
+    75
+   ],
+   "native_body_bbox": [
+    142,
+    55,
+    161,
+    72
+   ],
+   "class_name": "filled_triangle",
+   "rgb": [
+    13,
+    13,
+    161
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s02",
+   "label": "Utomilumab",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__utomilumab_1_1_2__p01__v2/shared_legend_crops/legend_02.png",
+   "image_size": [
+    64,
+    23
+   ],
+   "sha256": "13d0098c4686e050eb4d3a211168b2471448c4b2136e2643c776598e82e77baf",
+   "source_native_legend_id": "color03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__utomilumab_1_1_2__p01__v2/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    120,
+    52,
+    184,
+    75
+   ],
+   "bbox_original": [
+    120,
+    52,
+    184,
+    75
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color04",
+   "native_swatch_id": "S03",
+   "bbox": [
+    120,
+    92,
+    184,
+    117
+   ],
+   "native_body_bbox": [
+    141,
+    95,
+    162,
+    114
+   ],
+   "class_name": "filled_circle",
+   "rgb": [
+    229,
+    12,
+    10
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s03",
+   "label": "HuB6",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__utomilumab_1_1_2__p01__v2/shared_legend_crops/legend_03.png",
+   "image_size": [
+    64,
+    25
+   ],
+   "sha256": "1cb3d0a39483253b16b42341253722071caf73765a70205db2f6464c2df7e560",
+   "source_native_legend_id": "color04",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__utomilumab_1_1_2__p01__v2/shared_legend_crops/legend_03.png",
+   "bbox_crop": [
+    120,
+    92,
+    184,
+    117
+   ],
+   "bbox_original": [
+    120,
+    92,
+    184,
+    117
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "color02": "s01",
+  "color03": "s02",
+  "color04": "s03"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "color02",
+    "series_id": "s01",
+    "iou": 0.5320665083135392,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s02",
+    "iou": 0.6695384615384615,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s03",
+    "iou": 0.6721945826423439,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Urelumab",
+   "bbox": [
+    116,
+    16,
+    186,
+    30
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Utomilumab",
+   "bbox": [
+    115,
+    55,
+    188,
+    72
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "HuB6",
+   "bbox": [
+    114,
+    94,
+    189,
+    113
+   ]
+  }
+ ],
+ "input_sha256": "5b2d082ec0a486c46a39a930c34d362f88be48ab359b204b2e8bac6a2a4bb2da",
+ "source_sha256": "5b2d082ec0a486c46a39a930c34d362f88be48ab359b204b2e8bac6a2a4bb2da",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.011098099988885224
+}

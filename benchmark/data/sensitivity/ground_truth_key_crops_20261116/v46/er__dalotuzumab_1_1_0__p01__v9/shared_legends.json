@@ -1,0 +1,154 @@
+{
+ "panel_id": "er__dalotuzumab_1_1_0__p01__v9",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "MK-8669",
+   "bbox": [
+    641,
+    58,
+    721,
+    78
+   ],
+   "bbox_crop": [
+    641,
+    58,
+    721,
+    78
+   ],
+   "bbox_original": [
+    641,
+    58,
+    721,
+    78
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legend_crops/legend_01.png",
+   "image_size": [
+    80,
+    20
+   ],
+   "sha256": "51fe069fc24d349839caef9b8cc033b8adc59124cc5196ec44ce5712dd843d72",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "MK-0646",
+   "bbox": [
+    642,
+    101,
+    720,
+    120
+   ],
+   "bbox_crop": [
+    642,
+    101,
+    720,
+    120
+   ],
+   "bbox_original": [
+    642,
+    101,
+    720,
+    120
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legend_crops/legend_02.png",
+   "image_size": [
+    78,
+    19
+   ],
+   "sha256": "bbf97f5a2be7d36fb5b5b04034c5b212482346da2f3ce82da470676a6ea27f58",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s03",
+   "series_id": "s03",
+   "source_native_legend_id": "s03",
+   "label": "MK-0646+MK-8669",
+   "bbox": [
+    643,
+    145,
+    719,
+    161
+   ],
+   "bbox_crop": [
+    643,
+    145,
+    719,
+    161
+   ],
+   "bbox_original": [
+    643,
+    145,
+    719,
+    161
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legend_crops/legend_03.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legend_crops/legend_03.png",
+   "image_size": [
+    76,
+    16
+   ],
+   "sha256": "56455b8e309e67f49e346abd932cd77b6ba8a194fc3785fa241959d35d44d405",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s01": "s01",
+  "s02": "s02",
+  "s03": "s03"
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "MK-8669",
+   "bbox": [
+    641,
+    58,
+    721,
+    78
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "MK-0646",
+   "bbox": [
+    642,
+    101,
+    720,
+    120
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "MK-0646+MK-8669",
+   "bbox": [
+    643,
+    145,
+    719,
+    161
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "2da86a5040c185e1c6d7b6e4509c9ebe00cb910278747c0143d1e5676b9b5e07",
+ "source_sha256": "2da86a5040c185e1c6d7b6e4509c9ebe00cb910278747c0143d1e5676b9b5e07",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}

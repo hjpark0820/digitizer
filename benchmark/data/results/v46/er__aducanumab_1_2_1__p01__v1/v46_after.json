@@ -1,0 +1,161 @@
+{
+ "panel_id": "er__aducanumab_1_2_1__p01__v1",
+ "model": "v46_after",
+ "method": "v46_after",
+ "status": "completed",
+ "reason": "",
+ "predictions": [
+  {
+   "point_id": "v46_after_S01_0001",
+   "x_px": 123.0,
+   "y_px": 309.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S01",
+   "crop_x_px": 123.0,
+   "crop_y_px": 309.0
+  },
+  {
+   "point_id": "v46_after_S01_0002",
+   "x_px": 226.0,
+   "y_px": 299.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S01",
+   "crop_x_px": 226.0,
+   "crop_y_px": 299.0
+  },
+  {
+   "point_id": "v46_after_S01_0003",
+   "x_px": 285.0,
+   "y_px": 287.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S01",
+   "crop_x_px": 285.0,
+   "crop_y_px": 287.0
+  },
+  {
+   "point_id": "v46_after_S01_0004",
+   "x_px": 330.0,
+   "y_px": 257.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S01",
+   "crop_x_px": 330.0,
+   "crop_y_px": 257.0
+  },
+  {
+   "point_id": "v46_after_S01_0005",
+   "x_px": 476.0,
+   "y_px": 117.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S01",
+   "crop_x_px": 476.0,
+   "crop_y_px": 117.0
+  },
+  {
+   "point_id": "v46_after_S01_0006",
+   "x_px": 523.0,
+   "y_px": 117.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S01",
+   "crop_x_px": 523.0,
+   "crop_y_px": 117.0
+  },
+  {
+   "point_id": "v46_after_S01_0007",
+   "x_px": 572.0,
+   "y_px": 106.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S01",
+   "crop_x_px": 572.0,
+   "crop_y_px": 106.0
+  },
+  {
+   "point_id": "v46_after_S01_0008",
+   "x_px": 619.0,
+   "y_px": 84.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S01",
+   "crop_x_px": 619.0,
+   "crop_y_px": 84.0
+  },
+  {
+   "point_id": "v46_after_S02_0001",
+   "x_px": 474.0,
+   "y_px": 293.0,
+   "series_id": "s02",
+   "score": null,
+   "native_series_id": "S02",
+   "crop_x_px": 474.0,
+   "crop_y_px": 293.0
+  },
+  {
+   "point_id": "v46_after_S02_0002",
+   "x_px": 522.0,
+   "y_px": 264.0,
+   "series_id": "s02",
+   "score": null,
+   "native_series_id": "S02",
+   "crop_x_px": 522.0,
+   "crop_y_px": 264.0
+  },
+  {
+   "point_id": "v46_after_S02_0003",
+   "x_px": 619.0,
+   "y_px": 176.0,
+   "series_id": "s02",
+   "score": null,
+   "native_series_id": "S02",
+   "crop_x_px": 619.0,
+   "crop_y_px": 176.0
+  }
+ ],
+ "coordinate_convention": "full original image pixel centers; crop translation added exactly once",
+ "score_note": "Native export may omit confidence; null is unavailable, not zero. No score threshold added.",
+ "input_sha256": "531468e6d030e534e5c2cc4449dcacbd8c10341487446a0865ef798023d648c5",
+ "source_sha256": "531468e6d030e534e5c2cc4449dcacbd8c10341487446a0865ef798023d648c5",
+ "step5_entry_point": "GUI /correct-saved: export_session -> import_session -> correction_only_cli_v46.py",
+ "step5_src": "<BENCHMARK_V2>/src_snapshots/0fd678a840bc/src",
+ "iterations_requested": 5,
+ "correction_status": {
+  "completed": true,
+  "engine": "bw",
+  "detection_skipped": true,
+  "iterations_requested": 5,
+  "stop_policy": "manual",
+  "stop_report": {
+   "version": "v46-step5-stop-v1",
+   "policy": "manual",
+   "max_iterations": 5,
+   "plateau_warning_fraction": 0.001,
+   "engine_decisions_unchanged": true,
+   "cap_scope": "per invocation; joint BW iterations or iterations per colour series",
+   "plateau_warning_only": true,
+   "series": [
+    {
+     "series": "all_bw_series",
+     "mode": "structure_routed",
+     "iterations_executed": 1,
+     "accepted_actions": 0,
+     "previous_iterations": 0,
+     "stop_code": "all_candidates_blocked",
+     "stop_message": "All candidate actions failed evidence or protection checks.",
+     "native_stop_reason": "no_admissible_image_candidate",
+     "last_candidate_count": 12,
+     "last_admissible_count": 0,
+     "low_gain_warnings": [],
+     "trace_file": "correction_diagnostics/bw_series_17y26gfj/trace.json"
+    }
+   ],
+   "budget_exhausted": false,
+   "low_gain_warning_count": 0,
+   "summary": "Search stopped or preserved the input series; marker accuracy is not established."
+  }
+ }
+}

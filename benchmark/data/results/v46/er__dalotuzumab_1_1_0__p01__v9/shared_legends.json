@@ -1,0 +1,263 @@
+{
+ "panel_id": "er__dalotuzumab_1_1_0__p01__v9",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "color02",
+   "native_swatch_id": "S01",
+   "bbox": [
+    648,
+    55,
+    715,
+    82
+   ],
+   "native_body_bbox": [
+    670,
+    58,
+    693,
+    79
+   ],
+   "class_name": "filled_square",
+   "rgb": [
+    11,
+    70,
+    233
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s01",
+   "label": "MK-8669",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legend_crops/legend_01.png",
+   "image_size": [
+    67,
+    27
+   ],
+   "sha256": "d32188457e5ce464cd135525d2d872133f2b1c51cb30608369864f9c6dd9f059",
+   "source_native_legend_id": "color02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    648,
+    55,
+    715,
+    82
+   ],
+   "bbox_original": [
+    648,
+    55,
+    715,
+    82
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color03",
+   "native_swatch_id": "S02",
+   "bbox": [
+    648,
+    98,
+    715,
+    123
+   ],
+   "native_body_bbox": [
+    671,
+    101,
+    692,
+    120
+   ],
+   "class_name": "filled_inv_triangle",
+   "rgb": [
+    112,
+    114,
+    113
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s02",
+   "label": "MK-0646",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legend_crops/legend_02.png",
+   "image_size": [
+    67,
+    25
+   ],
+   "sha256": "a36d1714bf343b7d7d6073023007755bb076aa7120136dd2030a703a733fc450",
+   "source_native_legend_id": "color03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    648,
+    98,
+    715,
+    123
+   ],
+   "bbox_original": [
+    648,
+    98,
+    715,
+    123
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color04",
+   "native_swatch_id": "S03",
+   "bbox": [
+    648,
+    139,
+    716,
+    168
+   ],
+   "native_body_bbox": [
+    669,
+    142,
+    693,
+    165
+   ],
+   "class_name": "filled_rhombus",
+   "rgb": [
+    182,
+    73,
+    187
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s03",
+   "label": "MK-0646+MK-8669",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legend_crops/legend_03.png",
+   "image_size": [
+    68,
+    29
+   ],
+   "sha256": "de7c2a65893822e3d8c315f648bfdd2cfdf7fbdb6bea2ae258bc45c9e1991f28",
+   "source_native_legend_id": "color04",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legend_crops/legend_03.png",
+   "bbox_crop": [
+    648,
+    139,
+    716,
+    168
+   ],
+   "bbox_original": [
+    648,
+    139,
+    716,
+    168
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "color02": "s01",
+  "color03": "s02",
+  "color04": "s03"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "color02",
+    "series_id": "s01",
+    "iou": 0.6476558724021266,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s02",
+    "iou": 0.6756900212314225,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s03",
+    "iou": 0.518095238095238,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "MK-8669",
+   "bbox": [
+    641,
+    58,
+    721,
+    78
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "MK-0646",
+   "bbox": [
+    642,
+    101,
+    720,
+    120
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "MK-0646+MK-8669",
+   "bbox": [
+    643,
+    145,
+    719,
+    161
+   ]
+  }
+ ],
+ "input_sha256": "2da86a5040c185e1c6d7b6e4509c9ebe00cb910278747c0143d1e5676b9b5e07",
+ "source_sha256": "2da86a5040c185e1c6d7b6e4509c9ebe00cb910278747c0143d1e5676b9b5e07",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.01405300002079457
+}

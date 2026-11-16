@@ -1,0 +1,245 @@
+{
+ "panel_id": "er__pf-06747143_1_1_1__p01__v3",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    131,
+    349,
+    191,
+    370
+   ],
+   "native_body_bbox": [
+    151.8215497853986,
+    349.8233889471154,
+    170.1762324204929,
+    368.17807158220967
+   ],
+   "class_name": "open_circle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "IgG1 Control Ab",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__pf-06747143_1_1_1__p01__v3/shared_legend_crops/legend_01.png",
+   "image_size": [
+    60,
+    21
+   ],
+   "sha256": "bfd9010c87a48a6809b495413f254f87e29ad6e39b6445e16f2c52365814c674",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__pf-06747143_1_1_1__p01__v3/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    131,
+    349,
+    191,
+    370
+   ],
+   "bbox_original": [
+    131,
+    349,
+    191,
+    370
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    130,
+    382,
+    192,
+    400
+   ],
+   "native_body_bbox": [
+    152,
+    383,
+    171,
+    400
+   ],
+   "class_name": "filled_square",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s02",
+   "label": "PF-06747143",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__pf-06747143_1_1_1__p01__v3/shared_legend_crops/legend_02.png",
+   "image_size": [
+    62,
+    18
+   ],
+   "sha256": "cb6f2ec0422dbc9dfce3d98d149e437da52cfece6e72c23f3b9dc760e02198f1",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__pf-06747143_1_1_1__p01__v3/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    130,
+    382,
+    192,
+    400
+   ],
+   "bbox_original": [
+    130,
+    382,
+    192,
+    400
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S03",
+   "bbox": [
+    130,
+    414,
+    192,
+    431
+   ],
+   "native_body_bbox": [
+    151,
+    414,
+    172,
+    431
+   ],
+   "class_name": "filled_inv_triangle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s03",
+   "label": "m15-IgG1",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__pf-06747143_1_1_1__p01__v3/shared_legend_crops/legend_03.png",
+   "image_size": [
+    62,
+    17
+   ],
+   "sha256": "a8ca8346e80c1a1667758442928d01fe513312decec93de27d1cf13c9624234c",
+   "source_native_legend_id": "S03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__pf-06747143_1_1_1__p01__v3/shared_legend_crops/legend_03.png",
+   "bbox_crop": [
+    130,
+    414,
+    192,
+    431
+   ],
+   "bbox_original": [
+    130,
+    414,
+    192,
+    431
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01",
+  "S02": "s02",
+  "S03": "s03"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.7619047619047619,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 0.8602150537634409,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s03",
+    "iou": 1.0,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "IgG1 Control Ab",
+   "bbox": [
+    131,
+    351,
+    191,
+    367
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "PF-06747143",
+   "bbox": [
+    131,
+    383,
+    191,
+    399
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "m15-IgG1",
+   "bbox": [
+    130,
+    414,
+    192,
+    431
+   ]
+  }
+ ],
+ "input_sha256": "397922f77563c053d26c21ab63a12be2b7c391689bab07fa5842d57a0c645490",
+ "source_sha256": "397922f77563c053d26c21ab63a12be2b7c391689bab07fa5842d57a0c645490",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.029266600031405687
+}

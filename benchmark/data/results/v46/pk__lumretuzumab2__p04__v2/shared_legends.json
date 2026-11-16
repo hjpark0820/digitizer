@@ -1,0 +1,169 @@
+{
+ "panel_id": "pk__lumretuzumab2__p04__v2",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "color02",
+   "native_swatch_id": "S01",
+   "bbox": [
+    233,
+    324,
+    253,
+    335
+   ],
+   "native_body_bbox": [
+    239,
+    327,
+    246,
+    332
+   ],
+   "class_name": "unknown_marker",
+   "rgb": [
+    93,
+    157,
+    111
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s02",
+   "label": "20mg/kg (Q3W)",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__lumretuzumab2__p04__v2/shared_legend_crops/legend_01.png",
+   "image_size": [
+    20,
+    11
+   ],
+   "sha256": "539871e71424d34e8987842038cb3e29fed0392682d343cc8c3e2f7e1885fcda",
+   "source_native_legend_id": "color02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__lumretuzumab2__p04__v2/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    233,
+    324,
+    253,
+    335
+   ],
+   "bbox_original": [
+    233,
+    324,
+    253,
+    335
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color03",
+   "native_swatch_id": "S02",
+   "bbox": [
+    236,
+    311,
+    249,
+    324
+   ],
+   "native_body_bbox": [
+    239,
+    314,
+    246,
+    321
+   ],
+   "class_name": "unknown_marker",
+   "rgb": [
+    154,
+    133,
+    137
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s01",
+   "label": "10mg/kg (Q3W)",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__lumretuzumab2__p04__v2/shared_legend_crops/legend_02.png",
+   "image_size": [
+    13,
+    13
+   ],
+   "sha256": "2f746bfb6e3e5432ff497ea713e2a6b10384a823532f1d37cbd09d22e7485cbf",
+   "source_native_legend_id": "color03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__lumretuzumab2__p04__v2/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    236,
+    311,
+    249,
+    324
+   ],
+   "bbox_original": [
+    236,
+    311,
+    249,
+    324
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "color02": "s02",
+  "color03": "s01"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "color02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s02",
+    "iou": 0.5042016806722689,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s01",
+    "iou": 0.3699186991869919,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "10mg/kg (Q3W)",
+   "bbox": [
+    230,
+    313,
+    254,
+    320
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "20mg/kg (Q3W)",
+   "bbox": [
+    231,
+    326,
+    254,
+    332
+   ]
+  }
+ ],
+ "input_sha256": "2d26c09566d2b221fab92aa93552c4cc12461624bede507c2e5583187513bbf1",
+ "source_sha256": "2d26c09566d2b221fab92aa93552c4cc12461624bede507c2e5583187513bbf1",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.004512299987254664
+}

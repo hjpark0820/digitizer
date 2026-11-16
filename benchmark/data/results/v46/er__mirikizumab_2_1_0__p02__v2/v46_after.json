@@ -1,0 +1,91 @@
+{
+ "panel_id": "er__mirikizumab_2_1_0__p02__v2",
+ "model": "v46_after",
+ "method": "v46_after",
+ "status": "completed",
+ "reason": "",
+ "predictions": [
+  {
+   "point_id": "v46_after_color02_0001",
+   "x_px": 544.0,
+   "y_px": 506.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "color02",
+   "crop_x_px": 544.0,
+   "crop_y_px": 506.0
+  },
+  {
+   "point_id": "v46_after_color02_0002",
+   "x_px": 676.0,
+   "y_px": 367.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "color02",
+   "crop_x_px": 676.0,
+   "crop_y_px": 367.0
+  },
+  {
+   "point_id": "v46_after_color02_0003",
+   "x_px": 993.0,
+   "y_px": 325.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "color02",
+   "crop_x_px": 993.0,
+   "crop_y_px": 325.0
+  },
+  {
+   "point_id": "v46_after_color02_0004",
+   "x_px": 1300.0,
+   "y_px": 310.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "color02",
+   "crop_x_px": 1300.0,
+   "crop_y_px": 310.0
+  }
+ ],
+ "coordinate_convention": "full original image pixel centers; crop translation added exactly once",
+ "score_note": "Native export may omit confidence; null is unavailable, not zero. No score threshold added.",
+ "input_sha256": "7a5b8e6fe3c0620d0574d14b887f9d3b5e68f1e6bd8fd51d9329e37d01a1ff4e",
+ "source_sha256": "7a5b8e6fe3c0620d0574d14b887f9d3b5e68f1e6bd8fd51d9329e37d01a1ff4e",
+ "step5_entry_point": "GUI /correct-saved: export_session -> import_session -> correction_only_cli_v46.py",
+ "step5_src": "<BENCHMARK_V2>/src_snapshots/0fd678a840bc/src",
+ "iterations_requested": 5,
+ "correction_status": {
+  "completed": true,
+  "engine": "color",
+  "detection_skipped": true,
+  "iterations_requested": 5,
+  "stop_policy": "manual",
+  "stop_report": {
+   "version": "v46-step5-stop-v1",
+   "policy": "manual",
+   "max_iterations": 5,
+   "plateau_warning_fraction": 0.001,
+   "engine_decisions_unchanged": true,
+   "cap_scope": "per invocation; joint BW iterations or iterations per colour series",
+   "plateau_warning_only": true,
+   "series": [
+    {
+     "series": "color02",
+     "mode": "chamfer",
+     "iterations_executed": 1,
+     "accepted_actions": 0,
+     "previous_iterations": 0,
+     "stop_code": "all_candidates_blocked",
+     "stop_message": "All candidate actions failed evidence or protection checks.",
+     "native_stop_reason": "no_admissible_improvement",
+     "last_candidate_count": 13,
+     "last_admissible_count": 0,
+     "low_gain_warnings": [],
+     "trace_file": "step5/color02/trace.json"
+    }
+   ],
+   "budget_exhausted": false,
+   "low_gain_warning_count": 0,
+   "summary": "Search stopped or preserved the input series; marker accuracy is not established."
+  }
+ }
+}

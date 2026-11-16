@@ -1,0 +1,108 @@
+{
+ "panel_id": "pk__lifastuzumab2__p04__v9",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "HERALD arm A (18 mg/kg q3w)",
+   "bbox": [
+    64,
+    33,
+    80,
+    41
+   ],
+   "bbox_crop": [
+    64,
+    33,
+    80,
+    41
+   ],
+   "bbox_original": [
+    64,
+    33,
+    80,
+    41
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__lifastuzumab2__p04__v9/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__lifastuzumab2__p04__v9/shared_legend_crops/legend_01.png",
+   "image_size": [
+    16,
+    8
+   ],
+   "sha256": "8f2da0d8a718b8b590a3f4a243bc850f9f0d4cf5d5d8a38b7adeb54ba4ec0d79",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "HERALD arm B (18 mg/kg LD and 9 mg/kg LD q3w)",
+   "bbox": [
+    64,
+    46,
+    80,
+    54
+   ],
+   "bbox_crop": [
+    64,
+    46,
+    80,
+    54
+   ],
+   "bbox_original": [
+    64,
+    46,
+    80,
+    54
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__lifastuzumab2__p04__v9/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__lifastuzumab2__p04__v9/shared_legend_crops/legend_02.png",
+   "image_size": [
+    16,
+    8
+   ],
+   "sha256": "2fb0040b4535b7f7d0edc3c4ca8d2092dc8318590eba310cb72cad595cc06682",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s01": "s01",
+  "s02": "s02"
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "HERALD arm A (18 mg/kg q3w)",
+   "bbox": [
+    64,
+    33,
+    80,
+    41
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "HERALD arm B (18 mg/kg LD and 9 mg/kg LD q3w)",
+   "bbox": [
+    64,
+    46,
+    80,
+    54
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "caf50a4d2fee3234dd7a7a8484f8f787d3b4dcf3d5f19074a0723622fb221d5d",
+ "source_sha256": "caf50a4d2fee3234dd7a7a8484f8f787d3b4dcf3d5f19074a0723622fb221d5d",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}

@@ -1,0 +1,171 @@
+{
+ "panel_id": "er__imalumab_2_1_1__p01__v5",
+ "model": "v46_after",
+ "method": "v46_after",
+ "status": "completed",
+ "reason": "",
+ "predictions": [
+  {
+   "point_id": "v46_after_S02_0001",
+   "x_px": 204.0,
+   "y_px": 81.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S02",
+   "crop_x_px": 204.0,
+   "crop_y_px": 81.0
+  },
+  {
+   "point_id": "v46_after_S02_0002",
+   "x_px": 225.0,
+   "y_px": 158.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S02",
+   "crop_x_px": 225.0,
+   "crop_y_px": 158.0
+  },
+  {
+   "point_id": "v46_after_S02_0003",
+   "x_px": 254.0,
+   "y_px": 200.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S02",
+   "crop_x_px": 254.0,
+   "crop_y_px": 200.0
+  },
+  {
+   "point_id": "v46_after_S02_0004",
+   "x_px": 300.0,
+   "y_px": 279.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S02",
+   "crop_x_px": 300.0,
+   "crop_y_px": 279.0
+  },
+  {
+   "point_id": "v46_after_S02_0005",
+   "x_px": 405.0,
+   "y_px": 420.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S02",
+   "crop_x_px": 405.0,
+   "crop_y_px": 420.0
+  },
+  {
+   "point_id": "v46_after_S02_0006",
+   "x_px": 603.0,
+   "y_px": 452.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S02",
+   "crop_x_px": 603.0,
+   "crop_y_px": 452.0
+  },
+  {
+   "point_id": "v46_after_S02_0007",
+   "x_px": 1003.0,
+   "y_px": 481.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S02",
+   "crop_x_px": 1003.0,
+   "crop_y_px": 481.0
+  },
+  {
+   "point_id": "v46_after_S01_0001",
+   "x_px": 259.0,
+   "y_px": 108.0,
+   "series_id": "s02",
+   "score": null,
+   "native_series_id": "S01",
+   "crop_x_px": 259.0,
+   "crop_y_px": 108.0
+  },
+  {
+   "point_id": "v46_after_S01_0002",
+   "x_px": 299.0,
+   "y_px": 112.0,
+   "series_id": "s02",
+   "score": null,
+   "native_series_id": "S01",
+   "crop_x_px": 299.0,
+   "crop_y_px": 112.0
+  },
+  {
+   "point_id": "v46_after_S01_0003",
+   "x_px": 400.0,
+   "y_px": 132.0,
+   "series_id": "s02",
+   "score": null,
+   "native_series_id": "S01",
+   "crop_x_px": 400.0,
+   "crop_y_px": 132.0
+  },
+  {
+   "point_id": "v46_after_S01_0004",
+   "x_px": 609.0,
+   "y_px": 150.0,
+   "series_id": "s02",
+   "score": null,
+   "native_series_id": "S01",
+   "crop_x_px": 609.0,
+   "crop_y_px": 150.0
+  },
+  {
+   "point_id": "v46_after_S01_0005",
+   "x_px": 1011.0,
+   "y_px": 133.0,
+   "series_id": "s02",
+   "score": null,
+   "native_series_id": "S01",
+   "crop_x_px": 1011.0,
+   "crop_y_px": 133.0
+  }
+ ],
+ "coordinate_convention": "full original image pixel centers; crop translation added exactly once",
+ "score_note": "Native export may omit confidence; null is unavailable, not zero. No score threshold added.",
+ "input_sha256": "3fac01b4995c6d4da4d793b92432c20f0278cc46b3509a7ca49aadb93789c9bd",
+ "source_sha256": "3fac01b4995c6d4da4d793b92432c20f0278cc46b3509a7ca49aadb93789c9bd",
+ "step5_entry_point": "GUI /correct-saved: export_session -> import_session -> correction_only_cli_v46.py",
+ "step5_src": "<BENCHMARK_V2>/src_snapshots/0fd678a840bc/src",
+ "iterations_requested": 5,
+ "correction_status": {
+  "completed": true,
+  "engine": "bw",
+  "detection_skipped": true,
+  "iterations_requested": 5,
+  "stop_policy": "manual",
+  "stop_report": {
+   "version": "v46-step5-stop-v1",
+   "policy": "manual",
+   "max_iterations": 5,
+   "plateau_warning_fraction": 0.001,
+   "engine_decisions_unchanged": true,
+   "cap_scope": "per invocation; joint BW iterations or iterations per colour series",
+   "plateau_warning_only": true,
+   "series": [
+    {
+     "series": "all_bw_series",
+     "mode": "structure_routed",
+     "iterations_executed": 1,
+     "accepted_actions": 0,
+     "previous_iterations": 0,
+     "stop_code": "all_candidates_blocked",
+     "stop_message": "All candidate actions failed evidence or protection checks.",
+     "native_stop_reason": "no_admissible_image_candidate",
+     "last_candidate_count": 9,
+     "last_admissible_count": 0,
+     "low_gain_warnings": [],
+     "trace_file": "correction_diagnostics/bw_series_xsuapjpj/trace.json"
+    }
+   ],
+   "budget_exhausted": false,
+   "low_gain_warning_count": 0,
+   "summary": "Search stopped or preserved the input series; marker accuracy is not established."
+  }
+ }
+}

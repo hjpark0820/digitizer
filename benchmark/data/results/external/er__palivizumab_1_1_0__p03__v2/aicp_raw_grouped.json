@@ -1,0 +1,1215 @@
+{
+ "version": "external_shared_input_benchmark_v1",
+ "panel_id": "er__palivizumab_1_1_0__p03__v2",
+ "modality": "color",
+ "method": "aicp_raw_grouped",
+ "status": "completed",
+ "coordinate_system": "x_px/y_px = full original unrotated image pixels; x/y = shared native crop pixels",
+ "image_path": "data/images\\er__palivizumab_1_1_0__p03__v2.png",
+ "input_sha256": "ff45d58ce9b5e33e4922161f98ae7b7af5a511632926d578a119d437d7257402",
+ "source_image_path": "data/images\\er__palivizumab_1_1_0__p03__v2.png",
+ "source_sha256": "ff45d58ce9b5e33e4922161f98ae7b7af5a511632926d578a119d437d7257402",
+ "crop_box_original": [
+  0,
+  0,
+  406,
+  744
+ ],
+ "plot_box": [
+  49.0,
+  559.0,
+  273.0,
+  710.0
+ ],
+ "legend_box": [
+  295.0,
+  8.0,
+  400.0,
+  73.0
+ ],
+ "legends": [
+  {
+   "legend_index": 0,
+   "series_id": "s03",
+   "label": "R347",
+   "source_native_legend_id": "color02",
+   "box_input": [
+    295,
+    56,
+    325,
+    71
+   ],
+   "box_original": [
+    295,
+    56,
+    325,
+    71
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__palivizumab_1_1_0__p03__v2/shared_legend_crops/legend_01.png",
+   "crop_sha256": "8d4eb679aed4a927eda751c32cf818dc78b135ee37adb0878a98234e827a4145",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__palivizumab_1_1_0__p03__v2/shared_legends.json",
+   "shared_legends_sha256": "4ce5f8a3e70d3eab9e936c078e30e73595f63e82dd23ddb8383b82507767a364",
+   "mapping_provenance": {
+    "color02": "s03",
+    "color03": "s01",
+    "color04": "s02"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 1,
+   "series_id": "s01",
+   "label": "Nirsevimab",
+   "source_native_legend_id": "color03",
+   "box_input": [
+    295,
+    8,
+    325,
+    23
+   ],
+   "box_original": [
+    295,
+    8,
+    325,
+    23
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__palivizumab_1_1_0__p03__v2/shared_legend_crops/legend_02.png",
+   "crop_sha256": "e2938d42bb25c04b444b5bbbec7474c1c27428da1c31fd309782ede03360555a",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__palivizumab_1_1_0__p03__v2/shared_legends.json",
+   "shared_legends_sha256": "4ce5f8a3e70d3eab9e936c078e30e73595f63e82dd23ddb8383b82507767a364",
+   "mapping_provenance": {
+    "color02": "s03",
+    "color03": "s01",
+    "color04": "s02"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 2,
+   "series_id": "s02",
+   "label": "Palivizumab",
+   "source_native_legend_id": "color04",
+   "box_input": [
+    295,
+    32,
+    325,
+    47
+   ],
+   "box_original": [
+    295,
+    32,
+    325,
+    47
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__palivizumab_1_1_0__p03__v2/shared_legend_crops/legend_03.png",
+   "crop_sha256": "1ddd4698183e2f8cf1d566becccaa01cd4b4a03e01cf194843418622c1f15457",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__palivizumab_1_1_0__p03__v2/shared_legends.json",
+   "shared_legends_sha256": "4ce5f8a3e70d3eab9e936c078e30e73595f63e82dd23ddb8383b82507767a364",
+   "mapping_provenance": {
+    "color02": "s03",
+    "color03": "s01",
+    "color04": "s02"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  }
+ ],
+ "predictions": [
+  {
+   "point_id": "CP0028",
+   "x": 252.95703125,
+   "y": 605.953125,
+   "model_x": 319,
+   "model_y": 417,
+   "detection_score": 0.8795892000198364,
+   "series_id": "s02",
+   "legend_index": 2,
+   "score": 0.980813205242157,
+   "winning_similarity": 0.980813205242157,
+   "similarities": [
+    0.545056164264679,
+    0.4843405485153198,
+    0.980813205242157
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0028.png",
+   "patch_box_input": [
+    232,
+    595,
+    272,
+    615
+   ],
+   "x_px": 252.95703125,
+   "y_px": 605.953125
+  },
+  {
+   "point_id": "CP0029",
+   "x": 252.95703125,
+   "y": 626.296875,
+   "model_x": 319,
+   "model_y": 431,
+   "detection_score": 0.9960814118385315,
+   "series_id": "s02",
+   "legend_index": 2,
+   "score": 0.9648177623748779,
+   "winning_similarity": 0.9648177623748779,
+   "similarities": [
+    0.3029741942882538,
+    0.9331267476081848,
+    0.9648177623748779
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0029.png",
+   "patch_box_input": [
+    232,
+    616,
+    272,
+    636
+   ],
+   "x_px": 252.95703125,
+   "y_px": 626.296875
+  },
+  {
+   "point_id": "CP0030",
+   "x": 226.7890625,
+   "y": 630.65625,
+   "model_x": 286,
+   "model_y": 434,
+   "detection_score": 0.9738479256629944,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.9555414915084839,
+   "winning_similarity": 0.9555414915084839,
+   "similarities": [
+    0.32305461168289185,
+    0.9555414915084839,
+    0.7908910512924194
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0030.png",
+   "patch_box_input": [
+    206,
+    620,
+    246,
+    640
+   ],
+   "x_px": 226.7890625,
+   "y_px": 630.65625
+  },
+  {
+   "point_id": "CP0031",
+   "x": 226.7890625,
+   "y": 642.28125,
+   "model_x": 286,
+   "model_y": 442,
+   "detection_score": 0.9979975819587708,
+   "series_id": "s02",
+   "legend_index": 2,
+   "score": 0.9813147187232971,
+   "winning_similarity": 0.9813147187232971,
+   "similarities": [
+    0.26346442103385925,
+    0.32232236862182617,
+    0.9813147187232971
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0031.png",
+   "patch_box_input": [
+    206,
+    632,
+    246,
+    652
+   ],
+   "x_px": 226.7890625,
+   "y_px": 642.28125
+  },
+  {
+   "point_id": "CP0032",
+   "x": 69.78125,
+   "y": 694.59375,
+   "model_x": 88,
+   "model_y": 478,
+   "detection_score": 0.9403411746025085,
+   "series_id": "s02",
+   "legend_index": 2,
+   "score": 0.9643639922142029,
+   "winning_similarity": 0.9643639922142029,
+   "similarities": [
+    0.32299867272377014,
+    0.8057615160942078,
+    0.9643639922142029
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0032.png",
+   "patch_box_input": [
+    49,
+    684,
+    89,
+    704
+   ],
+   "x_px": 69.78125,
+   "y_px": 694.59375
+  },
+  {
+   "point_id": "CP0033",
+   "x": 95.15625,
+   "y": 694.59375,
+   "model_x": 120,
+   "model_y": 478,
+   "detection_score": 0.9342753291130066,
+   "series_id": "s02",
+   "legend_index": 2,
+   "score": 0.9687488079071045,
+   "winning_similarity": 0.9687488079071045,
+   "similarities": [
+    0.2601344883441925,
+    0.8770564198493958,
+    0.9687488079071045
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0033.png",
+   "patch_box_input": [
+    75,
+    684,
+    115,
+    704
+   ],
+   "x_px": 95.15625,
+   "y_px": 694.59375
+  },
+  {
+   "point_id": "CP0034",
+   "x": 122.1171875,
+   "y": 694.59375,
+   "model_x": 154,
+   "model_y": 478,
+   "detection_score": 0.979468822479248,
+   "series_id": "s02",
+   "legend_index": 2,
+   "score": 0.9809514284133911,
+   "winning_similarity": 0.9809514284133911,
+   "similarities": [
+    0.35687416791915894,
+    0.9297744035720825,
+    0.9809514284133911
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0034.png",
+   "patch_box_input": [
+    102,
+    684,
+    142,
+    704
+   ],
+   "x_px": 122.1171875,
+   "y_px": 694.59375
+  },
+  {
+   "point_id": "CP0035",
+   "x": 201.4140625,
+   "y": 691.6875,
+   "model_x": 254,
+   "model_y": 476,
+   "detection_score": 0.9792050719261169,
+   "series_id": "s02",
+   "legend_index": 2,
+   "score": 0.9908566474914551,
+   "winning_similarity": 0.9908566474914551,
+   "similarities": [
+    0.2534434199333191,
+    0.8560867309570312,
+    0.9908566474914551
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0035.png",
+   "patch_box_input": [
+    181,
+    681,
+    221,
+    701
+   ],
+   "x_px": 201.4140625,
+   "y_px": 691.6875
+  },
+  {
+   "point_id": "CP0036",
+   "x": 149.078125,
+   "y": 697.5,
+   "model_x": 188,
+   "model_y": 480,
+   "detection_score": 0.5482944846153259,
+   "series_id": "s02",
+   "legend_index": 2,
+   "score": 0.9935020804405212,
+   "winning_similarity": 0.9935020804405212,
+   "similarities": [
+    0.21399907767772675,
+    0.7596659064292908,
+    0.9935020804405212
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0036.png",
+   "patch_box_input": [
+    129,
+    687,
+    169,
+    707
+   ],
+   "x_px": 149.078125,
+   "y_px": 697.5
+  },
+  {
+   "point_id": "CP0037",
+   "x": 175.24609375,
+   "y": 700.40625,
+   "model_x": 221,
+   "model_y": 482,
+   "detection_score": 0.9986061453819275,
+   "series_id": "s02",
+   "legend_index": 2,
+   "score": 0.9970882534980774,
+   "winning_similarity": 0.9970882534980774,
+   "similarities": [
+    0.48991793394088745,
+    0.8016119599342346,
+    0.9970882534980774
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0037.png",
+   "patch_box_input": [
+    155,
+    690,
+    195,
+    710
+   ],
+   "x_px": 175.24609375,
+   "y_px": 700.40625
+  }
+ ],
+ "unavailable": [],
+ "patches": [
+  {
+   "point_index": 0,
+   "point_id": "CP0028",
+   "box_input": [
+    232,
+    595,
+    272,
+    615
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0028.png"
+  },
+  {
+   "point_index": 1,
+   "point_id": "CP0029",
+   "box_input": [
+    232,
+    616,
+    272,
+    636
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0029.png"
+  },
+  {
+   "point_index": 2,
+   "point_id": "CP0030",
+   "box_input": [
+    206,
+    620,
+    246,
+    640
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0030.png"
+  },
+  {
+   "point_index": 3,
+   "point_id": "CP0031",
+   "box_input": [
+    206,
+    632,
+    246,
+    652
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0031.png"
+  },
+  {
+   "point_index": 4,
+   "point_id": "CP0032",
+   "box_input": [
+    49,
+    684,
+    89,
+    704
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0032.png"
+  },
+  {
+   "point_index": 5,
+   "point_id": "CP0033",
+   "box_input": [
+    75,
+    684,
+    115,
+    704
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0033.png"
+  },
+  {
+   "point_index": 6,
+   "point_id": "CP0034",
+   "box_input": [
+    102,
+    684,
+    142,
+    704
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0034.png"
+  },
+  {
+   "point_index": 7,
+   "point_id": "CP0035",
+   "box_input": [
+    181,
+    681,
+    221,
+    701
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0035.png"
+  },
+  {
+   "point_index": 8,
+   "point_id": "CP0036",
+   "box_input": [
+    129,
+    687,
+    169,
+    707
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0036.png"
+  },
+  {
+   "point_index": 9,
+   "point_id": "CP0037",
+   "box_input": [
+    155,
+    690,
+    195,
+    710
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/patches/CP0037.png"
+  }
+ ],
+ "similarity_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/aicp_raw_grouped/similarity.npy",
+ "similarity_row_point_ids": [
+  "CP0028",
+  "CP0029",
+  "CP0030",
+  "CP0031",
+  "CP0032",
+  "CP0033",
+  "CP0034",
+  "CP0035",
+  "CP0036",
+  "CP0037"
+ ],
+ "similarity_column_series_ids": [
+  "s03",
+  "s01",
+  "s02"
+ ],
+ "timing": {
+  "shared_input_verification_seconds": 0.0047342999605461955,
+  "legend_crop_seconds": 0.0029066000133752823,
+  "network_seconds": 0.031010900042019784,
+  "head_postprocess_and_export_seconds": 0.10856269998475909,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.010806199978105724,
+  "learned_matching_seconds": 0.05554929992649704,
+  "total_seconds": 0.2100444999523461,
+  "method_total_excluding_shared_verification_seconds": 0.2100444999523461,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "patch_matching_timing": {
+  "patch_extract_and_export_seconds": 0.010806199978105724,
+  "learned_matching_seconds": 0.05554929992649704,
+  "total_seconds": 0.06756429991219193
+ },
+ "timing_breakdown": {
+  "shared_input_verification_seconds": 0.0047342999605461955,
+  "legend_crop_seconds": 0.0029066000133752823,
+  "network_seconds": 0.031010900042019784,
+  "head_postprocess_and_export_seconds": 0.10856269998475909,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.010806199978105724,
+  "learned_matching_seconds": 0.05554929992649704,
+  "total_seconds": 0.2100444999523461,
+  "method_total_excluding_shared_verification_seconds": 0.2100444999523461,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "raw_heads_result_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/raw_heads/chartparser/er__palivizumab_1_1_0__p03__v2/result.json",
+ "raw_points": [
+  {
+   "point_id": "CP0028",
+   "x": 252.95703125,
+   "y": 605.953125,
+   "model_x": 319,
+   "model_y": 417,
+   "detection_score": 0.8795892000198364,
+   "x_px": 252.95703125,
+   "y_px": 605.953125
+  },
+  {
+   "point_id": "CP0029",
+   "x": 252.95703125,
+   "y": 626.296875,
+   "model_x": 319,
+   "model_y": 431,
+   "detection_score": 0.9960814118385315,
+   "x_px": 252.95703125,
+   "y_px": 626.296875
+  },
+  {
+   "point_id": "CP0030",
+   "x": 226.7890625,
+   "y": 630.65625,
+   "model_x": 286,
+   "model_y": 434,
+   "detection_score": 0.9738479256629944,
+   "x_px": 226.7890625,
+   "y_px": 630.65625
+  },
+  {
+   "point_id": "CP0031",
+   "x": 226.7890625,
+   "y": 642.28125,
+   "model_x": 286,
+   "model_y": 442,
+   "detection_score": 0.9979975819587708,
+   "x_px": 226.7890625,
+   "y_px": 642.28125
+  },
+  {
+   "point_id": "CP0032",
+   "x": 69.78125,
+   "y": 694.59375,
+   "model_x": 88,
+   "model_y": 478,
+   "detection_score": 0.9403411746025085,
+   "x_px": 69.78125,
+   "y_px": 694.59375
+  },
+  {
+   "point_id": "CP0033",
+   "x": 95.15625,
+   "y": 694.59375,
+   "model_x": 120,
+   "model_y": 478,
+   "detection_score": 0.9342753291130066,
+   "x_px": 95.15625,
+   "y_px": 694.59375
+  },
+  {
+   "point_id": "CP0034",
+   "x": 122.1171875,
+   "y": 694.59375,
+   "model_x": 154,
+   "model_y": 478,
+   "detection_score": 0.979468822479248,
+   "x_px": 122.1171875,
+   "y_px": 694.59375
+  },
+  {
+   "point_id": "CP0035",
+   "x": 201.4140625,
+   "y": 691.6875,
+   "model_x": 254,
+   "model_y": 476,
+   "detection_score": 0.9792050719261169,
+   "x_px": 201.4140625,
+   "y_px": 691.6875
+  },
+  {
+   "point_id": "CP0036",
+   "x": 149.078125,
+   "y": 697.5,
+   "model_x": 188,
+   "model_y": 480,
+   "detection_score": 0.5482944846153259,
+   "x_px": 149.078125,
+   "y_px": 697.5
+  },
+  {
+   "point_id": "CP0037",
+   "x": 175.24609375,
+   "y": 700.40625,
+   "model_x": 221,
+   "model_y": 482,
+   "detection_score": 0.9986061453819275,
+   "x_px": 175.24609375,
+   "y_px": 700.40625
+  }
+ ],
+ "corrected_points": [
+  {
+   "point_id": "CP0028",
+   "x": 253.75,
+   "y": 605.953125,
+   "model_x": 320,
+   "model_y": 417,
+   "raw_x": 252.95703125,
+   "raw_y": 605.953125,
+   "detection_score": 0.8795892000198364,
+   "component_id": 9,
+   "x_px": 253.75,
+   "y_px": 605.953125
+  },
+  {
+   "point_id": "CP0029",
+   "x": 252.95703125,
+   "y": 626.296875,
+   "model_x": 319,
+   "model_y": 431,
+   "raw_x": 252.95703125,
+   "raw_y": 626.296875,
+   "detection_score": 0.9960814118385315,
+   "component_id": 9,
+   "x_px": 252.95703125,
+   "y_px": 626.296875
+  },
+  {
+   "point_id": "CP0030",
+   "x": 226.7890625,
+   "y": 630.65625,
+   "model_x": 286,
+   "model_y": 434,
+   "raw_x": 226.7890625,
+   "raw_y": 630.65625,
+   "detection_score": 0.9738479256629944,
+   "component_id": 9,
+   "x_px": 226.7890625,
+   "y_px": 630.65625
+  },
+  {
+   "point_id": "CP0031",
+   "x": 226.7890625,
+   "y": 642.28125,
+   "model_x": 286,
+   "model_y": 442,
+   "raw_x": 226.7890625,
+   "raw_y": 642.28125,
+   "detection_score": 0.9979975819587708,
+   "component_id": 9,
+   "x_px": 226.7890625,
+   "y_px": 642.28125
+  },
+  {
+   "point_id": "CP0033",
+   "x": 95.15625,
+   "y": 698.953125,
+   "model_x": 120,
+   "model_y": 481,
+   "raw_x": 95.15625,
+   "raw_y": 694.59375,
+   "detection_score": 0.9342753291130066,
+   "component_id": 10,
+   "x_px": 95.15625,
+   "y_px": 698.953125
+  },
+  {
+   "point_id": "CP0034",
+   "x": 122.1171875,
+   "y": 697.5,
+   "model_x": 154,
+   "model_y": 480,
+   "raw_x": 122.1171875,
+   "raw_y": 694.59375,
+   "detection_score": 0.979468822479248,
+   "component_id": 11,
+   "x_px": 122.1171875,
+   "y_px": 697.5
+  },
+  {
+   "point_id": "CP0035",
+   "x": 201.4140625,
+   "y": 691.6875,
+   "model_x": 254,
+   "model_y": 476,
+   "raw_x": 201.4140625,
+   "raw_y": 691.6875,
+   "detection_score": 0.9792050719261169,
+   "component_id": 9,
+   "x_px": 201.4140625,
+   "y_px": 691.6875
+  },
+  {
+   "point_id": "CP0036",
+   "x": 149.078125,
+   "y": 700.40625,
+   "model_x": 188,
+   "model_y": 482,
+   "raw_x": 149.078125,
+   "raw_y": 697.5,
+   "detection_score": 0.5482944846153259,
+   "component_id": 11,
+   "x_px": 149.078125,
+   "y_px": 700.40625
+  },
+  {
+   "point_id": "CP0037",
+   "x": 175.24609375,
+   "y": 700.40625,
+   "model_x": 221,
+   "model_y": 482,
+   "raw_x": 175.24609375,
+   "raw_y": 700.40625,
+   "detection_score": 0.9986061453819275,
+   "component_id": 9,
+   "x_px": 175.24609375,
+   "y_px": 700.40625
+  }
+ ],
+ "rejected_points": [
+  {
+   "point_id": "CP0032",
+   "x": 69.78125,
+   "y": 694.59375,
+   "model_x": 88,
+   "model_y": 478,
+   "detection_score": 0.9403411746025085,
+   "x_px": 69.78125,
+   "y_px": 694.59375,
+   "reason": "no_centerline_in_band_radius"
+  }
+ ],
+ "excluded_points": [
+  {
+   "point_id": "CP0001",
+   "x": 252.95703125,
+   "y": 98.8125,
+   "model_x": 319,
+   "model_y": 68,
+   "detection_score": 0.9327383041381836,
+   "x_px": 252.95703125,
+   "y_px": 98.8125
+  },
+  {
+   "point_id": "CP0002",
+   "x": 226.7890625,
+   "y": 104.625,
+   "model_x": 286,
+   "model_y": 72,
+   "detection_score": 0.9961142539978027,
+   "x_px": 226.7890625,
+   "y_px": 104.625
+  },
+  {
+   "point_id": "CP0003",
+   "x": 252.95703125,
+   "y": 124.96875,
+   "model_x": 319,
+   "model_y": 86,
+   "detection_score": 0.973579466342926,
+   "x_px": 252.95703125,
+   "y_px": 124.96875
+  },
+  {
+   "point_id": "CP0004",
+   "x": 226.7890625,
+   "y": 136.59375,
+   "model_x": 286,
+   "model_y": 94,
+   "detection_score": 0.9972296357154846,
+   "x_px": 226.7890625,
+   "y_px": 136.59375
+  },
+  {
+   "point_id": "CP0005",
+   "x": 199.828125,
+   "y": 156.9375,
+   "model_x": 252,
+   "model_y": 108,
+   "detection_score": 0.8046290874481201,
+   "x_px": 199.828125,
+   "y_px": 156.9375
+  },
+  {
+   "point_id": "CP0006",
+   "x": 174.453125,
+   "y": 174.375,
+   "model_x": 220,
+   "model_y": 120,
+   "detection_score": 0.9447392225265503,
+   "x_px": 174.453125,
+   "y_px": 174.375
+  },
+  {
+   "point_id": "CP0007",
+   "x": 147.4921875,
+   "y": 188.90625,
+   "model_x": 186,
+   "model_y": 130,
+   "detection_score": 0.9961434006690979,
+   "x_px": 147.4921875,
+   "y_px": 188.90625
+  },
+  {
+   "point_id": "CP0008",
+   "x": 174.453125,
+   "y": 186.0,
+   "model_x": 220,
+   "model_y": 128,
+   "detection_score": 0.8689391016960144,
+   "x_px": 174.453125,
+   "y_px": 186.0
+  },
+  {
+   "point_id": "CP0009",
+   "x": 121.32421875,
+   "y": 191.8125,
+   "model_x": 153,
+   "model_y": 132,
+   "detection_score": 0.9828459620475769,
+   "x_px": 121.32421875,
+   "y_px": 191.8125
+  },
+  {
+   "point_id": "CP0010",
+   "x": 199.03515625,
+   "y": 191.8125,
+   "model_x": 251,
+   "model_y": 132,
+   "detection_score": 0.5851474404335022,
+   "x_px": 199.03515625,
+   "y_px": 191.8125
+  },
+  {
+   "point_id": "CP0011",
+   "x": 253.75,
+   "y": 194.71875,
+   "model_x": 320,
+   "model_y": 134,
+   "detection_score": 0.54805988073349,
+   "x_px": 253.75,
+   "y_px": 194.71875
+  },
+  {
+   "point_id": "CP0012",
+   "x": 69.78125,
+   "y": 199.078125,
+   "model_x": 88,
+   "model_y": 137,
+   "detection_score": 0.7895790934562683,
+   "x_px": 69.78125,
+   "y_px": 199.078125
+  },
+  {
+   "point_id": "CP0013",
+   "x": 95.15625,
+   "y": 200.53125,
+   "model_x": 120,
+   "model_y": 138,
+   "detection_score": 0.877515971660614,
+   "x_px": 95.15625,
+   "y_px": 200.53125
+  },
+  {
+   "point_id": "CP0014",
+   "x": 226.7890625,
+   "y": 197.625,
+   "model_x": 286,
+   "model_y": 136,
+   "detection_score": 0.9818238615989685,
+   "x_px": 226.7890625,
+   "y_px": 197.625
+  },
+  {
+   "point_id": "CP0015",
+   "x": 226.7890625,
+   "y": 348.75,
+   "model_x": 286,
+   "model_y": 240,
+   "detection_score": 0.9812834858894348,
+   "x_px": 226.7890625,
+   "y_px": 348.75
+  },
+  {
+   "point_id": "CP0016",
+   "x": 253.75,
+   "y": 360.375,
+   "model_x": 320,
+   "model_y": 248,
+   "detection_score": 0.9575924873352051,
+   "x_px": 253.75,
+   "y_px": 360.375
+  },
+  {
+   "point_id": "CP0017",
+   "x": 200.62109375,
+   "y": 367.640625,
+   "model_x": 253,
+   "model_y": 253,
+   "detection_score": 0.9978511333465576,
+   "x_px": 200.62109375,
+   "y_px": 367.640625
+  },
+  {
+   "point_id": "CP0018",
+   "x": 226.7890625,
+   "y": 377.8125,
+   "model_x": 286,
+   "model_y": 260,
+   "detection_score": 0.9787078499794006,
+   "x_px": 226.7890625,
+   "y_px": 377.8125
+  },
+  {
+   "point_id": "CP0019",
+   "x": 174.453125,
+   "y": 385.078125,
+   "model_x": 220,
+   "model_y": 265,
+   "detection_score": 0.9926827549934387,
+   "x_px": 174.453125,
+   "y_px": 385.078125
+  },
+  {
+   "point_id": "CP0020",
+   "x": 174.453125,
+   "y": 398.15625,
+   "model_x": 220,
+   "model_y": 274,
+   "detection_score": 0.9767100214958191,
+   "x_px": 174.453125,
+   "y_px": 398.15625
+  },
+  {
+   "point_id": "CP0021",
+   "x": 148.28515625,
+   "y": 427.21875,
+   "model_x": 187,
+   "model_y": 294,
+   "detection_score": 0.9943700432777405,
+   "x_px": 148.28515625,
+   "y_px": 427.21875
+  },
+  {
+   "point_id": "CP0022",
+   "x": 200.62109375,
+   "y": 433.03125,
+   "model_x": 253,
+   "model_y": 298,
+   "detection_score": 0.9935152530670166,
+   "x_px": 200.62109375,
+   "y_px": 433.03125
+  },
+  {
+   "point_id": "CP0023",
+   "x": 69.78125,
+   "y": 437.390625,
+   "model_x": 88,
+   "model_y": 301,
+   "detection_score": 0.8441190719604492,
+   "x_px": 69.78125,
+   "y_px": 437.390625
+  },
+  {
+   "point_id": "CP0024",
+   "x": 95.15625,
+   "y": 438.84375,
+   "model_x": 120,
+   "model_y": 302,
+   "detection_score": 0.9715279936790466,
+   "x_px": 95.15625,
+   "y_px": 438.84375
+  },
+  {
+   "point_id": "CP0025",
+   "x": 122.1171875,
+   "y": 438.84375,
+   "model_x": 154,
+   "model_y": 302,
+   "detection_score": 0.9956315755844116,
+   "x_px": 122.1171875,
+   "y_px": 438.84375
+  },
+  {
+   "point_id": "CP0026",
+   "x": 148.28515625,
+   "y": 438.84375,
+   "model_x": 187,
+   "model_y": 302,
+   "detection_score": 0.8731577396392822,
+   "x_px": 148.28515625,
+   "y_px": 438.84375
+  },
+  {
+   "point_id": "CP0027",
+   "x": 227.58203125,
+   "y": 438.84375,
+   "model_x": 287,
+   "model_y": 302,
+   "detection_score": 0.9873473644256592,
+   "x_px": 227.58203125,
+   "y_px": 438.84375
+  }
+ ],
+ "centerline_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__palivizumab_1_1_0__p03__v2/chartparser_geometry/centerline_512.png",
+ "public_process_kps_reference": [
+  {
+   "point_id": "CP0028",
+   "status": "retained",
+   "x": 252.95703125,
+   "y": 605.953125,
+   "upright_x": 252.95703125,
+   "upright_y": 605.953125,
+   "original_x": 252.95703125,
+   "original_y": 605.953125,
+   "model_x": 319.0,
+   "model_y": 417.0
+  },
+  {
+   "point_id": "CP0029",
+   "status": "retained",
+   "x": 252.95703125,
+   "y": 616.125,
+   "upright_x": 252.95703125,
+   "upright_y": 616.125,
+   "original_x": 252.95703125,
+   "original_y": 616.125,
+   "model_x": 319.0,
+   "model_y": 424.0
+  },
+  {
+   "point_id": "CP0030",
+   "status": "retained",
+   "x": 226.7890625,
+   "y": 630.65625,
+   "upright_x": 226.7890625,
+   "upright_y": 630.65625,
+   "original_x": 226.7890625,
+   "original_y": 630.65625,
+   "model_x": 286.0,
+   "model_y": 434.0
+  },
+  {
+   "point_id": "CP0031",
+   "status": "retained",
+   "x": 226.7890625,
+   "y": 636.46875,
+   "upright_x": 226.7890625,
+   "upright_y": 636.46875,
+   "original_x": 226.7890625,
+   "original_y": 636.46875,
+   "model_x": 286.0,
+   "model_y": 438.0
+  },
+  {
+   "point_id": "CP0032",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0033",
+   "status": "retained",
+   "x": 95.15625,
+   "y": 696.046875,
+   "upright_x": 95.15625,
+   "upright_y": 696.046875,
+   "original_x": 95.15625,
+   "original_y": 696.046875,
+   "model_x": 120.0,
+   "model_y": 479.0
+  },
+  {
+   "point_id": "CP0034",
+   "status": "retained",
+   "x": 122.1171875,
+   "y": 696.046875,
+   "upright_x": 122.1171875,
+   "upright_y": 696.046875,
+   "original_x": 122.1171875,
+   "original_y": 696.046875,
+   "model_x": 154.0,
+   "model_y": 479.0
+  },
+  {
+   "point_id": "CP0035",
+   "status": "retained",
+   "x": 201.4140625,
+   "y": 690.234375,
+   "upright_x": 201.4140625,
+   "upright_y": 690.234375,
+   "original_x": 201.4140625,
+   "original_y": 690.234375,
+   "model_x": 254.0,
+   "model_y": 475.0
+  },
+  {
+   "point_id": "CP0036",
+   "status": "retained",
+   "x": 149.078125,
+   "y": 697.5,
+   "upright_x": 149.078125,
+   "upright_y": 697.5,
+   "original_x": 149.078125,
+   "original_y": 697.5,
+   "model_x": 188.0,
+   "model_y": 480.0
+  },
+  {
+   "point_id": "CP0037",
+   "status": "retained",
+   "x": 175.24609375,
+   "y": 700.40625,
+   "upright_x": 175.24609375,
+   "upright_y": 700.40625,
+   "original_x": 175.24609375,
+   "original_y": 700.40625,
+   "model_x": 221.0,
+   "model_y": 482.0
+  }
+ ],
+ "implementation_choices": {
+  "curve_probability": "Cached segmentation[0,1], already sigmoid in ChartParserModel.forward; no second activation.",
+  "probability_inconsistency": "Paper section 3.2.3 says two-channel Softmax, section 3.2.4 discusses Sigmoid, and the public forward applies independent Sigmoid. This run thresholds the released cached Sigmoid output directly, not a claim of identical paper Softmax probabilities.",
+  "threshold": 0.6,
+  "morphology": "One 3x3 all-ones binary closing; constant-zero border.",
+  "connectivity": 8,
+  "component_policy": "Retain every connected component; no minimum-area deletion.",
+  "thinning": "skimage.morphology.skeletonize(method=zhang) independently within each 8-connected component.",
+  "correction": "Nearest centreline pixel in x +/- 1 columns and abs(delta_y) < 15 model pixels; minimum Euclidean distance, ties smaller y then x. Snap x and y to that centreline pixel. Reject if absent.",
+  "correction_parameters_provenance": "The paper does not specify kernel/thinner/selection radius. Column band and vertical radius are borrowed from public process_kps; nearest selection and exact snapping are explicit experimental choices.",
+  "public_reference": "Separate result using original argmax mask, public x +/- 1, y-run gap <= 2, first ascending-y mean within 15, average with original y. Safety bounds added; not used for grouping.",
+  "pivot_patch_size_width_height": [
+   40,
+   20
+  ],
+  "pivot_patch_coordinate_system": "Native original-resolution upright input crop, not the 512x512 model input.",
+  "legend_images": "Unmodified original RGB swatch box crops, connector pixels retained. No reconstructed swatch masks.",
+  "grouping": "Official LineEX learned Siamese + MLP similarity, highest score over supplied legend crops. No histogram override or confidence rejection.",
+  "shape_classification": "Not performed. Legend identity is not a semantic circle/square/triangle prediction.",
+  "deduplication": "None. Distinct raw pivot hypotheses can snap to the same pixel and remain separate records.",
+  "no_legend_policy": "Abstain from grouping even for a nominal single-series panel; no fabricated legend."
+ },
+ "native_legend_stage": "unavailable; supplied benchmark swatch crops used, never class-3 remapping",
+ "limitations": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ],
+ "shared_legend_status": "available",
+ "shared_legend_reason": null,
+ "shared_legends_sha256": "4ce5f8a3e70d3eab9e936c078e30e73595f63e82dd23ddb8383b82507767a364",
+ "warnings": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ]
+}

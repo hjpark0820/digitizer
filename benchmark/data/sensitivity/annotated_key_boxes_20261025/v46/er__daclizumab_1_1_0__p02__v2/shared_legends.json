@@ -1,0 +1,157 @@
+{
+ "panel_id": "er__daclizumab_1_1_0__p02__v2",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    3,
+    216,
+    38,
+    225
+   ],
+   "native_body_bbox": [
+    16,
+    216,
+    27,
+    225
+   ],
+   "class_name": "filled_square",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "negative control antibody",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__daclizumab_1_1_0__p02__v2/shared_legend_crops/legend_01.png",
+   "image_size": [
+    35,
+    9
+   ],
+   "sha256": "73012737afcca37daf09c53ebeb39eeea800d51891872279c350106087ff712e",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__daclizumab_1_1_0__p02__v2/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    3,
+    216,
+    38,
+    225
+   ],
+   "bbox_original": [
+    3,
+    216,
+    38,
+    225
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    3,
+    254,
+    38,
+    263
+   ],
+   "native_body_bbox": [
+    16,
+    254,
+    27,
+    263
+   ],
+   "class_name": "filled_inv_triangle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s02",
+   "label": "CDC positive control antibody",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__daclizumab_1_1_0__p02__v2/shared_legend_crops/legend_02.png",
+   "image_size": [
+    35,
+    9
+   ],
+   "sha256": "6121a13dea82e97738899ae2c0f5309fb00da5055177ffe6402b04d4f76d2cea",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__daclizumab_1_1_0__p02__v2/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    3,
+    254,
+    38,
+    263
+   ],
+   "bbox_original": [
+    3,
+    254,
+    38,
+    263
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01",
+  "S02": "s02"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.7333333333333333,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 0.7333333333333333,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "negative control antibody",
+   "bbox": [
+    4,
+    217,
+    37,
+    224
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "CDC positive control antibody",
+   "bbox": [
+    4,
+    255,
+    37,
+    262
+   ]
+  }
+ ],
+ "input_sha256": "69ae38e095947fed688ba264ae7b3f06199da9265921bc95e51e5cd3cd0cffd0",
+ "source_sha256": "69ae38e095947fed688ba264ae7b3f06199da9265921bc95e51e5cd3cd0cffd0",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.009288600063882768
+}

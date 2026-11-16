@@ -349,6 +349,7 @@
       <div id="colorStep5Objective" class="hint" style="display:none; margin-top:6px; padding:8px; background:#edf5f0;"></div>
       </div>
       <div id="diagBox" style="display:none; margin-top:12px;">
+        <div id="legendReviewHost"></div>
         <div class="hint" id="legendDiagHint"></div>
         <pre id="legendAnalysisText" style="white-space:pre-wrap; overflow-wrap:anywhere;"></pre>
         <a id="legendAnalysisLink" target="_blank" rel="noopener" hidden>Open full legend / series analysis (JSON)</a>
@@ -509,6 +510,7 @@
   </div>
 </dialog>
 <script src="/image_sidecar_v46.js"></script>
+<script src="/legend_review_v46.js"></script>
 <script id="bwImageState">
 // Pure image/request state: browser Blob bytes are immutable. A prepared PNG
 // never becomes the source for another preparation request.
@@ -597,6 +599,7 @@ let originalImage = null;
 let originalUrl = null;
 let preparedUrl = null;
 let prepareController = null;
+let legendReviewController = null;
 const sidecar = new ImageSidecarV46.ImageSidecar();
 let editImageNames=[], imageBrowserPage=0, thumbnailUrls=[], thumbnailSerial=0;
 let folderPreviewUrl=null, folderPreviewSerial=0;
@@ -610,12 +613,13 @@ function resultCapabilities(data) {
   const correctable = !!(editable && data.ok && data.job_id && data.step5_available !== false &&
     (!data.legend_optional || data.legend_optional.status === 'completed'));
   const legend = !!(data && (data.legend_diagnostic_url || data.legend_overlay_url ||
-    data.legend_optional_url || data.legend_optional));
+    data.legend_optional_url || data.legend_optional || data.legend_review_url));
   return {editable, correctable, legend};
 }
 
 function syncImageControls() {
   const busy = !!imageState.busy || folderNavigationBusy;
+  legendReviewController?.syncBusy();
   const capabilities = resultCapabilities(window.lastData);
   document.getElementById('run').disabled = busy || !imgLoaded;
   document.getElementById('btnStep5').disabled = busy || !capabilities.correctable;
@@ -726,6 +730,11 @@ function configureTriangleDiagnostic(data, resultCurrent) {
 }
 
 function configureLegendDiagnostic(data, resultCurrent) {
+  legendReviewController?.clear();
+  legendReviewController = data.legend_review_url ? window.LegendReviewV46?.mount(document.getElementById('legendReviewHost'), {
+    data, isCurrent: resultCurrent, isBusy: () => !!imageState.busy || folderNavigationBusy,
+    onRerun: rerunReviewedLegend
+  }) || null : null;
   const toggle = document.getElementById('toggleDiag');
   const box = document.getElementById('diagBox');
   const hint = document.getElementById('legendDiagHint');
@@ -754,11 +763,11 @@ function configureLegendDiagnostic(data, resultCurrent) {
   box.style.display = 'none';
   overlayCaption.style.display = 'none';
   toggle.onclick = null;
-  const available = !!(dUrl || oUrl || analysis || data.legend_optional_url);
+  const available = !!(dUrl || oUrl || analysis || data.legend_optional_url || data.legend_review_url);
   toggle.style.display = data.job_id || available ? 'inline-block' : 'none';
   toggle.disabled = !available;
   toggle.title = available ? '' : 'This run did not produce a legend analysis.';
-  const diagnosticLabel = dUrl || oUrl ? 'legend fit diagnostic' : 'legend / series analysis';
+  const diagnosticLabel = data.legend_review_url ? 'legend swatches / review' : dUrl || oUrl ? 'legend fit diagnostic' : 'legend / series analysis';
   toggle.textContent = 'Show '+diagnosticLabel;
   hint.textContent = data.legend_diagnostic_kind === 'color-group-templates'
     ? 'Colour-group v46: source legend swatch | actual detection template | separate series ID. Supported line + symbol decompositions remove connector ink from the model, including dashed lines through open circles. Uncertain decompositions retain an observed fallback.'
@@ -775,6 +784,7 @@ function configureLegendDiagnostic(data, resultCurrent) {
     const open = box.style.display === 'none';
     box.style.display = open ? 'block' : 'none';
     toggle.textContent = (open ? 'Hide ' : 'Show ')+diagnosticLabel;
+    if (open) legendReviewController?.load();
     if (!open || loaded) return;
     const load = (img, url, caption) => {
       if (!url) return;
@@ -1441,6 +1451,37 @@ async function runDigitize(withCorrect) {
     if (imageState.current(runToken)) {
       imageState.finish(runToken); syncImageControls();
       document.getElementById('spinner').style.display = 'none';
+    }
+  }
+}
+
+async function rerunReviewedLegend(payload) {
+  if (imageState.busy || payload.job_id !== window.lastData?.job_id) return;
+  if (currentEdForSave() && hasUnsavedFolderChanges()) {
+    // The previous job remains on the server, but pending point/axis edits are
+    // not inputs to a fresh detection pass.
+    if (!confirm('Rerunning detection starts a new result. Save any point or axis edits first if you want to keep them. Continue?')) return;
+  }
+  const token = imageState.begin('digitize');
+  syncImageControls();
+  const spinner = document.getElementById('spinner'), started = Date.now();
+  const update = () => { spinner.textContent = 'Detecting with reviewed legend… ' + Math.floor((Date.now()-started)/1000) + ' s'; };
+  spinner.style.display = 'block'; update();
+  const timer = setInterval(update, 1000);
+  try {
+    const data = await (await checkedResponse(await fetch('/legend-review/'+payload.job_id+'/rerun', {
+      method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
+    }))).json();
+    if (!imageState.current(token)) return;
+    presentResult(data);
+    setTimeout(() => {
+      if (window.lastData === data && !imageState.busy) document.getElementById('toggleDiag').click();
+    }, 0);
+    return data;
+  } finally {
+    clearInterval(timer);
+    if (imageState.current(token)) {
+      imageState.finish(token); syncImageControls(); spinner.style.display='none';
     }
   }
 }

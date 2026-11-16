@@ -1,0 +1,240 @@
+{
+ "panel_id": "pk__lenzilumab1__p01__v3",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    454,
+    54,
+    501,
+    72
+   ],
+   "native_body_bbox": [
+    470.1193679258485,
+    55.12233062499027,
+    485.8756610738697,
+    70.8786237730115
+   ],
+   "class_name": "open_circle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "Lenzilumab 1 mg/kg (n=3)",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/pk__lenzilumab1__p01__v3/shared_legend_crops/legend_01.png",
+   "image_size": [
+    47,
+    18
+   ],
+   "sha256": "54613319b62e0d548bc4d144644b9fc8d9eab63496f4e5c4704bbc0059f529aa",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/pk__lenzilumab1__p01__v3/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    454,
+    54,
+    501,
+    72
+   ],
+   "bbox_original": [
+    454,
+    54,
+    501,
+    72
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    455,
+    107,
+    501,
+    124
+   ],
+   "native_body_bbox": [
+    470,
+    107,
+    486,
+    124
+   ],
+   "class_name": "unknown_marker",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s02",
+   "label": "Lenzilumab 3 mg/kg (n=6)",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/pk__lenzilumab1__p01__v3/shared_legend_crops/legend_02.png",
+   "image_size": [
+    46,
+    17
+   ],
+   "sha256": "065e7b7b0084809dac6581802f29b274f3daa99762d9688afec24560034293c2",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/pk__lenzilumab1__p01__v3/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    455,
+    107,
+    501,
+    124
+   ],
+   "bbox_original": [
+    455,
+    107,
+    501,
+    124
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S03",
+   "bbox": [
+    457,
+    161,
+    499,
+    174
+   ],
+   "native_body_bbox": null,
+   "class_name": "unknown_marker",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s03",
+   "label": "Lenzilumab 10 mg/kg (n=6)",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/pk__lenzilumab1__p01__v3/shared_legend_crops/legend_03.png",
+   "image_size": [
+    42,
+    13
+   ],
+   "sha256": "59b3c0ef4e48f7d7dbd22f1f1944f4b318de3c4329559ca7e9dea6e75f8e3e85",
+   "source_native_legend_id": "S03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/pk__lenzilumab1__p01__v3/shared_legend_crops/legend_03.png",
+   "bbox_crop": [
+    457,
+    161,
+    499,
+    174
+   ],
+   "bbox_original": [
+    457,
+    161,
+    499,
+    174
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01",
+  "S02": "s02",
+  "S03": "s03"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.7281323877068558,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 1.0,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s03",
+    "iou": 1.0,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Lenzilumab 1 mg/kg (n=3)",
+   "bbox": [
+    456,
+    56,
+    500,
+    70
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Lenzilumab 3 mg/kg (n=6)",
+   "bbox": [
+    455,
+    107,
+    501,
+    124
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "Lenzilumab 10 mg/kg (n=6)",
+   "bbox": [
+    457,
+    161,
+    499,
+    174
+   ]
+  }
+ ],
+ "input_sha256": "aeabd1e58f8e70f273a928b5cd0cd1d0506d90cf0e15744e05f4f8b37c7b767a",
+ "source_sha256": "aeabd1e58f8e70f273a928b5cd0cd1d0506d90cf0e15744e05f4f8b37c7b767a",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.029694100026972592
+}

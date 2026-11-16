@@ -1,0 +1,2327 @@
+{
+ "version": "external_shared_input_benchmark_v1",
+ "panel_id": "er__pozelimab_1_2_2__p01__v7",
+ "modality": "color",
+ "method": "aicp_raw_grouped",
+ "status": "completed",
+ "coordinate_system": "x_px/y_px = full original unrotated image pixels; x/y = shared native crop pixels",
+ "image_path": "data/images\\er__pozelimab_1_2_2__p01__v7.png",
+ "input_sha256": "fa928afbf6a1dacd4b0958428ff42e73bf08e186bb334f58962a771a5d7acc42",
+ "source_image_path": "data/images\\er__pozelimab_1_2_2__p01__v7.png",
+ "source_sha256": "fa928afbf6a1dacd4b0958428ff42e73bf08e186bb334f58962a771a5d7acc42",
+ "crop_box_original": [
+  0,
+  0,
+  581,
+  562
+ ],
+ "plot_box": [
+  91.0,
+  165.0,
+  553.0,
+  490.0
+ ],
+ "legend_box": [
+  110.0,
+  7.0,
+  310.0,
+  73.0
+ ],
+ "legends": [
+  {
+   "legend_index": 0,
+   "series_id": "s01",
+   "label": "REGN3918",
+   "source_native_legend_id": "s01",
+   "box_input": [
+    107,
+    10,
+    150,
+    22
+   ],
+   "box_original": [
+    107,
+    10,
+    150,
+    22
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_01.png",
+   "crop_sha256": "9535b50bbc23bd5f1124cbbddbbd4b3750291b2d167bcf4c92530bca123595e0",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legends.json",
+   "shared_legends_sha256": "8aa4ef21c1b970a59b07a860bdc1de261b72741544e1a0539913c1fd852f31db",
+   "mapping_provenance": {
+    "s01": "s01",
+    "s02": "s02",
+    "s03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 1,
+   "series_id": "s02",
+   "label": "In-house eculizumab",
+   "source_native_legend_id": "s02",
+   "box_input": [
+    106,
+    32,
+    150,
+    45
+   ],
+   "box_original": [
+    106,
+    32,
+    150,
+    45
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_02.png",
+   "crop_sha256": "2e95a2e65cd23822a679af7ec8d6de9efe77ab7a9a57d84ace7a96e0656777c4",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legends.json",
+   "shared_legends_sha256": "8aa4ef21c1b970a59b07a860bdc1de261b72741544e1a0539913c1fd852f31db",
+   "mapping_provenance": {
+    "s01": "s01",
+    "s02": "s02",
+    "s03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 2,
+   "series_id": "s03",
+   "label": "IgG4PControl",
+   "source_native_legend_id": "s03",
+   "box_input": [
+    107,
+    55,
+    149,
+    66
+   ],
+   "box_original": [
+    107,
+    55,
+    149,
+    66
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_03.png",
+   "crop_sha256": "fd9025ce12bc670e4090b79c6e686252a5bcea75e184b35a55adb5af8c62cd18",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legends.json",
+   "shared_legends_sha256": "8aa4ef21c1b970a59b07a860bdc1de261b72741544e1a0539913c1fd852f31db",
+   "mapping_provenance": {
+    "s01": "s01",
+    "s02": "s02",
+    "s03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  }
+ ],
+ "predictions": [
+  {
+   "point_id": "CP0007",
+   "x": 536.744140625,
+   "y": 248.0703125,
+   "model_x": 473,
+   "model_y": 226,
+   "detection_score": 0.9981034994125366,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9319713711738586,
+   "winning_similarity": 0.9319713711738586,
+   "similarities": [
+    0.5912094116210938,
+    0.07771428674459457,
+    0.9319713711738586
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0007.png",
+   "patch_box_input": [
+    516,
+    238,
+    556,
+    258
+   ],
+   "x_px": 536.744140625,
+   "y_px": 248.0703125
+  },
+  {
+   "point_id": "CP0008",
+   "x": 536.744140625,
+   "y": 259.046875,
+   "model_x": 473,
+   "model_y": 236,
+   "detection_score": 0.9116483330726624,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.758435070514679,
+   "winning_similarity": 0.758435070514679,
+   "similarities": [
+    0.5968634486198425,
+    0.13186393678188324,
+    0.758435070514679
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0008.png",
+   "patch_box_input": [
+    516,
+    249,
+    556,
+    269
+   ],
+   "x_px": 536.744140625,
+   "y_px": 259.046875
+  },
+  {
+   "point_id": "CP0009",
+   "x": 489.083984375,
+   "y": 267.828125,
+   "model_x": 431,
+   "model_y": 244,
+   "detection_score": 0.973538339138031,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9264109134674072,
+   "winning_similarity": 0.9264109134674072,
+   "similarities": [
+    0.48938870429992676,
+    0.06465001404285431,
+    0.9264109134674072
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0009.png",
+   "patch_box_input": [
+    469,
+    257,
+    509,
+    277
+   ],
+   "x_px": 489.083984375,
+   "y_px": 267.828125
+  },
+  {
+   "point_id": "CP0010",
+   "x": 166.810546875,
+   "y": 272.21875,
+   "model_x": 147,
+   "model_y": 248,
+   "detection_score": 0.8310043215751648,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9207885265350342,
+   "winning_similarity": 0.9207885265350342,
+   "similarities": [
+    0.9207885265350342,
+    0.7934902906417847,
+    0.16717422008514404
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0010.png",
+   "patch_box_input": [
+    146,
+    262,
+    186,
+    282
+   ],
+   "x_px": 166.810546875,
+   "y_px": 272.21875
+  },
+  {
+   "point_id": "CP0011",
+   "x": 212.201171875,
+   "y": 278.8046875,
+   "model_x": 187,
+   "model_y": 254,
+   "detection_score": 0.9932780861854553,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9231954216957092,
+   "winning_similarity": 0.9231954216957092,
+   "similarities": [
+    0.7467410564422607,
+    0.2078303098678589,
+    0.9231954216957092
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0011.png",
+   "patch_box_input": [
+    192,
+    268,
+    232,
+    288
+   ],
+   "x_px": 212.201171875,
+   "y_px": 278.8046875
+  },
+  {
+   "point_id": "CP0012",
+   "x": 305.251953125,
+   "y": 284.29296875,
+   "model_x": 269,
+   "model_y": 259,
+   "detection_score": 0.9941260814666748,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9746878147125244,
+   "winning_similarity": 0.9746878147125244,
+   "similarities": [
+    0.58759605884552,
+    0.06179720535874367,
+    0.9746878147125244
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0012.png",
+   "patch_box_input": [
+    285,
+    274,
+    325,
+    294
+   ],
+   "x_px": 305.251953125,
+   "y_px": 284.29296875
+  },
+  {
+   "point_id": "CP0013",
+   "x": 444.828125,
+   "y": 284.29296875,
+   "model_x": 392,
+   "model_y": 259,
+   "detection_score": 0.9861025810241699,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9552496671676636,
+   "winning_similarity": 0.9552496671676636,
+   "similarities": [
+    0.3901275396347046,
+    0.03448152542114258,
+    0.9552496671676636
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0013.png",
+   "patch_box_input": [
+    424,
+    274,
+    464,
+    294
+   ],
+   "x_px": 444.828125,
+   "y_px": 284.29296875
+  },
+  {
+   "point_id": "CP0014",
+   "x": 258.7265625,
+   "y": 286.48828125,
+   "model_x": 228,
+   "model_y": 261,
+   "detection_score": 0.9965619444847107,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7781510949134827,
+   "winning_similarity": 0.7781510949134827,
+   "similarities": [
+    0.72684246301651,
+    0.25736650824546814,
+    0.7781510949134827
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0014.png",
+   "patch_box_input": [
+    238,
+    276,
+    278,
+    296
+   ],
+   "x_px": 258.7265625,
+   "y_px": 286.48828125
+  },
+  {
+   "point_id": "CP0015",
+   "x": 342.69921875,
+   "y": 285.390625,
+   "model_x": 302,
+   "model_y": 260,
+   "detection_score": 0.3940616548061371,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9359508156776428,
+   "winning_similarity": 0.9359508156776428,
+   "similarities": [
+    0.639210045337677,
+    0.08872134983539581,
+    0.9359508156776428
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0015.png",
+   "patch_box_input": [
+    322,
+    275,
+    362,
+    295
+   ],
+   "x_px": 342.69921875,
+   "y_px": 285.390625
+  },
+  {
+   "point_id": "CP0016",
+   "x": 351.77734375,
+   "y": 285.390625,
+   "model_x": 310,
+   "model_y": 260,
+   "detection_score": 0.35948172211647034,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9504644274711609,
+   "winning_similarity": 0.9504644274711609,
+   "similarities": [
+    0.45028337836265564,
+    0.04361698776483536,
+    0.9504644274711609
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0016.png",
+   "patch_box_input": [
+    331,
+    275,
+    371,
+    295
+   ],
+   "x_px": 351.77734375,
+   "y_px": 285.390625
+  },
+  {
+   "point_id": "CP0017",
+   "x": 399.4375,
+   "y": 285.390625,
+   "model_x": 352,
+   "model_y": 260,
+   "detection_score": 0.9477307796478271,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9129230380058289,
+   "winning_similarity": 0.9129230380058289,
+   "similarities": [
+    0.5226708650588989,
+    0.0573032982647419,
+    0.9129230380058289
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0017.png",
+   "patch_box_input": [
+    379,
+    275,
+    419,
+    295
+   ],
+   "x_px": 399.4375,
+   "y_px": 285.390625
+  },
+  {
+   "point_id": "CP0018",
+   "x": 166.810546875,
+   "y": 297.46484375,
+   "model_x": 147,
+   "model_y": 271,
+   "detection_score": 0.7719075679779053,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9306889772415161,
+   "winning_similarity": 0.9306889772415161,
+   "similarities": [
+    0.9306889772415161,
+    0.480461061000824,
+    0.40622326731681824
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0018.png",
+   "patch_box_input": [
+    146,
+    287,
+    186,
+    307
+   ],
+   "x_px": 166.810546875,
+   "y_px": 297.46484375
+  },
+  {
+   "point_id": "CP0019",
+   "x": 212.201171875,
+   "y": 295.26953125,
+   "model_x": 187,
+   "model_y": 269,
+   "detection_score": 0.8529649972915649,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8426588177680969,
+   "winning_similarity": 0.8426588177680969,
+   "similarities": [
+    0.8426588177680969,
+    0.3862795829772949,
+    0.6957319378852844
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0019.png",
+   "patch_box_input": [
+    192,
+    285,
+    232,
+    305
+   ],
+   "x_px": 212.201171875,
+   "y_px": 295.26953125
+  },
+  {
+   "point_id": "CP0020",
+   "x": 305.251953125,
+   "y": 295.26953125,
+   "model_x": 269,
+   "model_y": 269,
+   "detection_score": 0.9910558462142944,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.928095817565918,
+   "winning_similarity": 0.928095817565918,
+   "similarities": [
+    0.928095817565918,
+    0.8442246913909912,
+    0.3476056456565857
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0020.png",
+   "patch_box_input": [
+    285,
+    285,
+    325,
+    305
+   ],
+   "x_px": 305.251953125,
+   "y_px": 295.26953125
+  },
+  {
+   "point_id": "CP0021",
+   "x": 212.201171875,
+   "y": 302.953125,
+   "model_x": 187,
+   "model_y": 276,
+   "detection_score": 0.8828475475311279,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8894190192222595,
+   "winning_similarity": 0.8894190192222595,
+   "similarities": [
+    0.8894190192222595,
+    0.39661094546318054,
+    0.5360383987426758
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0021.png",
+   "patch_box_input": [
+    192,
+    292,
+    232,
+    312
+   ],
+   "x_px": 212.201171875,
+   "y_px": 302.953125
+  },
+  {
+   "point_id": "CP0022",
+   "x": 352.912109375,
+   "y": 310.63671875,
+   "model_x": 311,
+   "model_y": 283,
+   "detection_score": 0.9584354758262634,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9257649183273315,
+   "winning_similarity": 0.9257649183273315,
+   "similarities": [
+    0.9257649183273315,
+    0.790249228477478,
+    0.4959224760532379
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0022.png",
+   "patch_box_input": [
+    332,
+    300,
+    372,
+    320
+   ],
+   "x_px": 352.912109375,
+   "y_px": 310.63671875
+  },
+  {
+   "point_id": "CP0023",
+   "x": 397.16796875,
+   "y": 334.78515625,
+   "model_x": 350,
+   "model_y": 305,
+   "detection_score": 0.9879468083381653,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9322935938835144,
+   "winning_similarity": 0.9322935938835144,
+   "similarities": [
+    0.9322935938835144,
+    0.8280768394470215,
+    0.26831117272377014
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0023.png",
+   "patch_box_input": [
+    377,
+    324,
+    417,
+    344
+   ],
+   "x_px": 397.16796875,
+   "y_px": 334.78515625
+  },
+  {
+   "point_id": "CP0024",
+   "x": 258.7265625,
+   "y": 353.4453125,
+   "model_x": 228,
+   "model_y": 322,
+   "detection_score": 0.9972236156463623,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9495208859443665,
+   "winning_similarity": 0.9495208859443665,
+   "similarities": [
+    0.9495208859443665,
+    0.5617919564247131,
+    0.7338671684265137
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0024.png",
+   "patch_box_input": [
+    238,
+    343,
+    278,
+    363
+   ],
+   "x_px": 258.7265625,
+   "y_px": 353.4453125
+  },
+  {
+   "point_id": "CP0025",
+   "x": 444.828125,
+   "y": 360.03125,
+   "model_x": 392,
+   "model_y": 328,
+   "detection_score": 0.9432200789451599,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8700235486030579,
+   "winning_similarity": 0.8700235486030579,
+   "similarities": [
+    0.8700235486030579,
+    0.6977046132087708,
+    0.23554573953151703
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0025.png",
+   "patch_box_input": [
+    424,
+    350,
+    464,
+    370
+   ],
+   "x_px": 444.828125,
+   "y_px": 360.03125
+  },
+  {
+   "point_id": "CP0026",
+   "x": 489.083984375,
+   "y": 367.71484375,
+   "model_x": 431,
+   "model_y": 335,
+   "detection_score": 0.6124587059020996,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7294142246246338,
+   "winning_similarity": 0.7294142246246338,
+   "similarities": [
+    0.7294142246246338,
+    0.6001175045967102,
+    0.4626484215259552
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0026.png",
+   "patch_box_input": [
+    469,
+    357,
+    509,
+    377
+   ],
+   "x_px": 489.083984375,
+   "y_px": 367.71484375
+  },
+  {
+   "point_id": "CP0027",
+   "x": 489.083984375,
+   "y": 383.08203125,
+   "model_x": 431,
+   "model_y": 349,
+   "detection_score": 0.9789093732833862,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9272945523262024,
+   "winning_similarity": 0.9272945523262024,
+   "similarities": [
+    0.9272945523262024,
+    0.8711221814155579,
+    0.19929422438144684
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0027.png",
+   "patch_box_input": [
+    469,
+    373,
+    509,
+    393
+   ],
+   "x_px": 489.083984375,
+   "y_px": 383.08203125
+  },
+  {
+   "point_id": "CP0028",
+   "x": 490.21875,
+   "y": 396.25390625,
+   "model_x": 432,
+   "model_y": 361,
+   "detection_score": 0.7708553075790405,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.594296395778656,
+   "winning_similarity": 0.594296395778656,
+   "similarities": [
+    0.49451082944869995,
+    0.4361516237258911,
+    0.594296395778656
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0028.png",
+   "patch_box_input": [
+    470,
+    386,
+    510,
+    406
+   ],
+   "x_px": 490.21875,
+   "y_px": 396.25390625
+  },
+  {
+   "point_id": "CP0029",
+   "x": 536.744140625,
+   "y": 396.25390625,
+   "model_x": 473,
+   "model_y": 361,
+   "detection_score": 0.9971820116043091,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9320618510246277,
+   "winning_similarity": 0.9320618510246277,
+   "similarities": [
+    0.9320618510246277,
+    0.7728056907653809,
+    0.22724540531635284
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0029.png",
+   "patch_box_input": [
+    516,
+    386,
+    556,
+    406
+   ],
+   "x_px": 536.744140625,
+   "y_px": 396.25390625
+  },
+  {
+   "point_id": "CP0030",
+   "x": 304.1171875,
+   "y": 451.13671875,
+   "model_x": 268,
+   "model_y": 411,
+   "detection_score": 0.9807165265083313,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9585578441619873,
+   "winning_similarity": 0.9585578441619873,
+   "similarities": [
+    0.9585578441619873,
+    0.7422398924827576,
+    0.3226846754550934
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0030.png",
+   "patch_box_input": [
+    284,
+    441,
+    324,
+    461
+   ],
+   "x_px": 304.1171875,
+   "y_px": 451.13671875
+  },
+  {
+   "point_id": "CP0031",
+   "x": 352.912109375,
+   "y": 484.06640625,
+   "model_x": 311,
+   "model_y": 441,
+   "detection_score": 0.9047821164131165,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9607800245285034,
+   "winning_similarity": 0.9607800245285034,
+   "similarities": [
+    0.9607800245285034,
+    0.6714925169944763,
+    0.4988584518432617
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0031.png",
+   "patch_box_input": [
+    332,
+    474,
+    372,
+    494
+   ],
+   "x_px": 352.912109375,
+   "y_px": 484.06640625
+  },
+  {
+   "point_id": "CP0032",
+   "x": 397.16796875,
+   "y": 486.26171875,
+   "model_x": 350,
+   "model_y": 443,
+   "detection_score": 0.9894352555274963,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9544324278831482,
+   "winning_similarity": 0.9544324278831482,
+   "similarities": [
+    0.9544324278831482,
+    0.662937581539154,
+    0.47098520398139954
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0032.png",
+   "patch_box_input": [
+    377,
+    476,
+    417,
+    496
+   ],
+   "x_px": 397.16796875,
+   "y_px": 486.26171875
+  },
+  {
+   "point_id": "CP0033",
+   "x": 533.33984375,
+   "y": 484.06640625,
+   "model_x": 470,
+   "model_y": 441,
+   "detection_score": 0.9150576591491699,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.932715892791748,
+   "winning_similarity": 0.932715892791748,
+   "similarities": [
+    0.932715892791748,
+    0.5284698605537415,
+    0.3790883421897888
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0033.png",
+   "patch_box_input": [
+    513,
+    474,
+    553,
+    494
+   ],
+   "x_px": 533.33984375,
+   "y_px": 484.06640625
+  },
+  {
+   "point_id": "CP0034",
+   "x": 445.962890625,
+   "y": 487.359375,
+   "model_x": 393,
+   "model_y": 444,
+   "detection_score": 0.8951514363288879,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9553667306900024,
+   "winning_similarity": 0.9553667306900024,
+   "similarities": [
+    0.9553667306900024,
+    0.6144952774047852,
+    0.658449649810791
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0034.png",
+   "patch_box_input": [
+    425,
+    477,
+    465,
+    497
+   ],
+   "x_px": 445.962890625,
+   "y_px": 487.359375
+  }
+ ],
+ "unavailable": [],
+ "patches": [
+  {
+   "point_index": 0,
+   "point_id": "CP0007",
+   "box_input": [
+    516,
+    238,
+    556,
+    258
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0007.png"
+  },
+  {
+   "point_index": 1,
+   "point_id": "CP0008",
+   "box_input": [
+    516,
+    249,
+    556,
+    269
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0008.png"
+  },
+  {
+   "point_index": 2,
+   "point_id": "CP0009",
+   "box_input": [
+    469,
+    257,
+    509,
+    277
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0009.png"
+  },
+  {
+   "point_index": 3,
+   "point_id": "CP0010",
+   "box_input": [
+    146,
+    262,
+    186,
+    282
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0010.png"
+  },
+  {
+   "point_index": 4,
+   "point_id": "CP0011",
+   "box_input": [
+    192,
+    268,
+    232,
+    288
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0011.png"
+  },
+  {
+   "point_index": 5,
+   "point_id": "CP0012",
+   "box_input": [
+    285,
+    274,
+    325,
+    294
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0012.png"
+  },
+  {
+   "point_index": 6,
+   "point_id": "CP0013",
+   "box_input": [
+    424,
+    274,
+    464,
+    294
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0013.png"
+  },
+  {
+   "point_index": 7,
+   "point_id": "CP0014",
+   "box_input": [
+    238,
+    276,
+    278,
+    296
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0014.png"
+  },
+  {
+   "point_index": 8,
+   "point_id": "CP0015",
+   "box_input": [
+    322,
+    275,
+    362,
+    295
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0015.png"
+  },
+  {
+   "point_index": 9,
+   "point_id": "CP0016",
+   "box_input": [
+    331,
+    275,
+    371,
+    295
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0016.png"
+  },
+  {
+   "point_index": 10,
+   "point_id": "CP0017",
+   "box_input": [
+    379,
+    275,
+    419,
+    295
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0017.png"
+  },
+  {
+   "point_index": 11,
+   "point_id": "CP0018",
+   "box_input": [
+    146,
+    287,
+    186,
+    307
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0018.png"
+  },
+  {
+   "point_index": 12,
+   "point_id": "CP0019",
+   "box_input": [
+    192,
+    285,
+    232,
+    305
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0019.png"
+  },
+  {
+   "point_index": 13,
+   "point_id": "CP0020",
+   "box_input": [
+    285,
+    285,
+    325,
+    305
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0020.png"
+  },
+  {
+   "point_index": 14,
+   "point_id": "CP0021",
+   "box_input": [
+    192,
+    292,
+    232,
+    312
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0021.png"
+  },
+  {
+   "point_index": 15,
+   "point_id": "CP0022",
+   "box_input": [
+    332,
+    300,
+    372,
+    320
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0022.png"
+  },
+  {
+   "point_index": 16,
+   "point_id": "CP0023",
+   "box_input": [
+    377,
+    324,
+    417,
+    344
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0023.png"
+  },
+  {
+   "point_index": 17,
+   "point_id": "CP0024",
+   "box_input": [
+    238,
+    343,
+    278,
+    363
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0024.png"
+  },
+  {
+   "point_index": 18,
+   "point_id": "CP0025",
+   "box_input": [
+    424,
+    350,
+    464,
+    370
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0025.png"
+  },
+  {
+   "point_index": 19,
+   "point_id": "CP0026",
+   "box_input": [
+    469,
+    357,
+    509,
+    377
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0026.png"
+  },
+  {
+   "point_index": 20,
+   "point_id": "CP0027",
+   "box_input": [
+    469,
+    373,
+    509,
+    393
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0027.png"
+  },
+  {
+   "point_index": 21,
+   "point_id": "CP0028",
+   "box_input": [
+    470,
+    386,
+    510,
+    406
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0028.png"
+  },
+  {
+   "point_index": 22,
+   "point_id": "CP0029",
+   "box_input": [
+    516,
+    386,
+    556,
+    406
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0029.png"
+  },
+  {
+   "point_index": 23,
+   "point_id": "CP0030",
+   "box_input": [
+    284,
+    441,
+    324,
+    461
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0030.png"
+  },
+  {
+   "point_index": 24,
+   "point_id": "CP0031",
+   "box_input": [
+    332,
+    474,
+    372,
+    494
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0031.png"
+  },
+  {
+   "point_index": 25,
+   "point_id": "CP0032",
+   "box_input": [
+    377,
+    476,
+    417,
+    496
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0032.png"
+  },
+  {
+   "point_index": 26,
+   "point_id": "CP0033",
+   "box_input": [
+    513,
+    474,
+    553,
+    494
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0033.png"
+  },
+  {
+   "point_index": 27,
+   "point_id": "CP0034",
+   "box_input": [
+    425,
+    477,
+    465,
+    497
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/patches/CP0034.png"
+  }
+ ],
+ "similarity_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/aicp_raw_grouped/similarity.npy",
+ "similarity_row_point_ids": [
+  "CP0007",
+  "CP0008",
+  "CP0009",
+  "CP0010",
+  "CP0011",
+  "CP0012",
+  "CP0013",
+  "CP0014",
+  "CP0015",
+  "CP0016",
+  "CP0017",
+  "CP0018",
+  "CP0019",
+  "CP0020",
+  "CP0021",
+  "CP0022",
+  "CP0023",
+  "CP0024",
+  "CP0025",
+  "CP0026",
+  "CP0027",
+  "CP0028",
+  "CP0029",
+  "CP0030",
+  "CP0031",
+  "CP0032",
+  "CP0033",
+  "CP0034"
+ ],
+ "similarity_column_series_ids": [
+  "s01",
+  "s02",
+  "s03"
+ ],
+ "timing": {
+  "shared_input_verification_seconds": 0.005388299992773682,
+  "legend_crop_seconds": 0.0031802000012248755,
+  "network_seconds": 0.03141759999562055,
+  "head_postprocess_and_export_seconds": 0.12396860000444576,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.029834199987817556,
+  "learned_matching_seconds": 0.12370749999536201,
+  "total_seconds": 0.3131745999562554,
+  "method_total_excluding_shared_verification_seconds": 0.3131745999562554,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "patch_matching_timing": {
+  "patch_extract_and_export_seconds": 0.029834199987817556,
+  "learned_matching_seconds": 0.12370749999536201,
+  "total_seconds": 0.15460819995496422
+ },
+ "timing_breakdown": {
+  "shared_input_verification_seconds": 0.005388299992773682,
+  "legend_crop_seconds": 0.0031802000012248755,
+  "network_seconds": 0.03141759999562055,
+  "head_postprocess_and_export_seconds": 0.12396860000444576,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.029834199987817556,
+  "learned_matching_seconds": 0.12370749999536201,
+  "total_seconds": 0.3131745999562554,
+  "method_total_excluding_shared_verification_seconds": 0.3131745999562554,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "raw_heads_result_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/raw_heads/chartparser/er__pozelimab_1_2_2__p01__v7/result.json",
+ "raw_points": [
+  {
+   "point_id": "CP0007",
+   "x": 536.744140625,
+   "y": 248.0703125,
+   "model_x": 473,
+   "model_y": 226,
+   "detection_score": 0.9981034994125366,
+   "x_px": 536.744140625,
+   "y_px": 248.0703125
+  },
+  {
+   "point_id": "CP0008",
+   "x": 536.744140625,
+   "y": 259.046875,
+   "model_x": 473,
+   "model_y": 236,
+   "detection_score": 0.9116483330726624,
+   "x_px": 536.744140625,
+   "y_px": 259.046875
+  },
+  {
+   "point_id": "CP0009",
+   "x": 489.083984375,
+   "y": 267.828125,
+   "model_x": 431,
+   "model_y": 244,
+   "detection_score": 0.973538339138031,
+   "x_px": 489.083984375,
+   "y_px": 267.828125
+  },
+  {
+   "point_id": "CP0010",
+   "x": 166.810546875,
+   "y": 272.21875,
+   "model_x": 147,
+   "model_y": 248,
+   "detection_score": 0.8310043215751648,
+   "x_px": 166.810546875,
+   "y_px": 272.21875
+  },
+  {
+   "point_id": "CP0011",
+   "x": 212.201171875,
+   "y": 278.8046875,
+   "model_x": 187,
+   "model_y": 254,
+   "detection_score": 0.9932780861854553,
+   "x_px": 212.201171875,
+   "y_px": 278.8046875
+  },
+  {
+   "point_id": "CP0012",
+   "x": 305.251953125,
+   "y": 284.29296875,
+   "model_x": 269,
+   "model_y": 259,
+   "detection_score": 0.9941260814666748,
+   "x_px": 305.251953125,
+   "y_px": 284.29296875
+  },
+  {
+   "point_id": "CP0013",
+   "x": 444.828125,
+   "y": 284.29296875,
+   "model_x": 392,
+   "model_y": 259,
+   "detection_score": 0.9861025810241699,
+   "x_px": 444.828125,
+   "y_px": 284.29296875
+  },
+  {
+   "point_id": "CP0014",
+   "x": 258.7265625,
+   "y": 286.48828125,
+   "model_x": 228,
+   "model_y": 261,
+   "detection_score": 0.9965619444847107,
+   "x_px": 258.7265625,
+   "y_px": 286.48828125
+  },
+  {
+   "point_id": "CP0015",
+   "x": 342.69921875,
+   "y": 285.390625,
+   "model_x": 302,
+   "model_y": 260,
+   "detection_score": 0.3940616548061371,
+   "x_px": 342.69921875,
+   "y_px": 285.390625
+  },
+  {
+   "point_id": "CP0016",
+   "x": 351.77734375,
+   "y": 285.390625,
+   "model_x": 310,
+   "model_y": 260,
+   "detection_score": 0.35948172211647034,
+   "x_px": 351.77734375,
+   "y_px": 285.390625
+  },
+  {
+   "point_id": "CP0017",
+   "x": 399.4375,
+   "y": 285.390625,
+   "model_x": 352,
+   "model_y": 260,
+   "detection_score": 0.9477307796478271,
+   "x_px": 399.4375,
+   "y_px": 285.390625
+  },
+  {
+   "point_id": "CP0018",
+   "x": 166.810546875,
+   "y": 297.46484375,
+   "model_x": 147,
+   "model_y": 271,
+   "detection_score": 0.7719075679779053,
+   "x_px": 166.810546875,
+   "y_px": 297.46484375
+  },
+  {
+   "point_id": "CP0019",
+   "x": 212.201171875,
+   "y": 295.26953125,
+   "model_x": 187,
+   "model_y": 269,
+   "detection_score": 0.8529649972915649,
+   "x_px": 212.201171875,
+   "y_px": 295.26953125
+  },
+  {
+   "point_id": "CP0020",
+   "x": 305.251953125,
+   "y": 295.26953125,
+   "model_x": 269,
+   "model_y": 269,
+   "detection_score": 0.9910558462142944,
+   "x_px": 305.251953125,
+   "y_px": 295.26953125
+  },
+  {
+   "point_id": "CP0021",
+   "x": 212.201171875,
+   "y": 302.953125,
+   "model_x": 187,
+   "model_y": 276,
+   "detection_score": 0.8828475475311279,
+   "x_px": 212.201171875,
+   "y_px": 302.953125
+  },
+  {
+   "point_id": "CP0022",
+   "x": 352.912109375,
+   "y": 310.63671875,
+   "model_x": 311,
+   "model_y": 283,
+   "detection_score": 0.9584354758262634,
+   "x_px": 352.912109375,
+   "y_px": 310.63671875
+  },
+  {
+   "point_id": "CP0023",
+   "x": 397.16796875,
+   "y": 334.78515625,
+   "model_x": 350,
+   "model_y": 305,
+   "detection_score": 0.9879468083381653,
+   "x_px": 397.16796875,
+   "y_px": 334.78515625
+  },
+  {
+   "point_id": "CP0024",
+   "x": 258.7265625,
+   "y": 353.4453125,
+   "model_x": 228,
+   "model_y": 322,
+   "detection_score": 0.9972236156463623,
+   "x_px": 258.7265625,
+   "y_px": 353.4453125
+  },
+  {
+   "point_id": "CP0025",
+   "x": 444.828125,
+   "y": 360.03125,
+   "model_x": 392,
+   "model_y": 328,
+   "detection_score": 0.9432200789451599,
+   "x_px": 444.828125,
+   "y_px": 360.03125
+  },
+  {
+   "point_id": "CP0026",
+   "x": 489.083984375,
+   "y": 367.71484375,
+   "model_x": 431,
+   "model_y": 335,
+   "detection_score": 0.6124587059020996,
+   "x_px": 489.083984375,
+   "y_px": 367.71484375
+  },
+  {
+   "point_id": "CP0027",
+   "x": 489.083984375,
+   "y": 383.08203125,
+   "model_x": 431,
+   "model_y": 349,
+   "detection_score": 0.9789093732833862,
+   "x_px": 489.083984375,
+   "y_px": 383.08203125
+  },
+  {
+   "point_id": "CP0028",
+   "x": 490.21875,
+   "y": 396.25390625,
+   "model_x": 432,
+   "model_y": 361,
+   "detection_score": 0.7708553075790405,
+   "x_px": 490.21875,
+   "y_px": 396.25390625
+  },
+  {
+   "point_id": "CP0029",
+   "x": 536.744140625,
+   "y": 396.25390625,
+   "model_x": 473,
+   "model_y": 361,
+   "detection_score": 0.9971820116043091,
+   "x_px": 536.744140625,
+   "y_px": 396.25390625
+  },
+  {
+   "point_id": "CP0030",
+   "x": 304.1171875,
+   "y": 451.13671875,
+   "model_x": 268,
+   "model_y": 411,
+   "detection_score": 0.9807165265083313,
+   "x_px": 304.1171875,
+   "y_px": 451.13671875
+  },
+  {
+   "point_id": "CP0031",
+   "x": 352.912109375,
+   "y": 484.06640625,
+   "model_x": 311,
+   "model_y": 441,
+   "detection_score": 0.9047821164131165,
+   "x_px": 352.912109375,
+   "y_px": 484.06640625
+  },
+  {
+   "point_id": "CP0032",
+   "x": 397.16796875,
+   "y": 486.26171875,
+   "model_x": 350,
+   "model_y": 443,
+   "detection_score": 0.9894352555274963,
+   "x_px": 397.16796875,
+   "y_px": 486.26171875
+  },
+  {
+   "point_id": "CP0033",
+   "x": 533.33984375,
+   "y": 484.06640625,
+   "model_x": 470,
+   "model_y": 441,
+   "detection_score": 0.9150576591491699,
+   "x_px": 533.33984375,
+   "y_px": 484.06640625
+  },
+  {
+   "point_id": "CP0034",
+   "x": 445.962890625,
+   "y": 487.359375,
+   "model_x": 393,
+   "model_y": 444,
+   "detection_score": 0.8951514363288879,
+   "x_px": 445.962890625,
+   "y_px": 487.359375
+  }
+ ],
+ "corrected_points": [
+  {
+   "point_id": "CP0007",
+   "x": 536.744140625,
+   "y": 249.16796875,
+   "model_x": 473,
+   "model_y": 227,
+   "raw_x": 536.744140625,
+   "raw_y": 248.0703125,
+   "detection_score": 0.9981034994125366,
+   "component_id": 12,
+   "x_px": 536.744140625,
+   "y_px": 249.16796875
+  },
+  {
+   "point_id": "CP0008",
+   "x": 536.744140625,
+   "y": 249.16796875,
+   "model_x": 473,
+   "model_y": 227,
+   "raw_x": 536.744140625,
+   "raw_y": 259.046875,
+   "detection_score": 0.9116483330726624,
+   "component_id": 12,
+   "x_px": 536.744140625,
+   "y_px": 249.16796875
+  },
+  {
+   "point_id": "CP0009",
+   "x": 489.083984375,
+   "y": 267.828125,
+   "model_x": 431,
+   "model_y": 244,
+   "raw_x": 489.083984375,
+   "raw_y": 267.828125,
+   "detection_score": 0.973538339138031,
+   "component_id": 12,
+   "x_px": 489.083984375,
+   "y_px": 267.828125
+  },
+  {
+   "point_id": "CP0010",
+   "x": 165.67578125,
+   "y": 273.31640625,
+   "model_x": 146,
+   "model_y": 249,
+   "raw_x": 166.810546875,
+   "raw_y": 272.21875,
+   "detection_score": 0.8310043215751648,
+   "component_id": 12,
+   "x_px": 165.67578125,
+   "y_px": 273.31640625
+  },
+  {
+   "point_id": "CP0011",
+   "x": 212.201171875,
+   "y": 279.90234375,
+   "model_x": 187,
+   "model_y": 255,
+   "raw_x": 212.201171875,
+   "raw_y": 278.8046875,
+   "detection_score": 0.9932780861854553,
+   "component_id": 12,
+   "x_px": 212.201171875,
+   "y_px": 279.90234375
+  },
+  {
+   "point_id": "CP0012",
+   "x": 305.251953125,
+   "y": 284.29296875,
+   "model_x": 269,
+   "model_y": 259,
+   "raw_x": 305.251953125,
+   "raw_y": 284.29296875,
+   "detection_score": 0.9941260814666748,
+   "component_id": 12,
+   "x_px": 305.251953125,
+   "y_px": 284.29296875
+  },
+  {
+   "point_id": "CP0013",
+   "x": 444.828125,
+   "y": 283.1953125,
+   "model_x": 392,
+   "model_y": 258,
+   "raw_x": 444.828125,
+   "raw_y": 284.29296875,
+   "detection_score": 0.9861025810241699,
+   "component_id": 12,
+   "x_px": 444.828125,
+   "y_px": 283.1953125
+  },
+  {
+   "point_id": "CP0014",
+   "x": 258.7265625,
+   "y": 285.390625,
+   "model_x": 228,
+   "model_y": 260,
+   "raw_x": 258.7265625,
+   "raw_y": 286.48828125,
+   "detection_score": 0.9965619444847107,
+   "component_id": 12,
+   "x_px": 258.7265625,
+   "y_px": 285.390625
+  },
+  {
+   "point_id": "CP0015",
+   "x": 342.69921875,
+   "y": 284.29296875,
+   "model_x": 302,
+   "model_y": 259,
+   "raw_x": 342.69921875,
+   "raw_y": 285.390625,
+   "detection_score": 0.3940616548061371,
+   "component_id": 12,
+   "x_px": 342.69921875,
+   "y_px": 284.29296875
+  },
+  {
+   "point_id": "CP0016",
+   "x": 351.77734375,
+   "y": 285.390625,
+   "model_x": 310,
+   "model_y": 260,
+   "raw_x": 351.77734375,
+   "raw_y": 285.390625,
+   "detection_score": 0.35948172211647034,
+   "component_id": 12,
+   "x_px": 351.77734375,
+   "y_px": 285.390625
+  },
+  {
+   "point_id": "CP0017",
+   "x": 399.4375,
+   "y": 285.390625,
+   "model_x": 352,
+   "model_y": 260,
+   "raw_x": 399.4375,
+   "raw_y": 285.390625,
+   "detection_score": 0.9477307796478271,
+   "component_id": 12,
+   "x_px": 399.4375,
+   "y_px": 285.390625
+  },
+  {
+   "point_id": "CP0018",
+   "x": 167.9453125,
+   "y": 295.26953125,
+   "model_x": 148,
+   "model_y": 269,
+   "raw_x": 166.810546875,
+   "raw_y": 297.46484375,
+   "detection_score": 0.7719075679779053,
+   "component_id": 13,
+   "x_px": 167.9453125,
+   "y_px": 295.26953125
+  },
+  {
+   "point_id": "CP0019",
+   "x": 212.201171875,
+   "y": 298.5625,
+   "model_x": 187,
+   "model_y": 272,
+   "raw_x": 212.201171875,
+   "raw_y": 295.26953125,
+   "detection_score": 0.8529649972915649,
+   "component_id": 13,
+   "x_px": 212.201171875,
+   "y_px": 298.5625
+  },
+  {
+   "point_id": "CP0020",
+   "x": 305.251953125,
+   "y": 294.171875,
+   "model_x": 269,
+   "model_y": 268,
+   "raw_x": 305.251953125,
+   "raw_y": 295.26953125,
+   "detection_score": 0.9910558462142944,
+   "component_id": 12,
+   "x_px": 305.251953125,
+   "y_px": 294.171875
+  },
+  {
+   "point_id": "CP0021",
+   "x": 213.3359375,
+   "y": 299.66015625,
+   "model_x": 188,
+   "model_y": 273,
+   "raw_x": 212.201171875,
+   "raw_y": 302.953125,
+   "detection_score": 0.8828475475311279,
+   "component_id": 13,
+   "x_px": 213.3359375,
+   "y_px": 299.66015625
+  },
+  {
+   "point_id": "CP0022",
+   "x": 352.912109375,
+   "y": 310.63671875,
+   "model_x": 311,
+   "model_y": 283,
+   "raw_x": 352.912109375,
+   "raw_y": 310.63671875,
+   "detection_score": 0.9584354758262634,
+   "component_id": 12,
+   "x_px": 352.912109375,
+   "y_px": 310.63671875
+  },
+  {
+   "point_id": "CP0023",
+   "x": 397.16796875,
+   "y": 334.78515625,
+   "model_x": 350,
+   "model_y": 305,
+   "raw_x": 397.16796875,
+   "raw_y": 334.78515625,
+   "detection_score": 0.9879468083381653,
+   "component_id": 12,
+   "x_px": 397.16796875,
+   "y_px": 334.78515625
+  },
+  {
+   "point_id": "CP0024",
+   "x": 257.591796875,
+   "y": 353.4453125,
+   "model_x": 227,
+   "model_y": 322,
+   "raw_x": 258.7265625,
+   "raw_y": 353.4453125,
+   "detection_score": 0.9972236156463623,
+   "component_id": 13,
+   "x_px": 257.591796875,
+   "y_px": 353.4453125
+  },
+  {
+   "point_id": "CP0025",
+   "x": 444.828125,
+   "y": 358.93359375,
+   "model_x": 392,
+   "model_y": 327,
+   "raw_x": 444.828125,
+   "raw_y": 360.03125,
+   "detection_score": 0.9432200789451599,
+   "component_id": 12,
+   "x_px": 444.828125,
+   "y_px": 358.93359375
+  },
+  {
+   "point_id": "CP0026",
+   "x": 487.94921875,
+   "y": 380.88671875,
+   "model_x": 430,
+   "model_y": 347,
+   "raw_x": 489.083984375,
+   "raw_y": 367.71484375,
+   "detection_score": 0.6124587059020996,
+   "component_id": 12,
+   "x_px": 487.94921875,
+   "y_px": 380.88671875
+  },
+  {
+   "point_id": "CP0027",
+   "x": 489.083984375,
+   "y": 381.984375,
+   "model_x": 431,
+   "model_y": 348,
+   "raw_x": 489.083984375,
+   "raw_y": 383.08203125,
+   "detection_score": 0.9789093732833862,
+   "component_id": 12,
+   "x_px": 489.083984375,
+   "y_px": 381.984375
+  },
+  {
+   "point_id": "CP0028",
+   "x": 490.21875,
+   "y": 381.984375,
+   "model_x": 432,
+   "model_y": 348,
+   "raw_x": 490.21875,
+   "raw_y": 396.25390625,
+   "detection_score": 0.7708553075790405,
+   "component_id": 12,
+   "x_px": 490.21875,
+   "y_px": 381.984375
+  },
+  {
+   "point_id": "CP0029",
+   "x": 536.744140625,
+   "y": 395.15625,
+   "model_x": 473,
+   "model_y": 360,
+   "raw_x": 536.744140625,
+   "raw_y": 396.25390625,
+   "detection_score": 0.9971820116043091,
+   "component_id": 12,
+   "x_px": 536.744140625,
+   "y_px": 395.15625
+  },
+  {
+   "point_id": "CP0030",
+   "x": 304.1171875,
+   "y": 451.13671875,
+   "model_x": 268,
+   "model_y": 411,
+   "raw_x": 304.1171875,
+   "raw_y": 451.13671875,
+   "detection_score": 0.9807165265083313,
+   "component_id": 13,
+   "x_px": 304.1171875,
+   "y_px": 451.13671875
+  },
+  {
+   "point_id": "CP0032",
+   "x": 397.16796875,
+   "y": 486.26171875,
+   "model_x": 350,
+   "model_y": 443,
+   "raw_x": 397.16796875,
+   "raw_y": 486.26171875,
+   "detection_score": 0.9894352555274963,
+   "component_id": 23,
+   "x_px": 397.16796875,
+   "y_px": 486.26171875
+  },
+  {
+   "point_id": "CP0033",
+   "x": 533.33984375,
+   "y": 482.96875,
+   "model_x": 470,
+   "model_y": 440,
+   "raw_x": 533.33984375,
+   "raw_y": 484.06640625,
+   "detection_score": 0.9150576591491699,
+   "component_id": 21,
+   "x_px": 533.33984375,
+   "y_px": 482.96875
+  },
+  {
+   "point_id": "CP0034",
+   "x": 445.962890625,
+   "y": 486.26171875,
+   "model_x": 393,
+   "model_y": 443,
+   "raw_x": 445.962890625,
+   "raw_y": 487.359375,
+   "detection_score": 0.8951514363288879,
+   "component_id": 23,
+   "x_px": 445.962890625,
+   "y_px": 486.26171875
+  }
+ ],
+ "rejected_points": [
+  {
+   "point_id": "CP0031",
+   "x": 352.912109375,
+   "y": 484.06640625,
+   "model_x": 311,
+   "model_y": 441,
+   "detection_score": 0.9047821164131165,
+   "x_px": 352.912109375,
+   "y_px": 484.06640625,
+   "reason": "no_centerline_in_band_radius"
+  }
+ ],
+ "excluded_points": [
+  {
+   "point_id": "CP0001",
+   "x": 29.50390625,
+   "y": 100.984375,
+   "model_x": 26,
+   "model_y": 92,
+   "detection_score": 0.3889009952545166,
+   "x_px": 29.50390625,
+   "y_px": 100.984375
+  },
+  {
+   "point_id": "CP0002",
+   "x": 36.3125,
+   "y": 100.984375,
+   "model_x": 32,
+   "model_y": 92,
+   "detection_score": 0.46213942766189575,
+   "x_px": 36.3125,
+   "y_px": 100.984375
+  },
+  {
+   "point_id": "CP0003",
+   "x": 349.5078125,
+   "y": 107.5703125,
+   "model_x": 308,
+   "model_y": 98,
+   "detection_score": 0.7023279070854187,
+   "x_px": 349.5078125,
+   "y_px": 107.5703125
+  },
+  {
+   "point_id": "CP0004",
+   "x": 15.88671875,
+   "y": 111.9609375,
+   "model_x": 14,
+   "model_y": 102,
+   "detection_score": 0.6494237780570984,
+   "x_px": 15.88671875,
+   "y_px": 111.9609375
+  },
+  {
+   "point_id": "CP0005",
+   "x": 40.8515625,
+   "y": 111.9609375,
+   "model_x": 36,
+   "model_y": 102,
+   "detection_score": 0.38047805428504944,
+   "x_px": 40.8515625,
+   "y_px": 111.9609375
+  },
+  {
+   "point_id": "CP0006",
+   "x": 306.38671875,
+   "y": 150.37890625,
+   "model_x": 270,
+   "model_y": 137,
+   "detection_score": 0.40323638916015625,
+   "x_px": 306.38671875,
+   "y_px": 150.37890625
+  }
+ ],
+ "centerline_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/chartparser_geometry/centerline_512.png",
+ "public_process_kps_reference": [
+  {
+   "point_id": "CP0007",
+   "status": "retained",
+   "x": 536.744140625,
+   "y": 248.0703125,
+   "upright_x": 536.744140625,
+   "upright_y": 248.0703125,
+   "original_x": 536.744140625,
+   "original_y": 248.0703125,
+   "model_x": 473.0,
+   "model_y": 226.0
+  },
+  {
+   "point_id": "CP0008",
+   "status": "retained",
+   "x": 536.744140625,
+   "y": 253.55859375,
+   "upright_x": 536.744140625,
+   "upright_y": 253.55859375,
+   "original_x": 536.744140625,
+   "original_y": 253.55859375,
+   "model_x": 473.0,
+   "model_y": 231.0
+  },
+  {
+   "point_id": "CP0009",
+   "status": "retained",
+   "x": 489.083984375,
+   "y": 266.73046875,
+   "upright_x": 489.083984375,
+   "upright_y": 266.73046875,
+   "original_x": 489.083984375,
+   "original_y": 266.73046875,
+   "model_x": 431.0,
+   "model_y": 243.0
+  },
+  {
+   "point_id": "CP0010",
+   "status": "retained",
+   "x": 166.810546875,
+   "y": 273.31640625,
+   "upright_x": 166.810546875,
+   "upright_y": 273.31640625,
+   "original_x": 166.810546875,
+   "original_y": 273.31640625,
+   "model_x": 147.0,
+   "model_y": 249.0
+  },
+  {
+   "point_id": "CP0011",
+   "status": "retained",
+   "x": 212.201171875,
+   "y": 278.8046875,
+   "upright_x": 212.201171875,
+   "upright_y": 278.8046875,
+   "original_x": 212.201171875,
+   "original_y": 278.8046875,
+   "model_x": 187.0,
+   "model_y": 254.0
+  },
+  {
+   "point_id": "CP0012",
+   "status": "retained",
+   "x": 305.251953125,
+   "y": 284.29296875,
+   "upright_x": 305.251953125,
+   "upright_y": 284.29296875,
+   "original_x": 305.251953125,
+   "original_y": 284.29296875,
+   "model_x": 269.0,
+   "model_y": 259.0
+  },
+  {
+   "point_id": "CP0013",
+   "status": "retained",
+   "x": 444.828125,
+   "y": 283.1953125,
+   "upright_x": 444.828125,
+   "upright_y": 283.1953125,
+   "original_x": 444.828125,
+   "original_y": 283.1953125,
+   "model_x": 392.0,
+   "model_y": 258.0
+  },
+  {
+   "point_id": "CP0014",
+   "status": "retained",
+   "x": 258.7265625,
+   "y": 285.390625,
+   "upright_x": 258.7265625,
+   "upright_y": 285.390625,
+   "original_x": 258.7265625,
+   "original_y": 285.390625,
+   "model_x": 228.0,
+   "model_y": 260.0
+  },
+  {
+   "point_id": "CP0015",
+   "status": "retained",
+   "x": 342.69921875,
+   "y": 284.29296875,
+   "upright_x": 342.69921875,
+   "upright_y": 284.29296875,
+   "original_x": 342.69921875,
+   "original_y": 284.29296875,
+   "model_x": 302.0,
+   "model_y": 259.0
+  },
+  {
+   "point_id": "CP0016",
+   "status": "retained",
+   "x": 351.77734375,
+   "y": 284.29296875,
+   "upright_x": 351.77734375,
+   "upright_y": 284.29296875,
+   "original_x": 351.77734375,
+   "original_y": 284.29296875,
+   "model_x": 310.0,
+   "model_y": 259.0
+  },
+  {
+   "point_id": "CP0017",
+   "status": "retained",
+   "x": 399.4375,
+   "y": 285.390625,
+   "upright_x": 399.4375,
+   "upright_y": 285.390625,
+   "original_x": 399.4375,
+   "original_y": 285.390625,
+   "model_x": 352.0,
+   "model_y": 260.0
+  },
+  {
+   "point_id": "CP0018",
+   "status": "retained",
+   "x": 166.810546875,
+   "y": 294.171875,
+   "upright_x": 166.810546875,
+   "upright_y": 294.171875,
+   "original_x": 166.810546875,
+   "original_y": 294.171875,
+   "model_x": 147.0,
+   "model_y": 268.0
+  },
+  {
+   "point_id": "CP0019",
+   "status": "retained",
+   "x": 212.201171875,
+   "y": 287.5859375,
+   "upright_x": 212.201171875,
+   "upright_y": 287.5859375,
+   "original_x": 212.201171875,
+   "original_y": 287.5859375,
+   "model_x": 187.0,
+   "model_y": 262.0
+  },
+  {
+   "point_id": "CP0020",
+   "status": "retained",
+   "x": 305.251953125,
+   "y": 289.78125,
+   "upright_x": 305.251953125,
+   "upright_y": 289.78125,
+   "original_x": 305.251953125,
+   "original_y": 289.78125,
+   "model_x": 269.0,
+   "model_y": 264.0
+  },
+  {
+   "point_id": "CP0021",
+   "status": "retained",
+   "x": 212.201171875,
+   "y": 304.05078125,
+   "upright_x": 212.201171875,
+   "upright_y": 304.05078125,
+   "original_x": 212.201171875,
+   "original_y": 304.05078125,
+   "model_x": 187.0,
+   "model_y": 277.0
+  },
+  {
+   "point_id": "CP0022",
+   "status": "retained",
+   "x": 352.912109375,
+   "y": 310.63671875,
+   "upright_x": 352.912109375,
+   "upright_y": 310.63671875,
+   "original_x": 352.912109375,
+   "original_y": 310.63671875,
+   "model_x": 311.0,
+   "model_y": 283.0
+  },
+  {
+   "point_id": "CP0023",
+   "status": "retained",
+   "x": 397.16796875,
+   "y": 334.78515625,
+   "upright_x": 397.16796875,
+   "upright_y": 334.78515625,
+   "original_x": 397.16796875,
+   "original_y": 334.78515625,
+   "model_x": 350.0,
+   "model_y": 305.0
+  },
+  {
+   "point_id": "CP0024",
+   "status": "retained",
+   "x": 258.7265625,
+   "y": 353.4453125,
+   "upright_x": 258.7265625,
+   "upright_y": 353.4453125,
+   "original_x": 258.7265625,
+   "original_y": 353.4453125,
+   "model_x": 228.0,
+   "model_y": 322.0
+  },
+  {
+   "point_id": "CP0025",
+   "status": "retained",
+   "x": 444.828125,
+   "y": 358.93359375,
+   "upright_x": 444.828125,
+   "upright_y": 358.93359375,
+   "original_x": 444.828125,
+   "original_y": 358.93359375,
+   "model_x": 392.0,
+   "model_y": 327.0
+  },
+  {
+   "point_id": "CP0026",
+   "status": "retained",
+   "x": 489.083984375,
+   "y": 374.30078125,
+   "upright_x": 489.083984375,
+   "upright_y": 374.30078125,
+   "original_x": 489.083984375,
+   "original_y": 374.30078125,
+   "model_x": 431.0,
+   "model_y": 341.0
+  },
+  {
+   "point_id": "CP0027",
+   "status": "retained",
+   "x": 489.083984375,
+   "y": 381.984375,
+   "upright_x": 489.083984375,
+   "upright_y": 381.984375,
+   "original_x": 489.083984375,
+   "original_y": 381.984375,
+   "model_x": 431.0,
+   "model_y": 348.0
+  },
+  {
+   "point_id": "CP0028",
+   "status": "retained",
+   "x": 490.21875,
+   "y": 388.5703125,
+   "upright_x": 490.21875,
+   "upright_y": 388.5703125,
+   "original_x": 490.21875,
+   "original_y": 388.5703125,
+   "model_x": 432.0,
+   "model_y": 354.0
+  },
+  {
+   "point_id": "CP0029",
+   "status": "retained",
+   "x": 536.744140625,
+   "y": 396.25390625,
+   "upright_x": 536.744140625,
+   "upright_y": 396.25390625,
+   "original_x": 536.744140625,
+   "original_y": 396.25390625,
+   "model_x": 473.0,
+   "model_y": 361.0
+  },
+  {
+   "point_id": "CP0030",
+   "status": "retained",
+   "x": 304.1171875,
+   "y": 450.0390625,
+   "upright_x": 304.1171875,
+   "upright_y": 450.0390625,
+   "original_x": 304.1171875,
+   "original_y": 450.0390625,
+   "model_x": 268.0,
+   "model_y": 410.0
+  },
+  {
+   "point_id": "CP0031",
+   "status": "retained",
+   "x": 352.912109375,
+   "y": 482.96875,
+   "upright_x": 352.912109375,
+   "upright_y": 482.96875,
+   "original_x": 352.912109375,
+   "original_y": 482.96875,
+   "model_x": 311.0,
+   "model_y": 440.0
+  },
+  {
+   "point_id": "CP0032",
+   "status": "retained",
+   "x": 397.16796875,
+   "y": 486.26171875,
+   "upright_x": 397.16796875,
+   "upright_y": 486.26171875,
+   "original_x": 397.16796875,
+   "original_y": 486.26171875,
+   "model_x": 350.0,
+   "model_y": 443.0
+  },
+  {
+   "point_id": "CP0033",
+   "status": "retained",
+   "x": 533.33984375,
+   "y": 482.96875,
+   "upright_x": 533.33984375,
+   "upright_y": 482.96875,
+   "original_x": 533.33984375,
+   "original_y": 482.96875,
+   "model_x": 470.0,
+   "model_y": 440.0
+  },
+  {
+   "point_id": "CP0034",
+   "status": "retained",
+   "x": 445.962890625,
+   "y": 487.359375,
+   "upright_x": 445.962890625,
+   "upright_y": 487.359375,
+   "original_x": 445.962890625,
+   "original_y": 487.359375,
+   "model_x": 393.0,
+   "model_y": 444.0
+  }
+ ],
+ "implementation_choices": {
+  "curve_probability": "Cached segmentation[0,1], already sigmoid in ChartParserModel.forward; no second activation.",
+  "probability_inconsistency": "Paper section 3.2.3 says two-channel Softmax, section 3.2.4 discusses Sigmoid, and the public forward applies independent Sigmoid. This run thresholds the released cached Sigmoid output directly, not a claim of identical paper Softmax probabilities.",
+  "threshold": 0.6,
+  "morphology": "One 3x3 all-ones binary closing; constant-zero border.",
+  "connectivity": 8,
+  "component_policy": "Retain every connected component; no minimum-area deletion.",
+  "thinning": "skimage.morphology.skeletonize(method=zhang) independently within each 8-connected component.",
+  "correction": "Nearest centreline pixel in x +/- 1 columns and abs(delta_y) < 15 model pixels; minimum Euclidean distance, ties smaller y then x. Snap x and y to that centreline pixel. Reject if absent.",
+  "correction_parameters_provenance": "The paper does not specify kernel/thinner/selection radius. Column band and vertical radius are borrowed from public process_kps; nearest selection and exact snapping are explicit experimental choices.",
+  "public_reference": "Separate result using original argmax mask, public x +/- 1, y-run gap <= 2, first ascending-y mean within 15, average with original y. Safety bounds added; not used for grouping.",
+  "pivot_patch_size_width_height": [
+   40,
+   20
+  ],
+  "pivot_patch_coordinate_system": "Native original-resolution upright input crop, not the 512x512 model input.",
+  "legend_images": "Unmodified original RGB swatch box crops, connector pixels retained. No reconstructed swatch masks.",
+  "grouping": "Official LineEX learned Siamese + MLP similarity, highest score over supplied legend crops. No histogram override or confidence rejection.",
+  "shape_classification": "Not performed. Legend identity is not a semantic circle/square/triangle prediction.",
+  "deduplication": "None. Distinct raw pivot hypotheses can snap to the same pixel and remain separate records.",
+  "no_legend_policy": "Abstain from grouping even for a nominal single-series panel; no fabricated legend."
+ },
+ "native_legend_stage": "unavailable; supplied benchmark swatch crops used, never class-3 remapping",
+ "limitations": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ],
+ "shared_legend_status": "available",
+ "shared_legend_reason": null,
+ "shared_legends_sha256": "8aa4ef21c1b970a59b07a860bdc1de261b72741544e1a0539913c1fd852f31db",
+ "warnings": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ]
+}

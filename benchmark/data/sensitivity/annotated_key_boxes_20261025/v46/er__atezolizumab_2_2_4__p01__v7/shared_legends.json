@@ -1,0 +1,83 @@
+{
+ "panel_id": "er__atezolizumab_2_2_4__p01__v7",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    101,
+    48,
+    147,
+    60
+   ],
+   "native_body_bbox": [
+    119,
+    50,
+    130,
+    60
+   ],
+   "class_name": "filled_square",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "Atezolizumab",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__atezolizumab_2_2_4__p01__v7/shared_legend_crops/legend_01.png",
+   "image_size": [
+    46,
+    12
+   ],
+   "sha256": "1ad2046ec63b4b8359c81d64648a37683e5bf34be4ba5dfdc0b87ebd993238e5",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__atezolizumab_2_2_4__p01__v7/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    101,
+    48,
+    147,
+    60
+   ],
+   "bbox_original": [
+    101,
+    48,
+    147,
+    60
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.7971014492753623,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Atezolizumab",
+   "bbox": [
+    102,
+    49,
+    146,
+    59
+   ]
+  }
+ ],
+ "input_sha256": "2a2def0f7c4dd9faea386877cc40954f606d72bcbce06c41306e50b4476391a2",
+ "source_sha256": "2a2def0f7c4dd9faea386877cc40954f606d72bcbce06c41306e50b4476391a2",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.0056588000152260065
+}

@@ -1,0 +1,245 @@
+{
+ "panel_id": "pk__denosumab_-_SB162__p01__v9",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    163,
+    33,
+    191,
+    48
+   ],
+   "native_body_bbox": [
+    171,
+    35,
+    184,
+    46
+   ],
+   "class_name": "filled_circle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "3 mg/kg (n=6)",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__denosumab_-_SB162__p01__v9/shared_legend_crops/legend_01.png",
+   "image_size": [
+    28,
+    15
+   ],
+   "sha256": "f53ed78c60c33ac01ea1d558ece966335a467d2dea58473181d99a45e603e866",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__denosumab_-_SB162__p01__v9/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    163,
+    33,
+    191,
+    48
+   ],
+   "bbox_original": [
+    163,
+    33,
+    191,
+    48
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    163,
+    52,
+    191,
+    65
+   ],
+   "native_body_bbox": [
+    171,
+    53,
+    183,
+    64
+   ],
+   "class_name": "unknown_marker",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s02",
+   "label": "10 mg/kg (n=6)",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__denosumab_-_SB162__p01__v9/shared_legend_crops/legend_02.png",
+   "image_size": [
+    28,
+    13
+   ],
+   "sha256": "19a93144736569b21b0015e68c72cf290a0aa57024bafa4a8de4db8ef8793c87",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__denosumab_-_SB162__p01__v9/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    163,
+    52,
+    191,
+    65
+   ],
+   "bbox_original": [
+    163,
+    52,
+    191,
+    65
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S03",
+   "bbox": [
+    163,
+    69,
+    191,
+    82
+   ],
+   "native_body_bbox": [
+    172,
+    70,
+    183,
+    81
+   ],
+   "class_name": "filled_triangle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s03",
+   "label": "30 mg/kg (n=6)",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__denosumab_-_SB162__p01__v9/shared_legend_crops/legend_03.png",
+   "image_size": [
+    28,
+    13
+   ],
+   "sha256": "f4f17159300c389832399ac0f64032dc901fa72609b278196d1975b193b0270e",
+   "source_native_legend_id": "S03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__denosumab_-_SB162__p01__v9/shared_legend_crops/legend_03.png",
+   "bbox_crop": [
+    163,
+    69,
+    191,
+    82
+   ],
+   "bbox_original": [
+    163,
+    69,
+    191,
+    82
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01",
+  "S02": "s02",
+  "S03": "s03"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.5957446808510638,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 0.6161369193154034,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s03",
+    "iou": 0.6161369193154034,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "3 mg/kg (n=6)",
+   "bbox": [
+    160,
+    35,
+    193,
+    45
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "10 mg/kg (n=6)",
+   "bbox": [
+    160,
+    53,
+    193,
+    62
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "30 mg/kg (n=6)",
+   "bbox": [
+    160,
+    71,
+    193,
+    80
+   ]
+  }
+ ],
+ "input_sha256": "91de8aade66c9f7be3c88d065a68e7859e96c0ee3a24b8c6dc95e86f41d7f4e5",
+ "source_sha256": "91de8aade66c9f7be3c88d065a68e7859e96c0ee3a24b8c6dc95e86f41d7f4e5",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.05431380000663921
+}

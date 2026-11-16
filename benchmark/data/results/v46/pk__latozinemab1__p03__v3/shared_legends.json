@@ -1,0 +1,263 @@
+{
+ "panel_id": "pk__latozinemab1__p03__v3",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "color02",
+   "native_swatch_id": "S01",
+   "bbox": [
+    652,
+    11,
+    692,
+    28
+   ],
+   "native_body_bbox": [
+    667,
+    14,
+    678,
+    25
+   ],
+   "class_name": "filled_rhombus",
+   "rgb": [
+    109,
+    99,
+    170
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s01",
+   "label": "15 mg/kg",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__latozinemab1__p03__v3/shared_legend_crops/legend_01.png",
+   "image_size": [
+    40,
+    17
+   ],
+   "sha256": "bfff5d4ffee3355f644efd8114c30c29de152e6f4b3655fb22ec94cefe7e6c3c",
+   "source_native_legend_id": "color02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__latozinemab1__p03__v3/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    652,
+    11,
+    692,
+    28
+   ],
+   "bbox_original": [
+    652,
+    11,
+    692,
+    28
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color03",
+   "native_swatch_id": "S02",
+   "bbox": [
+    652,
+    63,
+    691,
+    78
+   ],
+   "native_body_bbox": [
+    667,
+    66,
+    678,
+    75
+   ],
+   "class_name": "filled_inv_triangle",
+   "rgb": [
+    220,
+    146,
+    122
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s02",
+   "label": "30 mg/kg",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__latozinemab1__p03__v3/shared_legend_crops/legend_02.png",
+   "image_size": [
+    39,
+    15
+   ],
+   "sha256": "4ddf44c41cc20916f9e7ce4f4b9aca4db466a5e4f09724b0efc70d460ba57202",
+   "source_native_legend_id": "color03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__latozinemab1__p03__v3/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    652,
+    63,
+    691,
+    78
+   ],
+   "bbox_original": [
+    652,
+    63,
+    691,
+    78
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color04",
+   "native_swatch_id": "S03",
+   "bbox": [
+    652,
+    113,
+    692,
+    130
+   ],
+   "native_body_bbox": [
+    667,
+    117,
+    678,
+    126
+   ],
+   "class_name": "unknown_marker",
+   "rgb": [
+    176,
+    104,
+    172
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s03",
+   "label": "60 mg/kg",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__latozinemab1__p03__v3/shared_legend_crops/legend_03.png",
+   "image_size": [
+    40,
+    17
+   ],
+   "sha256": "216a4212b466429927f4187f25454b48cd26a572a0ea3ddd03cd14f56e9efed3",
+   "source_native_legend_id": "color04",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__latozinemab1__p03__v3/shared_legend_crops/legend_03.png",
+   "bbox_crop": [
+    652,
+    113,
+    692,
+    130
+   ],
+   "bbox_original": [
+    652,
+    113,
+    692,
+    130
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "color02": "s01",
+  "color03": "s02",
+  "color04": "s03"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "color02",
+    "series_id": "s01",
+    "iou": 0.5161764705882353,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s02",
+    "iou": 0.6446280991735537,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s03",
+    "iou": 0.5797101449275363,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "15 mg/kg",
+   "bbox": [
+    652,
+    14,
+    691,
+    23
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "30 mg/kg",
+   "bbox": [
+    651,
+    65,
+    692,
+    75
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "60 mg/kg",
+   "bbox": [
+    651,
+    116,
+    692,
+    126
+   ]
+  }
+ ],
+ "input_sha256": "155f56c19819510685efd335d62a523d755992e6af12bee27faeff9cdb01477a",
+ "source_sha256": "155f56c19819510685efd335d62a523d755992e6af12bee27faeff9cdb01477a",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.007329000014578924
+}

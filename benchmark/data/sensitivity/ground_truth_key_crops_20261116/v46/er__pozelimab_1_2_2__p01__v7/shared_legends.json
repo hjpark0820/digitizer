@@ -1,0 +1,154 @@
+{
+ "panel_id": "er__pozelimab_1_2_2__p01__v7",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "REGN3918",
+   "bbox": [
+    107,
+    10,
+    150,
+    22
+   ],
+   "bbox_crop": [
+    107,
+    10,
+    150,
+    22
+   ],
+   "bbox_original": [
+    107,
+    10,
+    150,
+    22
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_01.png",
+   "image_size": [
+    43,
+    12
+   ],
+   "sha256": "9535b50bbc23bd5f1124cbbddbbd4b3750291b2d167bcf4c92530bca123595e0",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "In-house eculizumab",
+   "bbox": [
+    106,
+    32,
+    150,
+    45
+   ],
+   "bbox_crop": [
+    106,
+    32,
+    150,
+    45
+   ],
+   "bbox_original": [
+    106,
+    32,
+    150,
+    45
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_02.png",
+   "image_size": [
+    44,
+    13
+   ],
+   "sha256": "2e95a2e65cd23822a679af7ec8d6de9efe77ab7a9a57d84ace7a96e0656777c4",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s03",
+   "series_id": "s03",
+   "source_native_legend_id": "s03",
+   "label": "IgG4PControl",
+   "bbox": [
+    107,
+    55,
+    149,
+    66
+   ],
+   "bbox_crop": [
+    107,
+    55,
+    149,
+    66
+   ],
+   "bbox_original": [
+    107,
+    55,
+    149,
+    66
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_03.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_03.png",
+   "image_size": [
+    42,
+    11
+   ],
+   "sha256": "fd9025ce12bc670e4090b79c6e686252a5bcea75e184b35a55adb5af8c62cd18",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s01": "s01",
+  "s02": "s02",
+  "s03": "s03"
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "REGN3918",
+   "bbox": [
+    107,
+    10,
+    150,
+    22
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "In-house eculizumab",
+   "bbox": [
+    106,
+    32,
+    150,
+    45
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "IgG4PControl",
+   "bbox": [
+    107,
+    55,
+    149,
+    66
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "fa928afbf6a1dacd4b0958428ff42e73bf08e186bb334f58962a771a5d7acc42",
+ "source_sha256": "fa928afbf6a1dacd4b0958428ff42e73bf08e186bb334f58962a771a5d7acc42",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}

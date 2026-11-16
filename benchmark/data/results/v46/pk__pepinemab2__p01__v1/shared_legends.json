@@ -1,0 +1,157 @@
+{
+ "panel_id": "pk__pepinemab2__p01__v1",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    593,
+    91,
+    643,
+    116
+   ],
+   "native_body_bbox": [
+    607,
+    92,
+    630,
+    115
+   ],
+   "class_name": "filled_circle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "Part A",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__pepinemab2__p01__v1/shared_legend_crops/legend_01.png",
+   "image_size": [
+    50,
+    25
+   ],
+   "sha256": "b1c1048300411d7b30703ef7069930e07cf00f524723c07562f2fd79f49818f6",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__pepinemab2__p01__v1/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    593,
+    91,
+    643,
+    116
+   ],
+   "bbox_original": [
+    593,
+    91,
+    643,
+    116
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    594,
+    119,
+    634,
+    150
+   ],
+   "native_body_bbox": [
+    604.3478811382178,
+    120.27610771158845,
+    631.6352930514635,
+    147.71674142728057
+   ],
+   "class_name": "filled_rhombus",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s02",
+   "label": "Part B",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__pepinemab2__p01__v1/shared_legend_crops/legend_02.png",
+   "image_size": [
+    40,
+    31
+   ],
+   "sha256": "112b5749881c821bd005f367c5034c6adf10d5379c443f82aef113baef4e4675",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__pepinemab2__p01__v1/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    594,
+    119,
+    634,
+    150
+   ],
+   "bbox_original": [
+    594,
+    119,
+    634,
+    150
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01",
+  "S02": "s02"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.6800518134715026,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 0.47619047619047616,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Part A",
+   "bbox": [
+    586,
+    93,
+    650,
+    114
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Part B",
+   "bbox": [
+    587,
+    124,
+    649,
+    144
+   ]
+  }
+ ],
+ "input_sha256": "80782a488bfc0202d376809fe55a420854bf004fd4acbf10b941b96b20e8338c",
+ "source_sha256": "80782a488bfc0202d376809fe55a420854bf004fd4acbf10b941b96b20e8338c",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.015440799994394183
+}

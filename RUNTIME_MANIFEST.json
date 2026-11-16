@@ -54,22 +54,6 @@
       ]
     },
     {
-      "path": "src/AI_OCR.md",
-      "bytes": 9823,
-      "sha256": "e2807c1a41999f2f1f47c0c961cb09bdd78fad9e0dfac9b2e55271aa85608cff",
-      "referenced_by": [
-        "agent workflow and axis-unit runtime"
-      ]
-    },
-    {
-      "path": "src/AI_WORKFLOW.md",
-      "bytes": 22236,
-      "sha256": "10ef46cf2b986bb6704d20da3efe6db270688a8a45fbf0b9661fd7c5137685f3",
-      "referenced_by": [
-        "agent workflow and axis-unit runtime"
-      ]
-    },
-    {
       "path": "src/agent_workflow.js",
       "bytes": 18235,
       "sha256": "2666ba39a8d828d0c21c02591e4d92e2bebdb5d933e72dec2e4158c149b0ee46",
@@ -84,6 +68,22 @@
       "referenced_by": [
         "existing distribution",
         "unified_server.py:1035"
+      ]
+    },
+    {
+      "path": "src/AI_OCR.md",
+      "bytes": 9823,
+      "sha256": "e2807c1a41999f2f1f47c0c961cb09bdd78fad9e0dfac9b2e55271aa85608cff",
+      "referenced_by": [
+        "agent workflow and axis-unit runtime"
+      ]
+    },
+    {
+      "path": "src/AI_WORKFLOW.md",
+      "bytes": 22236,
+      "sha256": "10ef46cf2b986bb6704d20da3efe6db270688a8a45fbf0b9661fd7c5137685f3",
+      "referenced_by": [
+        "agent workflow and axis-unit runtime"
       ]
     },
     {
@@ -314,8 +314,8 @@
     },
     {
       "path": "src/bw_detect_cli.py",
-      "bytes": 32377,
-      "sha256": "a3e4da237ea04fae1454e9a0af394694c6a2ee019670de55638ac63c7cd80998",
+      "bytes": 34392,
+      "sha256": "2b43d134d503495a7a92412a991dacc52702a0fcb494d03636202ec7d68825a9",
       "referenced_by": [
         "bw_detect_cli.py:192 dynamic filename",
         "existing distribution",
@@ -769,20 +769,6 @@
       ]
     },
     {
-      "path": "src/bw_pipeline.py",
-      "bytes": 59119,
-      "sha256": "0b9df61695960816d96dbf09c8ab79c17437bb8a8dffa68aaf74b94884cf6bb2",
-      "referenced_by": [
-        "bw_detect_cli.py:181",
-        "bw_detect_cli.py:192 dynamic filename",
-        "bw_detect_cli.py:204 dynamic filename",
-        "bw_detect_cli.py:298",
-        "bw_to_edit_data.py:35",
-        "existing distribution",
-        "unified_server.py:225"
-      ]
-    },
-    {
       "path": "src/bw_pipeline_v46.py",
       "bytes": 114582,
       "sha256": "b6666af050b498cb00b5ec5ed64882699d090fb51aa3bde96438f279c3a936ed",
@@ -800,6 +786,20 @@
         "color_marker_runtime_v46.py:96",
         "color_source_legend_v46.py:88",
         "existing distribution"
+      ]
+    },
+    {
+      "path": "src/bw_pipeline.py",
+      "bytes": 59119,
+      "sha256": "0b9df61695960816d96dbf09c8ab79c17437bb8a8dffa68aaf74b94884cf6bb2",
+      "referenced_by": [
+        "bw_detect_cli.py:181",
+        "bw_detect_cli.py:192 dynamic filename",
+        "bw_detect_cli.py:204 dynamic filename",
+        "bw_detect_cli.py:298",
+        "bw_to_edit_data.py:35",
+        "existing distribution",
+        "unified_server.py:225"
       ]
     },
     {
@@ -1272,8 +1272,8 @@
     },
     {
       "path": "src/color_legend_runtime_v46.py",
-      "bytes": 19876,
-      "sha256": "9c3ea1032dd91c0fb686b71bf0b4e2c242fb2bf6092c50b62d86200dd4588b1e",
+      "bytes": 21050,
+      "sha256": "c6218ba9919e3d667bbc9bb036ad190b67cd6e44d78c489fced05448a91f02ad",
       "referenced_by": [
         "color_marker_runtime_v46.py:18",
         "existing distribution",
@@ -1289,6 +1289,20 @@
       "referenced_by": [
         "color_series_correction_v46.py:18",
         "existing distribution"
+      ]
+    },
+    {
+      "path": "src/color_marker_evidence_v2.py",
+      "bytes": 21547,
+      "sha256": "5eb17dc50c0001acbb571c258ecb3722c8ac7bf6f76b1dfeaf5ad910ac8abb4b",
+      "referenced_by": [
+        "color_hollow_geometry_scale_v46.py:30",
+        "color_legend_composition_v46.py:17",
+        "color_marker_hybrid_v2.py:18",
+        "color_marker_runtime_v46.py:20",
+        "color_series_structure_v46.py:13",
+        "existing distribution",
+        "legend_optional_v46/single.py:16"
       ]
     },
     {
@@ -1318,29 +1332,6 @@
       ]
     },
     {
-      "path": "src/color_marker_evidence_v2.py",
-      "bytes": 21547,
-      "sha256": "5eb17dc50c0001acbb571c258ecb3722c8ac7bf6f76b1dfeaf5ad910ac8abb4b",
-      "referenced_by": [
-        "color_hollow_geometry_scale_v46.py:30",
-        "color_legend_composition_v46.py:17",
-        "color_marker_hybrid_v2.py:18",
-        "color_marker_runtime_v46.py:20",
-        "color_series_structure_v46.py:13",
-        "existing distribution",
-        "legend_optional_v46/single.py:16"
-      ]
-    },
-    {
-      "path": "src/color_marker_hybrid.py",
-      "bytes": 22266,
-      "sha256": "4bf2c3e5d787f69ccc76756c9e6bc34785a9aa33989f6e5b3b16ea9bab37e5c5",
-      "referenced_by": [
-        "color_marker_hybrid_v2.py:17",
-        "existing distribution"
-      ]
-    },
-    {
       "path": "src/color_marker_hybrid_v2.py",
       "bytes": 14966,
       "sha256": "63c9786678a221d9764fd702e280cef834bbfab3f92479e92acc7d0cc3244603",
@@ -1351,6 +1342,15 @@
         "color_marker_runtime_v46.py:27 module-name string",
         "existing distribution",
         "legend_optional_v46/single.py:17"
+      ]
+    },
+    {
+      "path": "src/color_marker_hybrid.py",
+      "bytes": 22266,
+      "sha256": "4bf2c3e5d787f69ccc76756c9e6bc34785a9aa33989f6e5b3b16ea9bab37e5c5",
+      "referenced_by": [
+        "color_marker_hybrid_v2.py:17",
+        "existing distribution"
       ]
     },
     {
@@ -1515,8 +1515,8 @@
     },
     {
       "path": "src/color_pipeline_v46.py",
-      "bytes": 36661,
-      "sha256": "b6f021d99536c227bb02f50589664e99dd4b64b6f8c0b0afbd83e85416a8fb34",
+      "bytes": 37176,
+      "sha256": "17c52efc9653b6268f7f26e2573981b4a73c716b774a8b090bf8b47b8651f88f",
       "referenced_by": [
         "existing distribution",
         "run_A4_color_v46.py:38"
@@ -1637,17 +1637,6 @@
       ]
     },
     {
-      "path": "src/color_step5.py",
-      "bytes": 56897,
-      "sha256": "3349f5bd47c3efd01e7a98a67cce42670d6401d2f05ab761144d057ef8fe3c02",
-      "referenced_by": [
-        "chart_analysis_v46.py:2310 dynamic filename",
-        "color_correct_cli.py:39",
-        "color_step5_payload_v46.py:228",
-        "existing distribution"
-      ]
-    },
-    {
       "path": "src/color_step5_defaults_v46.py",
       "bytes": 4511,
       "sha256": "fa7b48e460cc72ff456d354e85799f642a5caaa659f21b91e7b1ca9913e6bc50",
@@ -1680,6 +1669,17 @@
         "color_step5.py:988",
         "color_step5_export_v46.py:15",
         "correction_session_v46.py:287",
+        "existing distribution"
+      ]
+    },
+    {
+      "path": "src/color_step5.py",
+      "bytes": 56897,
+      "sha256": "3349f5bd47c3efd01e7a98a67cce42670d6401d2f05ab761144d057ef8fe3c02",
+      "referenced_by": [
+        "chart_analysis_v46.py:2310 dynamic filename",
+        "color_correct_cli.py:39",
+        "color_step5_payload_v46.py:228",
         "existing distribution"
       ]
     },
@@ -1750,8 +1750,8 @@
     },
     {
       "path": "src/correction_session_v46.py",
-      "bytes": 37547,
-      "sha256": "c2255b4b515a3d230ae3afd0e1e9928e4bf4502763e750f7f8ef8909993f8306",
+      "bytes": 40361,
+      "sha256": "fc42d08b1716206151762a232ab35b326e77eadc0033adaf52552cc07296cada",
       "referenced_by": [
         "agent_workflow.py:398",
         "color_group_runtime_v46.py:455",
@@ -1824,8 +1824,8 @@
     },
     {
       "path": "src/index.html",
-      "bytes": 181773,
-      "sha256": "daf9cc8ddd60443c121e24f6189e0dff5cdae9cdb50fe15eda61973101dfbff4",
+      "bytes": 183875,
+      "sha256": "54bac9fade36dc378e9ac6efa2c8e6eb7d80852b92f0f33906832451778a23bc",
       "referenced_by": [
         "web asset"
       ]
@@ -1967,8 +1967,8 @@
     },
     {
       "path": "src/legend_optional_v46/cli.py",
-      "bytes": 4847,
-      "sha256": "81c3c6f58d7fb102c426533050c15c1e3e2a65e595771e77f2922f4ab4df1cbe",
+      "bytes": 4949,
+      "sha256": "53970acb098dcb665bcb3310a7cb2cffefb70803b5ddec89fc752dab49f34caa",
       "referenced_by": [
         "bw_detect_cli.py:81",
         "existing distribution",
@@ -2014,15 +2014,6 @@
       ]
     },
     {
-      "path": "src/legend_optional_v46/palette.py",
-      "bytes": 11536,
-      "sha256": "9590b9bf6ccf70223647faef72b5b5aec16adf94e329fc5ea9fc131a7e39cce4",
-      "referenced_by": [
-        "existing distribution",
-        "legend_optional_v46/single.py:20"
-      ]
-    },
-    {
       "path": "src/legend_optional_v46/palette_base.py",
       "bytes": 10974,
       "sha256": "35fef8ff26c6ef29698d88b108c6451872f37bb64d8c88137002e11f86cce477",
@@ -2030,6 +2021,15 @@
         "existing distribution",
         "legend_optional_v46/common_ink.py:21",
         "legend_optional_v46/palette.py:15"
+      ]
+    },
+    {
+      "path": "src/legend_optional_v46/palette.py",
+      "bytes": 11536,
+      "sha256": "9590b9bf6ccf70223647faef72b5b5aec16adf94e329fc5ea9fc131a7e39cce4",
+      "referenced_by": [
+        "existing distribution",
+        "legend_optional_v46/single.py:20"
       ]
     },
     {
@@ -2059,6 +2059,23 @@
         "color_pipeline_v46.py:7",
         "existing distribution",
         "legend_optional_v46/native_legend.py:18"
+      ]
+    },
+    {
+      "path": "src/legend_review_v46.js",
+      "bytes": 22816,
+      "sha256": "2976488ec5cf3e30ef5232c9ced29fba5b1a4cc608d99b1ab7a45b11f9ff8e73",
+      "referenced_by": [
+        "index.html legend review panel",
+        "unified_server.py static asset"
+      ]
+    },
+    {
+      "path": "src/legend_review_v46.py",
+      "bytes": 21180,
+      "sha256": "fc2679f649c52d9bd42c71a58da1b558f6655a2a0591b355ff563ce8b5e6b3cf",
+      "referenced_by": [
+        "user-reviewed legend runtime"
       ]
     },
     {
@@ -2183,6 +2200,14 @@
         "existing distribution",
         "occlusion_aware_window_verifier.py:14",
         "open_marker_guard_v46.py:5"
+      ]
+    },
+    {
+      "path": "src/reviewed_legend_models_v46.py",
+      "bytes": 7471,
+      "sha256": "d91e2b6d58fc7ef792e8d3dccbc5de66b55119c18c88237d55c57cb1eb585d3d",
+      "referenced_by": [
+        "user-reviewed legend runtime"
       ]
     },
     {
@@ -2351,16 +2376,6 @@
       ]
     },
     {
-      "path": "src/type3_v46/path_bar_kink_detector.py",
-      "bytes": 8558,
-      "sha256": "63234c588c431eb91eed218467680c3f9cdc2b1f9c5875037865094577127978",
-      "referenced_by": [
-        "existing distribution",
-        "type3_v46/path_bar_kink_detector_v2.py:9",
-        "type3_v46/path_bar_kink_detector_v3.py:8"
-      ]
-    },
-    {
       "path": "src/type3_v46/path_bar_kink_detector_v2.py",
       "bytes": 6470,
       "sha256": "7798115ac42b9e7361cadcfddda535f737559f05c8779963595ff06720bd9dff",
@@ -2378,6 +2393,16 @@
       "referenced_by": [
         "existing distribution",
         "type3_v46/pipeline.py:22"
+      ]
+    },
+    {
+      "path": "src/type3_v46/path_bar_kink_detector.py",
+      "bytes": 8558,
+      "sha256": "63234c588c431eb91eed218467680c3f9cdc2b1f9c5875037865094577127978",
+      "referenced_by": [
+        "existing distribution",
+        "type3_v46/path_bar_kink_detector_v2.py:9",
+        "type3_v46/path_bar_kink_detector_v3.py:8"
       ]
     },
     {
@@ -2481,8 +2506,8 @@
     },
     {
       "path": "src/unified_server.py",
-      "bytes": 57584,
-      "sha256": "23ec069222766e85073bc2b7601dfc89d198ca99bf316f689ad4a46d4351115e",
+      "bytes": 64927,
+      "sha256": "7d48428236c904fd447a60c70791fc871d68e9d3865c57c41d240effdf1cb0c3",
       "referenced_by": [
         "existing distribution"
       ]

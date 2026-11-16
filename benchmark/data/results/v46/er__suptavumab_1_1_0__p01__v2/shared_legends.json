@@ -1,0 +1,169 @@
+{
+ "panel_id": "er__suptavumab_1_1_0__p01__v2",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "color02",
+   "native_swatch_id": "S01",
+   "bbox": [
+    320,
+    59,
+    372,
+    76
+   ],
+   "native_body_bbox": [
+    340,
+    62,
+    353,
+    73
+   ],
+   "class_name": "filled_circle",
+   "rgb": [
+    70,
+    133,
+    73
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s01",
+   "label": "Synthesized palivizumab",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__suptavumab_1_1_0__p01__v2/shared_legend_crops/legend_01.png",
+   "image_size": [
+    52,
+    17
+   ],
+   "sha256": "21703332d5e58c9e5d1b72e64e6dcedd52c26638d193078063935e06b49226be",
+   "source_native_legend_id": "color02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__suptavumab_1_1_0__p01__v2/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    320,
+    59,
+    372,
+    76
+   ],
+   "bbox_original": [
+    320,
+    59,
+    372,
+    76
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color03",
+   "native_swatch_id": "S02",
+   "bbox": [
+    687,
+    58,
+    742,
+    77
+   ],
+   "native_body_bbox": [
+    709,
+    61,
+    722,
+    74
+   ],
+   "class_name": "filled_circle",
+   "rgb": [
+    60,
+    65,
+    135
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s02",
+   "label": "Suptavumab",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__suptavumab_1_1_0__p01__v2/shared_legend_crops/legend_02.png",
+   "image_size": [
+    55,
+    19
+   ],
+   "sha256": "b9074f07bd787dd40731e7801ef38c4e7d695e6673e046374fb9f9f2029f267d",
+   "source_native_legend_id": "color03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__suptavumab_1_1_0__p01__v2/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    687,
+    58,
+    742,
+    77
+   ],
+   "bbox_original": [
+    687,
+    58,
+    742,
+    77
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "color02": "s01",
+  "color03": "s02"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "color02",
+    "series_id": "s01",
+    "iou": 0.6021052631578947,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s02",
+    "iou": 0.6038426349496798,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Synthesized palivizumab",
+   "bbox": [
+    317,
+    61,
+    375,
+    72
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Suptavumab",
+   "bbox": [
+    685,
+    61,
+    744,
+    73
+   ]
+  }
+ ],
+ "input_sha256": "55c1b68604121adb70f1c4cb7f28b65392d4608506666ff4fa9ee3db7bd138b9",
+ "source_sha256": "55c1b68604121adb70f1c4cb7f28b65392d4608506666ff4fa9ee3db7bd138b9",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.005091900005936623
+}

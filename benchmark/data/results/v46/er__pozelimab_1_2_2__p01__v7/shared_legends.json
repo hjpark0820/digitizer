@@ -1,0 +1,263 @@
+{
+ "panel_id": "er__pozelimab_1_2_2__p01__v7",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "color02",
+   "native_swatch_id": "S01",
+   "bbox": [
+    110,
+    7,
+    148,
+    26
+   ],
+   "native_body_bbox": [
+    121,
+    10,
+    136,
+    23
+   ],
+   "class_name": "filled_circle",
+   "rgb": [
+    5,
+    9,
+    124
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s01",
+   "label": "REGN3918",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_01.png",
+   "image_size": [
+    38,
+    19
+   ],
+   "sha256": "febdce4bf98846eb1d1a7f0984e6f2960b6e37680e0b4def6e23cafc30130ba2",
+   "source_native_legend_id": "color02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    110,
+    7,
+    148,
+    26
+   ],
+   "bbox_original": [
+    110,
+    7,
+    148,
+    26
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color03",
+   "native_swatch_id": "S02",
+   "bbox": [
+    110,
+    29,
+    148,
+    48
+   ],
+   "native_body_bbox": [
+    121,
+    32,
+    136,
+    45
+   ],
+   "class_name": "filled_square",
+   "rgb": [
+    143,
+    14,
+    72
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s02",
+   "label": "In-house eculizumab",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_02.png",
+   "image_size": [
+    38,
+    19
+   ],
+   "sha256": "c74a77f26c736d1f27b7c23ab775c9b9dc016292135a9ae26ede2446d2b222b8",
+   "source_native_legend_id": "color03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    110,
+    29,
+    148,
+    48
+   ],
+   "bbox_original": [
+    110,
+    29,
+    148,
+    48
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color04",
+   "native_swatch_id": "S03",
+   "bbox": [
+    110,
+    53,
+    148,
+    70
+   ],
+   "native_body_bbox": [
+    122,
+    56,
+    135,
+    67
+   ],
+   "class_name": "filled_square",
+   "rgb": [
+    0,
+    0,
+    0
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s03",
+   "label": "IgG4PControl",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_03.png",
+   "image_size": [
+    38,
+    17
+   ],
+   "sha256": "8e6587e9bbac21ca526a90ba3e50cd992e1a61fc39ec981d182b77473a70b21d",
+   "source_native_legend_id": "color04",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_03.png",
+   "bbox_crop": [
+    110,
+    53,
+    148,
+    70
+   ],
+   "bbox_original": [
+    110,
+    53,
+    148,
+    70
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "color02": "s01",
+  "color03": "s02",
+  "color04": "s03"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "color02",
+    "series_id": "s01",
+    "iou": 0.5831202046035806,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s02",
+    "iou": 0.6175,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s03",
+    "iou": 0.6057971014492753,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "REGN3918",
+   "bbox": [
+    107,
+    10,
+    150,
+    22
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "In-house eculizumab",
+   "bbox": [
+    106,
+    32,
+    150,
+    45
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "IgG4PControl",
+   "bbox": [
+    107,
+    55,
+    149,
+    66
+   ]
+  }
+ ],
+ "input_sha256": "fa928afbf6a1dacd4b0958428ff42e73bf08e186bb334f58962a771a5d7acc42",
+ "source_sha256": "fa928afbf6a1dacd4b0958428ff42e73bf08e186bb334f58962a771a5d7acc42",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.007942099997308105
+}

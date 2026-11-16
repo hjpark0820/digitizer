@@ -1,0 +1,183 @@
+{
+ "panel_id": "er__teclistamab_2_5_0__p06__v3",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    546,
+    391,
+    612,
+    414
+   ],
+   "native_body_bbox": [
+    570,
+    393,
+    589,
+    412
+   ],
+   "class_name": "filled_circle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "BCMAxCD3",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__teclistamab_2_5_0__p06__v3/shared_legend_crops/legend_01.png",
+   "image_size": [
+    66,
+    23
+   ],
+   "sha256": "788a4b9168763b3c0c4c0405bfca189505ae1cf2563f9b258e930841fc2c4725",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__teclistamab_2_5_0__p06__v3/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    546,
+    391,
+    612,
+    414
+   ],
+   "bbox_original": [
+    546,
+    391,
+    612,
+    414
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    825,
+    392,
+    891,
+    413
+   ],
+   "native_body_bbox": [
+    849.5001609409381,
+    393.50009064034106,
+    866.5001852199081,
+    410.500114919311
+   ],
+   "class_name": "open_square",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s02",
+   "label": "BCMAxnull",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__teclistamab_2_5_0__p06__v3/shared_legend_crops/legend_02.png",
+   "image_size": [
+    66,
+    21
+   ],
+   "sha256": "1dece1fb3d4e6d86400c7683d44e1ae62dc8ac6ce467eb39deb6e8cb616cf7c3",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__teclistamab_2_5_0__p06__v3/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    825,
+    392,
+    891,
+    413
+   ],
+   "bbox_original": [
+    825,
+    392,
+    891,
+    413
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01",
+  "S02": "s02"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.6646919431279621,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s04",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 0.6639839034205232,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s04",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   }
+  ],
+  "unmatched_annotations": [
+   "s04"
+  ],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "BCMAxCD3",
+   "bbox": [
+    541,
+    394,
+    617,
+    411
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "BCMAxnull",
+   "bbox": [
+    821,
+    395,
+    894,
+    410
+   ]
+  },
+  {
+   "series_id": "s04",
+   "label": "nullxCD3",
+   "bbox": [
+    1085,
+    394,
+    1160,
+    411
+   ]
+  }
+ ],
+ "input_sha256": "ea24462fa860cb859ba6c8022bd4513c456ac362c7a05f5714c8bfe2ab93654b",
+ "source_sha256": "ea24462fa860cb859ba6c8022bd4513c456ac362c7a05f5714c8bfe2ab93654b",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.025509800005238503
+}

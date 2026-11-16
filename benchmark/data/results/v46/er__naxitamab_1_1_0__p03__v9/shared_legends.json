@@ -1,0 +1,157 @@
+{
+ "panel_id": "er__naxitamab_1_1_0__p03__v9",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    41,
+    128,
+    67,
+    141
+   ],
+   "native_body_bbox": [
+    47.76259344293887,
+    128.76394205649345,
+    57.23938289691339,
+    138.24073151046795
+   ],
+   "class_name": "open_square",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "Dinutuximab beta",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__naxitamab_1_1_0__p03__v9/shared_legend_crops/legend_01.png",
+   "image_size": [
+    26,
+    13
+   ],
+   "sha256": "57b323c8cfe1fbb5d7faa5a10ef72db85554eb51cdcc96bf3ac57df549e4253e",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__naxitamab_1_1_0__p03__v9/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    41,
+    128,
+    67,
+    141
+   ],
+   "bbox_original": [
+    41,
+    128,
+    67,
+    141
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    174,
+    128,
+    202,
+    141
+   ],
+   "native_body_bbox": [
+    183,
+    129,
+    194,
+    140
+   ],
+   "class_name": "filled_square",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s02",
+   "label": "Naxitamab",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__naxitamab_1_1_0__p03__v9/shared_legend_crops/legend_02.png",
+   "image_size": [
+    28,
+    13
+   ],
+   "sha256": "671472041a763cf76d908517650ccb0264ab66ab394240bb0107af2de33c362c",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__naxitamab_1_1_0__p03__v9/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    174,
+    128,
+    202,
+    141
+   ],
+   "bbox_original": [
+    174,
+    128,
+    202,
+    141
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01",
+  "S02": "s02"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.5621621621621622,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 0.5894736842105263,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Dinutuximab beta",
+   "bbox": [
+    38,
+    130,
+    68,
+    138
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Naxitamab",
+   "bbox": [
+    173,
+    130,
+    203,
+    138
+   ]
+  }
+ ],
+ "input_sha256": "68f810ed4a013a7041137ea13d4150f763bc860f1140150be0f9f115edca4570",
+ "source_sha256": "68f810ed4a013a7041137ea13d4150f763bc860f1140150be0f9f115edca4570",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.018932399980258197
+}

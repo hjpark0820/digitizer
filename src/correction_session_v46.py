@@ -22,7 +22,8 @@ NPZ = 'color_step5_evidence_v46.npz'
 JSON_FILES = ('step5_inputs.json', 'color_correction_state.json', 'correction_state.json',
               'type3_detection_v46.json', 'legend_optional_v46.json', 'step5_stop_report.json',
               'color_group_state_v46.json', 'mode_selection_v46.json', 'fast_detection_v46.json',
-              'ocr_settings.json')
+              'ocr_settings.json', 'detection_settings_v46.json',
+              'legend_review_input.json', 'legend_review_state.json')
 SAFE_ID = re.compile(r'^[A-Za-z0-9_-][A-Za-z0-9_.-]{0,100}$')
 UNIT_METADATA_KEYS = ('unit', 'unit_status', 'unit_source', 'unit_text', 'label', 'unit_warning',
                       'label_source')
@@ -414,6 +415,57 @@ def capability(folder, image, ed):
     return None, 'Coordinates loaded for manual editing. Automatic Step 5 needs a correction-session JSON with saved evidence; detection was not run.'
 
 
+def _legend_review_artifacts(folder, artifacts, image, mode):
+    """Keep reviewable source crops without embedding large diagnostic masks.
+
+Review geometry is bound to decoded pixels in portable sessions because PNG
+encoding may change at import. The ordinary live-review API still uses an exact
+file hash, so an image replacement cannot reuse a stale browser review.
+    """
+    from legend_review_v46 import load_review, validate_review
+    pixel_binding = image_binding(image)
+    settings = (artifacts.get('detection_settings_v46.json') or {}).get('data') or {}
+    region = settings.get('legend_area') or settings.get('legend_box')
+    if isinstance(region, str):
+        try:
+            region = [int(v.strip()) for v in region.split(',')] if region.strip() else None
+        except ValueError as error:
+            raise ValueError('Saved legend selection is invalid.') from error
+    if region:
+        snapshot = load_review(folder, folder/'input.png', region, mode)
+        artifacts['legend_review_state.json'] = dict(encoding='json', data=snapshot)
+    for name in ('legend_review_input.json', 'legend_review_state.json'):
+        if name not in artifacts:
+            continue
+        value = artifacts[name]['data']
+        checked = validate_review(value, folder/'input.png', value.get('legend_box'), allow_empty=True)
+        value.update(checked)
+        value['image']['pixel_sha256'] = pixel_binding['pixel_sha256']
+
+
+def _restore_legend_review_binding(folder, image):
+    """Rebind PNG file hashes only after the saved pixel binding is verified."""
+    from legend_review_v46 import validate_review
+    binding = image_binding(image)
+    file_hash = hashlib.sha256((folder/'input.png').read_bytes()).hexdigest()
+    for name in ('legend_review_input.json', 'legend_review_state.json'):
+        path = folder/name
+        if not path.exists():
+            continue
+        value = read(path)
+        saved = value.get('image') or {}
+        if any(saved.get(key) != binding[key] for key in ('width', 'height', 'pixel_sha256')):
+            raise ValueError('Saved legend review belongs to different image pixels.')
+        old_hash = saved.get('sha256')
+        value['image'] = dict(binding, sha256=file_hash, sha256_kind='file_bytes')
+        checked = validate_review(value, folder/'input.png', value.get('legend_box'), allow_empty=True)
+        value.update(checked)
+        value['image']['pixel_sha256'] = binding['pixel_sha256']
+        if old_hash != file_hash:
+            value['image_binding_verified_on_import'] = 'identical_decoded_pixels'
+        save(path, value)
+
+
 def export_session(folder, mode, proposed=None):
     folder = Path(folder)
     image = cv2.imread(str(folder/'input.png'))
@@ -421,6 +473,7 @@ def export_session(folder, mode, proposed=None):
         raise ValueError('Paired job image is unavailable')
     ed = edited_data(read(folder/'edit_data.json'), proposed, image)
     artifacts = {name:dict(encoding='json',data=read(folder/name)) for name in JSON_FILES if (folder/name).exists()}
+    _legend_review_artifacts(folder, artifacts, image, mode)
     if (folder/NPZ).exists():
         artifacts[NPZ] = dict(encoding='base64',data=base64.b64encode(checked_npz((folder/NPZ).read_bytes())).decode('ascii'))
     return dict(format=FORMAT, mode=mode, image=image_binding(image), edit_data=ed,
@@ -603,6 +656,7 @@ def import_session(image_bytes, data_bytes, folder, mode='color', version_id=Non
     engine, reason = capability(folder,image,ed)
     if not cv2.imwrite(str(folder/'input.png'),image):
         raise ValueError('Cannot save paired image')
+    _restore_legend_review_binding(folder, image)
     save(folder/'edit_data.json',ed)
     meta = dict(mode=mode,engine=engine,imported=True,paired_hash_checked=paired,
                 manual_only_reason=reason, detection_skipped=True)

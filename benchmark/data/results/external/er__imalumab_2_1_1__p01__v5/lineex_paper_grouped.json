@@ -1,0 +1,3644 @@
+{
+ "version": "external_shared_input_benchmark_v1",
+ "panel_id": "er__imalumab_2_1_1__p01__v5",
+ "modality": "bw",
+ "method": "lineex_paper_grouped",
+ "status": "completed",
+ "coordinate_system": "x_px/y_px = full original unrotated image pixels; x/y = shared native crop pixels",
+ "image_path": "data/images\\er__imalumab_2_1_1__p01__v5.png",
+ "input_sha256": "3fac01b4995c6d4da4d793b92432c20f0278cc46b3509a7ca49aadb93789c9bd",
+ "source_image_path": "data/images\\er__imalumab_2_1_1__p01__v5.png",
+ "source_sha256": "3fac01b4995c6d4da4d793b92432c20f0278cc46b3509a7ca49aadb93789c9bd",
+ "crop_box_original": [
+  0,
+  0,
+  1074,
+  692
+ ],
+ "plot_box": [
+  184.0,
+  51.0,
+  1024.0,
+  577.0
+ ],
+ "legend_box": [
+  714.0,
+  220.0,
+  1016.0,
+  405.0
+ ],
+ "legends": [
+  {
+   "legend_index": 0,
+   "series_id": "s02",
+   "label": "C3 (neg. control)",
+   "source_native_legend_id": "S01",
+   "box_input": [
+    718,
+    221,
+    782,
+    261
+   ],
+   "box_original": [
+    718,
+    221,
+    782,
+    261
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__imalumab_2_1_1__p01__v5/shared_legend_crops/legend_01.png",
+   "crop_sha256": "5533371e3cf012c9ff64607f036e172a8d718962ff55298b15e3b6e48bfde36b",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__imalumab_2_1_1__p01__v5/shared_legends.json",
+   "shared_legends_sha256": "9a47be3bde383dc2587d95c6bd974209b20a7031a3c6854ff086f5c8ee657998",
+   "mapping_provenance": {
+    "S01": "s02",
+    "S02": "s01"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 1,
+   "series_id": "s01",
+   "label": "Bax94",
+   "source_native_legend_id": "S02",
+   "box_input": [
+    718,
+    362,
+    782,
+    398
+   ],
+   "box_original": [
+    718,
+    362,
+    782,
+    398
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__imalumab_2_1_1__p01__v5/shared_legend_crops/legend_02.png",
+   "crop_sha256": "ad6da228bf4804895d6862f0552dd9a7f1d5eaa8c4edc0876b7edc93d1d97dda",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__imalumab_2_1_1__p01__v5/shared_legends.json",
+   "shared_legends_sha256": "9a47be3bde383dc2587d95c6bd974209b20a7031a3c6854ff086f5c8ee657998",
+   "mapping_provenance": {
+    "S01": "s02",
+    "S02": "s01"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  }
+ ],
+ "predictions": [
+  {
+   "point_id": "LXP0000",
+   "x": 204.0,
+   "y": 86.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.9109808802604675,
+   "winning_similarity": 0.9109808802604675,
+   "similarities": [
+    0.8857954740524292,
+    0.9109808802604675
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0000.png",
+   "patch_box_input": [
+    184,
+    76,
+    224,
+    96
+   ],
+   "x_px": 204.0,
+   "y_px": 86.0
+  },
+  {
+   "point_id": "LXP0001",
+   "x": 709.0,
+   "y": 462.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.9030728936195374,
+   "winning_similarity": 0.9030728936195374,
+   "similarities": [
+    0.8523226380348206,
+    0.9030728936195374
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0001.png",
+   "patch_box_input": [
+    689,
+    452,
+    729,
+    472
+   ],
+   "x_px": 709.0,
+   "y_px": 462.0
+  },
+  {
+   "point_id": "LXP0002",
+   "x": 355.0,
+   "y": 123.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.7867158055305481,
+   "winning_similarity": 0.7867158055305481,
+   "similarities": [
+    0.7867158055305481,
+    0.6982501149177551
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0002.png",
+   "patch_box_input": [
+    335,
+    113,
+    375,
+    133
+   ],
+   "x_px": 355.0,
+   "y_px": 123.0
+  },
+  {
+   "point_id": "LXP0003",
+   "x": 461.0,
+   "y": 140.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.9036554098129272,
+   "winning_similarity": 0.9036554098129272,
+   "similarities": [
+    0.8987460732460022,
+    0.9036554098129272
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0003.png",
+   "patch_box_input": [
+    441,
+    130,
+    481,
+    150
+   ],
+   "x_px": 461.0,
+   "y_px": 140.0
+  },
+  {
+   "point_id": "LXP0004",
+   "x": 987.0,
+   "y": 477.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.8403003215789795,
+   "winning_similarity": 0.8403003215789795,
+   "similarities": [
+    0.8334186673164368,
+    0.8403003215789795
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0004.png",
+   "patch_box_input": [
+    967,
+    467,
+    1007,
+    487
+   ],
+   "x_px": 987.0,
+   "y_px": 477.0
+  },
+  {
+   "point_id": "LXP0005",
+   "x": 541.0,
+   "y": 442.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.897628128528595,
+   "winning_similarity": 0.897628128528595,
+   "similarities": [
+    0.897628128528595,
+    0.8793461322784424
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0005.png",
+   "patch_box_input": [
+    521,
+    432,
+    561,
+    452
+   ],
+   "x_px": 541.0,
+   "y_px": 442.0
+  },
+  {
+   "point_id": "LXP0006",
+   "x": 1004.0,
+   "y": 475.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.9115817546844482,
+   "winning_similarity": 0.9115817546844482,
+   "similarities": [
+    0.8736286759376526,
+    0.9115817546844482
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0006.png",
+   "patch_box_input": [
+    984,
+    465,
+    1024,
+    485
+   ],
+   "x_px": 1004.0,
+   "y_px": 475.0
+  },
+  {
+   "point_id": "LXP0007",
+   "x": 638.0,
+   "y": 153.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.9632768630981445,
+   "winning_similarity": 0.9632768630981445,
+   "similarities": [
+    0.9632768630981445,
+    0.8555509448051453
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0007.png",
+   "patch_box_input": [
+    618,
+    143,
+    658,
+    163
+   ],
+   "x_px": 638.0,
+   "y_px": 153.0
+  },
+  {
+   "point_id": "LXP0008",
+   "x": 383.0,
+   "y": 395.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.779840886592865,
+   "winning_similarity": 0.779840886592865,
+   "similarities": [
+    0.779840886592865,
+    0.7737066745758057
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0008.png",
+   "patch_box_input": [
+    363,
+    385,
+    403,
+    405
+   ],
+   "x_px": 383.0,
+   "y_px": 395.0
+  },
+  {
+   "point_id": "LXP0009",
+   "x": 207.0,
+   "y": 132.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.9018165469169617,
+   "winning_similarity": 0.9018165469169617,
+   "similarities": [
+    0.8804182410240173,
+    0.9018165469169617
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0009.png",
+   "patch_box_input": [
+    187,
+    122,
+    227,
+    142
+   ],
+   "x_px": 207.0,
+   "y_px": 132.0
+  },
+  {
+   "point_id": "LXP0010",
+   "x": 228.0,
+   "y": 126.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.627261757850647,
+   "winning_similarity": 0.627261757850647,
+   "similarities": [
+    0.627261757850647,
+    0.574257493019104
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0010.png",
+   "patch_box_input": [
+    208,
+    116,
+    248,
+    136
+   ],
+   "x_px": 228.0,
+   "y_px": 126.0
+  },
+  {
+   "point_id": "LXP0011",
+   "x": 799.0,
+   "y": 467.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.8047938942909241,
+   "winning_similarity": 0.8047938942909241,
+   "similarities": [
+    0.8047938942909241,
+    0.7734809517860413
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0011.png",
+   "patch_box_input": [
+    779,
+    457,
+    819,
+    477
+   ],
+   "x_px": 799.0,
+   "y_px": 467.0
+  },
+  {
+   "point_id": "LXP0012",
+   "x": 313.0,
+   "y": 290.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.8408817648887634,
+   "winning_similarity": 0.8408817648887634,
+   "similarities": [
+    0.6709474921226501,
+    0.8408817648887634
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0012.png",
+   "patch_box_input": [
+    293,
+    280,
+    333,
+    300
+   ],
+   "x_px": 313.0,
+   "y_px": 290.0
+  },
+  {
+   "point_id": "LXP0013",
+   "x": 780.0,
+   "y": 466.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.8068493008613586,
+   "winning_similarity": 0.8068493008613586,
+   "similarities": [
+    0.8068493008613586,
+    0.7434325814247131
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0013.png",
+   "patch_box_input": [
+    760,
+    456,
+    800,
+    476
+   ],
+   "x_px": 780.0,
+   "y_px": 466.0
+  },
+  {
+   "point_id": "LXP0014",
+   "x": 471.0,
+   "y": 427.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.7876627445220947,
+   "winning_similarity": 0.7876627445220947,
+   "similarities": [
+    0.7820369005203247,
+    0.7876627445220947
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0014.png",
+   "patch_box_input": [
+    451,
+    417,
+    491,
+    437
+   ],
+   "x_px": 471.0,
+   "y_px": 427.0
+  },
+  {
+   "point_id": "LXP0015",
+   "x": 548.0,
+   "y": 147.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.8892115354537964,
+   "winning_similarity": 0.8892115354537964,
+   "similarities": [
+    0.8707159161567688,
+    0.8892115354537964
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0015.png",
+   "patch_box_input": [
+    528,
+    137,
+    568,
+    157
+   ],
+   "x_px": 548.0,
+   "y_px": 147.0
+  },
+  {
+   "point_id": "LXP0016",
+   "x": 909.0,
+   "y": 474.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.913878858089447,
+   "winning_similarity": 0.913878858089447,
+   "similarities": [
+    0.9012304544448853,
+    0.913878858089447
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0016.png",
+   "patch_box_input": [
+    889,
+    464,
+    929,
+    484
+   ],
+   "x_px": 909.0,
+   "y_px": 474.0
+  },
+  {
+   "point_id": "LXP0017",
+   "x": 398.0,
+   "y": 128.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.4663134515285492,
+   "winning_similarity": 0.4663134515285492,
+   "similarities": [
+    0.4663134515285492,
+    0.04422605037689209
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0017.png",
+   "patch_box_input": [
+    378,
+    118,
+    418,
+    138
+   ],
+   "x_px": 398.0,
+   "y_px": 128.0
+  },
+  {
+   "point_id": "LXP0018",
+   "x": 922.0,
+   "y": 474.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.7959874868392944,
+   "winning_similarity": 0.7959874868392944,
+   "similarities": [
+    0.7959874868392944,
+    0.7644128799438477
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0018.png",
+   "patch_box_input": [
+    902,
+    464,
+    942,
+    484
+   ],
+   "x_px": 922.0,
+   "y_px": 474.0
+  },
+  {
+   "point_id": "LXP0019",
+   "x": 509.0,
+   "y": 435.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.8251035809516907,
+   "winning_similarity": 0.8251035809516907,
+   "similarities": [
+    0.8251035809516907,
+    0.8201988935470581
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0019.png",
+   "patch_box_input": [
+    489,
+    425,
+    529,
+    445
+   ],
+   "x_px": 509.0,
+   "y_px": 435.0
+  },
+  {
+   "point_id": "LXP0021",
+   "x": 314.0,
+   "y": 117.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.7804676294326782,
+   "winning_similarity": 0.7804676294326782,
+   "similarities": [
+    0.7804676294326782,
+    0.7718603014945984
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0021.png",
+   "patch_box_input": [
+    294,
+    107,
+    334,
+    127
+   ],
+   "x_px": 314.0,
+   "y_px": 117.0
+  },
+  {
+   "point_id": "LXP0022",
+   "x": 409.0,
+   "y": 129.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.5526229739189148,
+   "winning_similarity": 0.5526229739189148,
+   "similarities": [
+    0.5526229739189148,
+    0.5222265124320984
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0022.png",
+   "patch_box_input": [
+    389,
+    119,
+    429,
+    139
+   ],
+   "x_px": 409.0,
+   "y_px": 129.0
+  },
+  {
+   "point_id": "LXP0023",
+   "x": 258.0,
+   "y": 209.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.9033311009407043,
+   "winning_similarity": 0.9033311009407043,
+   "similarities": [
+    0.8975247144699097,
+    0.9033311009407043
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0023.png",
+   "patch_box_input": [
+    238,
+    199,
+    278,
+    219
+   ],
+   "x_px": 258.0,
+   "y_px": 209.0
+  },
+  {
+   "point_id": "LXP0024",
+   "x": 578.0,
+   "y": 146.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.8484218120574951,
+   "winning_similarity": 0.8484218120574951,
+   "similarities": [
+    0.8484218120574951,
+    0.8234630823135376
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0024.png",
+   "patch_box_input": [
+    558,
+    136,
+    598,
+    156
+   ],
+   "x_px": 578.0,
+   "y_px": 146.0
+  },
+  {
+   "point_id": "LXP0025",
+   "x": 528.0,
+   "y": 144.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.813309371471405,
+   "winning_similarity": 0.813309371471405,
+   "similarities": [
+    0.813309371471405,
+    0.7925111055374146
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0025.png",
+   "patch_box_input": [
+    508,
+    134,
+    548,
+    154
+   ],
+   "x_px": 528.0,
+   "y_px": 144.0
+  },
+  {
+   "point_id": "LXP0026",
+   "x": 817.0,
+   "y": 468.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.8364482522010803,
+   "winning_similarity": 0.8364482522010803,
+   "similarities": [
+    0.8364482522010803,
+    0.8123682737350464
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0026.png",
+   "patch_box_input": [
+    797,
+    458,
+    837,
+    478
+   ],
+   "x_px": 817.0,
+   "y_px": 468.0
+  },
+  {
+   "point_id": "LXP0027",
+   "x": 411.0,
+   "y": 430.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.8954439163208008,
+   "winning_similarity": 0.8954439163208008,
+   "similarities": [
+    0.8954439163208008,
+    0.8855059146881104
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0027.png",
+   "patch_box_input": [
+    391,
+    420,
+    431,
+    440
+   ],
+   "x_px": 411.0,
+   "y_px": 430.0
+  },
+  {
+   "point_id": "LXP0028",
+   "x": 961.0,
+   "y": 480.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.8620495200157166,
+   "winning_similarity": 0.8620495200157166,
+   "similarities": [
+    0.8620495200157166,
+    0.6638423204421997
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0028.png",
+   "patch_box_input": [
+    941,
+    470,
+    981,
+    490
+   ],
+   "x_px": 961.0,
+   "y_px": 480.0
+  },
+  {
+   "point_id": "LXP0029",
+   "x": 693.0,
+   "y": 461.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.9047900438308716,
+   "winning_similarity": 0.9047900438308716,
+   "similarities": [
+    0.8808883428573608,
+    0.9047900438308716
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0029.png",
+   "patch_box_input": [
+    673,
+    451,
+    713,
+    471
+   ],
+   "x_px": 693.0,
+   "y_px": 461.0
+  },
+  {
+   "point_id": "LXP0030",
+   "x": 259.0,
+   "y": 119.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.8712620735168457,
+   "winning_similarity": 0.8712620735168457,
+   "similarities": [
+    0.8592082262039185,
+    0.8712620735168457
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0030.png",
+   "patch_box_input": [
+    239,
+    109,
+    279,
+    129
+   ],
+   "x_px": 259.0,
+   "y_px": 119.0
+  },
+  {
+   "point_id": "LXP0031",
+   "x": 596.0,
+   "y": 442.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.8693504929542542,
+   "winning_similarity": 0.8693504929542542,
+   "similarities": [
+    0.8522900938987732,
+    0.8693504929542542
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0031.png",
+   "patch_box_input": [
+    576,
+    432,
+    616,
+    452
+   ],
+   "x_px": 596.0,
+   "y_px": 442.0
+  },
+  {
+   "point_id": "LXP0032",
+   "x": 589.0,
+   "y": 151.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.9446881413459778,
+   "winning_similarity": 0.9446881413459778,
+   "similarities": [
+    0.9349786639213562,
+    0.9446881413459778
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0032.png",
+   "patch_box_input": [
+    569,
+    141,
+    609,
+    161
+   ],
+   "x_px": 589.0,
+   "y_px": 151.0
+  },
+  {
+   "point_id": "LXP0033",
+   "x": 275.0,
+   "y": 225.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.74163419008255,
+   "winning_similarity": 0.74163419008255,
+   "similarities": [
+    0.74163419008255,
+    0.6772357821464539
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0033.png",
+   "patch_box_input": [
+    255,
+    215,
+    295,
+    235
+   ],
+   "x_px": 275.0,
+   "y_px": 225.0
+  },
+  {
+   "point_id": "LXP0034",
+   "x": 482.0,
+   "y": 431.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.8727995157241821,
+   "winning_similarity": 0.8727995157241821,
+   "similarities": [
+    0.8638651967048645,
+    0.8727995157241821
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0034.png",
+   "patch_box_input": [
+    462,
+    421,
+    502,
+    441
+   ],
+   "x_px": 482.0,
+   "y_px": 431.0
+  },
+  {
+   "point_id": "LXP0035",
+   "x": 743.0,
+   "y": 463.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.7976624965667725,
+   "winning_similarity": 0.7976624965667725,
+   "similarities": [
+    0.7976624965667725,
+    0.7570196986198425
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0035.png",
+   "patch_box_input": [
+    723,
+    453,
+    763,
+    473
+   ],
+   "x_px": 743.0,
+   "y_px": 463.0
+  },
+  {
+   "point_id": "LXP0036",
+   "x": 863.0,
+   "y": 471.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.8960376977920532,
+   "winning_similarity": 0.8960376977920532,
+   "similarities": [
+    0.8960376977920532,
+    0.8522442579269409
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0036.png",
+   "patch_box_input": [
+    843,
+    461,
+    883,
+    481
+   ],
+   "x_px": 863.0,
+   "y_px": 471.0
+  },
+  {
+   "point_id": "LXP0037",
+   "x": 613.0,
+   "y": 454.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.890321671962738,
+   "winning_similarity": 0.890321671962738,
+   "similarities": [
+    0.8612275719642639,
+    0.890321671962738
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0037.png",
+   "patch_box_input": [
+    593,
+    444,
+    633,
+    464
+   ],
+   "x_px": 613.0,
+   "y_px": 454.0
+  },
+  {
+   "point_id": "LXP0038",
+   "x": 360.0,
+   "y": 375.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.5731239914894104,
+   "winning_similarity": 0.5731239914894104,
+   "similarities": [
+    0.5731239914894104,
+    0.4180470407009125
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0038.png",
+   "patch_box_input": [
+    340,
+    365,
+    380,
+    385
+   ],
+   "x_px": 360.0,
+   "y_px": 375.0
+  },
+  {
+   "point_id": "LXP0039",
+   "x": 291.0,
+   "y": 127.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.7439787983894348,
+   "winning_similarity": 0.7439787983894348,
+   "similarities": [
+    0.7439787983894348,
+    0.7222980856895447
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0039.png",
+   "patch_box_input": [
+    271,
+    117,
+    311,
+    137
+   ],
+   "x_px": 291.0,
+   "y_px": 127.0
+  },
+  {
+   "point_id": "LXP0040",
+   "x": 432.0,
+   "y": 403.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.4182990789413452,
+   "winning_similarity": 0.4182990789413452,
+   "similarities": [
+    0.34884369373321533,
+    0.4182990789413452
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0040.png",
+   "patch_box_input": [
+    412,
+    393,
+    452,
+    413
+   ],
+   "x_px": 432.0,
+   "y_px": 403.0
+  },
+  {
+   "point_id": "LXP0041",
+   "x": 533.0,
+   "y": 146.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.8930457234382629,
+   "winning_similarity": 0.8930457234382629,
+   "similarities": [
+    0.8930457234382629,
+    0.8906946182250977
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0041.png",
+   "patch_box_input": [
+    513,
+    136,
+    553,
+    156
+   ],
+   "x_px": 533.0,
+   "y_px": 146.0
+  },
+  {
+   "point_id": "LXP0042",
+   "x": 945.0,
+   "y": 475.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.7556735873222351,
+   "winning_similarity": 0.7556735873222351,
+   "similarities": [
+    0.7556735873222351,
+    0.6935145854949951
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0042.png",
+   "patch_box_input": [
+    925,
+    465,
+    965,
+    485
+   ],
+   "x_px": 945.0,
+   "y_px": 475.0
+  },
+  {
+   "point_id": "LXP0043",
+   "x": 336.0,
+   "y": 120.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.7383009195327759,
+   "winning_similarity": 0.7383009195327759,
+   "similarities": [
+    0.7383009195327759,
+    0.5792781710624695
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0043.png",
+   "patch_box_input": [
+    316,
+    110,
+    356,
+    130
+   ],
+   "x_px": 336.0,
+   "y_px": 120.0
+  },
+  {
+   "point_id": "LXP0044",
+   "x": 841.0,
+   "y": 469.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.9114468693733215,
+   "winning_similarity": 0.9114468693733215,
+   "similarities": [
+    0.897711992263794,
+    0.9114468693733215
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0044.png",
+   "patch_box_input": [
+    821,
+    459,
+    861,
+    479
+   ],
+   "x_px": 841.0,
+   "y_px": 469.0
+  },
+  {
+   "point_id": "LXP0045",
+   "x": 497.0,
+   "y": 434.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.8435300588607788,
+   "winning_similarity": 0.8435300588607788,
+   "similarities": [
+    0.8435300588607788,
+    0.841632604598999
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0045.png",
+   "patch_box_input": [
+    477,
+    424,
+    517,
+    444
+   ],
+   "x_px": 497.0,
+   "y_px": 434.0
+  },
+  {
+   "point_id": "LXP0046",
+   "x": 732.0,
+   "y": 463.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.8371232748031616,
+   "winning_similarity": 0.8371232748031616,
+   "similarities": [
+    0.8371232748031616,
+    0.6657497882843018
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0046.png",
+   "patch_box_input": [
+    712,
+    453,
+    752,
+    473
+   ],
+   "x_px": 732.0,
+   "y_px": 463.0
+  },
+  {
+   "point_id": "LXP0047",
+   "x": 497.0,
+   "y": 142.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.8403182625770569,
+   "winning_similarity": 0.8403182625770569,
+   "similarities": [
+    0.8403182625770569,
+    0.6581628918647766
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0047.png",
+   "patch_box_input": [
+    477,
+    132,
+    517,
+    152
+   ],
+   "x_px": 497.0,
+   "y_px": 142.0
+  },
+  {
+   "point_id": "LXP0048",
+   "x": 572.0,
+   "y": 441.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.8240602612495422,
+   "winning_similarity": 0.8240602612495422,
+   "similarities": [
+    0.8240602612495422,
+    0.6503260135650635
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0048.png",
+   "patch_box_input": [
+    552,
+    431,
+    592,
+    451
+   ],
+   "x_px": 572.0,
+   "y_px": 441.0
+  },
+  {
+   "point_id": "LXP0049",
+   "x": 236.0,
+   "y": 183.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.6505863666534424,
+   "winning_similarity": 0.6505863666534424,
+   "similarities": [
+    0.6505863666534424,
+    0.4983268976211548
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0049.png",
+   "patch_box_input": [
+    216,
+    173,
+    256,
+    193
+   ],
+   "x_px": 236.0,
+   "y_px": 183.0
+  },
+  {
+   "point_id": "LXP0050",
+   "x": 674.0,
+   "y": 456.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.9131832122802734,
+   "winning_similarity": 0.9131832122802734,
+   "similarities": [
+    0.8817393183708191,
+    0.9131832122802734
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0050.png",
+   "patch_box_input": [
+    654,
+    446,
+    694,
+    466
+   ],
+   "x_px": 674.0,
+   "y_px": 456.0
+  },
+  {
+   "point_id": "LXP0051",
+   "x": 436.0,
+   "y": 134.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.824479877948761,
+   "winning_similarity": 0.824479877948761,
+   "similarities": [
+    0.824479877948761,
+    0.8108631372451782
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0051.png",
+   "patch_box_input": [
+    416,
+    124,
+    456,
+    144
+   ],
+   "x_px": 436.0,
+   "y_px": 134.0
+  },
+  {
+   "point_id": "LXP0052",
+   "x": 375.0,
+   "y": 125.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.7833995819091797,
+   "winning_similarity": 0.7833995819091797,
+   "similarities": [
+    0.7833995819091797,
+    0.7771475315093994
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0052.png",
+   "patch_box_input": [
+    355,
+    115,
+    395,
+    135
+   ],
+   "x_px": 375.0,
+   "y_px": 125.0
+  },
+  {
+   "point_id": "LXP0053",
+   "x": 883.0,
+   "y": 471.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.7875453233718872,
+   "winning_similarity": 0.7875453233718872,
+   "similarities": [
+    0.7875453233718872,
+    0.7203031182289124
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0053.png",
+   "patch_box_input": [
+    863,
+    461,
+    903,
+    481
+   ],
+   "x_px": 883.0,
+   "y_px": 471.0
+  },
+  {
+   "point_id": "LXP0054",
+   "x": 218.0,
+   "y": 124.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.8730491399765015,
+   "winning_similarity": 0.8730491399765015,
+   "similarities": [
+    0.794994056224823,
+    0.8730491399765015
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0054.png",
+   "patch_box_input": [
+    198,
+    114,
+    238,
+    134
+   ],
+   "x_px": 218.0,
+   "y_px": 124.0
+  },
+  {
+   "point_id": "LXP0055",
+   "x": 587.0,
+   "y": 442.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.8401547074317932,
+   "winning_similarity": 0.8401547074317932,
+   "similarities": [
+    0.8401547074317932,
+    0.621425986289978
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0055.png",
+   "patch_box_input": [
+    567,
+    432,
+    607,
+    452
+   ],
+   "x_px": 587.0,
+   "y_px": 442.0
+  },
+  {
+   "point_id": "LXP0056",
+   "x": 453.0,
+   "y": 426.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.8678205013275146,
+   "winning_similarity": 0.8678205013275146,
+   "similarities": [
+    0.8536902666091919,
+    0.8678205013275146
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0056.png",
+   "patch_box_input": [
+    433,
+    416,
+    473,
+    436
+   ],
+   "x_px": 453.0,
+   "y_px": 426.0
+  },
+  {
+   "point_id": "LXP0057",
+   "x": 459.0,
+   "y": 138.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.7880975008010864,
+   "winning_similarity": 0.7880975008010864,
+   "similarities": [
+    0.7880975008010864,
+    0.7521411776542664
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0057.png",
+   "patch_box_input": [
+    439,
+    128,
+    479,
+    148
+   ],
+   "x_px": 459.0,
+   "y_px": 138.0
+  },
+  {
+   "point_id": "LXP0058",
+   "x": 487.0,
+   "y": 141.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.8088592290878296,
+   "winning_similarity": 0.8088592290878296,
+   "similarities": [
+    0.8088592290878296,
+    0.6338717341423035
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0058.png",
+   "patch_box_input": [
+    467,
+    131,
+    507,
+    151
+   ],
+   "x_px": 487.0,
+   "y_px": 141.0
+  },
+  {
+   "point_id": "LXP0059",
+   "x": 299.0,
+   "y": 269.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.8511009216308594,
+   "winning_similarity": 0.8511009216308594,
+   "similarities": [
+    0.8367603421211243,
+    0.8511009216308594
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0059.png",
+   "patch_box_input": [
+    279,
+    259,
+    319,
+    279
+   ],
+   "x_px": 299.0,
+   "y_px": 269.0
+  },
+  {
+   "point_id": "LXP0060",
+   "x": 336.0,
+   "y": 337.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.6589861512184143,
+   "winning_similarity": 0.6589861512184143,
+   "similarities": [
+    0.6589861512184143,
+    0.4907481372356415
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0060.png",
+   "patch_box_input": [
+    316,
+    327,
+    356,
+    347
+   ],
+   "x_px": 336.0,
+   "y_px": 337.0
+  },
+  {
+   "point_id": "LXP0061",
+   "x": 268.0,
+   "y": 122.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.9034972786903381,
+   "winning_similarity": 0.9034972786903381,
+   "similarities": [
+    0.9034972786903381,
+    0.8669147491455078
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0061.png",
+   "patch_box_input": [
+    248,
+    112,
+    288,
+    132
+   ],
+   "x_px": 268.0,
+   "y_px": 122.0
+  },
+  {
+   "point_id": "LXP0062",
+   "x": 220.0,
+   "y": 166.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.9269078969955444,
+   "winning_similarity": 0.9269078969955444,
+   "similarities": [
+    0.8905830383300781,
+    0.9269078969955444
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0062.png",
+   "patch_box_input": [
+    200,
+    156,
+    240,
+    176
+   ],
+   "x_px": 220.0,
+   "y_px": 166.0
+  },
+  {
+   "point_id": "LXP0063",
+   "x": 395.0,
+   "y": 413.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 1,
+   "score": 0.8739869594573975,
+   "winning_similarity": 0.8739869594573975,
+   "similarities": [
+    0.8470345735549927,
+    0.8739869594573975
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0063.png",
+   "patch_box_input": [
+    375,
+    403,
+    415,
+    423
+   ],
+   "x_px": 395.0,
+   "y_px": 413.0
+  }
+ ],
+ "unavailable": [],
+ "patches": [
+  {
+   "point_index": 0,
+   "point_id": "LXP0000",
+   "box_input": [
+    184,
+    76,
+    224,
+    96
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0000.png"
+  },
+  {
+   "point_index": 1,
+   "point_id": "LXP0001",
+   "box_input": [
+    689,
+    452,
+    729,
+    472
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0001.png"
+  },
+  {
+   "point_index": 2,
+   "point_id": "LXP0002",
+   "box_input": [
+    335,
+    113,
+    375,
+    133
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0002.png"
+  },
+  {
+   "point_index": 3,
+   "point_id": "LXP0003",
+   "box_input": [
+    441,
+    130,
+    481,
+    150
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0003.png"
+  },
+  {
+   "point_index": 4,
+   "point_id": "LXP0004",
+   "box_input": [
+    967,
+    467,
+    1007,
+    487
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0004.png"
+  },
+  {
+   "point_index": 5,
+   "point_id": "LXP0005",
+   "box_input": [
+    521,
+    432,
+    561,
+    452
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0005.png"
+  },
+  {
+   "point_index": 6,
+   "point_id": "LXP0006",
+   "box_input": [
+    984,
+    465,
+    1024,
+    485
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0006.png"
+  },
+  {
+   "point_index": 7,
+   "point_id": "LXP0007",
+   "box_input": [
+    618,
+    143,
+    658,
+    163
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0007.png"
+  },
+  {
+   "point_index": 8,
+   "point_id": "LXP0008",
+   "box_input": [
+    363,
+    385,
+    403,
+    405
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0008.png"
+  },
+  {
+   "point_index": 9,
+   "point_id": "LXP0009",
+   "box_input": [
+    187,
+    122,
+    227,
+    142
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0009.png"
+  },
+  {
+   "point_index": 10,
+   "point_id": "LXP0010",
+   "box_input": [
+    208,
+    116,
+    248,
+    136
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0010.png"
+  },
+  {
+   "point_index": 11,
+   "point_id": "LXP0011",
+   "box_input": [
+    779,
+    457,
+    819,
+    477
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0011.png"
+  },
+  {
+   "point_index": 12,
+   "point_id": "LXP0012",
+   "box_input": [
+    293,
+    280,
+    333,
+    300
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0012.png"
+  },
+  {
+   "point_index": 13,
+   "point_id": "LXP0013",
+   "box_input": [
+    760,
+    456,
+    800,
+    476
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0013.png"
+  },
+  {
+   "point_index": 14,
+   "point_id": "LXP0014",
+   "box_input": [
+    451,
+    417,
+    491,
+    437
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0014.png"
+  },
+  {
+   "point_index": 15,
+   "point_id": "LXP0015",
+   "box_input": [
+    528,
+    137,
+    568,
+    157
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0015.png"
+  },
+  {
+   "point_index": 16,
+   "point_id": "LXP0016",
+   "box_input": [
+    889,
+    464,
+    929,
+    484
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0016.png"
+  },
+  {
+   "point_index": 17,
+   "point_id": "LXP0017",
+   "box_input": [
+    378,
+    118,
+    418,
+    138
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0017.png"
+  },
+  {
+   "point_index": 18,
+   "point_id": "LXP0018",
+   "box_input": [
+    902,
+    464,
+    942,
+    484
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0018.png"
+  },
+  {
+   "point_index": 19,
+   "point_id": "LXP0019",
+   "box_input": [
+    489,
+    425,
+    529,
+    445
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0019.png"
+  },
+  {
+   "point_index": 20,
+   "point_id": "LXP0021",
+   "box_input": [
+    294,
+    107,
+    334,
+    127
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0021.png"
+  },
+  {
+   "point_index": 21,
+   "point_id": "LXP0022",
+   "box_input": [
+    389,
+    119,
+    429,
+    139
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0022.png"
+  },
+  {
+   "point_index": 22,
+   "point_id": "LXP0023",
+   "box_input": [
+    238,
+    199,
+    278,
+    219
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0023.png"
+  },
+  {
+   "point_index": 23,
+   "point_id": "LXP0024",
+   "box_input": [
+    558,
+    136,
+    598,
+    156
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0024.png"
+  },
+  {
+   "point_index": 24,
+   "point_id": "LXP0025",
+   "box_input": [
+    508,
+    134,
+    548,
+    154
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0025.png"
+  },
+  {
+   "point_index": 25,
+   "point_id": "LXP0026",
+   "box_input": [
+    797,
+    458,
+    837,
+    478
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0026.png"
+  },
+  {
+   "point_index": 26,
+   "point_id": "LXP0027",
+   "box_input": [
+    391,
+    420,
+    431,
+    440
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0027.png"
+  },
+  {
+   "point_index": 27,
+   "point_id": "LXP0028",
+   "box_input": [
+    941,
+    470,
+    981,
+    490
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0028.png"
+  },
+  {
+   "point_index": 28,
+   "point_id": "LXP0029",
+   "box_input": [
+    673,
+    451,
+    713,
+    471
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0029.png"
+  },
+  {
+   "point_index": 29,
+   "point_id": "LXP0030",
+   "box_input": [
+    239,
+    109,
+    279,
+    129
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0030.png"
+  },
+  {
+   "point_index": 30,
+   "point_id": "LXP0031",
+   "box_input": [
+    576,
+    432,
+    616,
+    452
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0031.png"
+  },
+  {
+   "point_index": 31,
+   "point_id": "LXP0032",
+   "box_input": [
+    569,
+    141,
+    609,
+    161
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0032.png"
+  },
+  {
+   "point_index": 32,
+   "point_id": "LXP0033",
+   "box_input": [
+    255,
+    215,
+    295,
+    235
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0033.png"
+  },
+  {
+   "point_index": 33,
+   "point_id": "LXP0034",
+   "box_input": [
+    462,
+    421,
+    502,
+    441
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0034.png"
+  },
+  {
+   "point_index": 34,
+   "point_id": "LXP0035",
+   "box_input": [
+    723,
+    453,
+    763,
+    473
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0035.png"
+  },
+  {
+   "point_index": 35,
+   "point_id": "LXP0036",
+   "box_input": [
+    843,
+    461,
+    883,
+    481
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0036.png"
+  },
+  {
+   "point_index": 36,
+   "point_id": "LXP0037",
+   "box_input": [
+    593,
+    444,
+    633,
+    464
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0037.png"
+  },
+  {
+   "point_index": 37,
+   "point_id": "LXP0038",
+   "box_input": [
+    340,
+    365,
+    380,
+    385
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0038.png"
+  },
+  {
+   "point_index": 38,
+   "point_id": "LXP0039",
+   "box_input": [
+    271,
+    117,
+    311,
+    137
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0039.png"
+  },
+  {
+   "point_index": 39,
+   "point_id": "LXP0040",
+   "box_input": [
+    412,
+    393,
+    452,
+    413
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0040.png"
+  },
+  {
+   "point_index": 40,
+   "point_id": "LXP0041",
+   "box_input": [
+    513,
+    136,
+    553,
+    156
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0041.png"
+  },
+  {
+   "point_index": 41,
+   "point_id": "LXP0042",
+   "box_input": [
+    925,
+    465,
+    965,
+    485
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0042.png"
+  },
+  {
+   "point_index": 42,
+   "point_id": "LXP0043",
+   "box_input": [
+    316,
+    110,
+    356,
+    130
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0043.png"
+  },
+  {
+   "point_index": 43,
+   "point_id": "LXP0044",
+   "box_input": [
+    821,
+    459,
+    861,
+    479
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0044.png"
+  },
+  {
+   "point_index": 44,
+   "point_id": "LXP0045",
+   "box_input": [
+    477,
+    424,
+    517,
+    444
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0045.png"
+  },
+  {
+   "point_index": 45,
+   "point_id": "LXP0046",
+   "box_input": [
+    712,
+    453,
+    752,
+    473
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0046.png"
+  },
+  {
+   "point_index": 46,
+   "point_id": "LXP0047",
+   "box_input": [
+    477,
+    132,
+    517,
+    152
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0047.png"
+  },
+  {
+   "point_index": 47,
+   "point_id": "LXP0048",
+   "box_input": [
+    552,
+    431,
+    592,
+    451
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0048.png"
+  },
+  {
+   "point_index": 48,
+   "point_id": "LXP0049",
+   "box_input": [
+    216,
+    173,
+    256,
+    193
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0049.png"
+  },
+  {
+   "point_index": 49,
+   "point_id": "LXP0050",
+   "box_input": [
+    654,
+    446,
+    694,
+    466
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0050.png"
+  },
+  {
+   "point_index": 50,
+   "point_id": "LXP0051",
+   "box_input": [
+    416,
+    124,
+    456,
+    144
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0051.png"
+  },
+  {
+   "point_index": 51,
+   "point_id": "LXP0052",
+   "box_input": [
+    355,
+    115,
+    395,
+    135
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0052.png"
+  },
+  {
+   "point_index": 52,
+   "point_id": "LXP0053",
+   "box_input": [
+    863,
+    461,
+    903,
+    481
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0053.png"
+  },
+  {
+   "point_index": 53,
+   "point_id": "LXP0054",
+   "box_input": [
+    198,
+    114,
+    238,
+    134
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0054.png"
+  },
+  {
+   "point_index": 54,
+   "point_id": "LXP0055",
+   "box_input": [
+    567,
+    432,
+    607,
+    452
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0055.png"
+  },
+  {
+   "point_index": 55,
+   "point_id": "LXP0056",
+   "box_input": [
+    433,
+    416,
+    473,
+    436
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0056.png"
+  },
+  {
+   "point_index": 56,
+   "point_id": "LXP0057",
+   "box_input": [
+    439,
+    128,
+    479,
+    148
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0057.png"
+  },
+  {
+   "point_index": 57,
+   "point_id": "LXP0058",
+   "box_input": [
+    467,
+    131,
+    507,
+    151
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0058.png"
+  },
+  {
+   "point_index": 58,
+   "point_id": "LXP0059",
+   "box_input": [
+    279,
+    259,
+    319,
+    279
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0059.png"
+  },
+  {
+   "point_index": 59,
+   "point_id": "LXP0060",
+   "box_input": [
+    316,
+    327,
+    356,
+    347
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0060.png"
+  },
+  {
+   "point_index": 60,
+   "point_id": "LXP0061",
+   "box_input": [
+    248,
+    112,
+    288,
+    132
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0061.png"
+  },
+  {
+   "point_index": 61,
+   "point_id": "LXP0062",
+   "box_input": [
+    200,
+    156,
+    240,
+    176
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0062.png"
+  },
+  {
+   "point_index": 62,
+   "point_id": "LXP0063",
+   "box_input": [
+    375,
+    403,
+    415,
+    423
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/patches/LXP0063.png"
+  }
+ ],
+ "similarity_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/er__imalumab_2_1_1__p01__v5/lineex_paper_grouped/similarity.npy",
+ "similarity_row_point_ids": [
+  "LXP0000",
+  "LXP0001",
+  "LXP0002",
+  "LXP0003",
+  "LXP0004",
+  "LXP0005",
+  "LXP0006",
+  "LXP0007",
+  "LXP0008",
+  "LXP0009",
+  "LXP0010",
+  "LXP0011",
+  "LXP0012",
+  "LXP0013",
+  "LXP0014",
+  "LXP0015",
+  "LXP0016",
+  "LXP0017",
+  "LXP0018",
+  "LXP0019",
+  "LXP0021",
+  "LXP0022",
+  "LXP0023",
+  "LXP0024",
+  "LXP0025",
+  "LXP0026",
+  "LXP0027",
+  "LXP0028",
+  "LXP0029",
+  "LXP0030",
+  "LXP0031",
+  "LXP0032",
+  "LXP0033",
+  "LXP0034",
+  "LXP0035",
+  "LXP0036",
+  "LXP0037",
+  "LXP0038",
+  "LXP0039",
+  "LXP0040",
+  "LXP0041",
+  "LXP0042",
+  "LXP0043",
+  "LXP0044",
+  "LXP0045",
+  "LXP0046",
+  "LXP0047",
+  "LXP0048",
+  "LXP0049",
+  "LXP0050",
+  "LXP0051",
+  "LXP0052",
+  "LXP0053",
+  "LXP0054",
+  "LXP0055",
+  "LXP0056",
+  "LXP0057",
+  "LXP0058",
+  "LXP0059",
+  "LXP0060",
+  "LXP0061",
+  "LXP0062",
+  "LXP0063"
+ ],
+ "similarity_column_series_ids": [
+  "s02",
+  "s01"
+ ],
+ "timing": {
+  "shared_input_verification_seconds": 0.0,
+  "legend_crop_seconds": 0.0,
+  "network_seconds": 0.028439800022169948,
+  "head_postprocess_and_export_seconds": 0.02059289999306202,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.09818939998513088,
+  "learned_matching_seconds": 0.317892299965024,
+  "total_seconds": 0.4712226999690756,
+  "method_total_excluding_shared_verification_seconds": 0.4712226999690756,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "patch_matching_timing": {
+  "patch_extract_and_export_seconds": 0.09818939998513088,
+  "learned_matching_seconds": 0.317892299965024,
+  "total_seconds": 0.42218999995384365
+ },
+ "timing_breakdown": {
+  "shared_input_verification_seconds": 0.0,
+  "legend_crop_seconds": 0.0,
+  "network_seconds": 0.028439800022169948,
+  "head_postprocess_and_export_seconds": 0.02059289999306202,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.09818939998513088,
+  "learned_matching_seconds": 0.317892299965024,
+  "total_seconds": 0.4712226999690756,
+  "method_total_excluding_shared_verification_seconds": 0.4712226999690756,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "raw_points": [
+  {
+   "point_id": "LXP0000",
+   "x": 204.0,
+   "y": 86.0,
+   "detection_score": null,
+   "x_px": 204.0,
+   "y_px": 86.0
+  },
+  {
+   "point_id": "LXP0001",
+   "x": 709.0,
+   "y": 462.0,
+   "detection_score": null,
+   "x_px": 709.0,
+   "y_px": 462.0
+  },
+  {
+   "point_id": "LXP0002",
+   "x": 355.0,
+   "y": 123.0,
+   "detection_score": null,
+   "x_px": 355.0,
+   "y_px": 123.0
+  },
+  {
+   "point_id": "LXP0003",
+   "x": 461.0,
+   "y": 140.0,
+   "detection_score": null,
+   "x_px": 461.0,
+   "y_px": 140.0
+  },
+  {
+   "point_id": "LXP0004",
+   "x": 987.0,
+   "y": 477.0,
+   "detection_score": null,
+   "x_px": 987.0,
+   "y_px": 477.0
+  },
+  {
+   "point_id": "LXP0005",
+   "x": 541.0,
+   "y": 442.0,
+   "detection_score": null,
+   "x_px": 541.0,
+   "y_px": 442.0
+  },
+  {
+   "point_id": "LXP0006",
+   "x": 1004.0,
+   "y": 475.0,
+   "detection_score": null,
+   "x_px": 1004.0,
+   "y_px": 475.0
+  },
+  {
+   "point_id": "LXP0007",
+   "x": 638.0,
+   "y": 153.0,
+   "detection_score": null,
+   "x_px": 638.0,
+   "y_px": 153.0
+  },
+  {
+   "point_id": "LXP0008",
+   "x": 383.0,
+   "y": 395.0,
+   "detection_score": null,
+   "x_px": 383.0,
+   "y_px": 395.0
+  },
+  {
+   "point_id": "LXP0009",
+   "x": 207.0,
+   "y": 132.0,
+   "detection_score": null,
+   "x_px": 207.0,
+   "y_px": 132.0
+  },
+  {
+   "point_id": "LXP0010",
+   "x": 228.0,
+   "y": 126.0,
+   "detection_score": null,
+   "x_px": 228.0,
+   "y_px": 126.0
+  },
+  {
+   "point_id": "LXP0011",
+   "x": 799.0,
+   "y": 467.0,
+   "detection_score": null,
+   "x_px": 799.0,
+   "y_px": 467.0
+  },
+  {
+   "point_id": "LXP0012",
+   "x": 313.0,
+   "y": 290.0,
+   "detection_score": null,
+   "x_px": 313.0,
+   "y_px": 290.0
+  },
+  {
+   "point_id": "LXP0013",
+   "x": 780.0,
+   "y": 466.0,
+   "detection_score": null,
+   "x_px": 780.0,
+   "y_px": 466.0
+  },
+  {
+   "point_id": "LXP0014",
+   "x": 471.0,
+   "y": 427.0,
+   "detection_score": null,
+   "x_px": 471.0,
+   "y_px": 427.0
+  },
+  {
+   "point_id": "LXP0015",
+   "x": 548.0,
+   "y": 147.0,
+   "detection_score": null,
+   "x_px": 548.0,
+   "y_px": 147.0
+  },
+  {
+   "point_id": "LXP0016",
+   "x": 909.0,
+   "y": 474.0,
+   "detection_score": null,
+   "x_px": 909.0,
+   "y_px": 474.0
+  },
+  {
+   "point_id": "LXP0017",
+   "x": 398.0,
+   "y": 128.0,
+   "detection_score": null,
+   "x_px": 398.0,
+   "y_px": 128.0
+  },
+  {
+   "point_id": "LXP0018",
+   "x": 922.0,
+   "y": 474.0,
+   "detection_score": null,
+   "x_px": 922.0,
+   "y_px": 474.0
+  },
+  {
+   "point_id": "LXP0019",
+   "x": 509.0,
+   "y": 435.0,
+   "detection_score": null,
+   "x_px": 509.0,
+   "y_px": 435.0
+  },
+  {
+   "point_id": "LXP0021",
+   "x": 314.0,
+   "y": 117.0,
+   "detection_score": null,
+   "x_px": 314.0,
+   "y_px": 117.0
+  },
+  {
+   "point_id": "LXP0022",
+   "x": 409.0,
+   "y": 129.0,
+   "detection_score": null,
+   "x_px": 409.0,
+   "y_px": 129.0
+  },
+  {
+   "point_id": "LXP0023",
+   "x": 258.0,
+   "y": 209.0,
+   "detection_score": null,
+   "x_px": 258.0,
+   "y_px": 209.0
+  },
+  {
+   "point_id": "LXP0024",
+   "x": 578.0,
+   "y": 146.0,
+   "detection_score": null,
+   "x_px": 578.0,
+   "y_px": 146.0
+  },
+  {
+   "point_id": "LXP0025",
+   "x": 528.0,
+   "y": 144.0,
+   "detection_score": null,
+   "x_px": 528.0,
+   "y_px": 144.0
+  },
+  {
+   "point_id": "LXP0026",
+   "x": 817.0,
+   "y": 468.0,
+   "detection_score": null,
+   "x_px": 817.0,
+   "y_px": 468.0
+  },
+  {
+   "point_id": "LXP0027",
+   "x": 411.0,
+   "y": 430.0,
+   "detection_score": null,
+   "x_px": 411.0,
+   "y_px": 430.0
+  },
+  {
+   "point_id": "LXP0028",
+   "x": 961.0,
+   "y": 480.0,
+   "detection_score": null,
+   "x_px": 961.0,
+   "y_px": 480.0
+  },
+  {
+   "point_id": "LXP0029",
+   "x": 693.0,
+   "y": 461.0,
+   "detection_score": null,
+   "x_px": 693.0,
+   "y_px": 461.0
+  },
+  {
+   "point_id": "LXP0030",
+   "x": 259.0,
+   "y": 119.0,
+   "detection_score": null,
+   "x_px": 259.0,
+   "y_px": 119.0
+  },
+  {
+   "point_id": "LXP0031",
+   "x": 596.0,
+   "y": 442.0,
+   "detection_score": null,
+   "x_px": 596.0,
+   "y_px": 442.0
+  },
+  {
+   "point_id": "LXP0032",
+   "x": 589.0,
+   "y": 151.0,
+   "detection_score": null,
+   "x_px": 589.0,
+   "y_px": 151.0
+  },
+  {
+   "point_id": "LXP0033",
+   "x": 275.0,
+   "y": 225.0,
+   "detection_score": null,
+   "x_px": 275.0,
+   "y_px": 225.0
+  },
+  {
+   "point_id": "LXP0034",
+   "x": 482.0,
+   "y": 431.0,
+   "detection_score": null,
+   "x_px": 482.0,
+   "y_px": 431.0
+  },
+  {
+   "point_id": "LXP0035",
+   "x": 743.0,
+   "y": 463.0,
+   "detection_score": null,
+   "x_px": 743.0,
+   "y_px": 463.0
+  },
+  {
+   "point_id": "LXP0036",
+   "x": 863.0,
+   "y": 471.0,
+   "detection_score": null,
+   "x_px": 863.0,
+   "y_px": 471.0
+  },
+  {
+   "point_id": "LXP0037",
+   "x": 613.0,
+   "y": 454.0,
+   "detection_score": null,
+   "x_px": 613.0,
+   "y_px": 454.0
+  },
+  {
+   "point_id": "LXP0038",
+   "x": 360.0,
+   "y": 375.0,
+   "detection_score": null,
+   "x_px": 360.0,
+   "y_px": 375.0
+  },
+  {
+   "point_id": "LXP0039",
+   "x": 291.0,
+   "y": 127.0,
+   "detection_score": null,
+   "x_px": 291.0,
+   "y_px": 127.0
+  },
+  {
+   "point_id": "LXP0040",
+   "x": 432.0,
+   "y": 403.0,
+   "detection_score": null,
+   "x_px": 432.0,
+   "y_px": 403.0
+  },
+  {
+   "point_id": "LXP0041",
+   "x": 533.0,
+   "y": 146.0,
+   "detection_score": null,
+   "x_px": 533.0,
+   "y_px": 146.0
+  },
+  {
+   "point_id": "LXP0042",
+   "x": 945.0,
+   "y": 475.0,
+   "detection_score": null,
+   "x_px": 945.0,
+   "y_px": 475.0
+  },
+  {
+   "point_id": "LXP0043",
+   "x": 336.0,
+   "y": 120.0,
+   "detection_score": null,
+   "x_px": 336.0,
+   "y_px": 120.0
+  },
+  {
+   "point_id": "LXP0044",
+   "x": 841.0,
+   "y": 469.0,
+   "detection_score": null,
+   "x_px": 841.0,
+   "y_px": 469.0
+  },
+  {
+   "point_id": "LXP0045",
+   "x": 497.0,
+   "y": 434.0,
+   "detection_score": null,
+   "x_px": 497.0,
+   "y_px": 434.0
+  },
+  {
+   "point_id": "LXP0046",
+   "x": 732.0,
+   "y": 463.0,
+   "detection_score": null,
+   "x_px": 732.0,
+   "y_px": 463.0
+  },
+  {
+   "point_id": "LXP0047",
+   "x": 497.0,
+   "y": 142.0,
+   "detection_score": null,
+   "x_px": 497.0,
+   "y_px": 142.0
+  },
+  {
+   "point_id": "LXP0048",
+   "x": 572.0,
+   "y": 441.0,
+   "detection_score": null,
+   "x_px": 572.0,
+   "y_px": 441.0
+  },
+  {
+   "point_id": "LXP0049",
+   "x": 236.0,
+   "y": 183.0,
+   "detection_score": null,
+   "x_px": 236.0,
+   "y_px": 183.0
+  },
+  {
+   "point_id": "LXP0050",
+   "x": 674.0,
+   "y": 456.0,
+   "detection_score": null,
+   "x_px": 674.0,
+   "y_px": 456.0
+  },
+  {
+   "point_id": "LXP0051",
+   "x": 436.0,
+   "y": 134.0,
+   "detection_score": null,
+   "x_px": 436.0,
+   "y_px": 134.0
+  },
+  {
+   "point_id": "LXP0052",
+   "x": 375.0,
+   "y": 125.0,
+   "detection_score": null,
+   "x_px": 375.0,
+   "y_px": 125.0
+  },
+  {
+   "point_id": "LXP0053",
+   "x": 883.0,
+   "y": 471.0,
+   "detection_score": null,
+   "x_px": 883.0,
+   "y_px": 471.0
+  },
+  {
+   "point_id": "LXP0054",
+   "x": 218.0,
+   "y": 124.0,
+   "detection_score": null,
+   "x_px": 218.0,
+   "y_px": 124.0
+  },
+  {
+   "point_id": "LXP0055",
+   "x": 587.0,
+   "y": 442.0,
+   "detection_score": null,
+   "x_px": 587.0,
+   "y_px": 442.0
+  },
+  {
+   "point_id": "LXP0056",
+   "x": 453.0,
+   "y": 426.0,
+   "detection_score": null,
+   "x_px": 453.0,
+   "y_px": 426.0
+  },
+  {
+   "point_id": "LXP0057",
+   "x": 459.0,
+   "y": 138.0,
+   "detection_score": null,
+   "x_px": 459.0,
+   "y_px": 138.0
+  },
+  {
+   "point_id": "LXP0058",
+   "x": 487.0,
+   "y": 141.0,
+   "detection_score": null,
+   "x_px": 487.0,
+   "y_px": 141.0
+  },
+  {
+   "point_id": "LXP0059",
+   "x": 299.0,
+   "y": 269.0,
+   "detection_score": null,
+   "x_px": 299.0,
+   "y_px": 269.0
+  },
+  {
+   "point_id": "LXP0060",
+   "x": 336.0,
+   "y": 337.0,
+   "detection_score": null,
+   "x_px": 336.0,
+   "y_px": 337.0
+  },
+  {
+   "point_id": "LXP0061",
+   "x": 268.0,
+   "y": 122.0,
+   "detection_score": null,
+   "x_px": 268.0,
+   "y_px": 122.0
+  },
+  {
+   "point_id": "LXP0062",
+   "x": 220.0,
+   "y": 166.0,
+   "detection_score": null,
+   "x_px": 220.0,
+   "y_px": 166.0
+  },
+  {
+   "point_id": "LXP0063",
+   "x": 395.0,
+   "y": 413.0,
+   "detection_score": null,
+   "x_px": 395.0,
+   "y_px": 413.0
+  }
+ ],
+ "raw_queries": [
+  {
+   "query_id": 0,
+   "x": 204,
+   "y": 86,
+   "score": null,
+   "normalized_x": 0.18996179103851318,
+   "normalized_y": 0.12521472573280334,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 1,
+   "x": 709,
+   "y": 462,
+   "score": null,
+   "normalized_x": 0.660756528377533,
+   "normalized_y": 0.6678776741027832,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 2,
+   "x": 355,
+   "y": 123,
+   "score": null,
+   "normalized_x": 0.3305862843990326,
+   "normalized_y": 0.17858274281024933,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 3,
+   "x": 461,
+   "y": 140,
+   "score": null,
+   "normalized_x": 0.4295464754104614,
+   "normalized_y": 0.2029116004705429,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 4,
+   "x": 987,
+   "y": 477,
+   "score": null,
+   "normalized_x": 0.9190937280654907,
+   "normalized_y": 0.6907373070716858,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 5,
+   "x": 541,
+   "y": 442,
+   "score": null,
+   "normalized_x": 0.503975510597229,
+   "normalized_y": 0.6387504935264587,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 6,
+   "x": 1004,
+   "y": 475,
+   "score": null,
+   "normalized_x": 0.9349097609519958,
+   "normalized_y": 0.6867815852165222,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 7,
+   "x": 638,
+   "y": 153,
+   "score": null,
+   "normalized_x": 0.5943862795829773,
+   "normalized_y": 0.22122211754322052,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 8,
+   "x": 383,
+   "y": 395,
+   "score": null,
+   "normalized_x": 0.3572258949279785,
+   "normalized_y": 0.5713256597518921,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 9,
+   "x": 207,
+   "y": 132,
+   "score": null,
+   "normalized_x": 0.1936473250389099,
+   "normalized_y": 0.19158382713794708,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 10,
+   "x": 228,
+   "y": 126,
+   "score": null,
+   "normalized_x": 0.21272031962871552,
+   "normalized_y": 0.18225912749767303,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 11,
+   "x": 799,
+   "y": 467,
+   "score": null,
+   "normalized_x": 0.7445424199104309,
+   "normalized_y": 0.6755130290985107,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 12,
+   "x": 313,
+   "y": 290,
+   "score": null,
+   "normalized_x": 0.291568785905838,
+   "normalized_y": 0.41988101601600647,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 13,
+   "x": 780,
+   "y": 466,
+   "score": null,
+   "normalized_x": 0.7264593839645386,
+   "normalized_y": 0.6743627786636353,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 14,
+   "x": 471,
+   "y": 427,
+   "score": null,
+   "normalized_x": 0.4386447072029114,
+   "normalized_y": 0.6184490919113159,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 15,
+   "x": 548,
+   "y": 147,
+   "score": null,
+   "normalized_x": 0.5104392170906067,
+   "normalized_y": 0.21279403567314148,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 16,
+   "x": 909,
+   "y": 474,
+   "score": null,
+   "normalized_x": 0.8467308878898621,
+   "normalized_y": 0.6855752468109131,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 17,
+   "x": 398,
+   "y": 128,
+   "score": null,
+   "normalized_x": 0.3710388243198395,
+   "normalized_y": 0.1855451464653015,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 18,
+   "x": 922,
+   "y": 474,
+   "score": null,
+   "normalized_x": 0.8587656021118164,
+   "normalized_y": 0.6862139701843262,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 19,
+   "x": 509,
+   "y": 435,
+   "score": null,
+   "normalized_x": 0.47393596172332764,
+   "normalized_y": 0.6287828087806702,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 20,
+   "x": 653,
+   "y": 343,
+   "score": null,
+   "normalized_x": 0.6087964177131653,
+   "normalized_y": 0.49573251605033875,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": true,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 21,
+   "x": 314,
+   "y": 117,
+   "score": null,
+   "normalized_x": 0.2927873730659485,
+   "normalized_y": 0.16952213644981384,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 22,
+   "x": 409,
+   "y": 129,
+   "score": null,
+   "normalized_x": 0.3815002143383026,
+   "normalized_y": 0.18727508187294006,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 23,
+   "x": 258,
+   "y": 209,
+   "score": null,
+   "normalized_x": 0.24077105522155762,
+   "normalized_y": 0.3022279739379883,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 24,
+   "x": 578,
+   "y": 146,
+   "score": null,
+   "normalized_x": 0.538862943649292,
+   "normalized_y": 0.21167656779289246,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 25,
+   "x": 528,
+   "y": 144,
+   "score": null,
+   "normalized_x": 0.4918542206287384,
+   "normalized_y": 0.2091076821088791,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 26,
+   "x": 817,
+   "y": 468,
+   "score": null,
+   "normalized_x": 0.7612765431404114,
+   "normalized_y": 0.6766048669815063,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 27,
+   "x": 411,
+   "y": 430,
+   "score": null,
+   "normalized_x": 0.3833564221858978,
+   "normalized_y": 0.6228252649307251,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 28,
+   "x": 961,
+   "y": 480,
+   "score": null,
+   "normalized_x": 0.8951489329338074,
+   "normalized_y": 0.693871796131134,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 29,
+   "x": 693,
+   "y": 461,
+   "score": null,
+   "normalized_x": 0.6459025740623474,
+   "normalized_y": 0.6668484210968018,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 30,
+   "x": 259,
+   "y": 119,
+   "score": null,
+   "normalized_x": 0.24182724952697754,
+   "normalized_y": 0.17305229604244232,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 31,
+   "x": 596,
+   "y": 442,
+   "score": null,
+   "normalized_x": 0.5558314919471741,
+   "normalized_y": 0.6392737627029419,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 32,
+   "x": 589,
+   "y": 151,
+   "score": null,
+   "normalized_x": 0.549197256565094,
+   "normalized_y": 0.21872921288013458,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 33,
+   "x": 275,
+   "y": 225,
+   "score": null,
+   "normalized_x": 0.25670576095581055,
+   "normalized_y": 0.3257151246070862,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 34,
+   "x": 482,
+   "y": 431,
+   "score": null,
+   "normalized_x": 0.4495227038860321,
+   "normalized_y": 0.6234040260314941,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 35,
+   "x": 743,
+   "y": 463,
+   "score": null,
+   "normalized_x": 0.6925346851348877,
+   "normalized_y": 0.6695135235786438,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 36,
+   "x": 863,
+   "y": 471,
+   "score": null,
+   "normalized_x": 0.8040131330490112,
+   "normalized_y": 0.680797815322876,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 37,
+   "x": 613,
+   "y": 454,
+   "score": null,
+   "normalized_x": 0.5715903043746948,
+   "normalized_y": 0.6569897532463074,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 38,
+   "x": 360,
+   "y": 375,
+   "score": null,
+   "normalized_x": 0.33551523089408875,
+   "normalized_y": 0.5419856309890747,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 39,
+   "x": 291,
+   "y": 127,
+   "score": null,
+   "normalized_x": 0.27181103825569153,
+   "normalized_y": 0.18462364375591278,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 40,
+   "x": 432,
+   "y": 403,
+   "score": null,
+   "normalized_x": 0.40244439244270325,
+   "normalized_y": 0.5827189683914185,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 41,
+   "x": 533,
+   "y": 146,
+   "score": null,
+   "normalized_x": 0.496432363986969,
+   "normalized_y": 0.2116849422454834,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 42,
+   "x": 945,
+   "y": 475,
+   "score": null,
+   "normalized_x": 0.8805763721466064,
+   "normalized_y": 0.6875444650650024,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 43,
+   "x": 336,
+   "y": 120,
+   "score": null,
+   "normalized_x": 0.3133750855922699,
+   "normalized_y": 0.17361454665660858,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 44,
+   "x": 841,
+   "y": 469,
+   "score": null,
+   "normalized_x": 0.7837638258934021,
+   "normalized_y": 0.6778102517127991,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 45,
+   "x": 497,
+   "y": 434,
+   "score": null,
+   "normalized_x": 0.46333444118499756,
+   "normalized_y": 0.6273626685142517,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 46,
+   "x": 732,
+   "y": 463,
+   "score": null,
+   "normalized_x": 0.682388186454773,
+   "normalized_y": 0.6696165204048157,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 47,
+   "x": 497,
+   "y": 142,
+   "score": null,
+   "normalized_x": 0.46296226978302,
+   "normalized_y": 0.2065805047750473,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 48,
+   "x": 572,
+   "y": 441,
+   "score": null,
+   "normalized_x": 0.5330392122268677,
+   "normalized_y": 0.6386616230010986,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 49,
+   "x": 236,
+   "y": 183,
+   "score": null,
+   "normalized_x": 0.22064676880836487,
+   "normalized_y": 0.26518845558166504,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 50,
+   "x": 674,
+   "y": 456,
+   "score": null,
+   "normalized_x": 0.6280713677406311,
+   "normalized_y": 0.65973299741745,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 51,
+   "x": 436,
+   "y": 134,
+   "score": null,
+   "normalized_x": 0.4060482680797577,
+   "normalized_y": 0.19448943436145782,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 52,
+   "x": 375,
+   "y": 125,
+   "score": null,
+   "normalized_x": 0.3499526381492615,
+   "normalized_y": 0.18200232088565826,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 53,
+   "x": 883,
+   "y": 471,
+   "score": null,
+   "normalized_x": 0.8225007057189941,
+   "normalized_y": 0.6818054914474487,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 54,
+   "x": 218,
+   "y": 124,
+   "score": null,
+   "normalized_x": 0.20321807265281677,
+   "normalized_y": 0.18015038967132568,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 55,
+   "x": 587,
+   "y": 442,
+   "score": null,
+   "normalized_x": 0.5468910932540894,
+   "normalized_y": 0.6391218304634094,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 56,
+   "x": 453,
+   "y": 426,
+   "score": null,
+   "normalized_x": 0.4221234619617462,
+   "normalized_y": 0.6164554953575134,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 57,
+   "x": 459,
+   "y": 138,
+   "score": null,
+   "normalized_x": 0.428141713142395,
+   "normalized_y": 0.20055735111236572,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 58,
+   "x": 487,
+   "y": 141,
+   "score": null,
+   "normalized_x": 0.4535776376724243,
+   "normalized_y": 0.20406465232372284,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 59,
+   "x": 299,
+   "y": 269,
+   "score": null,
+   "normalized_x": 0.2786649167537689,
+   "normalized_y": 0.38890954852104187,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 60,
+   "x": 336,
+   "y": 337,
+   "score": null,
+   "normalized_x": 0.3131290376186371,
+   "normalized_y": 0.48827412724494934,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 61,
+   "x": 268,
+   "y": 122,
+   "score": null,
+   "normalized_x": 0.2500079572200775,
+   "normalized_y": 0.17670436203479767,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 62,
+   "x": 220,
+   "y": 166,
+   "score": null,
+   "normalized_x": 0.20543451607227325,
+   "normalized_y": 0.24064959585666656,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 63,
+   "x": 395,
+   "y": 413,
+   "score": null,
+   "normalized_x": 0.3679218590259552,
+   "normalized_y": 0.5971215963363647,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  }
+ ],
+ "head_status": "completed",
+ "implementation_choices": {
+  "keypoints": "Official 64-query L+D checkpoint",
+  "background_gate": "paper Algorithm 2 threshold 0.98 (released code uses 0.999); re-implemented gate verified identical to the vendor function at 0.999",
+  "legend_patches": "resized to 40x20 per paper section 4.3 before the matcher 224 transform",
+  "grouping": "Official learned Siamese matcher, no histogram override"
+ },
+ "limitations": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ],
+ "shared_legend_status": "available",
+ "warnings": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ]
+}

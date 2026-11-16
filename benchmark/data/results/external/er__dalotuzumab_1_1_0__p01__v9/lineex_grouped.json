@@ -1,0 +1,3740 @@
+{
+ "version": "external_shared_input_benchmark_v1",
+ "panel_id": "er__dalotuzumab_1_1_0__p01__v9",
+ "modality": "color",
+ "method": "lineex_grouped",
+ "status": "completed",
+ "coordinate_system": "x_px/y_px = full original unrotated image pixels; x/y = shared native crop pixels",
+ "image_path": "data/images\\er__dalotuzumab_1_1_0__p01__v9.png",
+ "input_sha256": "2da86a5040c185e1c6d7b6e4509c9ebe00cb910278747c0143d1e5676b9b5e07",
+ "source_image_path": "data/images\\er__dalotuzumab_1_1_0__p01__v9.png",
+ "source_sha256": "2da86a5040c185e1c6d7b6e4509c9ebe00cb910278747c0143d1e5676b9b5e07",
+ "crop_box_original": [
+  0,
+  0,
+  1027,
+  542
+ ],
+ "plot_box": [
+  116.0,
+  41.0,
+  643.0,
+  451.0
+ ],
+ "legend_box": [
+  648.0,
+  51.0,
+  1014.0,
+  175.0
+ ],
+ "legends": [
+  {
+   "legend_index": 0,
+   "series_id": "s01",
+   "label": "MK-8669",
+   "source_native_legend_id": "color02",
+   "box_input": [
+    648,
+    55,
+    715,
+    82
+   ],
+   "box_original": [
+    648,
+    55,
+    715,
+    82
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legend_crops/legend_01.png",
+   "crop_sha256": "d32188457e5ce464cd135525d2d872133f2b1c51cb30608369864f9c6dd9f059",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legends.json",
+   "shared_legends_sha256": "cbd094c48f048d13252c167bc55e9f342979f547357e2ce5b2f946c198500975",
+   "mapping_provenance": {
+    "color02": "s01",
+    "color03": "s02",
+    "color04": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 1,
+   "series_id": "s02",
+   "label": "MK-0646",
+   "source_native_legend_id": "color03",
+   "box_input": [
+    648,
+    98,
+    715,
+    123
+   ],
+   "box_original": [
+    648,
+    98,
+    715,
+    123
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legend_crops/legend_02.png",
+   "crop_sha256": "a36d1714bf343b7d7d6073023007755bb076aa7120136dd2030a703a733fc450",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legends.json",
+   "shared_legends_sha256": "cbd094c48f048d13252c167bc55e9f342979f547357e2ce5b2f946c198500975",
+   "mapping_provenance": {
+    "color02": "s01",
+    "color03": "s02",
+    "color04": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 2,
+   "series_id": "s03",
+   "label": "MK-0646+MK-8669",
+   "source_native_legend_id": "color04",
+   "box_input": [
+    648,
+    139,
+    716,
+    168
+   ],
+   "box_original": [
+    648,
+    139,
+    716,
+    168
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legend_crops/legend_03.png",
+   "crop_sha256": "de7c2a65893822e3d8c315f648bfdd2cfdf7fbdb6bea2ae258bc45c9e1991f28",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__dalotuzumab_1_1_0__p01__v9/shared_legends.json",
+   "shared_legends_sha256": "cbd094c48f048d13252c167bc55e9f342979f547357e2ce5b2f946c198500975",
+   "mapping_provenance": {
+    "color02": "s01",
+    "color03": "s02",
+    "color04": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  }
+ ],
+ "predictions": [
+  {
+   "point_id": "LX0000",
+   "x": 120.0,
+   "y": 80.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.6594247817993164,
+   "winning_similarity": 0.6594247817993164,
+   "similarities": [
+    0.15358710289001465,
+    0.6584005951881409,
+    0.6594247817993164
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0000.png",
+   "patch_box_input": [
+    100,
+    70,
+    140,
+    90
+   ],
+   "x_px": 120.0,
+   "y_px": 80.0
+  },
+  {
+   "point_id": "LX0001",
+   "x": 325.0,
+   "y": 355.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.6881056427955627,
+   "winning_similarity": 0.6881056427955627,
+   "similarities": [
+    0.5541087985038757,
+    0.6881056427955627,
+    0.6604781150817871
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0001.png",
+   "patch_box_input": [
+    305,
+    345,
+    345,
+    365
+   ],
+   "x_px": 325.0,
+   "y_px": 355.0
+  },
+  {
+   "point_id": "LX0002",
+   "x": 306.0,
+   "y": 149.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.10687580704689026,
+   "winning_similarity": 0.10687580704689026,
+   "similarities": [
+    0.00010418412421131507,
+    0.007725292816758156,
+    0.10687580704689026
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0002.png",
+   "patch_box_input": [
+    286,
+    139,
+    326,
+    159
+   ],
+   "x_px": 306.0,
+   "y_px": 149.0
+  },
+  {
+   "point_id": "LX0003",
+   "x": 512.0,
+   "y": 169.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.17005163431167603,
+   "winning_similarity": 0.17005163431167603,
+   "similarities": [
+    0.03859900310635567,
+    0.17005163431167603,
+    0.1366889923810959
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0003.png",
+   "patch_box_input": [
+    492,
+    159,
+    532,
+    179
+   ],
+   "x_px": 512.0,
+   "y_px": 169.0
+  },
+  {
+   "point_id": "LX0004",
+   "x": 622.0,
+   "y": 303.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9314759373664856,
+   "winning_similarity": 0.9314759373664856,
+   "similarities": [
+    0.9314759373664856,
+    0.8916525840759277,
+    0.12310922145843506
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0004.png",
+   "patch_box_input": [
+    602,
+    293,
+    642,
+    313
+   ],
+   "x_px": 622.0,
+   "y_px": 303.0
+  },
+  {
+   "point_id": "LX0005",
+   "x": 322.0,
+   "y": 345.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8475192189216614,
+   "winning_similarity": 0.8475192189216614,
+   "similarities": [
+    0.772571325302124,
+    0.7328617572784424,
+    0.8475192189216614
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0005.png",
+   "patch_box_input": [
+    302,
+    335,
+    342,
+    355
+   ],
+   "x_px": 322.0,
+   "y_px": 345.0
+  },
+  {
+   "point_id": "LX0006",
+   "x": 611.0,
+   "y": 336.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7769298553466797,
+   "winning_similarity": 0.7769298553466797,
+   "similarities": [
+    0.0016742702573537827,
+    0.14671745896339417,
+    0.7769298553466797
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0006.png",
+   "patch_box_input": [
+    591,
+    326,
+    631,
+    346
+   ],
+   "x_px": 611.0,
+   "y_px": 336.0
+  },
+  {
+   "point_id": "LX0007",
+   "x": 422.0,
+   "y": 217.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9955174326896667,
+   "winning_similarity": 0.9955174326896667,
+   "similarities": [
+    0.9955174326896667,
+    0.9824857711791992,
+    0.263528972864151
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0007.png",
+   "patch_box_input": [
+    402,
+    207,
+    442,
+    227
+   ],
+   "x_px": 422.0,
+   "y_px": 217.0
+  },
+  {
+   "point_id": "LX0008",
+   "x": 207.0,
+   "y": 202.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.2972260117530823,
+   "winning_similarity": 0.2972260117530823,
+   "similarities": [
+    1.2909231372759677e-05,
+    0.0010570221347734332,
+    0.2972260117530823
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0008.png",
+   "patch_box_input": [
+    187,
+    192,
+    227,
+    212
+   ],
+   "x_px": 207.0,
+   "y_px": 202.0
+  },
+  {
+   "point_id": "LX0009",
+   "x": 120.0,
+   "y": 109.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9899104237556458,
+   "winning_similarity": 0.9899104237556458,
+   "similarities": [
+    0.9899104237556458,
+    0.9651818871498108,
+    0.7041593790054321
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0009.png",
+   "patch_box_input": [
+    100,
+    99,
+    140,
+    119
+   ],
+   "x_px": 120.0,
+   "y_px": 109.0
+  },
+  {
+   "point_id": "LX0010",
+   "x": 208.0,
+   "y": 187.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.3017822504043579,
+   "winning_similarity": 0.3017822504043579,
+   "similarities": [
+    5.553481969400309e-05,
+    0.00365660828538239,
+    0.3017822504043579
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0010.png",
+   "patch_box_input": [
+    188,
+    177,
+    228,
+    197
+   ],
+   "x_px": 208.0,
+   "y_px": 187.0
+  },
+  {
+   "point_id": "LX0011",
+   "x": 420.0,
+   "y": 295.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7785470485687256,
+   "winning_similarity": 0.7785470485687256,
+   "similarities": [
+    0.3743131756782532,
+    0.6881173849105835,
+    0.7785470485687256
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0011.png",
+   "patch_box_input": [
+    400,
+    285,
+    440,
+    305
+   ],
+   "x_px": 420.0,
+   "y_px": 295.0
+  },
+  {
+   "point_id": "LX0012",
+   "x": 122.0,
+   "y": 123.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9652117490768433,
+   "winning_similarity": 0.9652117490768433,
+   "similarities": [
+    0.9652117490768433,
+    0.9496545195579529,
+    0.1861196905374527
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0012.png",
+   "patch_box_input": [
+    102,
+    113,
+    142,
+    133
+   ],
+   "x_px": 122.0,
+   "y_px": 123.0
+  },
+  {
+   "point_id": "LX0013",
+   "x": 528.0,
+   "y": 192.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.16517366468906403,
+   "winning_similarity": 0.16517366468906403,
+   "similarities": [
+    6.589194981643232e-06,
+    0.0003961439069826156,
+    0.16517366468906403
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0013.png",
+   "patch_box_input": [
+    508,
+    182,
+    548,
+    202
+   ],
+   "x_px": 528.0,
+   "y_px": 192.0
+  },
+  {
+   "point_id": "LX0014",
+   "x": 210.0,
+   "y": 275.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.3101680874824524,
+   "winning_similarity": 0.3101680874824524,
+   "similarities": [
+    0.00012898215209133923,
+    0.012141668237745762,
+    0.3101680874824524
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0014.png",
+   "patch_box_input": [
+    190,
+    265,
+    230,
+    285
+   ],
+   "x_px": 210.0,
+   "y_px": 275.0
+  },
+  {
+   "point_id": "LX0015",
+   "x": 530.0,
+   "y": 266.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9887247681617737,
+   "winning_similarity": 0.9887247681617737,
+   "similarities": [
+    0.9887247681617737,
+    0.9631016850471497,
+    0.17978686094284058
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0015.png",
+   "patch_box_input": [
+    510,
+    256,
+    550,
+    276
+   ],
+   "x_px": 530.0,
+   "y_px": 266.0
+  },
+  {
+   "point_id": "LX0016",
+   "x": 523.0,
+   "y": 341.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.6543315649032593,
+   "winning_similarity": 0.6543315649032593,
+   "similarities": [
+    0.05559359863400459,
+    0.6543315649032593,
+    0.4763799011707306
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0016.png",
+   "patch_box_input": [
+    503,
+    331,
+    543,
+    351
+   ],
+   "x_px": 523.0,
+   "y_px": 341.0
+  },
+  {
+   "point_id": "LX0017",
+   "x": 388.0,
+   "y": 158.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.09853289276361465,
+   "winning_similarity": 0.09853289276361465,
+   "similarities": [
+    0.0038508465513587,
+    0.09405823796987534,
+    0.09853289276361465
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0017.png",
+   "patch_box_input": [
+    368,
+    148,
+    408,
+    168
+   ],
+   "x_px": 388.0,
+   "y_px": 158.0
+  },
+  {
+   "point_id": "LX0018",
+   "x": 636.0,
+   "y": 157.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.11009059101343155,
+   "winning_similarity": 0.11009059101343155,
+   "similarities": [
+    0.003286954713985324,
+    0.09007611125707626,
+    0.11009059101343155
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0018.png",
+   "patch_box_input": [
+    616,
+    147,
+    656,
+    167
+   ],
+   "x_px": 636.0,
+   "y_px": 157.0
+  },
+  {
+   "point_id": "LX0019",
+   "x": 211.0,
+   "y": 202.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.20055340230464935,
+   "winning_similarity": 0.20055340230464935,
+   "similarities": [
+    0.0011077072704210877,
+    0.06842576712369919,
+    0.20055340230464935
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0019.png",
+   "patch_box_input": [
+    191,
+    192,
+    231,
+    212
+   ],
+   "x_px": 211.0,
+   "y_px": 202.0
+  },
+  {
+   "point_id": "LX0020",
+   "x": 323.0,
+   "y": 355.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7857567071914673,
+   "winning_similarity": 0.7857567071914673,
+   "similarities": [
+    0.6034804582595825,
+    0.7857567071914673,
+    0.5994305610656738
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0020.png",
+   "patch_box_input": [
+    303,
+    345,
+    343,
+    365
+   ],
+   "x_px": 323.0,
+   "y_px": 355.0
+  },
+  {
+   "point_id": "LX0021",
+   "x": 303.0,
+   "y": 154.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.10330355167388916,
+   "winning_similarity": 0.10330355167388916,
+   "similarities": [
+    0.00044550668098963797,
+    0.024531668052077293,
+    0.10330355167388916
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0021.png",
+   "patch_box_input": [
+    283,
+    144,
+    323,
+    164
+   ],
+   "x_px": 303.0,
+   "y_px": 154.0
+  },
+  {
+   "point_id": "LX0022",
+   "x": 419.0,
+   "y": 216.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9924115538597107,
+   "winning_similarity": 0.9924115538597107,
+   "similarities": [
+    0.9924115538597107,
+    0.9751396775245667,
+    0.08956504613161087
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0022.png",
+   "patch_box_input": [
+    399,
+    206,
+    439,
+    226
+   ],
+   "x_px": 419.0,
+   "y_px": 216.0
+  },
+  {
+   "point_id": "LX0023",
+   "x": 130.0,
+   "y": 150.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.30150386691093445,
+   "winning_similarity": 0.30150386691093445,
+   "similarities": [
+    1.4614356587117072e-05,
+    0.0010631775949150324,
+    0.30150386691093445
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0023.png",
+   "patch_box_input": [
+    110,
+    140,
+    150,
+    160
+   ],
+   "x_px": 130.0,
+   "y_px": 150.0
+  },
+  {
+   "point_id": "LX0024",
+   "x": 513.0,
+   "y": 167.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.2813739776611328,
+   "winning_similarity": 0.2813739776611328,
+   "similarities": [
+    0.11187684535980225,
+    0.2813739776611328,
+    0.07402495294809341
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0024.png",
+   "patch_box_input": [
+    493,
+    157,
+    533,
+    177
+   ],
+   "x_px": 513.0,
+   "y_px": 167.0
+  },
+  {
+   "point_id": "LX0025",
+   "x": 323.0,
+   "y": 209.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9917771816253662,
+   "winning_similarity": 0.9917771816253662,
+   "similarities": [
+    0.9917771816253662,
+    0.9779622554779053,
+    0.3450605869293213
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0025.png",
+   "patch_box_input": [
+    303,
+    199,
+    343,
+    219
+   ],
+   "x_px": 323.0,
+   "y_px": 209.0
+  },
+  {
+   "point_id": "LX0026",
+   "x": 530.0,
+   "y": 325.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8961077332496643,
+   "winning_similarity": 0.8961077332496643,
+   "similarities": [
+    0.7829411029815674,
+    0.7606161236763,
+    0.8961077332496643
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0026.png",
+   "patch_box_input": [
+    510,
+    315,
+    550,
+    335
+   ],
+   "x_px": 530.0,
+   "y_px": 325.0
+  },
+  {
+   "point_id": "LX0027",
+   "x": 209.0,
+   "y": 199.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.26158109307289124,
+   "winning_similarity": 0.26158109307289124,
+   "similarities": [
+    4.755250847665593e-05,
+    0.004010841716080904,
+    0.26158109307289124
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0027.png",
+   "patch_box_input": [
+    189,
+    189,
+    229,
+    209
+   ],
+   "x_px": 209.0,
+   "y_px": 199.0
+  },
+  {
+   "point_id": "LX0028",
+   "x": 591.0,
+   "y": 339.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.1426038146018982,
+   "winning_similarity": 0.1426038146018982,
+   "similarities": [
+    0.00898897834122181,
+    0.1426038146018982,
+    0.05702373757958412
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0028.png",
+   "patch_box_input": [
+    571,
+    329,
+    611,
+    349
+   ],
+   "x_px": 591.0,
+   "y_px": 339.0
+  },
+  {
+   "point_id": "LX0029",
+   "x": 325.0,
+   "y": 355.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.6881056427955627,
+   "winning_similarity": 0.6881056427955627,
+   "similarities": [
+    0.5541087985038757,
+    0.6881056427955627,
+    0.6604781150817871
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0029.png",
+   "patch_box_input": [
+    305,
+    345,
+    345,
+    365
+   ],
+   "x_px": 325.0,
+   "y_px": 355.0
+  },
+  {
+   "point_id": "LX0030",
+   "x": 208.0,
+   "y": 191.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.28684133291244507,
+   "winning_similarity": 0.28684133291244507,
+   "similarities": [
+    1.3962306184112094e-05,
+    0.0012020510621368885,
+    0.28684133291244507
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0030.png",
+   "patch_box_input": [
+    188,
+    181,
+    228,
+    201
+   ],
+   "x_px": 208.0,
+   "y_px": 191.0
+  },
+  {
+   "point_id": "LX0031",
+   "x": 427.0,
+   "y": 276.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8632649779319763,
+   "winning_similarity": 0.8632649779319763,
+   "similarities": [
+    0.41258886456489563,
+    0.8632649779319763,
+    0.7652174830436707
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0031.png",
+   "patch_box_input": [
+    407,
+    266,
+    447,
+    286
+   ],
+   "x_px": 427.0,
+   "y_px": 276.0
+  },
+  {
+   "point_id": "LX0032",
+   "x": 569.0,
+   "y": 323.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.2926640510559082,
+   "winning_similarity": 0.2926640510559082,
+   "similarities": [
+    5.862054604222067e-05,
+    0.004751714412122965,
+    0.2926640510559082
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0032.png",
+   "patch_box_input": [
+    549,
+    313,
+    589,
+    333
+   ],
+   "x_px": 569.0,
+   "y_px": 323.0
+  },
+  {
+   "point_id": "LX0033",
+   "x": 117.0,
+   "y": 104.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.954866349697113,
+   "winning_similarity": 0.954866349697113,
+   "similarities": [
+    0.954866349697113,
+    0.9208599925041199,
+    0.6035404801368713
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0033.png",
+   "patch_box_input": [
+    97,
+    94,
+    137,
+    114
+   ],
+   "x_px": 117.0,
+   "y_px": 104.0
+  },
+  {
+   "point_id": "LX0034",
+   "x": 212.0,
+   "y": 274.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.3441375195980072,
+   "winning_similarity": 0.3441375195980072,
+   "similarities": [
+    0.002427411498501897,
+    0.10787460207939148,
+    0.3441375195980072
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0034.png",
+   "patch_box_input": [
+    192,
+    264,
+    232,
+    284
+   ],
+   "x_px": 212.0,
+   "y_px": 274.0
+  },
+  {
+   "point_id": "LX0035",
+   "x": 521.0,
+   "y": 325.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8441833853721619,
+   "winning_similarity": 0.8441833853721619,
+   "similarities": [
+    0.8317676782608032,
+    0.7998782396316528,
+    0.8441833853721619
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0035.png",
+   "patch_box_input": [
+    501,
+    315,
+    541,
+    335
+   ],
+   "x_px": 521.0,
+   "y_px": 325.0
+  },
+  {
+   "point_id": "LX0036",
+   "x": 617.0,
+   "y": 314.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9853132367134094,
+   "winning_similarity": 0.9853132367134094,
+   "similarities": [
+    0.9853132367134094,
+    0.9482884407043457,
+    0.673433780670166
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0036.png",
+   "patch_box_input": [
+    597,
+    304,
+    637,
+    324
+   ],
+   "x_px": 617.0,
+   "y_px": 314.0
+  },
+  {
+   "point_id": "LX0037",
+   "x": 323.0,
+   "y": 355.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7857567071914673,
+   "winning_similarity": 0.7857567071914673,
+   "similarities": [
+    0.6034804582595825,
+    0.7857567071914673,
+    0.5994305610656738
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0037.png",
+   "patch_box_input": [
+    303,
+    345,
+    343,
+    365
+   ],
+   "x_px": 323.0,
+   "y_px": 355.0
+  },
+  {
+   "point_id": "LX0038",
+   "x": 131.0,
+   "y": 157.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.30150386691093445,
+   "winning_similarity": 0.30150386691093445,
+   "similarities": [
+    1.4614356587117072e-05,
+    0.0010631775949150324,
+    0.30150386691093445
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0038.png",
+   "patch_box_input": [
+    111,
+    147,
+    151,
+    167
+   ],
+   "x_px": 131.0,
+   "y_px": 157.0
+  },
+  {
+   "point_id": "LX0039",
+   "x": 323.0,
+   "y": 205.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9954574108123779,
+   "winning_similarity": 0.9954574108123779,
+   "similarities": [
+    0.9954574108123779,
+    0.9640060663223267,
+    0.3427974283695221
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0039.png",
+   "patch_box_input": [
+    303,
+    195,
+    343,
+    215
+   ],
+   "x_px": 323.0,
+   "y_px": 205.0
+  },
+  {
+   "point_id": "LX0040",
+   "x": 206.0,
+   "y": 274.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.2867547273635864,
+   "winning_similarity": 0.2867547273635864,
+   "similarities": [
+    9.171404599328525e-06,
+    0.0007933831657283008,
+    0.2867547273635864
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0040.png",
+   "patch_box_input": [
+    186,
+    264,
+    226,
+    284
+   ],
+   "x_px": 206.0,
+   "y_px": 274.0
+  },
+  {
+   "point_id": "LX0041",
+   "x": 508.0,
+   "y": 169.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.1332269161939621,
+   "winning_similarity": 0.1332269161939621,
+   "similarities": [
+    0.012944480404257774,
+    0.1332269161939621,
+    0.08540581166744232
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0041.png",
+   "patch_box_input": [
+    488,
+    159,
+    528,
+    179
+   ],
+   "x_px": 508.0,
+   "y_px": 169.0
+  },
+  {
+   "point_id": "LX0042",
+   "x": 598.0,
+   "y": 329.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.06434211134910583,
+   "winning_similarity": 0.06434211134910583,
+   "similarities": [
+    0.0002091692731482908,
+    0.00452990410849452,
+    0.06434211134910583
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0042.png",
+   "patch_box_input": [
+    578,
+    319,
+    618,
+    339
+   ],
+   "x_px": 598.0,
+   "y_px": 329.0
+  },
+  {
+   "point_id": "LX0043",
+   "x": 306.0,
+   "y": 201.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7660782933235168,
+   "winning_similarity": 0.7660782933235168,
+   "similarities": [
+    0.4359875023365021,
+    0.7660782933235168,
+    0.1511775404214859
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0043.png",
+   "patch_box_input": [
+    286,
+    191,
+    326,
+    211
+   ],
+   "x_px": 306.0,
+   "y_px": 201.0
+  },
+  {
+   "point_id": "LX0044",
+   "x": 532.0,
+   "y": 331.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7205473780632019,
+   "winning_similarity": 0.7205473780632019,
+   "similarities": [
+    0.07732412964105606,
+    0.5822380781173706,
+    0.7205473780632019
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0044.png",
+   "patch_box_input": [
+    512,
+    321,
+    552,
+    341
+   ],
+   "x_px": 532.0,
+   "y_px": 331.0
+  },
+  {
+   "point_id": "LX0045",
+   "x": 224.0,
+   "y": 279.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9216834306716919,
+   "winning_similarity": 0.9216834306716919,
+   "similarities": [
+    0.787860631942749,
+    0.6264387369155884,
+    0.9216834306716919
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0045.png",
+   "patch_box_input": [
+    204,
+    269,
+    244,
+    289
+   ],
+   "x_px": 224.0,
+   "y_px": 279.0
+  },
+  {
+   "point_id": "LX0046",
+   "x": 423.0,
+   "y": 297.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7506584525108337,
+   "winning_similarity": 0.7506584525108337,
+   "similarities": [
+    0.41529619693756104,
+    0.7506584525108337,
+    0.7073507905006409
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0046.png",
+   "patch_box_input": [
+    403,
+    287,
+    443,
+    307
+   ],
+   "x_px": 423.0,
+   "y_px": 297.0
+  },
+  {
+   "point_id": "LX0047",
+   "x": 423.0,
+   "y": 215.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9944707155227661,
+   "winning_similarity": 0.9944707155227661,
+   "similarities": [
+    0.9944707155227661,
+    0.9726497530937195,
+    0.28342846035957336
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0047.png",
+   "patch_box_input": [
+    403,
+    205,
+    443,
+    225
+   ],
+   "x_px": 423.0,
+   "y_px": 215.0
+  },
+  {
+   "point_id": "LX0048",
+   "x": 416.0,
+   "y": 215.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9811696410179138,
+   "winning_similarity": 0.9811696410179138,
+   "similarities": [
+    0.9811696410179138,
+    0.9628413319587708,
+    0.2925378680229187
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0048.png",
+   "patch_box_input": [
+    396,
+    205,
+    436,
+    225
+   ],
+   "x_px": 416.0,
+   "y_px": 215.0
+  },
+  {
+   "point_id": "LX0049",
+   "x": 120.0,
+   "y": 117.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9074426889419556,
+   "winning_similarity": 0.9074426889419556,
+   "similarities": [
+    0.9074426889419556,
+    0.9034810066223145,
+    0.3801938593387604
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0049.png",
+   "patch_box_input": [
+    100,
+    107,
+    140,
+    127
+   ],
+   "x_px": 120.0,
+   "y_px": 117.0
+  },
+  {
+   "point_id": "LX0050",
+   "x": 525.0,
+   "y": 268.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9934898614883423,
+   "winning_similarity": 0.9934898614883423,
+   "similarities": [
+    0.9934898614883423,
+    0.9508067965507507,
+    0.1516171097755432
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0050.png",
+   "patch_box_input": [
+    505,
+    258,
+    545,
+    278
+   ],
+   "x_px": 525.0,
+   "y_px": 268.0
+  },
+  {
+   "point_id": "LX0051",
+   "x": 388.0,
+   "y": 216.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7949115633964539,
+   "winning_similarity": 0.7949115633964539,
+   "similarities": [
+    0.5783447027206421,
+    0.7949115633964539,
+    0.13958574831485748
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0051.png",
+   "patch_box_input": [
+    368,
+    206,
+    408,
+    226
+   ],
+   "x_px": 388.0,
+   "y_px": 216.0
+  },
+  {
+   "point_id": "LX0052",
+   "x": 315.0,
+   "y": 204.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9726256132125854,
+   "winning_similarity": 0.9726256132125854,
+   "similarities": [
+    0.9726256132125854,
+    0.9541971683502197,
+    0.231720432639122
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0052.png",
+   "patch_box_input": [
+    295,
+    194,
+    335,
+    214
+   ],
+   "x_px": 315.0,
+   "y_px": 204.0
+  },
+  {
+   "point_id": "LX0053",
+   "x": 528.0,
+   "y": 337.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.667180061340332,
+   "winning_similarity": 0.667180061340332,
+   "similarities": [
+    0.03475488722324371,
+    0.38553741574287415,
+    0.667180061340332
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0053.png",
+   "patch_box_input": [
+    508,
+    327,
+    548,
+    347
+   ],
+   "x_px": 528.0,
+   "y_px": 337.0
+  },
+  {
+   "point_id": "LX0055",
+   "x": 427.0,
+   "y": 278.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9399275183677673,
+   "winning_similarity": 0.9399275183677673,
+   "similarities": [
+    0.9346822500228882,
+    0.9399275183677673,
+    0.7061513662338257
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0055.png",
+   "patch_box_input": [
+    407,
+    268,
+    447,
+    288
+   ],
+   "x_px": 427.0,
+   "y_px": 278.0
+  },
+  {
+   "point_id": "LX0056",
+   "x": 321.0,
+   "y": 344.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8588867783546448,
+   "winning_similarity": 0.8588867783546448,
+   "similarities": [
+    0.5293751358985901,
+    0.5528810024261475,
+    0.8588867783546448
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0056.png",
+   "patch_box_input": [
+    301,
+    334,
+    341,
+    354
+   ],
+   "x_px": 321.0,
+   "y_px": 344.0
+  },
+  {
+   "point_id": "LX0057",
+   "x": 243.0,
+   "y": 195.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8534739017486572,
+   "winning_similarity": 0.8534739017486572,
+   "similarities": [
+    0.7204923033714294,
+    0.8534739017486572,
+    0.12880390882492065
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0057.png",
+   "patch_box_input": [
+    223,
+    185,
+    263,
+    205
+   ],
+   "x_px": 243.0,
+   "y_px": 195.0
+  },
+  {
+   "point_id": "LX0058",
+   "x": 419.0,
+   "y": 218.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9947125911712646,
+   "winning_similarity": 0.9947125911712646,
+   "similarities": [
+    0.9947125911712646,
+    0.9822933077812195,
+    0.21057814359664917
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0058.png",
+   "patch_box_input": [
+    399,
+    208,
+    439,
+    228
+   ],
+   "x_px": 419.0,
+   "y_px": 218.0
+  },
+  {
+   "point_id": "LX0059",
+   "x": 207.0,
+   "y": 199.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.30426087975502014,
+   "winning_similarity": 0.30426087975502014,
+   "similarities": [
+    1.4076951629249379e-05,
+    0.0011376473121345043,
+    0.30426087975502014
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0059.png",
+   "patch_box_input": [
+    187,
+    189,
+    227,
+    209
+   ],
+   "x_px": 207.0,
+   "y_px": 199.0
+  },
+  {
+   "point_id": "LX0060",
+   "x": 211.0,
+   "y": 274.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.3628084659576416,
+   "winning_similarity": 0.3628084659576416,
+   "similarities": [
+    0.0004040803178213537,
+    0.035398826003074646,
+    0.3628084659576416
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0060.png",
+   "patch_box_input": [
+    191,
+    264,
+    231,
+    284
+   ],
+   "x_px": 211.0,
+   "y_px": 274.0
+  },
+  {
+   "point_id": "LX0061",
+   "x": 207.0,
+   "y": 190.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.29482942819595337,
+   "winning_similarity": 0.29482942819595337,
+   "similarities": [
+    1.568446350574959e-05,
+    0.0012089965166524053,
+    0.29482942819595337
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0061.png",
+   "patch_box_input": [
+    187,
+    180,
+    227,
+    200
+   ],
+   "x_px": 207.0,
+   "y_px": 190.0
+  },
+  {
+   "point_id": "LX0062",
+   "x": 118.0,
+   "y": 118.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9404919743537903,
+   "winning_similarity": 0.9404919743537903,
+   "similarities": [
+    0.9404919743537903,
+    0.9304847717285156,
+    0.3282942771911621
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0062.png",
+   "patch_box_input": [
+    98,
+    108,
+    138,
+    128
+   ],
+   "x_px": 118.0,
+   "y_px": 118.0
+  },
+  {
+   "point_id": "LX0063",
+   "x": 209.0,
+   "y": 272.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.25056344270706177,
+   "winning_similarity": 0.25056344270706177,
+   "similarities": [
+    2.2824840925750323e-05,
+    0.001570310560055077,
+    0.25056344270706177
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0063.png",
+   "patch_box_input": [
+    189,
+    262,
+    229,
+    282
+   ],
+   "x_px": 209.0,
+   "y_px": 272.0
+  }
+ ],
+ "unavailable": [],
+ "patches": [
+  {
+   "point_index": 0,
+   "point_id": "LX0000",
+   "box_input": [
+    100,
+    70,
+    140,
+    90
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0000.png"
+  },
+  {
+   "point_index": 1,
+   "point_id": "LX0001",
+   "box_input": [
+    305,
+    345,
+    345,
+    365
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0001.png"
+  },
+  {
+   "point_index": 2,
+   "point_id": "LX0002",
+   "box_input": [
+    286,
+    139,
+    326,
+    159
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0002.png"
+  },
+  {
+   "point_index": 3,
+   "point_id": "LX0003",
+   "box_input": [
+    492,
+    159,
+    532,
+    179
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0003.png"
+  },
+  {
+   "point_index": 4,
+   "point_id": "LX0004",
+   "box_input": [
+    602,
+    293,
+    642,
+    313
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0004.png"
+  },
+  {
+   "point_index": 5,
+   "point_id": "LX0005",
+   "box_input": [
+    302,
+    335,
+    342,
+    355
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0005.png"
+  },
+  {
+   "point_index": 6,
+   "point_id": "LX0006",
+   "box_input": [
+    591,
+    326,
+    631,
+    346
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0006.png"
+  },
+  {
+   "point_index": 7,
+   "point_id": "LX0007",
+   "box_input": [
+    402,
+    207,
+    442,
+    227
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0007.png"
+  },
+  {
+   "point_index": 8,
+   "point_id": "LX0008",
+   "box_input": [
+    187,
+    192,
+    227,
+    212
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0008.png"
+  },
+  {
+   "point_index": 9,
+   "point_id": "LX0009",
+   "box_input": [
+    100,
+    99,
+    140,
+    119
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0009.png"
+  },
+  {
+   "point_index": 10,
+   "point_id": "LX0010",
+   "box_input": [
+    188,
+    177,
+    228,
+    197
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0010.png"
+  },
+  {
+   "point_index": 11,
+   "point_id": "LX0011",
+   "box_input": [
+    400,
+    285,
+    440,
+    305
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0011.png"
+  },
+  {
+   "point_index": 12,
+   "point_id": "LX0012",
+   "box_input": [
+    102,
+    113,
+    142,
+    133
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0012.png"
+  },
+  {
+   "point_index": 13,
+   "point_id": "LX0013",
+   "box_input": [
+    508,
+    182,
+    548,
+    202
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0013.png"
+  },
+  {
+   "point_index": 14,
+   "point_id": "LX0014",
+   "box_input": [
+    190,
+    265,
+    230,
+    285
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0014.png"
+  },
+  {
+   "point_index": 15,
+   "point_id": "LX0015",
+   "box_input": [
+    510,
+    256,
+    550,
+    276
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0015.png"
+  },
+  {
+   "point_index": 16,
+   "point_id": "LX0016",
+   "box_input": [
+    503,
+    331,
+    543,
+    351
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0016.png"
+  },
+  {
+   "point_index": 17,
+   "point_id": "LX0017",
+   "box_input": [
+    368,
+    148,
+    408,
+    168
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0017.png"
+  },
+  {
+   "point_index": 18,
+   "point_id": "LX0018",
+   "box_input": [
+    616,
+    147,
+    656,
+    167
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0018.png"
+  },
+  {
+   "point_index": 19,
+   "point_id": "LX0019",
+   "box_input": [
+    191,
+    192,
+    231,
+    212
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0019.png"
+  },
+  {
+   "point_index": 20,
+   "point_id": "LX0020",
+   "box_input": [
+    303,
+    345,
+    343,
+    365
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0020.png"
+  },
+  {
+   "point_index": 21,
+   "point_id": "LX0021",
+   "box_input": [
+    283,
+    144,
+    323,
+    164
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0021.png"
+  },
+  {
+   "point_index": 22,
+   "point_id": "LX0022",
+   "box_input": [
+    399,
+    206,
+    439,
+    226
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0022.png"
+  },
+  {
+   "point_index": 23,
+   "point_id": "LX0023",
+   "box_input": [
+    110,
+    140,
+    150,
+    160
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0023.png"
+  },
+  {
+   "point_index": 24,
+   "point_id": "LX0024",
+   "box_input": [
+    493,
+    157,
+    533,
+    177
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0024.png"
+  },
+  {
+   "point_index": 25,
+   "point_id": "LX0025",
+   "box_input": [
+    303,
+    199,
+    343,
+    219
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0025.png"
+  },
+  {
+   "point_index": 26,
+   "point_id": "LX0026",
+   "box_input": [
+    510,
+    315,
+    550,
+    335
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0026.png"
+  },
+  {
+   "point_index": 27,
+   "point_id": "LX0027",
+   "box_input": [
+    189,
+    189,
+    229,
+    209
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0027.png"
+  },
+  {
+   "point_index": 28,
+   "point_id": "LX0028",
+   "box_input": [
+    571,
+    329,
+    611,
+    349
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0028.png"
+  },
+  {
+   "point_index": 29,
+   "point_id": "LX0029",
+   "box_input": [
+    305,
+    345,
+    345,
+    365
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0029.png"
+  },
+  {
+   "point_index": 30,
+   "point_id": "LX0030",
+   "box_input": [
+    188,
+    181,
+    228,
+    201
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0030.png"
+  },
+  {
+   "point_index": 31,
+   "point_id": "LX0031",
+   "box_input": [
+    407,
+    266,
+    447,
+    286
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0031.png"
+  },
+  {
+   "point_index": 32,
+   "point_id": "LX0032",
+   "box_input": [
+    549,
+    313,
+    589,
+    333
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0032.png"
+  },
+  {
+   "point_index": 33,
+   "point_id": "LX0033",
+   "box_input": [
+    97,
+    94,
+    137,
+    114
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0033.png"
+  },
+  {
+   "point_index": 34,
+   "point_id": "LX0034",
+   "box_input": [
+    192,
+    264,
+    232,
+    284
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0034.png"
+  },
+  {
+   "point_index": 35,
+   "point_id": "LX0035",
+   "box_input": [
+    501,
+    315,
+    541,
+    335
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0035.png"
+  },
+  {
+   "point_index": 36,
+   "point_id": "LX0036",
+   "box_input": [
+    597,
+    304,
+    637,
+    324
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0036.png"
+  },
+  {
+   "point_index": 37,
+   "point_id": "LX0037",
+   "box_input": [
+    303,
+    345,
+    343,
+    365
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0037.png"
+  },
+  {
+   "point_index": 38,
+   "point_id": "LX0038",
+   "box_input": [
+    111,
+    147,
+    151,
+    167
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0038.png"
+  },
+  {
+   "point_index": 39,
+   "point_id": "LX0039",
+   "box_input": [
+    303,
+    195,
+    343,
+    215
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0039.png"
+  },
+  {
+   "point_index": 40,
+   "point_id": "LX0040",
+   "box_input": [
+    186,
+    264,
+    226,
+    284
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0040.png"
+  },
+  {
+   "point_index": 41,
+   "point_id": "LX0041",
+   "box_input": [
+    488,
+    159,
+    528,
+    179
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0041.png"
+  },
+  {
+   "point_index": 42,
+   "point_id": "LX0042",
+   "box_input": [
+    578,
+    319,
+    618,
+    339
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0042.png"
+  },
+  {
+   "point_index": 43,
+   "point_id": "LX0043",
+   "box_input": [
+    286,
+    191,
+    326,
+    211
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0043.png"
+  },
+  {
+   "point_index": 44,
+   "point_id": "LX0044",
+   "box_input": [
+    512,
+    321,
+    552,
+    341
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0044.png"
+  },
+  {
+   "point_index": 45,
+   "point_id": "LX0045",
+   "box_input": [
+    204,
+    269,
+    244,
+    289
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0045.png"
+  },
+  {
+   "point_index": 46,
+   "point_id": "LX0046",
+   "box_input": [
+    403,
+    287,
+    443,
+    307
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0046.png"
+  },
+  {
+   "point_index": 47,
+   "point_id": "LX0047",
+   "box_input": [
+    403,
+    205,
+    443,
+    225
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0047.png"
+  },
+  {
+   "point_index": 48,
+   "point_id": "LX0048",
+   "box_input": [
+    396,
+    205,
+    436,
+    225
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0048.png"
+  },
+  {
+   "point_index": 49,
+   "point_id": "LX0049",
+   "box_input": [
+    100,
+    107,
+    140,
+    127
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0049.png"
+  },
+  {
+   "point_index": 50,
+   "point_id": "LX0050",
+   "box_input": [
+    505,
+    258,
+    545,
+    278
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0050.png"
+  },
+  {
+   "point_index": 51,
+   "point_id": "LX0051",
+   "box_input": [
+    368,
+    206,
+    408,
+    226
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0051.png"
+  },
+  {
+   "point_index": 52,
+   "point_id": "LX0052",
+   "box_input": [
+    295,
+    194,
+    335,
+    214
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0052.png"
+  },
+  {
+   "point_index": 53,
+   "point_id": "LX0053",
+   "box_input": [
+    508,
+    327,
+    548,
+    347
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0053.png"
+  },
+  {
+   "point_index": 54,
+   "point_id": "LX0055",
+   "box_input": [
+    407,
+    268,
+    447,
+    288
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0055.png"
+  },
+  {
+   "point_index": 55,
+   "point_id": "LX0056",
+   "box_input": [
+    301,
+    334,
+    341,
+    354
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0056.png"
+  },
+  {
+   "point_index": 56,
+   "point_id": "LX0057",
+   "box_input": [
+    223,
+    185,
+    263,
+    205
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0057.png"
+  },
+  {
+   "point_index": 57,
+   "point_id": "LX0058",
+   "box_input": [
+    399,
+    208,
+    439,
+    228
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0058.png"
+  },
+  {
+   "point_index": 58,
+   "point_id": "LX0059",
+   "box_input": [
+    187,
+    189,
+    227,
+    209
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0059.png"
+  },
+  {
+   "point_index": 59,
+   "point_id": "LX0060",
+   "box_input": [
+    191,
+    264,
+    231,
+    284
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0060.png"
+  },
+  {
+   "point_index": 60,
+   "point_id": "LX0061",
+   "box_input": [
+    187,
+    180,
+    227,
+    200
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0061.png"
+  },
+  {
+   "point_index": 61,
+   "point_id": "LX0062",
+   "box_input": [
+    98,
+    108,
+    138,
+    128
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0062.png"
+  },
+  {
+   "point_index": 62,
+   "point_id": "LX0063",
+   "box_input": [
+    189,
+    262,
+    229,
+    282
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/patches/LX0063.png"
+  }
+ ],
+ "similarity_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__dalotuzumab_1_1_0__p01__v9/lineex_grouped/similarity.npy",
+ "similarity_row_point_ids": [
+  "LX0000",
+  "LX0001",
+  "LX0002",
+  "LX0003",
+  "LX0004",
+  "LX0005",
+  "LX0006",
+  "LX0007",
+  "LX0008",
+  "LX0009",
+  "LX0010",
+  "LX0011",
+  "LX0012",
+  "LX0013",
+  "LX0014",
+  "LX0015",
+  "LX0016",
+  "LX0017",
+  "LX0018",
+  "LX0019",
+  "LX0020",
+  "LX0021",
+  "LX0022",
+  "LX0023",
+  "LX0024",
+  "LX0025",
+  "LX0026",
+  "LX0027",
+  "LX0028",
+  "LX0029",
+  "LX0030",
+  "LX0031",
+  "LX0032",
+  "LX0033",
+  "LX0034",
+  "LX0035",
+  "LX0036",
+  "LX0037",
+  "LX0038",
+  "LX0039",
+  "LX0040",
+  "LX0041",
+  "LX0042",
+  "LX0043",
+  "LX0044",
+  "LX0045",
+  "LX0046",
+  "LX0047",
+  "LX0048",
+  "LX0049",
+  "LX0050",
+  "LX0051",
+  "LX0052",
+  "LX0053",
+  "LX0055",
+  "LX0056",
+  "LX0057",
+  "LX0058",
+  "LX0059",
+  "LX0060",
+  "LX0061",
+  "LX0062",
+  "LX0063"
+ ],
+ "similarity_column_series_ids": [
+  "s01",
+  "s02",
+  "s03"
+ ],
+ "timing": {
+  "shared_input_verification_seconds": 0.007265300024300814,
+  "legend_crop_seconds": 0.002982800011523068,
+  "network_seconds": 0.012311400030739605,
+  "head_postprocess_and_export_seconds": 0.007232300005853176,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.05891010002233088,
+  "learned_matching_seconds": 0.25625350000336766,
+  "total_seconds": 0.33909850008785725,
+  "method_total_excluding_shared_verification_seconds": 0.33909850008785725,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "patch_matching_timing": {
+  "patch_extract_and_export_seconds": 0.05891010002233088,
+  "learned_matching_seconds": 0.25625350000336766,
+  "total_seconds": 0.3165720000397414
+ },
+ "timing_breakdown": {
+  "shared_input_verification_seconds": 0.007265300024300814,
+  "legend_crop_seconds": 0.002982800011523068,
+  "network_seconds": 0.012311400030739605,
+  "head_postprocess_and_export_seconds": 0.007232300005853176,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.05891010002233088,
+  "learned_matching_seconds": 0.25625350000336766,
+  "total_seconds": 0.33909850008785725,
+  "method_total_excluding_shared_verification_seconds": 0.33909850008785725,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "raw_heads_result_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/raw_heads/lineex/er__dalotuzumab_1_1_0__p01__v9.json",
+ "raw_points": [
+  {
+   "point_id": "LX0000",
+   "x": 120.0,
+   "y": 80.0,
+   "detection_score": null,
+   "x_px": 120.0,
+   "y_px": 80.0
+  },
+  {
+   "point_id": "LX0001",
+   "x": 325.0,
+   "y": 355.0,
+   "detection_score": null,
+   "x_px": 325.0,
+   "y_px": 355.0
+  },
+  {
+   "point_id": "LX0002",
+   "x": 306.0,
+   "y": 149.0,
+   "detection_score": null,
+   "x_px": 306.0,
+   "y_px": 149.0
+  },
+  {
+   "point_id": "LX0003",
+   "x": 512.0,
+   "y": 169.0,
+   "detection_score": null,
+   "x_px": 512.0,
+   "y_px": 169.0
+  },
+  {
+   "point_id": "LX0004",
+   "x": 622.0,
+   "y": 303.0,
+   "detection_score": null,
+   "x_px": 622.0,
+   "y_px": 303.0
+  },
+  {
+   "point_id": "LX0005",
+   "x": 322.0,
+   "y": 345.0,
+   "detection_score": null,
+   "x_px": 322.0,
+   "y_px": 345.0
+  },
+  {
+   "point_id": "LX0006",
+   "x": 611.0,
+   "y": 336.0,
+   "detection_score": null,
+   "x_px": 611.0,
+   "y_px": 336.0
+  },
+  {
+   "point_id": "LX0007",
+   "x": 422.0,
+   "y": 217.0,
+   "detection_score": null,
+   "x_px": 422.0,
+   "y_px": 217.0
+  },
+  {
+   "point_id": "LX0008",
+   "x": 207.0,
+   "y": 202.0,
+   "detection_score": null,
+   "x_px": 207.0,
+   "y_px": 202.0
+  },
+  {
+   "point_id": "LX0009",
+   "x": 120.0,
+   "y": 109.0,
+   "detection_score": null,
+   "x_px": 120.0,
+   "y_px": 109.0
+  },
+  {
+   "point_id": "LX0010",
+   "x": 208.0,
+   "y": 187.0,
+   "detection_score": null,
+   "x_px": 208.0,
+   "y_px": 187.0
+  },
+  {
+   "point_id": "LX0011",
+   "x": 420.0,
+   "y": 295.0,
+   "detection_score": null,
+   "x_px": 420.0,
+   "y_px": 295.0
+  },
+  {
+   "point_id": "LX0012",
+   "x": 122.0,
+   "y": 123.0,
+   "detection_score": null,
+   "x_px": 122.0,
+   "y_px": 123.0
+  },
+  {
+   "point_id": "LX0013",
+   "x": 528.0,
+   "y": 192.0,
+   "detection_score": null,
+   "x_px": 528.0,
+   "y_px": 192.0
+  },
+  {
+   "point_id": "LX0014",
+   "x": 210.0,
+   "y": 275.0,
+   "detection_score": null,
+   "x_px": 210.0,
+   "y_px": 275.0
+  },
+  {
+   "point_id": "LX0015",
+   "x": 530.0,
+   "y": 266.0,
+   "detection_score": null,
+   "x_px": 530.0,
+   "y_px": 266.0
+  },
+  {
+   "point_id": "LX0016",
+   "x": 523.0,
+   "y": 341.0,
+   "detection_score": null,
+   "x_px": 523.0,
+   "y_px": 341.0
+  },
+  {
+   "point_id": "LX0017",
+   "x": 388.0,
+   "y": 158.0,
+   "detection_score": null,
+   "x_px": 388.0,
+   "y_px": 158.0
+  },
+  {
+   "point_id": "LX0018",
+   "x": 636.0,
+   "y": 157.0,
+   "detection_score": null,
+   "x_px": 636.0,
+   "y_px": 157.0
+  },
+  {
+   "point_id": "LX0019",
+   "x": 211.0,
+   "y": 202.0,
+   "detection_score": null,
+   "x_px": 211.0,
+   "y_px": 202.0
+  },
+  {
+   "point_id": "LX0020",
+   "x": 323.0,
+   "y": 355.0,
+   "detection_score": null,
+   "x_px": 323.0,
+   "y_px": 355.0
+  },
+  {
+   "point_id": "LX0021",
+   "x": 303.0,
+   "y": 154.0,
+   "detection_score": null,
+   "x_px": 303.0,
+   "y_px": 154.0
+  },
+  {
+   "point_id": "LX0022",
+   "x": 419.0,
+   "y": 216.0,
+   "detection_score": null,
+   "x_px": 419.0,
+   "y_px": 216.0
+  },
+  {
+   "point_id": "LX0023",
+   "x": 130.0,
+   "y": 150.0,
+   "detection_score": null,
+   "x_px": 130.0,
+   "y_px": 150.0
+  },
+  {
+   "point_id": "LX0024",
+   "x": 513.0,
+   "y": 167.0,
+   "detection_score": null,
+   "x_px": 513.0,
+   "y_px": 167.0
+  },
+  {
+   "point_id": "LX0025",
+   "x": 323.0,
+   "y": 209.0,
+   "detection_score": null,
+   "x_px": 323.0,
+   "y_px": 209.0
+  },
+  {
+   "point_id": "LX0026",
+   "x": 530.0,
+   "y": 325.0,
+   "detection_score": null,
+   "x_px": 530.0,
+   "y_px": 325.0
+  },
+  {
+   "point_id": "LX0027",
+   "x": 209.0,
+   "y": 199.0,
+   "detection_score": null,
+   "x_px": 209.0,
+   "y_px": 199.0
+  },
+  {
+   "point_id": "LX0028",
+   "x": 591.0,
+   "y": 339.0,
+   "detection_score": null,
+   "x_px": 591.0,
+   "y_px": 339.0
+  },
+  {
+   "point_id": "LX0029",
+   "x": 325.0,
+   "y": 355.0,
+   "detection_score": null,
+   "x_px": 325.0,
+   "y_px": 355.0
+  },
+  {
+   "point_id": "LX0030",
+   "x": 208.0,
+   "y": 191.0,
+   "detection_score": null,
+   "x_px": 208.0,
+   "y_px": 191.0
+  },
+  {
+   "point_id": "LX0031",
+   "x": 427.0,
+   "y": 276.0,
+   "detection_score": null,
+   "x_px": 427.0,
+   "y_px": 276.0
+  },
+  {
+   "point_id": "LX0032",
+   "x": 569.0,
+   "y": 323.0,
+   "detection_score": null,
+   "x_px": 569.0,
+   "y_px": 323.0
+  },
+  {
+   "point_id": "LX0033",
+   "x": 117.0,
+   "y": 104.0,
+   "detection_score": null,
+   "x_px": 117.0,
+   "y_px": 104.0
+  },
+  {
+   "point_id": "LX0034",
+   "x": 212.0,
+   "y": 274.0,
+   "detection_score": null,
+   "x_px": 212.0,
+   "y_px": 274.0
+  },
+  {
+   "point_id": "LX0035",
+   "x": 521.0,
+   "y": 325.0,
+   "detection_score": null,
+   "x_px": 521.0,
+   "y_px": 325.0
+  },
+  {
+   "point_id": "LX0036",
+   "x": 617.0,
+   "y": 314.0,
+   "detection_score": null,
+   "x_px": 617.0,
+   "y_px": 314.0
+  },
+  {
+   "point_id": "LX0037",
+   "x": 323.0,
+   "y": 355.0,
+   "detection_score": null,
+   "x_px": 323.0,
+   "y_px": 355.0
+  },
+  {
+   "point_id": "LX0038",
+   "x": 131.0,
+   "y": 157.0,
+   "detection_score": null,
+   "x_px": 131.0,
+   "y_px": 157.0
+  },
+  {
+   "point_id": "LX0039",
+   "x": 323.0,
+   "y": 205.0,
+   "detection_score": null,
+   "x_px": 323.0,
+   "y_px": 205.0
+  },
+  {
+   "point_id": "LX0040",
+   "x": 206.0,
+   "y": 274.0,
+   "detection_score": null,
+   "x_px": 206.0,
+   "y_px": 274.0
+  },
+  {
+   "point_id": "LX0041",
+   "x": 508.0,
+   "y": 169.0,
+   "detection_score": null,
+   "x_px": 508.0,
+   "y_px": 169.0
+  },
+  {
+   "point_id": "LX0042",
+   "x": 598.0,
+   "y": 329.0,
+   "detection_score": null,
+   "x_px": 598.0,
+   "y_px": 329.0
+  },
+  {
+   "point_id": "LX0043",
+   "x": 306.0,
+   "y": 201.0,
+   "detection_score": null,
+   "x_px": 306.0,
+   "y_px": 201.0
+  },
+  {
+   "point_id": "LX0044",
+   "x": 532.0,
+   "y": 331.0,
+   "detection_score": null,
+   "x_px": 532.0,
+   "y_px": 331.0
+  },
+  {
+   "point_id": "LX0045",
+   "x": 224.0,
+   "y": 279.0,
+   "detection_score": null,
+   "x_px": 224.0,
+   "y_px": 279.0
+  },
+  {
+   "point_id": "LX0046",
+   "x": 423.0,
+   "y": 297.0,
+   "detection_score": null,
+   "x_px": 423.0,
+   "y_px": 297.0
+  },
+  {
+   "point_id": "LX0047",
+   "x": 423.0,
+   "y": 215.0,
+   "detection_score": null,
+   "x_px": 423.0,
+   "y_px": 215.0
+  },
+  {
+   "point_id": "LX0048",
+   "x": 416.0,
+   "y": 215.0,
+   "detection_score": null,
+   "x_px": 416.0,
+   "y_px": 215.0
+  },
+  {
+   "point_id": "LX0049",
+   "x": 120.0,
+   "y": 117.0,
+   "detection_score": null,
+   "x_px": 120.0,
+   "y_px": 117.0
+  },
+  {
+   "point_id": "LX0050",
+   "x": 525.0,
+   "y": 268.0,
+   "detection_score": null,
+   "x_px": 525.0,
+   "y_px": 268.0
+  },
+  {
+   "point_id": "LX0051",
+   "x": 388.0,
+   "y": 216.0,
+   "detection_score": null,
+   "x_px": 388.0,
+   "y_px": 216.0
+  },
+  {
+   "point_id": "LX0052",
+   "x": 315.0,
+   "y": 204.0,
+   "detection_score": null,
+   "x_px": 315.0,
+   "y_px": 204.0
+  },
+  {
+   "point_id": "LX0053",
+   "x": 528.0,
+   "y": 337.0,
+   "detection_score": null,
+   "x_px": 528.0,
+   "y_px": 337.0
+  },
+  {
+   "point_id": "LX0055",
+   "x": 427.0,
+   "y": 278.0,
+   "detection_score": null,
+   "x_px": 427.0,
+   "y_px": 278.0
+  },
+  {
+   "point_id": "LX0056",
+   "x": 321.0,
+   "y": 344.0,
+   "detection_score": null,
+   "x_px": 321.0,
+   "y_px": 344.0
+  },
+  {
+   "point_id": "LX0057",
+   "x": 243.0,
+   "y": 195.0,
+   "detection_score": null,
+   "x_px": 243.0,
+   "y_px": 195.0
+  },
+  {
+   "point_id": "LX0058",
+   "x": 419.0,
+   "y": 218.0,
+   "detection_score": null,
+   "x_px": 419.0,
+   "y_px": 218.0
+  },
+  {
+   "point_id": "LX0059",
+   "x": 207.0,
+   "y": 199.0,
+   "detection_score": null,
+   "x_px": 207.0,
+   "y_px": 199.0
+  },
+  {
+   "point_id": "LX0060",
+   "x": 211.0,
+   "y": 274.0,
+   "detection_score": null,
+   "x_px": 211.0,
+   "y_px": 274.0
+  },
+  {
+   "point_id": "LX0061",
+   "x": 207.0,
+   "y": 190.0,
+   "detection_score": null,
+   "x_px": 207.0,
+   "y_px": 190.0
+  },
+  {
+   "point_id": "LX0062",
+   "x": 118.0,
+   "y": 118.0,
+   "detection_score": null,
+   "x_px": 118.0,
+   "y_px": 118.0
+  },
+  {
+   "point_id": "LX0063",
+   "x": 209.0,
+   "y": 272.0,
+   "detection_score": null,
+   "x_px": 209.0,
+   "y_px": 272.0
+  }
+ ],
+ "raw_queries": [
+  {
+   "query_id": 0,
+   "x": 120,
+   "y": 80,
+   "score": null,
+   "normalized_x": 0.11710532754659653,
+   "normalized_y": 0.14802925288677216,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 1,
+   "x": 325,
+   "y": 355,
+   "score": null,
+   "normalized_x": 0.3173404932022095,
+   "normalized_y": 0.6560413837432861,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 2,
+   "x": 306,
+   "y": 149,
+   "score": null,
+   "normalized_x": 0.2984270751476288,
+   "normalized_y": 0.2758551836013794,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 3,
+   "x": 512,
+   "y": 169,
+   "score": null,
+   "normalized_x": 0.4993431270122528,
+   "normalized_y": 0.3122127950191498,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 4,
+   "x": 622,
+   "y": 303,
+   "score": null,
+   "normalized_x": 0.6060935258865356,
+   "normalized_y": 0.560812771320343,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 5,
+   "x": 322,
+   "y": 345,
+   "score": null,
+   "normalized_x": 0.31436899304389954,
+   "normalized_y": 0.636764407157898,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 6,
+   "x": 611,
+   "y": 336,
+   "score": null,
+   "normalized_x": 0.5958115458488464,
+   "normalized_y": 0.6210698485374451,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 7,
+   "x": 422,
+   "y": 217,
+   "score": null,
+   "normalized_x": 0.411001980304718,
+   "normalized_y": 0.40196648240089417,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 8,
+   "x": 207,
+   "y": 202,
+   "score": null,
+   "normalized_x": 0.20213067531585693,
+   "normalized_y": 0.37293121218681335,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 9,
+   "x": 120,
+   "y": 109,
+   "score": null,
+   "normalized_x": 0.116855688393116,
+   "normalized_y": 0.20207971334457397,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 10,
+   "x": 208,
+   "y": 187,
+   "score": null,
+   "normalized_x": 0.20279671251773834,
+   "normalized_y": 0.3452233374118805,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 11,
+   "x": 420,
+   "y": 295,
+   "score": null,
+   "normalized_x": 0.40936365723609924,
+   "normalized_y": 0.5456156134605408,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 12,
+   "x": 122,
+   "y": 123,
+   "score": null,
+   "normalized_x": 0.11969460546970367,
+   "normalized_y": 0.22799065709114075,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 13,
+   "x": 528,
+   "y": 192,
+   "score": null,
+   "normalized_x": 0.5147837996482849,
+   "normalized_y": 0.3544251322746277,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 14,
+   "x": 210,
+   "y": 275,
+   "score": null,
+   "normalized_x": 0.20474880933761597,
+   "normalized_y": 0.509023129940033,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 15,
+   "x": 530,
+   "y": 266,
+   "score": null,
+   "normalized_x": 0.5168545842170715,
+   "normalized_y": 0.4918915927410126,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 16,
+   "x": 523,
+   "y": 341,
+   "score": null,
+   "normalized_x": 0.5093689560890198,
+   "normalized_y": 0.6294021606445312,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 17,
+   "x": 388,
+   "y": 158,
+   "score": null,
+   "normalized_x": 0.3787152171134949,
+   "normalized_y": 0.29247769713401794,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 18,
+   "x": 636,
+   "y": 157,
+   "score": null,
+   "normalized_x": 0.6192879676818848,
+   "normalized_y": 0.2909671366214752,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 19,
+   "x": 211,
+   "y": 202,
+   "score": null,
+   "normalized_x": 0.2059280425310135,
+   "normalized_y": 0.373738169670105,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 20,
+   "x": 323,
+   "y": 355,
+   "score": null,
+   "normalized_x": 0.31472891569137573,
+   "normalized_y": 0.6564109921455383,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 21,
+   "x": 303,
+   "y": 154,
+   "score": null,
+   "normalized_x": 0.29543235898017883,
+   "normalized_y": 0.2841935157775879,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 22,
+   "x": 419,
+   "y": 216,
+   "score": null,
+   "normalized_x": 0.40863412618637085,
+   "normalized_y": 0.3993412256240845,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 23,
+   "x": 130,
+   "y": 150,
+   "score": null,
+   "normalized_x": 0.12670570611953735,
+   "normalized_y": 0.27842384576797485,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 24,
+   "x": 513,
+   "y": 167,
+   "score": null,
+   "normalized_x": 0.5001106858253479,
+   "normalized_y": 0.3097200095653534,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 25,
+   "x": 323,
+   "y": 209,
+   "score": null,
+   "normalized_x": 0.31470245122909546,
+   "normalized_y": 0.38690099120140076,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 26,
+   "x": 530,
+   "y": 325,
+   "score": null,
+   "normalized_x": 0.516968309879303,
+   "normalized_y": 0.6005751490592957,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 27,
+   "x": 209,
+   "y": 199,
+   "score": null,
+   "normalized_x": 0.20412245392799377,
+   "normalized_y": 0.36728304624557495,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 28,
+   "x": 591,
+   "y": 339,
+   "score": null,
+   "normalized_x": 0.5761653780937195,
+   "normalized_y": 0.627268373966217,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 29,
+   "x": 325,
+   "y": 355,
+   "score": null,
+   "normalized_x": 0.316910982131958,
+   "normalized_y": 0.6561729907989502,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 30,
+   "x": 208,
+   "y": 191,
+   "score": null,
+   "normalized_x": 0.2026435136795044,
+   "normalized_y": 0.3531608283519745,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 31,
+   "x": 427,
+   "y": 276,
+   "score": null,
+   "normalized_x": 0.4158880412578583,
+   "normalized_y": 0.511006236076355,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 32,
+   "x": 569,
+   "y": 323,
+   "score": null,
+   "normalized_x": 0.5545546412467957,
+   "normalized_y": 0.5959816575050354,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 33,
+   "x": 117,
+   "y": 104,
+   "score": null,
+   "normalized_x": 0.11434146761894226,
+   "normalized_y": 0.19188667833805084,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 34,
+   "x": 212,
+   "y": 274,
+   "score": null,
+   "normalized_x": 0.20661792159080505,
+   "normalized_y": 0.5072160363197327,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 35,
+   "x": 521,
+   "y": 325,
+   "score": null,
+   "normalized_x": 0.5074062347412109,
+   "normalized_y": 0.5999888181686401,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 36,
+   "x": 617,
+   "y": 314,
+   "score": null,
+   "normalized_x": 0.6016398668289185,
+   "normalized_y": 0.5795208811759949,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 37,
+   "x": 323,
+   "y": 355,
+   "score": null,
+   "normalized_x": 0.3152170181274414,
+   "normalized_y": 0.6563823223114014,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 38,
+   "x": 131,
+   "y": 157,
+   "score": null,
+   "normalized_x": 0.12844307720661163,
+   "normalized_y": 0.2906436324119568,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 39,
+   "x": 323,
+   "y": 205,
+   "score": null,
+   "normalized_x": 0.31480172276496887,
+   "normalized_y": 0.3790816366672516,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 40,
+   "x": 206,
+   "y": 274,
+   "score": null,
+   "normalized_x": 0.20155207812786102,
+   "normalized_y": 0.5061454772949219,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 41,
+   "x": 508,
+   "y": 169,
+   "score": null,
+   "normalized_x": 0.4952107071876526,
+   "normalized_y": 0.31228920817375183,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 42,
+   "x": 598,
+   "y": 329,
+   "score": null,
+   "normalized_x": 0.5829901695251465,
+   "normalized_y": 0.6085003614425659,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 43,
+   "x": 306,
+   "y": 201,
+   "score": null,
+   "normalized_x": 0.2986518442630768,
+   "normalized_y": 0.3720479905605316,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 44,
+   "x": 532,
+   "y": 331,
+   "score": null,
+   "normalized_x": 0.5185508728027344,
+   "normalized_y": 0.6117043495178223,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 45,
+   "x": 224,
+   "y": 279,
+   "score": null,
+   "normalized_x": 0.21899251639842987,
+   "normalized_y": 0.5157053470611572,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 46,
+   "x": 423,
+   "y": 297,
+   "score": null,
+   "normalized_x": 0.41227081418037415,
+   "normalized_y": 0.5480901002883911,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 47,
+   "x": 423,
+   "y": 215,
+   "score": null,
+   "normalized_x": 0.41234588623046875,
+   "normalized_y": 0.3972855508327484,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 48,
+   "x": 416,
+   "y": 215,
+   "score": null,
+   "normalized_x": 0.405329167842865,
+   "normalized_y": 0.39841777086257935,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 49,
+   "x": 120,
+   "y": 117,
+   "score": null,
+   "normalized_x": 0.11717876046895981,
+   "normalized_y": 0.21657530963420868,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 50,
+   "x": 525,
+   "y": 268,
+   "score": null,
+   "normalized_x": 0.5121305584907532,
+   "normalized_y": 0.4948669373989105,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 51,
+   "x": 388,
+   "y": 216,
+   "score": null,
+   "normalized_x": 0.3784790337085724,
+   "normalized_y": 0.3993685245513916,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 52,
+   "x": 315,
+   "y": 204,
+   "score": null,
+   "normalized_x": 0.30755385756492615,
+   "normalized_y": 0.37778884172439575,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 53,
+   "x": 528,
+   "y": 337,
+   "score": null,
+   "normalized_x": 0.5142766237258911,
+   "normalized_y": 0.6233447194099426,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 54,
+   "x": 114,
+   "y": 102,
+   "score": null,
+   "normalized_x": 0.11144877970218658,
+   "normalized_y": 0.18905052542686462,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 55,
+   "x": 427,
+   "y": 278,
+   "score": null,
+   "normalized_x": 0.4164104163646698,
+   "normalized_y": 0.5130343437194824,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 56,
+   "x": 321,
+   "y": 344,
+   "score": null,
+   "normalized_x": 0.31274938583374023,
+   "normalized_y": 0.635273814201355,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 57,
+   "x": 243,
+   "y": 195,
+   "score": null,
+   "normalized_x": 0.2366734743118286,
+   "normalized_y": 0.3606202006340027,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 58,
+   "x": 419,
+   "y": 218,
+   "score": null,
+   "normalized_x": 0.4079931378364563,
+   "normalized_y": 0.40369874238967896,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 59,
+   "x": 207,
+   "y": 199,
+   "score": null,
+   "normalized_x": 0.20163454115390778,
+   "normalized_y": 0.36891061067581177,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 60,
+   "x": 211,
+   "y": 274,
+   "score": null,
+   "normalized_x": 0.20602908730506897,
+   "normalized_y": 0.506787121295929,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 61,
+   "x": 207,
+   "y": 190,
+   "score": null,
+   "normalized_x": 0.20166470110416412,
+   "normalized_y": 0.3508215546607971,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 62,
+   "x": 118,
+   "y": 118,
+   "score": null,
+   "normalized_x": 0.11535448580980301,
+   "normalized_y": 0.2187270224094391,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 63,
+   "x": 209,
+   "y": 272,
+   "score": null,
+   "normalized_x": 0.20439882576465607,
+   "normalized_y": 0.5029498934745789,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  }
+ ],
+ "head_status": "completed",
+ "implementation_choices": {
+  "keypoints": "Official 64-query L+D checkpoint and background gate",
+  "grouping": "Same official learned Siamese matcher as ChartParser paper, no histogram override."
+ },
+ "limitations": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ],
+ "shared_legend_status": "available",
+ "shared_legend_reason": null,
+ "shared_legends_sha256": "cbd094c48f048d13252c167bc55e9f342979f547357e2ce5b2f946c198500975",
+ "warnings": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ]
+}

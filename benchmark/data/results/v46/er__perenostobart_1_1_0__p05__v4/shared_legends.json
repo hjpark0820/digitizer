@@ -1,0 +1,169 @@
+{
+ "panel_id": "er__perenostobart_1_1_0__p05__v4",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "color02",
+   "native_swatch_id": "S01",
+   "bbox": [
+    138,
+    49,
+    192,
+    74
+   ],
+   "native_body_bbox": [
+    155,
+    53,
+    174,
+    70
+   ],
+   "class_name": "filled_circle",
+   "rgb": [
+    0,
+    71,
+    138
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s01",
+   "label": "SRF617",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__perenostobart_1_1_0__p05__v4/shared_legend_crops/legend_01.png",
+   "image_size": [
+    54,
+    25
+   ],
+   "sha256": "11dfbf45bf7b2335cfa694096f52b63aa5b2abe2b073ef8176ee0905dcd26fe9",
+   "source_native_legend_id": "color02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__perenostobart_1_1_0__p05__v4/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    138,
+    49,
+    192,
+    74
+   ],
+   "bbox_original": [
+    138,
+    49,
+    192,
+    74
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color03",
+   "native_swatch_id": "S02",
+   "bbox": [
+    138,
+    83,
+    192,
+    106
+   ],
+   "native_body_bbox": [
+    155,
+    86,
+    174,
+    103
+   ],
+   "class_name": "filled_circle",
+   "rgb": [
+    144,
+    145,
+    147
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s02",
+   "label": "Isotype Control",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__perenostobart_1_1_0__p05__v4/shared_legend_crops/legend_02.png",
+   "image_size": [
+    54,
+    23
+   ],
+   "sha256": "d64b9356f939713f108c50d9e67830a4dc6f2b330be14ba8b9bc9a794b51cf3e",
+   "source_native_legend_id": "color03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__perenostobart_1_1_0__p05__v4/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    138,
+    83,
+    192,
+    106
+   ],
+   "bbox_original": [
+    138,
+    83,
+    192,
+    106
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "color02": "s01",
+  "color03": "s02"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "color02",
+    "series_id": "s01",
+    "iou": 0.6039473684210527,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s02",
+    "iou": 0.6835443037974683,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "SRF617",
+   "bbox": [
+    132,
+    52,
+    196,
+    69
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Isotype Control",
+   "bbox": [
+    132,
+    85,
+    196,
+    103
+   ]
+  }
+ ],
+ "input_sha256": "ff5c3ba56ce3df356e42c55e0ee379963660cace2d5625c9a29af2aca132e74d",
+ "source_sha256": "ff5c3ba56ce3df356e42c55e0ee379963660cace2d5625c9a29af2aca132e74d",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.007239600003231317
+}

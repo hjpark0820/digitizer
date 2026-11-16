@@ -1,0 +1,157 @@
+{
+ "panel_id": "er__aducanumab_1_2_1__p01__v1",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    157,
+    40,
+    185,
+    70
+   ],
+   "native_body_bbox": [
+    158,
+    42,
+    183,
+    68
+   ],
+   "class_name": "open_circle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "human Aβ1-16",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__aducanumab_1_2_1__p01__v1/shared_legend_crops/legend_01.png",
+   "image_size": [
+    28,
+    30
+   ],
+   "sha256": "272b17e443ed35c7c458d428cd6f50592e75ac026722cb770ca319c50f423ed5",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__aducanumab_1_2_1__p01__v1/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    157,
+    40,
+    185,
+    70
+   ],
+   "bbox_original": [
+    157,
+    40,
+    185,
+    70
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    157,
+    96,
+    185,
+    115
+   ],
+   "native_body_bbox": [
+    162.28443717740302,
+    97.08600202712663,
+    177.5350500394147,
+    112.40205304156731
+   ],
+   "class_name": "filled_triangle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s02",
+   "label": "mouse Aβ1-16",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__aducanumab_1_2_1__p01__v1/shared_legend_crops/legend_02.png",
+   "image_size": [
+    28,
+    19
+   ],
+   "sha256": "8239ddcd53b612b821bf4b642ef3b4e4a2e799dae5d74cfaa811cf4fea4e31e3",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__aducanumab_1_2_1__p01__v1/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    157,
+    96,
+    185,
+    115
+   ],
+   "bbox_original": [
+    157,
+    96,
+    185,
+    115
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01",
+  "S02": "s02"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.5185185185185185,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 0.6441717791411042,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "human Aβ1-16",
+   "bbox": [
+    149,
+    44,
+    191,
+    65
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "mouse Aβ1-16",
+   "bbox": [
+    152,
+    98,
+    188,
+    113
+   ]
+  }
+ ],
+ "input_sha256": "531468e6d030e534e5c2cc4449dcacbd8c10341487446a0865ef798023d648c5",
+ "source_sha256": "531468e6d030e534e5c2cc4449dcacbd8c10341487446a0865ef798023d648c5",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.02131740003824234
+}

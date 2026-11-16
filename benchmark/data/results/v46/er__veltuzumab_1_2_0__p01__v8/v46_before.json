@@ -1,0 +1,158 @@
+{
+  "panel_id": "er__veltuzumab_1_2_0__p01__v8",
+  "model": "v46_before",
+  "method": "v46_before",
+  "status": "completed",
+  "reason": "",
+  "predictions": [
+    {
+      "point_id": "v46_before_S04_0001",
+      "x_px": 148.0,
+      "y_px": 219.0,
+      "series_id": "s04",
+      "score": null,
+      "native_series_id": "S04",
+      "crop_x_px": 148.0,
+      "crop_y_px": 219.0
+    },
+    {
+      "point_id": "v46_before_S03_0001",
+      "x_px": 151.0,
+      "y_px": 201.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "S03",
+      "crop_x_px": 151.0,
+      "crop_y_px": 201.0
+    },
+    {
+      "point_id": "v46_before_S03_0002",
+      "x_px": 384.0,
+      "y_px": 402.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "S03",
+      "crop_x_px": 384.0,
+      "crop_y_px": 402.0
+    },
+    {
+      "point_id": "v46_before_S02_0001",
+      "x_px": 152.0,
+      "y_px": 167.0,
+      "series_id": "s03",
+      "score": null,
+      "native_series_id": "S02",
+      "crop_x_px": 152.0,
+      "crop_y_px": 167.0
+    },
+    {
+      "point_id": "v46_before_S02_0002",
+      "x_px": 152.0,
+      "y_px": 186.0,
+      "series_id": "s03",
+      "score": null,
+      "native_series_id": "S02",
+      "crop_x_px": 152.0,
+      "crop_y_px": 186.0
+    },
+    {
+      "point_id": "v46_before_S02_0003",
+      "x_px": 276.0,
+      "y_px": 359.0,
+      "series_id": "s03",
+      "score": null,
+      "native_series_id": "S02",
+      "crop_x_px": 276.0,
+      "crop_y_px": 359.0
+    }
+  ],
+  "coordinate_convention": "full original image pixel centers; crop translation added exactly once",
+  "score_note": "Native export may omit confidence; null is unavailable, not zero. No score threshold added.",
+  "input_sha256": "6fd7b49cf68486b5cd43205ecd42c165ef8bcbbb85059a6637904558c7bddc07",
+  "source_sha256": "6fd7b49cf68486b5cd43205ecd42c165ef8bcbbb85059a6637904558c7bddc07",
+  "timing": {
+    "input_verification_seconds": 0.015197400003671646,
+    "detection_process_seconds": 78.97559099999489,
+    "legend_crop_export_seconds": 0.04792889999225736,
+    "total_wall_seconds": 79.05255969997961,
+    "native": {
+      "detection": {
+        "pipeline_imports_seconds": 0.018720399995800108,
+        "image_read_seconds": 0.005140900029800832,
+        "axis_calibration_seconds": 2.273223500000313,
+        "run_detection_seconds": 74.86531029996695,
+        "post_detection_seconds": 0.30376600002637133,
+        "output_save_seconds": 0.27188190002925694,
+        "cli_main_seconds": 77.49564380000811,
+        "pipeline_timings": {
+          "setup": 1.1581238999497145,
+          "preprocessing": 0.6916105000418611,
+          "segments": 0.0,
+          "errorbar": 0.0,
+          "points": 72.48165490000974,
+          "filter_coordinates": 0.00013529998250305653,
+          "overlay": 0.001083599985577166,
+          "legend_ocr": 0.5115634999820031,
+          "diagnostics": 0.020895500027108938,
+          "total": 74.86509399994975
+        },
+        "pipeline_timing_scope": "run_detection wall seconds; named stages are non-overlapping; segments/errorbar exclude separately timed diagnostic rendering. points includes the point detector and its own diagnostics. total includes minor glue/logging; CLI imports, image decoding, optional correction and file export are outside.",
+        "point_pipeline_timings": {
+          "backend_setup_seconds": 4.1199964471161366e-05,
+          "legend_seconds": 0.20221220003440976,
+          "scale_policy_seconds": 49.567053099977784,
+          "grid_models_seconds": 9.628451299970038,
+          "window_and_records_seconds": 12.076258999994025,
+          "filled_contour_identity_seconds": 0.0,
+          "selection_seconds": 0.010412500065285712,
+          "centered_x_seconds": 2.2299995180219412e-05,
+          "legend_panels_seconds": 0.00641979998908937,
+          "layered_marker_seconds": 0.7156444999855012,
+          "partial_hollow_seconds": 0.0,
+          "explained_occlusion_seconds": 0.0,
+          "untyped_region_seconds": 0.1884297999786213,
+          "total_seconds": 72.47220669995295,
+          "timing_scope": "Sequential detect_points wall time; per-model/window diagnostics are nested",
+          "filled_boundary_retention_seconds": 0.0041220999555662274
+        },
+        "settings": {
+          "point_backend": "grid_v46",
+          "gpu_batch_size": 512,
+          "filled_contour_identity_requested": false,
+          "visible_first_detection_requested": true,
+          "diagnostic_detail_requested": null,
+          "skip_segments": true,
+          "diagnostic_detail": false,
+          "image_shape": [
+            602,
+            1196
+          ],
+          "plot_area": [
+            111,
+            39,
+            412,
+            421
+          ],
+          "legend_area": [
+            10,
+            524,
+            1125,
+            582
+          ]
+        },
+        "timing_scope": "perf_counter wall seconds; imports include backend initialization; post_detection includes output_save; cli_main excludes process launch/module-level imports and this timing file write"
+      },
+      "shared_legend_seconds": 0.20221220003440976,
+      "shared_legend_timing_note": "BW native timer or transparent colour LegendRuntime.prepare timer; included in detection process wall time.",
+      "model_load_seconds": 0.018720399995800108,
+      "model_load_timing_note": "BW native imports/backend initialization, included in process wall time; colour unavailable, not zero.",
+      "timing_wrapper": {
+        "shared_legend_seconds": null,
+        "legend_calls": 0,
+        "module_preload_seconds": 0.0,
+        "wrapper": "perf_counter around original LegendRuntime.prepare; unchanged args and return value",
+        "native_cli_seconds": 77.72580139996717
+      }
+    }
+  }
+}

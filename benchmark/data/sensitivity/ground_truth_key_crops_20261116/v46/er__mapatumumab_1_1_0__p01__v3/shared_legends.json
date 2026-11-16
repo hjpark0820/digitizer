@@ -1,0 +1,108 @@
+{
+ "panel_id": "er__mapatumumab_1_1_0__p01__v3",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "IC mAb",
+   "bbox": [
+    157,
+    485,
+    274,
+    511
+   ],
+   "bbox_crop": [
+    157,
+    485,
+    274,
+    511
+   ],
+   "bbox_original": [
+    157,
+    485,
+    274,
+    511
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__mapatumumab_1_1_0__p01__v3/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__mapatumumab_1_1_0__p01__v3/shared_legend_crops/legend_01.png",
+   "image_size": [
+    117,
+    26
+   ],
+   "sha256": "1a60bec850a5e2670a5f437a9a6b2763d2ecebe8eaf0039a0b457b639f79d8ae",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "ETR1",
+   "bbox": [
+    161,
+    554,
+    270,
+    573
+   ],
+   "bbox_crop": [
+    161,
+    554,
+    270,
+    573
+   ],
+   "bbox_original": [
+    161,
+    554,
+    270,
+    573
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__mapatumumab_1_1_0__p01__v3/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__mapatumumab_1_1_0__p01__v3/shared_legend_crops/legend_02.png",
+   "image_size": [
+    109,
+    19
+   ],
+   "sha256": "5bdaf151fea1f2a15576bf58c0d2e18270a471da493250368ae7c23203bd52e7",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s02": "s02",
+  "s01": "s01"
+ },
+ "annotations": [
+  {
+   "series_id": "s02",
+   "label": "IC mAb",
+   "bbox": [
+    157,
+    485,
+    274,
+    511
+   ]
+  },
+  {
+   "series_id": "s01",
+   "label": "ETR1",
+   "bbox": [
+    161,
+    554,
+    270,
+    573
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "b247d4ba7518921cd65b6e3d753601ddd7adf10d7dcf599a314738eb472435a5",
+ "source_sha256": "b247d4ba7518921cd65b6e3d753601ddd7adf10d7dcf599a314738eb472435a5",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}

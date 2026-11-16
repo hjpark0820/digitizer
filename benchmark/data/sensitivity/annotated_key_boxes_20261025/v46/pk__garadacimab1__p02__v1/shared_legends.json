@@ -1,0 +1,245 @@
+{
+ "panel_id": "pk__garadacimab1__p02__v1",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    485,
+    10,
+    505,
+    19
+   ],
+   "native_body_bbox": [
+    490.5,
+    9.725005,
+    499.5,
+    18.274995
+   ],
+   "class_name": "filled_square",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "1 mg/kg",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__garadacimab1__p02__v1/shared_legend_crops/legend_01.png",
+   "image_size": [
+    20,
+    9
+   ],
+   "sha256": "0385449cc5259df3bc84955dbcf4dc25e8242363e8a0ad51725c249b1579c306",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__garadacimab1__p02__v1/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    485,
+    10,
+    505,
+    19
+   ],
+   "bbox_original": [
+    485,
+    10,
+    505,
+    19
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    484,
+    37,
+    506,
+    48
+   ],
+   "native_body_bbox": [
+    488,
+    37,
+    502,
+    48
+   ],
+   "class_name": "unknown_marker",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s02",
+   "label": "3 mg/kg",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__garadacimab1__p02__v1/shared_legend_crops/legend_02.png",
+   "image_size": [
+    22,
+    11
+   ],
+   "sha256": "00159cc8049d00856778b6b3b27965fafcf63015c43323b24c91ff3c79f14740",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__garadacimab1__p02__v1/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    484,
+    37,
+    506,
+    48
+   ],
+   "bbox_original": [
+    484,
+    37,
+    506,
+    48
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S03",
+   "bbox": [
+    484,
+    65,
+    506,
+    76
+   ],
+   "native_body_bbox": [
+    488,
+    65,
+    502,
+    76
+   ],
+   "class_name": "unknown_marker",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s03",
+   "label": "10 mg/kg",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__garadacimab1__p02__v1/shared_legend_crops/legend_03.png",
+   "image_size": [
+    22,
+    11
+   ],
+   "sha256": "8a99046c01469a5cf9d86d7e007b0e87f7acf95ecc7337cd2b3077ba779e41b7",
+   "source_native_legend_id": "S03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__garadacimab1__p02__v1/shared_legend_crops/legend_03.png",
+   "bbox_crop": [
+    484,
+    65,
+    506,
+    76
+   ],
+   "bbox_original": [
+    484,
+    65,
+    506,
+    76
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01",
+  "S02": "s02",
+  "S03": "s03"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 1.0,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 0.743801652892562,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s03",
+    "iou": 1.0,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "1 mg/kg",
+   "bbox": [
+    485,
+    10,
+    505,
+    19
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "3 mg/kg",
+   "bbox": [
+    485,
+    38,
+    505,
+    47
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "10 mg/kg",
+   "bbox": [
+    484,
+    65,
+    506,
+    76
+   ]
+  }
+ ],
+ "input_sha256": "50d3bfa84b8232f3f1c89fcb42485aac6fe448125ae9da4cd491b6c18bff479c",
+ "source_sha256": "50d3bfa84b8232f3f1c89fcb42485aac6fe448125ae9da4cd491b6c18bff479c",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.042071100004250184
+}

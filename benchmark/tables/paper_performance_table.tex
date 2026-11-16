@@ -1,0 +1,24 @@
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.25}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.6cm}@{\hspace{9pt}}rrrr@{\hspace{12pt}}rr@{\hspace{12pt}}rr@{\hspace{12pt}}r@{}}
+\toprule
+& \multicolumn{4}{c}{\textbf{Subgroups}} & \multicolumn{2}{c}{\textbf{Plot type}} & \multicolumn{2}{c}{\textbf{Appearance}} & \multicolumn{1}{c}{\textbf{Overall}} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}\cmidrule(l){10-10}
+Method & \shortstack{PK\\BW} & \shortstack{PK\\Color} & \shortstack{ER\\BW} & \shortstack{ER\\Color} & PK & ER & BW & Color & All \\
+\midrule
+Proposed, before correction & 68.5 & 86.0 & 74.2 & 93.7 & 78.6 & 84.7 & 70.8 & 88.7 & 80.9 \\
+Proposed, after correction & 69.4 & 86.4 & 75.3 & 94.5 & 79.3 & 85.7 & 71.8 & 89.3 & 81.7 \\
+AI-ChartParser, raw & 28.8 & 52.6 & 34.5 & 65.5 & 41.8 & 50.7 & 31.2 & 57.8 & 45.4 \\
+AI-ChartParser, corrected & 26.5 & 52.1 & 30.0 & 61.1 & 40.6 & 46.2 & 27.9 & 55.6 & 42.8 \\
+LineEX, paper settings & 23.0 & 37.9 & 27.3 & 39.7 & 30.7 & 33.5 & 24.9 & 38.7 & 32.0 \\
+LineEX, released-code settings & 21.5 & 37.1 & 25.0 & 39.2 & 29.4 & 32.2 & 23.0 & 38.0 & 30.6 \\
+\midrule
+Panels & 25 & 25 & 25 & 25 & 50 & 50 & 50 & 50 & 100 \\
+Reference points & 891 & 1,057 & 568 & 576 & 1,948 & 1,144 & 1,459 & 1,633 & 3,092 \\
+\bottomrule
+\end{tabular}%
+}
+\endgroup

@@ -1,0 +1,3896 @@
+{
+ "version": "external_shared_input_benchmark_v1",
+ "panel_id": "pk__amubarvimab1__p02__v1",
+ "modality": "bw",
+ "method": "aicp_raw_grouped",
+ "status": "completed",
+ "coordinate_system": "x_px/y_px = full original unrotated image pixels; x/y = shared native crop pixels",
+ "image_path": "data/images\\pk__amubarvimab1__p02__v1.png",
+ "input_sha256": "67fed0358beeedc4cca6174a3fdb9dba5269a3a74b5f6fc29ebfab8348da7ea5",
+ "source_image_path": "data/images\\pk__amubarvimab1__p02__v1.png",
+ "source_sha256": "67fed0358beeedc4cca6174a3fdb9dba5269a3a74b5f6fc29ebfab8348da7ea5",
+ "crop_box_original": [
+  0,
+  0,
+  314,
+  203
+ ],
+ "plot_box": [
+  55.0,
+  0.0,
+  303.0,
+  165.0
+ ],
+ "legend_box": [
+  224.0,
+  0.0,
+  305.0,
+  64.0
+ ],
+ "legends": [
+  {
+   "legend_index": 0,
+   "series_id": "s01",
+   "label": "750mg",
+   "source_native_legend_id": "S01",
+   "box_input": [
+    224,
+    0,
+    254,
+    14
+   ],
+   "box_original": [
+    224,
+    0,
+    254,
+    14
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__amubarvimab1__p02__v1/shared_legend_crops/legend_01.png",
+   "crop_sha256": "d6861c45583a484d564dd1f1591fc44d5e9d0e7e987642b33691853716937e3e",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__amubarvimab1__p02__v1/shared_legends.json",
+   "shared_legends_sha256": "be19118dc6187631d79997fdddc88dbc44a38c517f432351d350f453bc1bcfbc",
+   "mapping_provenance": {
+    "S01": "s01",
+    "S02": "s02",
+    "S03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 1,
+   "series_id": "s02",
+   "label": "1500mg",
+   "source_native_legend_id": "S02",
+   "box_input": [
+    224,
+    24,
+    254,
+    37
+   ],
+   "box_original": [
+    224,
+    24,
+    254,
+    37
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__amubarvimab1__p02__v1/shared_legend_crops/legend_02.png",
+   "crop_sha256": "c99a57bd93d4aa200fe5ac86ebb86f44cce6fcf1eca9b179a5bc4aa2a33f97ce",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__amubarvimab1__p02__v1/shared_legends.json",
+   "shared_legends_sha256": "be19118dc6187631d79997fdddc88dbc44a38c517f432351d350f453bc1bcfbc",
+   "mapping_provenance": {
+    "S01": "s01",
+    "S02": "s02",
+    "S03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 2,
+   "series_id": "s03",
+   "label": "3000mg",
+   "source_native_legend_id": "S03",
+   "box_input": [
+    224,
+    48,
+    254,
+    61
+   ],
+   "box_original": [
+    224,
+    48,
+    254,
+    61
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__amubarvimab1__p02__v1/shared_legend_crops/legend_03.png",
+   "crop_sha256": "8a05c016eb51dcfdc99554eb0a665f05425e8779d1580259e088f7bc66ca2aee",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__amubarvimab1__p02__v1/shared_legends.json",
+   "shared_legends_sha256": "be19118dc6187631d79997fdddc88dbc44a38c517f432351d350f453bc1bcfbc",
+   "mapping_provenance": {
+    "S01": "s01",
+    "S02": "s02",
+    "S03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  }
+ ],
+ "predictions": [
+  {
+   "point_id": "CP0005",
+   "x": 74.20703125,
+   "y": 35.287109375,
+   "model_x": 121,
+   "model_y": 89,
+   "detection_score": 0.7944132685661316,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9353594183921814,
+   "winning_similarity": 0.9353594183921814,
+   "similarities": [
+    0.8785838484764099,
+    0.9353594183921814,
+    0.8885807394981384
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0005.png",
+   "patch_box_input": [
+    54,
+    25,
+    94,
+    45
+   ],
+   "x_px": 74.20703125,
+   "y_px": 35.287109375
+  },
+  {
+   "point_id": "CP0006",
+   "x": 74.20703125,
+   "y": 40.44140625,
+   "model_x": 121,
+   "model_y": 102,
+   "detection_score": 0.4223182499408722,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9825181365013123,
+   "winning_similarity": 0.9825181365013123,
+   "similarities": [
+    0.9715530872344971,
+    0.9825181365013123,
+    0.9807370901107788
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0006.png",
+   "patch_box_input": [
+    54,
+    30,
+    94,
+    50
+   ],
+   "x_px": 74.20703125,
+   "y_px": 40.44140625
+  },
+  {
+   "point_id": "CP0007",
+   "x": 134.30859375,
+   "y": 46.388671875,
+   "model_x": 219,
+   "model_y": 117,
+   "detection_score": 0.6997418999671936,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7493144273757935,
+   "winning_similarity": 0.7493144273757935,
+   "similarities": [
+    0.47803011536598206,
+    0.7493144273757935,
+    0.4594641625881195
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0007.png",
+   "patch_box_input": [
+    114,
+    36,
+    154,
+    56
+   ],
+   "x_px": 134.30859375,
+   "y_px": 46.388671875
+  },
+  {
+   "point_id": "CP0010",
+   "x": 133.6953125,
+   "y": 56.697265625,
+   "model_x": 218,
+   "model_y": 143,
+   "detection_score": 0.6576269865036011,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9764545559883118,
+   "winning_similarity": 0.9764545559883118,
+   "similarities": [
+    0.9450637698173523,
+    0.9764545559883118,
+    0.9656449556350708
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0010.png",
+   "patch_box_input": [
+    113,
+    46,
+    153,
+    66
+   ],
+   "x_px": 133.6953125,
+   "y_px": 56.697265625
+  },
+  {
+   "point_id": "CP0011",
+   "x": 93.83203125,
+   "y": 57.490234375,
+   "model_x": 153,
+   "model_y": 145,
+   "detection_score": 0.8328370451927185,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9365773797035217,
+   "winning_similarity": 0.9365773797035217,
+   "similarities": [
+    0.8451617956161499,
+    0.9365773797035217,
+    0.9056281447410583
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0011.png",
+   "patch_box_input": [
+    73,
+    47,
+    113,
+    67
+   ],
+   "x_px": 93.83203125,
+   "y_px": 57.490234375
+  },
+  {
+   "point_id": "CP0012",
+   "x": 169.87890625,
+   "y": 57.490234375,
+   "model_x": 277,
+   "model_y": 145,
+   "detection_score": 0.9631690382957458,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9141099452972412,
+   "winning_similarity": 0.9141099452972412,
+   "similarities": [
+    0.8664592504501343,
+    0.9141099452972412,
+    0.871195375919342
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0012.png",
+   "patch_box_input": [
+    149,
+    47,
+    189,
+    67
+   ],
+   "x_px": 169.87890625,
+   "y_px": 57.490234375
+  },
+  {
+   "point_id": "CP0013",
+   "x": 169.87890625,
+   "y": 61.8515625,
+   "model_x": 277,
+   "model_y": 156,
+   "detection_score": 0.9886103272438049,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.967964768409729,
+   "winning_similarity": 0.967964768409729,
+   "similarities": [
+    0.9278021454811096,
+    0.9661298394203186,
+    0.967964768409729
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0013.png",
+   "patch_box_input": [
+    149,
+    51,
+    189,
+    71
+   ],
+   "x_px": 169.87890625,
+   "y_px": 61.8515625
+  },
+  {
+   "point_id": "CP0014",
+   "x": 133.08203125,
+   "y": 65.81640625,
+   "model_x": 217,
+   "model_y": 166,
+   "detection_score": 0.9728859663009644,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9599512815475464,
+   "winning_similarity": 0.9599512815475464,
+   "similarities": [
+    0.9075808525085449,
+    0.9599512815475464,
+    0.9336771368980408
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0014.png",
+   "patch_box_input": [
+    113,
+    55,
+    153,
+    75
+   ],
+   "x_px": 133.08203125,
+   "y_px": 65.81640625
+  },
+  {
+   "point_id": "CP0015",
+   "x": 169.87890625,
+   "y": 67.40234375,
+   "model_x": 277,
+   "model_y": 170,
+   "detection_score": 0.7927045226097107,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9834409952163696,
+   "winning_similarity": 0.9834409952163696,
+   "similarities": [
+    0.9683027267456055,
+    0.9834409952163696,
+    0.9793891310691833
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0015.png",
+   "patch_box_input": [
+    149,
+    57,
+    189,
+    77
+   ],
+   "x_px": 169.87890625,
+   "y_px": 67.40234375
+  },
+  {
+   "point_id": "CP0016",
+   "x": 206.0625,
+   "y": 67.005859375,
+   "model_x": 336,
+   "model_y": 169,
+   "detection_score": 0.8366835117340088,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.5576457977294922,
+   "winning_similarity": 0.5576457977294922,
+   "similarities": [
+    0.3121177852153778,
+    0.5576457977294922,
+    0.344499409198761
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0016.png",
+   "patch_box_input": [
+    186,
+    57,
+    226,
+    77
+   ],
+   "x_px": 206.0625,
+   "y_px": 67.005859375
+  },
+  {
+   "point_id": "CP0017",
+   "x": 169.87890625,
+   "y": 72.556640625,
+   "model_x": 277,
+   "model_y": 183,
+   "detection_score": 0.9759364128112793,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9657045602798462,
+   "winning_similarity": 0.9657045602798462,
+   "similarities": [
+    0.9190651178359985,
+    0.9657045602798462,
+    0.9542497396469116
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0017.png",
+   "patch_box_input": [
+    149,
+    62,
+    189,
+    82
+   ],
+   "x_px": 169.87890625,
+   "y_px": 72.556640625
+  },
+  {
+   "point_id": "CP0018",
+   "x": 242.859375,
+   "y": 72.16015625,
+   "model_x": 396,
+   "model_y": 182,
+   "detection_score": 0.615957498550415,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.33076217770576477,
+   "winning_similarity": 0.33076217770576477,
+   "similarities": [
+    0.14057214558124542,
+    0.33076217770576477,
+    0.12981122732162476
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0018.png",
+   "patch_box_input": [
+    222,
+    62,
+    262,
+    82
+   ],
+   "x_px": 242.859375,
+   "y_px": 72.16015625
+  },
+  {
+   "point_id": "CP0019",
+   "x": 280.26953125,
+   "y": 71.763671875,
+   "model_x": 457,
+   "model_y": 181,
+   "detection_score": 0.9337689876556396,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.92848801612854,
+   "winning_similarity": 0.92848801612854,
+   "similarities": [
+    0.8162373900413513,
+    0.92848801612854,
+    0.7788879871368408
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0019.png",
+   "patch_box_input": [
+    260,
+    61,
+    300,
+    81
+   ],
+   "x_px": 280.26953125,
+   "y_px": 71.763671875
+  },
+  {
+   "point_id": "CP0020",
+   "x": 76.046875,
+   "y": 73.349609375,
+   "model_x": 124,
+   "model_y": 185,
+   "detection_score": 0.3765459656715393,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9494360089302063,
+   "winning_similarity": 0.9494360089302063,
+   "similarities": [
+    0.9154466986656189,
+    0.9494360089302063,
+    0.9424641728401184
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0020.png",
+   "patch_box_input": [
+    56,
+    63,
+    96,
+    83
+   ],
+   "x_px": 76.046875,
+   "y_px": 73.349609375
+  },
+  {
+   "point_id": "CP0021",
+   "x": 133.08203125,
+   "y": 72.953125,
+   "model_x": 217,
+   "model_y": 184,
+   "detection_score": 0.9499555230140686,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9396243095397949,
+   "winning_similarity": 0.9396243095397949,
+   "similarities": [
+    0.8061617016792297,
+    0.9396243095397949,
+    0.8737647533416748
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0021.png",
+   "patch_box_input": [
+    113,
+    62,
+    153,
+    82
+   ],
+   "x_px": 133.08203125,
+   "y_px": 72.953125
+  },
+  {
+   "point_id": "CP0022",
+   "x": 76.046875,
+   "y": 76.91796875,
+   "model_x": 124,
+   "model_y": 194,
+   "detection_score": 0.502822756767273,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9556939005851746,
+   "winning_similarity": 0.9556939005851746,
+   "similarities": [
+    0.9318556189537048,
+    0.9556939005851746,
+    0.9375997185707092
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0022.png",
+   "patch_box_input": [
+    56,
+    66,
+    96,
+    86
+   ],
+   "x_px": 76.046875,
+   "y_px": 76.91796875
+  },
+  {
+   "point_id": "CP0023",
+   "x": 93.83203125,
+   "y": 78.107421875,
+   "model_x": 153,
+   "model_y": 197,
+   "detection_score": 0.9963855743408203,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9427202939987183,
+   "winning_similarity": 0.9427202939987183,
+   "similarities": [
+    0.9298036098480225,
+    0.9427202939987183,
+    0.9418118596076965
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0023.png",
+   "patch_box_input": [
+    73,
+    68,
+    113,
+    88
+   ],
+   "x_px": 93.83203125,
+   "y_px": 78.107421875
+  },
+  {
+   "point_id": "CP0024",
+   "x": 280.26953125,
+   "y": 77.7109375,
+   "model_x": 457,
+   "model_y": 196,
+   "detection_score": 0.9466309547424316,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9810298681259155,
+   "winning_similarity": 0.9810298681259155,
+   "similarities": [
+    0.9717534184455872,
+    0.9810298681259155,
+    0.9775595664978027
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0024.png",
+   "patch_box_input": [
+    260,
+    67,
+    300,
+    87
+   ],
+   "x_px": 280.26953125,
+   "y_px": 77.7109375
+  },
+  {
+   "point_id": "CP0026",
+   "x": 206.0625,
+   "y": 79.296875,
+   "model_x": 336,
+   "model_y": 200,
+   "detection_score": 0.9701784253120422,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9741774797439575,
+   "winning_similarity": 0.9741774797439575,
+   "similarities": [
+    0.9593508839607239,
+    0.9741774797439575,
+    0.9732474684715271
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0026.png",
+   "patch_box_input": [
+    186,
+    69,
+    226,
+    89
+   ],
+   "x_px": 206.0625,
+   "y_px": 79.296875
+  },
+  {
+   "point_id": "CP0028",
+   "x": 94.4453125,
+   "y": 82.46875,
+   "model_x": 154,
+   "model_y": 208,
+   "detection_score": 0.8935600519180298,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9902948141098022,
+   "winning_similarity": 0.9902948141098022,
+   "similarities": [
+    0.984328031539917,
+    0.9902948141098022,
+    0.9895899891853333
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0028.png",
+   "patch_box_input": [
+    74,
+    72,
+    114,
+    92
+   ],
+   "x_px": 94.4453125,
+   "y_px": 82.46875
+  },
+  {
+   "point_id": "CP0029",
+   "x": 169.87890625,
+   "y": 82.46875,
+   "model_x": 277,
+   "model_y": 208,
+   "detection_score": 0.7117690443992615,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8493821024894714,
+   "winning_similarity": 0.8493821024894714,
+   "similarities": [
+    0.6395143866539001,
+    0.8493821024894714,
+    0.5609124302864075
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0029.png",
+   "patch_box_input": [
+    149,
+    72,
+    189,
+    92
+   ],
+   "x_px": 169.87890625,
+   "y_px": 82.46875
+  },
+  {
+   "point_id": "CP0030",
+   "x": 242.24609375,
+   "y": 83.26171875,
+   "model_x": 395,
+   "model_y": 210,
+   "detection_score": 0.9334878325462341,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9422746896743774,
+   "winning_similarity": 0.9422746896743774,
+   "similarities": [
+    0.9032230973243713,
+    0.9422746896743774,
+    0.8995125889778137
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0030.png",
+   "patch_box_input": [
+    222,
+    73,
+    262,
+    93
+   ],
+   "x_px": 242.24609375,
+   "y_px": 83.26171875
+  },
+  {
+   "point_id": "CP0031",
+   "x": 280.26953125,
+   "y": 84.0546875,
+   "model_x": 457,
+   "model_y": 212,
+   "detection_score": 0.9083381295204163,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9560586810112,
+   "winning_similarity": 0.9560586810112,
+   "similarities": [
+    0.876988410949707,
+    0.9560586810112,
+    0.9062072038650513
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0031.png",
+   "patch_box_input": [
+    260,
+    74,
+    300,
+    94
+   ],
+   "x_px": 280.26953125,
+   "y_px": 84.0546875
+  },
+  {
+   "point_id": "CP0033",
+   "x": 76.046875,
+   "y": 85.640625,
+   "model_x": 124,
+   "model_y": 216,
+   "detection_score": 0.7574834227561951,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9780791997909546,
+   "winning_similarity": 0.9780791997909546,
+   "similarities": [
+    0.9676066637039185,
+    0.9776782989501953,
+    0.9780791997909546
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0033.png",
+   "patch_box_input": [
+    56,
+    75,
+    96,
+    95
+   ],
+   "x_px": 76.046875,
+   "y_px": 85.640625
+  },
+  {
+   "point_id": "CP0034",
+   "x": 94.4453125,
+   "y": 86.037109375,
+   "model_x": 154,
+   "model_y": 217,
+   "detection_score": 0.9952598214149475,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9069571495056152,
+   "winning_similarity": 0.9069571495056152,
+   "similarities": [
+    0.7962251901626587,
+    0.9069571495056152,
+    0.8390622735023499
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0034.png",
+   "patch_box_input": [
+    74,
+    76,
+    114,
+    96
+   ],
+   "x_px": 94.4453125,
+   "y_px": 86.037109375
+  },
+  {
+   "point_id": "CP0035",
+   "x": 242.24609375,
+   "y": 86.43359375,
+   "model_x": 395,
+   "model_y": 218,
+   "detection_score": 0.9540060758590698,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9873328804969788,
+   "winning_similarity": 0.9873328804969788,
+   "similarities": [
+    0.9837480187416077,
+    0.986409604549408,
+    0.9873328804969788
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0035.png",
+   "patch_box_input": [
+    222,
+    76,
+    262,
+    96
+   ],
+   "x_px": 242.24609375,
+   "y_px": 86.43359375
+  },
+  {
+   "point_id": "CP0036",
+   "x": 83.40625,
+   "y": 88.01953125,
+   "model_x": 136,
+   "model_y": 222,
+   "detection_score": 0.6310513019561768,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9832768440246582,
+   "winning_similarity": 0.9832768440246582,
+   "similarities": [
+    0.9612906575202942,
+    0.9832768440246582,
+    0.9728357791900635
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0036.png",
+   "patch_box_input": [
+    63,
+    78,
+    103,
+    98
+   ],
+   "x_px": 83.40625,
+   "y_px": 88.01953125
+  },
+  {
+   "point_id": "CP0037",
+   "x": 76.046875,
+   "y": 90.794921875,
+   "model_x": 124,
+   "model_y": 229,
+   "detection_score": 0.9528545141220093,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8715751767158508,
+   "winning_similarity": 0.8715751767158508,
+   "similarities": [
+    0.7429466247558594,
+    0.8715751767158508,
+    0.8085722327232361
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0037.png",
+   "patch_box_input": [
+    56,
+    80,
+    96,
+    100
+   ],
+   "x_px": 76.046875,
+   "y_px": 90.794921875
+  },
+  {
+   "point_id": "CP0038",
+   "x": 242.24609375,
+   "y": 91.19140625,
+   "model_x": 395,
+   "model_y": 230,
+   "detection_score": 0.9004369974136353,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9044961929321289,
+   "winning_similarity": 0.9044961929321289,
+   "similarities": [
+    0.7883038520812988,
+    0.9044961929321289,
+    0.8407223224639893
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0038.png",
+   "patch_box_input": [
+    222,
+    81,
+    262,
+    101
+   ],
+   "x_px": 242.24609375,
+   "y_px": 91.19140625
+  },
+  {
+   "point_id": "CP0039",
+   "x": 169.87890625,
+   "y": 91.984375,
+   "model_x": 277,
+   "model_y": 232,
+   "detection_score": 0.8342169523239136,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9337101578712463,
+   "winning_similarity": 0.9337101578712463,
+   "similarities": [
+    0.8903215527534485,
+    0.9337101578712463,
+    0.8844030499458313
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0039.png",
+   "patch_box_input": [
+    149,
+    81,
+    189,
+    101
+   ],
+   "x_px": 169.87890625,
+   "y_px": 91.984375
+  },
+  {
+   "point_id": "CP0040",
+   "x": 133.6953125,
+   "y": 93.966796875,
+   "model_x": 218,
+   "model_y": 237,
+   "detection_score": 0.9753565788269043,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.967423677444458,
+   "winning_similarity": 0.967423677444458,
+   "similarities": [
+    0.9305608868598938,
+    0.9659436345100403,
+    0.967423677444458
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0040.png",
+   "patch_box_input": [
+    113,
+    83,
+    153,
+    103
+   ],
+   "x_px": 133.6953125,
+   "y_px": 93.966796875
+  },
+  {
+   "point_id": "CP0042",
+   "x": 169.87890625,
+   "y": 97.138671875,
+   "model_x": 277,
+   "model_y": 245,
+   "detection_score": 0.9967712759971619,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9810016751289368,
+   "winning_similarity": 0.9810016751289368,
+   "similarities": [
+    0.9703924655914307,
+    0.980505645275116,
+    0.9810016751289368
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0042.png",
+   "patch_box_input": [
+    149,
+    87,
+    189,
+    107
+   ],
+   "x_px": 169.87890625,
+   "y_px": 97.138671875
+  },
+  {
+   "point_id": "CP0043",
+   "x": 280.26953125,
+   "y": 96.7421875,
+   "model_x": 457,
+   "model_y": 244,
+   "detection_score": 0.8806813359260559,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9455998539924622,
+   "winning_similarity": 0.9455998539924622,
+   "similarities": [
+    0.9342292547225952,
+    0.9455998539924622,
+    0.9455109238624573
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0043.png",
+   "patch_box_input": [
+    260,
+    86,
+    300,
+    106
+   ],
+   "x_px": 280.26953125,
+   "y_px": 96.7421875
+  },
+  {
+   "point_id": "CP0044",
+   "x": 206.0625,
+   "y": 98.328125,
+   "model_x": 336,
+   "model_y": 248,
+   "detection_score": 0.9616826772689819,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9258600473403931,
+   "winning_similarity": 0.9258600473403931,
+   "similarities": [
+    0.8557310104370117,
+    0.9258600473403931,
+    0.8292955160140991
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0044.png",
+   "patch_box_input": [
+    186,
+    88,
+    226,
+    108
+   ],
+   "x_px": 206.0625,
+   "y_px": 98.328125
+  },
+  {
+   "point_id": "CP0045",
+   "x": 280.26953125,
+   "y": 100.310546875,
+   "model_x": 457,
+   "model_y": 253,
+   "detection_score": 0.9506640434265137,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9805280566215515,
+   "winning_similarity": 0.9805280566215515,
+   "similarities": [
+    0.9622941613197327,
+    0.9805280566215515,
+    0.9792742133140564
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0045.png",
+   "patch_box_input": [
+    260,
+    90,
+    300,
+    110
+   ],
+   "x_px": 280.26953125,
+   "y_px": 100.310546875
+  },
+  {
+   "point_id": "CP0046",
+   "x": 169.87890625,
+   "y": 101.896484375,
+   "model_x": 277,
+   "model_y": 257,
+   "detection_score": 0.9966297745704651,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8446354269981384,
+   "winning_similarity": 0.8446354269981384,
+   "similarities": [
+    0.6670408248901367,
+    0.8446354269981384,
+    0.6965102553367615
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0046.png",
+   "patch_box_input": [
+    149,
+    91,
+    189,
+    111
+   ],
+   "x_px": 169.87890625,
+   "y_px": 101.896484375
+  },
+  {
+   "point_id": "CP0048",
+   "x": 206.0625,
+   "y": 105.068359375,
+   "model_x": 336,
+   "model_y": 265,
+   "detection_score": 0.9950860142707825,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9658783674240112,
+   "winning_similarity": 0.9658783674240112,
+   "similarities": [
+    0.9475710988044739,
+    0.9658783674240112,
+    0.9602283835411072
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0048.png",
+   "patch_box_input": [
+    186,
+    95,
+    226,
+    115
+   ],
+   "x_px": 206.0625,
+   "y_px": 105.068359375
+  },
+  {
+   "point_id": "CP0049",
+   "x": 280.26953125,
+   "y": 105.068359375,
+   "model_x": 457,
+   "model_y": 265,
+   "detection_score": 0.8655536770820618,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9541860222816467,
+   "winning_similarity": 0.9541860222816467,
+   "similarities": [
+    0.9048532843589783,
+    0.9541860222816467,
+    0.920203447341919
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0049.png",
+   "patch_box_input": [
+    260,
+    95,
+    300,
+    115
+   ],
+   "x_px": 280.26953125,
+   "y_px": 105.068359375
+  },
+  {
+   "point_id": "CP0050",
+   "x": 206.0625,
+   "y": 111.80859375,
+   "model_x": 336,
+   "model_y": 282,
+   "detection_score": 0.9905722737312317,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9231281876564026,
+   "winning_similarity": 0.9231281876564026,
+   "similarities": [
+    0.7886637449264526,
+    0.9231281876564026,
+    0.8436278104782104
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0050.png",
+   "patch_box_input": [
+    186,
+    101,
+    226,
+    121
+   ],
+   "x_px": 206.0625,
+   "y_px": 111.80859375
+  },
+  {
+   "point_id": "CP0051",
+   "x": 280.8828125,
+   "y": 112.6015625,
+   "model_x": 458,
+   "model_y": 284,
+   "detection_score": 0.6750246286392212,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.909138560295105,
+   "winning_similarity": 0.909138560295105,
+   "similarities": [
+    0.8046392798423767,
+    0.909138560295105,
+    0.7583412528038025
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0051.png",
+   "patch_box_input": [
+    260,
+    102,
+    300,
+    122
+   ],
+   "x_px": 280.8828125,
+   "y_px": 112.6015625
+  },
+  {
+   "point_id": "CP0052",
+   "x": 244.0859375,
+   "y": 116.56640625,
+   "model_x": 398,
+   "model_y": 294,
+   "detection_score": 0.991135835647583,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9835926294326782,
+   "winning_similarity": 0.9835926294326782,
+   "similarities": [
+    0.9728288650512695,
+    0.9835926294326782,
+    0.9835397005081177
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0052.png",
+   "patch_box_input": [
+    224,
+    106,
+    264,
+    126
+   ],
+   "x_px": 244.0859375,
+   "y_px": 116.56640625
+  },
+  {
+   "point_id": "CP0053",
+   "x": 280.8828125,
+   "y": 118.15234375,
+   "model_x": 458,
+   "model_y": 298,
+   "detection_score": 0.9543290734291077,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9854965806007385,
+   "winning_similarity": 0.9854965806007385,
+   "similarities": [
+    0.9780929088592529,
+    0.9854965806007385,
+    0.9816641807556152
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0053.png",
+   "patch_box_input": [
+    260,
+    108,
+    300,
+    128
+   ],
+   "x_px": 280.8828125,
+   "y_px": 118.15234375
+  },
+  {
+   "point_id": "CP0054",
+   "x": 244.0859375,
+   "y": 120.927734375,
+   "model_x": 398,
+   "model_y": 305,
+   "detection_score": 0.997257649898529,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9342262148857117,
+   "winning_similarity": 0.9342262148857117,
+   "similarities": [
+    0.8358060121536255,
+    0.9342262148857117,
+    0.9174680113792419
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0054.png",
+   "patch_box_input": [
+    224,
+    110,
+    264,
+    130
+   ],
+   "x_px": 244.0859375,
+   "y_px": 120.927734375
+  },
+  {
+   "point_id": "CP0055",
+   "x": 280.8828125,
+   "y": 120.927734375,
+   "model_x": 458,
+   "model_y": 305,
+   "detection_score": 0.9840170741081238,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9624999761581421,
+   "winning_similarity": 0.9624999761581421,
+   "similarities": [
+    0.9235634803771973,
+    0.9624999761581421,
+    0.9501627683639526
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0055.png",
+   "patch_box_input": [
+    260,
+    110,
+    300,
+    130
+   ],
+   "x_px": 280.8828125,
+   "y_px": 120.927734375
+  },
+  {
+   "point_id": "CP0057",
+   "x": 280.8828125,
+   "y": 130.046875,
+   "model_x": 458,
+   "model_y": 328,
+   "detection_score": 0.982921302318573,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7707597613334656,
+   "winning_similarity": 0.7707597613334656,
+   "similarities": [
+    0.4942355155944824,
+    0.7707597613334656,
+    0.4404943883419037
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0057.png",
+   "patch_box_input": [
+    260,
+    120,
+    300,
+    140
+   ],
+   "x_px": 280.8828125,
+   "y_px": 130.046875
+  },
+  {
+   "point_id": "CP0058",
+   "x": 243.47265625,
+   "y": 164.541015625,
+   "model_x": 397,
+   "model_y": 415,
+   "detection_score": 0.364872545003891,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8875217437744141,
+   "winning_similarity": 0.8875217437744141,
+   "similarities": [
+    0.8134315609931946,
+    0.8659449815750122,
+    0.8875217437744141
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0058.png",
+   "patch_box_input": [
+    223,
+    154,
+    263,
+    174
+   ],
+   "x_px": 243.47265625,
+   "y_px": 164.541015625
+  },
+  {
+   "point_id": "CP0059",
+   "x": 119.58984375,
+   "y": 164.9375,
+   "model_x": 195,
+   "model_y": 416,
+   "detection_score": 0.8745476603507996,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8714991211891174,
+   "winning_similarity": 0.8714991211891174,
+   "similarities": [
+    0.7968186736106873,
+    0.8695518970489502,
+    0.8714991211891174
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0059.png",
+   "patch_box_input": [
+    99,
+    154,
+    139,
+    174
+   ],
+   "x_px": 119.58984375,
+   "y_px": 164.9375
+  },
+  {
+   "point_id": "CP0060",
+   "x": 180.91796875,
+   "y": 164.9375,
+   "model_x": 295,
+   "model_y": 416,
+   "detection_score": 0.8728635311126709,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8706808686256409,
+   "winning_similarity": 0.8706808686256409,
+   "similarities": [
+    0.7893797755241394,
+    0.8688313961029053,
+    0.8706808686256409
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0060.png",
+   "patch_box_input": [
+    160,
+    154,
+    200,
+    174
+   ],
+   "x_px": 180.91796875,
+   "y_px": 164.9375
+  },
+  {
+   "point_id": "CP0061",
+   "x": 302.34765625,
+   "y": 164.9375,
+   "model_x": 493,
+   "model_y": 416,
+   "detection_score": 0.9832595586776733,
+   "series_id": "unknown_patch_unavailable",
+   "score": null,
+   "winning_similarity": null,
+   "similarities": [],
+   "legend_index": null,
+   "grouping_status": "unavailable_incomplete_native_patch",
+   "x_px": 302.34765625,
+   "y_px": 164.9375
+  }
+ ],
+ "unavailable": [
+  {
+   "point_id": "CP0061",
+   "x": 302.34765625,
+   "y": 164.9375,
+   "model_x": 493,
+   "model_y": 416,
+   "detection_score": 0.9832595586776733,
+   "x_px": 302.34765625,
+   "y_px": 164.9375,
+   "reason": "incomplete 40x20 patch at image boundary"
+  }
+ ],
+ "patches": [
+  {
+   "point_index": 0,
+   "point_id": "CP0005",
+   "box_input": [
+    54,
+    25,
+    94,
+    45
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0005.png"
+  },
+  {
+   "point_index": 1,
+   "point_id": "CP0006",
+   "box_input": [
+    54,
+    30,
+    94,
+    50
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0006.png"
+  },
+  {
+   "point_index": 2,
+   "point_id": "CP0007",
+   "box_input": [
+    114,
+    36,
+    154,
+    56
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0007.png"
+  },
+  {
+   "point_index": 3,
+   "point_id": "CP0010",
+   "box_input": [
+    113,
+    46,
+    153,
+    66
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0010.png"
+  },
+  {
+   "point_index": 4,
+   "point_id": "CP0011",
+   "box_input": [
+    73,
+    47,
+    113,
+    67
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0011.png"
+  },
+  {
+   "point_index": 5,
+   "point_id": "CP0012",
+   "box_input": [
+    149,
+    47,
+    189,
+    67
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0012.png"
+  },
+  {
+   "point_index": 6,
+   "point_id": "CP0013",
+   "box_input": [
+    149,
+    51,
+    189,
+    71
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0013.png"
+  },
+  {
+   "point_index": 7,
+   "point_id": "CP0014",
+   "box_input": [
+    113,
+    55,
+    153,
+    75
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0014.png"
+  },
+  {
+   "point_index": 8,
+   "point_id": "CP0015",
+   "box_input": [
+    149,
+    57,
+    189,
+    77
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0015.png"
+  },
+  {
+   "point_index": 9,
+   "point_id": "CP0016",
+   "box_input": [
+    186,
+    57,
+    226,
+    77
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0016.png"
+  },
+  {
+   "point_index": 10,
+   "point_id": "CP0017",
+   "box_input": [
+    149,
+    62,
+    189,
+    82
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0017.png"
+  },
+  {
+   "point_index": 11,
+   "point_id": "CP0018",
+   "box_input": [
+    222,
+    62,
+    262,
+    82
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0018.png"
+  },
+  {
+   "point_index": 12,
+   "point_id": "CP0019",
+   "box_input": [
+    260,
+    61,
+    300,
+    81
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0019.png"
+  },
+  {
+   "point_index": 13,
+   "point_id": "CP0020",
+   "box_input": [
+    56,
+    63,
+    96,
+    83
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0020.png"
+  },
+  {
+   "point_index": 14,
+   "point_id": "CP0021",
+   "box_input": [
+    113,
+    62,
+    153,
+    82
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0021.png"
+  },
+  {
+   "point_index": 15,
+   "point_id": "CP0022",
+   "box_input": [
+    56,
+    66,
+    96,
+    86
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0022.png"
+  },
+  {
+   "point_index": 16,
+   "point_id": "CP0023",
+   "box_input": [
+    73,
+    68,
+    113,
+    88
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0023.png"
+  },
+  {
+   "point_index": 17,
+   "point_id": "CP0024",
+   "box_input": [
+    260,
+    67,
+    300,
+    87
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0024.png"
+  },
+  {
+   "point_index": 18,
+   "point_id": "CP0026",
+   "box_input": [
+    186,
+    69,
+    226,
+    89
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0026.png"
+  },
+  {
+   "point_index": 19,
+   "point_id": "CP0028",
+   "box_input": [
+    74,
+    72,
+    114,
+    92
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0028.png"
+  },
+  {
+   "point_index": 20,
+   "point_id": "CP0029",
+   "box_input": [
+    149,
+    72,
+    189,
+    92
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0029.png"
+  },
+  {
+   "point_index": 21,
+   "point_id": "CP0030",
+   "box_input": [
+    222,
+    73,
+    262,
+    93
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0030.png"
+  },
+  {
+   "point_index": 22,
+   "point_id": "CP0031",
+   "box_input": [
+    260,
+    74,
+    300,
+    94
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0031.png"
+  },
+  {
+   "point_index": 23,
+   "point_id": "CP0033",
+   "box_input": [
+    56,
+    75,
+    96,
+    95
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0033.png"
+  },
+  {
+   "point_index": 24,
+   "point_id": "CP0034",
+   "box_input": [
+    74,
+    76,
+    114,
+    96
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0034.png"
+  },
+  {
+   "point_index": 25,
+   "point_id": "CP0035",
+   "box_input": [
+    222,
+    76,
+    262,
+    96
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0035.png"
+  },
+  {
+   "point_index": 26,
+   "point_id": "CP0036",
+   "box_input": [
+    63,
+    78,
+    103,
+    98
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0036.png"
+  },
+  {
+   "point_index": 27,
+   "point_id": "CP0037",
+   "box_input": [
+    56,
+    80,
+    96,
+    100
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0037.png"
+  },
+  {
+   "point_index": 28,
+   "point_id": "CP0038",
+   "box_input": [
+    222,
+    81,
+    262,
+    101
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0038.png"
+  },
+  {
+   "point_index": 29,
+   "point_id": "CP0039",
+   "box_input": [
+    149,
+    81,
+    189,
+    101
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0039.png"
+  },
+  {
+   "point_index": 30,
+   "point_id": "CP0040",
+   "box_input": [
+    113,
+    83,
+    153,
+    103
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0040.png"
+  },
+  {
+   "point_index": 31,
+   "point_id": "CP0042",
+   "box_input": [
+    149,
+    87,
+    189,
+    107
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0042.png"
+  },
+  {
+   "point_index": 32,
+   "point_id": "CP0043",
+   "box_input": [
+    260,
+    86,
+    300,
+    106
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0043.png"
+  },
+  {
+   "point_index": 33,
+   "point_id": "CP0044",
+   "box_input": [
+    186,
+    88,
+    226,
+    108
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0044.png"
+  },
+  {
+   "point_index": 34,
+   "point_id": "CP0045",
+   "box_input": [
+    260,
+    90,
+    300,
+    110
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0045.png"
+  },
+  {
+   "point_index": 35,
+   "point_id": "CP0046",
+   "box_input": [
+    149,
+    91,
+    189,
+    111
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0046.png"
+  },
+  {
+   "point_index": 36,
+   "point_id": "CP0048",
+   "box_input": [
+    186,
+    95,
+    226,
+    115
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0048.png"
+  },
+  {
+   "point_index": 37,
+   "point_id": "CP0049",
+   "box_input": [
+    260,
+    95,
+    300,
+    115
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0049.png"
+  },
+  {
+   "point_index": 38,
+   "point_id": "CP0050",
+   "box_input": [
+    186,
+    101,
+    226,
+    121
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0050.png"
+  },
+  {
+   "point_index": 39,
+   "point_id": "CP0051",
+   "box_input": [
+    260,
+    102,
+    300,
+    122
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0051.png"
+  },
+  {
+   "point_index": 40,
+   "point_id": "CP0052",
+   "box_input": [
+    224,
+    106,
+    264,
+    126
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0052.png"
+  },
+  {
+   "point_index": 41,
+   "point_id": "CP0053",
+   "box_input": [
+    260,
+    108,
+    300,
+    128
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0053.png"
+  },
+  {
+   "point_index": 42,
+   "point_id": "CP0054",
+   "box_input": [
+    224,
+    110,
+    264,
+    130
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0054.png"
+  },
+  {
+   "point_index": 43,
+   "point_id": "CP0055",
+   "box_input": [
+    260,
+    110,
+    300,
+    130
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0055.png"
+  },
+  {
+   "point_index": 44,
+   "point_id": "CP0057",
+   "box_input": [
+    260,
+    120,
+    300,
+    140
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0057.png"
+  },
+  {
+   "point_index": 45,
+   "point_id": "CP0058",
+   "box_input": [
+    223,
+    154,
+    263,
+    174
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0058.png"
+  },
+  {
+   "point_index": 46,
+   "point_id": "CP0059",
+   "box_input": [
+    99,
+    154,
+    139,
+    174
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0059.png"
+  },
+  {
+   "point_index": 47,
+   "point_id": "CP0060",
+   "box_input": [
+    160,
+    154,
+    200,
+    174
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/patches/CP0060.png"
+  }
+ ],
+ "similarity_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/aicp_raw_grouped/similarity.npy",
+ "similarity_row_point_ids": [
+  "CP0005",
+  "CP0006",
+  "CP0007",
+  "CP0010",
+  "CP0011",
+  "CP0012",
+  "CP0013",
+  "CP0014",
+  "CP0015",
+  "CP0016",
+  "CP0017",
+  "CP0018",
+  "CP0019",
+  "CP0020",
+  "CP0021",
+  "CP0022",
+  "CP0023",
+  "CP0024",
+  "CP0026",
+  "CP0028",
+  "CP0029",
+  "CP0030",
+  "CP0031",
+  "CP0033",
+  "CP0034",
+  "CP0035",
+  "CP0036",
+  "CP0037",
+  "CP0038",
+  "CP0039",
+  "CP0040",
+  "CP0042",
+  "CP0043",
+  "CP0044",
+  "CP0045",
+  "CP0046",
+  "CP0048",
+  "CP0049",
+  "CP0050",
+  "CP0051",
+  "CP0052",
+  "CP0053",
+  "CP0054",
+  "CP0055",
+  "CP0057",
+  "CP0058",
+  "CP0059",
+  "CP0060"
+ ],
+ "similarity_column_series_ids": [
+  "s01",
+  "s02",
+  "s03"
+ ],
+ "timing": {
+  "shared_input_verification_seconds": 0.0031547999824397266,
+  "legend_crop_seconds": 0.004643000022042543,
+  "network_seconds": 0.03755859995726496,
+  "head_postprocess_and_export_seconds": 0.16985650005517527,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.0735759999952279,
+  "learned_matching_seconds": 0.24834170000394806,
+  "total_seconds": 0.5356676000519656,
+  "method_total_excluding_shared_verification_seconds": 0.5356676000519656,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "patch_matching_timing": {
+  "patch_extract_and_export_seconds": 0.0735759999952279,
+  "learned_matching_seconds": 0.24834170000394806,
+  "total_seconds": 0.3236095000174828
+ },
+ "timing_breakdown": {
+  "shared_input_verification_seconds": 0.0031547999824397266,
+  "legend_crop_seconds": 0.004643000022042543,
+  "network_seconds": 0.03755859995726496,
+  "head_postprocess_and_export_seconds": 0.16985650005517527,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.0735759999952279,
+  "learned_matching_seconds": 0.24834170000394806,
+  "total_seconds": 0.5356676000519656,
+  "method_total_excluding_shared_verification_seconds": 0.5356676000519656,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "raw_heads_result_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/raw_heads/chartparser/pk__amubarvimab1__p02__v1/result.json",
+ "raw_points": [
+  {
+   "point_id": "CP0005",
+   "x": 74.20703125,
+   "y": 35.287109375,
+   "model_x": 121,
+   "model_y": 89,
+   "detection_score": 0.7944132685661316,
+   "x_px": 74.20703125,
+   "y_px": 35.287109375
+  },
+  {
+   "point_id": "CP0006",
+   "x": 74.20703125,
+   "y": 40.44140625,
+   "model_x": 121,
+   "model_y": 102,
+   "detection_score": 0.4223182499408722,
+   "x_px": 74.20703125,
+   "y_px": 40.44140625
+  },
+  {
+   "point_id": "CP0007",
+   "x": 134.30859375,
+   "y": 46.388671875,
+   "model_x": 219,
+   "model_y": 117,
+   "detection_score": 0.6997418999671936,
+   "x_px": 134.30859375,
+   "y_px": 46.388671875
+  },
+  {
+   "point_id": "CP0010",
+   "x": 133.6953125,
+   "y": 56.697265625,
+   "model_x": 218,
+   "model_y": 143,
+   "detection_score": 0.6576269865036011,
+   "x_px": 133.6953125,
+   "y_px": 56.697265625
+  },
+  {
+   "point_id": "CP0011",
+   "x": 93.83203125,
+   "y": 57.490234375,
+   "model_x": 153,
+   "model_y": 145,
+   "detection_score": 0.8328370451927185,
+   "x_px": 93.83203125,
+   "y_px": 57.490234375
+  },
+  {
+   "point_id": "CP0012",
+   "x": 169.87890625,
+   "y": 57.490234375,
+   "model_x": 277,
+   "model_y": 145,
+   "detection_score": 0.9631690382957458,
+   "x_px": 169.87890625,
+   "y_px": 57.490234375
+  },
+  {
+   "point_id": "CP0013",
+   "x": 169.87890625,
+   "y": 61.8515625,
+   "model_x": 277,
+   "model_y": 156,
+   "detection_score": 0.9886103272438049,
+   "x_px": 169.87890625,
+   "y_px": 61.8515625
+  },
+  {
+   "point_id": "CP0014",
+   "x": 133.08203125,
+   "y": 65.81640625,
+   "model_x": 217,
+   "model_y": 166,
+   "detection_score": 0.9728859663009644,
+   "x_px": 133.08203125,
+   "y_px": 65.81640625
+  },
+  {
+   "point_id": "CP0015",
+   "x": 169.87890625,
+   "y": 67.40234375,
+   "model_x": 277,
+   "model_y": 170,
+   "detection_score": 0.7927045226097107,
+   "x_px": 169.87890625,
+   "y_px": 67.40234375
+  },
+  {
+   "point_id": "CP0016",
+   "x": 206.0625,
+   "y": 67.005859375,
+   "model_x": 336,
+   "model_y": 169,
+   "detection_score": 0.8366835117340088,
+   "x_px": 206.0625,
+   "y_px": 67.005859375
+  },
+  {
+   "point_id": "CP0017",
+   "x": 169.87890625,
+   "y": 72.556640625,
+   "model_x": 277,
+   "model_y": 183,
+   "detection_score": 0.9759364128112793,
+   "x_px": 169.87890625,
+   "y_px": 72.556640625
+  },
+  {
+   "point_id": "CP0018",
+   "x": 242.859375,
+   "y": 72.16015625,
+   "model_x": 396,
+   "model_y": 182,
+   "detection_score": 0.615957498550415,
+   "x_px": 242.859375,
+   "y_px": 72.16015625
+  },
+  {
+   "point_id": "CP0019",
+   "x": 280.26953125,
+   "y": 71.763671875,
+   "model_x": 457,
+   "model_y": 181,
+   "detection_score": 0.9337689876556396,
+   "x_px": 280.26953125,
+   "y_px": 71.763671875
+  },
+  {
+   "point_id": "CP0020",
+   "x": 76.046875,
+   "y": 73.349609375,
+   "model_x": 124,
+   "model_y": 185,
+   "detection_score": 0.3765459656715393,
+   "x_px": 76.046875,
+   "y_px": 73.349609375
+  },
+  {
+   "point_id": "CP0021",
+   "x": 133.08203125,
+   "y": 72.953125,
+   "model_x": 217,
+   "model_y": 184,
+   "detection_score": 0.9499555230140686,
+   "x_px": 133.08203125,
+   "y_px": 72.953125
+  },
+  {
+   "point_id": "CP0022",
+   "x": 76.046875,
+   "y": 76.91796875,
+   "model_x": 124,
+   "model_y": 194,
+   "detection_score": 0.502822756767273,
+   "x_px": 76.046875,
+   "y_px": 76.91796875
+  },
+  {
+   "point_id": "CP0023",
+   "x": 93.83203125,
+   "y": 78.107421875,
+   "model_x": 153,
+   "model_y": 197,
+   "detection_score": 0.9963855743408203,
+   "x_px": 93.83203125,
+   "y_px": 78.107421875
+  },
+  {
+   "point_id": "CP0024",
+   "x": 280.26953125,
+   "y": 77.7109375,
+   "model_x": 457,
+   "model_y": 196,
+   "detection_score": 0.9466309547424316,
+   "x_px": 280.26953125,
+   "y_px": 77.7109375
+  },
+  {
+   "point_id": "CP0026",
+   "x": 206.0625,
+   "y": 79.296875,
+   "model_x": 336,
+   "model_y": 200,
+   "detection_score": 0.9701784253120422,
+   "x_px": 206.0625,
+   "y_px": 79.296875
+  },
+  {
+   "point_id": "CP0028",
+   "x": 94.4453125,
+   "y": 82.46875,
+   "model_x": 154,
+   "model_y": 208,
+   "detection_score": 0.8935600519180298,
+   "x_px": 94.4453125,
+   "y_px": 82.46875
+  },
+  {
+   "point_id": "CP0029",
+   "x": 169.87890625,
+   "y": 82.46875,
+   "model_x": 277,
+   "model_y": 208,
+   "detection_score": 0.7117690443992615,
+   "x_px": 169.87890625,
+   "y_px": 82.46875
+  },
+  {
+   "point_id": "CP0030",
+   "x": 242.24609375,
+   "y": 83.26171875,
+   "model_x": 395,
+   "model_y": 210,
+   "detection_score": 0.9334878325462341,
+   "x_px": 242.24609375,
+   "y_px": 83.26171875
+  },
+  {
+   "point_id": "CP0031",
+   "x": 280.26953125,
+   "y": 84.0546875,
+   "model_x": 457,
+   "model_y": 212,
+   "detection_score": 0.9083381295204163,
+   "x_px": 280.26953125,
+   "y_px": 84.0546875
+  },
+  {
+   "point_id": "CP0033",
+   "x": 76.046875,
+   "y": 85.640625,
+   "model_x": 124,
+   "model_y": 216,
+   "detection_score": 0.7574834227561951,
+   "x_px": 76.046875,
+   "y_px": 85.640625
+  },
+  {
+   "point_id": "CP0034",
+   "x": 94.4453125,
+   "y": 86.037109375,
+   "model_x": 154,
+   "model_y": 217,
+   "detection_score": 0.9952598214149475,
+   "x_px": 94.4453125,
+   "y_px": 86.037109375
+  },
+  {
+   "point_id": "CP0035",
+   "x": 242.24609375,
+   "y": 86.43359375,
+   "model_x": 395,
+   "model_y": 218,
+   "detection_score": 0.9540060758590698,
+   "x_px": 242.24609375,
+   "y_px": 86.43359375
+  },
+  {
+   "point_id": "CP0036",
+   "x": 83.40625,
+   "y": 88.01953125,
+   "model_x": 136,
+   "model_y": 222,
+   "detection_score": 0.6310513019561768,
+   "x_px": 83.40625,
+   "y_px": 88.01953125
+  },
+  {
+   "point_id": "CP0037",
+   "x": 76.046875,
+   "y": 90.794921875,
+   "model_x": 124,
+   "model_y": 229,
+   "detection_score": 0.9528545141220093,
+   "x_px": 76.046875,
+   "y_px": 90.794921875
+  },
+  {
+   "point_id": "CP0038",
+   "x": 242.24609375,
+   "y": 91.19140625,
+   "model_x": 395,
+   "model_y": 230,
+   "detection_score": 0.9004369974136353,
+   "x_px": 242.24609375,
+   "y_px": 91.19140625
+  },
+  {
+   "point_id": "CP0039",
+   "x": 169.87890625,
+   "y": 91.984375,
+   "model_x": 277,
+   "model_y": 232,
+   "detection_score": 0.8342169523239136,
+   "x_px": 169.87890625,
+   "y_px": 91.984375
+  },
+  {
+   "point_id": "CP0040",
+   "x": 133.6953125,
+   "y": 93.966796875,
+   "model_x": 218,
+   "model_y": 237,
+   "detection_score": 0.9753565788269043,
+   "x_px": 133.6953125,
+   "y_px": 93.966796875
+  },
+  {
+   "point_id": "CP0042",
+   "x": 169.87890625,
+   "y": 97.138671875,
+   "model_x": 277,
+   "model_y": 245,
+   "detection_score": 0.9967712759971619,
+   "x_px": 169.87890625,
+   "y_px": 97.138671875
+  },
+  {
+   "point_id": "CP0043",
+   "x": 280.26953125,
+   "y": 96.7421875,
+   "model_x": 457,
+   "model_y": 244,
+   "detection_score": 0.8806813359260559,
+   "x_px": 280.26953125,
+   "y_px": 96.7421875
+  },
+  {
+   "point_id": "CP0044",
+   "x": 206.0625,
+   "y": 98.328125,
+   "model_x": 336,
+   "model_y": 248,
+   "detection_score": 0.9616826772689819,
+   "x_px": 206.0625,
+   "y_px": 98.328125
+  },
+  {
+   "point_id": "CP0045",
+   "x": 280.26953125,
+   "y": 100.310546875,
+   "model_x": 457,
+   "model_y": 253,
+   "detection_score": 0.9506640434265137,
+   "x_px": 280.26953125,
+   "y_px": 100.310546875
+  },
+  {
+   "point_id": "CP0046",
+   "x": 169.87890625,
+   "y": 101.896484375,
+   "model_x": 277,
+   "model_y": 257,
+   "detection_score": 0.9966297745704651,
+   "x_px": 169.87890625,
+   "y_px": 101.896484375
+  },
+  {
+   "point_id": "CP0048",
+   "x": 206.0625,
+   "y": 105.068359375,
+   "model_x": 336,
+   "model_y": 265,
+   "detection_score": 0.9950860142707825,
+   "x_px": 206.0625,
+   "y_px": 105.068359375
+  },
+  {
+   "point_id": "CP0049",
+   "x": 280.26953125,
+   "y": 105.068359375,
+   "model_x": 457,
+   "model_y": 265,
+   "detection_score": 0.8655536770820618,
+   "x_px": 280.26953125,
+   "y_px": 105.068359375
+  },
+  {
+   "point_id": "CP0050",
+   "x": 206.0625,
+   "y": 111.80859375,
+   "model_x": 336,
+   "model_y": 282,
+   "detection_score": 0.9905722737312317,
+   "x_px": 206.0625,
+   "y_px": 111.80859375
+  },
+  {
+   "point_id": "CP0051",
+   "x": 280.8828125,
+   "y": 112.6015625,
+   "model_x": 458,
+   "model_y": 284,
+   "detection_score": 0.6750246286392212,
+   "x_px": 280.8828125,
+   "y_px": 112.6015625
+  },
+  {
+   "point_id": "CP0052",
+   "x": 244.0859375,
+   "y": 116.56640625,
+   "model_x": 398,
+   "model_y": 294,
+   "detection_score": 0.991135835647583,
+   "x_px": 244.0859375,
+   "y_px": 116.56640625
+  },
+  {
+   "point_id": "CP0053",
+   "x": 280.8828125,
+   "y": 118.15234375,
+   "model_x": 458,
+   "model_y": 298,
+   "detection_score": 0.9543290734291077,
+   "x_px": 280.8828125,
+   "y_px": 118.15234375
+  },
+  {
+   "point_id": "CP0054",
+   "x": 244.0859375,
+   "y": 120.927734375,
+   "model_x": 398,
+   "model_y": 305,
+   "detection_score": 0.997257649898529,
+   "x_px": 244.0859375,
+   "y_px": 120.927734375
+  },
+  {
+   "point_id": "CP0055",
+   "x": 280.8828125,
+   "y": 120.927734375,
+   "model_x": 458,
+   "model_y": 305,
+   "detection_score": 0.9840170741081238,
+   "x_px": 280.8828125,
+   "y_px": 120.927734375
+  },
+  {
+   "point_id": "CP0057",
+   "x": 280.8828125,
+   "y": 130.046875,
+   "model_x": 458,
+   "model_y": 328,
+   "detection_score": 0.982921302318573,
+   "x_px": 280.8828125,
+   "y_px": 130.046875
+  },
+  {
+   "point_id": "CP0058",
+   "x": 243.47265625,
+   "y": 164.541015625,
+   "model_x": 397,
+   "model_y": 415,
+   "detection_score": 0.364872545003891,
+   "x_px": 243.47265625,
+   "y_px": 164.541015625
+  },
+  {
+   "point_id": "CP0059",
+   "x": 119.58984375,
+   "y": 164.9375,
+   "model_x": 195,
+   "model_y": 416,
+   "detection_score": 0.8745476603507996,
+   "x_px": 119.58984375,
+   "y_px": 164.9375
+  },
+  {
+   "point_id": "CP0060",
+   "x": 180.91796875,
+   "y": 164.9375,
+   "model_x": 295,
+   "model_y": 416,
+   "detection_score": 0.8728635311126709,
+   "x_px": 180.91796875,
+   "y_px": 164.9375
+  },
+  {
+   "point_id": "CP0061",
+   "x": 302.34765625,
+   "y": 164.9375,
+   "model_x": 493,
+   "model_y": 416,
+   "detection_score": 0.9832595586776733,
+   "x_px": 302.34765625,
+   "y_px": 164.9375
+  }
+ ],
+ "corrected_points": [
+  {
+   "point_id": "CP0005",
+   "x": 74.20703125,
+   "y": 35.287109375,
+   "model_x": 121,
+   "model_y": 89,
+   "raw_x": 74.20703125,
+   "raw_y": 35.287109375,
+   "detection_score": 0.7944132685661316,
+   "component_id": 13,
+   "x_px": 74.20703125,
+   "y_px": 35.287109375
+  },
+  {
+   "point_id": "CP0006",
+   "x": 74.20703125,
+   "y": 40.44140625,
+   "model_x": 121,
+   "model_y": 102,
+   "raw_x": 74.20703125,
+   "raw_y": 40.44140625,
+   "detection_score": 0.4223182499408722,
+   "component_id": 13,
+   "x_px": 74.20703125,
+   "y_px": 40.44140625
+  },
+  {
+   "point_id": "CP0007",
+   "x": 133.6953125,
+   "y": 46.388671875,
+   "model_x": 218,
+   "model_y": 117,
+   "raw_x": 134.30859375,
+   "raw_y": 46.388671875,
+   "detection_score": 0.6997418999671936,
+   "component_id": 13,
+   "x_px": 133.6953125,
+   "y_px": 46.388671875
+  },
+  {
+   "point_id": "CP0010",
+   "x": 133.6953125,
+   "y": 56.697265625,
+   "model_x": 218,
+   "model_y": 143,
+   "raw_x": 133.6953125,
+   "raw_y": 56.697265625,
+   "detection_score": 0.6576269865036011,
+   "component_id": 13,
+   "x_px": 133.6953125,
+   "y_px": 56.697265625
+  },
+  {
+   "point_id": "CP0011",
+   "x": 94.4453125,
+   "y": 56.697265625,
+   "model_x": 154,
+   "model_y": 143,
+   "raw_x": 93.83203125,
+   "raw_y": 57.490234375,
+   "detection_score": 0.8328370451927185,
+   "component_id": 13,
+   "x_px": 94.4453125,
+   "y_px": 56.697265625
+  },
+  {
+   "point_id": "CP0012",
+   "x": 170.4921875,
+   "y": 57.490234375,
+   "model_x": 278,
+   "model_y": 145,
+   "raw_x": 169.87890625,
+   "raw_y": 57.490234375,
+   "detection_score": 0.9631690382957458,
+   "component_id": 13,
+   "x_px": 170.4921875,
+   "y_px": 57.490234375
+  },
+  {
+   "point_id": "CP0013",
+   "x": 169.87890625,
+   "y": 61.8515625,
+   "model_x": 277,
+   "model_y": 156,
+   "raw_x": 169.87890625,
+   "raw_y": 61.8515625,
+   "detection_score": 0.9886103272438049,
+   "component_id": 13,
+   "x_px": 169.87890625,
+   "y_px": 61.8515625
+  },
+  {
+   "point_id": "CP0014",
+   "x": 132.46875,
+   "y": 63.041015625,
+   "model_x": 216,
+   "model_y": 159,
+   "raw_x": 133.08203125,
+   "raw_y": 65.81640625,
+   "detection_score": 0.9728859663009644,
+   "component_id": 13,
+   "x_px": 132.46875,
+   "y_px": 63.041015625
+  },
+  {
+   "point_id": "CP0015",
+   "x": 169.87890625,
+   "y": 67.005859375,
+   "model_x": 277,
+   "model_y": 169,
+   "raw_x": 169.87890625,
+   "raw_y": 67.40234375,
+   "detection_score": 0.7927045226097107,
+   "component_id": 13,
+   "x_px": 169.87890625,
+   "y_px": 67.005859375
+  },
+  {
+   "point_id": "CP0016",
+   "x": 206.0625,
+   "y": 67.005859375,
+   "model_x": 336,
+   "model_y": 169,
+   "raw_x": 206.0625,
+   "raw_y": 67.005859375,
+   "detection_score": 0.8366835117340088,
+   "component_id": 13,
+   "x_px": 206.0625,
+   "y_px": 67.005859375
+  },
+  {
+   "point_id": "CP0017",
+   "x": 169.87890625,
+   "y": 70.57421875,
+   "model_x": 277,
+   "model_y": 178,
+   "raw_x": 169.87890625,
+   "raw_y": 72.556640625,
+   "detection_score": 0.9759364128112793,
+   "component_id": 13,
+   "x_px": 169.87890625,
+   "y_px": 70.57421875
+  },
+  {
+   "point_id": "CP0018",
+   "x": 242.859375,
+   "y": 72.16015625,
+   "model_x": 396,
+   "model_y": 182,
+   "raw_x": 242.859375,
+   "raw_y": 72.16015625,
+   "detection_score": 0.615957498550415,
+   "component_id": 13,
+   "x_px": 242.859375,
+   "y_px": 72.16015625
+  },
+  {
+   "point_id": "CP0019",
+   "x": 280.26953125,
+   "y": 71.763671875,
+   "model_x": 457,
+   "model_y": 181,
+   "raw_x": 280.26953125,
+   "raw_y": 71.763671875,
+   "detection_score": 0.9337689876556396,
+   "component_id": 13,
+   "x_px": 280.26953125,
+   "y_px": 71.763671875
+  },
+  {
+   "point_id": "CP0020",
+   "x": 76.66015625,
+   "y": 73.349609375,
+   "model_x": 125,
+   "model_y": 185,
+   "raw_x": 76.046875,
+   "raw_y": 73.349609375,
+   "detection_score": 0.3765459656715393,
+   "component_id": 13,
+   "x_px": 76.66015625,
+   "y_px": 73.349609375
+  },
+  {
+   "point_id": "CP0021",
+   "x": 132.46875,
+   "y": 71.3671875,
+   "model_x": 216,
+   "model_y": 180,
+   "raw_x": 133.08203125,
+   "raw_y": 72.953125,
+   "detection_score": 0.9499555230140686,
+   "component_id": 13,
+   "x_px": 132.46875,
+   "y_px": 71.3671875
+  },
+  {
+   "point_id": "CP0022",
+   "x": 76.66015625,
+   "y": 76.91796875,
+   "model_x": 125,
+   "model_y": 194,
+   "raw_x": 76.046875,
+   "raw_y": 76.91796875,
+   "detection_score": 0.502822756767273,
+   "component_id": 13,
+   "x_px": 76.66015625,
+   "y_px": 76.91796875
+  },
+  {
+   "point_id": "CP0023",
+   "x": 93.83203125,
+   "y": 78.107421875,
+   "model_x": 153,
+   "model_y": 197,
+   "raw_x": 93.83203125,
+   "raw_y": 78.107421875,
+   "detection_score": 0.9963855743408203,
+   "component_id": 13,
+   "x_px": 93.83203125,
+   "y_px": 78.107421875
+  },
+  {
+   "point_id": "CP0024",
+   "x": 280.26953125,
+   "y": 77.314453125,
+   "model_x": 457,
+   "model_y": 195,
+   "raw_x": 280.26953125,
+   "raw_y": 77.7109375,
+   "detection_score": 0.9466309547424316,
+   "component_id": 13,
+   "x_px": 280.26953125,
+   "y_px": 77.314453125
+  },
+  {
+   "point_id": "CP0026",
+   "x": 206.0625,
+   "y": 80.08984375,
+   "model_x": 336,
+   "model_y": 202,
+   "raw_x": 206.0625,
+   "raw_y": 79.296875,
+   "detection_score": 0.9701784253120422,
+   "component_id": 13,
+   "x_px": 206.0625,
+   "y_px": 80.08984375
+  },
+  {
+   "point_id": "CP0028",
+   "x": 94.4453125,
+   "y": 85.244140625,
+   "model_x": 154,
+   "model_y": 215,
+   "raw_x": 94.4453125,
+   "raw_y": 82.46875,
+   "detection_score": 0.8935600519180298,
+   "component_id": 13,
+   "x_px": 94.4453125,
+   "y_px": 85.244140625
+  },
+  {
+   "point_id": "CP0029",
+   "x": 169.265625,
+   "y": 81.67578125,
+   "model_x": 276,
+   "model_y": 206,
+   "raw_x": 169.87890625,
+   "raw_y": 82.46875,
+   "detection_score": 0.7117690443992615,
+   "component_id": 13,
+   "x_px": 169.265625,
+   "y_px": 81.67578125
+  },
+  {
+   "point_id": "CP0030",
+   "x": 242.24609375,
+   "y": 83.26171875,
+   "model_x": 395,
+   "model_y": 210,
+   "raw_x": 242.24609375,
+   "raw_y": 83.26171875,
+   "detection_score": 0.9334878325462341,
+   "component_id": 13,
+   "x_px": 242.24609375,
+   "y_px": 83.26171875
+  },
+  {
+   "point_id": "CP0031",
+   "x": 280.26953125,
+   "y": 82.46875,
+   "model_x": 457,
+   "model_y": 208,
+   "raw_x": 280.26953125,
+   "raw_y": 84.0546875,
+   "detection_score": 0.9083381295204163,
+   "component_id": 13,
+   "x_px": 280.26953125,
+   "y_px": 82.46875
+  },
+  {
+   "point_id": "CP0033",
+   "x": 76.046875,
+   "y": 85.640625,
+   "model_x": 124,
+   "model_y": 216,
+   "raw_x": 76.046875,
+   "raw_y": 85.640625,
+   "detection_score": 0.7574834227561951,
+   "component_id": 13,
+   "x_px": 76.046875,
+   "y_px": 85.640625
+  },
+  {
+   "point_id": "CP0034",
+   "x": 94.4453125,
+   "y": 85.244140625,
+   "model_x": 154,
+   "model_y": 215,
+   "raw_x": 94.4453125,
+   "raw_y": 86.037109375,
+   "detection_score": 0.9952598214149475,
+   "component_id": 13,
+   "x_px": 94.4453125,
+   "y_px": 85.244140625
+  },
+  {
+   "point_id": "CP0035",
+   "x": 242.859375,
+   "y": 84.0546875,
+   "model_x": 396,
+   "model_y": 212,
+   "raw_x": 242.24609375,
+   "raw_y": 86.43359375,
+   "detection_score": 0.9540060758590698,
+   "component_id": 13,
+   "x_px": 242.859375,
+   "y_px": 84.0546875
+  },
+  {
+   "point_id": "CP0036",
+   "x": 82.79296875,
+   "y": 88.01953125,
+   "model_x": 135,
+   "model_y": 222,
+   "raw_x": 83.40625,
+   "raw_y": 88.01953125,
+   "detection_score": 0.6310513019561768,
+   "component_id": 13,
+   "x_px": 82.79296875,
+   "y_px": 88.01953125
+  },
+  {
+   "point_id": "CP0037",
+   "x": 76.046875,
+   "y": 90.3984375,
+   "model_x": 124,
+   "model_y": 228,
+   "raw_x": 76.046875,
+   "raw_y": 90.794921875,
+   "detection_score": 0.9528545141220093,
+   "component_id": 13,
+   "x_px": 76.046875,
+   "y_px": 90.3984375
+  },
+  {
+   "point_id": "CP0038",
+   "x": 242.24609375,
+   "y": 90.3984375,
+   "model_x": 395,
+   "model_y": 228,
+   "raw_x": 242.24609375,
+   "raw_y": 91.19140625,
+   "detection_score": 0.9004369974136353,
+   "component_id": 13,
+   "x_px": 242.24609375,
+   "y_px": 90.3984375
+  },
+  {
+   "point_id": "CP0039",
+   "x": 170.4921875,
+   "y": 91.984375,
+   "model_x": 278,
+   "model_y": 232,
+   "raw_x": 169.87890625,
+   "raw_y": 91.984375,
+   "detection_score": 0.8342169523239136,
+   "component_id": 13,
+   "x_px": 170.4921875,
+   "y_px": 91.984375
+  },
+  {
+   "point_id": "CP0040",
+   "x": 133.6953125,
+   "y": 95.15625,
+   "model_x": 218,
+   "model_y": 240,
+   "raw_x": 133.6953125,
+   "raw_y": 93.966796875,
+   "detection_score": 0.9753565788269043,
+   "component_id": 13,
+   "x_px": 133.6953125,
+   "y_px": 95.15625
+  },
+  {
+   "point_id": "CP0042",
+   "x": 169.265625,
+   "y": 94.759765625,
+   "model_x": 276,
+   "model_y": 239,
+   "raw_x": 169.87890625,
+   "raw_y": 97.138671875,
+   "detection_score": 0.9967712759971619,
+   "component_id": 13,
+   "x_px": 169.265625,
+   "y_px": 94.759765625
+  },
+  {
+   "point_id": "CP0043",
+   "x": 279.65625,
+   "y": 96.7421875,
+   "model_x": 456,
+   "model_y": 244,
+   "raw_x": 280.26953125,
+   "raw_y": 96.7421875,
+   "detection_score": 0.8806813359260559,
+   "component_id": 13,
+   "x_px": 279.65625,
+   "y_px": 96.7421875
+  },
+  {
+   "point_id": "CP0044",
+   "x": 206.0625,
+   "y": 97.931640625,
+   "model_x": 336,
+   "model_y": 247,
+   "raw_x": 206.0625,
+   "raw_y": 98.328125,
+   "detection_score": 0.9616826772689819,
+   "component_id": 13,
+   "x_px": 206.0625,
+   "y_px": 97.931640625
+  },
+  {
+   "point_id": "CP0045",
+   "x": 280.8828125,
+   "y": 97.931640625,
+   "model_x": 458,
+   "model_y": 247,
+   "raw_x": 280.26953125,
+   "raw_y": 100.310546875,
+   "detection_score": 0.9506640434265137,
+   "component_id": 13,
+   "x_px": 280.8828125,
+   "y_px": 97.931640625
+  },
+  {
+   "point_id": "CP0046",
+   "x": 169.87890625,
+   "y": 101.5,
+   "model_x": 277,
+   "model_y": 256,
+   "raw_x": 169.87890625,
+   "raw_y": 101.896484375,
+   "detection_score": 0.9966297745704651,
+   "component_id": 13,
+   "x_px": 169.87890625,
+   "y_px": 101.5
+  },
+  {
+   "point_id": "CP0048",
+   "x": 205.44921875,
+   "y": 102.29296875,
+   "model_x": 335,
+   "model_y": 258,
+   "raw_x": 206.0625,
+   "raw_y": 105.068359375,
+   "detection_score": 0.9950860142707825,
+   "component_id": 13,
+   "x_px": 205.44921875,
+   "y_px": 102.29296875
+  },
+  {
+   "point_id": "CP0049",
+   "x": 280.26953125,
+   "y": 104.671875,
+   "model_x": 457,
+   "model_y": 264,
+   "raw_x": 280.26953125,
+   "raw_y": 105.068359375,
+   "detection_score": 0.8655536770820618,
+   "component_id": 13,
+   "x_px": 280.26953125,
+   "y_px": 104.671875
+  },
+  {
+   "point_id": "CP0050",
+   "x": 205.44921875,
+   "y": 111.015625,
+   "model_x": 335,
+   "model_y": 280,
+   "raw_x": 206.0625,
+   "raw_y": 111.80859375,
+   "detection_score": 0.9905722737312317,
+   "component_id": 13,
+   "x_px": 205.44921875,
+   "y_px": 111.015625
+  },
+  {
+   "point_id": "CP0051",
+   "x": 280.8828125,
+   "y": 112.6015625,
+   "model_x": 458,
+   "model_y": 284,
+   "raw_x": 280.8828125,
+   "raw_y": 112.6015625,
+   "detection_score": 0.6750246286392212,
+   "component_id": 13,
+   "x_px": 280.8828125,
+   "y_px": 112.6015625
+  },
+  {
+   "point_id": "CP0052",
+   "x": 244.69921875,
+   "y": 114.583984375,
+   "model_x": 399,
+   "model_y": 289,
+   "raw_x": 244.0859375,
+   "raw_y": 116.56640625,
+   "detection_score": 0.991135835647583,
+   "component_id": 13,
+   "x_px": 244.69921875,
+   "y_px": 114.583984375
+  },
+  {
+   "point_id": "CP0053",
+   "x": 280.8828125,
+   "y": 118.15234375,
+   "model_x": 458,
+   "model_y": 298,
+   "raw_x": 280.8828125,
+   "raw_y": 118.15234375,
+   "detection_score": 0.9543290734291077,
+   "component_id": 13,
+   "x_px": 280.8828125,
+   "y_px": 118.15234375
+  },
+  {
+   "point_id": "CP0054",
+   "x": 243.47265625,
+   "y": 120.53125,
+   "model_x": 397,
+   "model_y": 304,
+   "raw_x": 244.0859375,
+   "raw_y": 120.927734375,
+   "detection_score": 0.997257649898529,
+   "component_id": 13,
+   "x_px": 243.47265625,
+   "y_px": 120.53125
+  },
+  {
+   "point_id": "CP0055",
+   "x": 280.26953125,
+   "y": 118.548828125,
+   "model_x": 457,
+   "model_y": 299,
+   "raw_x": 280.8828125,
+   "raw_y": 120.927734375,
+   "detection_score": 0.9840170741081238,
+   "component_id": 13,
+   "x_px": 280.26953125,
+   "y_px": 118.548828125
+  },
+  {
+   "point_id": "CP0057",
+   "x": 280.26953125,
+   "y": 129.25390625,
+   "model_x": 457,
+   "model_y": 326,
+   "raw_x": 280.8828125,
+   "raw_y": 130.046875,
+   "detection_score": 0.982921302318573,
+   "component_id": 13,
+   "x_px": 280.26953125,
+   "y_px": 129.25390625
+  },
+  {
+   "point_id": "CP0058",
+   "x": 243.47265625,
+   "y": 164.541015625,
+   "model_x": 397,
+   "model_y": 415,
+   "raw_x": 243.47265625,
+   "raw_y": 164.541015625,
+   "detection_score": 0.364872545003891,
+   "component_id": 24,
+   "x_px": 243.47265625,
+   "y_px": 164.541015625
+  },
+  {
+   "point_id": "CP0059",
+   "x": 119.58984375,
+   "y": 164.541015625,
+   "model_x": 195,
+   "model_y": 415,
+   "raw_x": 119.58984375,
+   "raw_y": 164.9375,
+   "detection_score": 0.8745476603507996,
+   "component_id": 2,
+   "x_px": 119.58984375,
+   "y_px": 164.541015625
+  }
+ ],
+ "rejected_points": [
+  {
+   "point_id": "CP0060",
+   "x": 180.91796875,
+   "y": 164.9375,
+   "model_x": 295,
+   "model_y": 416,
+   "detection_score": 0.8728635311126709,
+   "x_px": 180.91796875,
+   "y_px": 164.9375,
+   "reason": "no_centerline_in_band_radius"
+  },
+  {
+   "point_id": "CP0061",
+   "x": 302.34765625,
+   "y": 164.9375,
+   "model_x": 493,
+   "model_y": 416,
+   "detection_score": 0.9832595586776733,
+   "x_px": 302.34765625,
+   "y_px": 164.9375,
+   "reason": "no_centerline_in_band_radius"
+  }
+ ],
+ "excluded_points": [
+  {
+   "point_id": "CP0001",
+   "x": 237.953125,
+   "y": 6.34375,
+   "model_x": 388,
+   "model_y": 16,
+   "detection_score": 0.9517454504966736,
+   "x_px": 237.953125,
+   "y_px": 6.34375
+  },
+  {
+   "point_id": "CP0002",
+   "x": 6.74609375,
+   "y": 29.33984375,
+   "model_x": 11,
+   "model_y": 74,
+   "detection_score": 0.45136743783950806,
+   "x_px": 6.74609375,
+   "y_px": 29.33984375
+  },
+  {
+   "point_id": "CP0003",
+   "x": 238.56640625,
+   "y": 30.529296875,
+   "model_x": 389,
+   "model_y": 77,
+   "detection_score": 0.8853241801261902,
+   "x_px": 238.56640625,
+   "y_px": 30.529296875
+  },
+  {
+   "point_id": "CP0004",
+   "x": 299.28125,
+   "y": 30.529296875,
+   "model_x": 488,
+   "model_y": 77,
+   "detection_score": 0.3238362669944763,
+   "x_px": 299.28125,
+   "y_px": 30.529296875
+  },
+  {
+   "point_id": "CP0008",
+   "x": 240.40625,
+   "y": 51.939453125,
+   "model_x": 392,
+   "model_y": 131,
+   "detection_score": 0.40513816475868225,
+   "x_px": 240.40625,
+   "y_px": 51.939453125
+  },
+  {
+   "point_id": "CP0009",
+   "x": 237.33984375,
+   "y": 52.3359375,
+   "model_x": 387,
+   "model_y": 132,
+   "detection_score": 0.5520060658454895,
+   "x_px": 237.33984375,
+   "y_px": 52.3359375
+  },
+  {
+   "point_id": "CP0025",
+   "x": 41.703125,
+   "y": 79.693359375,
+   "model_x": 68,
+   "model_y": 201,
+   "detection_score": 0.6218027472496033,
+   "x_px": 41.703125,
+   "y_px": 79.693359375
+  },
+  {
+   "point_id": "CP0027",
+   "x": 41.08984375,
+   "y": 83.658203125,
+   "model_x": 67,
+   "model_y": 211,
+   "detection_score": 0.561874270439148,
+   "x_px": 41.08984375,
+   "y_px": 83.658203125
+  },
+  {
+   "point_id": "CP0032",
+   "x": 6.1328125,
+   "y": 86.037109375,
+   "model_x": 10,
+   "model_y": 217,
+   "detection_score": 0.7063736319541931,
+   "x_px": 6.1328125,
+   "y_px": 86.037109375
+  },
+  {
+   "point_id": "CP0041",
+   "x": 6.74609375,
+   "y": 97.138671875,
+   "model_x": 11,
+   "model_y": 245,
+   "detection_score": 0.4699399173259735,
+   "x_px": 6.74609375,
+   "y_px": 97.138671875
+  },
+  {
+   "point_id": "CP0047",
+   "x": 6.74609375,
+   "y": 105.46484375,
+   "model_x": 11,
+   "model_y": 266,
+   "detection_score": 0.7005082368850708,
+   "x_px": 6.74609375,
+   "y_px": 105.46484375
+  },
+  {
+   "point_id": "CP0056",
+   "x": 6.74609375,
+   "y": 129.25390625,
+   "model_x": 11,
+   "model_y": 326,
+   "detection_score": 0.7672433853149414,
+   "x_px": 6.74609375,
+   "y_px": 129.25390625
+  },
+  {
+   "point_id": "CP0062",
+   "x": 210.96875,
+   "y": 190.708984375,
+   "model_x": 344,
+   "model_y": 481,
+   "detection_score": 0.43044787645339966,
+   "x_px": 210.96875,
+   "y_px": 190.708984375
+  },
+  {
+   "point_id": "CP0063",
+   "x": 207.90234375,
+   "y": 199.03515625,
+   "model_x": 339,
+   "model_y": 502,
+   "detection_score": 0.4249991774559021,
+   "x_px": 207.90234375,
+   "y_px": 199.03515625
+  }
+ ],
+ "centerline_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__amubarvimab1__p02__v1/chartparser_geometry/centerline_512.png",
+ "public_process_kps_reference": [
+  {
+   "point_id": "CP0005",
+   "status": "retained",
+   "x": 74.20703125,
+   "y": 36.873046875,
+   "upright_x": 74.20703125,
+   "upright_y": 36.873046875,
+   "original_x": 74.20703125,
+   "original_y": 36.873046875,
+   "model_x": 121.0,
+   "model_y": 93.0
+  },
+  {
+   "point_id": "CP0006",
+   "status": "retained",
+   "x": 74.20703125,
+   "y": 39.251953125,
+   "upright_x": 74.20703125,
+   "upright_y": 39.251953125,
+   "original_x": 74.20703125,
+   "original_y": 39.251953125,
+   "model_x": 121.0,
+   "model_y": 99.0
+  },
+  {
+   "point_id": "CP0007",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0010",
+   "status": "retained",
+   "x": 133.6953125,
+   "y": 55.5078125,
+   "upright_x": 133.6953125,
+   "upright_y": 55.5078125,
+   "original_x": 133.6953125,
+   "original_y": 55.5078125,
+   "model_x": 218.0,
+   "model_y": 140.0
+  },
+  {
+   "point_id": "CP0011",
+   "status": "retained",
+   "x": 93.83203125,
+   "y": 57.09375,
+   "upright_x": 93.83203125,
+   "upright_y": 57.09375,
+   "original_x": 93.83203125,
+   "original_y": 57.09375,
+   "model_x": 153.0,
+   "model_y": 144.0
+  },
+  {
+   "point_id": "CP0012",
+   "status": "retained",
+   "x": 169.87890625,
+   "y": 58.6796875,
+   "upright_x": 169.87890625,
+   "upright_y": 58.6796875,
+   "original_x": 169.87890625,
+   "original_y": 58.6796875,
+   "model_x": 277.0,
+   "model_y": 148.0
+  },
+  {
+   "point_id": "CP0013",
+   "status": "retained",
+   "x": 169.87890625,
+   "y": 60.662109375,
+   "upright_x": 169.87890625,
+   "upright_y": 60.662109375,
+   "original_x": 169.87890625,
+   "original_y": 60.662109375,
+   "model_x": 277.0,
+   "model_y": 153.0
+  },
+  {
+   "point_id": "CP0014",
+   "status": "retained",
+   "x": 133.08203125,
+   "y": 68.591796875,
+   "upright_x": 133.08203125,
+   "upright_y": 68.591796875,
+   "original_x": 133.08203125,
+   "original_y": 68.591796875,
+   "model_x": 217.0,
+   "model_y": 173.0
+  },
+  {
+   "point_id": "CP0015",
+   "status": "retained",
+   "x": 169.87890625,
+   "y": 67.798828125,
+   "upright_x": 169.87890625,
+   "upright_y": 67.798828125,
+   "original_x": 169.87890625,
+   "original_y": 67.798828125,
+   "model_x": 277.0,
+   "model_y": 171.0
+  },
+  {
+   "point_id": "CP0016",
+   "status": "retained",
+   "x": 206.0625,
+   "y": 66.609375,
+   "upright_x": 206.0625,
+   "upright_y": 66.609375,
+   "original_x": 206.0625,
+   "original_y": 66.609375,
+   "model_x": 336.0,
+   "model_y": 168.0
+  },
+  {
+   "point_id": "CP0017",
+   "status": "retained",
+   "x": 169.87890625,
+   "y": 70.177734375,
+   "upright_x": 169.87890625,
+   "upright_y": 70.177734375,
+   "original_x": 169.87890625,
+   "original_y": 70.177734375,
+   "model_x": 277.0,
+   "model_y": 177.0
+  },
+  {
+   "point_id": "CP0018",
+   "status": "retained",
+   "x": 242.859375,
+   "y": 72.16015625,
+   "upright_x": 242.859375,
+   "upright_y": 72.16015625,
+   "original_x": 242.859375,
+   "original_y": 72.16015625,
+   "model_x": 396.0,
+   "model_y": 182.0
+  },
+  {
+   "point_id": "CP0019",
+   "status": "retained",
+   "x": 280.26953125,
+   "y": 72.953125,
+   "upright_x": 280.26953125,
+   "upright_y": 72.953125,
+   "original_x": 280.26953125,
+   "original_y": 72.953125,
+   "model_x": 457.0,
+   "model_y": 184.0
+  },
+  {
+   "point_id": "CP0020",
+   "status": "retained",
+   "x": 76.046875,
+   "y": 73.74609375,
+   "upright_x": 76.046875,
+   "upright_y": 73.74609375,
+   "original_x": 76.046875,
+   "original_y": 73.74609375,
+   "model_x": 124.0,
+   "model_y": 186.0
+  },
+  {
+   "point_id": "CP0021",
+   "status": "retained",
+   "x": 133.08203125,
+   "y": 72.16015625,
+   "upright_x": 133.08203125,
+   "upright_y": 72.16015625,
+   "original_x": 133.08203125,
+   "original_y": 72.16015625,
+   "model_x": 217.0,
+   "model_y": 182.0
+  },
+  {
+   "point_id": "CP0022",
+   "status": "retained",
+   "x": 76.046875,
+   "y": 75.728515625,
+   "upright_x": 76.046875,
+   "upright_y": 75.728515625,
+   "original_x": 76.046875,
+   "original_y": 75.728515625,
+   "model_x": 124.0,
+   "model_y": 191.0
+  },
+  {
+   "point_id": "CP0023",
+   "status": "retained",
+   "x": 93.83203125,
+   "y": 78.107421875,
+   "upright_x": 93.83203125,
+   "upright_y": 78.107421875,
+   "original_x": 93.83203125,
+   "original_y": 78.107421875,
+   "model_x": 153.0,
+   "model_y": 197.0
+  },
+  {
+   "point_id": "CP0024",
+   "status": "retained",
+   "x": 280.26953125,
+   "y": 75.728515625,
+   "upright_x": 280.26953125,
+   "upright_y": 75.728515625,
+   "original_x": 280.26953125,
+   "original_y": 75.728515625,
+   "model_x": 457.0,
+   "model_y": 191.0
+  },
+  {
+   "point_id": "CP0026",
+   "status": "retained",
+   "x": 206.0625,
+   "y": 78.900390625,
+   "upright_x": 206.0625,
+   "upright_y": 78.900390625,
+   "original_x": 206.0625,
+   "original_y": 78.900390625,
+   "model_x": 336.0,
+   "model_y": 199.0
+  },
+  {
+   "point_id": "CP0028",
+   "status": "retained",
+   "x": 94.4453125,
+   "y": 80.486328125,
+   "upright_x": 94.4453125,
+   "upright_y": 80.486328125,
+   "original_x": 94.4453125,
+   "original_y": 80.486328125,
+   "model_x": 154.0,
+   "model_y": 203.0
+  },
+  {
+   "point_id": "CP0029",
+   "status": "retained",
+   "x": 169.87890625,
+   "y": 80.8828125,
+   "upright_x": 169.87890625,
+   "upright_y": 80.8828125,
+   "original_x": 169.87890625,
+   "original_y": 80.8828125,
+   "model_x": 277.0,
+   "model_y": 204.0
+  },
+  {
+   "point_id": "CP0030",
+   "status": "retained",
+   "x": 242.24609375,
+   "y": 83.26171875,
+   "upright_x": 242.24609375,
+   "upright_y": 83.26171875,
+   "original_x": 242.24609375,
+   "original_y": 83.26171875,
+   "model_x": 395.0,
+   "model_y": 210.0
+  },
+  {
+   "point_id": "CP0031",
+   "status": "retained",
+   "x": 280.26953125,
+   "y": 83.26171875,
+   "upright_x": 280.26953125,
+   "upright_y": 83.26171875,
+   "original_x": 280.26953125,
+   "original_y": 83.26171875,
+   "model_x": 457.0,
+   "model_y": 210.0
+  },
+  {
+   "point_id": "CP0033",
+   "status": "retained",
+   "x": 76.046875,
+   "y": 85.640625,
+   "upright_x": 76.046875,
+   "upright_y": 85.640625,
+   "original_x": 76.046875,
+   "original_y": 85.640625,
+   "model_x": 124.0,
+   "model_y": 216.0
+  },
+  {
+   "point_id": "CP0034",
+   "status": "retained",
+   "x": 94.4453125,
+   "y": 85.640625,
+   "upright_x": 94.4453125,
+   "upright_y": 85.640625,
+   "original_x": 94.4453125,
+   "original_y": 85.640625,
+   "model_x": 154.0,
+   "model_y": 216.0
+  },
+  {
+   "point_id": "CP0035",
+   "status": "retained",
+   "x": 242.24609375,
+   "y": 84.84765625,
+   "upright_x": 242.24609375,
+   "upright_y": 84.84765625,
+   "original_x": 242.24609375,
+   "original_y": 84.84765625,
+   "model_x": 395.0,
+   "model_y": 214.0
+  },
+  {
+   "point_id": "CP0036",
+   "status": "retained",
+   "x": 83.40625,
+   "y": 87.623046875,
+   "upright_x": 83.40625,
+   "upright_y": 87.623046875,
+   "original_x": 83.40625,
+   "original_y": 87.623046875,
+   "model_x": 136.0,
+   "model_y": 221.0
+  },
+  {
+   "point_id": "CP0037",
+   "status": "retained",
+   "x": 76.046875,
+   "y": 88.01953125,
+   "upright_x": 76.046875,
+   "upright_y": 88.01953125,
+   "original_x": 76.046875,
+   "original_y": 88.01953125,
+   "model_x": 124.0,
+   "model_y": 222.0
+  },
+  {
+   "point_id": "CP0038",
+   "status": "retained",
+   "x": 242.24609375,
+   "y": 90.3984375,
+   "upright_x": 242.24609375,
+   "upright_y": 90.3984375,
+   "original_x": 242.24609375,
+   "original_y": 90.3984375,
+   "model_x": 395.0,
+   "model_y": 228.0
+  },
+  {
+   "point_id": "CP0039",
+   "status": "retained",
+   "x": 169.87890625,
+   "y": 91.19140625,
+   "upright_x": 169.87890625,
+   "upright_y": 91.19140625,
+   "original_x": 169.87890625,
+   "original_y": 91.19140625,
+   "model_x": 277.0,
+   "model_y": 230.0
+  },
+  {
+   "point_id": "CP0040",
+   "status": "retained",
+   "x": 133.6953125,
+   "y": 93.966796875,
+   "upright_x": 133.6953125,
+   "upright_y": 93.966796875,
+   "original_x": 133.6953125,
+   "original_y": 93.966796875,
+   "model_x": 218.0,
+   "model_y": 237.0
+  },
+  {
+   "point_id": "CP0042",
+   "status": "retained",
+   "x": 169.87890625,
+   "y": 98.724609375,
+   "upright_x": 169.87890625,
+   "upright_y": 98.724609375,
+   "original_x": 169.87890625,
+   "original_y": 98.724609375,
+   "model_x": 277.0,
+   "model_y": 249.0
+  },
+  {
+   "point_id": "CP0043",
+   "status": "retained",
+   "x": 280.26953125,
+   "y": 96.7421875,
+   "upright_x": 280.26953125,
+   "upright_y": 96.7421875,
+   "original_x": 280.26953125,
+   "original_y": 96.7421875,
+   "model_x": 457.0,
+   "model_y": 244.0
+  },
+  {
+   "point_id": "CP0044",
+   "status": "retained",
+   "x": 206.0625,
+   "y": 99.12109375,
+   "upright_x": 206.0625,
+   "upright_y": 99.12109375,
+   "original_x": 206.0625,
+   "original_y": 99.12109375,
+   "model_x": 336.0,
+   "model_y": 250.0
+  },
+  {
+   "point_id": "CP0045",
+   "status": "retained",
+   "x": 280.26953125,
+   "y": 98.724609375,
+   "upright_x": 280.26953125,
+   "upright_y": 98.724609375,
+   "original_x": 280.26953125,
+   "original_y": 98.724609375,
+   "model_x": 457.0,
+   "model_y": 249.0
+  },
+  {
+   "point_id": "CP0046",
+   "status": "retained",
+   "x": 169.87890625,
+   "y": 101.103515625,
+   "upright_x": 169.87890625,
+   "upright_y": 101.103515625,
+   "original_x": 169.87890625,
+   "original_y": 101.103515625,
+   "model_x": 277.0,
+   "model_y": 255.0
+  },
+  {
+   "point_id": "CP0048",
+   "status": "retained",
+   "x": 206.0625,
+   "y": 102.29296875,
+   "upright_x": 206.0625,
+   "upright_y": 102.29296875,
+   "original_x": 206.0625,
+   "original_y": 102.29296875,
+   "model_x": 336.0,
+   "model_y": 258.0
+  },
+  {
+   "point_id": "CP0049",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0050",
+   "status": "retained",
+   "x": 206.0625,
+   "y": 110.619140625,
+   "upright_x": 206.0625,
+   "upright_y": 110.619140625,
+   "original_x": 206.0625,
+   "original_y": 110.619140625,
+   "model_x": 336.0,
+   "model_y": 279.0
+  },
+  {
+   "point_id": "CP0051",
+   "status": "retained",
+   "x": 280.8828125,
+   "y": 114.583984375,
+   "upright_x": 280.8828125,
+   "upright_y": 114.583984375,
+   "original_x": 280.8828125,
+   "original_y": 114.583984375,
+   "model_x": 458.0,
+   "model_y": 289.0
+  },
+  {
+   "point_id": "CP0052",
+   "status": "retained",
+   "x": 244.0859375,
+   "y": 115.376953125,
+   "upright_x": 244.0859375,
+   "upright_y": 115.376953125,
+   "original_x": 244.0859375,
+   "original_y": 115.376953125,
+   "model_x": 398.0,
+   "model_y": 291.0
+  },
+  {
+   "point_id": "CP0053",
+   "status": "retained",
+   "x": 280.8828125,
+   "y": 117.359375,
+   "upright_x": 280.8828125,
+   "upright_y": 117.359375,
+   "original_x": 280.8828125,
+   "original_y": 117.359375,
+   "model_x": 458.0,
+   "model_y": 296.0
+  },
+  {
+   "point_id": "CP0054",
+   "status": "retained",
+   "x": 244.0859375,
+   "y": 120.53125,
+   "upright_x": 244.0859375,
+   "upright_y": 120.53125,
+   "original_x": 244.0859375,
+   "original_y": 120.53125,
+   "model_x": 398.0,
+   "model_y": 304.0
+  },
+  {
+   "point_id": "CP0055",
+   "status": "retained",
+   "x": 280.8828125,
+   "y": 118.9453125,
+   "upright_x": 280.8828125,
+   "upright_y": 118.9453125,
+   "original_x": 280.8828125,
+   "original_y": 118.9453125,
+   "model_x": 458.0,
+   "model_y": 300.0
+  },
+  {
+   "point_id": "CP0057",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0058",
+   "status": "retained",
+   "x": 243.47265625,
+   "y": 164.541015625,
+   "upright_x": 243.47265625,
+   "upright_y": 164.541015625,
+   "original_x": 243.47265625,
+   "original_y": 164.541015625,
+   "model_x": 397.0,
+   "model_y": 415.0
+  },
+  {
+   "point_id": "CP0059",
+   "status": "retained",
+   "x": 119.58984375,
+   "y": 164.9375,
+   "upright_x": 119.58984375,
+   "upright_y": 164.9375,
+   "original_x": 119.58984375,
+   "original_y": 164.9375,
+   "model_x": 195.0,
+   "model_y": 416.0
+  },
+  {
+   "point_id": "CP0060",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0061",
+   "status": "retained",
+   "x": 302.34765625,
+   "y": 164.9375,
+   "upright_x": 302.34765625,
+   "upright_y": 164.9375,
+   "original_x": 302.34765625,
+   "original_y": 164.9375,
+   "model_x": 493.0,
+   "model_y": 416.0
+  }
+ ],
+ "implementation_choices": {
+  "curve_probability": "Cached segmentation[0,1], already sigmoid in ChartParserModel.forward; no second activation.",
+  "probability_inconsistency": "Paper section 3.2.3 says two-channel Softmax, section 3.2.4 discusses Sigmoid, and the public forward applies independent Sigmoid. This run thresholds the released cached Sigmoid output directly, not a claim of identical paper Softmax probabilities.",
+  "threshold": 0.6,
+  "morphology": "One 3x3 all-ones binary closing; constant-zero border.",
+  "connectivity": 8,
+  "component_policy": "Retain every connected component; no minimum-area deletion.",
+  "thinning": "skimage.morphology.skeletonize(method=zhang) independently within each 8-connected component.",
+  "correction": "Nearest centreline pixel in x +/- 1 columns and abs(delta_y) < 15 model pixels; minimum Euclidean distance, ties smaller y then x. Snap x and y to that centreline pixel. Reject if absent.",
+  "correction_parameters_provenance": "The paper does not specify kernel/thinner/selection radius. Column band and vertical radius are borrowed from public process_kps; nearest selection and exact snapping are explicit experimental choices.",
+  "public_reference": "Separate result using original argmax mask, public x +/- 1, y-run gap <= 2, first ascending-y mean within 15, average with original y. Safety bounds added; not used for grouping.",
+  "pivot_patch_size_width_height": [
+   40,
+   20
+  ],
+  "pivot_patch_coordinate_system": "Native original-resolution upright input crop, not the 512x512 model input.",
+  "legend_images": "Unmodified original RGB swatch box crops, connector pixels retained. No reconstructed swatch masks.",
+  "grouping": "Official LineEX learned Siamese + MLP similarity, highest score over supplied legend crops. No histogram override or confidence rejection.",
+  "shape_classification": "Not performed. Legend identity is not a semantic circle/square/triangle prediction.",
+  "deduplication": "None. Distinct raw pivot hypotheses can snap to the same pixel and remain separate records.",
+  "no_legend_policy": "Abstain from grouping even for a nominal single-series panel; no fabricated legend."
+ },
+ "native_legend_stage": "unavailable; supplied benchmark swatch crops used, never class-3 remapping",
+ "limitations": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ],
+ "shared_legend_status": "available",
+ "shared_legend_reason": null,
+ "shared_legends_sha256": "be19118dc6187631d79997fdddc88dbc44a38c517f432351d350f453bc1bcfbc",
+ "warnings": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ]
+}

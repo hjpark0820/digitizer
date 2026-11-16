@@ -1,0 +1,5410 @@
+{
+  "definition": "Symbol + position F1: a prediction counts only if it is within tolerance AND assigned to the right legend symbol.\n\nThe user's definition: a data point is correct when its position matches a reference point and its\nmarker corresponds to the legend symbol of that reference point's series. Symbol NAMES play no role;\nwhat matters is which legend entry (legend symbol) the point was assigned to.\n\n  legend entry of a prediction   v46: the shared legend entry whose native id equals the point's\n                                 native_series_id (its curve = that legend entry);\n                                 AI-ChartParser / LineEX: the legend crop their Siamese matcher\n                                 assigned the point to (legend_index into the same shared entries).\n  legend entry of a reference    PK: the entry matched to the annotated swatch box of that series\n  series (ground truth)          (bbox overlap, shared_legends.json), except panels re-established\n                                 from pixels; ER (no swatch annotation): established from pixels by\n                                 two independent annotators + adjudication (legend_gt/final.json).\n                                 A series with no detected legend entry can be matched by nobody.\n  single-series panels           only one symbol exists, so position alone decides.\n  identical duplicate entries    where the legend shows the same symbol twice (same marker, same text,\n                                 e.g. one per legend group), those entries are one symbol\n                                 (--equivalent-entries), so either assignment counts.\nMatching: evaluate.py's one-to-one maximum-cardinality matching at the primary OKS tolerance\n(OKS>0.5, LineEX image-diagonal scale), with the legend entry in place of the series label.\nPooled F1 = 2TP / (2TP + FP + FN) over the panels of a group; 95% intervals from 2000 panel resamples.\n",
+  "tolerance": "oks_lineex",
+  "summary": {
+    "PK 흑백": {
+      "panels": 25,
+      "reference_points": 891,
+      "methods": {
+        "v46_before": {
+          "f1": 0.6847826086956522,
+          "ci95": [
+            0.5900860392766867,
+            0.7809671149749966
+          ],
+          "tp_fp_fn": [
+            504,
+            77,
+            387
+          ]
+        },
+        "v46_after": {
+          "f1": 0.6944257891202149,
+          "ci95": [
+            0.5979633865011237,
+            0.7911995770982434
+          ],
+          "tp_fp_fn": [
+            517,
+            81,
+            374
+          ]
+        },
+        "aicp_raw_grouped": {
+          "f1": 0.28832116788321166,
+          "ci95": [
+            0.23118487286952202,
+            0.3474821278385198
+          ],
+          "tp_fp_fn": [
+            237,
+            516,
+            654
+          ]
+        },
+        "aicp_corrected_grouped": {
+          "f1": 0.26506024096385544,
+          "ci95": [
+            0.20977317226594436,
+            0.32079353228845153
+          ],
+          "tp_fp_fn": [
+            209,
+            477,
+            682
+          ]
+        },
+        "lineex_paper_grouped": {
+          "f1": 0.2300230946882217,
+          "ci95": [
+            0.201051371446264,
+            0.26168941907487603
+          ],
+          "tp_fp_fn": [
+            249,
+            1025,
+            642
+          ]
+        },
+        "lineex_grouped": {
+          "f1": 0.21467967755621553,
+          "ci95": [
+            0.18167272531666356,
+            0.24793459338913884
+          ],
+          "tp_fp_fn": [
+            253,
+            1213,
+            638
+          ]
+        }
+      }
+    },
+    "PK 컬러": {
+      "panels": 25,
+      "reference_points": 1057,
+      "methods": {
+        "v46_before": {
+          "f1": 0.8596926127912742,
+          "ci95": [
+            0.8199048205074494,
+            0.8944566917744372
+          ],
+          "tp_fp_fn": [
+            867,
+            93,
+            190
+          ]
+        },
+        "v46_after": {
+          "f1": 0.864101315148563,
+          "ci95": [
+            0.8257924863452117,
+            0.898121343881734
+          ],
+          "tp_fp_fn": [
+            887,
+            109,
+            170
+          ]
+        },
+        "aicp_raw_grouped": {
+          "f1": 0.5263696876600102,
+          "ci95": [
+            0.461859516059078,
+            0.592406783235481
+          ],
+          "tp_fp_fn": [
+            514,
+            382,
+            543
+          ]
+        },
+        "aicp_corrected_grouped": {
+          "f1": 0.5214211076280042,
+          "ci95": [
+            0.4528942538325164,
+            0.5920043421598928
+          ],
+          "tp_fp_fn": [
+            499,
+            358,
+            558
+          ]
+        },
+        "lineex_paper_grouped": {
+          "f1": 0.3794295592048401,
+          "ci95": [
+            0.33931621692229647,
+            0.41801694652967614
+          ],
+          "tp_fp_fn": [
+            439,
+            818,
+            618
+          ]
+        },
+        "lineex_grouped": {
+          "f1": 0.3705501618122977,
+          "ci95": [
+            0.3298962647604281,
+            0.41231209462524454
+          ],
+          "tp_fp_fn": [
+            458,
+            957,
+            599
+          ]
+        }
+      }
+    },
+    "ER 흑백": {
+      "panels": 25,
+      "reference_points": 568,
+      "methods": {
+        "v46_before": {
+          "f1": 0.7422680412371134,
+          "ci95": [
+            0.6585052913881091,
+            0.8198931051823259
+          ],
+          "tp_fp_fn": [
+            360,
+            42,
+            208
+          ]
+        },
+        "v46_after": {
+          "f1": 0.7528205128205128,
+          "ci95": [
+            0.6674946086322632,
+            0.8300769345792818
+          ],
+          "tp_fp_fn": [
+            367,
+            40,
+            201
+          ]
+        },
+        "aicp_raw_grouped": {
+          "f1": 0.34505862646566166,
+          "ci95": [
+            0.28683842152037914,
+            0.40742630385487516
+          ],
+          "tp_fp_fn": [
+            206,
+            420,
+            362
+          ]
+        },
+        "aicp_corrected_grouped": {
+          "f1": 0.299645390070922,
+          "ci95": [
+            0.23354591836734692,
+            0.36858512513706093
+          ],
+          "tp_fp_fn": [
+            169,
+            391,
+            399
+          ]
+        },
+        "lineex_paper_grouped": {
+          "f1": 0.27287853577371046,
+          "ci95": [
+            0.22271367760233016,
+            0.32558442029862306
+          ],
+          "tp_fp_fn": [
+            246,
+            989,
+            322
+          ]
+        },
+        "lineex_grouped": {
+          "f1": 0.24986537425955843,
+          "ci95": [
+            0.22159145803063784,
+            0.27614653521584565
+          ],
+          "tp_fp_fn": [
+            232,
+            1057,
+            336
+          ]
+        }
+      }
+    },
+    "ER 컬러": {
+      "panels": 25,
+      "reference_points": 576,
+      "methods": {
+        "v46_before": {
+          "f1": 0.9365079365079365,
+          "ci95": [
+            0.896342720431609,
+            0.967553396150729
+          ],
+          "tp_fp_fn": [
+            531,
+            27,
+            45
+          ]
+        },
+        "v46_after": {
+          "f1": 0.945264986967854,
+          "ci95": [
+            0.9064106541466895,
+            0.9744549514674709
+          ],
+          "tp_fp_fn": [
+            544,
+            31,
+            32
+          ]
+        },
+        "aicp_raw_grouped": {
+          "f1": 0.655436447166922,
+          "ci95": [
+            0.5934491404320721,
+            0.7221275103884505
+          ],
+          "tp_fp_fn": [
+            428,
+            302,
+            148
+          ]
+        },
+        "aicp_corrected_grouped": {
+          "f1": 0.6107491856677525,
+          "ci95": [
+            0.5466014216544761,
+            0.6746694617321487
+          ],
+          "tp_fp_fn": [
+            375,
+            277,
+            201
+          ]
+        },
+        "lineex_paper_grouped": {
+          "f1": 0.3971238938053097,
+          "ci95": [
+            0.35953216308238395,
+            0.43124673956661314
+          ],
+          "tp_fp_fn": [
+            359,
+            873,
+            217
+          ]
+        },
+        "lineex_grouped": {
+          "f1": 0.3918067226890756,
+          "ci95": [
+            0.3547105632219319,
+            0.4259801495194271
+          ],
+          "tp_fp_fn": [
+            373,
+            955,
+            203
+          ]
+        }
+      }
+    },
+    "PK": {
+      "panels": 50,
+      "reference_points": 1948,
+      "methods": {
+        "v46_before": {
+          "f1": 0.7858985382631126,
+          "ci95": [
+            0.7307022755496788,
+            0.8375742849482293
+          ],
+          "tp_fp_fn": [
+            1371,
+            170,
+            577
+          ]
+        },
+        "v46_after": {
+          "f1": 0.792772444946358,
+          "ci95": [
+            0.7381298375576296,
+            0.8454129338049156
+          ],
+          "tp_fp_fn": [
+            1404,
+            190,
+            544
+          ]
+        },
+        "aicp_raw_grouped": {
+          "f1": 0.41757019738671114,
+          "ci95": [
+            0.359544666250634,
+            0.47427029961701395
+          ],
+          "tp_fp_fn": [
+            751,
+            898,
+            1197
+          ]
+        },
+        "aicp_corrected_grouped": {
+          "f1": 0.4056144371240332,
+          "ci95": [
+            0.34476699963952806,
+            0.4643818812312062
+          ],
+          "tp_fp_fn": [
+            708,
+            835,
+            1240
+          ]
+        },
+        "lineex_paper_grouped": {
+          "f1": 0.3072114311230185,
+          "ci95": [
+            0.27501729635706035,
+            0.3409354070038693
+          ],
+          "tp_fp_fn": [
+            688,
+            1843,
+            1260
+          ]
+        },
+        "lineex_grouped": {
+          "f1": 0.29447090494926487,
+          "ci95": [
+            0.2616781826207862,
+            0.3308591717347089
+          ],
+          "tp_fp_fn": [
+            711,
+            2170,
+            1237
+          ]
+        }
+      }
+    },
+    "ER": {
+      "panels": 50,
+      "reference_points": 1144,
+      "methods": {
+        "v46_before": {
+          "f1": 0.846958174904943,
+          "ci95": [
+            0.7936934218244467,
+            0.895314456134063
+          ],
+          "tp_fp_fn": [
+            891,
+            69,
+            253
+          ]
+        },
+        "v46_after": {
+          "f1": 0.8570084666039511,
+          "ci95": [
+            0.803930551840017,
+            0.9038597835025758
+          ],
+          "tp_fp_fn": [
+            911,
+            71,
+            233
+          ]
+        },
+        "aicp_raw_grouped": {
+          "f1": 0.5072,
+          "ci95": [
+            0.4430819642381509,
+            0.5751157003425764
+          ],
+          "tp_fp_fn": [
+            634,
+            722,
+            510
+          ]
+        },
+        "aicp_corrected_grouped": {
+          "f1": 0.4617996604414261,
+          "ci95": [
+            0.3933347839878445,
+            0.5315770825213477
+          ],
+          "tp_fp_fn": [
+            544,
+            668,
+            600
+          ]
+        },
+        "lineex_paper_grouped": {
+          "f1": 0.335087233453337,
+          "ci95": [
+            0.29863184653439345,
+            0.370959651047679
+          ],
+          "tp_fp_fn": [
+            605,
+            1862,
+            539
+          ]
+        },
+        "lineex_grouped": {
+          "f1": 0.32172294602499335,
+          "ci95": [
+            0.29103600349574216,
+            0.3502788720785661
+          ],
+          "tp_fp_fn": [
+            605,
+            2012,
+            539
+          ]
+        }
+      }
+    },
+    "흑백": {
+      "panels": 50,
+      "reference_points": 1459,
+      "methods": {
+        "v46_before": {
+          "f1": 0.7076167076167076,
+          "ci95": [
+            0.6388416550538144,
+            0.770990323479064
+          ],
+          "tp_fp_fn": [
+            864,
+            119,
+            595
+          ]
+        },
+        "v46_after": {
+          "f1": 0.7175324675324676,
+          "ci95": [
+            0.6471892546299326,
+            0.783620326562865
+          ],
+          "tp_fp_fn": [
+            884,
+            121,
+            575
+          ]
+        },
+        "aicp_raw_grouped": {
+          "f1": 0.31219168428470756,
+          "ci95": [
+            0.2680418826350388,
+            0.35659823843481453
+          ],
+          "tp_fp_fn": [
+            443,
+            936,
+            1016
+          ]
+        },
+        "aicp_corrected_grouped": {
+          "f1": 0.27948243992606286,
+          "ci95": [
+            0.23409921053286956,
+            0.32333839897428635
+          ],
+          "tp_fp_fn": [
+            378,
+            868,
+            1081
+          ]
+        },
+        "lineex_paper_grouped": {
+          "f1": 0.24949596774193547,
+          "ci95": [
+            0.22021080251320863,
+            0.28072800746354204
+          ],
+          "tp_fp_fn": [
+            495,
+            2014,
+            964
+          ]
+        },
+        "lineex_grouped": {
+          "f1": 0.23018509729473186,
+          "ci95": [
+            0.2075420415078051,
+            0.25375770759865607
+          ],
+          "tp_fp_fn": [
+            485,
+            2270,
+            974
+          ]
+        }
+      }
+    },
+    "컬러": {
+      "panels": 50,
+      "reference_points": 1633,
+      "methods": {
+        "v46_before": {
+          "f1": 0.8873373532211997,
+          "ci95": [
+            0.8577248473513395,
+            0.9149069773050537
+          ],
+          "tp_fp_fn": [
+            1398,
+            120,
+            235
+          ]
+        },
+        "v46_after": {
+          "f1": 0.8932584269662921,
+          "ci95": [
+            0.8644159152069671,
+            0.9204331895757144
+          ],
+          "tp_fp_fn": [
+            1431,
+            140,
+            202
+          ]
+        },
+        "aicp_raw_grouped": {
+          "f1": 0.578091439091746,
+          "ci95": [
+            0.5299050062095022,
+            0.6287170478151368
+          ],
+          "tp_fp_fn": [
+            942,
+            684,
+            691
+          ]
+        },
+        "aicp_corrected_grouped": {
+          "f1": 0.5563335455124124,
+          "ci95": [
+            0.5049720097527172,
+            0.6052870372789257
+          ],
+          "tp_fp_fn": [
+            874,
+            635,
+            759
+          ]
+        },
+        "lineex_paper_grouped": {
+          "f1": 0.38719068413391555,
+          "ci95": [
+            0.35893244204,
+            0.4142108236828734
+          ],
+          "tp_fp_fn": [
+            798,
+            1691,
+            835
+          ]
+        },
+        "lineex_grouped": {
+          "f1": 0.3797989031078611,
+          "ci95": [
+            0.3520670664706464,
+            0.4081163997602485
+          ],
+          "tp_fp_fn": [
+            831,
+            1912,
+            802
+          ]
+        }
+      }
+    },
+    "전체": {
+      "panels": 100,
+      "reference_points": 3092,
+      "methods": {
+        "v46_before": {
+          "f1": 0.8088682281423207,
+          "ci95": [
+            0.7695894236317011,
+            0.8461485568288191
+          ],
+          "tp_fp_fn": [
+            2262,
+            239,
+            830
+          ]
+        },
+        "v46_after": {
+          "f1": 0.8168666196189132,
+          "ci95": [
+            0.77799458542576,
+            0.8540377433958483
+          ],
+          "tp_fp_fn": [
+            2315,
+            261,
+            777
+          ]
+        },
+        "aicp_raw_grouped": {
+          "f1": 0.4543217976053797,
+          "ci95": [
+            0.40942416936664927,
+            0.4994494730380852
+          ],
+          "tp_fp_fn": [
+            1385,
+            1620,
+            1707
+          ]
+        },
+        "aicp_corrected_grouped": {
+          "f1": 0.42825380537027535,
+          "ci95": [
+            0.3818118954455673,
+            0.47361432545991367
+          ],
+          "tp_fp_fn": [
+            1252,
+            1503,
+            1840
+          ]
+        },
+        "lineex_paper_grouped": {
+          "f1": 0.3196538936959209,
+          "ci95": [
+            0.2940116193786023,
+            0.34340591235942763
+          ],
+          "tp_fp_fn": [
+            1293,
+            3705,
+            1799
+          ]
+        },
+        "lineex_grouped": {
+          "f1": 0.30640279394644937,
+          "ci95": [
+            0.2826932128138618,
+            0.3298746836715317
+          ],
+          "tp_fp_fn": [
+            1316,
+            4182,
+            1776
+          ]
+        }
+      }
+    }
+  },
+  "panels": [
+    {
+      "panel_id": "er__veltuzumab_1_2_0__p01__v8",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 12,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 2,
+          "fn": 8
+        },
+        "v46_after": {
+          "status": "failed",
+          "tp": 0,
+          "fp": 0,
+          "fn": 12
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 7,
+          "fn": 8
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 7,
+          "fn": 8
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 18,
+          "fn": 5
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 20,
+          "fn": 7
+        }
+      }
+    },
+    {
+      "panel_id": "er__adalimumab_4_3_1__p01__v7",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 35,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 23,
+          "fp": 0,
+          "fn": 12
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 28,
+          "fp": 0,
+          "fn": 7
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 15,
+          "fn": 24
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 15,
+          "fn": 28
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 43,
+          "fn": 17
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 15,
+          "fp": 49,
+          "fn": 20
+        }
+      }
+    },
+    {
+      "panel_id": "er__mapatumumab_1_1_0__p01__v3",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 15,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 0,
+          "fn": 3
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 0,
+          "fn": 2
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 18,
+          "fn": 8
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 2,
+          "fp": 14,
+          "fn": 13
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 51,
+          "fn": 8
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 51,
+          "fn": 8
+        }
+      }
+    },
+    {
+      "panel_id": "er__aducanumab_1_1_0__p01__v9",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 21,
+      "single_series": false,
+      "reference_points_without_entry": 10,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 0,
+          "fp": 0,
+          "fn": 21
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 0,
+          "fp": 0,
+          "fn": 21
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 16,
+          "fn": 10
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 16,
+          "fn": 10
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 49,
+          "fn": 10
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 51,
+          "fn": 10
+        }
+      }
+    },
+    {
+      "panel_id": "er__adalimumab_4_1_1__p01__v9",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 41,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 22,
+          "fp": 1,
+          "fn": 19
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 22,
+          "fp": 1,
+          "fn": 19
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 3,
+          "fp": 9,
+          "fn": 38
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 2,
+          "fp": 8,
+          "fn": 39
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 25,
+          "fp": 38,
+          "fn": 16
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 47,
+          "fn": 25
+        }
+      }
+    },
+    {
+      "panel_id": "er__imalumab_2_1_1__p01__v5",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 14,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 0,
+          "fn": 2
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 0,
+          "fn": 2
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 8,
+          "fn": 2
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 6,
+          "fn": 3
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 50,
+          "fn": 1
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 51,
+          "fn": 1
+        }
+      }
+    },
+    {
+      "panel_id": "er__teclistamab_2_6_0__p01__v2",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 20,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 0,
+          "fn": 6
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 0,
+          "fn": 6
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 11,
+          "fn": 11
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 10,
+          "fn": 11
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 15,
+          "fp": 30,
+          "fn": 5
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 32,
+          "fn": 7
+        }
+      }
+    },
+    {
+      "panel_id": "er__daclizumab_1_1_0__p02__v2",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 9,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 6,
+          "fn": 2
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 6,
+          "fn": 2
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 12,
+          "fn": 5
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 15,
+          "fn": 5
+        }
+      }
+    },
+    {
+      "panel_id": "er__mapatumumab_1_2_1__p01__v9",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 33,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 33,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 33,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 54,
+          "fn": 26
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 3,
+          "fp": 53,
+          "fn": 30
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 48,
+          "fn": 17
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 50,
+          "fn": 19
+        }
+      }
+    },
+    {
+      "panel_id": "er__zalutumumab_1_10_2__p01__v2",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 19,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 6,
+          "fn": 6
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 6,
+          "fn": 6
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 19,
+          "fn": 13
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 18,
+          "fn": 12
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 56,
+          "fn": 11
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 55,
+          "fn": 10
+        }
+      }
+    },
+    {
+      "panel_id": "er__temtokibart_1_2_1__p01__v9",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 31,
+      "single_series": false,
+      "reference_points_without_entry": 2,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 4,
+          "fn": 14
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 4,
+          "fn": 14
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 34,
+          "fn": 22
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 31,
+          "fn": 22
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 41,
+          "fn": 25
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 47,
+          "fn": 21
+        }
+      }
+    },
+    {
+      "panel_id": "er__teclistamab_2_5_0__p06__v3",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 25,
+      "single_series": false,
+      "reference_points_without_entry": 8,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 1,
+          "fn": 12
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 1,
+          "fn": 12
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 0,
+          "fp": 2,
+          "fn": 25
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 0,
+          "fp": 2,
+          "fn": 25
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 0,
+          "fp": 0,
+          "fn": 25
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 0,
+          "fp": 0,
+          "fn": 25
+        }
+      }
+    },
+    {
+      "panel_id": "er__trastuzumab_3_1_2__p01__v8",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 42,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 34,
+          "fp": 2,
+          "fn": 8
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 34,
+          "fp": 2,
+          "fn": 8
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 21,
+          "fp": 47,
+          "fn": 21
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 22,
+          "fp": 43,
+          "fn": 20
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 27,
+          "fp": 36,
+          "fn": 15
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 46,
+          "fn": 24
+        }
+      }
+    },
+    {
+      "panel_id": "er__atezolizumab_2_2_4__p01__v7",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 6,
+      "single_series": true,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 0,
+          "fn": 1
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 0,
+          "fn": 1
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 6,
+          "fn": 0
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 5,
+          "fn": 0
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 58,
+          "fn": 0
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 58,
+          "fn": 0
+        }
+      }
+    },
+    {
+      "panel_id": "er__veltuzumab_1_2_0__p02__v6",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 12,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 1,
+          "fn": 6
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 1,
+          "fn": 6
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 6,
+          "fn": 3
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 8,
+          "fn": 7
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 3,
+          "fp": 13,
+          "fn": 9
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 13,
+          "fn": 8
+        }
+      }
+    },
+    {
+      "panel_id": "er__ixekizumab_1_1_2__p01__v8",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 14,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 1,
+          "fn": 2
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 1,
+          "fn": 1
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 12,
+          "fn": 1
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 12,
+          "fn": 2
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 51,
+          "fn": 2
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 51,
+          "fn": 2
+        }
+      }
+    },
+    {
+      "panel_id": "er__pf-06747143_1_1_1__p01__v3",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 25,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 22,
+          "fp": 1,
+          "fn": 3
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 23,
+          "fp": 1,
+          "fn": 2
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 24,
+          "fn": 16
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 23,
+          "fn": 16
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 58,
+          "fn": 20
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 51,
+          "fn": 13
+        }
+      }
+    },
+    {
+      "panel_id": "er__temtokibart_1_1_0__p01__v8",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 37,
+      "single_series": false,
+      "reference_points_without_entry": 8,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 1,
+          "fn": 29
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 1,
+          "fn": 27
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 37,
+          "fn": 24
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 39,
+          "fn": 28
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 42,
+          "fn": 30
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 47,
+          "fn": 25
+        }
+      }
+    },
+    {
+      "panel_id": "er__zalutumumab_1_8_0__p01__v8",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 26,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 12,
+          "fn": 14
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 12,
+          "fn": 14
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 6,
+          "fn": 21
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 2,
+          "fp": 3,
+          "fn": 24
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 45,
+          "fn": 14
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 52,
+          "fn": 17
+        }
+      }
+    },
+    {
+      "panel_id": "er__mapatumumab_1_1_0__p04__v5",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 17,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 1,
+          "fn": 1
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 1,
+          "fn": 1
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 8,
+          "fn": 9
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 6,
+          "fn": 13
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 49,
+          "fn": 5
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 51,
+          "fn": 7
+        }
+      }
+    },
+    {
+      "panel_id": "er__teclistamab_2_5_0__p03__v5",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 27,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 0,
+          "fn": 9
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 0,
+          "fn": 8
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 1,
+          "fp": 3,
+          "fn": 26
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 0,
+          "fp": 3,
+          "fn": 27
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 0,
+          "fp": 0,
+          "fn": 27
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 0,
+          "fp": 0,
+          "fn": 27
+        }
+      }
+    },
+    {
+      "panel_id": "er__naxitamab_1_1_0__p03__v9",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 13,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 0,
+          "fn": 2
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 0,
+          "fn": 2
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 14,
+          "fn": 6
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 3,
+          "fp": 7,
+          "fn": 10
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 56,
+          "fn": 6
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 56,
+          "fn": 6
+        }
+      }
+    },
+    {
+      "panel_id": "er__ulocuplumab_1_2_1__p01__v9",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 45,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 23,
+          "fp": 9,
+          "fn": 22
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 23,
+          "fp": 9,
+          "fn": 22
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 29,
+          "fn": 34
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 27,
+          "fn": 35
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 55,
+          "fn": 37
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 55,
+          "fn": 36
+        }
+      }
+    },
+    {
+      "panel_id": "er__aducanumab_1_2_1__p01__v1",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 19,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 0,
+          "fn": 8
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 0,
+          "fn": 8
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 22,
+          "fn": 7
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 23,
+          "fn": 9
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 49,
+          "fn": 7
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 50,
+          "fn": 8
+        }
+      }
+    },
+    {
+      "panel_id": "er__datopotamab_deruxtecan_1_1_0__p02__v8",
+      "dataset": "er",
+      "modality": "bw",
+      "reference_points": 10,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 7,
+          "fn": 5
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 6,
+          "fn": 5
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 41,
+          "fn": 5
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 59,
+          "fn": 5
+        }
+      }
+    },
+    {
+      "panel_id": "er__imalumab_1_1_4__p01__v6",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 26,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 26,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 26,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 24,
+          "fp": 20,
+          "fn": 2
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 21,
+          "fp": 14,
+          "fn": 5
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 42,
+          "fn": 6
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 21,
+          "fp": 42,
+          "fn": 5
+        }
+      }
+    },
+    {
+      "panel_id": "er__bimekizumab_1_1_0__p01__v9",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 25,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 23,
+          "fp": 1,
+          "fn": 2
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 25,
+          "fp": 2,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 2,
+          "fn": 14
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 3,
+          "fn": 16
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 22,
+          "fn": 8
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 22,
+          "fn": 8
+        }
+      }
+    },
+    {
+      "panel_id": "er__guselkumab_2_1_2__p01__v7",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 62,
+      "single_series": false,
+      "reference_points_without_entry": 2,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 59,
+          "fp": 0,
+          "fn": 3
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 60,
+          "fp": 3,
+          "fn": 2
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 43,
+          "fp": 20,
+          "fn": 19
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 40,
+          "fp": 16,
+          "fn": 22
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 28,
+          "fp": 35,
+          "fn": 34
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 29,
+          "fp": 35,
+          "fn": 33
+        }
+      }
+    },
+    {
+      "panel_id": "er__mirikizumab_2_1_0__p02__v2",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 6,
+      "single_series": false,
+      "reference_points_without_entry": 2,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 0,
+          "fn": 2
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 0,
+          "fn": 2
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 10,
+          "fn": 2
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 7,
+          "fn": 2
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 45,
+          "fn": 2
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 60,
+          "fn": 2
+        }
+      }
+    },
+    {
+      "panel_id": "er__utomilumab_1_1_3__p01__v5",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 19,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 0,
+          "fn": 2
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 8,
+          "fn": 3
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 8,
+          "fn": 3
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 46,
+          "fn": 2
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 45,
+          "fn": 1
+        }
+      }
+    },
+    {
+      "panel_id": "er__palivizumab_1_1_0__p03__v2",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 22,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 0,
+          "fn": 3
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 22,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 1,
+          "fn": 13
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 1,
+          "fn": 14
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 7,
+          "fn": 10
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 8,
+          "fn": 10
+        }
+      }
+    },
+    {
+      "panel_id": "er__talacotuzumab_1_1_1__p01__v2",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 16,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 15,
+          "fp": 0,
+          "fn": 1
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 15,
+          "fp": 0,
+          "fn": 1
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 14,
+          "fn": 6
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 17,
+          "fn": 10
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 44,
+          "fn": 5
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 53,
+          "fn": 6
+        }
+      }
+    },
+    {
+      "panel_id": "er__talacotuzumab_1_2_2__p01__v5",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 16,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 2,
+          "fn": 2
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 2,
+          "fn": 2
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 26,
+          "fn": 8
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 25,
+          "fn": 9
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 44,
+          "fn": 10
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 54,
+          "fn": 6
+        }
+      }
+    },
+    {
+      "panel_id": "er__chf_10067_1_1_4__p01__v6",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 19,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 6,
+          "fn": 9
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 6,
+          "fn": 9
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 6,
+          "fn": 9
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 4,
+          "fn": 10
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 54,
+          "fn": 10
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 50,
+          "fn": 6
+        }
+      }
+    },
+    {
+      "panel_id": "er__dalotuzumab_1_1_0__p01__v9",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 17,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 10,
+          "fn": 6
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 8,
+          "fn": 6
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 15,
+          "fp": 43,
+          "fn": 2
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 50,
+          "fn": 4
+        }
+      }
+    },
+    {
+      "panel_id": "er__palivizumab_1_1_0__p01__v8",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 24,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 0,
+          "fn": 4
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 0,
+          "fn": 4
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 15,
+          "fp": 14,
+          "fn": 9
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 15,
+          "fp": 13,
+          "fn": 9
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 46,
+          "fn": 7
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 48,
+          "fn": 8
+        }
+      }
+    },
+    {
+      "panel_id": "er__ibalizumab_1_1_0__p05__v9",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 35,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 34,
+          "fp": 0,
+          "fn": 1
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 35,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 30,
+          "fp": 49,
+          "fn": 5
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 30,
+          "fp": 46,
+          "fn": 5
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 23,
+          "fp": 38,
+          "fn": 12
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 22,
+          "fp": 40,
+          "fn": 13
+        }
+      }
+    },
+    {
+      "panel_id": "er__perenostobart_1_1_0__p05__v4",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 22,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 22,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 22,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 15,
+          "fp": 18,
+          "fn": 7
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 15,
+          "fp": 14,
+          "fn": 7
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 45,
+          "fn": 4
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 45,
+          "fn": 4
+        }
+      }
+    },
+    {
+      "panel_id": "er__utomilumab_1_1_2__p01__v2",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 20,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 0,
+          "fn": 4
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 0,
+          "fn": 1
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 6,
+          "fn": 6
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 5,
+          "fn": 6
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 39,
+          "fn": 2
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 41,
+          "fn": 3
+        }
+      }
+    },
+    {
+      "panel_id": "er__sotigalimab_1_2_0__p01__v7",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 25,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 25,
+          "fp": 8,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 25,
+          "fp": 8,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 17,
+          "fn": 5
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 15,
+          "fn": 7
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 43,
+          "fn": 5
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 45,
+          "fn": 6
+        }
+      }
+    },
+    {
+      "panel_id": "er__pozelimab_1_2_2__p01__v7",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 26,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 26,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 26,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 9,
+          "fn": 7
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 8,
+          "fn": 7
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 43,
+          "fn": 9
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 44,
+          "fn": 9
+        }
+      }
+    },
+    {
+      "panel_id": "er__demcizumab_1_1_0__p09__v6",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 21,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 21,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 21,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 21,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 21,
+          "fp": 0,
+          "fn": 0
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 3,
+          "fp": 4,
+          "fn": 18
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 0,
+          "fn": 14
+        }
+      }
+    },
+    {
+      "panel_id": "er__dostarlimab_1_1_0__p01__v9",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 25,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 24,
+          "fp": 0,
+          "fn": 1
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 24,
+          "fp": 0,
+          "fn": 1
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 1,
+          "fn": 7
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 2,
+          "fn": 9
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 42,
+          "fn": 8
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 45,
+          "fn": 6
+        }
+      }
+    },
+    {
+      "panel_id": "er__demcizumab_1_1_0__p03__v8",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 21,
+      "single_series": false,
+      "reference_points_without_entry": 7,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 0,
+          "fn": 7
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 0,
+          "fn": 7
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 28,
+          "fn": 8
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 28,
+          "fn": 8
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 8,
+          "fn": 11
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 9,
+          "fn": 12
+        }
+      }
+    },
+    {
+      "panel_id": "er__mirikizumab_2_1_0__p03__v9",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 6,
+      "single_series": false,
+      "reference_points_without_entry": 2,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 0,
+          "fn": 2
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 0,
+          "fn": 2
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 7,
+          "fn": 2
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 5,
+          "fn": 2
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 24,
+          "fn": 2
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 34,
+          "fn": 2
+        }
+      }
+    },
+    {
+      "panel_id": "er__suptavumab_1_1_0__p01__v2",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 19,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 3,
+          "fn": 2
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 3,
+          "fn": 3
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 24,
+          "fn": 7
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 50,
+          "fn": 5
+        }
+      }
+    },
+    {
+      "panel_id": "er__demcizumab_1_1_0__p08__v2",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 23,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 23,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 23,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 22,
+          "fp": 1,
+          "fn": 1
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 21,
+          "fp": 1,
+          "fn": 2
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 2,
+          "fn": 14
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 1,
+          "fn": 13
+        }
+      }
+    },
+    {
+      "panel_id": "er__imalumab_1_1_3__p01__v6",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 28,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 26,
+          "fp": 10,
+          "fn": 2
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 27,
+          "fp": 10,
+          "fn": 1
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 24,
+          "fp": 15,
+          "fn": 4
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 18,
+          "fn": 12
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 45,
+          "fn": 10
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 44,
+          "fn": 8
+        }
+      }
+    },
+    {
+      "panel_id": "er__demcizumab_1_1_0__p04__v4",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 24,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 24,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 24,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 22,
+          "fp": 2,
+          "fn": 2
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 3,
+          "fp": 1,
+          "fn": 21
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 45,
+          "fn": 8
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 47,
+          "fn": 8
+        }
+      }
+    },
+    {
+      "panel_id": "er__imalumab_1_1_6__p01__v7",
+      "dataset": "er",
+      "modality": "color",
+      "reference_points": 29,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 29,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 29,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 28,
+          "fp": 15,
+          "fn": 1
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 23,
+          "fp": 15,
+          "fn": 6
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 43,
+          "fn": 11
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 43,
+          "fn": 11
+        }
+      }
+    },
+    {
+      "panel_id": "pk__pepinemab2__p02__v1",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 12,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 0,
+          "fn": 8
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 0,
+          "fn": 8
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 5,
+          "fn": 8
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 2,
+          "fn": 6
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 50,
+          "fn": 2
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 57,
+          "fn": 5
+        }
+      }
+    },
+    {
+      "panel_id": "pk__garadacimab1__p02__v1",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 39,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 34,
+          "fp": 2,
+          "fn": 5
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 36,
+          "fp": 2,
+          "fn": 3
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 34,
+          "fn": 22
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 15,
+          "fp": 32,
+          "fn": 24
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 24,
+          "fn": 25
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 46,
+          "fn": 21
+        }
+      }
+    },
+    {
+      "panel_id": "pk__bepranemab1__p01__v3",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 67,
+      "single_series": false,
+      "reference_points_without_entry": 34,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 23,
+          "fp": 15,
+          "fn": 44
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 23,
+          "fp": 15,
+          "fn": 44
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 24,
+          "fn": 62
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 23,
+          "fn": 62
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 48,
+          "fn": 56
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 56,
+          "fn": 59
+        }
+      }
+    },
+    {
+      "panel_id": "pk__fiztasovimab1__p01__v2",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 18,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 2,
+          "fn": 8
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 2,
+          "fn": 8
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 25,
+          "fn": 14
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 18,
+          "fn": 13
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 50,
+          "fn": 12
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 52,
+          "fn": 13
+        }
+      }
+    },
+    {
+      "panel_id": "pk__denosumab_-_SB162__p01__v9",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 47,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 46,
+          "fp": 1,
+          "fn": 1
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 46,
+          "fp": 1,
+          "fn": 1
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 26,
+          "fn": 27
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 25,
+          "fn": 29
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 40,
+          "fn": 31
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 46,
+          "fn": 31
+        }
+      }
+    },
+    {
+      "panel_id": "pk__zilovertamab1__p05__v9",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 4,
+      "single_series": true,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 1,
+          "fn": 0
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 3,
+          "fp": 1,
+          "fn": 1
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 47,
+          "fn": 0
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 47,
+          "fn": 0
+        }
+      }
+    },
+    {
+      "panel_id": "pk__nesvacumab1__p01__v2",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 73,
+      "single_series": false,
+      "reference_points_without_entry": 15,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 21,
+          "fp": 4,
+          "fn": 52
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 21,
+          "fp": 4,
+          "fn": 52
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 30,
+          "fp": 25,
+          "fn": 43
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 27,
+          "fp": 24,
+          "fn": 46
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 30,
+          "fn": 57
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 24,
+          "fp": 37,
+          "fn": 49
+        }
+      }
+    },
+    {
+      "panel_id": "pk__fulranumab1__p01__v3",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 57,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 33,
+          "fp": 9,
+          "fn": 24
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 34,
+          "fp": 9,
+          "fn": 23
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 3,
+          "fp": 45,
+          "fn": 54
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 43,
+          "fn": 53
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 53,
+          "fn": 50
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 55,
+          "fn": 51
+        }
+      }
+    },
+    {
+      "panel_id": "pk__pepinemab2__p01__v1",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 8,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 1,
+          "fn": 3
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 1,
+          "fn": 3
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 9,
+          "fn": 3
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 7,
+          "fn": 3
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 59,
+          "fn": 3
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 57,
+          "fn": 1
+        }
+      }
+    },
+    {
+      "panel_id": "pk__narnatumab1__p02__v9",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 22,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 2,
+          "fn": 3
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 2,
+          "fn": 3
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 14,
+          "fn": 13
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 13,
+          "fn": 12
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 53,
+          "fn": 13
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 54,
+          "fn": 14
+        }
+      }
+    },
+    {
+      "panel_id": "pk__narnatumab1__p04__v9",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 13,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 5,
+          "fn": 2
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 5,
+          "fn": 2
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 10,
+          "fn": 4
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 11,
+          "fn": 6
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 47,
+          "fn": 3
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 50,
+          "fn": 6
+        }
+      }
+    },
+    {
+      "panel_id": "pk__zilovertamab1__p07__v3",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 4,
+      "single_series": true,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 3,
+          "fp": 0,
+          "fn": 1
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 2,
+          "fp": 0,
+          "fn": 2
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 58,
+          "fn": 0
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 4,
+          "fp": 58,
+          "fn": 0
+        }
+      }
+    },
+    {
+      "panel_id": "pk__amubarvimab1__p02__v1",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 23,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 1,
+          "fn": 3
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 21,
+          "fp": 4,
+          "fn": 2
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 41,
+          "fn": 15
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 39,
+          "fn": 15
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 54,
+          "fn": 14
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 53,
+          "fn": 12
+        }
+      }
+    },
+    {
+      "panel_id": "pk__tigatuzumab1__p01__v6",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 37,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 9,
+          "fn": 17
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 9,
+          "fn": 17
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 19,
+          "fn": 29
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 20,
+          "fn": 30
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 18,
+          "fn": 31
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 55,
+          "fn": 31
+        }
+      }
+    },
+    {
+      "panel_id": "pk__panitumumab2__p02__v5",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 42,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "failed",
+          "tp": 0,
+          "fp": 0,
+          "fn": 42
+        },
+        "v46_after": {
+          "status": "failed",
+          "tp": 0,
+          "fp": 0,
+          "fn": 42
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 24,
+          "fn": 37
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 23,
+          "fn": 36
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 17,
+          "fn": 36
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 16,
+          "fn": 34
+        }
+      }
+    },
+    {
+      "panel_id": "pk__lenzilumab1__p01__v3",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 28,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 0,
+          "fn": 8
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 21,
+          "fp": 1,
+          "fn": 7
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 17,
+          "fn": 18
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 20,
+          "fn": 22
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 12,
+          "fn": 18
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 55,
+          "fn": 20
+        }
+      }
+    },
+    {
+      "panel_id": "pk__obinutuzumab2__p01__v2",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 23,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 0,
+          "fn": 5
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 0,
+          "fn": 5
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 34,
+          "fn": 14
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 31,
+          "fn": 15
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 53,
+          "fn": 14
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 49,
+          "fn": 10
+        }
+      }
+    },
+    {
+      "panel_id": "pk__ligelizumab1__p01__v7",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 50,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 36,
+          "fp": 1,
+          "fn": 14
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 39,
+          "fp": 1,
+          "fn": 11
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 27,
+          "fn": 33
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 29,
+          "fn": 38
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 44,
+          "fn": 39
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 53,
+          "fn": 41
+        }
+      }
+    },
+    {
+      "panel_id": "pk__abrilumab2__p02__v9",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 58,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 0,
+          "fn": 49
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 0,
+          "fn": 49
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 13,
+          "fn": 46
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 10,
+          "fn": 46
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 26,
+          "fn": 38
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 46,
+          "fn": 45
+        }
+      }
+    },
+    {
+      "panel_id": "pk__evolocumab1__p02__v2",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 28,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 0,
+          "fn": 12
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 0,
+          "fn": 12
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 5,
+          "fn": 16
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 7,
+          "fn": 23
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 45,
+          "fn": 16
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 47,
+          "fn": 11
+        }
+      }
+    },
+    {
+      "panel_id": "pk__obinutuzumab2__p02__v3",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 23,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 0,
+          "fn": 7
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 0,
+          "fn": 7
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 34,
+          "fn": 15
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 34,
+          "fn": 15
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 56,
+          "fn": 15
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 57,
+          "fn": 16
+        }
+      }
+    },
+    {
+      "panel_id": "pk__cixutumumab1__p03__v1",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 26,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 3,
+          "fn": 8
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 23,
+          "fp": 3,
+          "fn": 3
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 30,
+          "fn": 17
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 27,
+          "fn": 16
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 54,
+          "fn": 17
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 56,
+          "fn": 18
+        }
+      }
+    },
+    {
+      "panel_id": "pk__balstilimab2__p01__v2",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 41,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 34,
+          "fp": 0,
+          "fn": 7
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 34,
+          "fp": 0,
+          "fn": 7
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 19,
+          "fn": 29
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 16,
+          "fn": 29
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 47,
+          "fn": 31
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 51,
+          "fn": 28
+        }
+      }
+    },
+    {
+      "panel_id": "pk__aducanumab1__p01__v9",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 66,
+      "single_series": false,
+      "reference_points_without_entry": 9,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 36,
+          "fp": 7,
+          "fn": 30
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 36,
+          "fp": 7,
+          "fn": 30
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 25,
+          "fn": 58
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 21,
+          "fn": 58
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 33,
+          "fn": 47
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 46,
+          "fn": 48
+        }
+      }
+    },
+    {
+      "panel_id": "pk__gosuranemab1__p02__v6",
+      "dataset": "pk",
+      "modality": "bw",
+      "reference_points": 82,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 47,
+          "fp": 15,
+          "fn": 35
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 47,
+          "fp": 15,
+          "fn": 35
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 10,
+          "fn": 76
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 0,
+          "fp": 1,
+          "fn": 82
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 7,
+          "fn": 74
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 8,
+          "fp": 14,
+          "fn": 74
+        }
+      }
+    },
+    {
+      "panel_id": "pk__opicinumab1__p01__v9",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 70,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 36,
+          "fp": 1,
+          "fn": 34
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 36,
+          "fp": 1,
+          "fn": 34
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 32,
+          "fp": 45,
+          "fn": 38
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 32,
+          "fp": 44,
+          "fn": 38
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 15,
+          "fp": 37,
+          "fn": 55
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 38,
+          "fn": 53
+        }
+      }
+    },
+    {
+      "panel_id": "pk__lumretuzumab2__p04__v2",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 13,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 1,
+          "fn": 0
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 1,
+          "fn": 1
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 45,
+          "fn": 0
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 51,
+          "fn": 0
+        }
+      }
+    },
+    {
+      "panel_id": "pk__cetrelimab2__p02__v7",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 68,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 54,
+          "fp": 1,
+          "fn": 14
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 54,
+          "fp": 2,
+          "fn": 14
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 39,
+          "fp": 11,
+          "fn": 29
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 39,
+          "fp": 10,
+          "fn": 29
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 31,
+          "fp": 29,
+          "fn": 37
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 35,
+          "fp": 26,
+          "fn": 33
+        }
+      }
+    },
+    {
+      "panel_id": "pk__tozorakimab1__p03__v6",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 26,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 24,
+          "fp": 0,
+          "fn": 2
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 24,
+          "fp": 0,
+          "fn": 2
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 12,
+          "fn": 7
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 11,
+          "fn": 7
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 51,
+          "fn": 13
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 51,
+          "fn": 13
+        }
+      }
+    },
+    {
+      "panel_id": "pk__tuvonralimab1__p03__v5",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 46,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 42,
+          "fp": 1,
+          "fn": 4
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 43,
+          "fp": 1,
+          "fn": 3
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 32,
+          "fp": 17,
+          "fn": 14
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 32,
+          "fp": 15,
+          "fn": 14
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 43,
+          "fn": 29
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 44,
+          "fn": 29
+        }
+      }
+    },
+    {
+      "panel_id": "pk__mibavademab2__p02__v8",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 81,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 73,
+          "fp": 5,
+          "fn": 8
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 75,
+          "fp": 5,
+          "fn": 6
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 21,
+          "fp": 9,
+          "fn": 60
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 9,
+          "fn": 61
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 31,
+          "fp": 33,
+          "fn": 50
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 31,
+          "fp": 33,
+          "fn": 50
+        }
+      }
+    },
+    {
+      "panel_id": "pk__atidortoxumab1__p04__v5",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 22,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 22,
+          "fp": 8,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 22,
+          "fp": 13,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 13,
+          "fn": 12
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 12,
+          "fn": 12
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 49,
+          "fn": 10
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 52,
+          "fn": 10
+        }
+      }
+    },
+    {
+      "panel_id": "pk__abelacimab1__p01__v3",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 87,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 76,
+          "fp": 24,
+          "fn": 11
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 79,
+          "fp": 24,
+          "fn": 8
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 58,
+          "fp": 33,
+          "fn": 29
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 56,
+          "fp": 32,
+          "fn": 31
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 35,
+          "fp": 19,
+          "fn": 52
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 42,
+          "fp": 22,
+          "fn": 45
+        }
+      }
+    },
+    {
+      "panel_id": "pk__upanovimab1__p02__v1",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 38,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 36,
+          "fp": 10,
+          "fn": 2
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 36,
+          "fp": 10,
+          "fn": 2
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 26,
+          "fp": 11,
+          "fn": 12
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 25,
+          "fp": 8,
+          "fn": 13
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 16,
+          "fn": 26
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 16,
+          "fn": 22
+        }
+      }
+    },
+    {
+      "panel_id": "pk__lifastuzumab2__p04__v9",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 26,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 23,
+          "fp": 0,
+          "fn": 3
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 24,
+          "fp": 0,
+          "fn": 2
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 11,
+          "fn": 9
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 9,
+          "fn": 9
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 43,
+          "fn": 6
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 45,
+          "fn": 7
+        }
+      }
+    },
+    {
+      "panel_id": "pk__barzolvolimab3__p01__v5",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 32,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 27,
+          "fp": 1,
+          "fn": 5
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 27,
+          "fp": 2,
+          "fn": 5
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 8,
+          "fn": 15
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 5,
+          "fn": 13
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 9,
+          "fn": 21
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 14,
+          "fn": 21
+        }
+      }
+    },
+    {
+      "panel_id": "pk__cilgavimab3__p05__v4",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 32,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 31,
+          "fp": 21,
+          "fn": 1
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 32,
+          "fp": 21,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 13,
+          "fn": 18
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 12,
+          "fn": 18
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 22,
+          "fn": 21
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 45,
+          "fn": 19
+        }
+      }
+    },
+    {
+      "panel_id": "pk__risankizumab5__p03__v9",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 28,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 26,
+          "fp": 0,
+          "fn": 2
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 27,
+          "fp": 0,
+          "fn": 1
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 3,
+          "fn": 10
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 4,
+          "fn": 11
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 28,
+          "fn": 12
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 46,
+          "fn": 11
+        }
+      }
+    },
+    {
+      "panel_id": "pk__cilgavimab3__p06__v5",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 25,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 25,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 25,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 6,
+          "fn": 14
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 6,
+          "fn": 14
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 12,
+          "fn": 11
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 21,
+          "fn": 11
+        }
+      }
+    },
+    {
+      "panel_id": "pk__sibeprenlimab1__p01__v2",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 45,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 44,
+          "fp": 2,
+          "fn": 1
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 44,
+          "fp": 4,
+          "fn": 1
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 22,
+          "fp": 14,
+          "fn": 23
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 22,
+          "fp": 10,
+          "fn": 23
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 23,
+          "fp": 28,
+          "fn": 22
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 23,
+          "fp": 39,
+          "fn": 22
+        }
+      }
+    },
+    {
+      "panel_id": "pk__ongericimab1__p01__v9",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 51,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 37,
+          "fp": 1,
+          "fn": 14
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 41,
+          "fp": 1,
+          "fn": 10
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 17,
+          "fp": 18,
+          "fn": 34
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 13,
+          "fp": 19,
+          "fn": 38
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 15,
+          "fp": 49,
+          "fn": 36
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 48,
+          "fn": 35
+        }
+      }
+    },
+    {
+      "panel_id": "pk__latozinemab1__p03__v3",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 11,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 2,
+          "fn": 2
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 4,
+          "fn": 1
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 8,
+          "fn": 6
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 5,
+          "fp": 7,
+          "fn": 6
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 44,
+          "fn": 5
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 6,
+          "fp": 47,
+          "fn": 5
+        }
+      }
+    },
+    {
+      "panel_id": "pk__lumretuzumab2__p03__v7",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 50,
+      "single_series": false,
+      "reference_points_without_entry": 12,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 29,
+          "fp": 1,
+          "fn": 21
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 29,
+          "fp": 1,
+          "fn": 21
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 34,
+          "fn": 38
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 10,
+          "fp": 34,
+          "fn": 40
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 43,
+          "fn": 34
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 16,
+          "fp": 46,
+          "fn": 34
+        }
+      }
+    },
+    {
+      "panel_id": "pk__itepekimab1_F2__p01__v3",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 78,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 50,
+          "fp": 2,
+          "fn": 28
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 52,
+          "fp": 6,
+          "fn": 26
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 22,
+          "fn": 59
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 18,
+          "fp": 23,
+          "fn": 60
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 20,
+          "fn": 58
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 19,
+          "fp": 41,
+          "fn": 59
+        }
+      }
+    },
+    {
+      "panel_id": "pk__tuvonralimab1__p02__v5",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 42,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 39,
+          "fp": 7,
+          "fn": 3
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 39,
+          "fp": 6,
+          "fn": 3
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 24,
+          "fp": 8,
+          "fn": 18
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 22,
+          "fp": 6,
+          "fn": 20
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 20,
+          "fn": 22
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 20,
+          "fp": 40,
+          "fn": 22
+        }
+      }
+    },
+    {
+      "panel_id": "pk__tarextumab1__p01__v9",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 86,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 76,
+          "fp": 5,
+          "fn": 10
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 76,
+          "fp": 6,
+          "fn": 10
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 35,
+          "fp": 35,
+          "fn": 51
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 32,
+          "fp": 35,
+          "fn": 54
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 27,
+          "fp": 33,
+          "fn": 59
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 27,
+          "fp": 37,
+          "fn": 59
+        }
+      }
+    },
+    {
+      "panel_id": "pk__latozinemab1__p02__v4",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 9,
+      "single_series": true,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 0,
+          "fn": 0
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 0,
+          "fn": 0
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 2,
+          "fn": 2
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 7,
+          "fp": 2,
+          "fn": 2
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 33,
+          "fn": 0
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 34,
+          "fn": 0
+        }
+      }
+    },
+    {
+      "panel_id": "pk__zuberitamab1__p03__v3",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 39,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 27,
+          "fp": 0,
+          "fn": 12
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 30,
+          "fp": 0,
+          "fn": 9
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 23,
+          "fp": 27,
+          "fn": 16
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 25,
+          "fp": 23,
+          "fn": 14
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 28,
+          "fp": 29,
+          "fn": 11
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 26,
+          "fp": 31,
+          "fn": 13
+        }
+      }
+    },
+    {
+      "panel_id": "pk__gedivumab1__p01__v9",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 15,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 0,
+          "fn": 1
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 14,
+          "fp": 0,
+          "fn": 1
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 12,
+          "fp": 3,
+          "fn": 3
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 3,
+          "fn": 4
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 15,
+          "fp": 49,
+          "fn": 0
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 15,
+          "fp": 49,
+          "fn": 0
+        }
+      }
+    },
+    {
+      "panel_id": "pk__iparomlimab1__p01__v5",
+      "dataset": "pk",
+      "modality": "color",
+      "reference_points": 37,
+      "single_series": false,
+      "reference_points_without_entry": 0,
+      "ground_truth_source": "annotated swatch overlap",
+      "methods": {
+        "v46_before": {
+          "status": "completed",
+          "tp": 25,
+          "fp": 1,
+          "fn": 12
+        },
+        "v46_after": {
+          "status": "completed",
+          "tp": 26,
+          "fp": 2,
+          "fn": 11
+        },
+        "aicp_raw_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 18,
+          "fn": 26
+        },
+        "aicp_corrected_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 18,
+          "fn": 26
+        },
+        "lineex_paper_grouped": {
+          "status": "completed",
+          "tp": 9,
+          "fp": 34,
+          "fn": 28
+        },
+        "lineex_grouped": {
+          "status": "completed",
+          "tp": 11,
+          "fp": 41,
+          "fn": 26
+        }
+      }
+    }
+  ]
+}

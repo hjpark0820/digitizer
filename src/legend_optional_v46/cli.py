@@ -32,6 +32,7 @@ def parser(default_mode):
     p.add_argument('--plot-area',type=_roi)
     p.add_argument('--color-series-mode',choices=('auto','markers','line-only'),default='auto')
     p.add_argument('--swatches-json',default='')
+    p.add_argument('--legend-review-json',default='')
     for name in ('x-min','x-max','y-min','y-max'):p.add_argument('--'+name,type=float)
     p.add_argument('--x-log',action='store_true');p.add_argument('--y-log',action='store_true')
     p.add_argument('--correct',action='store_true');p.add_argument('--correct-iters',type=int,default=5)
@@ -52,9 +53,9 @@ def maybe_run(argv, *, default_mode='color'):
     argv=list(argv)
     if '--help' in argv or '-h' in argv:return False
     a,unused=parser(default_mode).parse_known_args(argv)
-    if a.no_legend and (a.legend_area is not None or a.swatches_json):
+    if a.no_legend and (a.legend_area is not None or a.swatches_json or a.legend_review_json):
         raise ValueError('--no-legend cannot be combined with a legend ROI or swatches')
-    if a.swatches_json:return False
+    if a.swatches_json or a.legend_review_json:return False
     if a.legend_area is not None and (a.mode=='bw' or a.color_series_mode in ('markers','line-only')):
         return False
     if not a.image or not a.out_dir:raise ValueError('Image and output directory are required')

@@ -59,7 +59,21 @@ class LegendRuntime:
 
     def discover(self, original, env):
         # Preserve initial products before later palette filtering changes them.
-        colors, legend_box = original()
+        review_path = getattr(env.get('_args'), 'legend_review_json', None)
+        if review_path:
+            from reviewed_legend_models_v46 import load_review, reviewed_color_seeds
+            legend_box = env.get('USER_LEGEND_BOX')
+            if legend_box is None:
+                raise ValueError('A legend rectangle is required for a reviewed legend')
+            entries = load_review(review_path, env['img'], image_path=env['IMG_PATH'],
+                                  legend_box=legend_box)
+            env['_V46_REVIEW_ENTRIES'] = entries
+            env['_LEGEND_1TO1'] = True
+            colors = reviewed_color_seeds(env['img'], entries)
+            self.diagnostics['legend_input_source'] = 'user_reviewed_legend'
+            self.diagnostics['reviewed_entries'] = _plain(entries)
+        else:
+            colors, legend_box = original()
         self.diagnostics['initial_palette'] = _plain([
             {k: v for k, v in item.items() if not k.startswith('_')}
             for item in colors])
@@ -88,9 +102,13 @@ class LegendRuntime:
         self.diagnostics.update(legend_area=area, native_grid=_plain(native_grid),
                                 native_palette=palette, native_centres=centres)
         try:
-            models, reports, rejected = extract_hybrid_legend(
-                image, area, native_grid=native_grid,
-                native_palette=palette, native_centres=centres)
+            if env.get('_V46_REVIEW_ENTRIES') is not None:
+                from reviewed_legend_models_v46 import extract_color_models
+                models, reports, rejected = extract_color_models(image, env['_V46_REVIEW_ENTRIES'])
+            else:
+                models, reports, rejected = extract_hybrid_legend(
+                    image, area, native_grid=native_grid,
+                    native_palette=palette, native_centres=centres)
         except Exception as error:
             self.diagnostics.update(status='error', error=f'{type(error).__name__}: {error}')
             self._save()
@@ -132,6 +150,7 @@ class LegendRuntime:
                                  f'{raw.shape[:2]} != {mask.shape}')
             rgb = tuple(map(int, report['color_rgb']))
             self.entries.append(dict(id=model.swatch_id, rgb=rgb, box=box,
+                                     review_id=report.get('review_id'),
                                      mask=mask.copy(), raw_bgr=raw,
                                      required_weight=np.asarray(model.required_weight)[domain].copy(),
                                      soft=np.asarray(model.raw_soft)[domain].copy(),

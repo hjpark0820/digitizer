@@ -1,0 +1,387 @@
+{
+ "panel_id": "pk__nesvacumab1__p01__v2",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    70,
+    352,
+    83,
+    365
+   ],
+   "native_body_bbox": [
+    72,
+    353,
+    82,
+    364
+   ],
+   "class_name": "unknown_marker",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "1 mg/kg",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__nesvacumab1__p01__v2/shared_legend_crops/legend_01.png",
+   "image_size": [
+    13,
+    13
+   ],
+   "sha256": "43a42c4a1d2ef8336e7f99af9eb0f86e0d160421c31bc2023a239d819682febe",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__nesvacumab1__p01__v2/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    70,
+    352,
+    83,
+    365
+   ],
+   "bbox_original": [
+    70,
+    352,
+    83,
+    365
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    232,
+    352,
+    250,
+    365
+   ],
+   "native_body_bbox": [
+    233,
+    354,
+    248,
+    364
+   ],
+   "class_name": "unknown_marker",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s03",
+   "label": "6 mg/kg",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__nesvacumab1__p01__v2/shared_legend_crops/legend_02.png",
+   "image_size": [
+    18,
+    13
+   ],
+   "sha256": "278b9b50df33c1ee34e1c44f80ae7acca53dfefac5652290d07d01efa28440b3",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__nesvacumab1__p01__v2/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    232,
+    352,
+    250,
+    365
+   ],
+   "bbox_original": [
+    232,
+    352,
+    250,
+    365
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S03",
+   "bbox": [
+    314,
+    352,
+    327,
+    365
+   ],
+   "native_body_bbox": [
+    315,
+    353,
+    326,
+    363
+   ],
+   "class_name": "unknown_marker",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s04",
+   "label": "12 mg/kg",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__nesvacumab1__p01__v2/shared_legend_crops/legend_03.png",
+   "image_size": [
+    13,
+    13
+   ],
+   "sha256": "f43fca0df16f25f755fa049014896f01bc0cb2960cc51340cbda54bd29cac06d",
+   "source_native_legend_id": "S03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__nesvacumab1__p01__v2/shared_legend_crops/legend_03.png",
+   "bbox_crop": [
+    314,
+    352,
+    327,
+    365
+   ],
+   "bbox_original": [
+    314,
+    352,
+    327,
+    365
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S04",
+   "bbox": [
+    395,
+    353,
+    423,
+    364
+   ],
+   "native_body_bbox": [
+    404,
+    355,
+    414,
+    363
+   ],
+   "class_name": "open_triangle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s05",
+   "label": "20 mg/kg",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__nesvacumab1__p01__v2/shared_legend_crops/legend_04.png",
+   "image_size": [
+    28,
+    11
+   ],
+   "sha256": "4ce42ae2c2fa36954fd33550d0d085c8c0a5a03909c44cee120414f8560b84c1",
+   "source_native_legend_id": "S04",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__nesvacumab1__p01__v2/shared_legend_crops/legend_04.png",
+   "bbox_crop": [
+    395,
+    353,
+    423,
+    364
+   ],
+   "bbox_original": [
+    395,
+    353,
+    423,
+    364
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01",
+  "S02": "s03",
+  "S03": "s04",
+  "S04": "s05"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.3501683501683502,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s04",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s05",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s03",
+    "iou": 0.4472049689440994,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s04",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s05",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s04",
+    "iou": 0.35986159169550175,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s05",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S04",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S04",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S04",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S04",
+    "series_id": "s04",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S04",
+    "series_id": "s05",
+    "iou": 0.7088607594936709,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [
+   "s02"
+  ],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "1 mg/kg",
+   "bbox": [
+    61,
+    354,
+    90,
+    362
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "3 mg/kg",
+   "bbox": [
+    143,
+    354,
+    171,
+    362
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "6 mg/kg",
+   "bbox": [
+    224,
+    354,
+    253,
+    362
+   ]
+  },
+  {
+   "series_id": "s04",
+   "label": "12 mg/kg",
+   "bbox": [
+    306,
+    354,
+    334,
+    362
+   ]
+  },
+  {
+   "series_id": "s05",
+   "label": "20 mg/kg",
+   "bbox": [
+    394,
+    354,
+    423,
+    362
+   ]
+  }
+ ],
+ "input_sha256": "3a52571a4e893b0951f4d8b7e93a7ea4388bcb934eab64bfdf9e503ac7892fe7",
+ "source_sha256": "3a52571a4e893b0951f4d8b7e93a7ea4388bcb934eab64bfdf9e503ac7892fe7",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.09634819999337196
+}

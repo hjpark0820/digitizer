@@ -155,6 +155,18 @@ physical-unit label. CSV/Excel exports retain separate unit and unit-status
 columns. Unit recognition does not convert the numeric values; review labels
 and units along with the calibration before using exported measurements.
 
+## Reviewing legend swatches
+
+After detection, open **Show legend swatches / review**. The original legend is shown with numbered crop boxes and a matching list of source swatches. The review is available even when automatic legend extraction found no entries.
+
+1. Choose **Add by center** and click the center of a missing legend symbol. Check the proposed crop; use **Width**, **Height**, or **Move selected center** if the crop cuts off the symbol or includes neighboring text.
+2. Select an incorrect box or swatch thumbnail and choose **Delete selected**. **Undo** and **Reset changes** restore edits before they are applied.
+3. Choose **Apply swatches & rerun detection**. Both Colour and B&W use the reviewed source crops to detect the plotted points again. Review the resulting points, series assignments, and calibration before exporting.
+
+The source image is unchanged. Rerunning creates a new result; save any point or axis edits first because those edits are not transferred into a fresh detection pass. Save result versions as JSON to retain the reviewed legend with the image and detection evidence. A plausible crop does not guarantee a correct marker template, so check the crop previews and the resulting detections.
+
+If an imported fast-detection result lacks the original-resolution image, reopen the original image and run detection before rerunning legend edits. The existing points remain available for review and editing.
+
 ## Synthetic examples
 
 [examples/](examples/) contains 40 selected synthetic plots in one flat folder: 10 PK B&W, 10 PK colour, 10 ER B&W and 10 ER colour. Filename prefixes identify each category. The [example guide](examples/README.md) and [manifest](examples/examples_manifest.json) provide the tested plot/legend regions, calibration, scores before and after automatic correction, and timing. These are curated demonstration cases, not a representative benchmark or clinical measurements.

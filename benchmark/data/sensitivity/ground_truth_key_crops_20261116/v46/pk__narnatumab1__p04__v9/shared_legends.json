@@ -1,0 +1,108 @@
+{
+ "panel_id": "pk__narnatumab1__p04__v9",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "15 mg/kg q2w",
+   "bbox": [
+    268,
+    33,
+    292,
+    41
+   ],
+   "bbox_crop": [
+    268,
+    33,
+    292,
+    41
+   ],
+   "bbox_original": [
+    268,
+    33,
+    292,
+    41
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__narnatumab1__p04__v9/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__narnatumab1__p04__v9/shared_legend_crops/legend_01.png",
+   "image_size": [
+    24,
+    8
+   ],
+   "sha256": "3b13545ad483dcaf12b1e69a81c00881cea527b0c978c821b565b998acef98ee",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "40 mg/kg q2w",
+   "bbox": [
+    268,
+    45,
+    292,
+    53
+   ],
+   "bbox_crop": [
+    268,
+    45,
+    292,
+    53
+   ],
+   "bbox_original": [
+    268,
+    45,
+    292,
+    53
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__narnatumab1__p04__v9/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__narnatumab1__p04__v9/shared_legend_crops/legend_02.png",
+   "image_size": [
+    24,
+    8
+   ],
+   "sha256": "42bc30eda95ec497591cd5c91b263f9132bf2e76fc059eae6d229c102d6420d2",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s01": "s01",
+  "s02": "s02"
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "15 mg/kg q2w",
+   "bbox": [
+    268,
+    33,
+    292,
+    41
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "40 mg/kg q2w",
+   "bbox": [
+    268,
+    45,
+    292,
+    53
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "03a9f554b611bed6d8e8cac7f44f8d134bf56dc695a486910c55ddcbd2d879c0",
+ "source_sha256": "03a9f554b611bed6d8e8cac7f44f8d134bf56dc695a486910c55ddcbd2d879c0",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}

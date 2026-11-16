@@ -1,0 +1,3645 @@
+{
+ "version": "external_shared_input_benchmark_v1",
+ "panel_id": "er__naxitamab_1_1_0__p03__v9",
+ "modality": "bw",
+ "method": "lineex_grouped",
+ "status": "completed",
+ "coordinate_system": "x_px/y_px = full original unrotated image pixels; x/y = shared native crop pixels",
+ "image_path": "data/images\\er__naxitamab_1_1_0__p03__v9.png",
+ "input_sha256": "68f810ed4a013a7041137ea13d4150f763bc860f1140150be0f9f115edca4570",
+ "source_image_path": "data/images\\er__naxitamab_1_1_0__p03__v9.png",
+ "source_sha256": "68f810ed4a013a7041137ea13d4150f763bc860f1140150be0f9f115edca4570",
+ "crop_box_original": [
+  0,
+  0,
+  279,
+  155
+ ],
+ "plot_box": [
+  48.0,
+  16.0,
+  263.0,
+  110.0
+ ],
+ "legend_box": [
+  41.0,
+  128.0,
+  265.0,
+  143.0
+ ],
+ "legends": [
+  {
+   "legend_index": 0,
+   "series_id": "s01",
+   "label": "Dinutuximab beta",
+   "source_native_legend_id": "S01",
+   "box_input": [
+    37,
+    129,
+    69,
+    139
+   ],
+   "box_original": [
+    37,
+    129,
+    69,
+    139
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__naxitamab_1_1_0__p03__v9/shared_legend_crops/legend_01.png",
+   "crop_sha256": "87b16c928e55c5537bf74caa2ef7ba665c9ba635e2580af3f13ab43b059a4eb8",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__naxitamab_1_1_0__p03__v9/shared_legends.json",
+   "shared_legends_sha256": "1e9b974b1d3e502a6d2bb53d57d72cda5c63306f96a21c8deed6810c46b1655e",
+   "mapping_provenance": {
+    "S01": "s01",
+    "S02": "s02"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 1,
+   "series_id": "s02",
+   "label": "Naxitamab",
+   "source_native_legend_id": "S02",
+   "box_input": [
+    172,
+    129,
+    204,
+    139
+   ],
+   "box_original": [
+    172,
+    129,
+    204,
+    139
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__naxitamab_1_1_0__p03__v9/shared_legend_crops/legend_02.png",
+   "crop_sha256": "18324d053525ea38f94e2b0a69f6a5133cf0c40f9ea6bc4014c705c9de8d3457",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__naxitamab_1_1_0__p03__v9/shared_legends.json",
+   "shared_legends_sha256": "1e9b974b1d3e502a6d2bb53d57d72cda5c63306f96a21c8deed6810c46b1655e",
+   "mapping_provenance": {
+    "S01": "s01",
+    "S02": "s02"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  }
+ ],
+ "predictions": [
+  {
+   "point_id": "LX0000",
+   "x": 62.0,
+   "y": 79.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8797352313995361,
+   "winning_similarity": 0.8797352313995361,
+   "similarities": [
+    0.7901141047477722,
+    0.8797352313995361
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0000.png",
+   "patch_box_input": [
+    42,
+    69,
+    82,
+    89
+   ],
+   "x_px": 62.0,
+   "y_px": 79.0
+  },
+  {
+   "point_id": "LX0001",
+   "x": 156.0,
+   "y": 61.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9796374440193176,
+   "winning_similarity": 0.9796374440193176,
+   "similarities": [
+    0.9575295448303223,
+    0.9796374440193176
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0001.png",
+   "patch_box_input": [
+    136,
+    51,
+    176,
+    71
+   ],
+   "x_px": 156.0,
+   "y_px": 61.0
+  },
+  {
+   "point_id": "LX0002",
+   "x": 155.0,
+   "y": 53.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9024743437767029,
+   "winning_similarity": 0.9024743437767029,
+   "similarities": [
+    0.8435300588607788,
+    0.9024743437767029
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0002.png",
+   "patch_box_input": [
+    135,
+    43,
+    175,
+    63
+   ],
+   "x_px": 155.0,
+   "y_px": 53.0
+  },
+  {
+   "point_id": "LX0003",
+   "x": 188.0,
+   "y": 54.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7989180684089661,
+   "winning_similarity": 0.7989180684089661,
+   "similarities": [
+    0.7343332767486572,
+    0.7989180684089661
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0003.png",
+   "patch_box_input": [
+    168,
+    44,
+    208,
+    64
+   ],
+   "x_px": 188.0,
+   "y_px": 54.0
+  },
+  {
+   "point_id": "LX0004",
+   "x": 250.0,
+   "y": 52.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8851951956748962,
+   "winning_similarity": 0.8851951956748962,
+   "similarities": [
+    0.8851951956748962,
+    0.8808731436729431
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0004.png",
+   "patch_box_input": [
+    230,
+    42,
+    270,
+    62
+   ],
+   "x_px": 250.0,
+   "y_px": 52.0
+  },
+  {
+   "point_id": "LX0005",
+   "x": 125.0,
+   "y": 73.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8103455305099487,
+   "winning_similarity": 0.8103455305099487,
+   "similarities": [
+    0.8103455305099487,
+    0.7303804755210876
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0005.png",
+   "patch_box_input": [
+    105,
+    63,
+    145,
+    83
+   ],
+   "x_px": 125.0,
+   "y_px": 73.0
+  },
+  {
+   "point_id": "LX0006",
+   "x": 250.0,
+   "y": 59.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9731308817863464,
+   "winning_similarity": 0.9731308817863464,
+   "similarities": [
+    0.9600902199745178,
+    0.9731308817863464
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0006.png",
+   "patch_box_input": [
+    230,
+    49,
+    270,
+    69
+   ],
+   "x_px": 250.0,
+   "y_px": 59.0
+  },
+  {
+   "point_id": "LX0007",
+   "x": 187.0,
+   "y": 58.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9646580815315247,
+   "winning_similarity": 0.9646580815315247,
+   "similarities": [
+    0.9162341356277466,
+    0.9646580815315247
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0007.png",
+   "patch_box_input": [
+    167,
+    48,
+    207,
+    68
+   ],
+   "x_px": 187.0,
+   "y_px": 58.0
+  },
+  {
+   "point_id": "LX0008",
+   "x": 121.0,
+   "y": 69.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8806463479995728,
+   "winning_similarity": 0.8806463479995728,
+   "similarities": [
+    0.8805201649665833,
+    0.8806463479995728
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0008.png",
+   "patch_box_input": [
+    101,
+    59,
+    141,
+    79
+   ],
+   "x_px": 121.0,
+   "y_px": 69.0
+  },
+  {
+   "point_id": "LX0009",
+   "x": 60.0,
+   "y": 91.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7847349643707275,
+   "winning_similarity": 0.7847349643707275,
+   "similarities": [
+    0.7847349643707275,
+    0.6604927778244019
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0009.png",
+   "patch_box_input": [
+    40,
+    81,
+    80,
+    101
+   ],
+   "x_px": 60.0,
+   "y_px": 91.0
+  },
+  {
+   "point_id": "LX0010",
+   "x": 91.0,
+   "y": 66.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8567596077919006,
+   "winning_similarity": 0.8567596077919006,
+   "similarities": [
+    0.8567596077919006,
+    0.7776064872741699
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0010.png",
+   "patch_box_input": [
+    71,
+    56,
+    111,
+    76
+   ],
+   "x_px": 91.0,
+   "y_px": 66.0
+  },
+  {
+   "point_id": "LX0011",
+   "x": 218.0,
+   "y": 61.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9642468094825745,
+   "winning_similarity": 0.9642468094825745,
+   "similarities": [
+    0.952576220035553,
+    0.9642468094825745
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0011.png",
+   "patch_box_input": [
+    198,
+    51,
+    238,
+    71
+   ],
+   "x_px": 218.0,
+   "y_px": 61.0
+  },
+  {
+   "point_id": "LX0012",
+   "x": 95.0,
+   "y": 97.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9541437029838562,
+   "winning_similarity": 0.9541437029838562,
+   "similarities": [
+    0.9431138038635254,
+    0.9541437029838562
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0012.png",
+   "patch_box_input": [
+    75,
+    87,
+    115,
+    107
+   ],
+   "x_px": 95.0,
+   "y_px": 97.0
+  },
+  {
+   "point_id": "LX0013",
+   "x": 218.0,
+   "y": 52.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8788238167762756,
+   "winning_similarity": 0.8788238167762756,
+   "similarities": [
+    0.8360261917114258,
+    0.8788238167762756
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0013.png",
+   "patch_box_input": [
+    198,
+    42,
+    238,
+    62
+   ],
+   "x_px": 218.0,
+   "y_px": 52.0
+  },
+  {
+   "point_id": "LX0014",
+   "x": 93.0,
+   "y": 98.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9336912631988525,
+   "winning_similarity": 0.9336912631988525,
+   "similarities": [
+    0.9336912631988525,
+    0.9305610060691833
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0014.png",
+   "patch_box_input": [
+    73,
+    88,
+    113,
+    108
+   ],
+   "x_px": 93.0,
+   "y_px": 98.0
+  },
+  {
+   "point_id": "LX0015",
+   "x": 187.0,
+   "y": 54.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8634151816368103,
+   "winning_similarity": 0.8634151816368103,
+   "similarities": [
+    0.7877445816993713,
+    0.8634151816368103
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0015.png",
+   "patch_box_input": [
+    167,
+    44,
+    207,
+    64
+   ],
+   "x_px": 187.0,
+   "y_px": 54.0
+  },
+  {
+   "point_id": "LX0016",
+   "x": 219.0,
+   "y": 59.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9669286608695984,
+   "winning_similarity": 0.9669286608695984,
+   "similarities": [
+    0.9381917715072632,
+    0.9669286608695984
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0016.png",
+   "patch_box_input": [
+    199,
+    49,
+    239,
+    69
+   ],
+   "x_px": 219.0,
+   "y_px": 59.0
+  },
+  {
+   "point_id": "LX0017",
+   "x": 127.0,
+   "y": 59.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9232631921768188,
+   "winning_similarity": 0.9232631921768188,
+   "similarities": [
+    0.8679916262626648,
+    0.9232631921768188
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0017.png",
+   "patch_box_input": [
+    107,
+    49,
+    147,
+    69
+   ],
+   "x_px": 127.0,
+   "y_px": 59.0
+  },
+  {
+   "point_id": "LX0018",
+   "x": 249.0,
+   "y": 54.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9498876333236694,
+   "winning_similarity": 0.9498876333236694,
+   "similarities": [
+    0.8981829285621643,
+    0.9498876333236694
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0018.png",
+   "patch_box_input": [
+    229,
+    44,
+    269,
+    64
+   ],
+   "x_px": 249.0,
+   "y_px": 54.0
+  },
+  {
+   "point_id": "LX0019",
+   "x": 123.0,
+   "y": 73.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8371763825416565,
+   "winning_similarity": 0.8371763825416565,
+   "similarities": [
+    0.8371763825416565,
+    0.703600287437439
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0019.png",
+   "patch_box_input": [
+    103,
+    63,
+    143,
+    83
+   ],
+   "x_px": 123.0,
+   "y_px": 73.0
+  },
+  {
+   "point_id": "LX0020",
+   "x": 155.0,
+   "y": 61.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9740141034126282,
+   "winning_similarity": 0.9740141034126282,
+   "similarities": [
+    0.945225179195404,
+    0.9740141034126282
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0020.png",
+   "patch_box_input": [
+    135,
+    51,
+    175,
+    71
+   ],
+   "x_px": 155.0,
+   "y_px": 61.0
+  },
+  {
+   "point_id": "LX0022",
+   "x": 184.0,
+   "y": 54.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9067792892456055,
+   "winning_similarity": 0.9067792892456055,
+   "similarities": [
+    0.8266631960868835,
+    0.9067792892456055
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0022.png",
+   "patch_box_input": [
+    164,
+    44,
+    204,
+    64
+   ],
+   "x_px": 184.0,
+   "y_px": 54.0
+  },
+  {
+   "point_id": "LX0023",
+   "x": 61.0,
+   "y": 92.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8714531660079956,
+   "winning_similarity": 0.8714531660079956,
+   "similarities": [
+    0.8714531660079956,
+    0.826623797416687
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0023.png",
+   "patch_box_input": [
+    41,
+    82,
+    81,
+    102
+   ],
+   "x_px": 61.0,
+   "y_px": 92.0
+  },
+  {
+   "point_id": "LX0024",
+   "x": 187.0,
+   "y": 53.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8650354146957397,
+   "winning_similarity": 0.8650354146957397,
+   "similarities": [
+    0.7917699813842773,
+    0.8650354146957397
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0024.png",
+   "patch_box_input": [
+    167,
+    43,
+    207,
+    63
+   ],
+   "x_px": 187.0,
+   "y_px": 53.0
+  },
+  {
+   "point_id": "LX0025",
+   "x": 156.0,
+   "y": 54.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9505020380020142,
+   "winning_similarity": 0.9505020380020142,
+   "similarities": [
+    0.8788047432899475,
+    0.9505020380020142
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0025.png",
+   "patch_box_input": [
+    136,
+    44,
+    176,
+    64
+   ],
+   "x_px": 156.0,
+   "y_px": 54.0
+  },
+  {
+   "point_id": "LX0026",
+   "x": 219.0,
+   "y": 57.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9717430472373962,
+   "winning_similarity": 0.9717430472373962,
+   "similarities": [
+    0.9264399409294128,
+    0.9717430472373962
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0026.png",
+   "patch_box_input": [
+    199,
+    47,
+    239,
+    67
+   ],
+   "x_px": 219.0,
+   "y_px": 57.0
+  },
+  {
+   "point_id": "LX0027",
+   "x": 89.0,
+   "y": 75.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8485015630722046,
+   "winning_similarity": 0.8485015630722046,
+   "similarities": [
+    0.8485015630722046,
+    0.7173128128051758
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0027.png",
+   "patch_box_input": [
+    69,
+    65,
+    109,
+    85
+   ],
+   "x_px": 89.0,
+   "y_px": 75.0
+  },
+  {
+   "point_id": "LX0028",
+   "x": 247.0,
+   "y": 60.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9685064554214478,
+   "winning_similarity": 0.9685064554214478,
+   "similarities": [
+    0.9606118202209473,
+    0.9685064554214478
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0028.png",
+   "patch_box_input": [
+    227,
+    50,
+    267,
+    70
+   ],
+   "x_px": 247.0,
+   "y_px": 60.0
+  },
+  {
+   "point_id": "LX0029",
+   "x": 156.0,
+   "y": 61.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9796374440193176,
+   "winning_similarity": 0.9796374440193176,
+   "similarities": [
+    0.9575295448303223,
+    0.9796374440193176
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0029.png",
+   "patch_box_input": [
+    136,
+    51,
+    176,
+    71
+   ],
+   "x_px": 156.0,
+   "y_px": 61.0
+  },
+  {
+   "point_id": "LX0030",
+   "x": 86.0,
+   "y": 71.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8530149459838867,
+   "winning_similarity": 0.8530149459838867,
+   "similarities": [
+    0.8530149459838867,
+    0.7866778373718262
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0030.png",
+   "patch_box_input": [
+    66,
+    61,
+    106,
+    81
+   ],
+   "x_px": 86.0,
+   "y_px": 71.0
+  },
+  {
+   "point_id": "LX0031",
+   "x": 176.0,
+   "y": 61.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.944875955581665,
+   "winning_similarity": 0.944875955581665,
+   "similarities": [
+    0.8748799562454224,
+    0.944875955581665
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0031.png",
+   "patch_box_input": [
+    156,
+    51,
+    196,
+    71
+   ],
+   "x_px": 176.0,
+   "y_px": 61.0
+  },
+  {
+   "point_id": "LX0032",
+   "x": 196.0,
+   "y": 58.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7552101612091064,
+   "winning_similarity": 0.7552101612091064,
+   "similarities": [
+    0.6813662052154541,
+    0.7552101612091064
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0032.png",
+   "patch_box_input": [
+    176,
+    48,
+    216,
+    68
+   ],
+   "x_px": 196.0,
+   "y_px": 58.0
+  },
+  {
+   "point_id": "LX0033",
+   "x": 63.0,
+   "y": 83.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9412729144096375,
+   "winning_similarity": 0.9412729144096375,
+   "similarities": [
+    0.9119827747344971,
+    0.9412729144096375
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0033.png",
+   "patch_box_input": [
+    43,
+    73,
+    83,
+    93
+   ],
+   "x_px": 63.0,
+   "y_px": 83.0
+  },
+  {
+   "point_id": "LX0034",
+   "x": 123.0,
+   "y": 79.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.971738874912262,
+   "winning_similarity": 0.971738874912262,
+   "similarities": [
+    0.9206178188323975,
+    0.971738874912262
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0034.png",
+   "patch_box_input": [
+    103,
+    69,
+    143,
+    89
+   ],
+   "x_px": 123.0,
+   "y_px": 79.0
+  },
+  {
+   "point_id": "LX0035",
+   "x": 205.0,
+   "y": 58.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9415332078933716,
+   "winning_similarity": 0.9415332078933716,
+   "similarities": [
+    0.882537841796875,
+    0.9415332078933716
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0035.png",
+   "patch_box_input": [
+    185,
+    48,
+    225,
+    68
+   ],
+   "x_px": 205.0,
+   "y_px": 58.0
+  },
+  {
+   "point_id": "LX0036",
+   "x": 225.0,
+   "y": 52.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7977145314216614,
+   "winning_similarity": 0.7977145314216614,
+   "similarities": [
+    0.7832000255584717,
+    0.7977145314216614
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0036.png",
+   "patch_box_input": [
+    205,
+    42,
+    245,
+    62
+   ],
+   "x_px": 225.0,
+   "y_px": 52.0
+  },
+  {
+   "point_id": "LX0037",
+   "x": 125.0,
+   "y": 73.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8103455305099487,
+   "winning_similarity": 0.8103455305099487,
+   "similarities": [
+    0.8103455305099487,
+    0.7303804755210876
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0037.png",
+   "patch_box_input": [
+    105,
+    63,
+    145,
+    83
+   ],
+   "x_px": 125.0,
+   "y_px": 73.0
+  },
+  {
+   "point_id": "LX0038",
+   "x": 93.0,
+   "y": 97.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9544405937194824,
+   "winning_similarity": 0.9544405937194824,
+   "similarities": [
+    0.9308812022209167,
+    0.9544405937194824
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0038.png",
+   "patch_box_input": [
+    73,
+    87,
+    113,
+    107
+   ],
+   "x_px": 93.0,
+   "y_px": 97.0
+  },
+  {
+   "point_id": "LX0039",
+   "x": 82.0,
+   "y": 73.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8404756784439087,
+   "winning_similarity": 0.8404756784439087,
+   "similarities": [
+    0.8404756784439087,
+    0.7831189632415771
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0039.png",
+   "patch_box_input": [
+    62,
+    63,
+    102,
+    83
+   ],
+   "x_px": 82.0,
+   "y_px": 73.0
+  },
+  {
+   "point_id": "LX0040",
+   "x": 97.0,
+   "y": 93.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9654950499534607,
+   "winning_similarity": 0.9654950499534607,
+   "similarities": [
+    0.9308423399925232,
+    0.9654950499534607
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0040.png",
+   "patch_box_input": [
+    77,
+    83,
+    117,
+    103
+   ],
+   "x_px": 97.0,
+   "y_px": 93.0
+  },
+  {
+   "point_id": "LX0041",
+   "x": 188.0,
+   "y": 54.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7989180684089661,
+   "winning_similarity": 0.7989180684089661,
+   "similarities": [
+    0.7343332767486572,
+    0.7989180684089661
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0041.png",
+   "patch_box_input": [
+    168,
+    44,
+    208,
+    64
+   ],
+   "x_px": 188.0,
+   "y_px": 54.0
+  },
+  {
+   "point_id": "LX0042",
+   "x": 248.0,
+   "y": 54.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9490100145339966,
+   "winning_similarity": 0.9490100145339966,
+   "similarities": [
+    0.8942919969558716,
+    0.9490100145339966
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0042.png",
+   "patch_box_input": [
+    228,
+    44,
+    268,
+    64
+   ],
+   "x_px": 248.0,
+   "y_px": 54.0
+  },
+  {
+   "point_id": "LX0043",
+   "x": 94.0,
+   "y": 70.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8705415725708008,
+   "winning_similarity": 0.8705415725708008,
+   "similarities": [
+    0.8661726117134094,
+    0.8705415725708008
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0043.png",
+   "patch_box_input": [
+    74,
+    60,
+    114,
+    80
+   ],
+   "x_px": 94.0,
+   "y_px": 70.0
+  },
+  {
+   "point_id": "LX0044",
+   "x": 218.0,
+   "y": 60.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9489041566848755,
+   "winning_similarity": 0.9489041566848755,
+   "similarities": [
+    0.9482371211051941,
+    0.9489041566848755
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0044.png",
+   "patch_box_input": [
+    198,
+    50,
+    238,
+    70
+   ],
+   "x_px": 218.0,
+   "y_px": 60.0
+  },
+  {
+   "point_id": "LX0045",
+   "x": 122.0,
+   "y": 80.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9325570464134216,
+   "winning_similarity": 0.9325570464134216,
+   "similarities": [
+    0.9009444117546082,
+    0.9325570464134216
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0045.png",
+   "patch_box_input": [
+    102,
+    70,
+    142,
+    90
+   ],
+   "x_px": 122.0,
+   "y_px": 80.0
+  },
+  {
+   "point_id": "LX0046",
+   "x": 185.0,
+   "y": 63.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9564005136489868,
+   "winning_similarity": 0.9564005136489868,
+   "similarities": [
+    0.9564005136489868,
+    0.9521247148513794
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0046.png",
+   "patch_box_input": [
+    165,
+    53,
+    205,
+    73
+   ],
+   "x_px": 185.0,
+   "y_px": 63.0
+  },
+  {
+   "point_id": "LX0047",
+   "x": 154.0,
+   "y": 54.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.94700026512146,
+   "winning_similarity": 0.94700026512146,
+   "similarities": [
+    0.904720664024353,
+    0.94700026512146
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0047.png",
+   "patch_box_input": [
+    134,
+    44,
+    174,
+    64
+   ],
+   "x_px": 154.0,
+   "y_px": 54.0
+  },
+  {
+   "point_id": "LX0048",
+   "x": 155.0,
+   "y": 62.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9566367268562317,
+   "winning_similarity": 0.9566367268562317,
+   "similarities": [
+    0.9415362477302551,
+    0.9566367268562317
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0048.png",
+   "patch_box_input": [
+    135,
+    52,
+    175,
+    72
+   ],
+   "x_px": 155.0,
+   "y_px": 62.0
+  },
+  {
+   "point_id": "LX0049",
+   "x": 60.0,
+   "y": 91.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7847349643707275,
+   "winning_similarity": 0.7847349643707275,
+   "similarities": [
+    0.7847349643707275,
+    0.6604927778244019
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0049.png",
+   "patch_box_input": [
+    40,
+    81,
+    80,
+    101
+   ],
+   "x_px": 60.0,
+   "y_px": 91.0
+  },
+  {
+   "point_id": "LX0050",
+   "x": 218.0,
+   "y": 53.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9156797528266907,
+   "winning_similarity": 0.9156797528266907,
+   "similarities": [
+    0.867276668548584,
+    0.9156797528266907
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0050.png",
+   "patch_box_input": [
+    198,
+    43,
+    238,
+    63
+   ],
+   "x_px": 218.0,
+   "y_px": 53.0
+  },
+  {
+   "point_id": "LX0051",
+   "x": 114.0,
+   "y": 65.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8843186497688293,
+   "winning_similarity": 0.8843186497688293,
+   "similarities": [
+    0.8331857919692993,
+    0.8843186497688293
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0051.png",
+   "patch_box_input": [
+    94,
+    55,
+    134,
+    75
+   ],
+   "x_px": 114.0,
+   "y_px": 65.0
+  },
+  {
+   "point_id": "LX0052",
+   "x": 123.0,
+   "y": 62.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.929351806640625,
+   "winning_similarity": 0.929351806640625,
+   "similarities": [
+    0.8717659711837769,
+    0.929351806640625
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0052.png",
+   "patch_box_input": [
+    103,
+    52,
+    143,
+    72
+   ],
+   "x_px": 123.0,
+   "y_px": 62.0
+  },
+  {
+   "point_id": "LX0053",
+   "x": 242.0,
+   "y": 60.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9856476783752441,
+   "winning_similarity": 0.9856476783752441,
+   "similarities": [
+    0.9708389639854431,
+    0.9856476783752441
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0053.png",
+   "patch_box_input": [
+    222,
+    50,
+    262,
+    70
+   ],
+   "x_px": 242.0,
+   "y_px": 60.0
+  },
+  {
+   "point_id": "LX0054",
+   "x": 62.0,
+   "y": 79.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8797352313995361,
+   "winning_similarity": 0.8797352313995361,
+   "similarities": [
+    0.7901141047477722,
+    0.8797352313995361
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0054.png",
+   "patch_box_input": [
+    42,
+    69,
+    82,
+    89
+   ],
+   "x_px": 62.0,
+   "y_px": 79.0
+  },
+  {
+   "point_id": "LX0055",
+   "x": 185.0,
+   "y": 58.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9663897752761841,
+   "winning_similarity": 0.9663897752761841,
+   "similarities": [
+    0.8985860347747803,
+    0.9663897752761841
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0055.png",
+   "patch_box_input": [
+    165,
+    48,
+    205,
+    68
+   ],
+   "x_px": 185.0,
+   "y_px": 58.0
+  },
+  {
+   "point_id": "LX0056",
+   "x": 128.0,
+   "y": 72.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9114385843276978,
+   "winning_similarity": 0.9114385843276978,
+   "similarities": [
+    0.9114385843276978,
+    0.8995152711868286
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0056.png",
+   "patch_box_input": [
+    108,
+    62,
+    148,
+    82
+   ],
+   "x_px": 128.0,
+   "y_px": 72.0
+  },
+  {
+   "point_id": "LX0057",
+   "x": 181.0,
+   "y": 59.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9771608114242554,
+   "winning_similarity": 0.9771608114242554,
+   "similarities": [
+    0.9403843283653259,
+    0.9771608114242554
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0057.png",
+   "patch_box_input": [
+    161,
+    49,
+    201,
+    69
+   ],
+   "x_px": 181.0,
+   "y_px": 59.0
+  },
+  {
+   "point_id": "LX0058",
+   "x": 157.0,
+   "y": 58.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9330421686172485,
+   "winning_similarity": 0.9330421686172485,
+   "similarities": [
+    0.8861160278320312,
+    0.9330421686172485
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0058.png",
+   "patch_box_input": [
+    137,
+    48,
+    177,
+    68
+   ],
+   "x_px": 157.0,
+   "y_px": 58.0
+  },
+  {
+   "point_id": "LX0059",
+   "x": 77.0,
+   "y": 89.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8378366231918335,
+   "winning_similarity": 0.8378366231918335,
+   "similarities": [
+    0.8378366231918335,
+    0.7804253697395325
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0059.png",
+   "patch_box_input": [
+    57,
+    79,
+    97,
+    99
+   ],
+   "x_px": 77.0,
+   "y_px": 89.0
+  },
+  {
+   "point_id": "LX0060",
+   "x": 95.0,
+   "y": 90.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9367910623550415,
+   "winning_similarity": 0.9367910623550415,
+   "similarities": [
+    0.8737266063690186,
+    0.9367910623550415
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0060.png",
+   "patch_box_input": [
+    75,
+    80,
+    115,
+    100
+   ],
+   "x_px": 95.0,
+   "y_px": 90.0
+  },
+  {
+   "point_id": "LX0061",
+   "x": 93.0,
+   "y": 71.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8573288917541504,
+   "winning_similarity": 0.8573288917541504,
+   "similarities": [
+    0.8573288917541504,
+    0.8302552103996277
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0061.png",
+   "patch_box_input": [
+    73,
+    61,
+    113,
+    81
+   ],
+   "x_px": 93.0,
+   "y_px": 71.0
+  },
+  {
+   "point_id": "LX0062",
+   "x": 61.0,
+   "y": 91.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8212801218032837,
+   "winning_similarity": 0.8212801218032837,
+   "similarities": [
+    0.8191405534744263,
+    0.8212801218032837
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0062.png",
+   "patch_box_input": [
+    41,
+    81,
+    81,
+    101
+   ],
+   "x_px": 61.0,
+   "y_px": 91.0
+  },
+  {
+   "point_id": "LX0063",
+   "x": 94.0,
+   "y": 95.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9836843013763428,
+   "winning_similarity": 0.9836843013763428,
+   "similarities": [
+    0.9617052674293518,
+    0.9836843013763428
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0063.png",
+   "patch_box_input": [
+    74,
+    85,
+    114,
+    105
+   ],
+   "x_px": 94.0,
+   "y_px": 95.0
+  }
+ ],
+ "unavailable": [],
+ "patches": [
+  {
+   "point_index": 0,
+   "point_id": "LX0000",
+   "box_input": [
+    42,
+    69,
+    82,
+    89
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0000.png"
+  },
+  {
+   "point_index": 1,
+   "point_id": "LX0001",
+   "box_input": [
+    136,
+    51,
+    176,
+    71
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0001.png"
+  },
+  {
+   "point_index": 2,
+   "point_id": "LX0002",
+   "box_input": [
+    135,
+    43,
+    175,
+    63
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0002.png"
+  },
+  {
+   "point_index": 3,
+   "point_id": "LX0003",
+   "box_input": [
+    168,
+    44,
+    208,
+    64
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0003.png"
+  },
+  {
+   "point_index": 4,
+   "point_id": "LX0004",
+   "box_input": [
+    230,
+    42,
+    270,
+    62
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0004.png"
+  },
+  {
+   "point_index": 5,
+   "point_id": "LX0005",
+   "box_input": [
+    105,
+    63,
+    145,
+    83
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0005.png"
+  },
+  {
+   "point_index": 6,
+   "point_id": "LX0006",
+   "box_input": [
+    230,
+    49,
+    270,
+    69
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0006.png"
+  },
+  {
+   "point_index": 7,
+   "point_id": "LX0007",
+   "box_input": [
+    167,
+    48,
+    207,
+    68
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0007.png"
+  },
+  {
+   "point_index": 8,
+   "point_id": "LX0008",
+   "box_input": [
+    101,
+    59,
+    141,
+    79
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0008.png"
+  },
+  {
+   "point_index": 9,
+   "point_id": "LX0009",
+   "box_input": [
+    40,
+    81,
+    80,
+    101
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0009.png"
+  },
+  {
+   "point_index": 10,
+   "point_id": "LX0010",
+   "box_input": [
+    71,
+    56,
+    111,
+    76
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0010.png"
+  },
+  {
+   "point_index": 11,
+   "point_id": "LX0011",
+   "box_input": [
+    198,
+    51,
+    238,
+    71
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0011.png"
+  },
+  {
+   "point_index": 12,
+   "point_id": "LX0012",
+   "box_input": [
+    75,
+    87,
+    115,
+    107
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0012.png"
+  },
+  {
+   "point_index": 13,
+   "point_id": "LX0013",
+   "box_input": [
+    198,
+    42,
+    238,
+    62
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0013.png"
+  },
+  {
+   "point_index": 14,
+   "point_id": "LX0014",
+   "box_input": [
+    73,
+    88,
+    113,
+    108
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0014.png"
+  },
+  {
+   "point_index": 15,
+   "point_id": "LX0015",
+   "box_input": [
+    167,
+    44,
+    207,
+    64
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0015.png"
+  },
+  {
+   "point_index": 16,
+   "point_id": "LX0016",
+   "box_input": [
+    199,
+    49,
+    239,
+    69
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0016.png"
+  },
+  {
+   "point_index": 17,
+   "point_id": "LX0017",
+   "box_input": [
+    107,
+    49,
+    147,
+    69
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0017.png"
+  },
+  {
+   "point_index": 18,
+   "point_id": "LX0018",
+   "box_input": [
+    229,
+    44,
+    269,
+    64
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0018.png"
+  },
+  {
+   "point_index": 19,
+   "point_id": "LX0019",
+   "box_input": [
+    103,
+    63,
+    143,
+    83
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0019.png"
+  },
+  {
+   "point_index": 20,
+   "point_id": "LX0020",
+   "box_input": [
+    135,
+    51,
+    175,
+    71
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0020.png"
+  },
+  {
+   "point_index": 21,
+   "point_id": "LX0022",
+   "box_input": [
+    164,
+    44,
+    204,
+    64
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0022.png"
+  },
+  {
+   "point_index": 22,
+   "point_id": "LX0023",
+   "box_input": [
+    41,
+    82,
+    81,
+    102
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0023.png"
+  },
+  {
+   "point_index": 23,
+   "point_id": "LX0024",
+   "box_input": [
+    167,
+    43,
+    207,
+    63
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0024.png"
+  },
+  {
+   "point_index": 24,
+   "point_id": "LX0025",
+   "box_input": [
+    136,
+    44,
+    176,
+    64
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0025.png"
+  },
+  {
+   "point_index": 25,
+   "point_id": "LX0026",
+   "box_input": [
+    199,
+    47,
+    239,
+    67
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0026.png"
+  },
+  {
+   "point_index": 26,
+   "point_id": "LX0027",
+   "box_input": [
+    69,
+    65,
+    109,
+    85
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0027.png"
+  },
+  {
+   "point_index": 27,
+   "point_id": "LX0028",
+   "box_input": [
+    227,
+    50,
+    267,
+    70
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0028.png"
+  },
+  {
+   "point_index": 28,
+   "point_id": "LX0029",
+   "box_input": [
+    136,
+    51,
+    176,
+    71
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0029.png"
+  },
+  {
+   "point_index": 29,
+   "point_id": "LX0030",
+   "box_input": [
+    66,
+    61,
+    106,
+    81
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0030.png"
+  },
+  {
+   "point_index": 30,
+   "point_id": "LX0031",
+   "box_input": [
+    156,
+    51,
+    196,
+    71
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0031.png"
+  },
+  {
+   "point_index": 31,
+   "point_id": "LX0032",
+   "box_input": [
+    176,
+    48,
+    216,
+    68
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0032.png"
+  },
+  {
+   "point_index": 32,
+   "point_id": "LX0033",
+   "box_input": [
+    43,
+    73,
+    83,
+    93
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0033.png"
+  },
+  {
+   "point_index": 33,
+   "point_id": "LX0034",
+   "box_input": [
+    103,
+    69,
+    143,
+    89
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0034.png"
+  },
+  {
+   "point_index": 34,
+   "point_id": "LX0035",
+   "box_input": [
+    185,
+    48,
+    225,
+    68
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0035.png"
+  },
+  {
+   "point_index": 35,
+   "point_id": "LX0036",
+   "box_input": [
+    205,
+    42,
+    245,
+    62
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0036.png"
+  },
+  {
+   "point_index": 36,
+   "point_id": "LX0037",
+   "box_input": [
+    105,
+    63,
+    145,
+    83
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0037.png"
+  },
+  {
+   "point_index": 37,
+   "point_id": "LX0038",
+   "box_input": [
+    73,
+    87,
+    113,
+    107
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0038.png"
+  },
+  {
+   "point_index": 38,
+   "point_id": "LX0039",
+   "box_input": [
+    62,
+    63,
+    102,
+    83
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0039.png"
+  },
+  {
+   "point_index": 39,
+   "point_id": "LX0040",
+   "box_input": [
+    77,
+    83,
+    117,
+    103
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0040.png"
+  },
+  {
+   "point_index": 40,
+   "point_id": "LX0041",
+   "box_input": [
+    168,
+    44,
+    208,
+    64
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0041.png"
+  },
+  {
+   "point_index": 41,
+   "point_id": "LX0042",
+   "box_input": [
+    228,
+    44,
+    268,
+    64
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0042.png"
+  },
+  {
+   "point_index": 42,
+   "point_id": "LX0043",
+   "box_input": [
+    74,
+    60,
+    114,
+    80
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0043.png"
+  },
+  {
+   "point_index": 43,
+   "point_id": "LX0044",
+   "box_input": [
+    198,
+    50,
+    238,
+    70
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0044.png"
+  },
+  {
+   "point_index": 44,
+   "point_id": "LX0045",
+   "box_input": [
+    102,
+    70,
+    142,
+    90
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0045.png"
+  },
+  {
+   "point_index": 45,
+   "point_id": "LX0046",
+   "box_input": [
+    165,
+    53,
+    205,
+    73
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0046.png"
+  },
+  {
+   "point_index": 46,
+   "point_id": "LX0047",
+   "box_input": [
+    134,
+    44,
+    174,
+    64
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0047.png"
+  },
+  {
+   "point_index": 47,
+   "point_id": "LX0048",
+   "box_input": [
+    135,
+    52,
+    175,
+    72
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0048.png"
+  },
+  {
+   "point_index": 48,
+   "point_id": "LX0049",
+   "box_input": [
+    40,
+    81,
+    80,
+    101
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0049.png"
+  },
+  {
+   "point_index": 49,
+   "point_id": "LX0050",
+   "box_input": [
+    198,
+    43,
+    238,
+    63
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0050.png"
+  },
+  {
+   "point_index": 50,
+   "point_id": "LX0051",
+   "box_input": [
+    94,
+    55,
+    134,
+    75
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0051.png"
+  },
+  {
+   "point_index": 51,
+   "point_id": "LX0052",
+   "box_input": [
+    103,
+    52,
+    143,
+    72
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0052.png"
+  },
+  {
+   "point_index": 52,
+   "point_id": "LX0053",
+   "box_input": [
+    222,
+    50,
+    262,
+    70
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0053.png"
+  },
+  {
+   "point_index": 53,
+   "point_id": "LX0054",
+   "box_input": [
+    42,
+    69,
+    82,
+    89
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0054.png"
+  },
+  {
+   "point_index": 54,
+   "point_id": "LX0055",
+   "box_input": [
+    165,
+    48,
+    205,
+    68
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0055.png"
+  },
+  {
+   "point_index": 55,
+   "point_id": "LX0056",
+   "box_input": [
+    108,
+    62,
+    148,
+    82
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0056.png"
+  },
+  {
+   "point_index": 56,
+   "point_id": "LX0057",
+   "box_input": [
+    161,
+    49,
+    201,
+    69
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0057.png"
+  },
+  {
+   "point_index": 57,
+   "point_id": "LX0058",
+   "box_input": [
+    137,
+    48,
+    177,
+    68
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0058.png"
+  },
+  {
+   "point_index": 58,
+   "point_id": "LX0059",
+   "box_input": [
+    57,
+    79,
+    97,
+    99
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0059.png"
+  },
+  {
+   "point_index": 59,
+   "point_id": "LX0060",
+   "box_input": [
+    75,
+    80,
+    115,
+    100
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0060.png"
+  },
+  {
+   "point_index": 60,
+   "point_id": "LX0061",
+   "box_input": [
+    73,
+    61,
+    113,
+    81
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0061.png"
+  },
+  {
+   "point_index": 61,
+   "point_id": "LX0062",
+   "box_input": [
+    41,
+    81,
+    81,
+    101
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0062.png"
+  },
+  {
+   "point_index": 62,
+   "point_id": "LX0063",
+   "box_input": [
+    74,
+    85,
+    114,
+    105
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/patches/LX0063.png"
+  }
+ ],
+ "similarity_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__naxitamab_1_1_0__p03__v9/lineex_grouped/similarity.npy",
+ "similarity_row_point_ids": [
+  "LX0000",
+  "LX0001",
+  "LX0002",
+  "LX0003",
+  "LX0004",
+  "LX0005",
+  "LX0006",
+  "LX0007",
+  "LX0008",
+  "LX0009",
+  "LX0010",
+  "LX0011",
+  "LX0012",
+  "LX0013",
+  "LX0014",
+  "LX0015",
+  "LX0016",
+  "LX0017",
+  "LX0018",
+  "LX0019",
+  "LX0020",
+  "LX0022",
+  "LX0023",
+  "LX0024",
+  "LX0025",
+  "LX0026",
+  "LX0027",
+  "LX0028",
+  "LX0029",
+  "LX0030",
+  "LX0031",
+  "LX0032",
+  "LX0033",
+  "LX0034",
+  "LX0035",
+  "LX0036",
+  "LX0037",
+  "LX0038",
+  "LX0039",
+  "LX0040",
+  "LX0041",
+  "LX0042",
+  "LX0043",
+  "LX0044",
+  "LX0045",
+  "LX0046",
+  "LX0047",
+  "LX0048",
+  "LX0049",
+  "LX0050",
+  "LX0051",
+  "LX0052",
+  "LX0053",
+  "LX0054",
+  "LX0055",
+  "LX0056",
+  "LX0057",
+  "LX0058",
+  "LX0059",
+  "LX0060",
+  "LX0061",
+  "LX0062",
+  "LX0063"
+ ],
+ "similarity_column_series_ids": [
+  "s01",
+  "s02"
+ ],
+ "timing": {
+  "shared_input_verification_seconds": 0.0015317000215873122,
+  "legend_crop_seconds": 0.0020560999400913715,
+  "network_seconds": 0.012256500078365207,
+  "head_postprocess_and_export_seconds": 0.004443999961949885,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.056913299951702356,
+  "learned_matching_seconds": 0.2567500000586733,
+  "total_seconds": 0.333524200017564,
+  "method_total_excluding_shared_verification_seconds": 0.333524200017564,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "patch_matching_timing": {
+  "patch_extract_and_export_seconds": 0.056913299951702356,
+  "learned_matching_seconds": 0.2567500000586733,
+  "total_seconds": 0.31476760003715754
+ },
+ "timing_breakdown": {
+  "shared_input_verification_seconds": 0.0015317000215873122,
+  "legend_crop_seconds": 0.0020560999400913715,
+  "network_seconds": 0.012256500078365207,
+  "head_postprocess_and_export_seconds": 0.004443999961949885,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.056913299951702356,
+  "learned_matching_seconds": 0.2567500000586733,
+  "total_seconds": 0.333524200017564,
+  "method_total_excluding_shared_verification_seconds": 0.333524200017564,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "raw_heads_result_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/raw_heads/lineex/er__naxitamab_1_1_0__p03__v9.json",
+ "raw_points": [
+  {
+   "point_id": "LX0000",
+   "x": 62.0,
+   "y": 79.0,
+   "detection_score": null,
+   "x_px": 62.0,
+   "y_px": 79.0
+  },
+  {
+   "point_id": "LX0001",
+   "x": 156.0,
+   "y": 61.0,
+   "detection_score": null,
+   "x_px": 156.0,
+   "y_px": 61.0
+  },
+  {
+   "point_id": "LX0002",
+   "x": 155.0,
+   "y": 53.0,
+   "detection_score": null,
+   "x_px": 155.0,
+   "y_px": 53.0
+  },
+  {
+   "point_id": "LX0003",
+   "x": 188.0,
+   "y": 54.0,
+   "detection_score": null,
+   "x_px": 188.0,
+   "y_px": 54.0
+  },
+  {
+   "point_id": "LX0004",
+   "x": 250.0,
+   "y": 52.0,
+   "detection_score": null,
+   "x_px": 250.0,
+   "y_px": 52.0
+  },
+  {
+   "point_id": "LX0005",
+   "x": 125.0,
+   "y": 73.0,
+   "detection_score": null,
+   "x_px": 125.0,
+   "y_px": 73.0
+  },
+  {
+   "point_id": "LX0006",
+   "x": 250.0,
+   "y": 59.0,
+   "detection_score": null,
+   "x_px": 250.0,
+   "y_px": 59.0
+  },
+  {
+   "point_id": "LX0007",
+   "x": 187.0,
+   "y": 58.0,
+   "detection_score": null,
+   "x_px": 187.0,
+   "y_px": 58.0
+  },
+  {
+   "point_id": "LX0008",
+   "x": 121.0,
+   "y": 69.0,
+   "detection_score": null,
+   "x_px": 121.0,
+   "y_px": 69.0
+  },
+  {
+   "point_id": "LX0009",
+   "x": 60.0,
+   "y": 91.0,
+   "detection_score": null,
+   "x_px": 60.0,
+   "y_px": 91.0
+  },
+  {
+   "point_id": "LX0010",
+   "x": 91.0,
+   "y": 66.0,
+   "detection_score": null,
+   "x_px": 91.0,
+   "y_px": 66.0
+  },
+  {
+   "point_id": "LX0011",
+   "x": 218.0,
+   "y": 61.0,
+   "detection_score": null,
+   "x_px": 218.0,
+   "y_px": 61.0
+  },
+  {
+   "point_id": "LX0012",
+   "x": 95.0,
+   "y": 97.0,
+   "detection_score": null,
+   "x_px": 95.0,
+   "y_px": 97.0
+  },
+  {
+   "point_id": "LX0013",
+   "x": 218.0,
+   "y": 52.0,
+   "detection_score": null,
+   "x_px": 218.0,
+   "y_px": 52.0
+  },
+  {
+   "point_id": "LX0014",
+   "x": 93.0,
+   "y": 98.0,
+   "detection_score": null,
+   "x_px": 93.0,
+   "y_px": 98.0
+  },
+  {
+   "point_id": "LX0015",
+   "x": 187.0,
+   "y": 54.0,
+   "detection_score": null,
+   "x_px": 187.0,
+   "y_px": 54.0
+  },
+  {
+   "point_id": "LX0016",
+   "x": 219.0,
+   "y": 59.0,
+   "detection_score": null,
+   "x_px": 219.0,
+   "y_px": 59.0
+  },
+  {
+   "point_id": "LX0017",
+   "x": 127.0,
+   "y": 59.0,
+   "detection_score": null,
+   "x_px": 127.0,
+   "y_px": 59.0
+  },
+  {
+   "point_id": "LX0018",
+   "x": 249.0,
+   "y": 54.0,
+   "detection_score": null,
+   "x_px": 249.0,
+   "y_px": 54.0
+  },
+  {
+   "point_id": "LX0019",
+   "x": 123.0,
+   "y": 73.0,
+   "detection_score": null,
+   "x_px": 123.0,
+   "y_px": 73.0
+  },
+  {
+   "point_id": "LX0020",
+   "x": 155.0,
+   "y": 61.0,
+   "detection_score": null,
+   "x_px": 155.0,
+   "y_px": 61.0
+  },
+  {
+   "point_id": "LX0022",
+   "x": 184.0,
+   "y": 54.0,
+   "detection_score": null,
+   "x_px": 184.0,
+   "y_px": 54.0
+  },
+  {
+   "point_id": "LX0023",
+   "x": 61.0,
+   "y": 92.0,
+   "detection_score": null,
+   "x_px": 61.0,
+   "y_px": 92.0
+  },
+  {
+   "point_id": "LX0024",
+   "x": 187.0,
+   "y": 53.0,
+   "detection_score": null,
+   "x_px": 187.0,
+   "y_px": 53.0
+  },
+  {
+   "point_id": "LX0025",
+   "x": 156.0,
+   "y": 54.0,
+   "detection_score": null,
+   "x_px": 156.0,
+   "y_px": 54.0
+  },
+  {
+   "point_id": "LX0026",
+   "x": 219.0,
+   "y": 57.0,
+   "detection_score": null,
+   "x_px": 219.0,
+   "y_px": 57.0
+  },
+  {
+   "point_id": "LX0027",
+   "x": 89.0,
+   "y": 75.0,
+   "detection_score": null,
+   "x_px": 89.0,
+   "y_px": 75.0
+  },
+  {
+   "point_id": "LX0028",
+   "x": 247.0,
+   "y": 60.0,
+   "detection_score": null,
+   "x_px": 247.0,
+   "y_px": 60.0
+  },
+  {
+   "point_id": "LX0029",
+   "x": 156.0,
+   "y": 61.0,
+   "detection_score": null,
+   "x_px": 156.0,
+   "y_px": 61.0
+  },
+  {
+   "point_id": "LX0030",
+   "x": 86.0,
+   "y": 71.0,
+   "detection_score": null,
+   "x_px": 86.0,
+   "y_px": 71.0
+  },
+  {
+   "point_id": "LX0031",
+   "x": 176.0,
+   "y": 61.0,
+   "detection_score": null,
+   "x_px": 176.0,
+   "y_px": 61.0
+  },
+  {
+   "point_id": "LX0032",
+   "x": 196.0,
+   "y": 58.0,
+   "detection_score": null,
+   "x_px": 196.0,
+   "y_px": 58.0
+  },
+  {
+   "point_id": "LX0033",
+   "x": 63.0,
+   "y": 83.0,
+   "detection_score": null,
+   "x_px": 63.0,
+   "y_px": 83.0
+  },
+  {
+   "point_id": "LX0034",
+   "x": 123.0,
+   "y": 79.0,
+   "detection_score": null,
+   "x_px": 123.0,
+   "y_px": 79.0
+  },
+  {
+   "point_id": "LX0035",
+   "x": 205.0,
+   "y": 58.0,
+   "detection_score": null,
+   "x_px": 205.0,
+   "y_px": 58.0
+  },
+  {
+   "point_id": "LX0036",
+   "x": 225.0,
+   "y": 52.0,
+   "detection_score": null,
+   "x_px": 225.0,
+   "y_px": 52.0
+  },
+  {
+   "point_id": "LX0037",
+   "x": 125.0,
+   "y": 73.0,
+   "detection_score": null,
+   "x_px": 125.0,
+   "y_px": 73.0
+  },
+  {
+   "point_id": "LX0038",
+   "x": 93.0,
+   "y": 97.0,
+   "detection_score": null,
+   "x_px": 93.0,
+   "y_px": 97.0
+  },
+  {
+   "point_id": "LX0039",
+   "x": 82.0,
+   "y": 73.0,
+   "detection_score": null,
+   "x_px": 82.0,
+   "y_px": 73.0
+  },
+  {
+   "point_id": "LX0040",
+   "x": 97.0,
+   "y": 93.0,
+   "detection_score": null,
+   "x_px": 97.0,
+   "y_px": 93.0
+  },
+  {
+   "point_id": "LX0041",
+   "x": 188.0,
+   "y": 54.0,
+   "detection_score": null,
+   "x_px": 188.0,
+   "y_px": 54.0
+  },
+  {
+   "point_id": "LX0042",
+   "x": 248.0,
+   "y": 54.0,
+   "detection_score": null,
+   "x_px": 248.0,
+   "y_px": 54.0
+  },
+  {
+   "point_id": "LX0043",
+   "x": 94.0,
+   "y": 70.0,
+   "detection_score": null,
+   "x_px": 94.0,
+   "y_px": 70.0
+  },
+  {
+   "point_id": "LX0044",
+   "x": 218.0,
+   "y": 60.0,
+   "detection_score": null,
+   "x_px": 218.0,
+   "y_px": 60.0
+  },
+  {
+   "point_id": "LX0045",
+   "x": 122.0,
+   "y": 80.0,
+   "detection_score": null,
+   "x_px": 122.0,
+   "y_px": 80.0
+  },
+  {
+   "point_id": "LX0046",
+   "x": 185.0,
+   "y": 63.0,
+   "detection_score": null,
+   "x_px": 185.0,
+   "y_px": 63.0
+  },
+  {
+   "point_id": "LX0047",
+   "x": 154.0,
+   "y": 54.0,
+   "detection_score": null,
+   "x_px": 154.0,
+   "y_px": 54.0
+  },
+  {
+   "point_id": "LX0048",
+   "x": 155.0,
+   "y": 62.0,
+   "detection_score": null,
+   "x_px": 155.0,
+   "y_px": 62.0
+  },
+  {
+   "point_id": "LX0049",
+   "x": 60.0,
+   "y": 91.0,
+   "detection_score": null,
+   "x_px": 60.0,
+   "y_px": 91.0
+  },
+  {
+   "point_id": "LX0050",
+   "x": 218.0,
+   "y": 53.0,
+   "detection_score": null,
+   "x_px": 218.0,
+   "y_px": 53.0
+  },
+  {
+   "point_id": "LX0051",
+   "x": 114.0,
+   "y": 65.0,
+   "detection_score": null,
+   "x_px": 114.0,
+   "y_px": 65.0
+  },
+  {
+   "point_id": "LX0052",
+   "x": 123.0,
+   "y": 62.0,
+   "detection_score": null,
+   "x_px": 123.0,
+   "y_px": 62.0
+  },
+  {
+   "point_id": "LX0053",
+   "x": 242.0,
+   "y": 60.0,
+   "detection_score": null,
+   "x_px": 242.0,
+   "y_px": 60.0
+  },
+  {
+   "point_id": "LX0054",
+   "x": 62.0,
+   "y": 79.0,
+   "detection_score": null,
+   "x_px": 62.0,
+   "y_px": 79.0
+  },
+  {
+   "point_id": "LX0055",
+   "x": 185.0,
+   "y": 58.0,
+   "detection_score": null,
+   "x_px": 185.0,
+   "y_px": 58.0
+  },
+  {
+   "point_id": "LX0056",
+   "x": 128.0,
+   "y": 72.0,
+   "detection_score": null,
+   "x_px": 128.0,
+   "y_px": 72.0
+  },
+  {
+   "point_id": "LX0057",
+   "x": 181.0,
+   "y": 59.0,
+   "detection_score": null,
+   "x_px": 181.0,
+   "y_px": 59.0
+  },
+  {
+   "point_id": "LX0058",
+   "x": 157.0,
+   "y": 58.0,
+   "detection_score": null,
+   "x_px": 157.0,
+   "y_px": 58.0
+  },
+  {
+   "point_id": "LX0059",
+   "x": 77.0,
+   "y": 89.0,
+   "detection_score": null,
+   "x_px": 77.0,
+   "y_px": 89.0
+  },
+  {
+   "point_id": "LX0060",
+   "x": 95.0,
+   "y": 90.0,
+   "detection_score": null,
+   "x_px": 95.0,
+   "y_px": 90.0
+  },
+  {
+   "point_id": "LX0061",
+   "x": 93.0,
+   "y": 71.0,
+   "detection_score": null,
+   "x_px": 93.0,
+   "y_px": 71.0
+  },
+  {
+   "point_id": "LX0062",
+   "x": 61.0,
+   "y": 91.0,
+   "detection_score": null,
+   "x_px": 61.0,
+   "y_px": 91.0
+  },
+  {
+   "point_id": "LX0063",
+   "x": 94.0,
+   "y": 95.0,
+   "detection_score": null,
+   "x_px": 94.0,
+   "y_px": 95.0
+  }
+ ],
+ "raw_queries": [
+  {
+   "query_id": 0,
+   "x": 62,
+   "y": 79,
+   "score": null,
+   "normalized_x": 0.22384874522686005,
+   "normalized_y": 0.5135317444801331,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 1,
+   "x": 156,
+   "y": 61,
+   "score": null,
+   "normalized_x": 0.5605307221412659,
+   "normalized_y": 0.39523938298225403,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 2,
+   "x": 155,
+   "y": 53,
+   "score": null,
+   "normalized_x": 0.5584535002708435,
+   "normalized_y": 0.3468437194824219,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 3,
+   "x": 188,
+   "y": 54,
+   "score": null,
+   "normalized_x": 0.6749588251113892,
+   "normalized_y": 0.34863126277923584,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 4,
+   "x": 250,
+   "y": 52,
+   "score": null,
+   "normalized_x": 0.8962506055831909,
+   "normalized_y": 0.34002232551574707,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 5,
+   "x": 125,
+   "y": 73,
+   "score": null,
+   "normalized_x": 0.45098549127578735,
+   "normalized_y": 0.47293728590011597,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 6,
+   "x": 250,
+   "y": 59,
+   "score": null,
+   "normalized_x": 0.8981558680534363,
+   "normalized_y": 0.386542409658432,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 7,
+   "x": 187,
+   "y": 58,
+   "score": null,
+   "normalized_x": 0.6735386848449707,
+   "normalized_y": 0.37620943784713745,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 8,
+   "x": 121,
+   "y": 69,
+   "score": null,
+   "normalized_x": 0.4372289478778839,
+   "normalized_y": 0.4500572383403778,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 9,
+   "x": 60,
+   "y": 91,
+   "score": null,
+   "normalized_x": 0.2182997465133667,
+   "normalized_y": 0.5927491188049316,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 10,
+   "x": 91,
+   "y": 66,
+   "score": null,
+   "normalized_x": 0.3290819525718689,
+   "normalized_y": 0.4262803792953491,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 11,
+   "x": 218,
+   "y": 61,
+   "score": null,
+   "normalized_x": 0.7840155363082886,
+   "normalized_y": 0.3964402973651886,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 12,
+   "x": 95,
+   "y": 97,
+   "score": null,
+   "normalized_x": 0.34286177158355713,
+   "normalized_y": 0.6296823620796204,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 13,
+   "x": 218,
+   "y": 52,
+   "score": null,
+   "normalized_x": 0.7828233242034912,
+   "normalized_y": 0.33677616715431213,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 14,
+   "x": 93,
+   "y": 98,
+   "score": null,
+   "normalized_x": 0.3341825008392334,
+   "normalized_y": 0.633038341999054,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 15,
+   "x": 187,
+   "y": 54,
+   "score": null,
+   "normalized_x": 0.6719995737075806,
+   "normalized_y": 0.3488827347755432,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 16,
+   "x": 219,
+   "y": 59,
+   "score": null,
+   "normalized_x": 0.7873460054397583,
+   "normalized_y": 0.3831452429294586,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 17,
+   "x": 127,
+   "y": 59,
+   "score": null,
+   "normalized_x": 0.4554287791252136,
+   "normalized_y": 0.3809080421924591,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 18,
+   "x": 249,
+   "y": 54,
+   "score": null,
+   "normalized_x": 0.8931415677070618,
+   "normalized_y": 0.34928780794143677,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 19,
+   "x": 123,
+   "y": 73,
+   "score": null,
+   "normalized_x": 0.4429083466529846,
+   "normalized_y": 0.47496286034584045,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 20,
+   "x": 155,
+   "y": 61,
+   "score": null,
+   "normalized_x": 0.5590724349021912,
+   "normalized_y": 0.3986258804798126,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 21,
+   "x": 70,
+   "y": 58,
+   "score": null,
+   "normalized_x": 0.2532423436641693,
+   "normalized_y": 0.37910518050193787,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": true,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 22,
+   "x": 184,
+   "y": 54,
+   "score": null,
+   "normalized_x": 0.6601696014404297,
+   "normalized_y": 0.3518179953098297,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 23,
+   "x": 61,
+   "y": 92,
+   "score": null,
+   "normalized_x": 0.22201402485370636,
+   "normalized_y": 0.5973116755485535,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 24,
+   "x": 187,
+   "y": 53,
+   "score": null,
+   "normalized_x": 0.6725199818611145,
+   "normalized_y": 0.3468499779701233,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 25,
+   "x": 156,
+   "y": 54,
+   "score": null,
+   "normalized_x": 0.562032163143158,
+   "normalized_y": 0.34888264536857605,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 26,
+   "x": 219,
+   "y": 57,
+   "score": null,
+   "normalized_x": 0.7855061292648315,
+   "normalized_y": 0.3727883994579315,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 27,
+   "x": 89,
+   "y": 75,
+   "score": null,
+   "normalized_x": 0.32067856192588806,
+   "normalized_y": 0.48507165908813477,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 28,
+   "x": 247,
+   "y": 60,
+   "score": null,
+   "normalized_x": 0.8886100053787231,
+   "normalized_y": 0.39071568846702576,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 29,
+   "x": 156,
+   "y": 61,
+   "score": null,
+   "normalized_x": 0.560368001461029,
+   "normalized_y": 0.3972246050834656,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 30,
+   "x": 86,
+   "y": 71,
+   "score": null,
+   "normalized_x": 0.3084907531738281,
+   "normalized_y": 0.46110615134239197,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 31,
+   "x": 176,
+   "y": 61,
+   "score": null,
+   "normalized_x": 0.6326925158500671,
+   "normalized_y": 0.39790698885917664,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 32,
+   "x": 196,
+   "y": 58,
+   "score": null,
+   "normalized_x": 0.7051212787628174,
+   "normalized_y": 0.376069575548172,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 33,
+   "x": 63,
+   "y": 83,
+   "score": null,
+   "normalized_x": 0.2258664071559906,
+   "normalized_y": 0.5394948720932007,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 34,
+   "x": 123,
+   "y": 79,
+   "score": null,
+   "normalized_x": 0.44280192255973816,
+   "normalized_y": 0.5136924982070923,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 35,
+   "x": 205,
+   "y": 58,
+   "score": null,
+   "normalized_x": 0.7355019450187683,
+   "normalized_y": 0.3797614872455597,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 36,
+   "x": 225,
+   "y": 52,
+   "score": null,
+   "normalized_x": 0.809981107711792,
+   "normalized_y": 0.3413487374782562,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 37,
+   "x": 125,
+   "y": 73,
+   "score": null,
+   "normalized_x": 0.45075687766075134,
+   "normalized_y": 0.4756655693054199,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 38,
+   "x": 93,
+   "y": 97,
+   "score": null,
+   "normalized_x": 0.3344937860965729,
+   "normalized_y": 0.6287720799446106,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 39,
+   "x": 82,
+   "y": 73,
+   "score": null,
+   "normalized_x": 0.29566535353660583,
+   "normalized_y": 0.4741624891757965,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 40,
+   "x": 97,
+   "y": 93,
+   "score": null,
+   "normalized_x": 0.3501352071762085,
+   "normalized_y": 0.6029216647148132,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 41,
+   "x": 188,
+   "y": 54,
+   "score": null,
+   "normalized_x": 0.6747307777404785,
+   "normalized_y": 0.35169368982315063,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 42,
+   "x": 248,
+   "y": 54,
+   "score": null,
+   "normalized_x": 0.8890714645385742,
+   "normalized_y": 0.3531549274921417,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 43,
+   "x": 94,
+   "y": 70,
+   "score": null,
+   "normalized_x": 0.3390035927295685,
+   "normalized_y": 0.4548253118991852,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 44,
+   "x": 218,
+   "y": 60,
+   "score": null,
+   "normalized_x": 0.7834174036979675,
+   "normalized_y": 0.3909551799297333,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 45,
+   "x": 122,
+   "y": 80,
+   "score": null,
+   "normalized_x": 0.4403066039085388,
+   "normalized_y": 0.5212054252624512,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 46,
+   "x": 185,
+   "y": 63,
+   "score": null,
+   "normalized_x": 0.6666287779808044,
+   "normalized_y": 0.40870746970176697,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 47,
+   "x": 154,
+   "y": 54,
+   "score": null,
+   "normalized_x": 0.5554527640342712,
+   "normalized_y": 0.3484678566455841,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 48,
+   "x": 155,
+   "y": 62,
+   "score": null,
+   "normalized_x": 0.5584928393363953,
+   "normalized_y": 0.40046125650405884,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 49,
+   "x": 60,
+   "y": 91,
+   "score": null,
+   "normalized_x": 0.2173186093568802,
+   "normalized_y": 0.5911933779716492,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 50,
+   "x": 218,
+   "y": 53,
+   "score": null,
+   "normalized_x": 0.7836595177650452,
+   "normalized_y": 0.3424355983734131,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 51,
+   "x": 114,
+   "y": 65,
+   "score": null,
+   "normalized_x": 0.4105950891971588,
+   "normalized_y": 0.42536312341690063,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 52,
+   "x": 123,
+   "y": 62,
+   "score": null,
+   "normalized_x": 0.44135117530822754,
+   "normalized_y": 0.4013270437717438,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 53,
+   "x": 242,
+   "y": 60,
+   "score": null,
+   "normalized_x": 0.8689088821411133,
+   "normalized_y": 0.39353567361831665,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 54,
+   "x": 62,
+   "y": 79,
+   "score": null,
+   "normalized_x": 0.2243163138628006,
+   "normalized_y": 0.5116658806800842,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 55,
+   "x": 185,
+   "y": 58,
+   "score": null,
+   "normalized_x": 0.6652591824531555,
+   "normalized_y": 0.3801572024822235,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 56,
+   "x": 128,
+   "y": 72,
+   "score": null,
+   "normalized_x": 0.45890355110168457,
+   "normalized_y": 0.46644020080566406,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 57,
+   "x": 181,
+   "y": 59,
+   "score": null,
+   "normalized_x": 0.6512506604194641,
+   "normalized_y": 0.382097452878952,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 58,
+   "x": 157,
+   "y": 58,
+   "score": null,
+   "normalized_x": 0.5646901726722717,
+   "normalized_y": 0.3773622214794159,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 59,
+   "x": 77,
+   "y": 89,
+   "score": null,
+   "normalized_x": 0.27878040075302124,
+   "normalized_y": 0.5782837867736816,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 60,
+   "x": 95,
+   "y": 90,
+   "score": null,
+   "normalized_x": 0.3430899381637573,
+   "normalized_y": 0.5809574127197266,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 61,
+   "x": 93,
+   "y": 71,
+   "score": null,
+   "normalized_x": 0.33596959710121155,
+   "normalized_y": 0.4589099586009979,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 62,
+   "x": 61,
+   "y": 91,
+   "score": null,
+   "normalized_x": 0.22098909318447113,
+   "normalized_y": 0.5878596305847168,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 63,
+   "x": 94,
+   "y": 95,
+   "score": null,
+   "normalized_x": 0.3393145799636841,
+   "normalized_y": 0.6140924096107483,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  }
+ ],
+ "head_status": "completed",
+ "implementation_choices": {
+  "keypoints": "Official 64-query L+D checkpoint and background gate",
+  "grouping": "Same official learned Siamese matcher as ChartParser paper, no histogram override."
+ },
+ "limitations": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ],
+ "shared_legend_status": "available",
+ "shared_legend_reason": null,
+ "shared_legends_sha256": "1e9b974b1d3e502a6d2bb53d57d72cda5c63306f96a21c8deed6810c46b1655e",
+ "warnings": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ]
+}

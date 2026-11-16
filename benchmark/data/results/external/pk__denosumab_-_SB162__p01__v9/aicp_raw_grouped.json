@@ -1,0 +1,3515 @@
+{
+ "version": "external_shared_input_benchmark_v1",
+ "panel_id": "pk__denosumab_-_SB162__p01__v9",
+ "modality": "bw",
+ "method": "aicp_raw_grouped",
+ "status": "completed",
+ "coordinate_system": "x_px/y_px = full original unrotated image pixels; x/y = shared native crop pixels",
+ "image_path": "data/images\\pk__denosumab_-_SB162__p01__v9.png",
+ "input_sha256": "91de8aade66c9f7be3c88d065a68e7859e96c0ee3a24b8c6dc95e86f41d7f4e5",
+ "source_image_path": "data/images\\pk__denosumab_-_SB162__p01__v9.png",
+ "source_sha256": "91de8aade66c9f7be3c88d065a68e7859e96c0ee3a24b8c6dc95e86f41d7f4e5",
+ "crop_box_original": [
+  0,
+  0,
+  520,
+  364
+ ],
+ "plot_box": [
+  56.0,
+  7.0,
+  514.0,
+  305.0
+ ],
+ "legend_box": [
+  160.0,
+  31.0,
+  281.0,
+  87.0
+ ],
+ "legends": [
+  {
+   "legend_index": 0,
+   "series_id": "s01",
+   "label": "3 mg/kg (n=6)",
+   "source_native_legend_id": "S01",
+   "box_input": [
+    163,
+    33,
+    191,
+    48
+   ],
+   "box_original": [
+    163,
+    33,
+    191,
+    48
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__denosumab_-_SB162__p01__v9/shared_legend_crops/legend_01.png",
+   "crop_sha256": "f53ed78c60c33ac01ea1d558ece966335a467d2dea58473181d99a45e603e866",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__denosumab_-_SB162__p01__v9/shared_legends.json",
+   "shared_legends_sha256": "1b86f1cbb069fffa507e6b35532c76b83aa7018b235882d3135fe9fa44d0d019",
+   "mapping_provenance": {
+    "S01": "s01",
+    "S02": "s02",
+    "S03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 1,
+   "series_id": "s02",
+   "label": "10 mg/kg (n=6)",
+   "source_native_legend_id": "S02",
+   "box_input": [
+    163,
+    52,
+    191,
+    65
+   ],
+   "box_original": [
+    163,
+    52,
+    191,
+    65
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__denosumab_-_SB162__p01__v9/shared_legend_crops/legend_02.png",
+   "crop_sha256": "19a93144736569b21b0015e68c72cf290a0aa57024bafa4a8de4db8ef8793c87",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__denosumab_-_SB162__p01__v9/shared_legends.json",
+   "shared_legends_sha256": "1b86f1cbb069fffa507e6b35532c76b83aa7018b235882d3135fe9fa44d0d019",
+   "mapping_provenance": {
+    "S01": "s01",
+    "S02": "s02",
+    "S03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 2,
+   "series_id": "s03",
+   "label": "30 mg/kg (n=6)",
+   "source_native_legend_id": "S03",
+   "box_input": [
+    163,
+    69,
+    191,
+    82
+   ],
+   "box_original": [
+    163,
+    69,
+    191,
+    82
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__denosumab_-_SB162__p01__v9/shared_legend_crops/legend_03.png",
+   "crop_sha256": "f4f17159300c389832399ac0f64032dc901fa72609b278196d1975b193b0270e",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__denosumab_-_SB162__p01__v9/shared_legends.json",
+   "shared_legends_sha256": "1b86f1cbb069fffa507e6b35532c76b83aa7018b235882d3135fe9fa44d0d019",
+   "mapping_provenance": {
+    "S01": "s01",
+    "S02": "s02",
+    "S03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  }
+ ],
+ "predictions": [
+  {
+   "point_id": "CP0001",
+   "x": 336.171875,
+   "y": 26.3046875,
+   "model_x": 331,
+   "model_y": 37,
+   "detection_score": 0.7960452437400818,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9679979085922241,
+   "winning_similarity": 0.9679979085922241,
+   "similarities": [
+    0.9534279704093933,
+    0.9281805157661438,
+    0.9679979085922241
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0001.png",
+   "patch_box_input": [
+    316,
+    16,
+    356,
+    36
+   ],
+   "x_px": 336.171875,
+   "y_px": 26.3046875
+  },
+  {
+   "point_id": "CP0002",
+   "x": 68.046875,
+   "y": 37.6796875,
+   "model_x": 67,
+   "model_y": 53,
+   "detection_score": 0.9915592074394226,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9074729084968567,
+   "winning_similarity": 0.9074729084968567,
+   "similarities": [
+    0.9074729084968567,
+    0.8017904162406921,
+    0.8637661337852478
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0002.png",
+   "patch_box_input": [
+    48,
+    27,
+    88,
+    47
+   ],
+   "x_px": 68.046875,
+   "y_px": 37.6796875
+  },
+  {
+   "point_id": "CP0004",
+   "x": 337.1875,
+   "y": 41.234375,
+   "model_x": 332,
+   "model_y": 58,
+   "detection_score": 0.44064757227897644,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7519524097442627,
+   "winning_similarity": 0.7519524097442627,
+   "similarities": [
+    0.7519524097442627,
+    0.5069875717163086,
+    0.70158851146698
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0004.png",
+   "patch_box_input": [
+    317,
+    31,
+    357,
+    51
+   ],
+   "x_px": 337.1875,
+   "y_px": 41.234375
+  },
+  {
+   "point_id": "CP0005",
+   "x": 337.1875,
+   "y": 45.5,
+   "model_x": 332,
+   "model_y": 64,
+   "detection_score": 0.4128354489803314,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8961052298545837,
+   "winning_similarity": 0.8961052298545837,
+   "similarities": [
+    0.8709247708320618,
+    0.7656628489494324,
+    0.8961052298545837
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0005.png",
+   "patch_box_input": [
+    317,
+    35,
+    357,
+    55
+   ],
+   "x_px": 337.1875,
+   "y_px": 45.5
+  },
+  {
+   "point_id": "CP0006",
+   "x": 68.046875,
+   "y": 50.4765625,
+   "model_x": 67,
+   "model_y": 71,
+   "detection_score": 0.9139405488967896,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9277517795562744,
+   "winning_similarity": 0.9277517795562744,
+   "similarities": [
+    0.9277517795562744,
+    0.8686473965644836,
+    0.9121275544166565
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0006.png",
+   "patch_box_input": [
+    48,
+    40,
+    88,
+    60
+   ],
+   "x_px": 68.046875,
+   "y_px": 50.4765625
+  },
+  {
+   "point_id": "CP0009",
+   "x": 337.1875,
+   "y": 78.203125,
+   "model_x": 332,
+   "model_y": 110,
+   "detection_score": 0.7760473489761353,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9546191692352295,
+   "winning_similarity": 0.9546191692352295,
+   "similarities": [
+    0.9384407997131348,
+    0.9388415813446045,
+    0.9546191692352295
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0009.png",
+   "patch_box_input": [
+    317,
+    68,
+    357,
+    88
+   ],
+   "x_px": 337.1875,
+   "y_px": 78.203125
+  },
+  {
+   "point_id": "CP0010",
+   "x": 337.1875,
+   "y": 89.578125,
+   "model_x": 332,
+   "model_y": 126,
+   "detection_score": 0.8627111315727234,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9039901494979858,
+   "winning_similarity": 0.9039901494979858,
+   "similarities": [
+    0.8583577871322632,
+    0.9039901494979858,
+    0.8964053392410278
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0010.png",
+   "patch_box_input": [
+    317,
+    79,
+    357,
+    99
+   ],
+   "x_px": 337.1875,
+   "y_px": 89.578125
+  },
+  {
+   "point_id": "CP0011",
+   "x": 361.5625,
+   "y": 99.53125,
+   "model_x": 356,
+   "model_y": 140,
+   "detection_score": 0.9952359795570374,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9640101194381714,
+   "winning_similarity": 0.9640101194381714,
+   "similarities": [
+    0.9389519691467285,
+    0.9125099182128906,
+    0.9640101194381714
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0011.png",
+   "patch_box_input": [
+    341,
+    89,
+    381,
+    109
+   ],
+   "x_px": 361.5625,
+   "y_px": 99.53125
+  },
+  {
+   "point_id": "CP0013",
+   "x": 91.40625,
+   "y": 110.1953125,
+   "model_x": 90,
+   "model_y": 155,
+   "detection_score": 0.9729905724525452,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9375331401824951,
+   "winning_similarity": 0.9375331401824951,
+   "similarities": [
+    0.9375331401824951,
+    0.9011337161064148,
+    0.9363800287246704
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0013.png",
+   "patch_box_input": [
+    71,
+    100,
+    111,
+    120
+   ],
+   "x_px": 91.40625,
+   "y_px": 110.1953125
+  },
+  {
+   "point_id": "CP0014",
+   "x": 361.5625,
+   "y": 109.484375,
+   "model_x": 356,
+   "model_y": 154,
+   "detection_score": 0.9853589534759521,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.5725443363189697,
+   "winning_similarity": 0.5725443363189697,
+   "similarities": [
+    0.5725443363189697,
+    0.5345022082328796,
+    0.22403578460216522
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0014.png",
+   "patch_box_input": [
+    341,
+    99,
+    381,
+    119
+   ],
+   "x_px": 361.5625,
+   "y_px": 109.484375
+  },
+  {
+   "point_id": "CP0015",
+   "x": 385.9375,
+   "y": 117.3046875,
+   "model_x": 380,
+   "model_y": 165,
+   "detection_score": 0.991273820400238,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9732131958007812,
+   "winning_similarity": 0.9732131958007812,
+   "similarities": [
+    0.959565281867981,
+    0.9146870970726013,
+    0.9732131958007812
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0015.png",
+   "patch_box_input": [
+    365,
+    107,
+    405,
+    127
+   ],
+   "x_px": 385.9375,
+   "y_px": 117.3046875
+  },
+  {
+   "point_id": "CP0016",
+   "x": 93.4375,
+   "y": 120.1484375,
+   "model_x": 92,
+   "model_y": 169,
+   "detection_score": 0.7260459065437317,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8210095763206482,
+   "winning_similarity": 0.8210095763206482,
+   "similarities": [
+    0.8210095763206482,
+    0.7950894832611084,
+    0.6440792679786682
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0016.png",
+   "patch_box_input": [
+    73,
+    110,
+    113,
+    130
+   ],
+   "x_px": 93.4375,
+   "y_px": 120.1484375
+  },
+  {
+   "point_id": "CP0017",
+   "x": 115.78125,
+   "y": 127.2578125,
+   "model_x": 114,
+   "model_y": 179,
+   "detection_score": 0.806300938129425,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8682579398155212,
+   "winning_similarity": 0.8682579398155212,
+   "similarities": [
+    0.8682579398155212,
+    0.8170127272605896,
+    0.8250045776367188
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0017.png",
+   "patch_box_input": [
+    95,
+    117,
+    135,
+    137
+   ],
+   "x_px": 115.78125,
+   "y_px": 127.2578125
+  },
+  {
+   "point_id": "CP0018",
+   "x": 384.921875,
+   "y": 127.2578125,
+   "model_x": 379,
+   "model_y": 179,
+   "detection_score": 0.5597304105758667,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.24408715963363647,
+   "winning_similarity": 0.24408715963363647,
+   "similarities": [
+    0.24408715963363647,
+    0.19515855610370636,
+    0.12494426220655441
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0018.png",
+   "patch_box_input": [
+    364,
+    117,
+    404,
+    137
+   ],
+   "x_px": 384.921875,
+   "y_px": 127.2578125
+  },
+  {
+   "point_id": "CP0019",
+   "x": 66.015625,
+   "y": 134.3671875,
+   "model_x": 65,
+   "model_y": 189,
+   "detection_score": 0.836521565914154,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9721583724021912,
+   "winning_similarity": 0.9721583724021912,
+   "similarities": [
+    0.9721583724021912,
+    0.9668880105018616,
+    0.96588134765625
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0019.png",
+   "patch_box_input": [
+    46,
+    124,
+    86,
+    144
+   ],
+   "x_px": 66.015625,
+   "y_px": 134.3671875
+  },
+  {
+   "point_id": "CP0020",
+   "x": 115.78125,
+   "y": 140.0546875,
+   "model_x": 114,
+   "model_y": 197,
+   "detection_score": 0.9971550703048706,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9737813472747803,
+   "winning_similarity": 0.9737813472747803,
+   "similarities": [
+    0.9660141468048096,
+    0.9482927322387695,
+    0.9737813472747803
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0020.png",
+   "patch_box_input": [
+    95,
+    130,
+    135,
+    150
+   ],
+   "x_px": 115.78125,
+   "y_px": 140.0546875
+  },
+  {
+   "point_id": "CP0021",
+   "x": 426.5625,
+   "y": 140.0546875,
+   "model_x": 420,
+   "model_y": 197,
+   "detection_score": 0.7951571941375732,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9721339344978333,
+   "winning_similarity": 0.9721339344978333,
+   "similarities": [
+    0.9601007699966431,
+    0.9346338510513306,
+    0.9721339344978333
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0021.png",
+   "patch_box_input": [
+    406,
+    130,
+    446,
+    150
+   ],
+   "x_px": 426.5625,
+   "y_px": 140.0546875
+  },
+  {
+   "point_id": "CP0022",
+   "x": 336.171875,
+   "y": 145.7421875,
+   "model_x": 331,
+   "model_y": 205,
+   "detection_score": 0.43258950114250183,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9536409378051758,
+   "winning_similarity": 0.9536409378051758,
+   "similarities": [
+    0.9325421452522278,
+    0.9324017763137817,
+    0.9536409378051758
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0022.png",
+   "patch_box_input": [
+    316,
+    135,
+    356,
+    155
+   ],
+   "x_px": 336.171875,
+   "y_px": 145.7421875
+  },
+  {
+   "point_id": "CP0023",
+   "x": 67.03125,
+   "y": 150.0078125,
+   "model_x": 66,
+   "model_y": 211,
+   "detection_score": 0.9703942537307739,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9655994176864624,
+   "winning_similarity": 0.9655994176864624,
+   "similarities": [
+    0.963963508605957,
+    0.9330277442932129,
+    0.9655994176864624
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0023.png",
+   "patch_box_input": [
+    47,
+    140,
+    87,
+    160
+   ],
+   "x_px": 67.03125,
+   "y_px": 150.0078125
+  },
+  {
+   "point_id": "CP0024",
+   "x": 245.78125,
+   "y": 150.0078125,
+   "model_x": 242,
+   "model_y": 211,
+   "detection_score": 0.8579320311546326,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.439267635345459,
+   "winning_similarity": 0.439267635345459,
+   "similarities": [
+    0.439267635345459,
+    0.3285815119743347,
+    0.18718770146369934
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0024.png",
+   "patch_box_input": [
+    225,
+    140,
+    265,
+    160
+   ],
+   "x_px": 245.78125,
+   "y_px": 150.0078125
+  },
+  {
+   "point_id": "CP0025",
+   "x": 336.171875,
+   "y": 151.4296875,
+   "model_x": 331,
+   "model_y": 213,
+   "detection_score": 0.5816222429275513,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9618501663208008,
+   "winning_similarity": 0.9618501663208008,
+   "similarities": [
+    0.9437451362609863,
+    0.9429235458374023,
+    0.9618501663208008
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0025.png",
+   "patch_box_input": [
+    316,
+    141,
+    356,
+    161
+   ],
+   "x_px": 336.171875,
+   "y_px": 151.4296875
+  },
+  {
+   "point_id": "CP0026",
+   "x": 245.78125,
+   "y": 164.2265625,
+   "model_x": 242,
+   "model_y": 231,
+   "detection_score": 0.9973453879356384,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9323776364326477,
+   "winning_similarity": 0.9323776364326477,
+   "similarities": [
+    0.9042540788650513,
+    0.8217214941978455,
+    0.9323776364326477
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0026.png",
+   "patch_box_input": [
+    225,
+    154,
+    265,
+    174
+   ],
+   "x_px": 245.78125,
+   "y_px": 164.2265625
+  },
+  {
+   "point_id": "CP0027",
+   "x": 475.3125,
+   "y": 162.09375,
+   "model_x": 468,
+   "model_y": 228,
+   "detection_score": 0.9323168992996216,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9861316680908203,
+   "winning_similarity": 0.9861316680908203,
+   "similarities": [
+    0.9695256948471069,
+    0.9693437814712524,
+    0.9861316680908203
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0027.png",
+   "patch_box_input": [
+    455,
+    152,
+    495,
+    172
+   ],
+   "x_px": 475.3125,
+   "y_px": 162.09375
+  },
+  {
+   "point_id": "CP0028",
+   "x": 154.375,
+   "y": 165.6484375,
+   "model_x": 152,
+   "model_y": 233,
+   "detection_score": 0.47246506810188293,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.696639895439148,
+   "winning_similarity": 0.696639895439148,
+   "similarities": [
+    0.696639895439148,
+    0.5507901310920715,
+    0.38847512006759644
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0028.png",
+   "patch_box_input": [
+    134,
+    155,
+    174,
+    175
+   ],
+   "x_px": 154.375,
+   "y_px": 165.6484375
+  },
+  {
+   "point_id": "CP0029",
+   "x": 361.5625,
+   "y": 174.1796875,
+   "model_x": 356,
+   "model_y": 245,
+   "detection_score": 0.4917519688606262,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8721840977668762,
+   "winning_similarity": 0.8721840977668762,
+   "similarities": [
+    0.8721840977668762,
+    0.8699808716773987,
+    0.8720262050628662
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0029.png",
+   "patch_box_input": [
+    341,
+    164,
+    381,
+    184
+   ],
+   "x_px": 361.5625,
+   "y_px": 174.1796875
+  },
+  {
+   "point_id": "CP0030",
+   "x": 90.390625,
+   "y": 179.8671875,
+   "model_x": 89,
+   "model_y": 253,
+   "detection_score": 0.7506799101829529,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9623345732688904,
+   "winning_similarity": 0.9623345732688904,
+   "similarities": [
+    0.945934534072876,
+    0.9623345732688904,
+    0.9617815613746643
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0030.png",
+   "patch_box_input": [
+    70,
+    169,
+    110,
+    189
+   ],
+   "x_px": 90.390625,
+   "y_px": 179.8671875
+  },
+  {
+   "point_id": "CP0031",
+   "x": 153.359375,
+   "y": 180.578125,
+   "model_x": 151,
+   "model_y": 254,
+   "detection_score": 0.9974039196968079,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9738078713417053,
+   "winning_similarity": 0.9738078713417053,
+   "similarities": [
+    0.9501908421516418,
+    0.9512783885002136,
+    0.9738078713417053
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0031.png",
+   "patch_box_input": [
+    133,
+    170,
+    173,
+    190
+   ],
+   "x_px": 153.359375,
+   "y_px": 180.578125
+  },
+  {
+   "point_id": "CP0032",
+   "x": 347.34375,
+   "y": 184.84375,
+   "model_x": 342,
+   "model_y": 260,
+   "detection_score": 0.5157013535499573,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9669429063796997,
+   "winning_similarity": 0.9669429063796997,
+   "similarities": [
+    0.9566828012466431,
+    0.9517827033996582,
+    0.9669429063796997
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0032.png",
+   "patch_box_input": [
+    327,
+    174,
+    367,
+    194
+   ],
+   "x_px": 347.34375,
+   "y_px": 184.84375
+  },
+  {
+   "point_id": "CP0033",
+   "x": 152.34375,
+   "y": 194.796875,
+   "model_x": 150,
+   "model_y": 274,
+   "detection_score": 0.7816190719604492,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.12664633989334106,
+   "winning_similarity": 0.12664633989334106,
+   "similarities": [
+    0.12664633989334106,
+    0.11929339170455933,
+    0.05004196986556053
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0033.png",
+   "patch_box_input": [
+    132,
+    184,
+    172,
+    204
+   ],
+   "x_px": 152.34375,
+   "y_px": 194.796875
+  },
+  {
+   "point_id": "CP0034",
+   "x": 380.859375,
+   "y": 196.9296875,
+   "model_x": 375,
+   "model_y": 277,
+   "detection_score": 0.35652855038642883,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8094460964202881,
+   "winning_similarity": 0.8094460964202881,
+   "similarities": [
+    0.8094460964202881,
+    0.7605245113372803,
+    0.6608579158782959
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0034.png",
+   "patch_box_input": [
+    360,
+    186,
+    400,
+    206
+   ],
+   "x_px": 380.859375,
+   "y_px": 196.9296875
+  },
+  {
+   "point_id": "CP0035",
+   "x": 90.390625,
+   "y": 201.1953125,
+   "model_x": 89,
+   "model_y": 283,
+   "detection_score": 0.9955770969390869,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.95591139793396,
+   "winning_similarity": 0.95591139793396,
+   "similarities": [
+    0.9390756487846375,
+    0.9263381361961365,
+    0.95591139793396
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0035.png",
+   "patch_box_input": [
+    70,
+    191,
+    110,
+    211
+   ],
+   "x_px": 90.390625,
+   "y_px": 201.1953125
+  },
+  {
+   "point_id": "CP0036",
+   "x": 361.5625,
+   "y": 204.75,
+   "model_x": 356,
+   "model_y": 288,
+   "detection_score": 0.9976536631584167,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9718271493911743,
+   "winning_similarity": 0.9718271493911743,
+   "similarities": [
+    0.9608806371688843,
+    0.9505530595779419,
+    0.9718271493911743
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0036.png",
+   "patch_box_input": [
+    341,
+    194,
+    381,
+    214
+   ],
+   "x_px": 361.5625,
+   "y_px": 204.75
+  },
+  {
+   "point_id": "CP0037",
+   "x": 116.796875,
+   "y": 216.125,
+   "model_x": 115,
+   "model_y": 304,
+   "detection_score": 0.8857071995735168,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9554044604301453,
+   "winning_similarity": 0.9554044604301453,
+   "similarities": [
+    0.9282185435295105,
+    0.9442628026008606,
+    0.9554044604301453
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0037.png",
+   "patch_box_input": [
+    96,
+    206,
+    136,
+    226
+   ],
+   "x_px": 116.796875,
+   "y_px": 216.125
+  },
+  {
+   "point_id": "CP0038",
+   "x": 337.1875,
+   "y": 223.234375,
+   "model_x": 332,
+   "model_y": 314,
+   "detection_score": 0.7874584794044495,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9046949744224548,
+   "winning_similarity": 0.9046949744224548,
+   "similarities": [
+    0.8934831619262695,
+    0.9046949744224548,
+    0.8790120482444763
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0038.png",
+   "patch_box_input": [
+    317,
+    213,
+    357,
+    233
+   ],
+   "x_px": 337.1875,
+   "y_px": 223.234375
+  },
+  {
+   "point_id": "CP0039",
+   "x": 390.0,
+   "y": 225.3671875,
+   "model_x": 384,
+   "model_y": 317,
+   "detection_score": 0.7357879877090454,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9745751619338989,
+   "winning_similarity": 0.9745751619338989,
+   "similarities": [
+    0.9603700637817383,
+    0.9354092478752136,
+    0.9745751619338989
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0039.png",
+   "patch_box_input": [
+    370,
+    215,
+    410,
+    235
+   ],
+   "x_px": 390.0,
+   "y_px": 225.3671875
+  },
+  {
+   "point_id": "CP0040",
+   "x": 243.75,
+   "y": 227.5,
+   "model_x": 240,
+   "model_y": 320,
+   "detection_score": 0.4944550395011902,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9454584121704102,
+   "winning_similarity": 0.9454584121704102,
+   "similarities": [
+    0.8865211606025696,
+    0.9454584121704102,
+    0.8833181262016296
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0040.png",
+   "patch_box_input": [
+    223,
+    217,
+    263,
+    237
+   ],
+   "x_px": 243.75,
+   "y_px": 227.5
+  },
+  {
+   "point_id": "CP0041",
+   "x": 430.625,
+   "y": 229.6328125,
+   "model_x": 424,
+   "model_y": 323,
+   "detection_score": 0.7818816900253296,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8903181552886963,
+   "winning_similarity": 0.8903181552886963,
+   "similarities": [
+    0.8141676783561707,
+    0.8903181552886963,
+    0.8601237535476685
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0041.png",
+   "patch_box_input": [
+    410,
+    219,
+    450,
+    239
+   ],
+   "x_px": 430.625,
+   "y_px": 229.6328125
+  },
+  {
+   "point_id": "CP0042",
+   "x": 116.796875,
+   "y": 231.765625,
+   "model_x": 115,
+   "model_y": 326,
+   "detection_score": 0.9821980595588684,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9636896252632141,
+   "winning_similarity": 0.9636896252632141,
+   "similarities": [
+    0.9541565775871277,
+    0.9294097423553467,
+    0.9636896252632141
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0042.png",
+   "patch_box_input": [
+    96,
+    221,
+    136,
+    241
+   ],
+   "x_px": 116.796875,
+   "y_px": 231.765625
+  },
+  {
+   "point_id": "CP0043",
+   "x": 390.0,
+   "y": 233.8984375,
+   "model_x": 384,
+   "model_y": 329,
+   "detection_score": 0.4064301550388336,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.6646406054496765,
+   "winning_similarity": 0.6646406054496765,
+   "similarities": [
+    0.6646406054496765,
+    0.45916759967803955,
+    0.3637034296989441
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0043.png",
+   "patch_box_input": [
+    370,
+    223,
+    410,
+    243
+   ],
+   "x_px": 390.0,
+   "y_px": 233.8984375
+  },
+  {
+   "point_id": "CP0044",
+   "x": 154.375,
+   "y": 240.296875,
+   "model_x": 152,
+   "model_y": 338,
+   "detection_score": 0.7586427927017212,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8698793053627014,
+   "winning_similarity": 0.8698793053627014,
+   "similarities": [
+    0.7931035161018372,
+    0.8698793053627014,
+    0.7331670522689819
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0044.png",
+   "patch_box_input": [
+    134,
+    230,
+    174,
+    250
+   ],
+   "x_px": 154.375,
+   "y_px": 240.296875
+  },
+  {
+   "point_id": "CP0045",
+   "x": 427.578125,
+   "y": 240.296875,
+   "model_x": 421,
+   "model_y": 338,
+   "detection_score": 0.9828659892082214,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9409788250923157,
+   "winning_similarity": 0.9409788250923157,
+   "similarities": [
+    0.9341694116592407,
+    0.9002789258956909,
+    0.9409788250923157
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0045.png",
+   "patch_box_input": [
+    407,
+    230,
+    447,
+    250
+   ],
+   "x_px": 427.578125,
+   "y_px": 240.296875
+  },
+  {
+   "point_id": "CP0046",
+   "x": 476.328125,
+   "y": 243.8515625,
+   "model_x": 469,
+   "model_y": 343,
+   "detection_score": 0.9925277233123779,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9743878245353699,
+   "winning_similarity": 0.9743878245353699,
+   "similarities": [
+    0.9612681865692139,
+    0.9634272456169128,
+    0.9743878245353699
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0046.png",
+   "patch_box_input": [
+    456,
+    233,
+    496,
+    253
+   ],
+   "x_px": 476.328125,
+   "y_px": 243.8515625
+  },
+  {
+   "point_id": "CP0047",
+   "x": 242.734375,
+   "y": 251.671875,
+   "model_x": 239,
+   "model_y": 354,
+   "detection_score": 0.983342170715332,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.976021945476532,
+   "winning_similarity": 0.976021945476532,
+   "similarities": [
+    0.9589062929153442,
+    0.9429728388786316,
+    0.976021945476532
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0047.png",
+   "patch_box_input": [
+    222,
+    241,
+    262,
+    261
+   ],
+   "x_px": 242.734375,
+   "y_px": 251.671875
+  },
+  {
+   "point_id": "CP0048",
+   "x": 338.203125,
+   "y": 251.671875,
+   "model_x": 333,
+   "model_y": 354,
+   "detection_score": 0.989281415939331,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9742491841316223,
+   "winning_similarity": 0.9742491841316223,
+   "similarities": [
+    0.9542691707611084,
+    0.940747082233429,
+    0.9742491841316223
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0048.png",
+   "patch_box_input": [
+    318,
+    241,
+    358,
+    261
+   ],
+   "x_px": 338.203125,
+   "y_px": 251.671875
+  },
+  {
+   "point_id": "CP0049",
+   "x": 476.328125,
+   "y": 258.78125,
+   "model_x": 469,
+   "model_y": 364,
+   "detection_score": 0.9931255578994751,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8929109573364258,
+   "winning_similarity": 0.8929109573364258,
+   "similarities": [
+    0.8514683842658997,
+    0.7252808213233948,
+    0.8929109573364258
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0049.png",
+   "patch_box_input": [
+    456,
+    248,
+    496,
+    268
+   ],
+   "x_px": 476.328125,
+   "y_px": 258.78125
+  },
+  {
+   "point_id": "CP0050",
+   "x": 152.34375,
+   "y": 264.46875,
+   "model_x": 150,
+   "model_y": 372,
+   "detection_score": 0.9976166486740112,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9805256724357605,
+   "winning_similarity": 0.9805256724357605,
+   "similarities": [
+    0.9681439399719238,
+    0.9586241245269775,
+    0.9805256724357605
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0050.png",
+   "patch_box_input": [
+    132,
+    254,
+    172,
+    274
+   ],
+   "x_px": 152.34375,
+   "y_px": 264.46875
+  }
+ ],
+ "unavailable": [],
+ "patches": [
+  {
+   "point_index": 0,
+   "point_id": "CP0001",
+   "box_input": [
+    316,
+    16,
+    356,
+    36
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0001.png"
+  },
+  {
+   "point_index": 1,
+   "point_id": "CP0002",
+   "box_input": [
+    48,
+    27,
+    88,
+    47
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0002.png"
+  },
+  {
+   "point_index": 2,
+   "point_id": "CP0004",
+   "box_input": [
+    317,
+    31,
+    357,
+    51
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0004.png"
+  },
+  {
+   "point_index": 3,
+   "point_id": "CP0005",
+   "box_input": [
+    317,
+    35,
+    357,
+    55
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0005.png"
+  },
+  {
+   "point_index": 4,
+   "point_id": "CP0006",
+   "box_input": [
+    48,
+    40,
+    88,
+    60
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0006.png"
+  },
+  {
+   "point_index": 5,
+   "point_id": "CP0009",
+   "box_input": [
+    317,
+    68,
+    357,
+    88
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0009.png"
+  },
+  {
+   "point_index": 6,
+   "point_id": "CP0010",
+   "box_input": [
+    317,
+    79,
+    357,
+    99
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0010.png"
+  },
+  {
+   "point_index": 7,
+   "point_id": "CP0011",
+   "box_input": [
+    341,
+    89,
+    381,
+    109
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0011.png"
+  },
+  {
+   "point_index": 8,
+   "point_id": "CP0013",
+   "box_input": [
+    71,
+    100,
+    111,
+    120
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0013.png"
+  },
+  {
+   "point_index": 9,
+   "point_id": "CP0014",
+   "box_input": [
+    341,
+    99,
+    381,
+    119
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0014.png"
+  },
+  {
+   "point_index": 10,
+   "point_id": "CP0015",
+   "box_input": [
+    365,
+    107,
+    405,
+    127
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0015.png"
+  },
+  {
+   "point_index": 11,
+   "point_id": "CP0016",
+   "box_input": [
+    73,
+    110,
+    113,
+    130
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0016.png"
+  },
+  {
+   "point_index": 12,
+   "point_id": "CP0017",
+   "box_input": [
+    95,
+    117,
+    135,
+    137
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0017.png"
+  },
+  {
+   "point_index": 13,
+   "point_id": "CP0018",
+   "box_input": [
+    364,
+    117,
+    404,
+    137
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0018.png"
+  },
+  {
+   "point_index": 14,
+   "point_id": "CP0019",
+   "box_input": [
+    46,
+    124,
+    86,
+    144
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0019.png"
+  },
+  {
+   "point_index": 15,
+   "point_id": "CP0020",
+   "box_input": [
+    95,
+    130,
+    135,
+    150
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0020.png"
+  },
+  {
+   "point_index": 16,
+   "point_id": "CP0021",
+   "box_input": [
+    406,
+    130,
+    446,
+    150
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0021.png"
+  },
+  {
+   "point_index": 17,
+   "point_id": "CP0022",
+   "box_input": [
+    316,
+    135,
+    356,
+    155
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0022.png"
+  },
+  {
+   "point_index": 18,
+   "point_id": "CP0023",
+   "box_input": [
+    47,
+    140,
+    87,
+    160
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0023.png"
+  },
+  {
+   "point_index": 19,
+   "point_id": "CP0024",
+   "box_input": [
+    225,
+    140,
+    265,
+    160
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0024.png"
+  },
+  {
+   "point_index": 20,
+   "point_id": "CP0025",
+   "box_input": [
+    316,
+    141,
+    356,
+    161
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0025.png"
+  },
+  {
+   "point_index": 21,
+   "point_id": "CP0026",
+   "box_input": [
+    225,
+    154,
+    265,
+    174
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0026.png"
+  },
+  {
+   "point_index": 22,
+   "point_id": "CP0027",
+   "box_input": [
+    455,
+    152,
+    495,
+    172
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0027.png"
+  },
+  {
+   "point_index": 23,
+   "point_id": "CP0028",
+   "box_input": [
+    134,
+    155,
+    174,
+    175
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0028.png"
+  },
+  {
+   "point_index": 24,
+   "point_id": "CP0029",
+   "box_input": [
+    341,
+    164,
+    381,
+    184
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0029.png"
+  },
+  {
+   "point_index": 25,
+   "point_id": "CP0030",
+   "box_input": [
+    70,
+    169,
+    110,
+    189
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0030.png"
+  },
+  {
+   "point_index": 26,
+   "point_id": "CP0031",
+   "box_input": [
+    133,
+    170,
+    173,
+    190
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0031.png"
+  },
+  {
+   "point_index": 27,
+   "point_id": "CP0032",
+   "box_input": [
+    327,
+    174,
+    367,
+    194
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0032.png"
+  },
+  {
+   "point_index": 28,
+   "point_id": "CP0033",
+   "box_input": [
+    132,
+    184,
+    172,
+    204
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0033.png"
+  },
+  {
+   "point_index": 29,
+   "point_id": "CP0034",
+   "box_input": [
+    360,
+    186,
+    400,
+    206
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0034.png"
+  },
+  {
+   "point_index": 30,
+   "point_id": "CP0035",
+   "box_input": [
+    70,
+    191,
+    110,
+    211
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0035.png"
+  },
+  {
+   "point_index": 31,
+   "point_id": "CP0036",
+   "box_input": [
+    341,
+    194,
+    381,
+    214
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0036.png"
+  },
+  {
+   "point_index": 32,
+   "point_id": "CP0037",
+   "box_input": [
+    96,
+    206,
+    136,
+    226
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0037.png"
+  },
+  {
+   "point_index": 33,
+   "point_id": "CP0038",
+   "box_input": [
+    317,
+    213,
+    357,
+    233
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0038.png"
+  },
+  {
+   "point_index": 34,
+   "point_id": "CP0039",
+   "box_input": [
+    370,
+    215,
+    410,
+    235
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0039.png"
+  },
+  {
+   "point_index": 35,
+   "point_id": "CP0040",
+   "box_input": [
+    223,
+    217,
+    263,
+    237
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0040.png"
+  },
+  {
+   "point_index": 36,
+   "point_id": "CP0041",
+   "box_input": [
+    410,
+    219,
+    450,
+    239
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0041.png"
+  },
+  {
+   "point_index": 37,
+   "point_id": "CP0042",
+   "box_input": [
+    96,
+    221,
+    136,
+    241
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0042.png"
+  },
+  {
+   "point_index": 38,
+   "point_id": "CP0043",
+   "box_input": [
+    370,
+    223,
+    410,
+    243
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0043.png"
+  },
+  {
+   "point_index": 39,
+   "point_id": "CP0044",
+   "box_input": [
+    134,
+    230,
+    174,
+    250
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0044.png"
+  },
+  {
+   "point_index": 40,
+   "point_id": "CP0045",
+   "box_input": [
+    407,
+    230,
+    447,
+    250
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0045.png"
+  },
+  {
+   "point_index": 41,
+   "point_id": "CP0046",
+   "box_input": [
+    456,
+    233,
+    496,
+    253
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0046.png"
+  },
+  {
+   "point_index": 42,
+   "point_id": "CP0047",
+   "box_input": [
+    222,
+    241,
+    262,
+    261
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0047.png"
+  },
+  {
+   "point_index": 43,
+   "point_id": "CP0048",
+   "box_input": [
+    318,
+    241,
+    358,
+    261
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0048.png"
+  },
+  {
+   "point_index": 44,
+   "point_id": "CP0049",
+   "box_input": [
+    456,
+    248,
+    496,
+    268
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0049.png"
+  },
+  {
+   "point_index": 45,
+   "point_id": "CP0050",
+   "box_input": [
+    132,
+    254,
+    172,
+    274
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/patches/CP0050.png"
+  }
+ ],
+ "similarity_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/aicp_raw_grouped/similarity.npy",
+ "similarity_row_point_ids": [
+  "CP0001",
+  "CP0002",
+  "CP0004",
+  "CP0005",
+  "CP0006",
+  "CP0009",
+  "CP0010",
+  "CP0011",
+  "CP0013",
+  "CP0014",
+  "CP0015",
+  "CP0016",
+  "CP0017",
+  "CP0018",
+  "CP0019",
+  "CP0020",
+  "CP0021",
+  "CP0022",
+  "CP0023",
+  "CP0024",
+  "CP0025",
+  "CP0026",
+  "CP0027",
+  "CP0028",
+  "CP0029",
+  "CP0030",
+  "CP0031",
+  "CP0032",
+  "CP0033",
+  "CP0034",
+  "CP0035",
+  "CP0036",
+  "CP0037",
+  "CP0038",
+  "CP0039",
+  "CP0040",
+  "CP0041",
+  "CP0042",
+  "CP0043",
+  "CP0044",
+  "CP0045",
+  "CP0046",
+  "CP0047",
+  "CP0048",
+  "CP0049",
+  "CP0050"
+ ],
+ "similarity_column_series_ids": [
+  "s01",
+  "s02",
+  "s03"
+ ],
+ "timing": {
+  "shared_input_verification_seconds": 0.004255699983332306,
+  "legend_crop_seconds": 0.005070299957878888,
+  "network_seconds": 0.05574560002423823,
+  "head_postprocess_and_export_seconds": 0.15978679998079315,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.0724288999917917,
+  "learned_matching_seconds": 0.19917510001687333,
+  "total_seconds": 0.4935491999494843,
+  "method_total_excluding_shared_verification_seconds": 0.4935491999494843,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "patch_matching_timing": {
+  "patch_extract_and_export_seconds": 0.0724288999917917,
+  "learned_matching_seconds": 0.19917510001687333,
+  "total_seconds": 0.27294649998657405
+ },
+ "timing_breakdown": {
+  "shared_input_verification_seconds": 0.004255699983332306,
+  "legend_crop_seconds": 0.005070299957878888,
+  "network_seconds": 0.05574560002423823,
+  "head_postprocess_and_export_seconds": 0.15978679998079315,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.0724288999917917,
+  "learned_matching_seconds": 0.19917510001687333,
+  "total_seconds": 0.4935491999494843,
+  "method_total_excluding_shared_verification_seconds": 0.4935491999494843,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "raw_heads_result_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/raw_heads/chartparser/pk__denosumab_-_SB162__p01__v9/result.json",
+ "raw_points": [
+  {
+   "point_id": "CP0001",
+   "x": 336.171875,
+   "y": 26.3046875,
+   "model_x": 331,
+   "model_y": 37,
+   "detection_score": 0.7960452437400818,
+   "x_px": 336.171875,
+   "y_px": 26.3046875
+  },
+  {
+   "point_id": "CP0002",
+   "x": 68.046875,
+   "y": 37.6796875,
+   "model_x": 67,
+   "model_y": 53,
+   "detection_score": 0.9915592074394226,
+   "x_px": 68.046875,
+   "y_px": 37.6796875
+  },
+  {
+   "point_id": "CP0004",
+   "x": 337.1875,
+   "y": 41.234375,
+   "model_x": 332,
+   "model_y": 58,
+   "detection_score": 0.44064757227897644,
+   "x_px": 337.1875,
+   "y_px": 41.234375
+  },
+  {
+   "point_id": "CP0005",
+   "x": 337.1875,
+   "y": 45.5,
+   "model_x": 332,
+   "model_y": 64,
+   "detection_score": 0.4128354489803314,
+   "x_px": 337.1875,
+   "y_px": 45.5
+  },
+  {
+   "point_id": "CP0006",
+   "x": 68.046875,
+   "y": 50.4765625,
+   "model_x": 67,
+   "model_y": 71,
+   "detection_score": 0.9139405488967896,
+   "x_px": 68.046875,
+   "y_px": 50.4765625
+  },
+  {
+   "point_id": "CP0009",
+   "x": 337.1875,
+   "y": 78.203125,
+   "model_x": 332,
+   "model_y": 110,
+   "detection_score": 0.7760473489761353,
+   "x_px": 337.1875,
+   "y_px": 78.203125
+  },
+  {
+   "point_id": "CP0010",
+   "x": 337.1875,
+   "y": 89.578125,
+   "model_x": 332,
+   "model_y": 126,
+   "detection_score": 0.8627111315727234,
+   "x_px": 337.1875,
+   "y_px": 89.578125
+  },
+  {
+   "point_id": "CP0011",
+   "x": 361.5625,
+   "y": 99.53125,
+   "model_x": 356,
+   "model_y": 140,
+   "detection_score": 0.9952359795570374,
+   "x_px": 361.5625,
+   "y_px": 99.53125
+  },
+  {
+   "point_id": "CP0013",
+   "x": 91.40625,
+   "y": 110.1953125,
+   "model_x": 90,
+   "model_y": 155,
+   "detection_score": 0.9729905724525452,
+   "x_px": 91.40625,
+   "y_px": 110.1953125
+  },
+  {
+   "point_id": "CP0014",
+   "x": 361.5625,
+   "y": 109.484375,
+   "model_x": 356,
+   "model_y": 154,
+   "detection_score": 0.9853589534759521,
+   "x_px": 361.5625,
+   "y_px": 109.484375
+  },
+  {
+   "point_id": "CP0015",
+   "x": 385.9375,
+   "y": 117.3046875,
+   "model_x": 380,
+   "model_y": 165,
+   "detection_score": 0.991273820400238,
+   "x_px": 385.9375,
+   "y_px": 117.3046875
+  },
+  {
+   "point_id": "CP0016",
+   "x": 93.4375,
+   "y": 120.1484375,
+   "model_x": 92,
+   "model_y": 169,
+   "detection_score": 0.7260459065437317,
+   "x_px": 93.4375,
+   "y_px": 120.1484375
+  },
+  {
+   "point_id": "CP0017",
+   "x": 115.78125,
+   "y": 127.2578125,
+   "model_x": 114,
+   "model_y": 179,
+   "detection_score": 0.806300938129425,
+   "x_px": 115.78125,
+   "y_px": 127.2578125
+  },
+  {
+   "point_id": "CP0018",
+   "x": 384.921875,
+   "y": 127.2578125,
+   "model_x": 379,
+   "model_y": 179,
+   "detection_score": 0.5597304105758667,
+   "x_px": 384.921875,
+   "y_px": 127.2578125
+  },
+  {
+   "point_id": "CP0019",
+   "x": 66.015625,
+   "y": 134.3671875,
+   "model_x": 65,
+   "model_y": 189,
+   "detection_score": 0.836521565914154,
+   "x_px": 66.015625,
+   "y_px": 134.3671875
+  },
+  {
+   "point_id": "CP0020",
+   "x": 115.78125,
+   "y": 140.0546875,
+   "model_x": 114,
+   "model_y": 197,
+   "detection_score": 0.9971550703048706,
+   "x_px": 115.78125,
+   "y_px": 140.0546875
+  },
+  {
+   "point_id": "CP0021",
+   "x": 426.5625,
+   "y": 140.0546875,
+   "model_x": 420,
+   "model_y": 197,
+   "detection_score": 0.7951571941375732,
+   "x_px": 426.5625,
+   "y_px": 140.0546875
+  },
+  {
+   "point_id": "CP0022",
+   "x": 336.171875,
+   "y": 145.7421875,
+   "model_x": 331,
+   "model_y": 205,
+   "detection_score": 0.43258950114250183,
+   "x_px": 336.171875,
+   "y_px": 145.7421875
+  },
+  {
+   "point_id": "CP0023",
+   "x": 67.03125,
+   "y": 150.0078125,
+   "model_x": 66,
+   "model_y": 211,
+   "detection_score": 0.9703942537307739,
+   "x_px": 67.03125,
+   "y_px": 150.0078125
+  },
+  {
+   "point_id": "CP0024",
+   "x": 245.78125,
+   "y": 150.0078125,
+   "model_x": 242,
+   "model_y": 211,
+   "detection_score": 0.8579320311546326,
+   "x_px": 245.78125,
+   "y_px": 150.0078125
+  },
+  {
+   "point_id": "CP0025",
+   "x": 336.171875,
+   "y": 151.4296875,
+   "model_x": 331,
+   "model_y": 213,
+   "detection_score": 0.5816222429275513,
+   "x_px": 336.171875,
+   "y_px": 151.4296875
+  },
+  {
+   "point_id": "CP0026",
+   "x": 245.78125,
+   "y": 164.2265625,
+   "model_x": 242,
+   "model_y": 231,
+   "detection_score": 0.9973453879356384,
+   "x_px": 245.78125,
+   "y_px": 164.2265625
+  },
+  {
+   "point_id": "CP0027",
+   "x": 475.3125,
+   "y": 162.09375,
+   "model_x": 468,
+   "model_y": 228,
+   "detection_score": 0.9323168992996216,
+   "x_px": 475.3125,
+   "y_px": 162.09375
+  },
+  {
+   "point_id": "CP0028",
+   "x": 154.375,
+   "y": 165.6484375,
+   "model_x": 152,
+   "model_y": 233,
+   "detection_score": 0.47246506810188293,
+   "x_px": 154.375,
+   "y_px": 165.6484375
+  },
+  {
+   "point_id": "CP0029",
+   "x": 361.5625,
+   "y": 174.1796875,
+   "model_x": 356,
+   "model_y": 245,
+   "detection_score": 0.4917519688606262,
+   "x_px": 361.5625,
+   "y_px": 174.1796875
+  },
+  {
+   "point_id": "CP0030",
+   "x": 90.390625,
+   "y": 179.8671875,
+   "model_x": 89,
+   "model_y": 253,
+   "detection_score": 0.7506799101829529,
+   "x_px": 90.390625,
+   "y_px": 179.8671875
+  },
+  {
+   "point_id": "CP0031",
+   "x": 153.359375,
+   "y": 180.578125,
+   "model_x": 151,
+   "model_y": 254,
+   "detection_score": 0.9974039196968079,
+   "x_px": 153.359375,
+   "y_px": 180.578125
+  },
+  {
+   "point_id": "CP0032",
+   "x": 347.34375,
+   "y": 184.84375,
+   "model_x": 342,
+   "model_y": 260,
+   "detection_score": 0.5157013535499573,
+   "x_px": 347.34375,
+   "y_px": 184.84375
+  },
+  {
+   "point_id": "CP0033",
+   "x": 152.34375,
+   "y": 194.796875,
+   "model_x": 150,
+   "model_y": 274,
+   "detection_score": 0.7816190719604492,
+   "x_px": 152.34375,
+   "y_px": 194.796875
+  },
+  {
+   "point_id": "CP0034",
+   "x": 380.859375,
+   "y": 196.9296875,
+   "model_x": 375,
+   "model_y": 277,
+   "detection_score": 0.35652855038642883,
+   "x_px": 380.859375,
+   "y_px": 196.9296875
+  },
+  {
+   "point_id": "CP0035",
+   "x": 90.390625,
+   "y": 201.1953125,
+   "model_x": 89,
+   "model_y": 283,
+   "detection_score": 0.9955770969390869,
+   "x_px": 90.390625,
+   "y_px": 201.1953125
+  },
+  {
+   "point_id": "CP0036",
+   "x": 361.5625,
+   "y": 204.75,
+   "model_x": 356,
+   "model_y": 288,
+   "detection_score": 0.9976536631584167,
+   "x_px": 361.5625,
+   "y_px": 204.75
+  },
+  {
+   "point_id": "CP0037",
+   "x": 116.796875,
+   "y": 216.125,
+   "model_x": 115,
+   "model_y": 304,
+   "detection_score": 0.8857071995735168,
+   "x_px": 116.796875,
+   "y_px": 216.125
+  },
+  {
+   "point_id": "CP0038",
+   "x": 337.1875,
+   "y": 223.234375,
+   "model_x": 332,
+   "model_y": 314,
+   "detection_score": 0.7874584794044495,
+   "x_px": 337.1875,
+   "y_px": 223.234375
+  },
+  {
+   "point_id": "CP0039",
+   "x": 390.0,
+   "y": 225.3671875,
+   "model_x": 384,
+   "model_y": 317,
+   "detection_score": 0.7357879877090454,
+   "x_px": 390.0,
+   "y_px": 225.3671875
+  },
+  {
+   "point_id": "CP0040",
+   "x": 243.75,
+   "y": 227.5,
+   "model_x": 240,
+   "model_y": 320,
+   "detection_score": 0.4944550395011902,
+   "x_px": 243.75,
+   "y_px": 227.5
+  },
+  {
+   "point_id": "CP0041",
+   "x": 430.625,
+   "y": 229.6328125,
+   "model_x": 424,
+   "model_y": 323,
+   "detection_score": 0.7818816900253296,
+   "x_px": 430.625,
+   "y_px": 229.6328125
+  },
+  {
+   "point_id": "CP0042",
+   "x": 116.796875,
+   "y": 231.765625,
+   "model_x": 115,
+   "model_y": 326,
+   "detection_score": 0.9821980595588684,
+   "x_px": 116.796875,
+   "y_px": 231.765625
+  },
+  {
+   "point_id": "CP0043",
+   "x": 390.0,
+   "y": 233.8984375,
+   "model_x": 384,
+   "model_y": 329,
+   "detection_score": 0.4064301550388336,
+   "x_px": 390.0,
+   "y_px": 233.8984375
+  },
+  {
+   "point_id": "CP0044",
+   "x": 154.375,
+   "y": 240.296875,
+   "model_x": 152,
+   "model_y": 338,
+   "detection_score": 0.7586427927017212,
+   "x_px": 154.375,
+   "y_px": 240.296875
+  },
+  {
+   "point_id": "CP0045",
+   "x": 427.578125,
+   "y": 240.296875,
+   "model_x": 421,
+   "model_y": 338,
+   "detection_score": 0.9828659892082214,
+   "x_px": 427.578125,
+   "y_px": 240.296875
+  },
+  {
+   "point_id": "CP0046",
+   "x": 476.328125,
+   "y": 243.8515625,
+   "model_x": 469,
+   "model_y": 343,
+   "detection_score": 0.9925277233123779,
+   "x_px": 476.328125,
+   "y_px": 243.8515625
+  },
+  {
+   "point_id": "CP0047",
+   "x": 242.734375,
+   "y": 251.671875,
+   "model_x": 239,
+   "model_y": 354,
+   "detection_score": 0.983342170715332,
+   "x_px": 242.734375,
+   "y_px": 251.671875
+  },
+  {
+   "point_id": "CP0048",
+   "x": 338.203125,
+   "y": 251.671875,
+   "model_x": 333,
+   "model_y": 354,
+   "detection_score": 0.989281415939331,
+   "x_px": 338.203125,
+   "y_px": 251.671875
+  },
+  {
+   "point_id": "CP0049",
+   "x": 476.328125,
+   "y": 258.78125,
+   "model_x": 469,
+   "model_y": 364,
+   "detection_score": 0.9931255578994751,
+   "x_px": 476.328125,
+   "y_px": 258.78125
+  },
+  {
+   "point_id": "CP0050",
+   "x": 152.34375,
+   "y": 264.46875,
+   "model_x": 150,
+   "model_y": 372,
+   "detection_score": 0.9976166486740112,
+   "x_px": 152.34375,
+   "y_px": 264.46875
+  }
+ ],
+ "corrected_points": [
+  {
+   "point_id": "CP0001",
+   "x": 336.171875,
+   "y": 26.3046875,
+   "model_x": 331,
+   "model_y": 37,
+   "raw_x": 336.171875,
+   "raw_y": 26.3046875,
+   "detection_score": 0.7960452437400818,
+   "component_id": 1,
+   "x_px": 336.171875,
+   "y_px": 26.3046875
+  },
+  {
+   "point_id": "CP0002",
+   "x": 68.046875,
+   "y": 37.6796875,
+   "model_x": 67,
+   "model_y": 53,
+   "raw_x": 68.046875,
+   "raw_y": 37.6796875,
+   "detection_score": 0.9915592074394226,
+   "component_id": 2,
+   "x_px": 68.046875,
+   "y_px": 37.6796875
+  },
+  {
+   "point_id": "CP0004",
+   "x": 337.1875,
+   "y": 41.234375,
+   "model_x": 332,
+   "model_y": 58,
+   "raw_x": 337.1875,
+   "raw_y": 41.234375,
+   "detection_score": 0.44064757227897644,
+   "component_id": 1,
+   "x_px": 337.1875,
+   "y_px": 41.234375
+  },
+  {
+   "point_id": "CP0005",
+   "x": 338.203125,
+   "y": 45.5,
+   "model_x": 333,
+   "model_y": 64,
+   "raw_x": 337.1875,
+   "raw_y": 45.5,
+   "detection_score": 0.4128354489803314,
+   "component_id": 1,
+   "x_px": 338.203125,
+   "y_px": 45.5
+  },
+  {
+   "point_id": "CP0006",
+   "x": 68.046875,
+   "y": 50.4765625,
+   "model_x": 67,
+   "model_y": 71,
+   "raw_x": 68.046875,
+   "raw_y": 50.4765625,
+   "detection_score": 0.9139405488967896,
+   "component_id": 2,
+   "x_px": 68.046875,
+   "y_px": 50.4765625
+  },
+  {
+   "point_id": "CP0009",
+   "x": 336.171875,
+   "y": 78.203125,
+   "model_x": 331,
+   "model_y": 110,
+   "raw_x": 337.1875,
+   "raw_y": 78.203125,
+   "detection_score": 0.7760473489761353,
+   "component_id": 1,
+   "x_px": 336.171875,
+   "y_px": 78.203125
+  },
+  {
+   "point_id": "CP0010",
+   "x": 338.203125,
+   "y": 89.578125,
+   "model_x": 333,
+   "model_y": 126,
+   "raw_x": 337.1875,
+   "raw_y": 89.578125,
+   "detection_score": 0.8627111315727234,
+   "component_id": 1,
+   "x_px": 338.203125,
+   "y_px": 89.578125
+  },
+  {
+   "point_id": "CP0011",
+   "x": 361.5625,
+   "y": 98.8203125,
+   "model_x": 356,
+   "model_y": 139,
+   "raw_x": 361.5625,
+   "raw_y": 99.53125,
+   "detection_score": 0.9952359795570374,
+   "component_id": 1,
+   "x_px": 361.5625,
+   "y_px": 98.8203125
+  },
+  {
+   "point_id": "CP0013",
+   "x": 91.40625,
+   "y": 110.1953125,
+   "model_x": 90,
+   "model_y": 155,
+   "raw_x": 91.40625,
+   "raw_y": 110.1953125,
+   "detection_score": 0.9729905724525452,
+   "component_id": 2,
+   "x_px": 91.40625,
+   "y_px": 110.1953125
+  },
+  {
+   "point_id": "CP0014",
+   "x": 362.578125,
+   "y": 100.2421875,
+   "model_x": 357,
+   "model_y": 141,
+   "raw_x": 361.5625,
+   "raw_y": 109.484375,
+   "detection_score": 0.9853589534759521,
+   "component_id": 1,
+   "x_px": 362.578125,
+   "y_px": 100.2421875
+  },
+  {
+   "point_id": "CP0015",
+   "x": 385.9375,
+   "y": 117.3046875,
+   "model_x": 380,
+   "model_y": 165,
+   "raw_x": 385.9375,
+   "raw_y": 117.3046875,
+   "detection_score": 0.991273820400238,
+   "component_id": 1,
+   "x_px": 385.9375,
+   "y_px": 117.3046875
+  },
+  {
+   "point_id": "CP0016",
+   "x": 94.453125,
+   "y": 114.4609375,
+   "model_x": 93,
+   "model_y": 161,
+   "raw_x": 93.4375,
+   "raw_y": 120.1484375,
+   "detection_score": 0.7260459065437317,
+   "component_id": 2,
+   "x_px": 94.453125,
+   "y_px": 114.4609375
+  },
+  {
+   "point_id": "CP0017",
+   "x": 114.765625,
+   "y": 127.2578125,
+   "model_x": 113,
+   "model_y": 179,
+   "raw_x": 115.78125,
+   "raw_y": 127.2578125,
+   "detection_score": 0.806300938129425,
+   "component_id": 3,
+   "x_px": 114.765625,
+   "y_px": 127.2578125
+  },
+  {
+   "point_id": "CP0018",
+   "x": 385.9375,
+   "y": 117.3046875,
+   "model_x": 380,
+   "model_y": 165,
+   "raw_x": 384.921875,
+   "raw_y": 127.2578125,
+   "detection_score": 0.5597304105758667,
+   "component_id": 1,
+   "x_px": 385.9375,
+   "y_px": 117.3046875
+  },
+  {
+   "point_id": "CP0019",
+   "x": 67.03125,
+   "y": 132.234375,
+   "model_x": 66,
+   "model_y": 186,
+   "raw_x": 66.015625,
+   "raw_y": 134.3671875,
+   "detection_score": 0.836521565914154,
+   "component_id": 2,
+   "x_px": 67.03125,
+   "y_px": 132.234375
+  },
+  {
+   "point_id": "CP0020",
+   "x": 115.78125,
+   "y": 140.0546875,
+   "model_x": 114,
+   "model_y": 197,
+   "raw_x": 115.78125,
+   "raw_y": 140.0546875,
+   "detection_score": 0.9971550703048706,
+   "component_id": 2,
+   "x_px": 115.78125,
+   "y_px": 140.0546875
+  },
+  {
+   "point_id": "CP0021",
+   "x": 426.5625,
+   "y": 140.0546875,
+   "model_x": 420,
+   "model_y": 197,
+   "raw_x": 426.5625,
+   "raw_y": 140.0546875,
+   "detection_score": 0.7951571941375732,
+   "component_id": 1,
+   "x_px": 426.5625,
+   "y_px": 140.0546875
+  },
+  {
+   "point_id": "CP0022",
+   "x": 337.1875,
+   "y": 145.7421875,
+   "model_x": 332,
+   "model_y": 205,
+   "raw_x": 336.171875,
+   "raw_y": 145.7421875,
+   "detection_score": 0.43258950114250183,
+   "component_id": 2,
+   "x_px": 337.1875,
+   "y_px": 145.7421875
+  },
+  {
+   "point_id": "CP0023",
+   "x": 67.03125,
+   "y": 150.0078125,
+   "model_x": 66,
+   "model_y": 211,
+   "raw_x": 67.03125,
+   "raw_y": 150.0078125,
+   "detection_score": 0.9703942537307739,
+   "component_id": 2,
+   "x_px": 67.03125,
+   "y_px": 150.0078125
+  },
+  {
+   "point_id": "CP0025",
+   "x": 335.15625,
+   "y": 147.1640625,
+   "model_x": 330,
+   "model_y": 207,
+   "raw_x": 336.171875,
+   "raw_y": 151.4296875,
+   "detection_score": 0.5816222429275513,
+   "component_id": 2,
+   "x_px": 335.15625,
+   "y_px": 147.1640625
+  },
+  {
+   "point_id": "CP0026",
+   "x": 245.78125,
+   "y": 163.515625,
+   "model_x": 242,
+   "model_y": 230,
+   "raw_x": 245.78125,
+   "raw_y": 164.2265625,
+   "detection_score": 0.9973453879356384,
+   "component_id": 2,
+   "x_px": 245.78125,
+   "y_px": 163.515625
+  },
+  {
+   "point_id": "CP0027",
+   "x": 474.296875,
+   "y": 162.09375,
+   "model_x": 467,
+   "model_y": 228,
+   "raw_x": 475.3125,
+   "raw_y": 162.09375,
+   "detection_score": 0.9323168992996216,
+   "component_id": 1,
+   "x_px": 474.296875,
+   "y_px": 162.09375
+  },
+  {
+   "point_id": "CP0029",
+   "x": 362.578125,
+   "y": 174.1796875,
+   "model_x": 357,
+   "model_y": 245,
+   "raw_x": 361.5625,
+   "raw_y": 174.1796875,
+   "detection_score": 0.4917519688606262,
+   "component_id": 2,
+   "x_px": 362.578125,
+   "y_px": 174.1796875
+  },
+  {
+   "point_id": "CP0030",
+   "x": 91.40625,
+   "y": 179.8671875,
+   "model_x": 90,
+   "model_y": 253,
+   "raw_x": 90.390625,
+   "raw_y": 179.8671875,
+   "detection_score": 0.7506799101829529,
+   "component_id": 2,
+   "x_px": 91.40625,
+   "y_px": 179.8671875
+  },
+  {
+   "point_id": "CP0031",
+   "x": 152.34375,
+   "y": 180.578125,
+   "model_x": 150,
+   "model_y": 254,
+   "raw_x": 153.359375,
+   "raw_y": 180.578125,
+   "detection_score": 0.9974039196968079,
+   "component_id": 2,
+   "x_px": 152.34375,
+   "y_px": 180.578125
+  },
+  {
+   "point_id": "CP0032",
+   "x": 348.359375,
+   "y": 184.84375,
+   "model_x": 343,
+   "model_y": 260,
+   "raw_x": 347.34375,
+   "raw_y": 184.84375,
+   "detection_score": 0.5157013535499573,
+   "component_id": 2,
+   "x_px": 348.359375,
+   "y_px": 184.84375
+  },
+  {
+   "point_id": "CP0034",
+   "x": 381.875,
+   "y": 193.375,
+   "model_x": 376,
+   "model_y": 272,
+   "raw_x": 380.859375,
+   "raw_y": 196.9296875,
+   "detection_score": 0.35652855038642883,
+   "component_id": 2,
+   "x_px": 381.875,
+   "y_px": 193.375
+  },
+  {
+   "point_id": "CP0035",
+   "x": 90.390625,
+   "y": 200.484375,
+   "model_x": 89,
+   "model_y": 282,
+   "raw_x": 90.390625,
+   "raw_y": 201.1953125,
+   "detection_score": 0.9955770969390869,
+   "component_id": 2,
+   "x_px": 90.390625,
+   "y_px": 200.484375
+  },
+  {
+   "point_id": "CP0036",
+   "x": 361.5625,
+   "y": 204.0390625,
+   "model_x": 356,
+   "model_y": 287,
+   "raw_x": 361.5625,
+   "raw_y": 204.75,
+   "detection_score": 0.9976536631584167,
+   "component_id": 2,
+   "x_px": 361.5625,
+   "y_px": 204.0390625
+  },
+  {
+   "point_id": "CP0037",
+   "x": 117.8125,
+   "y": 216.125,
+   "model_x": 116,
+   "model_y": 304,
+   "raw_x": 116.796875,
+   "raw_y": 216.125,
+   "detection_score": 0.8857071995735168,
+   "component_id": 2,
+   "x_px": 117.8125,
+   "y_px": 216.125
+  },
+  {
+   "point_id": "CP0038",
+   "x": 337.1875,
+   "y": 223.234375,
+   "model_x": 332,
+   "model_y": 314,
+   "raw_x": 337.1875,
+   "raw_y": 223.234375,
+   "detection_score": 0.7874584794044495,
+   "component_id": 5,
+   "x_px": 337.1875,
+   "y_px": 223.234375
+  },
+  {
+   "point_id": "CP0039",
+   "x": 390.0,
+   "y": 225.3671875,
+   "model_x": 384,
+   "model_y": 317,
+   "raw_x": 390.0,
+   "raw_y": 225.3671875,
+   "detection_score": 0.7357879877090454,
+   "component_id": 2,
+   "x_px": 390.0,
+   "y_px": 225.3671875
+  },
+  {
+   "point_id": "CP0040",
+   "x": 243.75,
+   "y": 227.5,
+   "model_x": 240,
+   "model_y": 320,
+   "raw_x": 243.75,
+   "raw_y": 227.5,
+   "detection_score": 0.4944550395011902,
+   "component_id": 2,
+   "x_px": 243.75,
+   "y_px": 227.5
+  },
+  {
+   "point_id": "CP0041",
+   "x": 429.609375,
+   "y": 229.6328125,
+   "model_x": 423,
+   "model_y": 323,
+   "raw_x": 430.625,
+   "raw_y": 229.6328125,
+   "detection_score": 0.7818816900253296,
+   "component_id": 2,
+   "x_px": 429.609375,
+   "y_px": 229.6328125
+  },
+  {
+   "point_id": "CP0042",
+   "x": 116.796875,
+   "y": 231.765625,
+   "model_x": 115,
+   "model_y": 326,
+   "raw_x": 116.796875,
+   "raw_y": 231.765625,
+   "detection_score": 0.9821980595588684,
+   "component_id": 2,
+   "x_px": 116.796875,
+   "y_px": 231.765625
+  },
+  {
+   "point_id": "CP0043",
+   "x": 391.015625,
+   "y": 226.078125,
+   "model_x": 385,
+   "model_y": 318,
+   "raw_x": 390.0,
+   "raw_y": 233.8984375,
+   "detection_score": 0.4064301550388336,
+   "component_id": 2,
+   "x_px": 391.015625,
+   "y_px": 226.078125
+  },
+  {
+   "point_id": "CP0044",
+   "x": 153.359375,
+   "y": 241.71875,
+   "model_x": 151,
+   "model_y": 340,
+   "raw_x": 154.375,
+   "raw_y": 240.296875,
+   "detection_score": 0.7586427927017212,
+   "component_id": 2,
+   "x_px": 153.359375,
+   "y_px": 241.71875
+  },
+  {
+   "point_id": "CP0045",
+   "x": 427.578125,
+   "y": 240.296875,
+   "model_x": 421,
+   "model_y": 338,
+   "raw_x": 427.578125,
+   "raw_y": 240.296875,
+   "detection_score": 0.9828659892082214,
+   "component_id": 2,
+   "x_px": 427.578125,
+   "y_px": 240.296875
+  },
+  {
+   "point_id": "CP0046",
+   "x": 476.328125,
+   "y": 245.984375,
+   "model_x": 469,
+   "model_y": 346,
+   "raw_x": 476.328125,
+   "raw_y": 243.8515625,
+   "detection_score": 0.9925277233123779,
+   "component_id": 2,
+   "x_px": 476.328125,
+   "y_px": 245.984375
+  },
+  {
+   "point_id": "CP0047",
+   "x": 242.734375,
+   "y": 251.671875,
+   "model_x": 239,
+   "model_y": 354,
+   "raw_x": 242.734375,
+   "raw_y": 251.671875,
+   "detection_score": 0.983342170715332,
+   "component_id": 2,
+   "x_px": 242.734375,
+   "y_px": 251.671875
+  },
+  {
+   "point_id": "CP0048",
+   "x": 338.203125,
+   "y": 250.9609375,
+   "model_x": 333,
+   "model_y": 353,
+   "raw_x": 338.203125,
+   "raw_y": 251.671875,
+   "detection_score": 0.989281415939331,
+   "component_id": 10,
+   "x_px": 338.203125,
+   "y_px": 250.9609375
+  },
+  {
+   "point_id": "CP0049",
+   "x": 476.328125,
+   "y": 258.0703125,
+   "model_x": 469,
+   "model_y": 363,
+   "raw_x": 476.328125,
+   "raw_y": 258.78125,
+   "detection_score": 0.9931255578994751,
+   "component_id": 2,
+   "x_px": 476.328125,
+   "y_px": 258.0703125
+  },
+  {
+   "point_id": "CP0050",
+   "x": 152.34375,
+   "y": 264.46875,
+   "model_x": 150,
+   "model_y": 372,
+   "raw_x": 152.34375,
+   "raw_y": 264.46875,
+   "detection_score": 0.9976166486740112,
+   "component_id": 2,
+   "x_px": 152.34375,
+   "y_px": 264.46875
+  }
+ ],
+ "rejected_points": [
+  {
+   "point_id": "CP0024",
+   "x": 245.78125,
+   "y": 150.0078125,
+   "model_x": 242,
+   "model_y": 211,
+   "detection_score": 0.8579320311546326,
+   "x_px": 245.78125,
+   "y_px": 150.0078125,
+   "reason": "no_centerline_in_band_radius"
+  },
+  {
+   "point_id": "CP0028",
+   "x": 154.375,
+   "y": 165.6484375,
+   "model_x": 152,
+   "model_y": 233,
+   "detection_score": 0.47246506810188293,
+   "x_px": 154.375,
+   "y_px": 165.6484375,
+   "reason": "no_centerline_in_band_radius"
+  },
+  {
+   "point_id": "CP0033",
+   "x": 152.34375,
+   "y": 194.796875,
+   "model_x": 150,
+   "model_y": 274,
+   "detection_score": 0.7816190719604492,
+   "x_px": 152.34375,
+   "y_px": 194.796875,
+   "reason": "no_centerline_in_band_radius"
+  }
+ ],
+ "excluded_points": [
+  {
+   "point_id": "CP0003",
+   "x": 176.71875,
+   "y": 40.5234375,
+   "model_x": 174,
+   "model_y": 57,
+   "detection_score": 0.8640365600585938,
+   "x_px": 176.71875,
+   "y_px": 40.5234375
+  },
+  {
+   "point_id": "CP0007",
+   "x": 176.71875,
+   "y": 57.5859375,
+   "model_x": 174,
+   "model_y": 81,
+   "detection_score": 0.9935199618339539,
+   "x_px": 176.71875,
+   "y_px": 57.5859375
+  },
+  {
+   "point_id": "CP0008",
+   "x": 176.71875,
+   "y": 75.359375,
+   "model_x": 174,
+   "model_y": 106,
+   "detection_score": 0.9992469549179077,
+   "x_px": 176.71875,
+   "y_px": 75.359375
+  },
+  {
+   "point_id": "CP0012",
+   "x": 9.140625,
+   "y": 105.9296875,
+   "model_x": 9,
+   "model_y": 149,
+   "detection_score": 0.9925642609596252,
+   "x_px": 9.140625,
+   "y_px": 105.9296875
+  },
+  {
+   "point_id": "CP0051",
+   "x": 60.9375,
+   "y": 307.8359375,
+   "model_x": 60,
+   "model_y": 433,
+   "detection_score": 0.4234468638896942,
+   "x_px": 60.9375,
+   "y_px": 307.8359375
+  }
+ ],
+ "centerline_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__denosumab_-_SB162__p01__v9/chartparser_geometry/centerline_512.png",
+ "public_process_kps_reference": [
+  {
+   "point_id": "CP0001",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0002",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0004",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0005",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0006",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0009",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0010",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0011",
+   "status": "retained",
+   "x": 361.5625,
+   "y": 98.109375,
+   "upright_x": 361.5625,
+   "upright_y": 98.109375,
+   "original_x": 361.5625,
+   "original_y": 98.109375,
+   "model_x": 356.0,
+   "model_y": 138.0
+  },
+  {
+   "point_id": "CP0013",
+   "status": "retained",
+   "x": 91.40625,
+   "y": 108.0625,
+   "upright_x": 91.40625,
+   "upright_y": 108.0625,
+   "original_x": 91.40625,
+   "original_y": 108.0625,
+   "model_x": 90.0,
+   "model_y": 152.0
+  },
+  {
+   "point_id": "CP0014",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0015",
+   "status": "retained",
+   "x": 385.9375,
+   "y": 116.59375,
+   "upright_x": 385.9375,
+   "upright_y": 116.59375,
+   "original_x": 385.9375,
+   "original_y": 116.59375,
+   "model_x": 380.0,
+   "model_y": 164.0
+  },
+  {
+   "point_id": "CP0016",
+   "status": "retained",
+   "x": 93.4375,
+   "y": 115.171875,
+   "upright_x": 93.4375,
+   "upright_y": 115.171875,
+   "original_x": 93.4375,
+   "original_y": 115.171875,
+   "model_x": 92.0,
+   "model_y": 162.0
+  },
+  {
+   "point_id": "CP0017",
+   "status": "retained",
+   "x": 115.78125,
+   "y": 127.2578125,
+   "upright_x": 115.78125,
+   "upright_y": 127.2578125,
+   "original_x": 115.78125,
+   "original_y": 127.2578125,
+   "model_x": 114.0,
+   "model_y": 179.0
+  },
+  {
+   "point_id": "CP0018",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0019",
+   "status": "retained",
+   "x": 66.015625,
+   "y": 139.34375,
+   "upright_x": 66.015625,
+   "upright_y": 139.34375,
+   "original_x": 66.015625,
+   "original_y": 139.34375,
+   "model_x": 65.0,
+   "model_y": 196.0
+  },
+  {
+   "point_id": "CP0020",
+   "status": "retained",
+   "x": 115.78125,
+   "y": 140.0546875,
+   "upright_x": 115.78125,
+   "upright_y": 140.0546875,
+   "original_x": 115.78125,
+   "original_y": 140.0546875,
+   "model_x": 114.0,
+   "model_y": 197.0
+  },
+  {
+   "point_id": "CP0021",
+   "status": "retained",
+   "x": 426.5625,
+   "y": 139.34375,
+   "upright_x": 426.5625,
+   "upright_y": 139.34375,
+   "original_x": 426.5625,
+   "original_y": 139.34375,
+   "model_x": 420.0,
+   "model_y": 196.0
+  },
+  {
+   "point_id": "CP0022",
+   "status": "retained",
+   "x": 336.171875,
+   "y": 145.7421875,
+   "upright_x": 336.171875,
+   "upright_y": 145.7421875,
+   "original_x": 336.171875,
+   "original_y": 145.7421875,
+   "model_x": 331.0,
+   "model_y": 205.0
+  },
+  {
+   "point_id": "CP0023",
+   "status": "retained",
+   "x": 67.03125,
+   "y": 147.1640625,
+   "upright_x": 67.03125,
+   "upright_y": 147.1640625,
+   "original_x": 67.03125,
+   "original_y": 147.1640625,
+   "model_x": 66.0,
+   "model_y": 207.0
+  },
+  {
+   "point_id": "CP0024",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0025",
+   "status": "retained",
+   "x": 336.171875,
+   "y": 148.5859375,
+   "upright_x": 336.171875,
+   "upright_y": 148.5859375,
+   "original_x": 336.171875,
+   "original_y": 148.5859375,
+   "model_x": 331.0,
+   "model_y": 209.0
+  },
+  {
+   "point_id": "CP0026",
+   "status": "retained",
+   "x": 245.78125,
+   "y": 164.2265625,
+   "upright_x": 245.78125,
+   "upright_y": 164.2265625,
+   "original_x": 245.78125,
+   "original_y": 164.2265625,
+   "model_x": 242.0,
+   "model_y": 231.0
+  },
+  {
+   "point_id": "CP0027",
+   "status": "retained",
+   "x": 475.3125,
+   "y": 162.09375,
+   "upright_x": 475.3125,
+   "upright_y": 162.09375,
+   "original_x": 475.3125,
+   "original_y": 162.09375,
+   "model_x": 468.0,
+   "model_y": 228.0
+  },
+  {
+   "point_id": "CP0028",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0029",
+   "status": "retained",
+   "x": 361.5625,
+   "y": 172.7578125,
+   "upright_x": 361.5625,
+   "upright_y": 172.7578125,
+   "original_x": 361.5625,
+   "original_y": 172.7578125,
+   "model_x": 356.0,
+   "model_y": 243.0
+  },
+  {
+   "point_id": "CP0030",
+   "status": "retained",
+   "x": 90.390625,
+   "y": 182.0,
+   "upright_x": 90.390625,
+   "upright_y": 182.0,
+   "original_x": 90.390625,
+   "original_y": 182.0,
+   "model_x": 89.0,
+   "model_y": 256.0
+  },
+  {
+   "point_id": "CP0031",
+   "status": "retained",
+   "x": 153.359375,
+   "y": 179.15625,
+   "upright_x": 153.359375,
+   "upright_y": 179.15625,
+   "original_x": 153.359375,
+   "original_y": 179.15625,
+   "model_x": 151.0,
+   "model_y": 252.0
+  },
+  {
+   "point_id": "CP0032",
+   "status": "retained",
+   "x": 347.34375,
+   "y": 182.7109375,
+   "upright_x": 347.34375,
+   "upright_y": 182.7109375,
+   "original_x": 347.34375,
+   "original_y": 182.7109375,
+   "model_x": 342.0,
+   "model_y": 257.0
+  },
+  {
+   "point_id": "CP0033",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0034",
+   "status": "retained",
+   "x": 380.859375,
+   "y": 195.5078125,
+   "upright_x": 380.859375,
+   "upright_y": 195.5078125,
+   "original_x": 380.859375,
+   "original_y": 195.5078125,
+   "model_x": 375.0,
+   "model_y": 275.0
+  },
+  {
+   "point_id": "CP0035",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0036",
+   "status": "retained",
+   "x": 361.5625,
+   "y": 204.0390625,
+   "upright_x": 361.5625,
+   "upright_y": 204.0390625,
+   "original_x": 361.5625,
+   "original_y": 204.0390625,
+   "model_x": 356.0,
+   "model_y": 287.0
+  },
+  {
+   "point_id": "CP0037",
+   "status": "retained",
+   "x": 116.796875,
+   "y": 218.2578125,
+   "upright_x": 116.796875,
+   "upright_y": 218.2578125,
+   "original_x": 116.796875,
+   "original_y": 218.2578125,
+   "model_x": 115.0,
+   "model_y": 307.0
+  },
+  {
+   "point_id": "CP0038",
+   "status": "retained",
+   "x": 337.1875,
+   "y": 221.1015625,
+   "upright_x": 337.1875,
+   "upright_y": 221.1015625,
+   "original_x": 337.1875,
+   "original_y": 221.1015625,
+   "model_x": 332.0,
+   "model_y": 311.0
+  },
+  {
+   "point_id": "CP0039",
+   "status": "retained",
+   "x": 390.0,
+   "y": 224.65625,
+   "upright_x": 390.0,
+   "upright_y": 224.65625,
+   "original_x": 390.0,
+   "original_y": 224.65625,
+   "model_x": 384.0,
+   "model_y": 316.0
+  },
+  {
+   "point_id": "CP0040",
+   "status": "retained",
+   "x": 243.75,
+   "y": 222.5234375,
+   "upright_x": 243.75,
+   "upright_y": 222.5234375,
+   "original_x": 243.75,
+   "original_y": 222.5234375,
+   "model_x": 240.0,
+   "model_y": 313.0
+  },
+  {
+   "point_id": "CP0041",
+   "status": "retained",
+   "x": 430.625,
+   "y": 228.921875,
+   "upright_x": 430.625,
+   "upright_y": 228.921875,
+   "original_x": 430.625,
+   "original_y": 228.921875,
+   "model_x": 424.0,
+   "model_y": 322.0
+  },
+  {
+   "point_id": "CP0042",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0043",
+   "status": "retained",
+   "x": 390.0,
+   "y": 228.921875,
+   "upright_x": 390.0,
+   "upright_y": 228.921875,
+   "original_x": 390.0,
+   "original_y": 228.921875,
+   "model_x": 384.0,
+   "model_y": 322.0
+  },
+  {
+   "point_id": "CP0044",
+   "status": "retained",
+   "x": 154.375,
+   "y": 241.0078125,
+   "upright_x": 154.375,
+   "upright_y": 241.0078125,
+   "original_x": 154.375,
+   "original_y": 241.0078125,
+   "model_x": 152.0,
+   "model_y": 339.0
+  },
+  {
+   "point_id": "CP0045",
+   "status": "retained",
+   "x": 427.578125,
+   "y": 236.03125,
+   "upright_x": 427.578125,
+   "upright_y": 236.03125,
+   "original_x": 427.578125,
+   "original_y": 236.03125,
+   "model_x": 421.0,
+   "model_y": 332.0
+  },
+  {
+   "point_id": "CP0046",
+   "status": "retained",
+   "x": 476.328125,
+   "y": 246.6953125,
+   "upright_x": 476.328125,
+   "upright_y": 246.6953125,
+   "original_x": 476.328125,
+   "original_y": 246.6953125,
+   "model_x": 469.0,
+   "model_y": 347.0
+  },
+  {
+   "point_id": "CP0047",
+   "status": "retained",
+   "x": 242.734375,
+   "y": 248.1171875,
+   "upright_x": 242.734375,
+   "upright_y": 248.1171875,
+   "original_x": 242.734375,
+   "original_y": 248.1171875,
+   "model_x": 239.0,
+   "model_y": 349.0
+  },
+  {
+   "point_id": "CP0048",
+   "status": "retained",
+   "x": 338.203125,
+   "y": 251.671875,
+   "upright_x": 338.203125,
+   "upright_y": 251.671875,
+   "original_x": 338.203125,
+   "original_y": 251.671875,
+   "model_x": 333.0,
+   "model_y": 354.0
+  },
+  {
+   "point_id": "CP0049",
+   "status": "retained",
+   "x": 476.328125,
+   "y": 253.8046875,
+   "upright_x": 476.328125,
+   "upright_y": 253.8046875,
+   "original_x": 476.328125,
+   "original_y": 253.8046875,
+   "model_x": 469.0,
+   "model_y": 357.0
+  },
+  {
+   "point_id": "CP0050",
+   "status": "retained",
+   "x": 152.34375,
+   "y": 265.1796875,
+   "upright_x": 152.34375,
+   "upright_y": 265.1796875,
+   "original_x": 152.34375,
+   "original_y": 265.1796875,
+   "model_x": 150.0,
+   "model_y": 373.0
+  }
+ ],
+ "implementation_choices": {
+  "curve_probability": "Cached segmentation[0,1], already sigmoid in ChartParserModel.forward; no second activation.",
+  "probability_inconsistency": "Paper section 3.2.3 says two-channel Softmax, section 3.2.4 discusses Sigmoid, and the public forward applies independent Sigmoid. This run thresholds the released cached Sigmoid output directly, not a claim of identical paper Softmax probabilities.",
+  "threshold": 0.6,
+  "morphology": "One 3x3 all-ones binary closing; constant-zero border.",
+  "connectivity": 8,
+  "component_policy": "Retain every connected component; no minimum-area deletion.",
+  "thinning": "skimage.morphology.skeletonize(method=zhang) independently within each 8-connected component.",
+  "correction": "Nearest centreline pixel in x +/- 1 columns and abs(delta_y) < 15 model pixels; minimum Euclidean distance, ties smaller y then x. Snap x and y to that centreline pixel. Reject if absent.",
+  "correction_parameters_provenance": "The paper does not specify kernel/thinner/selection radius. Column band and vertical radius are borrowed from public process_kps; nearest selection and exact snapping are explicit experimental choices.",
+  "public_reference": "Separate result using original argmax mask, public x +/- 1, y-run gap <= 2, first ascending-y mean within 15, average with original y. Safety bounds added; not used for grouping.",
+  "pivot_patch_size_width_height": [
+   40,
+   20
+  ],
+  "pivot_patch_coordinate_system": "Native original-resolution upright input crop, not the 512x512 model input.",
+  "legend_images": "Unmodified original RGB swatch box crops, connector pixels retained. No reconstructed swatch masks.",
+  "grouping": "Official LineEX learned Siamese + MLP similarity, highest score over supplied legend crops. No histogram override or confidence rejection.",
+  "shape_classification": "Not performed. Legend identity is not a semantic circle/square/triangle prediction.",
+  "deduplication": "None. Distinct raw pivot hypotheses can snap to the same pixel and remain separate records.",
+  "no_legend_policy": "Abstain from grouping even for a nominal single-series panel; no fabricated legend."
+ },
+ "native_legend_stage": "unavailable; supplied benchmark swatch crops used, never class-3 remapping",
+ "limitations": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ],
+ "shared_legend_status": "available",
+ "shared_legend_reason": null,
+ "shared_legends_sha256": "1b86f1cbb069fffa507e6b35532c76b83aa7018b235882d3135fe9fa44d0d019",
+ "warnings": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ]
+}

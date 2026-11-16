@@ -1,0 +1,1623 @@
+{
+ "version": "external_shared_input_benchmark_v1",
+ "panel_id": "er__daclizumab_1_1_0__p02__v2",
+ "modality": "bw",
+ "method": "lineex_paper_grouped",
+ "status": "completed",
+ "coordinate_system": "x_px/y_px = full original unrotated image pixels; x/y = shared native crop pixels",
+ "image_path": "data/images\\er__daclizumab_1_1_0__p02__v2.png",
+ "input_sha256": "69ae38e095947fed688ba264ae7b3f06199da9265921bc95e51e5cd3cd0cffd0",
+ "source_image_path": "data/images\\er__daclizumab_1_1_0__p02__v2.png",
+ "source_sha256": "69ae38e095947fed688ba264ae7b3f06199da9265921bc95e51e5cd3cd0cffd0",
+ "crop_box_original": [
+  0,
+  0,
+  538,
+  276
+ ],
+ "plot_box": [
+  308.0,
+  16.0,
+  522.0,
+  169.0
+ ],
+ "legend_box": [
+  6.0,
+  212.0,
+  237.0,
+  268.0
+ ],
+ "legends": [
+  {
+   "legend_index": 0,
+   "series_id": "s01",
+   "label": "negative control antibody",
+   "source_native_legend_id": "S01",
+   "box_input": [
+    3,
+    216,
+    38,
+    225
+   ],
+   "box_original": [
+    3,
+    216,
+    38,
+    225
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__daclizumab_1_1_0__p02__v2/shared_legend_crops/legend_01.png",
+   "crop_sha256": "73012737afcca37daf09c53ebeb39eeea800d51891872279c350106087ff712e",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__daclizumab_1_1_0__p02__v2/shared_legends.json",
+   "shared_legends_sha256": "db1c4f858afd18608176d1592658268049adba57869fa20e84113eaeea9c8605",
+   "mapping_provenance": {
+    "S01": "s01",
+    "S02": "s02"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 1,
+   "series_id": "s02",
+   "label": "CDC positive control antibody",
+   "source_native_legend_id": "S02",
+   "box_input": [
+    3,
+    254,
+    38,
+    263
+   ],
+   "box_original": [
+    3,
+    254,
+    38,
+    263
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__daclizumab_1_1_0__p02__v2/shared_legend_crops/legend_02.png",
+   "crop_sha256": "6121a13dea82e97738899ae2c0f5309fb00da5055177ffe6402b04d4f76d2cea",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__daclizumab_1_1_0__p02__v2/shared_legends.json",
+   "shared_legends_sha256": "db1c4f858afd18608176d1592658268049adba57869fa20e84113eaeea9c8605",
+   "mapping_provenance": {
+    "S01": "s01",
+    "S02": "s02"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  }
+ ],
+ "predictions": [
+  {
+   "point_id": "LXP0004",
+   "x": 515.0,
+   "y": 163.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9579375982284546,
+   "winning_similarity": 0.9579375982284546,
+   "similarities": [
+    0.9579375982284546,
+    0.9552828669548035
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0004.png",
+   "patch_box_input": [
+    495,
+    153,
+    535,
+    173
+   ],
+   "x_px": 515.0,
+   "y_px": 163.0
+  },
+  {
+   "point_id": "LXP0007",
+   "x": 379.0,
+   "y": 154.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.10710467398166656,
+   "winning_similarity": 0.10710467398166656,
+   "similarities": [
+    0.10710467398166656,
+    0.09906107187271118
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0007.png",
+   "patch_box_input": [
+    359,
+    144,
+    399,
+    164
+   ],
+   "x_px": 379.0,
+   "y_px": 154.0
+  },
+  {
+   "point_id": "LXP0013",
+   "x": 433.0,
+   "y": 44.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.6278444528579712,
+   "winning_similarity": 0.6278444528579712,
+   "similarities": [
+    0.6278444528579712,
+    0.6215004324913025
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0013.png",
+   "patch_box_input": [
+    413,
+    34,
+    453,
+    54
+   ],
+   "x_px": 433.0,
+   "y_px": 44.0
+  },
+  {
+   "point_id": "LXP0018",
+   "x": 515.0,
+   "y": 56.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9381897449493408,
+   "winning_similarity": 0.9381897449493408,
+   "similarities": [
+    0.9381897449493408,
+    0.9348718523979187
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0018.png",
+   "patch_box_input": [
+    495,
+    46,
+    535,
+    66
+   ],
+   "x_px": 515.0,
+   "y_px": 56.0
+  },
+  {
+   "point_id": "LXP0022",
+   "x": 353.0,
+   "y": 153.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.2539559006690979,
+   "winning_similarity": 0.2539559006690979,
+   "similarities": [
+    0.2539559006690979,
+    0.20394153892993927
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0022.png",
+   "patch_box_input": [
+    333,
+    143,
+    373,
+    163
+   ],
+   "x_px": 353.0,
+   "y_px": 153.0
+  },
+  {
+   "point_id": "LXP0024",
+   "x": 428.0,
+   "y": 47.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.17303960025310516,
+   "winning_similarity": 0.17303960025310516,
+   "similarities": [
+    0.15266293287277222,
+    0.17303960025310516
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0024.png",
+   "patch_box_input": [
+    408,
+    37,
+    448,
+    57
+   ],
+   "x_px": 428.0,
+   "y_px": 47.0
+  },
+  {
+   "point_id": "LXP0025",
+   "x": 317.0,
+   "y": 156.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7584779858589172,
+   "winning_similarity": 0.7584779858589172,
+   "similarities": [
+    0.7584779858589172,
+    0.7105192542076111
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0025.png",
+   "patch_box_input": [
+    297,
+    146,
+    337,
+    166
+   ],
+   "x_px": 317.0,
+   "y_px": 156.0
+  },
+  {
+   "point_id": "LXP0026",
+   "x": 433.0,
+   "y": 157.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8810965418815613,
+   "winning_similarity": 0.8810965418815613,
+   "similarities": [
+    0.8810965418815613,
+    0.8732311725616455
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0026.png",
+   "patch_box_input": [
+    413,
+    147,
+    453,
+    167
+   ],
+   "x_px": 433.0,
+   "y_px": 157.0
+  },
+  {
+   "point_id": "LXP0031",
+   "x": 350.0,
+   "y": 158.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.11472854763269424,
+   "winning_similarity": 0.11472854763269424,
+   "similarities": [
+    0.06493757665157318,
+    0.11472854763269424
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0031.png",
+   "patch_box_input": [
+    330,
+    148,
+    370,
+    168
+   ],
+   "x_px": 350.0,
+   "y_px": 158.0
+  },
+  {
+   "point_id": "LXP0041",
+   "x": 395.0,
+   "y": 66.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.5522615313529968,
+   "winning_similarity": 0.5522615313529968,
+   "similarities": [
+    0.5522615313529968,
+    0.44536834955215454
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0041.png",
+   "patch_box_input": [
+    375,
+    56,
+    415,
+    76
+   ],
+   "x_px": 395.0,
+   "y_px": 66.0
+  },
+  {
+   "point_id": "LXP0042",
+   "x": 514.0,
+   "y": 161.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9294834733009338,
+   "winning_similarity": 0.9294834733009338,
+   "similarities": [
+    0.9294834733009338,
+    0.9293076992034912
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0042.png",
+   "patch_box_input": [
+    494,
+    151,
+    534,
+    171
+   ],
+   "x_px": 514.0,
+   "y_px": 161.0
+  },
+  {
+   "point_id": "LXP0047",
+   "x": 347.0,
+   "y": 154.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.0029527898877859116,
+   "winning_similarity": 0.0029527898877859116,
+   "similarities": [
+    0.001286157756112516,
+    0.0029527898877859116
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0047.png",
+   "patch_box_input": [
+    327,
+    144,
+    367,
+    164
+   ],
+   "x_px": 347.0,
+   "y_px": 154.0
+  },
+  {
+   "point_id": "LXP0048",
+   "x": 321.0,
+   "y": 162.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.31645217537879944,
+   "winning_similarity": 0.31645217537879944,
+   "similarities": [
+    0.31645217537879944,
+    0.22192545235157013
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0048.png",
+   "patch_box_input": [
+    301,
+    152,
+    341,
+    172
+   ],
+   "x_px": 321.0,
+   "y_px": 162.0
+  },
+  {
+   "point_id": "LXP0050",
+   "x": 434.0,
+   "y": 156.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9009367823600769,
+   "winning_similarity": 0.9009367823600769,
+   "similarities": [
+    0.8981158137321472,
+    0.9009367823600769
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0050.png",
+   "patch_box_input": [
+    414,
+    146,
+    454,
+    166
+   ],
+   "x_px": 434.0,
+   "y_px": 156.0
+  },
+  {
+   "point_id": "LXP0055",
+   "x": 378.0,
+   "y": 157.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.0728013664484024,
+   "winning_similarity": 0.0728013664484024,
+   "similarities": [
+    0.0728013664484024,
+    0.05157031491398811
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0055.png",
+   "patch_box_input": [
+    358,
+    147,
+    398,
+    167
+   ],
+   "x_px": 378.0,
+   "y_px": 157.0
+  },
+  {
+   "point_id": "LXP0058",
+   "x": 349.0,
+   "y": 155.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.03860974311828613,
+   "winning_similarity": 0.03860974311828613,
+   "similarities": [
+    0.03841525316238403,
+    0.03860974311828613
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0058.png",
+   "patch_box_input": [
+    329,
+    145,
+    369,
+    165
+   ],
+   "x_px": 349.0,
+   "y_px": 155.0
+  }
+ ],
+ "unavailable": [],
+ "patches": [
+  {
+   "point_index": 0,
+   "point_id": "LXP0004",
+   "box_input": [
+    495,
+    153,
+    535,
+    173
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0004.png"
+  },
+  {
+   "point_index": 1,
+   "point_id": "LXP0007",
+   "box_input": [
+    359,
+    144,
+    399,
+    164
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0007.png"
+  },
+  {
+   "point_index": 2,
+   "point_id": "LXP0013",
+   "box_input": [
+    413,
+    34,
+    453,
+    54
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0013.png"
+  },
+  {
+   "point_index": 3,
+   "point_id": "LXP0018",
+   "box_input": [
+    495,
+    46,
+    535,
+    66
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0018.png"
+  },
+  {
+   "point_index": 4,
+   "point_id": "LXP0022",
+   "box_input": [
+    333,
+    143,
+    373,
+    163
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0022.png"
+  },
+  {
+   "point_index": 5,
+   "point_id": "LXP0024",
+   "box_input": [
+    408,
+    37,
+    448,
+    57
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0024.png"
+  },
+  {
+   "point_index": 6,
+   "point_id": "LXP0025",
+   "box_input": [
+    297,
+    146,
+    337,
+    166
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0025.png"
+  },
+  {
+   "point_index": 7,
+   "point_id": "LXP0026",
+   "box_input": [
+    413,
+    147,
+    453,
+    167
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0026.png"
+  },
+  {
+   "point_index": 8,
+   "point_id": "LXP0031",
+   "box_input": [
+    330,
+    148,
+    370,
+    168
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0031.png"
+  },
+  {
+   "point_index": 9,
+   "point_id": "LXP0041",
+   "box_input": [
+    375,
+    56,
+    415,
+    76
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0041.png"
+  },
+  {
+   "point_index": 10,
+   "point_id": "LXP0042",
+   "box_input": [
+    494,
+    151,
+    534,
+    171
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0042.png"
+  },
+  {
+   "point_index": 11,
+   "point_id": "LXP0047",
+   "box_input": [
+    327,
+    144,
+    367,
+    164
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0047.png"
+  },
+  {
+   "point_index": 12,
+   "point_id": "LXP0048",
+   "box_input": [
+    301,
+    152,
+    341,
+    172
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0048.png"
+  },
+  {
+   "point_index": 13,
+   "point_id": "LXP0050",
+   "box_input": [
+    414,
+    146,
+    454,
+    166
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0050.png"
+  },
+  {
+   "point_index": 14,
+   "point_id": "LXP0055",
+   "box_input": [
+    358,
+    147,
+    398,
+    167
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0055.png"
+  },
+  {
+   "point_index": 15,
+   "point_id": "LXP0058",
+   "box_input": [
+    329,
+    145,
+    369,
+    165
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/patches/LXP0058.png"
+  }
+ ],
+ "similarity_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__daclizumab_1_1_0__p02__v2/lineex_paper_grouped/similarity.npy",
+ "similarity_row_point_ids": [
+  "LXP0004",
+  "LXP0007",
+  "LXP0013",
+  "LXP0018",
+  "LXP0022",
+  "LXP0024",
+  "LXP0025",
+  "LXP0026",
+  "LXP0031",
+  "LXP0041",
+  "LXP0042",
+  "LXP0047",
+  "LXP0048",
+  "LXP0050",
+  "LXP0055",
+  "LXP0058"
+ ],
+ "similarity_column_series_ids": [
+  "s01",
+  "s02"
+ ],
+ "timing": {
+  "shared_input_verification_seconds": 0.0,
+  "legend_crop_seconds": 0.0,
+  "network_seconds": 0.013275199919007719,
+  "head_postprocess_and_export_seconds": 0.005207400070503354,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.01991849998012185,
+  "learned_matching_seconds": 0.07024889998137951,
+  "total_seconds": 0.10989949991926551,
+  "method_total_excluding_shared_verification_seconds": 0.10989949991926551,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "patch_matching_timing": {
+  "patch_extract_and_export_seconds": 0.01991849998012185,
+  "learned_matching_seconds": 0.07024889998137951,
+  "total_seconds": 0.09141689992975444
+ },
+ "timing_breakdown": {
+  "shared_input_verification_seconds": 0.0,
+  "legend_crop_seconds": 0.0,
+  "network_seconds": 0.013275199919007719,
+  "head_postprocess_and_export_seconds": 0.005207400070503354,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.01991849998012185,
+  "learned_matching_seconds": 0.07024889998137951,
+  "total_seconds": 0.10989949991926551,
+  "method_total_excluding_shared_verification_seconds": 0.10989949991926551,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "raw_points": [
+  {
+   "point_id": "LXP0004",
+   "x": 515.0,
+   "y": 163.0,
+   "detection_score": null,
+   "x_px": 515.0,
+   "y_px": 163.0
+  },
+  {
+   "point_id": "LXP0007",
+   "x": 379.0,
+   "y": 154.0,
+   "detection_score": null,
+   "x_px": 379.0,
+   "y_px": 154.0
+  },
+  {
+   "point_id": "LXP0013",
+   "x": 433.0,
+   "y": 44.0,
+   "detection_score": null,
+   "x_px": 433.0,
+   "y_px": 44.0
+  },
+  {
+   "point_id": "LXP0018",
+   "x": 515.0,
+   "y": 56.0,
+   "detection_score": null,
+   "x_px": 515.0,
+   "y_px": 56.0
+  },
+  {
+   "point_id": "LXP0022",
+   "x": 353.0,
+   "y": 153.0,
+   "detection_score": null,
+   "x_px": 353.0,
+   "y_px": 153.0
+  },
+  {
+   "point_id": "LXP0024",
+   "x": 428.0,
+   "y": 47.0,
+   "detection_score": null,
+   "x_px": 428.0,
+   "y_px": 47.0
+  },
+  {
+   "point_id": "LXP0025",
+   "x": 317.0,
+   "y": 156.0,
+   "detection_score": null,
+   "x_px": 317.0,
+   "y_px": 156.0
+  },
+  {
+   "point_id": "LXP0026",
+   "x": 433.0,
+   "y": 157.0,
+   "detection_score": null,
+   "x_px": 433.0,
+   "y_px": 157.0
+  },
+  {
+   "point_id": "LXP0031",
+   "x": 350.0,
+   "y": 158.0,
+   "detection_score": null,
+   "x_px": 350.0,
+   "y_px": 158.0
+  },
+  {
+   "point_id": "LXP0041",
+   "x": 395.0,
+   "y": 66.0,
+   "detection_score": null,
+   "x_px": 395.0,
+   "y_px": 66.0
+  },
+  {
+   "point_id": "LXP0042",
+   "x": 514.0,
+   "y": 161.0,
+   "detection_score": null,
+   "x_px": 514.0,
+   "y_px": 161.0
+  },
+  {
+   "point_id": "LXP0047",
+   "x": 347.0,
+   "y": 154.0,
+   "detection_score": null,
+   "x_px": 347.0,
+   "y_px": 154.0
+  },
+  {
+   "point_id": "LXP0048",
+   "x": 321.0,
+   "y": 162.0,
+   "detection_score": null,
+   "x_px": 321.0,
+   "y_px": 162.0
+  },
+  {
+   "point_id": "LXP0050",
+   "x": 434.0,
+   "y": 156.0,
+   "detection_score": null,
+   "x_px": 434.0,
+   "y_px": 156.0
+  },
+  {
+   "point_id": "LXP0055",
+   "x": 378.0,
+   "y": 157.0,
+   "detection_score": null,
+   "x_px": 378.0,
+   "y_px": 157.0
+  },
+  {
+   "point_id": "LXP0058",
+   "x": 349.0,
+   "y": 155.0,
+   "detection_score": null,
+   "x_px": 349.0,
+   "y_px": 155.0
+  }
+ ],
+ "raw_queries": [
+  {
+   "query_id": 0,
+   "x": 45,
+   "y": 147,
+   "score": null,
+   "normalized_x": 0.08515866845846176,
+   "normalized_y": 0.5349525213241577,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 1,
+   "x": 327,
+   "y": 178,
+   "score": null,
+   "normalized_x": 0.6085252165794373,
+   "normalized_y": 0.6485255360603333,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 2,
+   "x": 199,
+   "y": 35,
+   "score": null,
+   "normalized_x": 0.3708435297012329,
+   "normalized_y": 0.1279182732105255,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 3,
+   "x": 288,
+   "y": 147,
+   "score": null,
+   "normalized_x": 0.536011278629303,
+   "normalized_y": 0.5339860320091248,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 4,
+   "x": 515,
+   "y": 163,
+   "score": null,
+   "normalized_x": 0.9579657316207886,
+   "normalized_y": 0.5925220251083374,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 5,
+   "x": 249,
+   "y": 149,
+   "score": null,
+   "normalized_x": 0.4643784761428833,
+   "normalized_y": 0.5420908331871033,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 6,
+   "x": 516,
+   "y": 179,
+   "score": null,
+   "normalized_x": 0.959164023399353,
+   "normalized_y": 0.6506618857383728,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 7,
+   "x": 379,
+   "y": 154,
+   "score": null,
+   "normalized_x": 0.7053457498550415,
+   "normalized_y": 0.560922384262085,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 8,
+   "x": 119,
+   "y": 148,
+   "score": null,
+   "normalized_x": 0.22141167521476746,
+   "normalized_y": 0.5394298434257507,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 9,
+   "x": 46,
+   "y": 148,
+   "score": null,
+   "normalized_x": 0.08580669015645981,
+   "normalized_y": 0.5380927920341492,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 10,
+   "x": 86,
+   "y": 147,
+   "score": null,
+   "normalized_x": 0.16075415909290314,
+   "normalized_y": 0.5344022512435913,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 11,
+   "x": 357,
+   "y": 178,
+   "score": null,
+   "normalized_x": 0.6644970774650574,
+   "normalized_y": 0.6482275128364563,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 12,
+   "x": 46,
+   "y": 180,
+   "score": null,
+   "normalized_x": 0.08611331135034561,
+   "normalized_y": 0.6544288396835327,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 13,
+   "x": 433,
+   "y": 44,
+   "score": null,
+   "normalized_x": 0.8064514398574829,
+   "normalized_y": 0.16031232476234436,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 14,
+   "x": 163,
+   "y": 178,
+   "score": null,
+   "normalized_x": 0.30331578850746155,
+   "normalized_y": 0.6467325091362,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 15,
+   "x": 386,
+   "y": 67,
+   "score": null,
+   "normalized_x": 0.7191610932350159,
+   "normalized_y": 0.24630305171012878,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": true,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 16,
+   "x": 452,
+   "y": 179,
+   "score": null,
+   "normalized_x": 0.8403636813163757,
+   "normalized_y": 0.6499165296554565,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 17,
+   "x": 254,
+   "y": 26,
+   "score": null,
+   "normalized_x": 0.4735187292098999,
+   "normalized_y": 0.09752620756626129,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 18,
+   "x": 515,
+   "y": 56,
+   "score": null,
+   "normalized_x": 0.9577412009239197,
+   "normalized_y": 0.20516029000282288,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 19,
+   "x": 200,
+   "y": 153,
+   "score": null,
+   "normalized_x": 0.3728695213794708,
+   "normalized_y": 0.5571219325065613,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 20,
+   "x": 246,
+   "y": 176,
+   "score": null,
+   "normalized_x": 0.45740050077438354,
+   "normalized_y": 0.6404865384101868,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 21,
+   "x": 168,
+   "y": 39,
+   "score": null,
+   "normalized_x": 0.3140597343444824,
+   "normalized_y": 0.14250494539737701,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 22,
+   "x": 353,
+   "y": 153,
+   "score": null,
+   "normalized_x": 0.6572305560112,
+   "normalized_y": 0.554830014705658,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 23,
+   "x": 86,
+   "y": 179,
+   "score": null,
+   "normalized_x": 0.1613122671842575,
+   "normalized_y": 0.6488952040672302,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 24,
+   "x": 428,
+   "y": 47,
+   "score": null,
+   "normalized_x": 0.7956494092941284,
+   "normalized_y": 0.17219355702400208,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 25,
+   "x": 317,
+   "y": 156,
+   "score": null,
+   "normalized_x": 0.5898460149765015,
+   "normalized_y": 0.5676811337471008,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 26,
+   "x": 433,
+   "y": 157,
+   "score": null,
+   "normalized_x": 0.8059422373771667,
+   "normalized_y": 0.5720909833908081,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 27,
+   "x": 127,
+   "y": 152,
+   "score": null,
+   "normalized_x": 0.2368146926164627,
+   "normalized_y": 0.5516062378883362,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 28,
+   "x": 479,
+   "y": 179,
+   "score": null,
+   "normalized_x": 0.8910772800445557,
+   "normalized_y": 0.6495999693870544,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 29,
+   "x": 256,
+   "y": 177,
+   "score": null,
+   "normalized_x": 0.4768412113189697,
+   "normalized_y": 0.6424211263656616,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": true,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 30,
+   "x": 127,
+   "y": 74,
+   "score": null,
+   "normalized_x": 0.236542746424675,
+   "normalized_y": 0.2710433304309845,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 31,
+   "x": 350,
+   "y": 158,
+   "score": null,
+   "normalized_x": 0.6523869633674622,
+   "normalized_y": 0.5748247504234314,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 32,
+   "x": 471,
+   "y": 159,
+   "score": null,
+   "normalized_x": 0.8758363127708435,
+   "normalized_y": 0.5789185762405396,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": true,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 33,
+   "x": 54,
+   "y": 149,
+   "score": null,
+   "normalized_x": 0.10205687582492828,
+   "normalized_y": 0.5406578779220581,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 34,
+   "x": 170,
+   "y": 154,
+   "score": null,
+   "normalized_x": 0.3177286386489868,
+   "normalized_y": 0.5594136714935303,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 35,
+   "x": 400,
+   "y": 176,
+   "score": null,
+   "normalized_x": 0.7448912858963013,
+   "normalized_y": 0.638629138469696,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 36,
+   "x": 474,
+   "y": 159,
+   "score": null,
+   "normalized_x": 0.8820828795433044,
+   "normalized_y": 0.5769057869911194,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": true,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 37,
+   "x": 199,
+   "y": 178,
+   "score": null,
+   "normalized_x": 0.3708888292312622,
+   "normalized_y": 0.6483321189880371,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 38,
+   "x": 87,
+   "y": 179,
+   "score": null,
+   "normalized_x": 0.16330242156982422,
+   "normalized_y": 0.6510725021362305,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 39,
+   "x": 224,
+   "y": 156,
+   "score": null,
+   "normalized_x": 0.4172710180282593,
+   "normalized_y": 0.5677405595779419,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 40,
+   "x": 88,
+   "y": 178,
+   "score": null,
+   "normalized_x": 0.16504019498825073,
+   "normalized_y": 0.6470534801483154,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 41,
+   "x": 395,
+   "y": 66,
+   "score": null,
+   "normalized_x": 0.7342541217803955,
+   "normalized_y": 0.23938044905662537,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 42,
+   "x": 514,
+   "y": 161,
+   "score": null,
+   "normalized_x": 0.9555114507675171,
+   "normalized_y": 0.5862501859664917,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 43,
+   "x": 192,
+   "y": 35,
+   "score": null,
+   "normalized_x": 0.35844314098358154,
+   "normalized_y": 0.12806269526481628,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 44,
+   "x": 430,
+   "y": 175,
+   "score": null,
+   "normalized_x": 0.7994058132171631,
+   "normalized_y": 0.6348574757575989,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 45,
+   "x": 170,
+   "y": 178,
+   "score": null,
+   "normalized_x": 0.317192018032074,
+   "normalized_y": 0.6454355716705322,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 46,
+   "x": 325,
+   "y": 178,
+   "score": null,
+   "normalized_x": 0.6058250069618225,
+   "normalized_y": 0.6477890610694885,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 47,
+   "x": 347,
+   "y": 154,
+   "score": null,
+   "normalized_x": 0.6453343033790588,
+   "normalized_y": 0.5586350560188293,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 48,
+   "x": 321,
+   "y": 162,
+   "score": null,
+   "normalized_x": 0.5968289971351624,
+   "normalized_y": 0.5884107351303101,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 49,
+   "x": 46,
+   "y": 180,
+   "score": null,
+   "normalized_x": 0.08626527339220047,
+   "normalized_y": 0.6526626348495483,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 50,
+   "x": 434,
+   "y": 156,
+   "score": null,
+   "normalized_x": 0.8075980544090271,
+   "normalized_y": 0.5664961934089661,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 51,
+   "x": 244,
+   "y": 158,
+   "score": null,
+   "normalized_x": 0.4539763033390045,
+   "normalized_y": 0.5730359554290771,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 52,
+   "x": 228,
+   "y": 38,
+   "score": null,
+   "normalized_x": 0.4250698983669281,
+   "normalized_y": 0.14127586781978607,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 53,
+   "x": 503,
+   "y": 179,
+   "score": null,
+   "normalized_x": 0.935684084892273,
+   "normalized_y": 0.6500653624534607,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 54,
+   "x": 46,
+   "y": 150,
+   "score": null,
+   "normalized_x": 0.08695227652788162,
+   "normalized_y": 0.5453351140022278,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 55,
+   "x": 378,
+   "y": 157,
+   "score": null,
+   "normalized_x": 0.7032361626625061,
+   "normalized_y": 0.5704321265220642,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 56,
+   "x": 200,
+   "y": 173,
+   "score": null,
+   "normalized_x": 0.3724977374076843,
+   "normalized_y": 0.6287866234779358,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 57,
+   "x": 462,
+   "y": 74,
+   "score": null,
+   "normalized_x": 0.8589305877685547,
+   "normalized_y": 0.2681686580181122,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": true,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 58,
+   "x": 349,
+   "y": 155,
+   "score": null,
+   "normalized_x": 0.6496716737747192,
+   "normalized_y": 0.5616558194160461,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 59,
+   "x": 122,
+   "y": 152,
+   "score": null,
+   "normalized_x": 0.2269391268491745,
+   "normalized_y": 0.5512824654579163,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 60,
+   "x": 90,
+   "y": 152,
+   "score": null,
+   "normalized_x": 0.16848592460155487,
+   "normalized_y": 0.5515936613082886,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 61,
+   "x": 165,
+   "y": 154,
+   "score": null,
+   "normalized_x": 0.30683043599128723,
+   "normalized_y": 0.5608221888542175,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 62,
+   "x": 47,
+   "y": 157,
+   "score": null,
+   "normalized_x": 0.08824402093887329,
+   "normalized_y": 0.5700975656509399,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 63,
+   "x": 129,
+   "y": 179,
+   "score": null,
+   "normalized_x": 0.2410307377576828,
+   "normalized_y": 0.6510466933250427,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  }
+ ],
+ "head_status": "completed",
+ "implementation_choices": {
+  "keypoints": "Official 64-query L+D checkpoint",
+  "background_gate": "paper Algorithm 2 threshold 0.98 (released code uses 0.999); re-implemented gate verified identical to the vendor function at 0.999",
+  "legend_patches": "resized to 40x20 per paper section 4.3 before the matcher 224 transform",
+  "grouping": "Official learned Siamese matcher, no histogram override"
+ },
+ "limitations": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ],
+ "shared_legend_status": "available",
+ "warnings": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ]
+}

@@ -1,0 +1,154 @@
+{
+ "panel_id": "er__trastuzumab_3_1_2__p01__v8",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "WT",
+   "bbox": [
+    1128,
+    683,
+    1198,
+    715
+   ],
+   "bbox_crop": [
+    1128,
+    683,
+    1198,
+    715
+   ],
+   "bbox_original": [
+    1128,
+    683,
+    1198,
+    715
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__trastuzumab_3_1_2__p01__v8/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__trastuzumab_3_1_2__p01__v8/shared_legend_crops/legend_01.png",
+   "image_size": [
+    70,
+    32
+   ],
+   "sha256": "97231afc3daac28606ec0608bb3efaca1cefbf7878e094c76dee9fcb4647cbdf",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "S298A/E333A/K334A",
+   "bbox": [
+    1129,
+    746,
+    1197,
+    776
+   ],
+   "bbox_crop": [
+    1129,
+    746,
+    1197,
+    776
+   ],
+   "bbox_original": [
+    1129,
+    746,
+    1197,
+    776
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__trastuzumab_3_1_2__p01__v8/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__trastuzumab_3_1_2__p01__v8/shared_legend_crops/legend_02.png",
+   "image_size": [
+    68,
+    30
+   ],
+   "sha256": "ff86991fec5d09840bce8f44689f7fb2bc499ce628983d70ee29d6503571e34b",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s03",
+   "series_id": "s03",
+   "source_native_legend_id": "s03",
+   "label": "S239D/I332E/A330L",
+   "bbox": [
+    1126,
+    805,
+    1200,
+    840
+   ],
+   "bbox_crop": [
+    1126,
+    805,
+    1200,
+    840
+   ],
+   "bbox_original": [
+    1126,
+    805,
+    1200,
+    840
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__trastuzumab_3_1_2__p01__v8/shared_legend_crops/legend_03.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__trastuzumab_3_1_2__p01__v8/shared_legend_crops/legend_03.png",
+   "image_size": [
+    74,
+    35
+   ],
+   "sha256": "80883f12f95e089d3c49c8a9515380f735ac34f59520a2ee19f6929631cf22b7",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s01": "s01",
+  "s02": "s02",
+  "s03": "s03"
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "WT",
+   "bbox": [
+    1128,
+    683,
+    1198,
+    715
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "S298A/E333A/K334A",
+   "bbox": [
+    1129,
+    746,
+    1197,
+    776
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "S239D/I332E/A330L",
+   "bbox": [
+    1126,
+    805,
+    1200,
+    840
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "fa3e3ff715a0ad56497f192334bc21787a918260c84822f9cc63667fd4a856fc",
+ "source_sha256": "fa3e3ff715a0ad56497f192334bc21787a918260c84822f9cc63667fd4a856fc",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}

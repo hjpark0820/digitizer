@@ -1,0 +1,195 @@
+{
+ "panel_id": "er__demcizumab_1_1_0__p03__v8",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "color02",
+   "native_swatch_id": "S01",
+   "bbox": [
+    81,
+    175,
+    98,
+    191
+   ],
+   "native_body_bbox": [
+    84,
+    177,
+    95,
+    188
+   ],
+   "class_name": "filled_circle",
+   "rgb": [
+    219,
+    28,
+    25
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s02",
+   "label": "Day 2",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__demcizumab_1_1_0__p03__v8/shared_legend_crops/legend_01.png",
+   "image_size": [
+    17,
+    16
+   ],
+   "sha256": "6410e5826575243e1bee3e2c32ff9587fe1fbc1b410650e023aad163faf14386",
+   "source_native_legend_id": "color02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__demcizumab_1_1_0__p03__v8/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    81,
+    175,
+    98,
+    191
+   ],
+   "bbox_original": [
+    81,
+    175,
+    98,
+    191
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color03",
+   "native_swatch_id": "S02",
+   "bbox": [
+    151,
+    175,
+    168,
+    191
+   ],
+   "native_body_bbox": [
+    154,
+    177,
+    165,
+    188
+   ],
+   "class_name": "filled_circle",
+   "rgb": [
+    119,
+    21,
+    219
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s03",
+   "label": "Day 3",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__demcizumab_1_1_0__p03__v8/shared_legend_crops/legend_02.png",
+   "image_size": [
+    17,
+    16
+   ],
+   "sha256": "91b5b92dad5be0848e9b9747bf2c9a7cc1af5983100b51af16223d1d08b90a7e",
+   "source_native_legend_id": "color03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__demcizumab_1_1_0__p03__v8/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    151,
+    175,
+    168,
+    191
+   ],
+   "bbox_original": [
+    151,
+    175,
+    168,
+    191
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "color02": "s02",
+  "color03": "s03"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "color02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s02",
+    "iou": 0.5718654434250765,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s03",
+    "iou": 0.5718654434250765,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [
+   "s01"
+  ],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Day 1",
+   "bbox": [
+    8,
+    176,
+    31,
+    188
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Day 2",
+   "bbox": [
+    78,
+    176,
+    100,
+    187
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "Day 3",
+   "bbox": [
+    148,
+    176,
+    170,
+    187
+   ]
+  }
+ ],
+ "input_sha256": "c53fa9ac659225432ee7028fef75e2b29ef081fea4ad004492debbb79bb9e9b9",
+ "source_sha256": "c53fa9ac659225432ee7028fef75e2b29ef081fea4ad004492debbb79bb9e9b9",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.004385399981401861
+}

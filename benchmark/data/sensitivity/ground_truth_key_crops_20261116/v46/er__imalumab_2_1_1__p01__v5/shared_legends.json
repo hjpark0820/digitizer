@@ -1,0 +1,108 @@
+{
+ "panel_id": "er__imalumab_2_1_1__p01__v5",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "C3 (neg. control)",
+   "bbox": [
+    708,
+    224,
+    792,
+    256
+   ],
+   "bbox_crop": [
+    708,
+    224,
+    792,
+    256
+   ],
+   "bbox_original": [
+    708,
+    224,
+    792,
+    256
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__imalumab_2_1_1__p01__v5/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__imalumab_2_1_1__p01__v5/shared_legend_crops/legend_01.png",
+   "image_size": [
+    84,
+    32
+   ],
+   "sha256": "450d755ed0e9eab739d00bf92320615a4a120400d70933cec4a3fc77ca29fae7",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "Bax94",
+   "bbox": [
+    708,
+    364,
+    792,
+    395
+   ],
+   "bbox_crop": [
+    708,
+    364,
+    792,
+    395
+   ],
+   "bbox_original": [
+    708,
+    364,
+    792,
+    395
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__imalumab_2_1_1__p01__v5/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__imalumab_2_1_1__p01__v5/shared_legend_crops/legend_02.png",
+   "image_size": [
+    84,
+    31
+   ],
+   "sha256": "a9e799233847caff12b4c7fcb8eeb4c624014b677a3b4933dc885cdc81658322",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s02": "s02",
+  "s01": "s01"
+ },
+ "annotations": [
+  {
+   "series_id": "s02",
+   "label": "C3 (neg. control)",
+   "bbox": [
+    708,
+    224,
+    792,
+    256
+   ]
+  },
+  {
+   "series_id": "s01",
+   "label": "Bax94",
+   "bbox": [
+    708,
+    364,
+    792,
+    395
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "3fac01b4995c6d4da4d793b92432c20f0278cc46b3509a7ca49aadb93789c9bd",
+ "source_sha256": "3fac01b4995c6d4da4d793b92432c20f0278cc46b3509a7ca49aadb93789c9bd",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}

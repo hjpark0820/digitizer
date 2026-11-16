@@ -1,0 +1,569 @@
+{
+ "version": "external_shared_input_benchmark_v1",
+ "panel_id": "pk__zilovertamab1__p05__v9",
+ "modality": "bw",
+ "method": "aicp_corrected_grouped",
+ "status": "completed",
+ "coordinate_system": "x_px/y_px = full original unrotated image pixels; x/y = shared native crop pixels",
+ "image_path": "data/images\\pk__zilovertamab1__p05__v9.png",
+ "input_sha256": "4abed8be028a5b2caad06cd9fd1f0fa19f347bf909ce89fa4ea64a974aad9235",
+ "source_image_path": "data/images\\pk__zilovertamab1__p05__v9.png",
+ "source_sha256": "4abed8be028a5b2caad06cd9fd1f0fa19f347bf909ce89fa4ea64a974aad9235",
+ "crop_box_original": [
+  0,
+  0,
+  168,
+  142
+ ],
+ "plot_box": [
+  28.0,
+  16.0,
+  152.0,
+  110.0
+ ],
+ "legend_box": [
+  80.0,
+  82.0,
+  113.0,
+  92.0
+ ],
+ "legends": [
+  {
+   "legend_index": 0,
+   "series_id": "s01",
+   "label": "Pt 2",
+   "source_native_legend_id": "s01",
+   "box_input": [
+    77,
+    82,
+    98,
+    89
+   ],
+   "box_original": [
+    77,
+    82,
+    98,
+    89
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__zilovertamab1__p05__v9/shared_legend_crops/legend_01.png",
+   "crop_sha256": "9cebec2e821488536baddfdb5eda82df322f3149676d4434d9e0fba19a69f2b3",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__zilovertamab1__p05__v9/shared_legends.json",
+   "shared_legends_sha256": "c2d5121e9f362eefeb6fda71346b964dbe9842902936d5a7738a9177acc27831",
+   "mapping_provenance": {
+    "s01": "s01"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  }
+ ],
+ "predictions": [
+  {
+   "point_id": "CP0001",
+   "x": 90.234375,
+   "y": 20.24609375,
+   "model_x": 275,
+   "model_y": 73,
+   "raw_x": 90.234375,
+   "raw_y": 20.24609375,
+   "detection_score": 0.9722372889518738,
+   "component_id": 3,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.938338041305542,
+   "winning_similarity": 0.938338041305542,
+   "similarities": [
+    0.938338041305542
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/pk__zilovertamab1__p05__v9/aicp_corrected_grouped/patches/CP0001.png",
+   "patch_box_input": [
+    70,
+    10,
+    110,
+    30
+   ],
+   "x_px": 90.234375,
+   "y_px": 20.24609375
+  },
+  {
+   "point_id": "CP0004",
+   "x": 37.40625,
+   "y": 25.23828125,
+   "model_x": 114,
+   "model_y": 91,
+   "raw_x": 37.40625,
+   "raw_y": 24.68359375,
+   "detection_score": 0.9733664989471436,
+   "component_id": 3,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9006940722465515,
+   "winning_similarity": 0.9006940722465515,
+   "similarities": [
+    0.9006940722465515
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/pk__zilovertamab1__p05__v9/aicp_corrected_grouped/patches/CP0004.png",
+   "patch_box_input": [
+    17,
+    15,
+    57,
+    35
+   ],
+   "x_px": 37.40625,
+   "y_px": 25.23828125
+  },
+  {
+   "point_id": "CP0005",
+   "x": 38.0625,
+   "y": 25.23828125,
+   "model_x": 116,
+   "model_y": 91,
+   "raw_x": 38.0625,
+   "raw_y": 26.625,
+   "detection_score": 0.7494269013404846,
+   "component_id": 3,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8486633896827698,
+   "winning_similarity": 0.8486633896827698,
+   "similarities": [
+    0.8486633896827698
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/pk__zilovertamab1__p05__v9/aicp_corrected_grouped/patches/CP0005.png",
+   "patch_box_input": [
+    18,
+    15,
+    58,
+    35
+   ],
+   "x_px": 38.0625,
+   "y_px": 25.23828125
+  },
+  {
+   "point_id": "CP0006",
+   "x": 150.9375,
+   "y": 31.0625,
+   "model_x": 460,
+   "model_y": 112,
+   "raw_x": 150.9375,
+   "raw_y": 31.33984375,
+   "detection_score": 0.9839809536933899,
+   "component_id": 3,
+   "series_id": "unknown_patch_unavailable",
+   "score": null,
+   "winning_similarity": null,
+   "similarities": [],
+   "legend_index": null,
+   "grouping_status": "unavailable_incomplete_native_patch",
+   "x_px": 150.9375,
+   "y_px": 31.0625
+  }
+ ],
+ "unavailable": [
+  {
+   "point_id": "CP0006",
+   "x": 150.9375,
+   "y": 31.0625,
+   "model_x": 460,
+   "model_y": 112,
+   "raw_x": 150.9375,
+   "raw_y": 31.33984375,
+   "detection_score": 0.9839809536933899,
+   "component_id": 3,
+   "x_px": 150.9375,
+   "y_px": 31.0625,
+   "reason": "incomplete 40x20 patch at image boundary"
+  }
+ ],
+ "patches": [
+  {
+   "point_index": 0,
+   "point_id": "CP0001",
+   "box_input": [
+    70,
+    10,
+    110,
+    30
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/pk__zilovertamab1__p05__v9/aicp_corrected_grouped/patches/CP0001.png"
+  },
+  {
+   "point_index": 1,
+   "point_id": "CP0004",
+   "box_input": [
+    17,
+    15,
+    57,
+    35
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/pk__zilovertamab1__p05__v9/aicp_corrected_grouped/patches/CP0004.png"
+  },
+  {
+   "point_index": 2,
+   "point_id": "CP0005",
+   "box_input": [
+    18,
+    15,
+    58,
+    35
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/pk__zilovertamab1__p05__v9/aicp_corrected_grouped/patches/CP0005.png"
+  }
+ ],
+ "similarity_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/pk__zilovertamab1__p05__v9/aicp_corrected_grouped/similarity.npy",
+ "similarity_row_point_ids": [
+  "CP0001",
+  "CP0004",
+  "CP0005"
+ ],
+ "similarity_column_series_ids": [
+  "s01"
+ ],
+ "timing": {
+  "shared_input_verification_seconds": 0.001497599994763732,
+  "legend_crop_seconds": 0.0012382999993860722,
+  "network_seconds": 0.034344299987424165,
+  "head_postprocess_and_export_seconds": 0.1343191000050865,
+  "curve_correction_seconds": 0.0236049999948591,
+  "patch_extract_and_export_seconds": 0.0035037999623455107,
+  "learned_matching_seconds": 0.022376200009603053,
+  "total_seconds": 0.22042619995772839,
+  "method_total_excluding_shared_verification_seconds": 0.22042619995772839,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "patch_matching_timing": {
+  "patch_extract_and_export_seconds": 0.0035037999623455107,
+  "learned_matching_seconds": 0.022376200009603053,
+  "total_seconds": 0.026919499970972538
+ },
+ "timing_breakdown": {
+  "shared_input_verification_seconds": 0.001497599994763732,
+  "legend_crop_seconds": 0.0012382999993860722,
+  "network_seconds": 0.034344299987424165,
+  "head_postprocess_and_export_seconds": 0.1343191000050865,
+  "curve_correction_seconds": 0.0236049999948591,
+  "patch_extract_and_export_seconds": 0.0035037999623455107,
+  "learned_matching_seconds": 0.022376200009603053,
+  "total_seconds": 0.22042619995772839,
+  "method_total_excluding_shared_verification_seconds": 0.22042619995772839,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "raw_heads_result_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/raw_heads/chartparser/pk__zilovertamab1__p05__v9/result.json",
+ "raw_points": [
+  {
+   "point_id": "CP0001",
+   "x": 90.234375,
+   "y": 20.24609375,
+   "model_x": 275,
+   "model_y": 73,
+   "detection_score": 0.9722372889518738,
+   "x_px": 90.234375,
+   "y_px": 20.24609375
+  },
+  {
+   "point_id": "CP0003",
+   "x": 28.546875,
+   "y": 24.9609375,
+   "model_x": 87,
+   "model_y": 90,
+   "detection_score": 0.9000908136367798,
+   "x_px": 28.546875,
+   "y_px": 24.9609375
+  },
+  {
+   "point_id": "CP0004",
+   "x": 37.40625,
+   "y": 24.68359375,
+   "model_x": 114,
+   "model_y": 89,
+   "detection_score": 0.9733664989471436,
+   "x_px": 37.40625,
+   "y_px": 24.68359375
+  },
+  {
+   "point_id": "CP0005",
+   "x": 38.0625,
+   "y": 26.625,
+   "model_x": 116,
+   "model_y": 96,
+   "detection_score": 0.7494269013404846,
+   "x_px": 38.0625,
+   "y_px": 26.625
+  },
+  {
+   "point_id": "CP0006",
+   "x": 150.9375,
+   "y": 31.33984375,
+   "model_x": 460,
+   "model_y": 113,
+   "detection_score": 0.9839809536933899,
+   "x_px": 150.9375,
+   "y_px": 31.33984375
+  }
+ ],
+ "corrected_points": [
+  {
+   "point_id": "CP0001",
+   "x": 90.234375,
+   "y": 20.24609375,
+   "model_x": 275,
+   "model_y": 73,
+   "raw_x": 90.234375,
+   "raw_y": 20.24609375,
+   "detection_score": 0.9722372889518738,
+   "component_id": 3,
+   "x_px": 90.234375,
+   "y_px": 20.24609375
+  },
+  {
+   "point_id": "CP0004",
+   "x": 37.40625,
+   "y": 25.23828125,
+   "model_x": 114,
+   "model_y": 91,
+   "raw_x": 37.40625,
+   "raw_y": 24.68359375,
+   "detection_score": 0.9733664989471436,
+   "component_id": 3,
+   "x_px": 37.40625,
+   "y_px": 25.23828125
+  },
+  {
+   "point_id": "CP0005",
+   "x": 38.0625,
+   "y": 25.23828125,
+   "model_x": 116,
+   "model_y": 91,
+   "raw_x": 38.0625,
+   "raw_y": 26.625,
+   "detection_score": 0.7494269013404846,
+   "component_id": 3,
+   "x_px": 38.0625,
+   "y_px": 25.23828125
+  },
+  {
+   "point_id": "CP0006",
+   "x": 150.9375,
+   "y": 31.0625,
+   "model_x": 460,
+   "model_y": 112,
+   "raw_x": 150.9375,
+   "raw_y": 31.33984375,
+   "detection_score": 0.9839809536933899,
+   "component_id": 3,
+   "x_px": 150.9375,
+   "y_px": 31.0625
+  }
+ ],
+ "rejected_points": [
+  {
+   "point_id": "CP0003",
+   "x": 28.546875,
+   "y": 24.9609375,
+   "model_x": 87,
+   "model_y": 90,
+   "detection_score": 0.9000908136367798,
+   "x_px": 28.546875,
+   "y_px": 24.9609375,
+   "reason": "no_centerline_in_band_radius"
+  }
+ ],
+ "excluded_points": [
+  {
+   "point_id": "CP0002",
+   "x": 19.6875,
+   "y": 24.9609375,
+   "model_x": 60,
+   "model_y": 90,
+   "detection_score": 0.37021079659461975,
+   "x_px": 19.6875,
+   "y_px": 24.9609375
+  },
+  {
+   "point_id": "CP0007",
+   "x": 18.046875,
+   "y": 75.71484375,
+   "model_x": 55,
+   "model_y": 273,
+   "detection_score": 0.44536271691322327,
+   "x_px": 18.046875,
+   "y_px": 75.71484375
+  },
+  {
+   "point_id": "CP0008",
+   "x": 19.6875,
+   "y": 75.9921875,
+   "model_x": 60,
+   "model_y": 274,
+   "detection_score": 0.3890312910079956,
+   "x_px": 19.6875,
+   "y_px": 75.9921875
+  },
+  {
+   "point_id": "CP0009",
+   "x": 109.265625,
+   "y": 84.3125,
+   "model_x": 333,
+   "model_y": 304,
+   "detection_score": 0.9873051047325134,
+   "x_px": 109.265625,
+   "y_px": 84.3125
+  },
+  {
+   "point_id": "CP0010",
+   "x": 109.265625,
+   "y": 87.0859375,
+   "model_x": 333,
+   "model_y": 314,
+   "detection_score": 0.9959192872047424,
+   "x_px": 109.265625,
+   "y_px": 87.0859375
+  },
+  {
+   "point_id": "CP0011",
+   "x": 19.6875,
+   "y": 91.5234375,
+   "model_x": 60,
+   "model_y": 330,
+   "detection_score": 0.6513491868972778,
+   "x_px": 19.6875,
+   "y_px": 91.5234375
+  },
+  {
+   "point_id": "CP0012",
+   "x": 18.375,
+   "y": 110.3828125,
+   "model_x": 56,
+   "model_y": 398,
+   "detection_score": 0.7203021049499512,
+   "x_px": 18.375,
+   "y_px": 110.3828125
+  },
+  {
+   "point_id": "CP0013",
+   "x": 28.21875,
+   "y": 110.3828125,
+   "model_x": 86,
+   "model_y": 398,
+   "detection_score": 0.9648953080177307,
+   "x_px": 28.21875,
+   "y_px": 110.3828125
+  },
+  {
+   "point_id": "CP0014",
+   "x": 150.28125,
+   "y": 110.9375,
+   "model_x": 458,
+   "model_y": 400,
+   "detection_score": 0.44649946689605713,
+   "x_px": 150.28125,
+   "y_px": 110.9375
+  }
+ ],
+ "centerline_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/pk__zilovertamab1__p05__v9/chartparser_geometry/centerline_512.png",
+ "public_process_kps_reference": [
+  {
+   "point_id": "CP0001",
+   "status": "retained",
+   "x": 90.234375,
+   "y": 20.24609375,
+   "upright_x": 90.234375,
+   "upright_y": 20.24609375,
+   "original_x": 90.234375,
+   "original_y": 20.24609375,
+   "model_x": 275.0,
+   "model_y": 73.0
+  },
+  {
+   "point_id": "CP0003",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0004",
+   "status": "retained",
+   "x": 37.40625,
+   "y": 24.40625,
+   "upright_x": 37.40625,
+   "upright_y": 24.40625,
+   "original_x": 37.40625,
+   "original_y": 24.40625,
+   "model_x": 114.0,
+   "model_y": 88.0
+  },
+  {
+   "point_id": "CP0005",
+   "status": "retained",
+   "x": 38.0625,
+   "y": 24.9609375,
+   "upright_x": 38.0625,
+   "upright_y": 24.9609375,
+   "original_x": 38.0625,
+   "original_y": 24.9609375,
+   "model_x": 116.0,
+   "model_y": 90.0
+  },
+  {
+   "point_id": "CP0006",
+   "status": "retained",
+   "x": 150.9375,
+   "y": 30.78515625,
+   "upright_x": 150.9375,
+   "upright_y": 30.78515625,
+   "original_x": 150.9375,
+   "original_y": 30.78515625,
+   "model_x": 460.0,
+   "model_y": 111.0
+  }
+ ],
+ "implementation_choices": {
+  "curve_probability": "Cached segmentation[0,1], already sigmoid in ChartParserModel.forward; no second activation.",
+  "probability_inconsistency": "Paper section 3.2.3 says two-channel Softmax, section 3.2.4 discusses Sigmoid, and the public forward applies independent Sigmoid. This run thresholds the released cached Sigmoid output directly, not a claim of identical paper Softmax probabilities.",
+  "threshold": 0.6,
+  "morphology": "One 3x3 all-ones binary closing; constant-zero border.",
+  "connectivity": 8,
+  "component_policy": "Retain every connected component; no minimum-area deletion.",
+  "thinning": "skimage.morphology.skeletonize(method=zhang) independently within each 8-connected component.",
+  "correction": "Nearest centreline pixel in x +/- 1 columns and abs(delta_y) < 15 model pixels; minimum Euclidean distance, ties smaller y then x. Snap x and y to that centreline pixel. Reject if absent.",
+  "correction_parameters_provenance": "The paper does not specify kernel/thinner/selection radius. Column band and vertical radius are borrowed from public process_kps; nearest selection and exact snapping are explicit experimental choices.",
+  "public_reference": "Separate result using original argmax mask, public x +/- 1, y-run gap <= 2, first ascending-y mean within 15, average with original y. Safety bounds added; not used for grouping.",
+  "pivot_patch_size_width_height": [
+   40,
+   20
+  ],
+  "pivot_patch_coordinate_system": "Native original-resolution upright input crop, not the 512x512 model input.",
+  "legend_images": "Unmodified original RGB swatch box crops, connector pixels retained. No reconstructed swatch masks.",
+  "grouping": "Official LineEX learned Siamese + MLP similarity, highest score over supplied legend crops. No histogram override or confidence rejection.",
+  "shape_classification": "Not performed. Legend identity is not a semantic circle/square/triangle prediction.",
+  "deduplication": "None. Distinct raw pivot hypotheses can snap to the same pixel and remain separate records.",
+  "no_legend_policy": "Abstain from grouping even for a nominal single-series panel; no fabricated legend."
+ },
+ "native_legend_stage": "unavailable; supplied benchmark swatch crops used, never class-3 remapping",
+ "limitations": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ],
+ "shared_legend_status": "available",
+ "shared_legend_reason": null,
+ "shared_legends_sha256": "c2d5121e9f362eefeb6fda71346b964dbe9842902936d5a7738a9177acc27831",
+ "warnings": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ]
+}

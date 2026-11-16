@@ -1,0 +1,157 @@
+{
+ "panel_id": "er__teclistamab_2_6_0__p01__v2",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    13,
+    434,
+    79,
+    457
+   ],
+   "native_body_bbox": [
+    37,
+    436,
+    56,
+    455
+   ],
+   "class_name": "filled_circle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "BCMAxCD3",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__teclistamab_2_6_0__p01__v2/shared_legend_crops/legend_01.png",
+   "image_size": [
+    66,
+    23
+   ],
+   "sha256": "6f0e7987ad57fc793390759fc15b939e80366cb2bf505ada30ccbd5f67227cfa",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__teclistamab_2_6_0__p01__v2/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    13,
+    434,
+    79,
+    457
+   ],
+   "bbox_original": [
+    13,
+    434,
+    79,
+    457
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    298,
+    431,
+    365,
+    460
+   ],
+   "native_body_bbox": [
+    321,
+    433,
+    342,
+    458
+   ],
+   "class_name": "open_rhombus",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s02",
+   "label": "Isotype",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__teclistamab_2_6_0__p01__v2/shared_legend_crops/legend_02.png",
+   "image_size": [
+    67,
+    29
+   ],
+   "sha256": "1f9fce7857e9522855d53bef7dd83ac63fb7dba8303074111eaa384cdbfd22fc",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__teclistamab_2_6_0__p01__v2/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    298,
+    431,
+    365,
+    460
+   ],
+   "bbox_original": [
+    298,
+    431,
+    365,
+    460
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01",
+  "S02": "s02"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.6646919431279621,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 0.49072265625,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "BCMAxCD3",
+   "bbox": [
+    8,
+    436,
+    84,
+    453
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Isotype",
+   "bbox": [
+    294,
+    437,
+    368,
+    452
+   ]
+  }
+ ],
+ "input_sha256": "0c564ab2eaa2d3dbd872a31cbea5a819f22430271ffebbefc90535083b7f2081",
+ "source_sha256": "0c564ab2eaa2d3dbd872a31cbea5a819f22430271ffebbefc90535083b7f2081",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.012608799966983497
+}

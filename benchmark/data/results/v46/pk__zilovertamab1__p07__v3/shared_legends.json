@@ -1,0 +1,83 @@
+{
+ "panel_id": "pk__zilovertamab1__p07__v3",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    76,
+    81,
+    95,
+    92
+   ],
+   "native_body_bbox": [
+    81,
+    82,
+    91,
+    91
+   ],
+   "class_name": "filled_square",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "Pt 01",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__zilovertamab1__p07__v3/shared_legend_crops/legend_01.png",
+   "image_size": [
+    19,
+    11
+   ],
+   "sha256": "817b6c68f7d0029ab07b5adb521e9a13004d0235b00802438dc83b13958deed9",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__zilovertamab1__p07__v3/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    76,
+    81,
+    95,
+    92
+   ],
+   "bbox_original": [
+    76,
+    81,
+    95,
+    92
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.5964125560538116,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Pt 01",
+   "bbox": [
+    74,
+    82,
+    95,
+    89
+   ]
+  }
+ ],
+ "input_sha256": "766b2bbd90c57ced4519645a4e3d7d307c3edea43911fab7e9e4ad3d6be6c5cb",
+ "source_sha256": "766b2bbd90c57ced4519645a4e3d7d307c3edea43911fab7e9e4ad3d6be6c5cb",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.004793300002347678
+}

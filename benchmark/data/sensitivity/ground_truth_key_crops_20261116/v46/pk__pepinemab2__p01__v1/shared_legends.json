@@ -1,0 +1,108 @@
+{
+ "panel_id": "pk__pepinemab2__p01__v1",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "Part A",
+   "bbox": [
+    586,
+    93,
+    650,
+    114
+   ],
+   "bbox_crop": [
+    586,
+    93,
+    650,
+    114
+   ],
+   "bbox_original": [
+    586,
+    93,
+    650,
+    114
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__pepinemab2__p01__v1/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__pepinemab2__p01__v1/shared_legend_crops/legend_01.png",
+   "image_size": [
+    64,
+    21
+   ],
+   "sha256": "8958b8b07f634d2bdc31d7dc04a774a3b4f94b078a6f70bb0f7278961c0127d3",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "Part B",
+   "bbox": [
+    587,
+    124,
+    649,
+    144
+   ],
+   "bbox_crop": [
+    587,
+    124,
+    649,
+    144
+   ],
+   "bbox_original": [
+    587,
+    124,
+    649,
+    144
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__pepinemab2__p01__v1/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__pepinemab2__p01__v1/shared_legend_crops/legend_02.png",
+   "image_size": [
+    62,
+    20
+   ],
+   "sha256": "f6ecf49a539421d40e504a8bb601b0e117069d556ec385e6c3621ecf513455a2",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s01": "s01",
+  "s02": "s02"
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Part A",
+   "bbox": [
+    586,
+    93,
+    650,
+    114
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Part B",
+   "bbox": [
+    587,
+    124,
+    649,
+    144
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "80782a488bfc0202d376809fe55a420854bf004fd4acbf10b941b96b20e8338c",
+ "source_sha256": "80782a488bfc0202d376809fe55a420854bf004fd4acbf10b941b96b20e8338c",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}

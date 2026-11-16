@@ -1,0 +1,168 @@
+{
+  "panel_id": "pk__lumretuzumab2__p04__v2",
+  "model": "v46_before",
+  "method": "v46_before",
+  "status": "completed",
+  "reason": "",
+  "predictions": [
+    {
+      "point_id": "v46_before_color02_0001",
+      "x_px": 105.0,
+      "y_px": 112.0,
+      "series_id": "s02",
+      "score": null,
+      "native_series_id": "color02",
+      "crop_x_px": 105.0,
+      "crop_y_px": 112.0
+    },
+    {
+      "point_id": "v46_before_color02_0002",
+      "x_px": 140.0,
+      "y_px": 104.0,
+      "series_id": "s02",
+      "score": null,
+      "native_series_id": "color02",
+      "crop_x_px": 140.0,
+      "crop_y_px": 104.0
+    },
+    {
+      "point_id": "v46_before_color02_0003",
+      "x_px": 173.0,
+      "y_px": 87.0,
+      "series_id": "s02",
+      "score": null,
+      "native_series_id": "color02",
+      "crop_x_px": 173.0,
+      "crop_y_px": 87.0
+    },
+    {
+      "point_id": "v46_before_color02_0004",
+      "x_px": 206.0,
+      "y_px": 97.0,
+      "series_id": "s02",
+      "score": null,
+      "native_series_id": "color02",
+      "crop_x_px": 206.0,
+      "crop_y_px": 97.0
+    },
+    {
+      "point_id": "v46_before_color02_0005",
+      "x_px": 240.0,
+      "y_px": 84.0,
+      "series_id": "s02",
+      "score": null,
+      "native_series_id": "color02",
+      "crop_x_px": 240.0,
+      "crop_y_px": 84.0
+    },
+    {
+      "point_id": "v46_before_color02_0006",
+      "x_px": 275.0,
+      "y_px": 88.0,
+      "series_id": "s02",
+      "score": null,
+      "native_series_id": "color02",
+      "crop_x_px": 275.0,
+      "crop_y_px": 88.0
+    },
+    {
+      "point_id": "v46_before_color02_0007",
+      "x_px": 309.0,
+      "y_px": 86.0,
+      "series_id": "s02",
+      "score": null,
+      "native_series_id": "color02",
+      "crop_x_px": 309.0,
+      "crop_y_px": 86.0
+    },
+    {
+      "point_id": "v46_before_color03_0001",
+      "x_px": 105.0,
+      "y_px": 150.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "color03",
+      "crop_x_px": 105.0,
+      "crop_y_px": 150.0
+    },
+    {
+      "point_id": "v46_before_color03_0002",
+      "x_px": 139.0,
+      "y_px": 142.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "color03",
+      "crop_x_px": 139.0,
+      "crop_y_px": 142.0
+    },
+    {
+      "point_id": "v46_before_color03_0003",
+      "x_px": 173.0,
+      "y_px": 125.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "color03",
+      "crop_x_px": 173.0,
+      "crop_y_px": 125.0
+    },
+    {
+      "point_id": "v46_before_color03_0004",
+      "x_px": 240.0,
+      "y_px": 131.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "color03",
+      "crop_x_px": 240.0,
+      "crop_y_px": 131.0
+    },
+    {
+      "point_id": "v46_before_color03_0005",
+      "x_px": 274.0,
+      "y_px": 121.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "color03",
+      "crop_x_px": 274.0,
+      "crop_y_px": 121.0
+    },
+    {
+      "point_id": "v46_before_color03_0006",
+      "x_px": 309.0,
+      "y_px": 133.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "color03",
+      "crop_x_px": 309.0,
+      "crop_y_px": 133.0
+    }
+  ],
+  "coordinate_convention": "full original image pixel centers; crop translation added exactly once",
+  "score_note": "Native export may omit confidence; null is unavailable, not zero. No score threshold added.",
+  "input_sha256": "2d26c09566d2b221fab92aa93552c4cc12461624bede507c2e5583187513bbf1",
+  "source_sha256": "2d26c09566d2b221fab92aa93552c4cc12461624bede507c2e5583187513bbf1",
+  "timing": {
+    "input_verification_seconds": 0.0023982000129763037,
+    "detection_process_seconds": 7.471320999989985,
+    "legend_crop_export_seconds": 0.004512299987254664,
+    "total_wall_seconds": 7.49647390001337,
+    "native": {
+      "shared_legend_seconds": 1.180084599996917,
+      "shared_legend_timing_note": "BW native timer or transparent colour LegendRuntime.prepare timer; included in detection process wall time.",
+      "model_load_seconds": null,
+      "model_load_timing_note": "BW native imports/backend initialization, included in process wall time; colour unavailable, not zero.",
+      "timing_wrapper": {
+        "shared_legend_seconds": 1.180084599996917,
+        "legend_calls": 1,
+        "module_preload_seconds": 0.12643810000736266,
+        "wrapper": "perf_counter around original LegendRuntime.prepare; unchanged args and return value",
+        "native_cli_seconds": 6.660596700006863
+      },
+      "color_marker_stage_seconds": 2.174890199996298,
+      "color_marker_analysis_timing": {
+        "proposals_seconds": 0.15769759999238886,
+        "window_seconds": 0.35818470013327897,
+        "analysis_seconds": 0.5206509999989066
+      }
+    }
+  }
+}

@@ -1,0 +1,263 @@
+{
+ "panel_id": "er__palivizumab_1_1_0__p03__v2",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "color02",
+   "native_swatch_id": "S01",
+   "bbox": [
+    295,
+    56,
+    325,
+    71
+   ],
+   "native_body_bbox": [
+    304,
+    59,
+    315,
+    68
+   ],
+   "class_name": "filled_triangle",
+   "rgb": [
+    158,
+    158,
+    158
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s03",
+   "label": "R347",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__palivizumab_1_1_0__p03__v2/shared_legend_crops/legend_01.png",
+   "image_size": [
+    30,
+    15
+   ],
+   "sha256": "8d4eb679aed4a927eda751c32cf818dc78b135ee37adb0878a98234e827a4145",
+   "source_native_legend_id": "color02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__palivizumab_1_1_0__p03__v2/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    295,
+    56,
+    325,
+    71
+   ],
+   "bbox_original": [
+    295,
+    56,
+    325,
+    71
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color03",
+   "native_swatch_id": "S02",
+   "bbox": [
+    295,
+    8,
+    325,
+    23
+   ],
+   "native_body_bbox": [
+    304,
+    11,
+    315,
+    20
+   ],
+   "class_name": "unknown_marker",
+   "rgb": [
+    119,
+    30,
+    77
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s01",
+   "label": "Nirsevimab",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__palivizumab_1_1_0__p03__v2/shared_legend_crops/legend_02.png",
+   "image_size": [
+    30,
+    15
+   ],
+   "sha256": "e2938d42bb25c04b444b5bbbec7474c1c27428da1c31fd309782ede03360555a",
+   "source_native_legend_id": "color03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__palivizumab_1_1_0__p03__v2/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    295,
+    8,
+    325,
+    23
+   ],
+   "bbox_original": [
+    295,
+    8,
+    325,
+    23
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color04",
+   "native_swatch_id": "S03",
+   "bbox": [
+    295,
+    32,
+    325,
+    47
+   ],
+   "native_body_bbox": [
+    304,
+    35,
+    315,
+    44
+   ],
+   "class_name": "filled_square",
+   "rgb": [
+    23,
+    55,
+    93
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s02",
+   "label": "Palivizumab",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__palivizumab_1_1_0__p03__v2/shared_legend_crops/legend_03.png",
+   "image_size": [
+    30,
+    15
+   ],
+   "sha256": "1ddd4698183e2f8cf1d566becccaa01cd4b4a03e01cf194843418622c1f15457",
+   "source_native_legend_id": "color04",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__palivizumab_1_1_0__p03__v2/shared_legend_crops/legend_03.png",
+   "bbox_crop": [
+    295,
+    32,
+    325,
+    47
+   ],
+   "bbox_original": [
+    295,
+    32,
+    325,
+    47
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "color02": "s03",
+  "color03": "s01",
+  "color04": "s02"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "color02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s03",
+    "iou": 0.5660377358490566,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s01",
+    "iou": 0.625,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s02",
+    "iou": 0.5660377358490566,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Nirsevimab",
+   "bbox": [
+    293,
+    10,
+    326,
+    20
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Palivizumab",
+   "bbox": [
+    293,
+    35,
+    326,
+    44
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "R347",
+   "bbox": [
+    293,
+    59,
+    326,
+    68
+   ]
+  }
+ ],
+ "input_sha256": "ff45d58ce9b5e33e4922161f98ae7b7af5a511632926d578a119d437d7257402",
+ "source_sha256": "ff45d58ce9b5e33e4922161f98ae7b7af5a511632926d578a119d437d7257402",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.006377399986376986
+}

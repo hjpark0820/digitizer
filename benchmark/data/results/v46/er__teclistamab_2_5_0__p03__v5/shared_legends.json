@@ -1,0 +1,245 @@
+{
+ "panel_id": "er__teclistamab_2_5_0__p03__v5",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    546,
+    794,
+    613,
+    815
+   ],
+   "native_body_bbox": [
+    571,
+    795,
+    590,
+    814
+   ],
+   "class_name": "filled_circle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "BCMAxCD3",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__teclistamab_2_5_0__p03__v5/shared_legend_crops/legend_01.png",
+   "image_size": [
+    67,
+    21
+   ],
+   "sha256": "99404119e662525578fea2c57f660d71e2426afcc0508f84b0535c2c2ad8e69e",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__teclistamab_2_5_0__p03__v5/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    546,
+    794,
+    613,
+    815
+   ],
+   "bbox_original": [
+    546,
+    794,
+    613,
+    815
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    832,
+    794,
+    899,
+    815
+   ],
+   "native_body_bbox": [
+    857.5027858407618,
+    795.5008379496726,
+    874.5014098015486,
+    812.4994619104593
+   ],
+   "class_name": "open_square",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s02",
+   "label": "BCMAxnull",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__teclistamab_2_5_0__p03__v5/shared_legend_crops/legend_02.png",
+   "image_size": [
+    67,
+    21
+   ],
+   "sha256": "521c923c20c662a007aa15d1ed9fe7c9fc298925a85bccde33e09f397a425601",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__teclistamab_2_5_0__p03__v5/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    832,
+    794,
+    899,
+    815
+   ],
+   "bbox_original": [
+    832,
+    794,
+    899,
+    815
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S03",
+   "bbox": [
+    1103,
+    791,
+    1170,
+    816
+   ],
+   "native_body_bbox": [
+    1125,
+    793,
+    1148,
+    815
+   ],
+   "class_name": "open_triangle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s03",
+   "label": "nullxCD3",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__teclistamab_2_5_0__p03__v5/shared_legend_crops/legend_03.png",
+   "image_size": [
+    67,
+    25
+   ],
+   "sha256": "21ee54b550c693862d0d0ab2502bd82f387145db89a3627b4941c90611f51552",
+   "source_native_legend_id": "S03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__teclistamab_2_5_0__p03__v5/shared_legend_crops/legend_03.png",
+   "bbox_crop": [
+    1103,
+    791,
+    1170,
+    816
+   ],
+   "bbox_original": [
+    1103,
+    791,
+    1170,
+    816
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01",
+  "S02": "s02",
+  "S03": "s03"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.7301282051282051,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 0.6646825396825397,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s03",
+    "iou": 0.5945646145313367,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "BCMAxCD3",
+   "bbox": [
+    542,
+    795,
+    618,
+    812
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "BCMAxnull",
+   "bbox": [
+    829,
+    796,
+    903,
+    811
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "nullxCD3",
+   "bbox": [
+    1099,
+    796,
+    1174,
+    812
+   ]
+  }
+ ],
+ "input_sha256": "210d0c608c2c477f95666c338057d6bbe98cd497eef0c4b5dab76997e1a2aa49",
+ "source_sha256": "210d0c608c2c477f95666c338057d6bbe98cd497eef0c4b5dab76997e1a2aa49",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.01676999998744577
+}

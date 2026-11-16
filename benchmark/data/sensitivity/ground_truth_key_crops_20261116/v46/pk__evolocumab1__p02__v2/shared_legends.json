@@ -1,0 +1,108 @@
+{
+ "panel_id": "pk__evolocumab1__p02__v2",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "140 mg (N = 15)",
+   "bbox": [
+    576,
+    72,
+    617,
+    82
+   ],
+   "bbox_crop": [
+    576,
+    72,
+    617,
+    82
+   ],
+   "bbox_original": [
+    576,
+    72,
+    617,
+    82
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__evolocumab1__p02__v2/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__evolocumab1__p02__v2/shared_legend_crops/legend_01.png",
+   "image_size": [
+    41,
+    10
+   ],
+   "sha256": "bd54ec0ad58586c781d2f963f0a31909659b03162b23923ff3ea0959fce2bad7",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "420 mg (N = 15)",
+   "bbox": [
+    576,
+    93,
+    617,
+    104
+   ],
+   "bbox_crop": [
+    576,
+    93,
+    617,
+    104
+   ],
+   "bbox_original": [
+    576,
+    93,
+    617,
+    104
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__evolocumab1__p02__v2/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__evolocumab1__p02__v2/shared_legend_crops/legend_02.png",
+   "image_size": [
+    41,
+    11
+   ],
+   "sha256": "581d70ee459d7c5b8bda644e8f6e8a9471630f238afa874c197caabbfeaa5323",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s01": "s01",
+  "s02": "s02"
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "140 mg (N = 15)",
+   "bbox": [
+    576,
+    72,
+    617,
+    82
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "420 mg (N = 15)",
+   "bbox": [
+    576,
+    93,
+    617,
+    104
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "9af8a92165fff7ab466ed25ebc0369493dc10434035e84ae33770e4e0eb3e8be",
+ "source_sha256": "9af8a92165fff7ab466ed25ebc0369493dc10434035e84ae33770e4e0eb3e8be",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}

@@ -1,0 +1,3652 @@
+{
+ "version": "external_shared_input_benchmark_v1",
+ "panel_id": "er__pozelimab_1_2_2__p01__v7",
+ "modality": "color",
+ "method": "lineex_grouped",
+ "status": "completed",
+ "coordinate_system": "x_px/y_px = full original unrotated image pixels; x/y = shared native crop pixels",
+ "image_path": "data/images\\er__pozelimab_1_2_2__p01__v7.png",
+ "input_sha256": "fa928afbf6a1dacd4b0958428ff42e73bf08e186bb334f58962a771a5d7acc42",
+ "source_image_path": "data/images\\er__pozelimab_1_2_2__p01__v7.png",
+ "source_sha256": "fa928afbf6a1dacd4b0958428ff42e73bf08e186bb334f58962a771a5d7acc42",
+ "crop_box_original": [
+  0,
+  0,
+  581,
+  562
+ ],
+ "plot_box": [
+  91.0,
+  165.0,
+  553.0,
+  490.0
+ ],
+ "legend_box": [
+  110.0,
+  7.0,
+  310.0,
+  73.0
+ ],
+ "legends": [
+  {
+   "legend_index": 0,
+   "series_id": "s01",
+   "label": "REGN3918",
+   "source_native_legend_id": "s01",
+   "box_input": [
+    107,
+    10,
+    150,
+    22
+   ],
+   "box_original": [
+    107,
+    10,
+    150,
+    22
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_01.png",
+   "crop_sha256": "9535b50bbc23bd5f1124cbbddbbd4b3750291b2d167bcf4c92530bca123595e0",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legends.json",
+   "shared_legends_sha256": "8aa4ef21c1b970a59b07a860bdc1de261b72741544e1a0539913c1fd852f31db",
+   "mapping_provenance": {
+    "s01": "s01",
+    "s02": "s02",
+    "s03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 1,
+   "series_id": "s02",
+   "label": "In-house eculizumab",
+   "source_native_legend_id": "s02",
+   "box_input": [
+    106,
+    32,
+    150,
+    45
+   ],
+   "box_original": [
+    106,
+    32,
+    150,
+    45
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_02.png",
+   "crop_sha256": "2e95a2e65cd23822a679af7ec8d6de9efe77ab7a9a57d84ace7a96e0656777c4",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legends.json",
+   "shared_legends_sha256": "8aa4ef21c1b970a59b07a860bdc1de261b72741544e1a0539913c1fd852f31db",
+   "mapping_provenance": {
+    "s01": "s01",
+    "s02": "s02",
+    "s03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 2,
+   "series_id": "s03",
+   "label": "IgG4PControl",
+   "source_native_legend_id": "s03",
+   "box_input": [
+    107,
+    55,
+    149,
+    66
+   ],
+   "box_original": [
+    107,
+    55,
+    149,
+    66
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legend_crops/legend_03.png",
+   "crop_sha256": "fd9025ce12bc670e4090b79c6e686252a5bcea75e184b35a55adb5af8c62cd18",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__pozelimab_1_2_2__p01__v7/shared_legends.json",
+   "shared_legends_sha256": "8aa4ef21c1b970a59b07a860bdc1de261b72741544e1a0539913c1fd852f31db",
+   "mapping_provenance": {
+    "s01": "s01",
+    "s02": "s02",
+    "s03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  }
+ ],
+ "predictions": [
+  {
+   "point_id": "LX0000",
+   "x": 162.0,
+   "y": 270.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.785035252571106,
+   "winning_similarity": 0.785035252571106,
+   "similarities": [
+    0.5979831218719482,
+    0.785035252571106,
+    0.17991048097610474
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0000.png",
+   "patch_box_input": [
+    142,
+    260,
+    182,
+    280
+   ],
+   "x_px": 162.0,
+   "y_px": 270.0
+  },
+  {
+   "point_id": "LX0001",
+   "x": 411.0,
+   "y": 484.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.47302594780921936,
+   "winning_similarity": 0.47302594780921936,
+   "similarities": [
+    0.47302594780921936,
+    0.11874241381883621,
+    0.3051079511642456
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0001.png",
+   "patch_box_input": [
+    391,
+    474,
+    431,
+    494
+   ],
+   "x_px": 411.0,
+   "y_px": 484.0
+  },
+  {
+   "point_id": "LX0002",
+   "x": 248.0,
+   "y": 287.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9423667788505554,
+   "winning_similarity": 0.9423667788505554,
+   "similarities": [
+    0.484229177236557,
+    0.11688105016946793,
+    0.9423667788505554
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0002.png",
+   "patch_box_input": [
+    228,
+    277,
+    268,
+    297
+   ],
+   "x_px": 248.0,
+   "y_px": 287.0
+  },
+  {
+   "point_id": "LX0003",
+   "x": 350.0,
+   "y": 312.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8831667900085449,
+   "winning_similarity": 0.8831667900085449,
+   "similarities": [
+    0.8831667900085449,
+    0.8079391121864319,
+    0.5226384401321411
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0003.png",
+   "patch_box_input": [
+    330,
+    302,
+    370,
+    322
+   ],
+   "x_px": 350.0,
+   "y_px": 312.0
+  },
+  {
+   "point_id": "LX0004",
+   "x": 535.0,
+   "y": 390.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8360451459884644,
+   "winning_similarity": 0.8360451459884644,
+   "similarities": [
+    0.8360451459884644,
+    0.7490234971046448,
+    0.19168615341186523
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0004.png",
+   "patch_box_input": [
+    515,
+    380,
+    555,
+    400
+   ],
+   "x_px": 535.0,
+   "y_px": 390.0
+  },
+  {
+   "point_id": "LX0005",
+   "x": 340.0,
+   "y": 479.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.2889532744884491,
+   "winning_similarity": 0.2889532744884491,
+   "similarities": [
+    0.2889532744884491,
+    0.12271781265735626,
+    0.22033244371414185
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0005.png",
+   "patch_box_input": [
+    320,
+    469,
+    360,
+    489
+   ],
+   "x_px": 340.0,
+   "y_px": 479.0
+  },
+  {
+   "point_id": "LX0006",
+   "x": 537.0,
+   "y": 486.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8786224126815796,
+   "winning_similarity": 0.8786224126815796,
+   "similarities": [
+    0.8786224126815796,
+    0.334923654794693,
+    0.6122749447822571
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0006.png",
+   "patch_box_input": [
+    517,
+    476,
+    557,
+    496
+   ],
+   "x_px": 537.0,
+   "y_px": 486.0
+  },
+  {
+   "point_id": "LX0007",
+   "x": 436.0,
+   "y": 358.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7661595344543457,
+   "winning_similarity": 0.7661595344543457,
+   "similarities": [
+    0.64418625831604,
+    0.5971466302871704,
+    0.7661595344543457
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0007.png",
+   "patch_box_input": [
+    416,
+    348,
+    456,
+    368
+   ],
+   "x_px": 436.0,
+   "y_px": 358.0
+  },
+  {
+   "point_id": "LX0008",
+   "x": 250.0,
+   "y": 350.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7110887765884399,
+   "winning_similarity": 0.7110887765884399,
+   "similarities": [
+    0.7110887765884399,
+    0.5882088541984558,
+    0.5754854679107666
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0008.png",
+   "patch_box_input": [
+    230,
+    340,
+    270,
+    360
+   ],
+   "x_px": 250.0,
+   "y_px": 350.0
+  },
+  {
+   "point_id": "LX0009",
+   "x": 164.0,
+   "y": 295.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9237014055252075,
+   "winning_similarity": 0.9237014055252075,
+   "similarities": [
+    0.9237014055252075,
+    0.7023235559463501,
+    0.239556685090065
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0009.png",
+   "patch_box_input": [
+    144,
+    285,
+    184,
+    305
+   ],
+   "x_px": 164.0,
+   "y_px": 295.0
+  },
+  {
+   "point_id": "LX0010",
+   "x": 213.0,
+   "y": 278.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9440742135047913,
+   "winning_similarity": 0.9440742135047913,
+   "similarities": [
+    0.72426837682724,
+    0.1294938623905182,
+    0.9440742135047913
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0010.png",
+   "patch_box_input": [
+    193,
+    268,
+    233,
+    288
+   ],
+   "x_px": 213.0,
+   "y_px": 278.0
+  },
+  {
+   "point_id": "LX0011",
+   "x": 455.0,
+   "y": 485.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8349986672401428,
+   "winning_similarity": 0.8349986672401428,
+   "similarities": [
+    0.8349986672401428,
+    0.5220766067504883,
+    0.08527064323425293
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0011.png",
+   "patch_box_input": [
+    435,
+    475,
+    475,
+    495
+   ],
+   "x_px": 455.0,
+   "y_px": 485.0
+  },
+  {
+   "point_id": "LX0012",
+   "x": 215.0,
+   "y": 318.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8140298128128052,
+   "winning_similarity": 0.8140298128128052,
+   "similarities": [
+    0.8140298128128052,
+    0.2222815304994583,
+    0.6314743161201477
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0012.png",
+   "patch_box_input": [
+    195,
+    308,
+    235,
+    328
+   ],
+   "x_px": 215.0,
+   "y_px": 318.0
+  },
+  {
+   "point_id": "LX0013",
+   "x": 476.0,
+   "y": 377.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.5344228744506836,
+   "winning_similarity": 0.5344228744506836,
+   "similarities": [
+    0.02030280791223049,
+    0.2838553488254547,
+    0.5344228744506836
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0013.png",
+   "patch_box_input": [
+    456,
+    367,
+    496,
+    387
+   ],
+   "x_px": 476.0,
+   "y_px": 377.0
+  },
+  {
+   "point_id": "LX0014",
+   "x": 294.0,
+   "y": 436.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.5993276238441467,
+   "winning_similarity": 0.5993276238441467,
+   "similarities": [
+    0.5315018892288208,
+    0.31367453932762146,
+    0.5993276238441467
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0014.png",
+   "patch_box_input": [
+    274,
+    426,
+    314,
+    446
+   ],
+   "x_px": 294.0,
+   "y_px": 436.0
+  },
+  {
+   "point_id": "LX0015",
+   "x": 401.0,
+   "y": 336.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8941882252693176,
+   "winning_similarity": 0.8941882252693176,
+   "similarities": [
+    0.8941882252693176,
+    0.8677946329116821,
+    0.3241743743419647
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0015.png",
+   "patch_box_input": [
+    381,
+    326,
+    421,
+    346
+   ],
+   "x_px": 401.0,
+   "y_px": 336.0
+  },
+  {
+   "point_id": "LX0017",
+   "x": 304.0,
+   "y": 297.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9030880331993103,
+   "winning_similarity": 0.9030880331993103,
+   "similarities": [
+    0.9030880331993103,
+    0.8167385458946228,
+    0.17945070564746857
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0017.png",
+   "patch_box_input": [
+    284,
+    287,
+    324,
+    307
+   ],
+   "x_px": 304.0,
+   "y_px": 297.0
+  },
+  {
+   "point_id": "LX0018",
+   "x": 511.0,
+   "y": 389.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.20471566915512085,
+   "winning_similarity": 0.20471566915512085,
+   "similarities": [
+    0.0010327385971322656,
+    0.07092025130987167,
+    0.20471566915512085
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0018.png",
+   "patch_box_input": [
+    491,
+    379,
+    531,
+    399
+   ],
+   "x_px": 511.0,
+   "y_px": 389.0
+  },
+  {
+   "point_id": "LX0019",
+   "x": 312.0,
+   "y": 446.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7488601207733154,
+   "winning_similarity": 0.7488601207733154,
+   "similarities": [
+    0.5439913868904114,
+    0.1582823246717453,
+    0.7488601207733154
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0019.png",
+   "patch_box_input": [
+    292,
+    436,
+    332,
+    456
+   ],
+   "x_px": 312.0,
+   "y_px": 446.0
+  },
+  {
+   "point_id": "LX0020",
+   "x": 385.0,
+   "y": 484.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7049117088317871,
+   "winning_similarity": 0.7049117088317871,
+   "similarities": [
+    0.7049117088317871,
+    0.22123044729232788,
+    0.2739626169204712
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0020.png",
+   "patch_box_input": [
+    365,
+    474,
+    405,
+    494
+   ],
+   "x_px": 385.0,
+   "y_px": 484.0
+  },
+  {
+   "point_id": "LX0021",
+   "x": 244.0,
+   "y": 288.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.854915976524353,
+   "winning_similarity": 0.854915976524353,
+   "similarities": [
+    0.19721949100494385,
+    0.07011698186397552,
+    0.854915976524353
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0021.png",
+   "patch_box_input": [
+    224,
+    278,
+    264,
+    298
+   ],
+   "x_px": 244.0,
+   "y_px": 288.0
+  },
+  {
+   "point_id": "LX0022",
+   "x": 328.0,
+   "y": 303.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.4203408658504486,
+   "winning_similarity": 0.4203408658504486,
+   "similarities": [
+    0.0031989493872970343,
+    0.09020042419433594,
+    0.4203408658504486
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0022.png",
+   "patch_box_input": [
+    308,
+    293,
+    348,
+    313
+   ],
+   "x_px": 328.0,
+   "y_px": 303.0
+  },
+  {
+   "point_id": "LX0023",
+   "x": 184.0,
+   "y": 302.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7770553827285767,
+   "winning_similarity": 0.7770553827285767,
+   "similarities": [
+    0.4916737973690033,
+    0.13653773069381714,
+    0.7770553827285767
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0023.png",
+   "patch_box_input": [
+    164,
+    292,
+    204,
+    312
+   ],
+   "x_px": 184.0,
+   "y_px": 302.0
+  },
+  {
+   "point_id": "LX0024",
+   "x": 432.0,
+   "y": 353.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.780249834060669,
+   "winning_similarity": 0.780249834060669,
+   "similarities": [
+    0.1357523798942566,
+    0.3015153110027313,
+    0.780249834060669
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0024.png",
+   "patch_box_input": [
+    412,
+    343,
+    452,
+    363
+   ],
+   "x_px": 432.0,
+   "y_px": 353.0
+  },
+  {
+   "point_id": "LX0025",
+   "x": 331.0,
+   "y": 308.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.6225557923316956,
+   "winning_similarity": 0.6225557923316956,
+   "similarities": [
+    0.009101721458137035,
+    0.12090466171503067,
+    0.6225557923316956
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0025.png",
+   "patch_box_input": [
+    311,
+    298,
+    351,
+    318
+   ],
+   "x_px": 331.0,
+   "y_px": 308.0
+  },
+  {
+   "point_id": "LX0026",
+   "x": 481.0,
+   "y": 386.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7294141054153442,
+   "winning_similarity": 0.7294141054153442,
+   "similarities": [
+    0.43081769347190857,
+    0.7294141054153442,
+    0.2810474634170532
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0026.png",
+   "patch_box_input": [
+    461,
+    376,
+    501,
+    396
+   ],
+   "x_px": 481.0,
+   "y_px": 386.0
+  },
+  {
+   "point_id": "LX0027",
+   "x": 247.0,
+   "y": 291.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9456466436386108,
+   "winning_similarity": 0.9456466436386108,
+   "similarities": [
+    0.22829274833202362,
+    0.10623177140951157,
+    0.9456466436386108
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0027.png",
+   "patch_box_input": [
+    227,
+    281,
+    267,
+    301
+   ],
+   "x_px": 247.0,
+   "y_px": 291.0
+  },
+  {
+   "point_id": "LX0029",
+   "x": 386.0,
+   "y": 485.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7935521602630615,
+   "winning_similarity": 0.7935521602630615,
+   "similarities": [
+    0.7935521602630615,
+    0.19854490458965302,
+    0.7744207978248596
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0029.png",
+   "patch_box_input": [
+    366,
+    475,
+    406,
+    495
+   ],
+   "x_px": 386.0,
+   "y_px": 485.0
+  },
+  {
+   "point_id": "LX0030",
+   "x": 215.0,
+   "y": 279.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8856066465377808,
+   "winning_similarity": 0.8856066465377808,
+   "similarities": [
+    0.7354050278663635,
+    0.1628991663455963,
+    0.8856066465377808
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0030.png",
+   "patch_box_input": [
+    195,
+    269,
+    235,
+    289
+   ],
+   "x_px": 215.0,
+   "y_px": 279.0
+  },
+  {
+   "point_id": "LX0031",
+   "x": 389.0,
+   "y": 477.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7079480290412903,
+   "winning_similarity": 0.7079480290412903,
+   "similarities": [
+    0.6894155144691467,
+    0.4536774754524231,
+    0.7079480290412903
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0031.png",
+   "patch_box_input": [
+    369,
+    467,
+    409,
+    487
+   ],
+   "x_px": 389.0,
+   "y_px": 477.0
+  },
+  {
+   "point_id": "LX0032",
+   "x": 436.0,
+   "y": 359.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7419175505638123,
+   "winning_similarity": 0.7419175505638123,
+   "similarities": [
+    0.5912789106369019,
+    0.5435646772384644,
+    0.7419175505638123
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0032.png",
+   "patch_box_input": [
+    416,
+    349,
+    456,
+    369
+   ],
+   "x_px": 436.0,
+   "y_px": 359.0
+  },
+  {
+   "point_id": "LX0033",
+   "x": 179.0,
+   "y": 293.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7625502347946167,
+   "winning_similarity": 0.7625502347946167,
+   "similarities": [
+    0.7625502347946167,
+    0.3797229528427124,
+    0.23190949857234955
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0033.png",
+   "patch_box_input": [
+    159,
+    283,
+    199,
+    303
+   ],
+   "x_px": 179.0,
+   "y_px": 293.0
+  },
+  {
+   "point_id": "LX0034",
+   "x": 299.0,
+   "y": 436.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.6588531136512756,
+   "winning_similarity": 0.6588531136512756,
+   "similarities": [
+    0.4989425837993622,
+    0.21258628368377686,
+    0.6588531136512756
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0034.png",
+   "patch_box_input": [
+    279,
+    426,
+    319,
+    446
+   ],
+   "x_px": 299.0,
+   "y_px": 436.0
+  },
+  {
+   "point_id": "LX0035",
+   "x": 452.0,
+   "y": 478.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8899139165878296,
+   "winning_similarity": 0.8899139165878296,
+   "similarities": [
+    0.8899139165878296,
+    0.4473181962966919,
+    0.6441718339920044
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0035.png",
+   "patch_box_input": [
+    432,
+    468,
+    472,
+    488
+   ],
+   "x_px": 452.0,
+   "y_px": 478.0
+  },
+  {
+   "point_id": "LX0036",
+   "x": 493.0,
+   "y": 386.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8974089026451111,
+   "winning_similarity": 0.8974089026451111,
+   "similarities": [
+    0.8974089026451111,
+    0.7538732290267944,
+    0.20303936302661896
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0036.png",
+   "patch_box_input": [
+    473,
+    376,
+    513,
+    396
+   ],
+   "x_px": 493.0,
+   "y_px": 386.0
+  },
+  {
+   "point_id": "LX0037",
+   "x": 364.0,
+   "y": 488.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8821914792060852,
+   "winning_similarity": 0.8821914792060852,
+   "similarities": [
+    0.8821914792060852,
+    0.3471331000328064,
+    0.6579453945159912
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0037.png",
+   "patch_box_input": [
+    344,
+    478,
+    384,
+    498
+   ],
+   "x_px": 364.0,
+   "y_px": 488.0
+  },
+  {
+   "point_id": "LX0038",
+   "x": 246.0,
+   "y": 340.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.4152463674545288,
+   "winning_similarity": 0.4152463674545288,
+   "similarities": [
+    0.33782532811164856,
+    0.23856224119663239,
+    0.4152463674545288
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0038.png",
+   "patch_box_input": [
+    226,
+    330,
+    266,
+    350
+   ],
+   "x_px": 246.0,
+   "y_px": 340.0
+  },
+  {
+   "point_id": "LX0039",
+   "x": 246.0,
+   "y": 288.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8895763754844666,
+   "winning_similarity": 0.8895763754844666,
+   "similarities": [
+    0.16944114863872528,
+    0.06088797748088837,
+    0.8895763754844666
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0039.png",
+   "patch_box_input": [
+    226,
+    278,
+    266,
+    298
+   ],
+   "x_px": 246.0,
+   "y_px": 288.0
+  },
+  {
+   "point_id": "LX0040",
+   "x": 283.0,
+   "y": 416.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.5113350749015808,
+   "winning_similarity": 0.5113350749015808,
+   "similarities": [
+    0.4364224970340729,
+    0.2997157871723175,
+    0.5113350749015808
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0040.png",
+   "patch_box_input": [
+    263,
+    406,
+    303,
+    426
+   ],
+   "x_px": 283.0,
+   "y_px": 416.0
+  },
+  {
+   "point_id": "LX0041",
+   "x": 378.0,
+   "y": 320.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.6096781492233276,
+   "winning_similarity": 0.6096781492233276,
+   "similarities": [
+    0.02723792754113674,
+    0.07460398226976395,
+    0.6096781492233276
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0041.png",
+   "patch_box_input": [
+    358,
+    310,
+    398,
+    330
+   ],
+   "x_px": 378.0,
+   "y_px": 320.0
+  },
+  {
+   "point_id": "LX0042",
+   "x": 519.0,
+   "y": 395.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.6057292222976685,
+   "winning_similarity": 0.6057292222976685,
+   "similarities": [
+    0.008842564187943935,
+    0.16309626400470734,
+    0.6057292222976685
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0042.png",
+   "patch_box_input": [
+    499,
+    385,
+    539,
+    405
+   ],
+   "x_px": 519.0,
+   "y_px": 395.0
+  },
+  {
+   "point_id": "LX0043",
+   "x": 249.0,
+   "y": 287.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9402127265930176,
+   "winning_similarity": 0.9402127265930176,
+   "similarities": [
+    0.4664433002471924,
+    0.0960175022482872,
+    0.9402127265930176
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0043.png",
+   "patch_box_input": [
+    229,
+    277,
+    269,
+    297
+   ],
+   "x_px": 249.0,
+   "y_px": 287.0
+  },
+  {
+   "point_id": "LX0044",
+   "x": 479.0,
+   "y": 488.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.6532280445098877,
+   "winning_similarity": 0.6532280445098877,
+   "similarities": [
+    0.543167769908905,
+    0.11203630268573761,
+    0.6532280445098877
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0044.png",
+   "patch_box_input": [
+    459,
+    478,
+    499,
+    498
+   ],
+   "x_px": 479.0,
+   "y_px": 488.0
+  },
+  {
+   "point_id": "LX0045",
+   "x": 310.0,
+   "y": 443.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7121022343635559,
+   "winning_similarity": 0.7121022343635559,
+   "similarities": [
+    0.7121022343635559,
+    0.32122641801834106,
+    0.4732939600944519
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0045.png",
+   "patch_box_input": [
+    290,
+    433,
+    330,
+    453
+   ],
+   "x_px": 310.0,
+   "y_px": 443.0
+  },
+  {
+   "point_id": "LX0046",
+   "x": 437.0,
+   "y": 479.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.6901543736457825,
+   "winning_similarity": 0.6901543736457825,
+   "similarities": [
+    0.5546948909759521,
+    0.41758468747138977,
+    0.6901543736457825
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0046.png",
+   "patch_box_input": [
+    417,
+    469,
+    457,
+    489
+   ],
+   "x_px": 437.0,
+   "y_px": 479.0
+  },
+  {
+   "point_id": "LX0047",
+   "x": 346.0,
+   "y": 310.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7172613143920898,
+   "winning_similarity": 0.7172613143920898,
+   "similarities": [
+    0.6847051382064819,
+    0.7172613143920898,
+    0.610507607460022
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0047.png",
+   "patch_box_input": [
+    326,
+    300,
+    366,
+    320
+   ],
+   "x_px": 346.0,
+   "y_px": 310.0
+  },
+  {
+   "point_id": "LX0048",
+   "x": 374.0,
+   "y": 482.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.6797498464584351,
+   "winning_similarity": 0.6797498464584351,
+   "similarities": [
+    0.6797498464584351,
+    0.360429972410202,
+    0.3452613949775696
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0048.png",
+   "patch_box_input": [
+    354,
+    472,
+    394,
+    492
+   ],
+   "x_px": 374.0,
+   "y_px": 482.0
+  },
+  {
+   "point_id": "LX0049",
+   "x": 186.0,
+   "y": 300.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.15247701108455658,
+   "winning_similarity": 0.15247701108455658,
+   "similarities": [
+    0.15247701108455658,
+    0.1013786569237709,
+    0.10018257051706314
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0049.png",
+   "patch_box_input": [
+    166,
+    290,
+    206,
+    310
+   ],
+   "x_px": 186.0,
+   "y_px": 300.0
+  },
+  {
+   "point_id": "LX0050",
+   "x": 467.0,
+   "y": 370.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.4669358432292938,
+   "winning_similarity": 0.4669358432292938,
+   "similarities": [
+    0.0333227813243866,
+    0.13946034014225006,
+    0.4669358432292938
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0050.png",
+   "patch_box_input": [
+    447,
+    360,
+    487,
+    380
+   ],
+   "x_px": 467.0,
+   "y_px": 370.0
+  },
+  {
+   "point_id": "LX0051",
+   "x": 309.0,
+   "y": 301.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.5372159481048584,
+   "winning_similarity": 0.5372159481048584,
+   "similarities": [
+    0.37755724787712097,
+    0.5372159481048584,
+    0.16656365990638733
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0051.png",
+   "patch_box_input": [
+    289,
+    291,
+    329,
+    311
+   ],
+   "x_px": 309.0,
+   "y_px": 301.0
+  },
+  {
+   "point_id": "LX0052",
+   "x": 264.0,
+   "y": 292.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8238853812217712,
+   "winning_similarity": 0.8238853812217712,
+   "similarities": [
+    0.8238853812217712,
+    0.29180970788002014,
+    0.34672650694847107
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0052.png",
+   "patch_box_input": [
+    244,
+    282,
+    284,
+    302
+   ],
+   "x_px": 264.0,
+   "y_px": 292.0
+  },
+  {
+   "point_id": "LX0053",
+   "x": 490.0,
+   "y": 488.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.6466943025588989,
+   "winning_similarity": 0.6466943025588989,
+   "similarities": [
+    0.5429047346115112,
+    0.11134118586778641,
+    0.6466943025588989
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0053.png",
+   "patch_box_input": [
+    470,
+    478,
+    510,
+    498
+   ],
+   "x_px": 490.0,
+   "y_px": 488.0
+  },
+  {
+   "point_id": "LX0054",
+   "x": 164.0,
+   "y": 283.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7871331572532654,
+   "winning_similarity": 0.7871331572532654,
+   "similarities": [
+    0.7609267830848694,
+    0.573036789894104,
+    0.7871331572532654
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0054.png",
+   "patch_box_input": [
+    144,
+    273,
+    184,
+    293
+   ],
+   "x_px": 164.0,
+   "y_px": 283.0
+  },
+  {
+   "point_id": "LX0055",
+   "x": 428.0,
+   "y": 479.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.521474301815033,
+   "winning_similarity": 0.521474301815033,
+   "similarities": [
+    0.014358581975102425,
+    0.1435529589653015,
+    0.521474301815033
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0055.png",
+   "patch_box_input": [
+    408,
+    469,
+    448,
+    489
+   ],
+   "x_px": 428.0,
+   "y_px": 479.0
+  },
+  {
+   "point_id": "LX0056",
+   "x": 320.0,
+   "y": 455.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.38872280716896057,
+   "winning_similarity": 0.38872280716896057,
+   "similarities": [
+    0.1309104561805725,
+    0.08397797495126724,
+    0.38872280716896057
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0056.png",
+   "patch_box_input": [
+    300,
+    445,
+    340,
+    465
+   ],
+   "x_px": 320.0,
+   "y_px": 455.0
+  },
+  {
+   "point_id": "LX0057",
+   "x": 447.0,
+   "y": 357.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9271343946456909,
+   "winning_similarity": 0.9271343946456909,
+   "similarities": [
+    0.9271343946456909,
+    0.8550652265548706,
+    0.39447957277297974
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0057.png",
+   "patch_box_input": [
+    427,
+    347,
+    467,
+    367
+   ],
+   "x_px": 447.0,
+   "y_px": 357.0
+  },
+  {
+   "point_id": "LX0058",
+   "x": 386.0,
+   "y": 331.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.5485643148422241,
+   "winning_similarity": 0.5485643148422241,
+   "similarities": [
+    0.09245501458644867,
+    0.5223285555839539,
+    0.5485643148422241
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0058.png",
+   "patch_box_input": [
+    366,
+    321,
+    406,
+    341
+   ],
+   "x_px": 386.0,
+   "y_px": 331.0
+  },
+  {
+   "point_id": "LX0059",
+   "x": 221.0,
+   "y": 300.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.5686882138252258,
+   "winning_similarity": 0.5686882138252258,
+   "similarities": [
+    0.17944614589214325,
+    0.11935783177614212,
+    0.5686882138252258
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0059.png",
+   "patch_box_input": [
+    201,
+    290,
+    241,
+    310
+   ],
+   "x_px": 221.0,
+   "y_px": 300.0
+  },
+  {
+   "point_id": "LX0060",
+   "x": 254.0,
+   "y": 360.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7105724215507507,
+   "winning_similarity": 0.7105724215507507,
+   "similarities": [
+    0.7105724215507507,
+    0.4247284531593323,
+    0.6325302124023438
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0060.png",
+   "patch_box_input": [
+    234,
+    350,
+    274,
+    370
+   ],
+   "x_px": 254.0,
+   "y_px": 360.0
+  },
+  {
+   "point_id": "LX0061",
+   "x": 226.0,
+   "y": 312.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.5868145823478699,
+   "winning_similarity": 0.5868145823478699,
+   "similarities": [
+    0.41556334495544434,
+    0.08651771396398544,
+    0.5868145823478699
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0061.png",
+   "patch_box_input": [
+    206,
+    302,
+    246,
+    322
+   ],
+   "x_px": 226.0,
+   "y_px": 312.0
+  },
+  {
+   "point_id": "LX0062",
+   "x": 166.0,
+   "y": 298.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9432724714279175,
+   "winning_similarity": 0.9432724714279175,
+   "similarities": [
+    0.9432724714279175,
+    0.5584551095962524,
+    0.6563489437103271
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0062.png",
+   "patch_box_input": [
+    146,
+    288,
+    186,
+    308
+   ],
+   "x_px": 166.0,
+   "y_px": 298.0
+  }
+ ],
+ "unavailable": [],
+ "patches": [
+  {
+   "point_index": 0,
+   "point_id": "LX0000",
+   "box_input": [
+    142,
+    260,
+    182,
+    280
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0000.png"
+  },
+  {
+   "point_index": 1,
+   "point_id": "LX0001",
+   "box_input": [
+    391,
+    474,
+    431,
+    494
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0001.png"
+  },
+  {
+   "point_index": 2,
+   "point_id": "LX0002",
+   "box_input": [
+    228,
+    277,
+    268,
+    297
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0002.png"
+  },
+  {
+   "point_index": 3,
+   "point_id": "LX0003",
+   "box_input": [
+    330,
+    302,
+    370,
+    322
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0003.png"
+  },
+  {
+   "point_index": 4,
+   "point_id": "LX0004",
+   "box_input": [
+    515,
+    380,
+    555,
+    400
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0004.png"
+  },
+  {
+   "point_index": 5,
+   "point_id": "LX0005",
+   "box_input": [
+    320,
+    469,
+    360,
+    489
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0005.png"
+  },
+  {
+   "point_index": 6,
+   "point_id": "LX0006",
+   "box_input": [
+    517,
+    476,
+    557,
+    496
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0006.png"
+  },
+  {
+   "point_index": 7,
+   "point_id": "LX0007",
+   "box_input": [
+    416,
+    348,
+    456,
+    368
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0007.png"
+  },
+  {
+   "point_index": 8,
+   "point_id": "LX0008",
+   "box_input": [
+    230,
+    340,
+    270,
+    360
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0008.png"
+  },
+  {
+   "point_index": 9,
+   "point_id": "LX0009",
+   "box_input": [
+    144,
+    285,
+    184,
+    305
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0009.png"
+  },
+  {
+   "point_index": 10,
+   "point_id": "LX0010",
+   "box_input": [
+    193,
+    268,
+    233,
+    288
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0010.png"
+  },
+  {
+   "point_index": 11,
+   "point_id": "LX0011",
+   "box_input": [
+    435,
+    475,
+    475,
+    495
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0011.png"
+  },
+  {
+   "point_index": 12,
+   "point_id": "LX0012",
+   "box_input": [
+    195,
+    308,
+    235,
+    328
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0012.png"
+  },
+  {
+   "point_index": 13,
+   "point_id": "LX0013",
+   "box_input": [
+    456,
+    367,
+    496,
+    387
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0013.png"
+  },
+  {
+   "point_index": 14,
+   "point_id": "LX0014",
+   "box_input": [
+    274,
+    426,
+    314,
+    446
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0014.png"
+  },
+  {
+   "point_index": 15,
+   "point_id": "LX0015",
+   "box_input": [
+    381,
+    326,
+    421,
+    346
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0015.png"
+  },
+  {
+   "point_index": 16,
+   "point_id": "LX0017",
+   "box_input": [
+    284,
+    287,
+    324,
+    307
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0017.png"
+  },
+  {
+   "point_index": 17,
+   "point_id": "LX0018",
+   "box_input": [
+    491,
+    379,
+    531,
+    399
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0018.png"
+  },
+  {
+   "point_index": 18,
+   "point_id": "LX0019",
+   "box_input": [
+    292,
+    436,
+    332,
+    456
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0019.png"
+  },
+  {
+   "point_index": 19,
+   "point_id": "LX0020",
+   "box_input": [
+    365,
+    474,
+    405,
+    494
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0020.png"
+  },
+  {
+   "point_index": 20,
+   "point_id": "LX0021",
+   "box_input": [
+    224,
+    278,
+    264,
+    298
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0021.png"
+  },
+  {
+   "point_index": 21,
+   "point_id": "LX0022",
+   "box_input": [
+    308,
+    293,
+    348,
+    313
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0022.png"
+  },
+  {
+   "point_index": 22,
+   "point_id": "LX0023",
+   "box_input": [
+    164,
+    292,
+    204,
+    312
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0023.png"
+  },
+  {
+   "point_index": 23,
+   "point_id": "LX0024",
+   "box_input": [
+    412,
+    343,
+    452,
+    363
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0024.png"
+  },
+  {
+   "point_index": 24,
+   "point_id": "LX0025",
+   "box_input": [
+    311,
+    298,
+    351,
+    318
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0025.png"
+  },
+  {
+   "point_index": 25,
+   "point_id": "LX0026",
+   "box_input": [
+    461,
+    376,
+    501,
+    396
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0026.png"
+  },
+  {
+   "point_index": 26,
+   "point_id": "LX0027",
+   "box_input": [
+    227,
+    281,
+    267,
+    301
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0027.png"
+  },
+  {
+   "point_index": 27,
+   "point_id": "LX0029",
+   "box_input": [
+    366,
+    475,
+    406,
+    495
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0029.png"
+  },
+  {
+   "point_index": 28,
+   "point_id": "LX0030",
+   "box_input": [
+    195,
+    269,
+    235,
+    289
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0030.png"
+  },
+  {
+   "point_index": 29,
+   "point_id": "LX0031",
+   "box_input": [
+    369,
+    467,
+    409,
+    487
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0031.png"
+  },
+  {
+   "point_index": 30,
+   "point_id": "LX0032",
+   "box_input": [
+    416,
+    349,
+    456,
+    369
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0032.png"
+  },
+  {
+   "point_index": 31,
+   "point_id": "LX0033",
+   "box_input": [
+    159,
+    283,
+    199,
+    303
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0033.png"
+  },
+  {
+   "point_index": 32,
+   "point_id": "LX0034",
+   "box_input": [
+    279,
+    426,
+    319,
+    446
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0034.png"
+  },
+  {
+   "point_index": 33,
+   "point_id": "LX0035",
+   "box_input": [
+    432,
+    468,
+    472,
+    488
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0035.png"
+  },
+  {
+   "point_index": 34,
+   "point_id": "LX0036",
+   "box_input": [
+    473,
+    376,
+    513,
+    396
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0036.png"
+  },
+  {
+   "point_index": 35,
+   "point_id": "LX0037",
+   "box_input": [
+    344,
+    478,
+    384,
+    498
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0037.png"
+  },
+  {
+   "point_index": 36,
+   "point_id": "LX0038",
+   "box_input": [
+    226,
+    330,
+    266,
+    350
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0038.png"
+  },
+  {
+   "point_index": 37,
+   "point_id": "LX0039",
+   "box_input": [
+    226,
+    278,
+    266,
+    298
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0039.png"
+  },
+  {
+   "point_index": 38,
+   "point_id": "LX0040",
+   "box_input": [
+    263,
+    406,
+    303,
+    426
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0040.png"
+  },
+  {
+   "point_index": 39,
+   "point_id": "LX0041",
+   "box_input": [
+    358,
+    310,
+    398,
+    330
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0041.png"
+  },
+  {
+   "point_index": 40,
+   "point_id": "LX0042",
+   "box_input": [
+    499,
+    385,
+    539,
+    405
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0042.png"
+  },
+  {
+   "point_index": 41,
+   "point_id": "LX0043",
+   "box_input": [
+    229,
+    277,
+    269,
+    297
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0043.png"
+  },
+  {
+   "point_index": 42,
+   "point_id": "LX0044",
+   "box_input": [
+    459,
+    478,
+    499,
+    498
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0044.png"
+  },
+  {
+   "point_index": 43,
+   "point_id": "LX0045",
+   "box_input": [
+    290,
+    433,
+    330,
+    453
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0045.png"
+  },
+  {
+   "point_index": 44,
+   "point_id": "LX0046",
+   "box_input": [
+    417,
+    469,
+    457,
+    489
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0046.png"
+  },
+  {
+   "point_index": 45,
+   "point_id": "LX0047",
+   "box_input": [
+    326,
+    300,
+    366,
+    320
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0047.png"
+  },
+  {
+   "point_index": 46,
+   "point_id": "LX0048",
+   "box_input": [
+    354,
+    472,
+    394,
+    492
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0048.png"
+  },
+  {
+   "point_index": 47,
+   "point_id": "LX0049",
+   "box_input": [
+    166,
+    290,
+    206,
+    310
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0049.png"
+  },
+  {
+   "point_index": 48,
+   "point_id": "LX0050",
+   "box_input": [
+    447,
+    360,
+    487,
+    380
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0050.png"
+  },
+  {
+   "point_index": 49,
+   "point_id": "LX0051",
+   "box_input": [
+    289,
+    291,
+    329,
+    311
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0051.png"
+  },
+  {
+   "point_index": 50,
+   "point_id": "LX0052",
+   "box_input": [
+    244,
+    282,
+    284,
+    302
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0052.png"
+  },
+  {
+   "point_index": 51,
+   "point_id": "LX0053",
+   "box_input": [
+    470,
+    478,
+    510,
+    498
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0053.png"
+  },
+  {
+   "point_index": 52,
+   "point_id": "LX0054",
+   "box_input": [
+    144,
+    273,
+    184,
+    293
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0054.png"
+  },
+  {
+   "point_index": 53,
+   "point_id": "LX0055",
+   "box_input": [
+    408,
+    469,
+    448,
+    489
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0055.png"
+  },
+  {
+   "point_index": 54,
+   "point_id": "LX0056",
+   "box_input": [
+    300,
+    445,
+    340,
+    465
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0056.png"
+  },
+  {
+   "point_index": 55,
+   "point_id": "LX0057",
+   "box_input": [
+    427,
+    347,
+    467,
+    367
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0057.png"
+  },
+  {
+   "point_index": 56,
+   "point_id": "LX0058",
+   "box_input": [
+    366,
+    321,
+    406,
+    341
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0058.png"
+  },
+  {
+   "point_index": 57,
+   "point_id": "LX0059",
+   "box_input": [
+    201,
+    290,
+    241,
+    310
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0059.png"
+  },
+  {
+   "point_index": 58,
+   "point_id": "LX0060",
+   "box_input": [
+    234,
+    350,
+    274,
+    370
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0060.png"
+  },
+  {
+   "point_index": 59,
+   "point_id": "LX0061",
+   "box_input": [
+    206,
+    302,
+    246,
+    322
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0061.png"
+  },
+  {
+   "point_index": 60,
+   "point_id": "LX0062",
+   "box_input": [
+    146,
+    288,
+    186,
+    308
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/patches/LX0062.png"
+  }
+ ],
+ "similarity_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__pozelimab_1_2_2__p01__v7/lineex_grouped/similarity.npy",
+ "similarity_row_point_ids": [
+  "LX0000",
+  "LX0001",
+  "LX0002",
+  "LX0003",
+  "LX0004",
+  "LX0005",
+  "LX0006",
+  "LX0007",
+  "LX0008",
+  "LX0009",
+  "LX0010",
+  "LX0011",
+  "LX0012",
+  "LX0013",
+  "LX0014",
+  "LX0015",
+  "LX0017",
+  "LX0018",
+  "LX0019",
+  "LX0020",
+  "LX0021",
+  "LX0022",
+  "LX0023",
+  "LX0024",
+  "LX0025",
+  "LX0026",
+  "LX0027",
+  "LX0029",
+  "LX0030",
+  "LX0031",
+  "LX0032",
+  "LX0033",
+  "LX0034",
+  "LX0035",
+  "LX0036",
+  "LX0037",
+  "LX0038",
+  "LX0039",
+  "LX0040",
+  "LX0041",
+  "LX0042",
+  "LX0043",
+  "LX0044",
+  "LX0045",
+  "LX0046",
+  "LX0047",
+  "LX0048",
+  "LX0049",
+  "LX0050",
+  "LX0051",
+  "LX0052",
+  "LX0053",
+  "LX0054",
+  "LX0055",
+  "LX0056",
+  "LX0057",
+  "LX0058",
+  "LX0059",
+  "LX0060",
+  "LX0061",
+  "LX0062"
+ ],
+ "similarity_column_series_ids": [
+  "s01",
+  "s02",
+  "s03"
+ ],
+ "timing": {
+  "shared_input_verification_seconds": 0.005388299992773682,
+  "legend_crop_seconds": 0.0031802000012248755,
+  "network_seconds": 0.014435700024478137,
+  "head_postprocess_and_export_seconds": 0.006043099972885102,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.060125700023490936,
+  "learned_matching_seconds": 0.2500893999822438,
+  "total_seconds": 0.3391984000336379,
+  "method_total_excluding_shared_verification_seconds": 0.3391984000336379,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "patch_matching_timing": {
+  "patch_extract_and_export_seconds": 0.060125700023490936,
+  "learned_matching_seconds": 0.2500893999822438,
+  "total_seconds": 0.31553940003504977
+ },
+ "timing_breakdown": {
+  "shared_input_verification_seconds": 0.005388299992773682,
+  "legend_crop_seconds": 0.0031802000012248755,
+  "network_seconds": 0.014435700024478137,
+  "head_postprocess_and_export_seconds": 0.006043099972885102,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.060125700023490936,
+  "learned_matching_seconds": 0.2500893999822438,
+  "total_seconds": 0.3391984000336379,
+  "method_total_excluding_shared_verification_seconds": 0.3391984000336379,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "raw_heads_result_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/raw_heads/lineex/er__pozelimab_1_2_2__p01__v7.json",
+ "raw_points": [
+  {
+   "point_id": "LX0000",
+   "x": 162.0,
+   "y": 270.0,
+   "detection_score": null,
+   "x_px": 162.0,
+   "y_px": 270.0
+  },
+  {
+   "point_id": "LX0001",
+   "x": 411.0,
+   "y": 484.0,
+   "detection_score": null,
+   "x_px": 411.0,
+   "y_px": 484.0
+  },
+  {
+   "point_id": "LX0002",
+   "x": 248.0,
+   "y": 287.0,
+   "detection_score": null,
+   "x_px": 248.0,
+   "y_px": 287.0
+  },
+  {
+   "point_id": "LX0003",
+   "x": 350.0,
+   "y": 312.0,
+   "detection_score": null,
+   "x_px": 350.0,
+   "y_px": 312.0
+  },
+  {
+   "point_id": "LX0004",
+   "x": 535.0,
+   "y": 390.0,
+   "detection_score": null,
+   "x_px": 535.0,
+   "y_px": 390.0
+  },
+  {
+   "point_id": "LX0005",
+   "x": 340.0,
+   "y": 479.0,
+   "detection_score": null,
+   "x_px": 340.0,
+   "y_px": 479.0
+  },
+  {
+   "point_id": "LX0006",
+   "x": 537.0,
+   "y": 486.0,
+   "detection_score": null,
+   "x_px": 537.0,
+   "y_px": 486.0
+  },
+  {
+   "point_id": "LX0007",
+   "x": 436.0,
+   "y": 358.0,
+   "detection_score": null,
+   "x_px": 436.0,
+   "y_px": 358.0
+  },
+  {
+   "point_id": "LX0008",
+   "x": 250.0,
+   "y": 350.0,
+   "detection_score": null,
+   "x_px": 250.0,
+   "y_px": 350.0
+  },
+  {
+   "point_id": "LX0009",
+   "x": 164.0,
+   "y": 295.0,
+   "detection_score": null,
+   "x_px": 164.0,
+   "y_px": 295.0
+  },
+  {
+   "point_id": "LX0010",
+   "x": 213.0,
+   "y": 278.0,
+   "detection_score": null,
+   "x_px": 213.0,
+   "y_px": 278.0
+  },
+  {
+   "point_id": "LX0011",
+   "x": 455.0,
+   "y": 485.0,
+   "detection_score": null,
+   "x_px": 455.0,
+   "y_px": 485.0
+  },
+  {
+   "point_id": "LX0012",
+   "x": 215.0,
+   "y": 318.0,
+   "detection_score": null,
+   "x_px": 215.0,
+   "y_px": 318.0
+  },
+  {
+   "point_id": "LX0013",
+   "x": 476.0,
+   "y": 377.0,
+   "detection_score": null,
+   "x_px": 476.0,
+   "y_px": 377.0
+  },
+  {
+   "point_id": "LX0014",
+   "x": 294.0,
+   "y": 436.0,
+   "detection_score": null,
+   "x_px": 294.0,
+   "y_px": 436.0
+  },
+  {
+   "point_id": "LX0015",
+   "x": 401.0,
+   "y": 336.0,
+   "detection_score": null,
+   "x_px": 401.0,
+   "y_px": 336.0
+  },
+  {
+   "point_id": "LX0017",
+   "x": 304.0,
+   "y": 297.0,
+   "detection_score": null,
+   "x_px": 304.0,
+   "y_px": 297.0
+  },
+  {
+   "point_id": "LX0018",
+   "x": 511.0,
+   "y": 389.0,
+   "detection_score": null,
+   "x_px": 511.0,
+   "y_px": 389.0
+  },
+  {
+   "point_id": "LX0019",
+   "x": 312.0,
+   "y": 446.0,
+   "detection_score": null,
+   "x_px": 312.0,
+   "y_px": 446.0
+  },
+  {
+   "point_id": "LX0020",
+   "x": 385.0,
+   "y": 484.0,
+   "detection_score": null,
+   "x_px": 385.0,
+   "y_px": 484.0
+  },
+  {
+   "point_id": "LX0021",
+   "x": 244.0,
+   "y": 288.0,
+   "detection_score": null,
+   "x_px": 244.0,
+   "y_px": 288.0
+  },
+  {
+   "point_id": "LX0022",
+   "x": 328.0,
+   "y": 303.0,
+   "detection_score": null,
+   "x_px": 328.0,
+   "y_px": 303.0
+  },
+  {
+   "point_id": "LX0023",
+   "x": 184.0,
+   "y": 302.0,
+   "detection_score": null,
+   "x_px": 184.0,
+   "y_px": 302.0
+  },
+  {
+   "point_id": "LX0024",
+   "x": 432.0,
+   "y": 353.0,
+   "detection_score": null,
+   "x_px": 432.0,
+   "y_px": 353.0
+  },
+  {
+   "point_id": "LX0025",
+   "x": 331.0,
+   "y": 308.0,
+   "detection_score": null,
+   "x_px": 331.0,
+   "y_px": 308.0
+  },
+  {
+   "point_id": "LX0026",
+   "x": 481.0,
+   "y": 386.0,
+   "detection_score": null,
+   "x_px": 481.0,
+   "y_px": 386.0
+  },
+  {
+   "point_id": "LX0027",
+   "x": 247.0,
+   "y": 291.0,
+   "detection_score": null,
+   "x_px": 247.0,
+   "y_px": 291.0
+  },
+  {
+   "point_id": "LX0029",
+   "x": 386.0,
+   "y": 485.0,
+   "detection_score": null,
+   "x_px": 386.0,
+   "y_px": 485.0
+  },
+  {
+   "point_id": "LX0030",
+   "x": 215.0,
+   "y": 279.0,
+   "detection_score": null,
+   "x_px": 215.0,
+   "y_px": 279.0
+  },
+  {
+   "point_id": "LX0031",
+   "x": 389.0,
+   "y": 477.0,
+   "detection_score": null,
+   "x_px": 389.0,
+   "y_px": 477.0
+  },
+  {
+   "point_id": "LX0032",
+   "x": 436.0,
+   "y": 359.0,
+   "detection_score": null,
+   "x_px": 436.0,
+   "y_px": 359.0
+  },
+  {
+   "point_id": "LX0033",
+   "x": 179.0,
+   "y": 293.0,
+   "detection_score": null,
+   "x_px": 179.0,
+   "y_px": 293.0
+  },
+  {
+   "point_id": "LX0034",
+   "x": 299.0,
+   "y": 436.0,
+   "detection_score": null,
+   "x_px": 299.0,
+   "y_px": 436.0
+  },
+  {
+   "point_id": "LX0035",
+   "x": 452.0,
+   "y": 478.0,
+   "detection_score": null,
+   "x_px": 452.0,
+   "y_px": 478.0
+  },
+  {
+   "point_id": "LX0036",
+   "x": 493.0,
+   "y": 386.0,
+   "detection_score": null,
+   "x_px": 493.0,
+   "y_px": 386.0
+  },
+  {
+   "point_id": "LX0037",
+   "x": 364.0,
+   "y": 488.0,
+   "detection_score": null,
+   "x_px": 364.0,
+   "y_px": 488.0
+  },
+  {
+   "point_id": "LX0038",
+   "x": 246.0,
+   "y": 340.0,
+   "detection_score": null,
+   "x_px": 246.0,
+   "y_px": 340.0
+  },
+  {
+   "point_id": "LX0039",
+   "x": 246.0,
+   "y": 288.0,
+   "detection_score": null,
+   "x_px": 246.0,
+   "y_px": 288.0
+  },
+  {
+   "point_id": "LX0040",
+   "x": 283.0,
+   "y": 416.0,
+   "detection_score": null,
+   "x_px": 283.0,
+   "y_px": 416.0
+  },
+  {
+   "point_id": "LX0041",
+   "x": 378.0,
+   "y": 320.0,
+   "detection_score": null,
+   "x_px": 378.0,
+   "y_px": 320.0
+  },
+  {
+   "point_id": "LX0042",
+   "x": 519.0,
+   "y": 395.0,
+   "detection_score": null,
+   "x_px": 519.0,
+   "y_px": 395.0
+  },
+  {
+   "point_id": "LX0043",
+   "x": 249.0,
+   "y": 287.0,
+   "detection_score": null,
+   "x_px": 249.0,
+   "y_px": 287.0
+  },
+  {
+   "point_id": "LX0044",
+   "x": 479.0,
+   "y": 488.0,
+   "detection_score": null,
+   "x_px": 479.0,
+   "y_px": 488.0
+  },
+  {
+   "point_id": "LX0045",
+   "x": 310.0,
+   "y": 443.0,
+   "detection_score": null,
+   "x_px": 310.0,
+   "y_px": 443.0
+  },
+  {
+   "point_id": "LX0046",
+   "x": 437.0,
+   "y": 479.0,
+   "detection_score": null,
+   "x_px": 437.0,
+   "y_px": 479.0
+  },
+  {
+   "point_id": "LX0047",
+   "x": 346.0,
+   "y": 310.0,
+   "detection_score": null,
+   "x_px": 346.0,
+   "y_px": 310.0
+  },
+  {
+   "point_id": "LX0048",
+   "x": 374.0,
+   "y": 482.0,
+   "detection_score": null,
+   "x_px": 374.0,
+   "y_px": 482.0
+  },
+  {
+   "point_id": "LX0049",
+   "x": 186.0,
+   "y": 300.0,
+   "detection_score": null,
+   "x_px": 186.0,
+   "y_px": 300.0
+  },
+  {
+   "point_id": "LX0050",
+   "x": 467.0,
+   "y": 370.0,
+   "detection_score": null,
+   "x_px": 467.0,
+   "y_px": 370.0
+  },
+  {
+   "point_id": "LX0051",
+   "x": 309.0,
+   "y": 301.0,
+   "detection_score": null,
+   "x_px": 309.0,
+   "y_px": 301.0
+  },
+  {
+   "point_id": "LX0052",
+   "x": 264.0,
+   "y": 292.0,
+   "detection_score": null,
+   "x_px": 264.0,
+   "y_px": 292.0
+  },
+  {
+   "point_id": "LX0053",
+   "x": 490.0,
+   "y": 488.0,
+   "detection_score": null,
+   "x_px": 490.0,
+   "y_px": 488.0
+  },
+  {
+   "point_id": "LX0054",
+   "x": 164.0,
+   "y": 283.0,
+   "detection_score": null,
+   "x_px": 164.0,
+   "y_px": 283.0
+  },
+  {
+   "point_id": "LX0055",
+   "x": 428.0,
+   "y": 479.0,
+   "detection_score": null,
+   "x_px": 428.0,
+   "y_px": 479.0
+  },
+  {
+   "point_id": "LX0056",
+   "x": 320.0,
+   "y": 455.0,
+   "detection_score": null,
+   "x_px": 320.0,
+   "y_px": 455.0
+  },
+  {
+   "point_id": "LX0057",
+   "x": 447.0,
+   "y": 357.0,
+   "detection_score": null,
+   "x_px": 447.0,
+   "y_px": 357.0
+  },
+  {
+   "point_id": "LX0058",
+   "x": 386.0,
+   "y": 331.0,
+   "detection_score": null,
+   "x_px": 386.0,
+   "y_px": 331.0
+  },
+  {
+   "point_id": "LX0059",
+   "x": 221.0,
+   "y": 300.0,
+   "detection_score": null,
+   "x_px": 221.0,
+   "y_px": 300.0
+  },
+  {
+   "point_id": "LX0060",
+   "x": 254.0,
+   "y": 360.0,
+   "detection_score": null,
+   "x_px": 254.0,
+   "y_px": 360.0
+  },
+  {
+   "point_id": "LX0061",
+   "x": 226.0,
+   "y": 312.0,
+   "detection_score": null,
+   "x_px": 226.0,
+   "y_px": 312.0
+  },
+  {
+   "point_id": "LX0062",
+   "x": 166.0,
+   "y": 298.0,
+   "detection_score": null,
+   "x_px": 166.0,
+   "y_px": 298.0
+  }
+ ],
+ "raw_queries": [
+  {
+   "query_id": 0,
+   "x": 162,
+   "y": 270,
+   "score": null,
+   "normalized_x": 0.2804628014564514,
+   "normalized_y": 0.48106998205184937,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 1,
+   "x": 411,
+   "y": 484,
+   "score": null,
+   "normalized_x": 0.7077584862709045,
+   "normalized_y": 0.8617693781852722,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 2,
+   "x": 248,
+   "y": 287,
+   "score": null,
+   "normalized_x": 0.4279678463935852,
+   "normalized_y": 0.5118799805641174,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 3,
+   "x": 350,
+   "y": 312,
+   "score": null,
+   "normalized_x": 0.6039838194847107,
+   "normalized_y": 0.5564461350440979,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 4,
+   "x": 535,
+   "y": 390,
+   "score": null,
+   "normalized_x": 0.9209119081497192,
+   "normalized_y": 0.6955521106719971,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 5,
+   "x": 340,
+   "y": 479,
+   "score": null,
+   "normalized_x": 0.5865577459335327,
+   "normalized_y": 0.8533309102058411,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 6,
+   "x": 537,
+   "y": 486,
+   "score": null,
+   "normalized_x": 0.9254668354988098,
+   "normalized_y": 0.8654855489730835,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 7,
+   "x": 436,
+   "y": 358,
+   "score": null,
+   "normalized_x": 0.751555323600769,
+   "normalized_y": 0.6371285915374756,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 8,
+   "x": 250,
+   "y": 350,
+   "score": null,
+   "normalized_x": 0.43180719017982483,
+   "normalized_y": 0.6240425109863281,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 9,
+   "x": 164,
+   "y": 295,
+   "score": null,
+   "normalized_x": 0.28377869725227356,
+   "normalized_y": 0.5253615379333496,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 10,
+   "x": 213,
+   "y": 278,
+   "score": null,
+   "normalized_x": 0.36731448769569397,
+   "normalized_y": 0.49553951621055603,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 11,
+   "x": 455,
+   "y": 485,
+   "score": null,
+   "normalized_x": 0.7841569185256958,
+   "normalized_y": 0.8637447953224182,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 12,
+   "x": 215,
+   "y": 318,
+   "score": null,
+   "normalized_x": 0.3712542951107025,
+   "normalized_y": 0.5665947198867798,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 13,
+   "x": 476,
+   "y": 377,
+   "score": null,
+   "normalized_x": 0.8206382989883423,
+   "normalized_y": 0.6715496778488159,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 14,
+   "x": 294,
+   "y": 436,
+   "score": null,
+   "normalized_x": 0.5060768127441406,
+   "normalized_y": 0.7770072817802429,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 15,
+   "x": 401,
+   "y": 336,
+   "score": null,
+   "normalized_x": 0.690242350101471,
+   "normalized_y": 0.598045825958252,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 16,
+   "x": 499,
+   "y": 491,
+   "score": null,
+   "normalized_x": 0.8603694438934326,
+   "normalized_y": 0.8748947381973267,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 17,
+   "x": 304,
+   "y": 297,
+   "score": null,
+   "normalized_x": 0.5236532688140869,
+   "normalized_y": 0.5298880338668823,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 18,
+   "x": 511,
+   "y": 389,
+   "score": null,
+   "normalized_x": 0.8802743554115295,
+   "normalized_y": 0.6926354169845581,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 19,
+   "x": 312,
+   "y": 446,
+   "score": null,
+   "normalized_x": 0.5381762385368347,
+   "normalized_y": 0.7948950529098511,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 20,
+   "x": 385,
+   "y": 484,
+   "score": null,
+   "normalized_x": 0.6630152463912964,
+   "normalized_y": 0.861335039138794,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 21,
+   "x": 244,
+   "y": 288,
+   "score": null,
+   "normalized_x": 0.4208701550960541,
+   "normalized_y": 0.5142315030097961,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 22,
+   "x": 328,
+   "y": 303,
+   "score": null,
+   "normalized_x": 0.5654541850090027,
+   "normalized_y": 0.5404964685440063,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 23,
+   "x": 184,
+   "y": 302,
+   "score": null,
+   "normalized_x": 0.31714949011802673,
+   "normalized_y": 0.5389429330825806,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 24,
+   "x": 432,
+   "y": 353,
+   "score": null,
+   "normalized_x": 0.7435923218727112,
+   "normalized_y": 0.628955066204071,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 25,
+   "x": 331,
+   "y": 308,
+   "score": null,
+   "normalized_x": 0.5697523355484009,
+   "normalized_y": 0.5489398837089539,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 26,
+   "x": 481,
+   "y": 386,
+   "score": null,
+   "normalized_x": 0.8292001485824585,
+   "normalized_y": 0.6873000264167786,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 27,
+   "x": 247,
+   "y": 291,
+   "score": null,
+   "normalized_x": 0.42517003417015076,
+   "normalized_y": 0.5188034772872925,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 28,
+   "x": 521,
+   "y": 491,
+   "score": null,
+   "normalized_x": 0.896748423576355,
+   "normalized_y": 0.8736913800239563,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 29,
+   "x": 386,
+   "y": 485,
+   "score": null,
+   "normalized_x": 0.6650997996330261,
+   "normalized_y": 0.8634190559387207,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 30,
+   "x": 215,
+   "y": 279,
+   "score": null,
+   "normalized_x": 0.37060216069221497,
+   "normalized_y": 0.49672698974609375,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 31,
+   "x": 389,
+   "y": 477,
+   "score": null,
+   "normalized_x": 0.6707988977432251,
+   "normalized_y": 0.8496280312538147,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 32,
+   "x": 436,
+   "y": 359,
+   "score": null,
+   "normalized_x": 0.7514154314994812,
+   "normalized_y": 0.6389847993850708,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 33,
+   "x": 179,
+   "y": 293,
+   "score": null,
+   "normalized_x": 0.3083217442035675,
+   "normalized_y": 0.5227353572845459,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 34,
+   "x": 299,
+   "y": 436,
+   "score": null,
+   "normalized_x": 0.5158315300941467,
+   "normalized_y": 0.7763503193855286,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 35,
+   "x": 452,
+   "y": 478,
+   "score": null,
+   "normalized_x": 0.7791047692298889,
+   "normalized_y": 0.8519160747528076,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 36,
+   "x": 493,
+   "y": 386,
+   "score": null,
+   "normalized_x": 0.8500746488571167,
+   "normalized_y": 0.6869542598724365,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 37,
+   "x": 364,
+   "y": 488,
+   "score": null,
+   "normalized_x": 0.6278013586997986,
+   "normalized_y": 0.8691881895065308,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 38,
+   "x": 246,
+   "y": 340,
+   "score": null,
+   "normalized_x": 0.4248914122581482,
+   "normalized_y": 0.6053860187530518,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 39,
+   "x": 246,
+   "y": 288,
+   "score": null,
+   "normalized_x": 0.42500537633895874,
+   "normalized_y": 0.5134539008140564,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 40,
+   "x": 283,
+   "y": 416,
+   "score": null,
+   "normalized_x": 0.4871430993080139,
+   "normalized_y": 0.7404900193214417,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 41,
+   "x": 378,
+   "y": 320,
+   "score": null,
+   "normalized_x": 0.6509537100791931,
+   "normalized_y": 0.5708996057510376,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 42,
+   "x": 519,
+   "y": 395,
+   "score": null,
+   "normalized_x": 0.8940740823745728,
+   "normalized_y": 0.7043541073799133,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 43,
+   "x": 249,
+   "y": 287,
+   "score": null,
+   "normalized_x": 0.4292225241661072,
+   "normalized_y": 0.511279821395874,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 44,
+   "x": 479,
+   "y": 488,
+   "score": null,
+   "normalized_x": 0.8248443007469177,
+   "normalized_y": 0.8684453368186951,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 45,
+   "x": 310,
+   "y": 443,
+   "score": null,
+   "normalized_x": 0.5335827469825745,
+   "normalized_y": 0.7898113131523132,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 46,
+   "x": 437,
+   "y": 479,
+   "score": null,
+   "normalized_x": 0.7533832788467407,
+   "normalized_y": 0.8529024720191956,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 47,
+   "x": 346,
+   "y": 310,
+   "score": null,
+   "normalized_x": 0.5967468023300171,
+   "normalized_y": 0.5522569417953491,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 48,
+   "x": 374,
+   "y": 482,
+   "score": null,
+   "normalized_x": 0.6440674662590027,
+   "normalized_y": 0.858048677444458,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 49,
+   "x": 186,
+   "y": 300,
+   "score": null,
+   "normalized_x": 0.3202800452709198,
+   "normalized_y": 0.5355501770973206,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 50,
+   "x": 467,
+   "y": 370,
+   "score": null,
+   "normalized_x": 0.8045734167098999,
+   "normalized_y": 0.6591851711273193,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 51,
+   "x": 309,
+   "y": 301,
+   "score": null,
+   "normalized_x": 0.5321467518806458,
+   "normalized_y": 0.5357709527015686,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 52,
+   "x": 264,
+   "y": 292,
+   "score": null,
+   "normalized_x": 0.455301970243454,
+   "normalized_y": 0.5212840437889099,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 53,
+   "x": 490,
+   "y": 488,
+   "score": null,
+   "normalized_x": 0.8448402285575867,
+   "normalized_y": 0.8699959516525269,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 54,
+   "x": 164,
+   "y": 283,
+   "score": null,
+   "normalized_x": 0.2826955318450928,
+   "normalized_y": 0.5051147937774658,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 55,
+   "x": 428,
+   "y": 479,
+   "score": null,
+   "normalized_x": 0.7376284599304199,
+   "normalized_y": 0.853699266910553,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 56,
+   "x": 320,
+   "y": 455,
+   "score": null,
+   "normalized_x": 0.5517863631248474,
+   "normalized_y": 0.811352550983429,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 57,
+   "x": 447,
+   "y": 357,
+   "score": null,
+   "normalized_x": 0.7694104313850403,
+   "normalized_y": 0.6354039311408997,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 58,
+   "x": 386,
+   "y": 331,
+   "score": null,
+   "normalized_x": 0.6659958958625793,
+   "normalized_y": 0.5892221927642822,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 59,
+   "x": 221,
+   "y": 300,
+   "score": null,
+   "normalized_x": 0.38079509139060974,
+   "normalized_y": 0.5341867208480835,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 60,
+   "x": 254,
+   "y": 360,
+   "score": null,
+   "normalized_x": 0.43722784519195557,
+   "normalized_y": 0.640980064868927,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 61,
+   "x": 226,
+   "y": 312,
+   "score": null,
+   "normalized_x": 0.38960713148117065,
+   "normalized_y": 0.5567910671234131,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 62,
+   "x": 166,
+   "y": 298,
+   "score": null,
+   "normalized_x": 0.28645867109298706,
+   "normalized_y": 0.5306966304779053,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 63,
+   "x": 262,
+   "y": 408,
+   "score": null,
+   "normalized_x": 0.45127108693122864,
+   "normalized_y": 0.7272368669509888,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": true,
+   "gate_status": "completed"
+  }
+ ],
+ "head_status": "completed",
+ "implementation_choices": {
+  "keypoints": "Official 64-query L+D checkpoint and background gate",
+  "grouping": "Same official learned Siamese matcher as ChartParser paper, no histogram override."
+ },
+ "limitations": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ],
+ "shared_legend_status": "available",
+ "shared_legend_reason": null,
+ "shared_legends_sha256": "8aa4ef21c1b970a59b07a860bdc1de261b72741544e1a0539913c1fd852f31db",
+ "warnings": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ]
+}

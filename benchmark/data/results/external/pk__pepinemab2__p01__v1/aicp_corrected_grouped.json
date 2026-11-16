@@ -1,0 +1,1213 @@
+{
+ "version": "external_shared_input_benchmark_v1",
+ "panel_id": "pk__pepinemab2__p01__v1",
+ "modality": "bw",
+ "method": "aicp_corrected_grouped",
+ "status": "completed",
+ "coordinate_system": "x_px/y_px = full original unrotated image pixels; x/y = shared native crop pixels",
+ "image_path": "data/images\\pk__pepinemab2__p01__v1.png",
+ "input_sha256": "80782a488bfc0202d376809fe55a420854bf004fd4acbf10b941b96b20e8338c",
+ "source_image_path": "data/images\\pk__pepinemab2__p01__v1.png",
+ "source_sha256": "80782a488bfc0202d376809fe55a420854bf004fd4acbf10b941b96b20e8338c",
+ "crop_box_original": [
+  0,
+  0,
+  877,
+  656
+ ],
+ "plot_box": [
+  158.0,
+  46.0,
+  873.0,
+  546.0
+ ],
+ "legend_box": [
+  593.0,
+  91.0,
+  721.0,
+  150.0
+ ],
+ "legends": [
+  {
+   "legend_index": 0,
+   "series_id": "s01",
+   "label": "Part A",
+   "source_native_legend_id": "S01",
+   "box_input": [
+    593,
+    91,
+    643,
+    116
+   ],
+   "box_original": [
+    593,
+    91,
+    643,
+    116
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__pepinemab2__p01__v1/shared_legend_crops/legend_01.png",
+   "crop_sha256": "b1c1048300411d7b30703ef7069930e07cf00f524723c07562f2fd79f49818f6",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__pepinemab2__p01__v1/shared_legends.json",
+   "shared_legends_sha256": "834e55e65f521a1c1fad2a4aefa2e519e7ec9411fec71a1b5a23443d59a9d34b",
+   "mapping_provenance": {
+    "S01": "s01",
+    "S02": "s02"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 1,
+   "series_id": "s02",
+   "label": "Part B",
+   "source_native_legend_id": "S02",
+   "box_input": [
+    594,
+    119,
+    634,
+    150
+   ],
+   "box_original": [
+    594,
+    119,
+    634,
+    150
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__pepinemab2__p01__v1/shared_legend_crops/legend_02.png",
+   "crop_sha256": "112b5749881c821bd005f367c5034c6adf10d5379c443f82aef113baef4e4675",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__pepinemab2__p01__v1/shared_legends.json",
+   "shared_legends_sha256": "834e55e65f521a1c1fad2a4aefa2e519e7ec9411fec71a1b5a23443d59a9d34b",
+   "mapping_provenance": {
+    "S01": "s01",
+    "S02": "s02"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  }
+ ],
+ "predictions": [
+  {
+   "point_id": "CP0005",
+   "x": 181.56640625,
+   "y": 226.78125,
+   "model_x": 106,
+   "model_y": 177,
+   "raw_x": 181.56640625,
+   "raw_y": 226.78125,
+   "detection_score": 0.9916155934333801,
+   "component_id": 5,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9080327153205872,
+   "winning_similarity": 0.9080327153205872,
+   "similarities": [
+    0.8687132596969604,
+    0.9080327153205872
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0005.png",
+   "patch_box_input": [
+    161,
+    216,
+    201,
+    236
+   ],
+   "x_px": 181.56640625,
+   "y_px": 226.78125
+  },
+  {
+   "point_id": "CP0006",
+   "x": 179.853515625,
+   "y": 228.0625,
+   "model_x": 105,
+   "model_y": 178,
+   "raw_x": 181.56640625,
+   "raw_y": 239.59375,
+   "detection_score": 0.9954800605773926,
+   "component_id": 5,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8962250351905823,
+   "winning_similarity": 0.8962250351905823,
+   "similarities": [
+    0.8307045102119446,
+    0.8962250351905823
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0006.png",
+   "patch_box_input": [
+    159,
+    218,
+    199,
+    238
+   ],
+   "x_px": 179.853515625,
+   "y_px": 228.0625
+  },
+  {
+   "point_id": "CP0010",
+   "x": 183.279296875,
+   "y": 288.28125,
+   "model_x": 107,
+   "model_y": 225,
+   "raw_x": 181.56640625,
+   "raw_y": 281.875,
+   "detection_score": 0.9898806810379028,
+   "component_id": 7,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8342645168304443,
+   "winning_similarity": 0.8342645168304443,
+   "similarities": [
+    0.8342645168304443,
+    0.7787468433380127
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0010.png",
+   "patch_box_input": [
+    163,
+    278,
+    203,
+    298
+   ],
+   "x_px": 183.279296875,
+   "y_px": 288.28125
+  },
+  {
+   "point_id": "CP0011",
+   "x": 320.310546875,
+   "y": 315.1875,
+   "model_x": 187,
+   "model_y": 246,
+   "raw_x": 320.310546875,
+   "raw_y": 299.8125,
+   "detection_score": 0.9794694185256958,
+   "component_id": 10,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8432273864746094,
+   "winning_similarity": 0.8432273864746094,
+   "similarities": [
+    0.7913900017738342,
+    0.8432273864746094
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0011.png",
+   "patch_box_input": [
+    300,
+    305,
+    340,
+    325
+   ],
+   "x_px": 320.310546875,
+   "y_px": 315.1875
+  },
+  {
+   "point_id": "CP0012",
+   "x": 489.88671875,
+   "y": 319.03125,
+   "model_x": 286,
+   "model_y": 249,
+   "raw_x": 489.88671875,
+   "raw_y": 319.03125,
+   "detection_score": 0.9326933026313782,
+   "component_id": 10,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8751664757728577,
+   "winning_similarity": 0.8751664757728577,
+   "similarities": [
+    0.8426699042320251,
+    0.8751664757728577
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0012.png",
+   "patch_box_input": [
+    469,
+    309,
+    509,
+    329
+   ],
+   "x_px": 489.88671875,
+   "y_px": 319.03125
+  },
+  {
+   "point_id": "CP0013",
+   "x": 491.599609375,
+   "y": 342.09375,
+   "model_x": 287,
+   "model_y": 267,
+   "raw_x": 491.599609375,
+   "raw_y": 335.6875,
+   "detection_score": 0.9945230484008789,
+   "component_id": 10,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8635746836662292,
+   "winning_similarity": 0.8635746836662292,
+   "similarities": [
+    0.8635746836662292,
+    0.8591108322143555
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0013.png",
+   "patch_box_input": [
+    471,
+    332,
+    511,
+    352
+   ],
+   "x_px": 491.599609375,
+   "y_px": 342.09375
+  },
+  {
+   "point_id": "CP0015",
+   "x": 489.88671875,
+   "y": 349.78125,
+   "model_x": 286,
+   "model_y": 273,
+   "raw_x": 491.599609375,
+   "raw_y": 349.78125,
+   "detection_score": 0.9837895035743713,
+   "component_id": 10,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8881964683532715,
+   "winning_similarity": 0.8881964683532715,
+   "similarities": [
+    0.8881964683532715,
+    0.8540076613426208
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0015.png",
+   "patch_box_input": [
+    469,
+    339,
+    509,
+    359
+   ],
+   "x_px": 489.88671875,
+   "y_px": 349.78125
+  },
+  {
+   "point_id": "CP0016",
+   "x": 806.771484375,
+   "y": 370.28125,
+   "model_x": 471,
+   "model_y": 289,
+   "raw_x": 808.484375,
+   "raw_y": 362.59375,
+   "detection_score": 0.7247219681739807,
+   "component_id": 12,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.4956199824810028,
+   "winning_similarity": 0.4956199824810028,
+   "similarities": [
+    0.4956199824810028,
+    0.45668119192123413
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0016.png",
+   "patch_box_input": [
+    786,
+    360,
+    826,
+    380
+   ],
+   "x_px": 806.771484375,
+   "y_px": 370.28125
+  },
+  {
+   "point_id": "CP0018",
+   "x": 808.484375,
+   "y": 384.375,
+   "model_x": 472,
+   "model_y": 300,
+   "raw_x": 808.484375,
+   "raw_y": 385.65625,
+   "detection_score": 0.9875410199165344,
+   "component_id": 10,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9060684442520142,
+   "winning_similarity": 0.9060684442520142,
+   "similarities": [
+    0.8578256368637085,
+    0.9060684442520142
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0018.png",
+   "patch_box_input": [
+    788,
+    374,
+    828,
+    394
+   ],
+   "x_px": 808.484375,
+   "y_px": 384.375
+  },
+  {
+   "point_id": "CP0019",
+   "x": 726.265625,
+   "y": 397.1875,
+   "model_x": 424,
+   "model_y": 310,
+   "raw_x": 727.978515625,
+   "raw_y": 397.1875,
+   "detection_score": 0.38035327196121216,
+   "component_id": 10,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.5634340047836304,
+   "winning_similarity": 0.5634340047836304,
+   "similarities": [
+    0.5634340047836304,
+    0.5440946221351624
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0019.png",
+   "patch_box_input": [
+    706,
+    387,
+    746,
+    407
+   ],
+   "x_px": 726.265625,
+   "y_px": 397.1875
+  },
+  {
+   "point_id": "CP0020",
+   "x": 715.98828125,
+   "y": 394.625,
+   "model_x": 418,
+   "model_y": 308,
+   "raw_x": 715.98828125,
+   "raw_y": 401.03125,
+   "detection_score": 0.36395177245140076,
+   "component_id": 10,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.5545275211334229,
+   "winning_similarity": 0.5545275211334229,
+   "similarities": [
+    0.5545275211334229,
+    0.5122100710868835
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0020.png",
+   "patch_box_input": [
+    695,
+    384,
+    735,
+    404
+   ],
+   "x_px": 715.98828125,
+   "y_px": 394.625
+  },
+  {
+   "point_id": "CP0021",
+   "x": 808.484375,
+   "y": 420.25,
+   "model_x": 472,
+   "model_y": 328,
+   "raw_x": 806.771484375,
+   "raw_y": 418.96875,
+   "detection_score": 0.9819552302360535,
+   "component_id": 10,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.843539297580719,
+   "winning_similarity": 0.843539297580719,
+   "similarities": [
+    0.7766749262809753,
+    0.843539297580719
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0021.png",
+   "patch_box_input": [
+    788,
+    410,
+    828,
+    430
+   ],
+   "x_px": 808.484375,
+   "y_px": 420.25
+  }
+ ],
+ "unavailable": [],
+ "patches": [
+  {
+   "point_index": 0,
+   "point_id": "CP0005",
+   "box_input": [
+    161,
+    216,
+    201,
+    236
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0005.png"
+  },
+  {
+   "point_index": 1,
+   "point_id": "CP0006",
+   "box_input": [
+    159,
+    218,
+    199,
+    238
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0006.png"
+  },
+  {
+   "point_index": 2,
+   "point_id": "CP0010",
+   "box_input": [
+    163,
+    278,
+    203,
+    298
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0010.png"
+  },
+  {
+   "point_index": 3,
+   "point_id": "CP0011",
+   "box_input": [
+    300,
+    305,
+    340,
+    325
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0011.png"
+  },
+  {
+   "point_index": 4,
+   "point_id": "CP0012",
+   "box_input": [
+    469,
+    309,
+    509,
+    329
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0012.png"
+  },
+  {
+   "point_index": 5,
+   "point_id": "CP0013",
+   "box_input": [
+    471,
+    332,
+    511,
+    352
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0013.png"
+  },
+  {
+   "point_index": 6,
+   "point_id": "CP0015",
+   "box_input": [
+    469,
+    339,
+    509,
+    359
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0015.png"
+  },
+  {
+   "point_index": 7,
+   "point_id": "CP0016",
+   "box_input": [
+    786,
+    360,
+    826,
+    380
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0016.png"
+  },
+  {
+   "point_index": 8,
+   "point_id": "CP0018",
+   "box_input": [
+    788,
+    374,
+    828,
+    394
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0018.png"
+  },
+  {
+   "point_index": 9,
+   "point_id": "CP0019",
+   "box_input": [
+    706,
+    387,
+    746,
+    407
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0019.png"
+  },
+  {
+   "point_index": 10,
+   "point_id": "CP0020",
+   "box_input": [
+    695,
+    384,
+    735,
+    404
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0020.png"
+  },
+  {
+   "point_index": 11,
+   "point_id": "CP0021",
+   "box_input": [
+    788,
+    410,
+    828,
+    430
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/patches/CP0021.png"
+  }
+ ],
+ "similarity_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/aicp_corrected_grouped/similarity.npy",
+ "similarity_row_point_ids": [
+  "CP0005",
+  "CP0006",
+  "CP0010",
+  "CP0011",
+  "CP0012",
+  "CP0013",
+  "CP0015",
+  "CP0016",
+  "CP0018",
+  "CP0019",
+  "CP0020",
+  "CP0021"
+ ],
+ "similarity_column_series_ids": [
+  "s01",
+  "s02"
+ ],
+ "timing": {
+  "shared_input_verification_seconds": 0.008287200005725026,
+  "legend_crop_seconds": 0.0034306999878026545,
+  "network_seconds": 0.03342509997310117,
+  "head_postprocess_and_export_seconds": 0.12522049999097362,
+  "curve_correction_seconds": 0.05598929995903745,
+  "patch_extract_and_export_seconds": 0.01641619997099042,
+  "learned_matching_seconds": 0.06313460000092164,
+  "total_seconds": 0.29890889988746494,
+  "method_total_excluding_shared_verification_seconds": 0.29890889988746494,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "patch_matching_timing": {
+  "patch_extract_and_export_seconds": 0.01641619997099042,
+  "learned_matching_seconds": 0.06313460000092164,
+  "total_seconds": 0.08084329997655004
+ },
+ "timing_breakdown": {
+  "shared_input_verification_seconds": 0.008287200005725026,
+  "legend_crop_seconds": 0.0034306999878026545,
+  "network_seconds": 0.03342509997310117,
+  "head_postprocess_and_export_seconds": 0.12522049999097362,
+  "curve_correction_seconds": 0.05598929995903745,
+  "patch_extract_and_export_seconds": 0.01641619997099042,
+  "learned_matching_seconds": 0.06313460000092164,
+  "total_seconds": 0.29890889988746494,
+  "method_total_excluding_shared_verification_seconds": 0.29890889988746494,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "raw_heads_result_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/raw_heads/chartparser/pk__pepinemab2__p01__v1/result.json",
+ "raw_points": [
+  {
+   "point_id": "CP0005",
+   "x": 181.56640625,
+   "y": 226.78125,
+   "model_x": 106,
+   "model_y": 177,
+   "detection_score": 0.9916155934333801,
+   "x_px": 181.56640625,
+   "y_px": 226.78125
+  },
+  {
+   "point_id": "CP0006",
+   "x": 181.56640625,
+   "y": 239.59375,
+   "model_x": 106,
+   "model_y": 187,
+   "detection_score": 0.9954800605773926,
+   "x_px": 181.56640625,
+   "y_px": 239.59375
+  },
+  {
+   "point_id": "CP0008",
+   "x": 320.310546875,
+   "y": 258.8125,
+   "model_x": 187,
+   "model_y": 202,
+   "detection_score": 0.32364219427108765,
+   "x_px": 320.310546875,
+   "y_px": 258.8125
+  },
+  {
+   "point_id": "CP0009",
+   "x": 320.310546875,
+   "y": 266.5,
+   "model_x": 187,
+   "model_y": 208,
+   "detection_score": 0.38645830750465393,
+   "x_px": 320.310546875,
+   "y_px": 266.5
+  },
+  {
+   "point_id": "CP0010",
+   "x": 181.56640625,
+   "y": 281.875,
+   "model_x": 106,
+   "model_y": 220,
+   "detection_score": 0.9898806810379028,
+   "x_px": 181.56640625,
+   "y_px": 281.875
+  },
+  {
+   "point_id": "CP0011",
+   "x": 320.310546875,
+   "y": 299.8125,
+   "model_x": 187,
+   "model_y": 234,
+   "detection_score": 0.9794694185256958,
+   "x_px": 320.310546875,
+   "y_px": 299.8125
+  },
+  {
+   "point_id": "CP0012",
+   "x": 489.88671875,
+   "y": 319.03125,
+   "model_x": 286,
+   "model_y": 249,
+   "detection_score": 0.9326933026313782,
+   "x_px": 489.88671875,
+   "y_px": 319.03125
+  },
+  {
+   "point_id": "CP0013",
+   "x": 491.599609375,
+   "y": 335.6875,
+   "model_x": 287,
+   "model_y": 262,
+   "detection_score": 0.9945230484008789,
+   "x_px": 491.599609375,
+   "y_px": 335.6875
+  },
+  {
+   "point_id": "CP0015",
+   "x": 491.599609375,
+   "y": 349.78125,
+   "model_x": 287,
+   "model_y": 273,
+   "detection_score": 0.9837895035743713,
+   "x_px": 491.599609375,
+   "y_px": 349.78125
+  },
+  {
+   "point_id": "CP0016",
+   "x": 808.484375,
+   "y": 362.59375,
+   "model_x": 472,
+   "model_y": 283,
+   "detection_score": 0.7247219681739807,
+   "x_px": 808.484375,
+   "y_px": 362.59375
+  },
+  {
+   "point_id": "CP0018",
+   "x": 808.484375,
+   "y": 385.65625,
+   "model_x": 472,
+   "model_y": 301,
+   "detection_score": 0.9875410199165344,
+   "x_px": 808.484375,
+   "y_px": 385.65625
+  },
+  {
+   "point_id": "CP0019",
+   "x": 727.978515625,
+   "y": 397.1875,
+   "model_x": 425,
+   "model_y": 310,
+   "detection_score": 0.38035327196121216,
+   "x_px": 727.978515625,
+   "y_px": 397.1875
+  },
+  {
+   "point_id": "CP0020",
+   "x": 715.98828125,
+   "y": 401.03125,
+   "model_x": 418,
+   "model_y": 313,
+   "detection_score": 0.36395177245140076,
+   "x_px": 715.98828125,
+   "y_px": 401.03125
+  },
+  {
+   "point_id": "CP0021",
+   "x": 806.771484375,
+   "y": 418.96875,
+   "model_x": 471,
+   "model_y": 327,
+   "detection_score": 0.9819552302360535,
+   "x_px": 806.771484375,
+   "y_px": 418.96875
+  }
+ ],
+ "corrected_points": [
+  {
+   "point_id": "CP0005",
+   "x": 181.56640625,
+   "y": 226.78125,
+   "model_x": 106,
+   "model_y": 177,
+   "raw_x": 181.56640625,
+   "raw_y": 226.78125,
+   "detection_score": 0.9916155934333801,
+   "component_id": 5,
+   "x_px": 181.56640625,
+   "y_px": 226.78125
+  },
+  {
+   "point_id": "CP0006",
+   "x": 179.853515625,
+   "y": 228.0625,
+   "model_x": 105,
+   "model_y": 178,
+   "raw_x": 181.56640625,
+   "raw_y": 239.59375,
+   "detection_score": 0.9954800605773926,
+   "component_id": 5,
+   "x_px": 179.853515625,
+   "y_px": 228.0625
+  },
+  {
+   "point_id": "CP0010",
+   "x": 183.279296875,
+   "y": 288.28125,
+   "model_x": 107,
+   "model_y": 225,
+   "raw_x": 181.56640625,
+   "raw_y": 281.875,
+   "detection_score": 0.9898806810379028,
+   "component_id": 7,
+   "x_px": 183.279296875,
+   "y_px": 288.28125
+  },
+  {
+   "point_id": "CP0011",
+   "x": 320.310546875,
+   "y": 315.1875,
+   "model_x": 187,
+   "model_y": 246,
+   "raw_x": 320.310546875,
+   "raw_y": 299.8125,
+   "detection_score": 0.9794694185256958,
+   "component_id": 10,
+   "x_px": 320.310546875,
+   "y_px": 315.1875
+  },
+  {
+   "point_id": "CP0012",
+   "x": 489.88671875,
+   "y": 319.03125,
+   "model_x": 286,
+   "model_y": 249,
+   "raw_x": 489.88671875,
+   "raw_y": 319.03125,
+   "detection_score": 0.9326933026313782,
+   "component_id": 10,
+   "x_px": 489.88671875,
+   "y_px": 319.03125
+  },
+  {
+   "point_id": "CP0013",
+   "x": 491.599609375,
+   "y": 342.09375,
+   "model_x": 287,
+   "model_y": 267,
+   "raw_x": 491.599609375,
+   "raw_y": 335.6875,
+   "detection_score": 0.9945230484008789,
+   "component_id": 10,
+   "x_px": 491.599609375,
+   "y_px": 342.09375
+  },
+  {
+   "point_id": "CP0015",
+   "x": 489.88671875,
+   "y": 349.78125,
+   "model_x": 286,
+   "model_y": 273,
+   "raw_x": 491.599609375,
+   "raw_y": 349.78125,
+   "detection_score": 0.9837895035743713,
+   "component_id": 10,
+   "x_px": 489.88671875,
+   "y_px": 349.78125
+  },
+  {
+   "point_id": "CP0016",
+   "x": 806.771484375,
+   "y": 370.28125,
+   "model_x": 471,
+   "model_y": 289,
+   "raw_x": 808.484375,
+   "raw_y": 362.59375,
+   "detection_score": 0.7247219681739807,
+   "component_id": 12,
+   "x_px": 806.771484375,
+   "y_px": 370.28125
+  },
+  {
+   "point_id": "CP0018",
+   "x": 808.484375,
+   "y": 384.375,
+   "model_x": 472,
+   "model_y": 300,
+   "raw_x": 808.484375,
+   "raw_y": 385.65625,
+   "detection_score": 0.9875410199165344,
+   "component_id": 10,
+   "x_px": 808.484375,
+   "y_px": 384.375
+  },
+  {
+   "point_id": "CP0019",
+   "x": 726.265625,
+   "y": 397.1875,
+   "model_x": 424,
+   "model_y": 310,
+   "raw_x": 727.978515625,
+   "raw_y": 397.1875,
+   "detection_score": 0.38035327196121216,
+   "component_id": 10,
+   "x_px": 726.265625,
+   "y_px": 397.1875
+  },
+  {
+   "point_id": "CP0020",
+   "x": 715.98828125,
+   "y": 394.625,
+   "model_x": 418,
+   "model_y": 308,
+   "raw_x": 715.98828125,
+   "raw_y": 401.03125,
+   "detection_score": 0.36395177245140076,
+   "component_id": 10,
+   "x_px": 715.98828125,
+   "y_px": 394.625
+  },
+  {
+   "point_id": "CP0021",
+   "x": 808.484375,
+   "y": 420.25,
+   "model_x": 472,
+   "model_y": 328,
+   "raw_x": 806.771484375,
+   "raw_y": 418.96875,
+   "detection_score": 0.9819552302360535,
+   "component_id": 10,
+   "x_px": 808.484375,
+   "y_px": 420.25
+  }
+ ],
+ "rejected_points": [
+  {
+   "point_id": "CP0008",
+   "x": 320.310546875,
+   "y": 258.8125,
+   "model_x": 187,
+   "model_y": 202,
+   "detection_score": 0.32364219427108765,
+   "x_px": 320.310546875,
+   "y_px": 258.8125,
+   "reason": "no_centerline_in_band_radius"
+  },
+  {
+   "point_id": "CP0009",
+   "x": 320.310546875,
+   "y": 266.5,
+   "model_x": 187,
+   "model_y": 208,
+   "detection_score": 0.38645830750465393,
+   "x_px": 320.310546875,
+   "y_px": 266.5,
+   "reason": "no_centerline_in_band_radius"
+  }
+ ],
+ "excluded_points": [
+  {
+   "point_id": "CP0001",
+   "x": 70.228515625,
+   "y": 55.09375,
+   "model_x": 41,
+   "model_y": 43,
+   "detection_score": 0.6236422657966614,
+   "x_px": 70.228515625,
+   "y_px": 55.09375
+  },
+  {
+   "point_id": "CP0002",
+   "x": 68.515625,
+   "y": 117.875,
+   "model_x": 40,
+   "model_y": 92,
+   "detection_score": 0.3478708267211914,
+   "x_px": 68.515625,
+   "y_px": 117.875
+  },
+  {
+   "point_id": "CP0003",
+   "x": 66.802734375,
+   "y": 128.125,
+   "model_x": 39,
+   "model_y": 100,
+   "detection_score": 0.4220307767391205,
+   "x_px": 66.802734375,
+   "y_px": 128.125
+  },
+  {
+   "point_id": "CP0004",
+   "x": 70.228515625,
+   "y": 158.875,
+   "model_x": 41,
+   "model_y": 124,
+   "detection_score": 0.31243446469306946,
+   "x_px": 70.228515625,
+   "y_px": 158.875
+  },
+  {
+   "point_id": "CP0007",
+   "x": 66.802734375,
+   "y": 242.15625,
+   "model_x": 39,
+   "model_y": 189,
+   "detection_score": 0.45360633730888367,
+   "x_px": 66.802734375,
+   "y_px": 242.15625
+  },
+  {
+   "point_id": "CP0014",
+   "x": 68.515625,
+   "y": 348.5,
+   "model_x": 40,
+   "model_y": 272,
+   "detection_score": 0.4101087152957916,
+   "x_px": 68.515625,
+   "y_px": 348.5
+  },
+  {
+   "point_id": "CP0017",
+   "x": 70.228515625,
+   "y": 370.28125,
+   "model_x": 41,
+   "model_y": 289,
+   "detection_score": 0.3415667712688446,
+   "x_px": 70.228515625,
+   "y_px": 370.28125
+  }
+ ],
+ "centerline_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/external/pk__pepinemab2__p01__v1/chartparser_geometry/centerline_512.png",
+ "public_process_kps_reference": [
+  {
+   "point_id": "CP0005",
+   "status": "retained",
+   "x": 181.56640625,
+   "y": 226.78125,
+   "upright_x": 181.56640625,
+   "upright_y": 226.78125,
+   "original_x": 181.56640625,
+   "original_y": 226.78125,
+   "model_x": 106.0,
+   "model_y": 177.0
+  },
+  {
+   "point_id": "CP0006",
+   "status": "retained",
+   "x": 181.56640625,
+   "y": 233.1875,
+   "upright_x": 181.56640625,
+   "upright_y": 233.1875,
+   "original_x": 181.56640625,
+   "original_y": 233.1875,
+   "model_x": 106.0,
+   "model_y": 182.0
+  },
+  {
+   "point_id": "CP0008",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0009",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0010",
+   "status": "retained",
+   "x": 181.56640625,
+   "y": 275.46875,
+   "upright_x": 181.56640625,
+   "upright_y": 275.46875,
+   "original_x": 181.56640625,
+   "original_y": 275.46875,
+   "model_x": 106.0,
+   "model_y": 215.0
+  },
+  {
+   "point_id": "CP0011",
+   "status": "retained",
+   "x": 320.310546875,
+   "y": 297.25,
+   "upright_x": 320.310546875,
+   "upright_y": 297.25,
+   "original_x": 320.310546875,
+   "original_y": 297.25,
+   "model_x": 187.0,
+   "model_y": 232.0
+  },
+  {
+   "point_id": "CP0012",
+   "status": "retained",
+   "x": 489.88671875,
+   "y": 326.71875,
+   "upright_x": 489.88671875,
+   "upright_y": 326.71875,
+   "original_x": 489.88671875,
+   "original_y": 326.71875,
+   "model_x": 286.0,
+   "model_y": 255.0
+  },
+  {
+   "point_id": "CP0013",
+   "status": "retained",
+   "x": 491.599609375,
+   "y": 329.28125,
+   "upright_x": 491.599609375,
+   "upright_y": 329.28125,
+   "original_x": 491.599609375,
+   "original_y": 329.28125,
+   "model_x": 287.0,
+   "model_y": 257.0
+  },
+  {
+   "point_id": "CP0015",
+   "status": "retained",
+   "x": 491.599609375,
+   "y": 347.21875,
+   "upright_x": 491.599609375,
+   "upright_y": 347.21875,
+   "original_x": 491.599609375,
+   "original_y": 347.21875,
+   "model_x": 287.0,
+   "model_y": 271.0
+  },
+  {
+   "point_id": "CP0016",
+   "status": "retained",
+   "x": 808.484375,
+   "y": 366.4375,
+   "upright_x": 808.484375,
+   "upright_y": 366.4375,
+   "original_x": 808.484375,
+   "original_y": 366.4375,
+   "model_x": 472.0,
+   "model_y": 286.0
+  },
+  {
+   "point_id": "CP0018",
+   "status": "retained",
+   "x": 808.484375,
+   "y": 377.96875,
+   "upright_x": 808.484375,
+   "upright_y": 377.96875,
+   "original_x": 808.484375,
+   "original_y": 377.96875,
+   "model_x": 472.0,
+   "model_y": 295.0
+  },
+  {
+   "point_id": "CP0019",
+   "status": "retained",
+   "x": 727.978515625,
+   "y": 397.1875,
+   "upright_x": 727.978515625,
+   "upright_y": 397.1875,
+   "original_x": 727.978515625,
+   "original_y": 397.1875,
+   "model_x": 425.0,
+   "model_y": 310.0
+  },
+  {
+   "point_id": "CP0020",
+   "status": "retained",
+   "x": 715.98828125,
+   "y": 397.1875,
+   "upright_x": 715.98828125,
+   "upright_y": 397.1875,
+   "original_x": 715.98828125,
+   "original_y": 397.1875,
+   "model_x": 418.0,
+   "model_y": 310.0
+  },
+  {
+   "point_id": "CP0021",
+   "status": "retained",
+   "x": 806.771484375,
+   "y": 411.28125,
+   "upright_x": 806.771484375,
+   "upright_y": 411.28125,
+   "original_x": 806.771484375,
+   "original_y": 411.28125,
+   "model_x": 471.0,
+   "model_y": 321.0
+  }
+ ],
+ "implementation_choices": {
+  "curve_probability": "Cached segmentation[0,1], already sigmoid in ChartParserModel.forward; no second activation.",
+  "probability_inconsistency": "Paper section 3.2.3 says two-channel Softmax, section 3.2.4 discusses Sigmoid, and the public forward applies independent Sigmoid. This run thresholds the released cached Sigmoid output directly, not a claim of identical paper Softmax probabilities.",
+  "threshold": 0.6,
+  "morphology": "One 3x3 all-ones binary closing; constant-zero border.",
+  "connectivity": 8,
+  "component_policy": "Retain every connected component; no minimum-area deletion.",
+  "thinning": "skimage.morphology.skeletonize(method=zhang) independently within each 8-connected component.",
+  "correction": "Nearest centreline pixel in x +/- 1 columns and abs(delta_y) < 15 model pixels; minimum Euclidean distance, ties smaller y then x. Snap x and y to that centreline pixel. Reject if absent.",
+  "correction_parameters_provenance": "The paper does not specify kernel/thinner/selection radius. Column band and vertical radius are borrowed from public process_kps; nearest selection and exact snapping are explicit experimental choices.",
+  "public_reference": "Separate result using original argmax mask, public x +/- 1, y-run gap <= 2, first ascending-y mean within 15, average with original y. Safety bounds added; not used for grouping.",
+  "pivot_patch_size_width_height": [
+   40,
+   20
+  ],
+  "pivot_patch_coordinate_system": "Native original-resolution upright input crop, not the 512x512 model input.",
+  "legend_images": "Unmodified original RGB swatch box crops, connector pixels retained. No reconstructed swatch masks.",
+  "grouping": "Official LineEX learned Siamese + MLP similarity, highest score over supplied legend crops. No histogram override or confidence rejection.",
+  "shape_classification": "Not performed. Legend identity is not a semantic circle/square/triangle prediction.",
+  "deduplication": "None. Distinct raw pivot hypotheses can snap to the same pixel and remain separate records.",
+  "no_legend_policy": "Abstain from grouping even for a nominal single-series panel; no fabricated legend."
+ },
+ "native_legend_stage": "unavailable; supplied benchmark swatch crops used, never class-3 remapping",
+ "limitations": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ],
+ "shared_legend_status": "available",
+ "shared_legend_reason": null,
+ "shared_legends_sha256": "834e55e65f521a1c1fad2a4aefa2e519e7ec9411fec71a1b5a23443d59a9d34b",
+ "warnings": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ]
+}

@@ -1,0 +1,151 @@
+{
+ "panel_id": "pk__fiztasovimab1__p01__v2",
+ "model": "v46_after",
+ "method": "v46_after",
+ "status": "completed",
+ "reason": "",
+ "predictions": [
+  {
+   "point_id": "v46_after_S03_0001",
+   "x_px": 64.0,
+   "y_px": 238.0,
+   "series_id": "s03",
+   "score": null,
+   "native_series_id": "S03",
+   "crop_x_px": 64.0,
+   "crop_y_px": 238.0
+  },
+  {
+   "point_id": "v46_after_S05_0001",
+   "x_px": 93.0,
+   "y_px": 196.0,
+   "series_id": "s05",
+   "score": null,
+   "native_series_id": "S05",
+   "crop_x_px": 93.0,
+   "crop_y_px": 196.0
+  },
+  {
+   "point_id": "v46_after_S05_0002",
+   "x_px": 201.0,
+   "y_px": 217.0,
+   "series_id": "s05",
+   "score": null,
+   "native_series_id": "S05",
+   "crop_x_px": 201.0,
+   "crop_y_px": 217.0
+  },
+  {
+   "point_id": "v46_after_S05_0003",
+   "x_px": 257.0,
+   "y_px": 227.0,
+   "series_id": "s05",
+   "score": null,
+   "native_series_id": "S05",
+   "crop_x_px": 257.0,
+   "crop_y_px": 227.0
+  },
+  {
+   "point_id": "v46_after_S04_0001",
+   "x_px": 93.0,
+   "y_px": 216.0,
+   "series_id": "s04",
+   "score": null,
+   "native_series_id": "S04",
+   "crop_x_px": 93.0,
+   "crop_y_px": 216.0
+  },
+  {
+   "point_id": "v46_after_S04_0002",
+   "x_px": 118.0,
+   "y_px": 219.0,
+   "series_id": "s04",
+   "score": null,
+   "native_series_id": "S04",
+   "crop_x_px": 118.0,
+   "crop_y_px": 219.0
+  },
+  {
+   "point_id": "v46_after_S04_0003",
+   "x_px": 148.0,
+   "y_px": 225.0,
+   "series_id": "s04",
+   "score": null,
+   "native_series_id": "S04",
+   "crop_x_px": 148.0,
+   "crop_y_px": 225.0
+  },
+  {
+   "point_id": "v46_after_S04_0004",
+   "x_px": 203.0,
+   "y_px": 232.0,
+   "series_id": "s04",
+   "score": null,
+   "native_series_id": "S04",
+   "crop_x_px": 203.0,
+   "crop_y_px": 232.0
+  },
+  {
+   "point_id": "v46_after_S01_0001",
+   "x_px": 120.0,
+   "y_px": 231.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S01",
+   "crop_x_px": 120.0,
+   "crop_y_px": 231.0
+  },
+  {
+   "point_id": "v46_after_S01_0002",
+   "x_px": 147.0,
+   "y_px": 231.0,
+   "series_id": "s01",
+   "score": null,
+   "native_series_id": "S01",
+   "crop_x_px": 147.0,
+   "crop_y_px": 231.0
+  }
+ ],
+ "coordinate_convention": "full original image pixel centers; crop translation added exactly once",
+ "score_note": "Native export may omit confidence; null is unavailable, not zero. No score threshold added.",
+ "input_sha256": "4d0d4bb8dbe8d1ba0ca546708be00d8407d908c803941eb48d44da316639f7b3",
+ "source_sha256": "4d0d4bb8dbe8d1ba0ca546708be00d8407d908c803941eb48d44da316639f7b3",
+ "step5_entry_point": "GUI /correct-saved: export_session -> import_session -> correction_only_cli_v46.py",
+ "step5_src": "<BENCHMARK_V2>/src_snapshots/0fd678a840bc/src",
+ "iterations_requested": 5,
+ "correction_status": {
+  "completed": true,
+  "engine": "bw",
+  "detection_skipped": true,
+  "iterations_requested": 5,
+  "stop_policy": "manual",
+  "stop_report": {
+   "version": "v46-step5-stop-v1",
+   "policy": "manual",
+   "max_iterations": 5,
+   "plateau_warning_fraction": 0.001,
+   "engine_decisions_unchanged": true,
+   "cap_scope": "per invocation; joint BW iterations or iterations per colour series",
+   "plateau_warning_only": true,
+   "series": [
+    {
+     "series": "all_bw_series",
+     "mode": "structure_routed",
+     "iterations_executed": 1,
+     "accepted_actions": 0,
+     "previous_iterations": 0,
+     "stop_code": "all_candidates_blocked",
+     "stop_message": "All candidate actions failed evidence or protection checks.",
+     "native_stop_reason": "no_admissible_image_candidate",
+     "last_candidate_count": 54,
+     "last_admissible_count": 0,
+     "low_gain_warnings": [],
+     "trace_file": "correction_diagnostics/bw_series_3t6uy1dd/trace.json"
+    }
+   ],
+   "budget_exhausted": false,
+   "low_gain_warning_count": 0,
+   "summary": "Search stopped or preserved the input series; marker accuracy is not established."
+  }
+ }
+}

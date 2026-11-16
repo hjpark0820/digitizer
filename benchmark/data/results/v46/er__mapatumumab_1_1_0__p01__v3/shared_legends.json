@@ -1,0 +1,157 @@
+{
+ "panel_id": "er__mapatumumab_1_1_0__p01__v3",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    166,
+    482,
+    266,
+    514
+   ],
+   "native_body_bbox": [
+    201.49896120592203,
+    483.49850827911706,
+    229.50401904257805,
+    511.503566115773
+   ],
+   "class_name": "open_square",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s02",
+   "label": "IC mAb",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__mapatumumab_1_1_0__p01__v3/shared_legend_crops/legend_01.png",
+   "image_size": [
+    100,
+    32
+   ],
+   "sha256": "0d11b0ef410d47b6d8ae4c3eddb17bdbb1f7f09616b516c121696124a8b2997a",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__mapatumumab_1_1_0__p01__v3/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    166,
+    482,
+    266,
+    514
+   ],
+   "bbox_original": [
+    166,
+    482,
+    266,
+    514
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    165,
+    553,
+    267,
+    576
+   ],
+   "native_body_bbox": [
+    207,
+    555,
+    226,
+    574
+   ],
+   "class_name": "filled_circle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "ETR1",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__mapatumumab_1_1_0__p01__v3/shared_legend_crops/legend_02.png",
+   "image_size": [
+    102,
+    23
+   ],
+   "sha256": "f3b373fe978f74a555df642e0f86f77f192459f7e3f557ef3b801fc9f2a578df",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__mapatumumab_1_1_0__p01__v3/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    165,
+    553,
+    267,
+    576
+   ],
+   "bbox_original": [
+    165,
+    553,
+    267,
+    576
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s02",
+  "S02": "s01"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.7138934651290499,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.781766841468334,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s02",
+   "label": "IC mAb",
+   "bbox": [
+    157,
+    485,
+    274,
+    511
+   ]
+  },
+  {
+   "series_id": "s01",
+   "label": "ETR1",
+   "bbox": [
+    161,
+    554,
+    270,
+    573
+   ]
+  }
+ ],
+ "input_sha256": "b247d4ba7518921cd65b6e3d753601ddd7adf10d7dcf599a314738eb472435a5",
+ "source_sha256": "b247d4ba7518921cd65b6e3d753601ddd7adf10d7dcf599a314738eb472435a5",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.022916399990208447
+}

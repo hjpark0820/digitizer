@@ -1,0 +1,1709 @@
+{
+ "version": "external_shared_input_benchmark_v1",
+ "panel_id": "er__demcizumab_1_1_0__p03__v8",
+ "modality": "color",
+ "method": "lineex_paper_grouped",
+ "status": "completed",
+ "coordinate_system": "x_px/y_px = full original unrotated image pixels; x/y = shared native crop pixels",
+ "image_path": "data/images\\er__demcizumab_1_1_0__p03__v8.png",
+ "input_sha256": "c53fa9ac659225432ee7028fef75e2b29ef081fea4ad004492debbb79bb9e9b9",
+ "source_image_path": "data/images\\er__demcizumab_1_1_0__p03__v8.png",
+ "source_sha256": "c53fa9ac659225432ee7028fef75e2b29ef081fea4ad004492debbb79bb9e9b9",
+ "crop_box_original": [
+  0,
+  0,
+  721,
+  234
+ ],
+ "plot_box": [
+  498.0,
+  18.0,
+  705.0,
+  195.0
+ ],
+ "legend_box": [
+  11.0,
+  175.0,
+  211.0,
+  192.0
+ ],
+ "legends": [
+  {
+   "legend_index": 0,
+   "series_id": "s02",
+   "label": "Day 2",
+   "source_native_legend_id": "color02",
+   "box_input": [
+    81,
+    175,
+    98,
+    191
+   ],
+   "box_original": [
+    81,
+    175,
+    98,
+    191
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__demcizumab_1_1_0__p03__v8/shared_legend_crops/legend_01.png",
+   "crop_sha256": "6410e5826575243e1bee3e2c32ff9587fe1fbc1b410650e023aad163faf14386",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__demcizumab_1_1_0__p03__v8/shared_legends.json",
+   "shared_legends_sha256": "e9ee8903a799b0534ff8300b1c8b415b8f6cbe198a464b96e421e25af3255b95",
+   "mapping_provenance": {
+    "color02": "s02",
+    "color03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 1,
+   "series_id": "s03",
+   "label": "Day 3",
+   "source_native_legend_id": "color03",
+   "box_input": [
+    151,
+    175,
+    168,
+    191
+   ],
+   "box_original": [
+    151,
+    175,
+    168,
+    191
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__demcizumab_1_1_0__p03__v8/shared_legend_crops/legend_02.png",
+   "crop_sha256": "91b5b92dad5be0848e9b9747bf2c9a7cc1af5983100b51af16223d1d08b90a7e",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__demcizumab_1_1_0__p03__v8/shared_legends.json",
+   "shared_legends_sha256": "e9ee8903a799b0534ff8300b1c8b415b8f6cbe198a464b96e421e25af3255b95",
+   "mapping_provenance": {
+    "color02": "s02",
+    "color03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  }
+ ],
+ "predictions": [
+  {
+   "point_id": "LXP0001",
+   "x": 557.0,
+   "y": 83.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.03961477801203728,
+   "winning_similarity": 0.03961477801203728,
+   "similarities": [
+    0.03961477801203728,
+    0.026872895658016205
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0001.png",
+   "patch_box_input": [
+    537,
+    73,
+    577,
+    93
+   ],
+   "x_px": 557.0,
+   "y_px": 83.0
+  },
+  {
+   "point_id": "LXP0004",
+   "x": 696.0,
+   "y": 29.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 1,
+   "score": 0.33839088678359985,
+   "winning_similarity": 0.33839088678359985,
+   "similarities": [
+    0.1387225091457367,
+    0.33839088678359985
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0004.png",
+   "patch_box_input": [
+    676,
+    19,
+    716,
+    39
+   ],
+   "x_px": 696.0,
+   "y_px": 29.0
+  },
+  {
+   "point_id": "LXP0006",
+   "x": 679.0,
+   "y": 97.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 1,
+   "score": 0.0417703315615654,
+   "winning_similarity": 0.0417703315615654,
+   "similarities": [
+    0.004525692202150822,
+    0.0417703315615654
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0006.png",
+   "patch_box_input": [
+    659,
+    87,
+    699,
+    107
+   ],
+   "x_px": 679.0,
+   "y_px": 97.0
+  },
+  {
+   "point_id": "LXP0011",
+   "x": 566.0,
+   "y": 124.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 1,
+   "score": 0.09239659458398819,
+   "winning_similarity": 0.09239659458398819,
+   "similarities": [
+    0.04907448589801788,
+    0.09239659458398819
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0011.png",
+   "patch_box_input": [
+    546,
+    114,
+    586,
+    134
+   ],
+   "x_px": 566.0,
+   "y_px": 124.0
+  },
+  {
+   "point_id": "LXP0013",
+   "x": 558.0,
+   "y": 40.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 1,
+   "score": 0.03251823037862778,
+   "winning_similarity": 0.03251823037862778,
+   "similarities": [
+    0.006913172081112862,
+    0.03251823037862778
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0013.png",
+   "patch_box_input": [
+    538,
+    30,
+    578,
+    50
+   ],
+   "x_px": 558.0,
+   "y_px": 40.0
+  },
+  {
+   "point_id": "LXP0016",
+   "x": 634.0,
+   "y": 119.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 1,
+   "score": 0.007887112908065319,
+   "winning_similarity": 0.007887112908065319,
+   "similarities": [
+    0.0020759364124387503,
+    0.007887112908065319
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0016.png",
+   "patch_box_input": [
+    614,
+    109,
+    654,
+    129
+   ],
+   "x_px": 634.0,
+   "y_px": 119.0
+  },
+  {
+   "point_id": "LXP0018",
+   "x": 645.0,
+   "y": 32.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 1,
+   "score": 0.04731103777885437,
+   "winning_similarity": 0.04731103777885437,
+   "similarities": [
+    0.0075150285847485065,
+    0.04731103777885437
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0018.png",
+   "patch_box_input": [
+    625,
+    22,
+    665,
+    42
+   ],
+   "x_px": 645.0,
+   "y_px": 32.0
+  },
+  {
+   "point_id": "LXP0026",
+   "x": 604.0,
+   "y": 89.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.9314698576927185,
+   "winning_similarity": 0.9314698576927185,
+   "similarities": [
+    0.9314698576927185,
+    0.017331033945083618
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0026.png",
+   "patch_box_input": [
+    584,
+    79,
+    624,
+    99
+   ],
+   "x_px": 604.0,
+   "y_px": 89.0
+  },
+  {
+   "point_id": "LXP0028",
+   "x": 674.0,
+   "y": 103.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 1,
+   "score": 0.09794491529464722,
+   "winning_similarity": 0.09794491529464722,
+   "similarities": [
+    0.00342991529032588,
+    0.09794491529464722
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0028.png",
+   "patch_box_input": [
+    654,
+    93,
+    694,
+    113
+   ],
+   "x_px": 674.0,
+   "y_px": 103.0
+  },
+  {
+   "point_id": "LXP0029",
+   "x": 498.0,
+   "y": 126.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 1,
+   "score": 0.06412023305892944,
+   "winning_similarity": 0.06412023305892944,
+   "similarities": [
+    0.0010098769562318921,
+    0.06412023305892944
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0029.png",
+   "patch_box_input": [
+    478,
+    116,
+    518,
+    136
+   ],
+   "x_px": 498.0,
+   "y_px": 126.0
+  },
+  {
+   "point_id": "LXP0035",
+   "x": 550.0,
+   "y": 82.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.40176141262054443,
+   "winning_similarity": 0.40176141262054443,
+   "similarities": [
+    0.40176141262054443,
+    0.028564125299453735
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0035.png",
+   "patch_box_input": [
+    530,
+    72,
+    570,
+    92
+   ],
+   "x_px": 550.0,
+   "y_px": 82.0
+  },
+  {
+   "point_id": "LXP0036",
+   "x": 621.0,
+   "y": 31.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 1,
+   "score": 0.5172615647315979,
+   "winning_similarity": 0.5172615647315979,
+   "similarities": [
+    0.005423415452241898,
+    0.5172615647315979
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0036.png",
+   "patch_box_input": [
+    601,
+    21,
+    641,
+    41
+   ],
+   "x_px": 621.0,
+   "y_px": 31.0
+  },
+  {
+   "point_id": "LXP0042",
+   "x": 671.0,
+   "y": 33.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 1,
+   "score": 0.04817233234643936,
+   "winning_similarity": 0.04817233234643936,
+   "similarities": [
+    0.0012007287004962564,
+    0.04817233234643936
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0042.png",
+   "patch_box_input": [
+    651,
+    23,
+    691,
+    43
+   ],
+   "x_px": 671.0,
+   "y_px": 33.0
+  },
+  {
+   "point_id": "LXP0044",
+   "x": 596.0,
+   "y": 116.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 1,
+   "score": 0.06454775482416153,
+   "winning_similarity": 0.06454775482416153,
+   "similarities": [
+    0.04026590660214424,
+    0.06454775482416153
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0044.png",
+   "patch_box_input": [
+    576,
+    106,
+    616,
+    126
+   ],
+   "x_px": 596.0,
+   "y_px": 116.0
+  },
+  {
+   "point_id": "LXP0046",
+   "x": 542.0,
+   "y": 118.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 0,
+   "score": 0.06663167476654053,
+   "winning_similarity": 0.06663167476654053,
+   "similarities": [
+    0.06663167476654053,
+    0.029332507401704788
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0046.png",
+   "patch_box_input": [
+    522,
+    108,
+    562,
+    128
+   ],
+   "x_px": 542.0,
+   "y_px": 118.0
+  },
+  {
+   "point_id": "LXP0050",
+   "x": 536.0,
+   "y": 41.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 1,
+   "score": 0.5470445156097412,
+   "winning_similarity": 0.5470445156097412,
+   "similarities": [
+    0.0202159583568573,
+    0.5470445156097412
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0050.png",
+   "patch_box_input": [
+    516,
+    31,
+    556,
+    51
+   ],
+   "x_px": 536.0,
+   "y_px": 41.0
+  },
+  {
+   "point_id": "LXP0053",
+   "x": 620.0,
+   "y": 118.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 1,
+   "score": 0.05513027310371399,
+   "winning_similarity": 0.05513027310371399,
+   "similarities": [
+    0.022895440459251404,
+    0.05513027310371399
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0053.png",
+   "patch_box_input": [
+    600,
+    108,
+    640,
+    128
+   ],
+   "x_px": 620.0,
+   "y_px": 118.0
+  },
+  {
+   "point_id": "LXP0057",
+   "x": 506.0,
+   "y": 50.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 1,
+   "score": 0.15190763771533966,
+   "winning_similarity": 0.15190763771533966,
+   "similarities": [
+    0.0020872519817203283,
+    0.15190763771533966
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0057.png",
+   "patch_box_input": [
+    486,
+    40,
+    526,
+    60
+   ],
+   "x_px": 506.0,
+   "y_px": 50.0
+  }
+ ],
+ "unavailable": [],
+ "patches": [
+  {
+   "point_index": 0,
+   "point_id": "LXP0001",
+   "box_input": [
+    537,
+    73,
+    577,
+    93
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0001.png"
+  },
+  {
+   "point_index": 1,
+   "point_id": "LXP0004",
+   "box_input": [
+    676,
+    19,
+    716,
+    39
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0004.png"
+  },
+  {
+   "point_index": 2,
+   "point_id": "LXP0006",
+   "box_input": [
+    659,
+    87,
+    699,
+    107
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0006.png"
+  },
+  {
+   "point_index": 3,
+   "point_id": "LXP0011",
+   "box_input": [
+    546,
+    114,
+    586,
+    134
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0011.png"
+  },
+  {
+   "point_index": 4,
+   "point_id": "LXP0013",
+   "box_input": [
+    538,
+    30,
+    578,
+    50
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0013.png"
+  },
+  {
+   "point_index": 5,
+   "point_id": "LXP0016",
+   "box_input": [
+    614,
+    109,
+    654,
+    129
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0016.png"
+  },
+  {
+   "point_index": 6,
+   "point_id": "LXP0018",
+   "box_input": [
+    625,
+    22,
+    665,
+    42
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0018.png"
+  },
+  {
+   "point_index": 7,
+   "point_id": "LXP0026",
+   "box_input": [
+    584,
+    79,
+    624,
+    99
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0026.png"
+  },
+  {
+   "point_index": 8,
+   "point_id": "LXP0028",
+   "box_input": [
+    654,
+    93,
+    694,
+    113
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0028.png"
+  },
+  {
+   "point_index": 9,
+   "point_id": "LXP0029",
+   "box_input": [
+    478,
+    116,
+    518,
+    136
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0029.png"
+  },
+  {
+   "point_index": 10,
+   "point_id": "LXP0035",
+   "box_input": [
+    530,
+    72,
+    570,
+    92
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0035.png"
+  },
+  {
+   "point_index": 11,
+   "point_id": "LXP0036",
+   "box_input": [
+    601,
+    21,
+    641,
+    41
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0036.png"
+  },
+  {
+   "point_index": 12,
+   "point_id": "LXP0042",
+   "box_input": [
+    651,
+    23,
+    691,
+    43
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0042.png"
+  },
+  {
+   "point_index": 13,
+   "point_id": "LXP0044",
+   "box_input": [
+    576,
+    106,
+    616,
+    126
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0044.png"
+  },
+  {
+   "point_index": 14,
+   "point_id": "LXP0046",
+   "box_input": [
+    522,
+    108,
+    562,
+    128
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0046.png"
+  },
+  {
+   "point_index": 15,
+   "point_id": "LXP0050",
+   "box_input": [
+    516,
+    31,
+    556,
+    51
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0050.png"
+  },
+  {
+   "point_index": 16,
+   "point_id": "LXP0053",
+   "box_input": [
+    600,
+    108,
+    640,
+    128
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0053.png"
+  },
+  {
+   "point_index": 17,
+   "point_id": "LXP0057",
+   "box_input": [
+    486,
+    40,
+    526,
+    60
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/patches/LXP0057.png"
+  }
+ ],
+ "similarity_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__demcizumab_1_1_0__p03__v8/lineex_paper_grouped/similarity.npy",
+ "similarity_row_point_ids": [
+  "LXP0001",
+  "LXP0004",
+  "LXP0006",
+  "LXP0011",
+  "LXP0013",
+  "LXP0016",
+  "LXP0018",
+  "LXP0026",
+  "LXP0028",
+  "LXP0029",
+  "LXP0035",
+  "LXP0036",
+  "LXP0042",
+  "LXP0044",
+  "LXP0046",
+  "LXP0050",
+  "LXP0053",
+  "LXP0057"
+ ],
+ "similarity_column_series_ids": [
+  "s02",
+  "s03"
+ ],
+ "timing": {
+  "shared_input_verification_seconds": 0.0,
+  "legend_crop_seconds": 0.0,
+  "network_seconds": 0.012227799976244569,
+  "head_postprocess_and_export_seconds": 0.0052247000858187675,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.01755400002002716,
+  "learned_matching_seconds": 0.07832699990831316,
+  "total_seconds": 0.11478010006248951,
+  "method_total_excluding_shared_verification_seconds": 0.11478010006248951,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "patch_matching_timing": {
+  "patch_extract_and_export_seconds": 0.01755400002002716,
+  "learned_matching_seconds": 0.07832699990831316,
+  "total_seconds": 0.09732760000042617
+ },
+ "timing_breakdown": {
+  "shared_input_verification_seconds": 0.0,
+  "legend_crop_seconds": 0.0,
+  "network_seconds": 0.012227799976244569,
+  "head_postprocess_and_export_seconds": 0.0052247000858187675,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.01755400002002716,
+  "learned_matching_seconds": 0.07832699990831316,
+  "total_seconds": 0.11478010006248951,
+  "method_total_excluding_shared_verification_seconds": 0.11478010006248951,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "raw_points": [
+  {
+   "point_id": "LXP0001",
+   "x": 557.0,
+   "y": 83.0,
+   "detection_score": null,
+   "x_px": 557.0,
+   "y_px": 83.0
+  },
+  {
+   "point_id": "LXP0004",
+   "x": 696.0,
+   "y": 29.0,
+   "detection_score": null,
+   "x_px": 696.0,
+   "y_px": 29.0
+  },
+  {
+   "point_id": "LXP0006",
+   "x": 679.0,
+   "y": 97.0,
+   "detection_score": null,
+   "x_px": 679.0,
+   "y_px": 97.0
+  },
+  {
+   "point_id": "LXP0011",
+   "x": 566.0,
+   "y": 124.0,
+   "detection_score": null,
+   "x_px": 566.0,
+   "y_px": 124.0
+  },
+  {
+   "point_id": "LXP0013",
+   "x": 558.0,
+   "y": 40.0,
+   "detection_score": null,
+   "x_px": 558.0,
+   "y_px": 40.0
+  },
+  {
+   "point_id": "LXP0016",
+   "x": 634.0,
+   "y": 119.0,
+   "detection_score": null,
+   "x_px": 634.0,
+   "y_px": 119.0
+  },
+  {
+   "point_id": "LXP0018",
+   "x": 645.0,
+   "y": 32.0,
+   "detection_score": null,
+   "x_px": 645.0,
+   "y_px": 32.0
+  },
+  {
+   "point_id": "LXP0026",
+   "x": 604.0,
+   "y": 89.0,
+   "detection_score": null,
+   "x_px": 604.0,
+   "y_px": 89.0
+  },
+  {
+   "point_id": "LXP0028",
+   "x": 674.0,
+   "y": 103.0,
+   "detection_score": null,
+   "x_px": 674.0,
+   "y_px": 103.0
+  },
+  {
+   "point_id": "LXP0029",
+   "x": 498.0,
+   "y": 126.0,
+   "detection_score": null,
+   "x_px": 498.0,
+   "y_px": 126.0
+  },
+  {
+   "point_id": "LXP0035",
+   "x": 550.0,
+   "y": 82.0,
+   "detection_score": null,
+   "x_px": 550.0,
+   "y_px": 82.0
+  },
+  {
+   "point_id": "LXP0036",
+   "x": 621.0,
+   "y": 31.0,
+   "detection_score": null,
+   "x_px": 621.0,
+   "y_px": 31.0
+  },
+  {
+   "point_id": "LXP0042",
+   "x": 671.0,
+   "y": 33.0,
+   "detection_score": null,
+   "x_px": 671.0,
+   "y_px": 33.0
+  },
+  {
+   "point_id": "LXP0044",
+   "x": 596.0,
+   "y": 116.0,
+   "detection_score": null,
+   "x_px": 596.0,
+   "y_px": 116.0
+  },
+  {
+   "point_id": "LXP0046",
+   "x": 542.0,
+   "y": 118.0,
+   "detection_score": null,
+   "x_px": 542.0,
+   "y_px": 118.0
+  },
+  {
+   "point_id": "LXP0050",
+   "x": 536.0,
+   "y": 41.0,
+   "detection_score": null,
+   "x_px": 536.0,
+   "y_px": 41.0
+  },
+  {
+   "point_id": "LXP0053",
+   "x": 620.0,
+   "y": 118.0,
+   "detection_score": null,
+   "x_px": 620.0,
+   "y_px": 118.0
+  },
+  {
+   "point_id": "LXP0057",
+   "x": 506.0,
+   "y": 50.0,
+   "detection_score": null,
+   "x_px": 506.0,
+   "y_px": 50.0
+  }
+ ],
+ "raw_queries": [
+  {
+   "query_id": 0,
+   "x": 30,
+   "y": 45,
+   "score": null,
+   "normalized_x": 0.04294105991721153,
+   "normalized_y": 0.1959754228591919,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 1,
+   "x": 557,
+   "y": 83,
+   "score": null,
+   "normalized_x": 0.7733696699142456,
+   "normalized_y": 0.35551637411117554,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 2,
+   "x": 193,
+   "y": 40,
+   "score": null,
+   "normalized_x": 0.26890796422958374,
+   "normalized_y": 0.17425094544887543,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 3,
+   "x": 313,
+   "y": 43,
+   "score": null,
+   "normalized_x": 0.43415898084640503,
+   "normalized_y": 0.186149463057518,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 4,
+   "x": 696,
+   "y": 29,
+   "score": null,
+   "normalized_x": 0.9655495882034302,
+   "normalized_y": 0.12727557122707367,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 5,
+   "x": 368,
+   "y": 120,
+   "score": null,
+   "normalized_x": 0.5111075043678284,
+   "normalized_y": 0.5144944190979004,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 6,
+   "x": 679,
+   "y": 97,
+   "score": null,
+   "normalized_x": 0.9418569207191467,
+   "normalized_y": 0.4150314927101135,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 7,
+   "x": 487,
+   "y": 76,
+   "score": null,
+   "normalized_x": 0.6763741374015808,
+   "normalized_y": 0.32565057277679443,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 8,
+   "x": 169,
+   "y": 93,
+   "score": null,
+   "normalized_x": 0.2345789223909378,
+   "normalized_y": 0.39938974380493164,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 9,
+   "x": 28,
+   "y": 85,
+   "score": null,
+   "normalized_x": 0.04003921151161194,
+   "normalized_y": 0.3658035695552826,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 10,
+   "x": 54,
+   "y": 46,
+   "score": null,
+   "normalized_x": 0.07584451884031296,
+   "normalized_y": 0.19770801067352295,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 11,
+   "x": 566,
+   "y": 124,
+   "score": null,
+   "normalized_x": 0.7863891124725342,
+   "normalized_y": 0.5310394167900085,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 12,
+   "x": 99,
+   "y": 103,
+   "score": null,
+   "normalized_x": 0.13843931257724762,
+   "normalized_y": 0.4412982165813446,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 13,
+   "x": 558,
+   "y": 40,
+   "score": null,
+   "normalized_x": 0.7750135064125061,
+   "normalized_y": 0.17521344125270844,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 14,
+   "x": 235,
+   "y": 120,
+   "score": null,
+   "normalized_x": 0.327109694480896,
+   "normalized_y": 0.5141556859016418,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 15,
+   "x": 407,
+   "y": 39,
+   "score": null,
+   "normalized_x": 0.5646833777427673,
+   "normalized_y": 0.1702454835176468,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 16,
+   "x": 634,
+   "y": 119,
+   "score": null,
+   "normalized_x": 0.8806251287460327,
+   "normalized_y": 0.5125566720962524,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 17,
+   "x": 273,
+   "y": 39,
+   "score": null,
+   "normalized_x": 0.37899208068847656,
+   "normalized_y": 0.1704355925321579,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 18,
+   "x": 645,
+   "y": 32,
+   "score": null,
+   "normalized_x": 0.8950300216674805,
+   "normalized_y": 0.1400209367275238,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 19,
+   "x": 319,
+   "y": 122,
+   "score": null,
+   "normalized_x": 0.44342660903930664,
+   "normalized_y": 0.5251241326332092,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 20,
+   "x": 469,
+   "y": 136,
+   "score": null,
+   "normalized_x": 0.6516803503036499,
+   "normalized_y": 0.5827792286872864,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 21,
+   "x": 150,
+   "y": 42,
+   "score": null,
+   "normalized_x": 0.20821554958820343,
+   "normalized_y": 0.18078692257404327,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 22,
+   "x": 277,
+   "y": 41,
+   "score": null,
+   "normalized_x": 0.3855218291282654,
+   "normalized_y": 0.17917782068252563,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 23,
+   "x": 30,
+   "y": 109,
+   "score": null,
+   "normalized_x": 0.04259661212563515,
+   "normalized_y": 0.4660801887512207,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 24,
+   "x": 435,
+   "y": 41,
+   "score": null,
+   "normalized_x": 0.603408694267273,
+   "normalized_y": 0.17936162650585175,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 25,
+   "x": 347,
+   "y": 83,
+   "score": null,
+   "normalized_x": 0.4814417362213135,
+   "normalized_y": 0.35611626505851746,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 26,
+   "x": 604,
+   "y": 89,
+   "score": null,
+   "normalized_x": 0.838498592376709,
+   "normalized_y": 0.38054344058036804,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 27,
+   "x": 180,
+   "y": 84,
+   "score": null,
+   "normalized_x": 0.250419944524765,
+   "normalized_y": 0.36058205366134644,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 28,
+   "x": 674,
+   "y": 103,
+   "score": null,
+   "normalized_x": 0.9359295964241028,
+   "normalized_y": 0.44408437609672546,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 29,
+   "x": 498,
+   "y": 126,
+   "score": null,
+   "normalized_x": 0.6908911466598511,
+   "normalized_y": 0.5386328101158142,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 30,
+   "x": 102,
+   "y": 40,
+   "score": null,
+   "normalized_x": 0.14186595380306244,
+   "normalized_y": 0.17436274886131287,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 31,
+   "x": 421,
+   "y": 88,
+   "score": null,
+   "normalized_x": 0.5850646495819092,
+   "normalized_y": 0.3799688220024109,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 32,
+   "x": 453,
+   "y": 78,
+   "score": null,
+   "normalized_x": 0.6283011436462402,
+   "normalized_y": 0.3375004529953003,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 33,
+   "x": 83,
+   "y": 99,
+   "score": null,
+   "normalized_x": 0.11647725105285645,
+   "normalized_y": 0.42603859305381775,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 34,
+   "x": 284,
+   "y": 99,
+   "score": null,
+   "normalized_x": 0.39446502923965454,
+   "normalized_y": 0.42489925026893616,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 35,
+   "x": 550,
+   "y": 82,
+   "score": null,
+   "normalized_x": 0.7636367678642273,
+   "normalized_y": 0.3510662913322449,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 36,
+   "x": 621,
+   "y": 31,
+   "score": null,
+   "normalized_x": 0.8619794249534607,
+   "normalized_y": 0.13383986055850983,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 37,
+   "x": 435,
+   "y": 124,
+   "score": null,
+   "normalized_x": 0.6033467650413513,
+   "normalized_y": 0.5327508449554443,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 38,
+   "x": 139,
+   "y": 94,
+   "score": null,
+   "normalized_x": 0.19303841888904572,
+   "normalized_y": 0.40374618768692017,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 39,
+   "x": 121,
+   "y": 51,
+   "score": null,
+   "normalized_x": 0.16819213330745697,
+   "normalized_y": 0.22147083282470703,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 40,
+   "x": 195,
+   "y": 77,
+   "score": null,
+   "normalized_x": 0.2710399627685547,
+   "normalized_y": 0.3291017413139343,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 41,
+   "x": 384,
+   "y": 41,
+   "score": null,
+   "normalized_x": 0.5329651236534119,
+   "normalized_y": 0.17830780148506165,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 42,
+   "x": 671,
+   "y": 33,
+   "score": null,
+   "normalized_x": 0.9311599731445312,
+   "normalized_y": 0.14160966873168945,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 43,
+   "x": 172,
+   "y": 36,
+   "score": null,
+   "normalized_x": 0.23932042717933655,
+   "normalized_y": 0.15400581061840057,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 44,
+   "x": 596,
+   "y": 116,
+   "score": null,
+   "normalized_x": 0.8272755742073059,
+   "normalized_y": 0.49890491366386414,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 45,
+   "x": 296,
+   "y": 127,
+   "score": null,
+   "normalized_x": 0.41151389479637146,
+   "normalized_y": 0.5442476868629456,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 46,
+   "x": 542,
+   "y": 118,
+   "score": null,
+   "normalized_x": 0.7523224949836731,
+   "normalized_y": 0.5062354803085327,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 47,
+   "x": 340,
+   "y": 43,
+   "score": null,
+   "normalized_x": 0.4722961187362671,
+   "normalized_y": 0.18499131500720978,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 48,
+   "x": 385,
+   "y": 87,
+   "score": null,
+   "normalized_x": 0.5351067185401917,
+   "normalized_y": 0.37565475702285767,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 49,
+   "x": 64,
+   "y": 93,
+   "score": null,
+   "normalized_x": 0.0889703631401062,
+   "normalized_y": 0.4003254175186157,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 50,
+   "x": 536,
+   "y": 41,
+   "score": null,
+   "normalized_x": 0.7434755563735962,
+   "normalized_y": 0.17663654685020447,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 51,
+   "x": 234,
+   "y": 75,
+   "score": null,
+   "normalized_x": 0.32557421922683716,
+   "normalized_y": 0.32092756032943726,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 52,
+   "x": 217,
+   "y": 63,
+   "score": null,
+   "normalized_x": 0.3019835352897644,
+   "normalized_y": 0.2729390859603882,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 53,
+   "x": 620,
+   "y": 118,
+   "score": null,
+   "normalized_x": 0.860483705997467,
+   "normalized_y": 0.5049037337303162,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 54,
+   "x": 61,
+   "y": 47,
+   "score": null,
+   "normalized_x": 0.08494007587432861,
+   "normalized_y": 0.20350848138332367,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 55,
+   "x": 482,
+   "y": 88,
+   "score": null,
+   "normalized_x": 0.6690456867218018,
+   "normalized_y": 0.3764040768146515,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 56,
+   "x": 308,
+   "y": 105,
+   "score": null,
+   "normalized_x": 0.4283750355243683,
+   "normalized_y": 0.4506436586380005,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 57,
+   "x": 506,
+   "y": 50,
+   "score": null,
+   "normalized_x": 0.7026424407958984,
+   "normalized_y": 0.2143060863018036,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 58,
+   "x": 377,
+   "y": 83,
+   "score": null,
+   "normalized_x": 0.5239003300666809,
+   "normalized_y": 0.35546281933784485,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 59,
+   "x": 106,
+   "y": 92,
+   "score": null,
+   "normalized_x": 0.14709873497486115,
+   "normalized_y": 0.39346981048583984,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 60,
+   "x": 206,
+   "y": 90,
+   "score": null,
+   "normalized_x": 0.2862737774848938,
+   "normalized_y": 0.3862204849720001,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 61,
+   "x": 157,
+   "y": 52,
+   "score": null,
+   "normalized_x": 0.21818718314170837,
+   "normalized_y": 0.22569119930267334,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 62,
+   "x": 48,
+   "y": 87,
+   "score": null,
+   "normalized_x": 0.06710509210824966,
+   "normalized_y": 0.3739432692527771,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 63,
+   "x": 276,
+   "y": 97,
+   "score": null,
+   "normalized_x": 0.38369500637054443,
+   "normalized_y": 0.41722050309181213,
+   "in_plot": false,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  }
+ ],
+ "head_status": "completed",
+ "implementation_choices": {
+  "keypoints": "Official 64-query L+D checkpoint",
+  "background_gate": "paper Algorithm 2 threshold 0.98 (released code uses 0.999); re-implemented gate verified identical to the vendor function at 0.999",
+  "legend_patches": "resized to 40x20 per paper section 4.3 before the matcher 224 transform",
+  "grouping": "Official learned Siamese matcher, no histogram override"
+ },
+ "limitations": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ],
+ "shared_legend_status": "available",
+ "warnings": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ]
+}

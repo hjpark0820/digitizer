@@ -1,0 +1,1105 @@
+{
+ "version": "external_shared_input_benchmark_v1",
+ "panel_id": "er__mirikizumab_2_1_0__p03__v9",
+ "modality": "color",
+ "method": "aicp_raw_grouped",
+ "status": "completed",
+ "coordinate_system": "x_px/y_px = full original unrotated image pixels; x/y = shared native crop pixels",
+ "image_path": "data/images\\er__mirikizumab_2_1_0__p03__v9.png",
+ "input_sha256": "9ec6f8ffb5ca54aaef8b4a7ff2ba5c79167e38c6cb5727f7ee1f9a86a5d79729",
+ "source_image_path": "data/images\\er__mirikizumab_2_1_0__p03__v9.png",
+ "source_sha256": "9ec6f8ffb5ca54aaef8b4a7ff2ba5c79167e38c6cb5727f7ee1f9a86a5d79729",
+ "crop_box_original": [
+  0,
+  0,
+  1201,
+  1437
+ ],
+ "plot_box": [
+  202.0,
+  806.0,
+  1144.0,
+  1323.0
+ ],
+ "legend_box": [
+  903.0,
+  11.0,
+  1146.0,
+  102.0
+ ],
+ "legends": [
+  {
+   "legend_index": 0,
+   "series_id": "s01",
+   "label": "SERENITY",
+   "source_native_legend_id": "s01",
+   "box_input": [
+    884,
+    6,
+    959,
+    52
+   ],
+   "box_original": [
+    884,
+    6,
+    959,
+    52
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__mirikizumab_2_1_0__p03__v9/shared_legend_crops/legend_01.png",
+   "crop_sha256": "28ee28baed6bf4d3031c7c4dcc721a8777a77ef6b2816389766ca3d359144512",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__mirikizumab_2_1_0__p03__v9/shared_legends.json",
+   "shared_legends_sha256": "91aba9f9dba9b47d7d8e56c04e0de49d79b0ab3dc6cd39989cb0b8eca87909ab",
+   "mapping_provenance": {
+    "s01": "s01",
+    "s02": "s02"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 1,
+   "series_id": "s02",
+   "label": "VIVID-1",
+   "source_native_legend_id": "s02",
+   "box_input": [
+    893,
+    63,
+    951,
+    91
+   ],
+   "box_original": [
+    893,
+    63,
+    951,
+    91
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__mirikizumab_2_1_0__p03__v9/shared_legend_crops/legend_02.png",
+   "crop_sha256": "820c85c1764dab799cfb1574ee522485e7483d8c8db8e5b134925bcdb014cec4",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__mirikizumab_2_1_0__p03__v9/shared_legends.json",
+   "shared_legends_sha256": "91aba9f9dba9b47d7d8e56c04e0de49d79b0ab3dc6cd39989cb0b8eca87909ab",
+   "mapping_provenance": {
+    "s01": "s01",
+    "s02": "s02"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  }
+ ],
+ "predictions": [
+  {
+   "point_id": "CP0015",
+   "x": 947.6640625,
+   "y": 931.8046875,
+   "model_x": 404,
+   "model_y": 332,
+   "detection_score": 0.5524792075157166,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7170260548591614,
+   "winning_similarity": 0.7170260548591614,
+   "similarities": [
+    0.32002341747283936,
+    0.7170260548591614
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0015.png",
+   "patch_box_input": [
+    927,
+    921,
+    967,
+    941
+   ],
+   "x_px": 947.6640625,
+   "y_px": 931.8046875
+  },
+  {
+   "point_id": "CP0016",
+   "x": 628.6484375,
+   "y": 945.837890625,
+   "model_x": 268,
+   "model_y": 337,
+   "detection_score": 0.8874707818031311,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.4896916449069977,
+   "winning_similarity": 0.4896916449069977,
+   "similarities": [
+    0.4896916449069977,
+    0.14257605373859406
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0016.png",
+   "patch_box_input": [
+    608,
+    935,
+    648,
+    955
+   ],
+   "x_px": 628.6484375,
+   "y_px": 945.837890625
+  },
+  {
+   "point_id": "CP0017",
+   "x": 687.291015625,
+   "y": 959.87109375,
+   "model_x": 293,
+   "model_y": 342,
+   "detection_score": 0.8609378933906555,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7273512482643127,
+   "winning_similarity": 0.7273512482643127,
+   "similarities": [
+    0.7273512482643127,
+    0.04788806661963463
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0017.png",
+   "patch_box_input": [
+    667,
+    949,
+    707,
+    969
+   ],
+   "x_px": 687.291015625,
+   "y_px": 959.87109375
+  },
+  {
+   "point_id": "CP0018",
+   "x": 947.6640625,
+   "y": 959.87109375,
+   "model_x": 404,
+   "model_y": 342,
+   "detection_score": 0.558910608291626,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.634991466999054,
+   "winning_similarity": 0.634991466999054,
+   "similarities": [
+    0.0802524983882904,
+    0.634991466999054
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0018.png",
+   "patch_box_input": [
+    927,
+    949,
+    967,
+    969
+   ],
+   "x_px": 947.6640625,
+   "y_px": 959.87109375
+  },
+  {
+   "point_id": "CP0019",
+   "x": 448.029296875,
+   "y": 996.357421875,
+   "model_x": 191,
+   "model_y": 355,
+   "detection_score": 0.3487112522125244,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.6582503318786621,
+   "winning_similarity": 0.6582503318786621,
+   "similarities": [
+    0.6582503318786621,
+    0.24589207768440247
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0019.png",
+   "patch_box_input": [
+    428,
+    986,
+    468,
+    1006
+   ],
+   "x_px": 448.029296875,
+   "y_px": 996.357421875
+  },
+  {
+   "point_id": "CP0020",
+   "x": 471.486328125,
+   "y": 999.1640625,
+   "model_x": 201,
+   "model_y": 356,
+   "detection_score": 0.34118983149528503,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.3203745186328888,
+   "winning_similarity": 0.3203745186328888,
+   "similarities": [
+    0.3203745186328888,
+    0.11987441033124924
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0020.png",
+   "patch_box_input": [
+    451,
+    989,
+    491,
+    1009
+   ],
+   "x_px": 471.486328125,
+   "y_px": 999.1640625
+  },
+  {
+   "point_id": "CP0021",
+   "x": 365.9296875,
+   "y": 1021.6171875,
+   "model_x": 156,
+   "model_y": 364,
+   "detection_score": 0.8256396055221558,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7325140833854675,
+   "winning_similarity": 0.7325140833854675,
+   "similarities": [
+    0.7325140833854675,
+    0.40771353244781494
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0021.png",
+   "patch_box_input": [
+    345,
+    1011,
+    385,
+    1031
+   ],
+   "x_px": 365.9296875,
+   "y_px": 1021.6171875
+  },
+  {
+   "point_id": "CP0022",
+   "x": 1022.7265625,
+   "y": 1027.23046875,
+   "model_x": 436,
+   "model_y": 366,
+   "detection_score": 0.6973376870155334,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9140750765800476,
+   "winning_similarity": 0.9140750765800476,
+   "similarities": [
+    0.9140750765800476,
+    0.12635228037834167
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0022.png",
+   "patch_box_input": [
+    1002,
+    1017,
+    1042,
+    1037
+   ],
+   "x_px": 1022.7265625,
+   "y_px": 1027.23046875
+  },
+  {
+   "point_id": "CP0023",
+   "x": 229.87890625,
+   "y": 1060.91015625,
+   "model_x": 98,
+   "model_y": 378,
+   "detection_score": 0.8780449628829956,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.6335378885269165,
+   "winning_similarity": 0.6335378885269165,
+   "similarities": [
+    0.2848537564277649,
+    0.6335378885269165
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0023.png",
+   "patch_box_input": [
+    209,
+    1050,
+    249,
+    1070
+   ],
+   "x_px": 229.87890625,
+   "y_px": 1060.91015625
+  },
+  {
+   "point_id": "CP0024",
+   "x": 227.533203125,
+   "y": 1097.396484375,
+   "model_x": 97,
+   "model_y": 391,
+   "detection_score": 0.9210458993911743,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.46162572503089905,
+   "winning_similarity": 0.46162572503089905,
+   "similarities": [
+    0.14590272307395935,
+    0.46162572503089905
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0024.png",
+   "patch_box_input": [
+    207,
+    1087,
+    247,
+    1107
+   ],
+   "x_px": 227.533203125,
+   "y_px": 1097.396484375
+  },
+  {
+   "point_id": "CP0025",
+   "x": 234.5703125,
+   "y": 1192.822265625,
+   "model_x": 100,
+   "model_y": 425,
+   "detection_score": 0.7395625114440918,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.6998728513717651,
+   "winning_similarity": 0.6998728513717651,
+   "similarities": [
+    0.6998728513717651,
+    0.06664558500051498
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0025.png",
+   "patch_box_input": [
+    214,
+    1182,
+    254,
+    1202
+   ],
+   "x_px": 234.5703125,
+   "y_px": 1192.822265625
+  }
+ ],
+ "unavailable": [],
+ "patches": [
+  {
+   "point_index": 0,
+   "point_id": "CP0015",
+   "box_input": [
+    927,
+    921,
+    967,
+    941
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0015.png"
+  },
+  {
+   "point_index": 1,
+   "point_id": "CP0016",
+   "box_input": [
+    608,
+    935,
+    648,
+    955
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0016.png"
+  },
+  {
+   "point_index": 2,
+   "point_id": "CP0017",
+   "box_input": [
+    667,
+    949,
+    707,
+    969
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0017.png"
+  },
+  {
+   "point_index": 3,
+   "point_id": "CP0018",
+   "box_input": [
+    927,
+    949,
+    967,
+    969
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0018.png"
+  },
+  {
+   "point_index": 4,
+   "point_id": "CP0019",
+   "box_input": [
+    428,
+    986,
+    468,
+    1006
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0019.png"
+  },
+  {
+   "point_index": 5,
+   "point_id": "CP0020",
+   "box_input": [
+    451,
+    989,
+    491,
+    1009
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0020.png"
+  },
+  {
+   "point_index": 6,
+   "point_id": "CP0021",
+   "box_input": [
+    345,
+    1011,
+    385,
+    1031
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0021.png"
+  },
+  {
+   "point_index": 7,
+   "point_id": "CP0022",
+   "box_input": [
+    1002,
+    1017,
+    1042,
+    1037
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0022.png"
+  },
+  {
+   "point_index": 8,
+   "point_id": "CP0023",
+   "box_input": [
+    209,
+    1050,
+    249,
+    1070
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0023.png"
+  },
+  {
+   "point_index": 9,
+   "point_id": "CP0024",
+   "box_input": [
+    207,
+    1087,
+    247,
+    1107
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0024.png"
+  },
+  {
+   "point_index": 10,
+   "point_id": "CP0025",
+   "box_input": [
+    214,
+    1182,
+    254,
+    1202
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/patches/CP0025.png"
+  }
+ ],
+ "similarity_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/aicp_raw_grouped/similarity.npy",
+ "similarity_row_point_ids": [
+  "CP0015",
+  "CP0016",
+  "CP0017",
+  "CP0018",
+  "CP0019",
+  "CP0020",
+  "CP0021",
+  "CP0022",
+  "CP0023",
+  "CP0024",
+  "CP0025"
+ ],
+ "similarity_column_series_ids": [
+  "s01",
+  "s02"
+ ],
+ "timing": {
+  "shared_input_verification_seconds": 0.023275299987290055,
+  "legend_crop_seconds": 0.0023284999770112336,
+  "network_seconds": 0.03268730000127107,
+  "head_postprocess_and_export_seconds": 0.1260133000323549,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.015508299984503537,
+  "learned_matching_seconds": 0.05259839998325333,
+  "total_seconds": 0.23019630002090707,
+  "method_total_excluding_shared_verification_seconds": 0.23019630002090707,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "patch_matching_timing": {
+  "patch_extract_and_export_seconds": 0.015508299984503537,
+  "learned_matching_seconds": 0.05259839998325333,
+  "total_seconds": 0.06916720001026988
+ },
+ "timing_breakdown": {
+  "shared_input_verification_seconds": 0.023275299987290055,
+  "legend_crop_seconds": 0.0023284999770112336,
+  "network_seconds": 0.03268730000127107,
+  "head_postprocess_and_export_seconds": 0.1260133000323549,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.015508299984503537,
+  "learned_matching_seconds": 0.05259839998325333,
+  "total_seconds": 0.23019630002090707,
+  "method_total_excluding_shared_verification_seconds": 0.23019630002090707,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "raw_heads_result_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/raw_heads/chartparser/er__mirikizumab_2_1_0__p03__v9/result.json",
+ "raw_points": [
+  {
+   "point_id": "CP0015",
+   "x": 947.6640625,
+   "y": 931.8046875,
+   "model_x": 404,
+   "model_y": 332,
+   "detection_score": 0.5524792075157166,
+   "x_px": 947.6640625,
+   "y_px": 931.8046875
+  },
+  {
+   "point_id": "CP0016",
+   "x": 628.6484375,
+   "y": 945.837890625,
+   "model_x": 268,
+   "model_y": 337,
+   "detection_score": 0.8874707818031311,
+   "x_px": 628.6484375,
+   "y_px": 945.837890625
+  },
+  {
+   "point_id": "CP0017",
+   "x": 687.291015625,
+   "y": 959.87109375,
+   "model_x": 293,
+   "model_y": 342,
+   "detection_score": 0.8609378933906555,
+   "x_px": 687.291015625,
+   "y_px": 959.87109375
+  },
+  {
+   "point_id": "CP0018",
+   "x": 947.6640625,
+   "y": 959.87109375,
+   "model_x": 404,
+   "model_y": 342,
+   "detection_score": 0.558910608291626,
+   "x_px": 947.6640625,
+   "y_px": 959.87109375
+  },
+  {
+   "point_id": "CP0019",
+   "x": 448.029296875,
+   "y": 996.357421875,
+   "model_x": 191,
+   "model_y": 355,
+   "detection_score": 0.3487112522125244,
+   "x_px": 448.029296875,
+   "y_px": 996.357421875
+  },
+  {
+   "point_id": "CP0020",
+   "x": 471.486328125,
+   "y": 999.1640625,
+   "model_x": 201,
+   "model_y": 356,
+   "detection_score": 0.34118983149528503,
+   "x_px": 471.486328125,
+   "y_px": 999.1640625
+  },
+  {
+   "point_id": "CP0021",
+   "x": 365.9296875,
+   "y": 1021.6171875,
+   "model_x": 156,
+   "model_y": 364,
+   "detection_score": 0.8256396055221558,
+   "x_px": 365.9296875,
+   "y_px": 1021.6171875
+  },
+  {
+   "point_id": "CP0022",
+   "x": 1022.7265625,
+   "y": 1027.23046875,
+   "model_x": 436,
+   "model_y": 366,
+   "detection_score": 0.6973376870155334,
+   "x_px": 1022.7265625,
+   "y_px": 1027.23046875
+  },
+  {
+   "point_id": "CP0023",
+   "x": 229.87890625,
+   "y": 1060.91015625,
+   "model_x": 98,
+   "model_y": 378,
+   "detection_score": 0.8780449628829956,
+   "x_px": 229.87890625,
+   "y_px": 1060.91015625
+  },
+  {
+   "point_id": "CP0024",
+   "x": 227.533203125,
+   "y": 1097.396484375,
+   "model_x": 97,
+   "model_y": 391,
+   "detection_score": 0.9210458993911743,
+   "x_px": 227.533203125,
+   "y_px": 1097.396484375
+  },
+  {
+   "point_id": "CP0025",
+   "x": 234.5703125,
+   "y": 1192.822265625,
+   "model_x": 100,
+   "model_y": 425,
+   "detection_score": 0.7395625114440918,
+   "x_px": 234.5703125,
+   "y_px": 1192.822265625
+  }
+ ],
+ "corrected_points": [
+  {
+   "point_id": "CP0015",
+   "x": 945.318359375,
+   "y": 928.998046875,
+   "model_x": 403,
+   "model_y": 331,
+   "raw_x": 947.6640625,
+   "raw_y": 931.8046875,
+   "detection_score": 0.5524792075157166,
+   "component_id": 10,
+   "x_px": 945.318359375,
+   "y_px": 928.998046875
+  },
+  {
+   "point_id": "CP0016",
+   "x": 628.6484375,
+   "y": 931.8046875,
+   "model_x": 268,
+   "model_y": 332,
+   "raw_x": 628.6484375,
+   "raw_y": 945.837890625,
+   "detection_score": 0.8874707818031311,
+   "component_id": 12,
+   "x_px": 628.6484375,
+   "y_px": 931.8046875
+  },
+  {
+   "point_id": "CP0017",
+   "x": 687.291015625,
+   "y": 959.87109375,
+   "model_x": 293,
+   "model_y": 342,
+   "raw_x": 687.291015625,
+   "raw_y": 959.87109375,
+   "detection_score": 0.8609378933906555,
+   "component_id": 12,
+   "x_px": 687.291015625,
+   "y_px": 959.87109375
+  },
+  {
+   "point_id": "CP0018",
+   "x": 950.009765625,
+   "y": 959.87109375,
+   "model_x": 405,
+   "model_y": 342,
+   "raw_x": 947.6640625,
+   "raw_y": 959.87109375,
+   "detection_score": 0.558910608291626,
+   "component_id": 13,
+   "x_px": 950.009765625,
+   "y_px": 959.87109375
+  },
+  {
+   "point_id": "CP0019",
+   "x": 450.375,
+   "y": 996.357421875,
+   "model_x": 192,
+   "model_y": 355,
+   "raw_x": 448.029296875,
+   "raw_y": 996.357421875,
+   "detection_score": 0.3487112522125244,
+   "component_id": 12,
+   "x_px": 450.375,
+   "y_px": 996.357421875
+  },
+  {
+   "point_id": "CP0020",
+   "x": 471.486328125,
+   "y": 990.744140625,
+   "model_x": 201,
+   "model_y": 353,
+   "raw_x": 471.486328125,
+   "raw_y": 999.1640625,
+   "detection_score": 0.34118983149528503,
+   "component_id": 12,
+   "x_px": 471.486328125,
+   "y_px": 990.744140625
+  },
+  {
+   "point_id": "CP0021",
+   "x": 365.9296875,
+   "y": 1013.197265625,
+   "model_x": 156,
+   "model_y": 361,
+   "raw_x": 365.9296875,
+   "raw_y": 1021.6171875,
+   "detection_score": 0.8256396055221558,
+   "component_id": 12,
+   "x_px": 365.9296875,
+   "y_px": 1013.197265625
+  },
+  {
+   "point_id": "CP0022",
+   "x": 1022.7265625,
+   "y": 1027.23046875,
+   "model_x": 436,
+   "model_y": 366,
+   "raw_x": 1022.7265625,
+   "raw_y": 1027.23046875,
+   "detection_score": 0.6973376870155334,
+   "component_id": 14,
+   "x_px": 1022.7265625,
+   "y_px": 1027.23046875
+  },
+  {
+   "point_id": "CP0025",
+   "x": 232.224609375,
+   "y": 1178.7890625,
+   "model_x": 99,
+   "model_y": 420,
+   "raw_x": 234.5703125,
+   "raw_y": 1192.822265625,
+   "detection_score": 0.7395625114440918,
+   "component_id": 12,
+   "x_px": 232.224609375,
+   "y_px": 1178.7890625
+  }
+ ],
+ "rejected_points": [
+  {
+   "point_id": "CP0023",
+   "x": 229.87890625,
+   "y": 1060.91015625,
+   "model_x": 98,
+   "model_y": 378,
+   "detection_score": 0.8780449628829956,
+   "x_px": 229.87890625,
+   "y_px": 1060.91015625,
+   "reason": "no_centerline_in_band_radius"
+  },
+  {
+   "point_id": "CP0024",
+   "x": 227.533203125,
+   "y": 1097.396484375,
+   "model_x": 97,
+   "model_y": 391,
+   "detection_score": 0.9210458993911743,
+   "x_px": 227.533203125,
+   "y_px": 1097.396484375,
+   "reason": "no_centerline_in_band_radius"
+  }
+ ],
+ "excluded_points": [
+  {
+   "point_id": "CP0001",
+   "x": 919.515625,
+   "y": 5.61328125,
+   "model_x": 392,
+   "model_y": 2,
+   "detection_score": 0.9863205552101135,
+   "x_px": 919.515625,
+   "y_px": 5.61328125
+  },
+  {
+   "point_id": "CP0002",
+   "x": 921.861328125,
+   "y": 56.1328125,
+   "model_x": 393,
+   "model_y": 20,
+   "detection_score": 0.7692010998725891,
+   "x_px": 921.861328125,
+   "y_px": 56.1328125
+  },
+  {
+   "point_id": "CP0003",
+   "x": 921.861328125,
+   "y": 95.42578125,
+   "model_x": 393,
+   "model_y": 34,
+   "detection_score": 0.9947007894515991,
+   "x_px": 921.861328125,
+   "y_px": 95.42578125
+  },
+  {
+   "point_id": "CP0004",
+   "x": 58.642578125,
+   "y": 106.65234375,
+   "model_x": 25,
+   "model_y": 38,
+   "detection_score": 0.39854830503463745,
+   "x_px": 58.642578125,
+   "y_px": 106.65234375
+  },
+  {
+   "point_id": "CP0005",
+   "x": 1081.369140625,
+   "y": 202.078125,
+   "model_x": 461,
+   "model_y": 72,
+   "detection_score": 0.9614548683166504,
+   "x_px": 1081.369140625,
+   "y_px": 202.078125
+  },
+  {
+   "point_id": "CP0006",
+   "x": 687.291015625,
+   "y": 216.111328125,
+   "model_x": 293,
+   "model_y": 77,
+   "detection_score": 0.7855684757232666,
+   "x_px": 687.291015625,
+   "y_px": 216.111328125
+  },
+  {
+   "point_id": "CP0007",
+   "x": 1022.7265625,
+   "y": 283.470703125,
+   "model_x": 436,
+   "model_y": 101,
+   "detection_score": 0.8003631830215454,
+   "x_px": 1022.7265625,
+   "y_px": 283.470703125
+  },
+  {
+   "point_id": "CP0008",
+   "x": 931.244140625,
+   "y": 325.5703125,
+   "model_x": 397,
+   "model_y": 116,
+   "detection_score": 0.31943970918655396,
+   "x_px": 931.244140625,
+   "y_px": 325.5703125
+  },
+  {
+   "point_id": "CP0009",
+   "x": 642.72265625,
+   "y": 356.443359375,
+   "model_x": 274,
+   "model_y": 127,
+   "detection_score": 0.6971430778503418,
+   "x_px": 642.72265625,
+   "y_px": 356.443359375
+  },
+  {
+   "point_id": "CP0010",
+   "x": 687.291015625,
+   "y": 353.63671875,
+   "model_x": 293,
+   "model_y": 126,
+   "detection_score": 0.8444942235946655,
+   "x_px": 687.291015625,
+   "y_px": 353.63671875
+  },
+  {
+   "point_id": "CP0011",
+   "x": 471.486328125,
+   "y": 406.962890625,
+   "model_x": 201,
+   "model_y": 145,
+   "detection_score": 0.6014847159385681,
+   "x_px": 471.486328125,
+   "y_px": 406.962890625
+  },
+  {
+   "point_id": "CP0012",
+   "x": 368.275390625,
+   "y": 435.029296875,
+   "model_x": 157,
+   "model_y": 155,
+   "detection_score": 0.8189460635185242,
+   "x_px": 368.275390625,
+   "y_px": 435.029296875
+  },
+  {
+   "point_id": "CP0013",
+   "x": 227.533203125,
+   "y": 479.935546875,
+   "model_x": 97,
+   "model_y": 171,
+   "detection_score": 0.9759725332260132,
+   "x_px": 227.533203125,
+   "y_px": 479.935546875
+  },
+  {
+   "point_id": "CP0014",
+   "x": 227.533203125,
+   "y": 519.228515625,
+   "model_x": 97,
+   "model_y": 185,
+   "detection_score": 0.9947419166564941,
+   "x_px": 227.533203125,
+   "y_px": 519.228515625
+  }
+ ],
+ "centerline_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/external/er__mirikizumab_2_1_0__p03__v9/chartparser_geometry/centerline_512.png",
+ "public_process_kps_reference": [
+  {
+   "point_id": "CP0015",
+   "status": "retained",
+   "x": 947.6640625,
+   "y": 926.19140625,
+   "upright_x": 947.6640625,
+   "upright_y": 926.19140625,
+   "original_x": 947.6640625,
+   "original_y": 926.19140625,
+   "model_x": 404.0,
+   "model_y": 330.0
+  },
+  {
+   "point_id": "CP0016",
+   "status": "retained",
+   "x": 628.6484375,
+   "y": 937.41796875,
+   "upright_x": 628.6484375,
+   "upright_y": 937.41796875,
+   "original_x": 628.6484375,
+   "original_y": 937.41796875,
+   "model_x": 268.0,
+   "model_y": 334.0
+  },
+  {
+   "point_id": "CP0017",
+   "status": "retained",
+   "x": 687.291015625,
+   "y": 957.064453125,
+   "upright_x": 687.291015625,
+   "upright_y": 957.064453125,
+   "original_x": 687.291015625,
+   "original_y": 957.064453125,
+   "model_x": 293.0,
+   "model_y": 341.0
+  },
+  {
+   "point_id": "CP0018",
+   "status": "retained",
+   "x": 947.6640625,
+   "y": 940.224609375,
+   "upright_x": 947.6640625,
+   "upright_y": 940.224609375,
+   "original_x": 947.6640625,
+   "original_y": 940.224609375,
+   "model_x": 404.0,
+   "model_y": 335.0
+  },
+  {
+   "point_id": "CP0019",
+   "status": "retained",
+   "x": 448.029296875,
+   "y": 996.357421875,
+   "upright_x": 448.029296875,
+   "upright_y": 996.357421875,
+   "original_x": 448.029296875,
+   "original_y": 996.357421875,
+   "model_x": 191.0,
+   "model_y": 355.0
+  },
+  {
+   "point_id": "CP0020",
+   "status": "retained",
+   "x": 471.486328125,
+   "y": 993.55078125,
+   "upright_x": 471.486328125,
+   "upright_y": 993.55078125,
+   "original_x": 471.486328125,
+   "original_y": 993.55078125,
+   "model_x": 201.0,
+   "model_y": 354.0
+  },
+  {
+   "point_id": "CP0021",
+   "status": "retained",
+   "x": 365.9296875,
+   "y": 1016.00390625,
+   "upright_x": 365.9296875,
+   "upright_y": 1016.00390625,
+   "original_x": 365.9296875,
+   "original_y": 1016.00390625,
+   "model_x": 156.0,
+   "model_y": 362.0
+  },
+  {
+   "point_id": "CP0022",
+   "status": "retained",
+   "x": 1022.7265625,
+   "y": 1027.23046875,
+   "upright_x": 1022.7265625,
+   "upright_y": 1027.23046875,
+   "original_x": 1022.7265625,
+   "original_y": 1027.23046875,
+   "model_x": 436.0,
+   "model_y": 366.0
+  },
+  {
+   "point_id": "CP0023",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0024",
+   "status": "rejected"
+  },
+  {
+   "point_id": "CP0025",
+   "status": "retained",
+   "x": 234.5703125,
+   "y": 1181.595703125,
+   "upright_x": 234.5703125,
+   "upright_y": 1181.595703125,
+   "original_x": 234.5703125,
+   "original_y": 1181.595703125,
+   "model_x": 100.0,
+   "model_y": 421.0
+  }
+ ],
+ "implementation_choices": {
+  "curve_probability": "Cached segmentation[0,1], already sigmoid in ChartParserModel.forward; no second activation.",
+  "probability_inconsistency": "Paper section 3.2.3 says two-channel Softmax, section 3.2.4 discusses Sigmoid, and the public forward applies independent Sigmoid. This run thresholds the released cached Sigmoid output directly, not a claim of identical paper Softmax probabilities.",
+  "threshold": 0.6,
+  "morphology": "One 3x3 all-ones binary closing; constant-zero border.",
+  "connectivity": 8,
+  "component_policy": "Retain every connected component; no minimum-area deletion.",
+  "thinning": "skimage.morphology.skeletonize(method=zhang) independently within each 8-connected component.",
+  "correction": "Nearest centreline pixel in x +/- 1 columns and abs(delta_y) < 15 model pixels; minimum Euclidean distance, ties smaller y then x. Snap x and y to that centreline pixel. Reject if absent.",
+  "correction_parameters_provenance": "The paper does not specify kernel/thinner/selection radius. Column band and vertical radius are borrowed from public process_kps; nearest selection and exact snapping are explicit experimental choices.",
+  "public_reference": "Separate result using original argmax mask, public x +/- 1, y-run gap <= 2, first ascending-y mean within 15, average with original y. Safety bounds added; not used for grouping.",
+  "pivot_patch_size_width_height": [
+   40,
+   20
+  ],
+  "pivot_patch_coordinate_system": "Native original-resolution upright input crop, not the 512x512 model input.",
+  "legend_images": "Unmodified original RGB swatch box crops, connector pixels retained. No reconstructed swatch masks.",
+  "grouping": "Official LineEX learned Siamese + MLP similarity, highest score over supplied legend crops. No histogram override or confidence rejection.",
+  "shape_classification": "Not performed. Legend identity is not a semantic circle/square/triangle prediction.",
+  "deduplication": "None. Distinct raw pivot hypotheses can snap to the same pixel and remain separate records.",
+  "no_legend_policy": "Abstain from grouping even for a nominal single-series panel; no fabricated legend."
+ },
+ "native_legend_stage": "unavailable; supplied benchmark swatch crops used, never class-3 remapping",
+ "limitations": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ],
+ "shared_legend_status": "available",
+ "shared_legend_reason": null,
+ "shared_legends_sha256": "91aba9f9dba9b47d7d8e56c04e0de49d79b0ab3dc6cd39989cb0b8eca87909ab",
+ "warnings": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ]
+}

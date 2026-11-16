@@ -1,0 +1,198 @@
+{
+  "panel_id": "er__datopotamab_deruxtecan_1_1_0__p02__v8",
+  "model": "v46_before",
+  "method": "v46_before",
+  "status": "completed",
+  "reason": "",
+  "predictions": [
+    {
+      "point_id": "v46_before_S02_0001",
+      "x_px": 351.0,
+      "y_px": 271.0,
+      "series_id": "s02",
+      "score": null,
+      "native_series_id": "S02",
+      "crop_x_px": 351.0,
+      "crop_y_px": 271.0
+    },
+    {
+      "point_id": "v46_before_S02_0002",
+      "x_px": 520.0,
+      "y_px": 455.0,
+      "series_id": "s02",
+      "score": null,
+      "native_series_id": "S02",
+      "crop_x_px": 520.0,
+      "crop_y_px": 455.0
+    },
+    {
+      "point_id": "v46_before_S02_0003",
+      "x_px": 639.0,
+      "y_px": 481.0,
+      "series_id": "s02",
+      "score": null,
+      "native_series_id": "S02",
+      "crop_x_px": 639.0,
+      "crop_y_px": 481.0
+    },
+    {
+      "point_id": "v46_before_S02_0004",
+      "x_px": 804.0,
+      "y_px": 513.0,
+      "series_id": "s02",
+      "score": null,
+      "native_series_id": "S02",
+      "crop_x_px": 804.0,
+      "crop_y_px": 513.0
+    },
+    {
+      "point_id": "v46_before_S02_0005",
+      "x_px": 975.0,
+      "y_px": 555.0,
+      "series_id": "s02",
+      "score": null,
+      "native_series_id": "S02",
+      "crop_x_px": 975.0,
+      "crop_y_px": 555.0
+    },
+    {
+      "point_id": "v46_before_S01_0001",
+      "x_px": 353.0,
+      "y_px": 178.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "S01",
+      "crop_x_px": 353.0,
+      "crop_y_px": 178.0
+    },
+    {
+      "point_id": "v46_before_S01_0002",
+      "x_px": 520.0,
+      "y_px": 264.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "S01",
+      "crop_x_px": 520.0,
+      "crop_y_px": 264.0
+    },
+    {
+      "point_id": "v46_before_S01_0003",
+      "x_px": 639.0,
+      "y_px": 230.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "S01",
+      "crop_x_px": 639.0,
+      "crop_y_px": 230.0
+    },
+    {
+      "point_id": "v46_before_S01_0004",
+      "x_px": 805.0,
+      "y_px": 266.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "S01",
+      "crop_x_px": 805.0,
+      "crop_y_px": 266.0
+    },
+    {
+      "point_id": "v46_before_S01_0005",
+      "x_px": 969.0,
+      "y_px": 442.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "S01",
+      "crop_x_px": 969.0,
+      "crop_y_px": 442.0
+    }
+  ],
+  "coordinate_convention": "full original image pixel centers; crop translation added exactly once",
+  "score_note": "Native export may omit confidence; null is unavailable, not zero. No score threshold added.",
+  "input_sha256": "d36ff739b9367d0c55c5031632fccf6ef8e4ade8c328ac35fdef679088c66576",
+  "source_sha256": "d36ff739b9367d0c55c5031632fccf6ef8e4ade8c328ac35fdef679088c66576",
+  "timing": {
+    "input_verification_seconds": 0.01591089996509254,
+    "detection_process_seconds": 12.307015099970158,
+    "legend_crop_export_seconds": 0.008337699982803315,
+    "total_wall_seconds": 12.344409499957692,
+    "native": {
+      "detection": {
+        "pipeline_imports_seconds": 0.01333899999735877,
+        "image_read_seconds": 0.009589099965523928,
+        "axis_calibration_seconds": 1.8474451000220142,
+        "run_detection_seconds": 9.11064000002807,
+        "post_detection_seconds": 0.060466399998404086,
+        "output_save_seconds": 0.053511800011619925,
+        "cli_main_seconds": 11.065766800020356,
+        "pipeline_timings": {
+          "setup": 0.006366599991451949,
+          "preprocessing": 1.215795599971898,
+          "segments": 0.0,
+          "errorbar": 0.0,
+          "points": 7.6754717999720015,
+          "filter_coordinates": 9.410001803189516e-05,
+          "overlay": 0.0010794000118039548,
+          "legend_ocr": 0.19559439999284223,
+          "diagnostics": 0.01599960000021383,
+          "total": 9.11042230000021
+        },
+        "pipeline_timing_scope": "run_detection wall seconds; named stages are non-overlapping; segments/errorbar exclude separately timed diagnostic rendering. points includes the point detector and its own diagnostics. total includes minor glue/logging; CLI imports, image decoding, optional correction and file export are outside.",
+        "point_pipeline_timings": {
+          "backend_setup_seconds": 2.2199994418770075e-05,
+          "legend_seconds": 0.05044399999314919,
+          "scale_policy_seconds": 3.269948699977249,
+          "grid_models_seconds": 4.120665800001007,
+          "window_and_records_seconds": 0.09854819998145103,
+          "filled_contour_identity_seconds": 0.0,
+          "selection_seconds": 0.006582200003322214,
+          "centered_x_seconds": 1.969997538253665e-05,
+          "legend_panels_seconds": 0.007109900005161762,
+          "layered_marker_seconds": 2.0299979951232672e-05,
+          "partial_hollow_seconds": 0.0,
+          "explained_occlusion_seconds": 0.0,
+          "untyped_region_seconds": 0.00900240003829822,
+          "total_seconds": 7.631293699960224,
+          "timing_scope": "Sequential detect_points wall time; per-model/window diagnostics are nested",
+          "filled_boundary_retention_seconds": 9.799998952075839e-05
+        },
+        "settings": {
+          "point_backend": "grid_v46",
+          "gpu_batch_size": 512,
+          "filled_contour_identity_requested": false,
+          "visible_first_detection_requested": true,
+          "diagnostic_detail_requested": null,
+          "skip_segments": true,
+          "diagnostic_detail": false,
+          "image_shape": [
+            1132,
+            1232
+          ],
+          "plot_area": [
+            185,
+            57,
+            1025,
+            618
+          ],
+          "legend_area": [
+            961,
+            996,
+            1220,
+            1124
+          ]
+        },
+        "timing_scope": "perf_counter wall seconds; imports include backend initialization; post_detection includes output_save; cli_main excludes process launch/module-level imports and this timing file write"
+      },
+      "shared_legend_seconds": 0.05044399999314919,
+      "shared_legend_timing_note": "BW native timer or transparent colour LegendRuntime.prepare timer; included in detection process wall time.",
+      "model_load_seconds": 0.01333899999735877,
+      "model_load_timing_note": "BW native imports/backend initialization, included in process wall time; colour unavailable, not zero.",
+      "timing_wrapper": {
+        "shared_legend_seconds": null,
+        "legend_calls": 0,
+        "module_preload_seconds": 0.0,
+        "wrapper": "perf_counter around original LegendRuntime.prepare; unchanged args and return value",
+        "native_cli_seconds": 11.278204399975948
+      }
+    }
+  }
+}

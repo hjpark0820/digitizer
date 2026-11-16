@@ -226,6 +226,7 @@ ticks. Preserve original images and image-linked JSON, IDs and evidence.
 | `src/type3_v46/` | Marker-free line/error-bar evidence, endpoints, reconstruction/correction adapters |
 | `src/color_correct_cli.py`, `src/color_path_correction_v46.py` | Colour Step-5 path/structure correction using saved detection evidence |
 | `src/bw_step5_v46.py`, `src/bw_series_correction_v46.py` | B&W Step-5 correction and structure-dependent scoring |
+| `src/legend_review_v46.js`, `src/legend_review_v46.py`, `src/reviewed_legend_models_v46.py` | Original-legend crop review, center-click proposals and validation, and authoritative reviewed-source templates for Colour and B&W detection |
 | `src/correction_session_v46.py` | Session validation, image/evidence binding, import/export, Excel, saved-only correction |
 | `src/correction_history_v46.py` | Version graph, original/prepared image objects, deduplicated evidence and history export |
 | `src/correction_only_cli_v46.py` | Runs correction from saved evidence; must not rerun detection |
@@ -400,6 +401,14 @@ The legend panel can show `legend_optional` and its JSON link without a PNG diag
   Do not overwrite the saved Step-5 reference or fit state with this visualization.
 - Folder preview navigation and the editor's loaded file are independent.
   Unsaved-change and busy guards must survive switching adjacent files.
+
+### Legend swatch review
+
+The existing legend-analysis panel includes source-linked swatch review through `legend_review_v46.js`. `GET /legend-review/{job_id}` provides inclusive working-image boxes, source image dimensions and a file hash. Center-click additions use `POST /legend-review/{job_id}/suggest`; the proposed crop remains editable and is not a correctness certificate. Preserve the clicked marker center when a crop is asymmetric or clipped at the legend boundary.
+
+`POST /legend-review/{job_id}/rerun` validates the image binding and full reviewed entry list, then creates a new detection job using the saved image, regions, mode and calibration settings. The reviewed list replaces automatic swatch discovery for that run; do not silently restore deleted entries. `reviewed_legend_models_v46.py` builds templates from the actual source crops without receiving shape labels. Colour and B&W retain their existing detection procedures after legend preparation. Fast-detection reviews use the saved working-image coordinates and must not be resized again.
+
+`correction_session_v46.py` preserves the review and detection settings in saved sessions. Portable import verifies decoded image pixels before rebinding file hashes. A fast-detection import without its original-resolution source cannot rerun legend edits: the server returns a clear 409 before creating a job; reopen the original image and detect again. Existing points remain editable. Keep the original result intact and do not transfer unsaved point/axis edits into a new detection result. Existing no-legend paths are unchanged. Validate zero-entry recovery, add/delete/rerun, stale-image rejection, and saved-session round trips when modifying this feature.
 
 ### Human editing of calibration and series labels
 

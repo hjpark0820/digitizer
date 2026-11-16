@@ -1,0 +1,245 @@
+{
+ "panel_id": "pk__garadacimab1__p02__v1",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    488,
+    8,
+    504,
+    21
+   ],
+   "native_body_bbox": [
+    490.5000039593983,
+    9.500002728244887,
+    499.49996980386845,
+    18.49996857271497
+   ],
+   "class_name": "filled_square",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "1 mg/kg",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__garadacimab1__p02__v1/shared_legend_crops/legend_01.png",
+   "image_size": [
+    16,
+    13
+   ],
+   "sha256": "2ade4ddf773e49d209b7d307a0bb710615ba54f6c1604969269a3f3333f3b56c",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__garadacimab1__p02__v1/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    488,
+    8,
+    504,
+    21
+   ],
+   "bbox_original": [
+    488,
+    8,
+    504,
+    21
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    488,
+    35,
+    504,
+    51
+   ],
+   "native_body_bbox": [
+    488,
+    37,
+    502,
+    50
+   ],
+   "class_name": "open_rhombus",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s02",
+   "label": "3 mg/kg",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__garadacimab1__p02__v1/shared_legend_crops/legend_02.png",
+   "image_size": [
+    16,
+    16
+   ],
+   "sha256": "25704904c4ba69737141ba74c8aed4314dc1a40d31278f726026e61b58b058b3",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__garadacimab1__p02__v1/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    488,
+    35,
+    504,
+    51
+   ],
+   "bbox_original": [
+    488,
+    35,
+    504,
+    51
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S03",
+   "bbox": [
+    488,
+    63,
+    504,
+    79
+   ],
+   "native_body_bbox": [
+    488,
+    64,
+    502,
+    77
+   ],
+   "class_name": "unknown_marker",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s03",
+   "label": "10 mg/kg",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__garadacimab1__p02__v1/shared_legend_crops/legend_03.png",
+   "image_size": [
+    16,
+    16
+   ],
+   "sha256": "66c7ea24863a7f9b2f149fa2db891a5aeaaa594c1445f44a0ac70af89919dd32",
+   "source_native_legend_id": "S03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/pk__garadacimab1__p02__v1/shared_legend_crops/legend_03.png",
+   "bbox_crop": [
+    488,
+    63,
+    504,
+    79
+   ],
+   "bbox_original": [
+    488,
+    63,
+    504,
+    79
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01",
+  "S02": "s02",
+  "S03": "s03"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.5901639344262295,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 0.4931506849315068,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S03",
+    "series_id": "s03",
+    "iou": 0.546583850931677,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "1 mg/kg",
+   "bbox": [
+    485,
+    10,
+    505,
+    19
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "3 mg/kg",
+   "bbox": [
+    485,
+    38,
+    505,
+    47
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "10 mg/kg",
+   "bbox": [
+    484,
+    65,
+    506,
+    76
+   ]
+  }
+ ],
+ "input_sha256": "50d3bfa84b8232f3f1c89fcb42485aac6fe448125ae9da4cd491b6c18bff479c",
+ "source_sha256": "50d3bfa84b8232f3f1c89fcb42485aac6fe448125ae9da4cd491b6c18bff479c",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.038519399997312576
+}

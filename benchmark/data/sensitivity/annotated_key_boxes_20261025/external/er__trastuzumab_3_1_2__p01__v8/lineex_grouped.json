@@ -1,0 +1,3784 @@
+{
+ "version": "external_shared_input_benchmark_v1",
+ "panel_id": "er__trastuzumab_3_1_2__p01__v8",
+ "modality": "bw",
+ "method": "lineex_grouped",
+ "status": "completed",
+ "coordinate_system": "x_px/y_px = full original unrotated image pixels; x/y = shared native crop pixels",
+ "image_path": "data/images\\er__trastuzumab_3_1_2__p01__v8.png",
+ "input_sha256": "fa3e3ff715a0ad56497f192334bc21787a918260c84822f9cc63667fd4a856fc",
+ "source_image_path": "data/images\\er__trastuzumab_3_1_2__p01__v8.png",
+ "source_sha256": "fa3e3ff715a0ad56497f192334bc21787a918260c84822f9cc63667fd4a856fc",
+ "crop_box_original": [
+  0,
+  0,
+  1824,
+  1218
+ ],
+ "plot_box": [
+  245.0,
+  93.0,
+  1552.0,
+  1016.0
+ ],
+ "legend_box": [
+  1139.0,
+  675.0,
+  1672.0,
+  855.0
+ ],
+ "legends": [
+  {
+   "legend_index": 0,
+   "series_id": "s01",
+   "label": "WT",
+   "source_native_legend_id": "S01",
+   "box_input": [
+    1126,
+    681,
+    1200,
+    717
+   ],
+   "box_original": [
+    1126,
+    681,
+    1200,
+    717
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__trastuzumab_3_1_2__p01__v8/shared_legend_crops/legend_01.png",
+   "crop_sha256": "abb56222f65c9174bc1544e7de31c033290d7439a00cb87b8b68d2876d754a4f",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__trastuzumab_3_1_2__p01__v8/shared_legends.json",
+   "shared_legends_sha256": "6fa2b42187ab3607cb268efea89cfd4f540829d3e6697bb87c8014c811196a5a",
+   "mapping_provenance": {
+    "S01": "s01",
+    "S02": "s02",
+    "S03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 1,
+   "series_id": "s02",
+   "label": "S298A/E333A/K334A",
+   "source_native_legend_id": "S02",
+   "box_input": [
+    1129,
+    746,
+    1197,
+    776
+   ],
+   "box_original": [
+    1129,
+    746,
+    1197,
+    776
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__trastuzumab_3_1_2__p01__v8/shared_legend_crops/legend_02.png",
+   "crop_sha256": "ff86991fec5d09840bce8f44689f7fb2bc499ce628983d70ee29d6503571e34b",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__trastuzumab_3_1_2__p01__v8/shared_legends.json",
+   "shared_legends_sha256": "6fa2b42187ab3607cb268efea89cfd4f540829d3e6697bb87c8014c811196a5a",
+   "mapping_provenance": {
+    "S01": "s01",
+    "S02": "s02",
+    "S03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 2,
+   "series_id": "s03",
+   "label": "S239D/I332E/A330L",
+   "source_native_legend_id": "S03",
+   "box_input": [
+    1126,
+    802,
+    1200,
+    845
+   ],
+   "box_original": [
+    1126,
+    802,
+    1200,
+    845
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__trastuzumab_3_1_2__p01__v8/shared_legend_crops/legend_03.png",
+   "crop_sha256": "6c75d1d0ee0572c147fa8183196516ac8192522014d1d1f04b1ab9b990f00f02",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/er__trastuzumab_3_1_2__p01__v8/shared_legends.json",
+   "shared_legends_sha256": "6fa2b42187ab3607cb268efea89cfd4f540829d3e6697bb87c8014c811196a5a",
+   "mapping_provenance": {
+    "S01": "s01",
+    "S02": "s02",
+    "S03": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  }
+ ],
+ "predictions": [
+  {
+   "point_id": "LX0000",
+   "x": 270.0,
+   "y": 824.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.781315803527832,
+   "winning_similarity": 0.781315803527832,
+   "similarities": [
+    0.781315803527832,
+    0.36996155977249146,
+    0.6860814094543457
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0000.png",
+   "patch_box_input": [
+    250,
+    814,
+    290,
+    834
+   ],
+   "x_px": 270.0,
+   "y_px": 824.0
+  },
+  {
+   "point_id": "LX0001",
+   "x": 1039.0,
+   "y": 514.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8412253856658936,
+   "winning_similarity": 0.8412253856658936,
+   "similarities": [
+    0.6834217309951782,
+    0.7776766419410706,
+    0.8412253856658936
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0001.png",
+   "patch_box_input": [
+    1019,
+    504,
+    1059,
+    524
+   ],
+   "x_px": 1039.0,
+   "y_px": 514.0
+  },
+  {
+   "point_id": "LX0002",
+   "x": 549.0,
+   "y": 894.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9281538128852844,
+   "winning_similarity": 0.9281538128852844,
+   "similarities": [
+    0.8950819969177246,
+    0.7862770557403564,
+    0.9281538128852844
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0002.png",
+   "patch_box_input": [
+    529,
+    884,
+    569,
+    904
+   ],
+   "x_px": 549.0,
+   "y_px": 894.0
+  },
+  {
+   "point_id": "LX0003",
+   "x": 764.0,
+   "y": 297.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8929175138473511,
+   "winning_similarity": 0.8929175138473511,
+   "similarities": [
+    0.6516854166984558,
+    0.821315586566925,
+    0.8929175138473511
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0003.png",
+   "patch_box_input": [
+    744,
+    287,
+    784,
+    307
+   ],
+   "x_px": 764.0,
+   "y_px": 297.0
+  },
+  {
+   "point_id": "LX0004",
+   "x": 1392.0,
+   "y": 236.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.875798761844635,
+   "winning_similarity": 0.875798761844635,
+   "similarities": [
+    0.6807140707969666,
+    0.5830914378166199,
+    0.875798761844635
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0004.png",
+   "patch_box_input": [
+    1372,
+    226,
+    1412,
+    246
+   ],
+   "x_px": 1392.0,
+   "y_px": 236.0
+  },
+  {
+   "point_id": "LX0005",
+   "x": 872.0,
+   "y": 808.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8889143466949463,
+   "winning_similarity": 0.8889143466949463,
+   "similarities": [
+    0.8889143466949463,
+    0.7461423873901367,
+    0.8305734992027283
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0005.png",
+   "patch_box_input": [
+    852,
+    798,
+    892,
+    818
+   ],
+   "x_px": 872.0,
+   "y_px": 808.0
+  },
+  {
+   "point_id": "LX0006",
+   "x": 1433.0,
+   "y": 251.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7800179719924927,
+   "winning_similarity": 0.7800179719924927,
+   "similarities": [
+    0.7800179719924927,
+    0.6763145923614502,
+    0.7327048182487488
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0006.png",
+   "patch_box_input": [
+    1413,
+    241,
+    1453,
+    261
+   ],
+   "x_px": 1433.0,
+   "y_px": 251.0
+  },
+  {
+   "point_id": "LX0007",
+   "x": 1048.0,
+   "y": 332.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8412253856658936,
+   "winning_similarity": 0.8412253856658936,
+   "similarities": [
+    0.6834217309951782,
+    0.7776766419410706,
+    0.8412253856658936
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0007.png",
+   "patch_box_input": [
+    1028,
+    322,
+    1068,
+    342
+   ],
+   "x_px": 1048.0,
+   "y_px": 332.0
+  },
+  {
+   "point_id": "LX0008",
+   "x": 575.0,
+   "y": 902.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7278587222099304,
+   "winning_similarity": 0.7278587222099304,
+   "similarities": [
+    0.7271988391876221,
+    0.6764417290687561,
+    0.7278587222099304
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0008.png",
+   "patch_box_input": [
+    555,
+    892,
+    595,
+    912
+   ],
+   "x_px": 575.0,
+   "y_px": 902.0
+  },
+  {
+   "point_id": "LX0009",
+   "x": 284.0,
+   "y": 940.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8220083117485046,
+   "winning_similarity": 0.8220083117485046,
+   "similarities": [
+    0.7380399703979492,
+    0.6786540150642395,
+    0.8220083117485046
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0009.png",
+   "patch_box_input": [
+    264,
+    930,
+    304,
+    950
+   ],
+   "x_px": 284.0,
+   "y_px": 940.0
+  },
+  {
+   "point_id": "LX0010",
+   "x": 352.0,
+   "y": 808.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.881248950958252,
+   "winning_similarity": 0.881248950958252,
+   "similarities": [
+    0.881248950958252,
+    0.7805597186088562,
+    0.8488665819168091
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0010.png",
+   "patch_box_input": [
+    332,
+    798,
+    372,
+    818
+   ],
+   "x_px": 352.0,
+   "y_px": 808.0
+  },
+  {
+   "point_id": "LX0011",
+   "x": 1171.0,
+   "y": 311.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8412253856658936,
+   "winning_similarity": 0.8412253856658936,
+   "similarities": [
+    0.6834217309951782,
+    0.7776766419410706,
+    0.8412253856658936
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0011.png",
+   "patch_box_input": [
+    1151,
+    301,
+    1191,
+    321
+   ],
+   "x_px": 1171.0,
+   "y_px": 311.0
+  },
+  {
+   "point_id": "LX0012",
+   "x": 430.0,
+   "y": 910.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7589343786239624,
+   "winning_similarity": 0.7589343786239624,
+   "similarities": [
+    0.7425321936607361,
+    0.714022159576416,
+    0.7589343786239624
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0012.png",
+   "patch_box_input": [
+    410,
+    900,
+    450,
+    920
+   ],
+   "x_px": 430.0,
+   "y_px": 910.0
+  },
+  {
+   "point_id": "LX0013",
+   "x": 1173.0,
+   "y": 222.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8412253856658936,
+   "winning_similarity": 0.8412253856658936,
+   "similarities": [
+    0.6834217309951782,
+    0.7776766419410706,
+    0.8412253856658936
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0013.png",
+   "patch_box_input": [
+    1153,
+    212,
+    1193,
+    232
+   ],
+   "x_px": 1173.0,
+   "y_px": 222.0
+  },
+  {
+   "point_id": "LX0014",
+   "x": 704.0,
+   "y": 866.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8499372005462646,
+   "winning_similarity": 0.8499372005462646,
+   "similarities": [
+    0.8379459381103516,
+    0.7698071599006653,
+    0.8499372005462646
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0014.png",
+   "patch_box_input": [
+    684,
+    856,
+    724,
+    876
+   ],
+   "x_px": 704.0,
+   "y_px": 866.0
+  },
+  {
+   "point_id": "LX0015",
+   "x": 920.0,
+   "y": 565.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8412253856658936,
+   "winning_similarity": 0.8412253856658936,
+   "similarities": [
+    0.6834217309951782,
+    0.7776766419410706,
+    0.8412253856658936
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0015.png",
+   "patch_box_input": [
+    900,
+    555,
+    940,
+    575
+   ],
+   "x_px": 920.0,
+   "y_px": 565.0
+  },
+  {
+   "point_id": "LX0016",
+   "x": 1288.0,
+   "y": 263.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9102587699890137,
+   "winning_similarity": 0.9102587699890137,
+   "similarities": [
+    0.7268282175064087,
+    0.7288281321525574,
+    0.9102587699890137
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0016.png",
+   "patch_box_input": [
+    1268,
+    253,
+    1308,
+    273
+   ],
+   "x_px": 1288.0,
+   "y_px": 263.0
+  },
+  {
+   "point_id": "LX0017",
+   "x": 627.0,
+   "y": 518.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.793899655342102,
+   "winning_similarity": 0.793899655342102,
+   "similarities": [
+    0.516696035861969,
+    0.723508358001709,
+    0.793899655342102
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0017.png",
+   "patch_box_input": [
+    607,
+    508,
+    647,
+    528
+   ],
+   "x_px": 627.0,
+   "y_px": 518.0
+  },
+  {
+   "point_id": "LX0018",
+   "x": 1304.0,
+   "y": 238.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8323090076446533,
+   "winning_similarity": 0.8323090076446533,
+   "similarities": [
+    0.8323090076446533,
+    0.6219046115875244,
+    0.7392175197601318
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0018.png",
+   "patch_box_input": [
+    1284,
+    228,
+    1324,
+    248
+   ],
+   "x_px": 1304.0,
+   "y_px": 238.0
+  },
+  {
+   "point_id": "LX0019",
+   "x": 800.0,
+   "y": 842.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8712289333343506,
+   "winning_similarity": 0.8712289333343506,
+   "similarities": [
+    0.46466249227523804,
+    0.8712289333343506,
+    0.8241006731987
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0019.png",
+   "patch_box_input": [
+    780,
+    832,
+    820,
+    852
+   ],
+   "x_px": 800.0,
+   "y_px": 842.0
+  },
+  {
+   "point_id": "LX0020",
+   "x": 1006.0,
+   "y": 600.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.6828609704971313,
+   "winning_similarity": 0.6828609704971313,
+   "similarities": [
+    0.23790836334228516,
+    0.6828609704971313,
+    0.5034392476081848
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0020.png",
+   "patch_box_input": [
+    986,
+    590,
+    1026,
+    610
+   ],
+   "x_px": 1006.0,
+   "y_px": 600.0
+  },
+  {
+   "point_id": "LX0021",
+   "x": 471.0,
+   "y": 701.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9014275074005127,
+   "winning_similarity": 0.9014275074005127,
+   "similarities": [
+    0.829127848148346,
+    0.7633659839630127,
+    0.9014275074005127
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0021.png",
+   "patch_box_input": [
+    451,
+    691,
+    491,
+    711
+   ],
+   "x_px": 471.0,
+   "y_px": 701.0
+  },
+  {
+   "point_id": "LX0022",
+   "x": 692.0,
+   "y": 428.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.6274914145469666,
+   "winning_similarity": 0.6274914145469666,
+   "similarities": [
+    0.6266780495643616,
+    0.6043321490287781,
+    0.6274914145469666
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0022.png",
+   "patch_box_input": [
+    672,
+    418,
+    712,
+    438
+   ],
+   "x_px": 692.0,
+   "y_px": 428.0
+  },
+  {
+   "point_id": "LX0023",
+   "x": 345.0,
+   "y": 926.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8412253856658936,
+   "winning_similarity": 0.8412253856658936,
+   "similarities": [
+    0.6834217309951782,
+    0.7776766419410706,
+    0.8412253856658936
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0023.png",
+   "patch_box_input": [
+    325,
+    916,
+    365,
+    936
+   ],
+   "x_px": 345.0,
+   "y_px": 926.0
+  },
+  {
+   "point_id": "LX0024",
+   "x": 976.0,
+   "y": 279.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8412253856658936,
+   "winning_similarity": 0.8412253856658936,
+   "similarities": [
+    0.6834217309951782,
+    0.7776766419410706,
+    0.8412253856658936
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0024.png",
+   "patch_box_input": [
+    956,
+    269,
+    996,
+    289
+   ],
+   "x_px": 976.0,
+   "y_px": 279.0
+  },
+  {
+   "point_id": "LX0025",
+   "x": 803.0,
+   "y": 295.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8656301498413086,
+   "winning_similarity": 0.8656301498413086,
+   "similarities": [
+    0.5828409194946289,
+    0.8656301498413086,
+    0.8518264293670654
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0025.png",
+   "patch_box_input": [
+    783,
+    285,
+    823,
+    305
+   ],
+   "x_px": 803.0,
+   "y_px": 295.0
+  },
+  {
+   "point_id": "LX0026",
+   "x": 1201.0,
+   "y": 240.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9161661863327026,
+   "winning_similarity": 0.9161661863327026,
+   "similarities": [
+    0.9161661863327026,
+    0.8121551871299744,
+    0.8974300622940063
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0026.png",
+   "patch_box_input": [
+    1181,
+    230,
+    1221,
+    250
+   ],
+   "x_px": 1201.0,
+   "y_px": 240.0
+  },
+  {
+   "point_id": "LX0027",
+   "x": 605.0,
+   "y": 895.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7765361070632935,
+   "winning_similarity": 0.7765361070632935,
+   "similarities": [
+    0.7637385725975037,
+    0.7252559661865234,
+    0.7765361070632935
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0027.png",
+   "patch_box_input": [
+    585,
+    885,
+    625,
+    905
+   ],
+   "x_px": 605.0,
+   "y_px": 895.0
+  },
+  {
+   "point_id": "LX0028",
+   "x": 1360.0,
+   "y": 257.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9385710954666138,
+   "winning_similarity": 0.9385710954666138,
+   "similarities": [
+    0.9385710954666138,
+    0.7720887660980225,
+    0.9144880175590515
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0028.png",
+   "patch_box_input": [
+    1340,
+    247,
+    1380,
+    267
+   ],
+   "x_px": 1360.0,
+   "y_px": 257.0
+  },
+  {
+   "point_id": "LX0029",
+   "x": 1036.0,
+   "y": 503.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8412253856658936,
+   "winning_similarity": 0.8412253856658936,
+   "similarities": [
+    0.6834217309951782,
+    0.7776766419410706,
+    0.8412253856658936
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0029.png",
+   "patch_box_input": [
+    1016,
+    493,
+    1056,
+    513
+   ],
+   "x_px": 1036.0,
+   "y_px": 503.0
+  },
+  {
+   "point_id": "LX0030",
+   "x": 388.0,
+   "y": 795.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.551824152469635,
+   "winning_similarity": 0.551824152469635,
+   "similarities": [
+    0.3313879370689392,
+    0.551824152469635,
+    0.548490047454834
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0030.png",
+   "patch_box_input": [
+    368,
+    785,
+    408,
+    805
+   ],
+   "x_px": 388.0,
+   "y_px": 795.0
+  },
+  {
+   "point_id": "LX0031",
+   "x": 944.0,
+   "y": 716.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7160452604293823,
+   "winning_similarity": 0.7160452604293823,
+   "similarities": [
+    0.49553102254867554,
+    0.7160452604293823,
+    0.7120588421821594
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0031.png",
+   "patch_box_input": [
+    924,
+    706,
+    964,
+    726
+   ],
+   "x_px": 944.0,
+   "y_px": 716.0
+  },
+  {
+   "point_id": "LX0032",
+   "x": 1008.0,
+   "y": 432.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.672217071056366,
+   "winning_similarity": 0.672217071056366,
+   "similarities": [
+    0.672217071056366,
+    0.5261793732643127,
+    0.6222820281982422
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0032.png",
+   "patch_box_input": [
+    988,
+    422,
+    1028,
+    442
+   ],
+   "x_px": 1008.0,
+   "y_px": 432.0
+  },
+  {
+   "point_id": "LX0033",
+   "x": 396.0,
+   "y": 901.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7718098163604736,
+   "winning_similarity": 0.7718098163604736,
+   "similarities": [
+    0.7718098163604736,
+    0.6535762548446655,
+    0.7043447494506836
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0033.png",
+   "patch_box_input": [
+    376,
+    891,
+    416,
+    911
+   ],
+   "x_px": 396.0,
+   "y_px": 901.0
+  },
+  {
+   "point_id": "LX0034",
+   "x": 708.0,
+   "y": 875.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8121986985206604,
+   "winning_similarity": 0.8121986985206604,
+   "similarities": [
+    0.781916618347168,
+    0.7317302823066711,
+    0.8121986985206604
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0034.png",
+   "patch_box_input": [
+    688,
+    865,
+    728,
+    885
+   ],
+   "x_px": 708.0,
+   "y_px": 875.0
+  },
+  {
+   "point_id": "LX0035",
+   "x": 1121.0,
+   "y": 256.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8114174604415894,
+   "winning_similarity": 0.8114174604415894,
+   "similarities": [
+    0.43703845143318176,
+    0.8114174604415894,
+    0.7776675224304199
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0035.png",
+   "patch_box_input": [
+    1101,
+    246,
+    1141,
+    266
+   ],
+   "x_px": 1121.0,
+   "y_px": 256.0
+  },
+  {
+   "point_id": "LX0036",
+   "x": 1264.0,
+   "y": 247.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8370302319526672,
+   "winning_similarity": 0.8370302319526672,
+   "similarities": [
+    0.8346537351608276,
+    0.7662164568901062,
+    0.8370302319526672
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0036.png",
+   "patch_box_input": [
+    1244,
+    237,
+    1284,
+    257
+   ],
+   "x_px": 1264.0,
+   "y_px": 247.0
+  },
+  {
+   "point_id": "LX0037",
+   "x": 951.0,
+   "y": 710.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7651299834251404,
+   "winning_similarity": 0.7651299834251404,
+   "similarities": [
+    0.6593174338340759,
+    0.7029435634613037,
+    0.7651299834251404
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0037.png",
+   "patch_box_input": [
+    931,
+    700,
+    971,
+    720
+   ],
+   "x_px": 951.0,
+   "y_px": 710.0
+  },
+  {
+   "point_id": "LX0038",
+   "x": 513.0,
+   "y": 909.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8135183453559875,
+   "winning_similarity": 0.8135183453559875,
+   "similarities": [
+    0.781173050403595,
+    0.7338346838951111,
+    0.8135183453559875
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0038.png",
+   "patch_box_input": [
+    493,
+    899,
+    533,
+    919
+   ],
+   "x_px": 513.0,
+   "y_px": 909.0
+  },
+  {
+   "point_id": "LX0039",
+   "x": 443.0,
+   "y": 879.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8751103281974792,
+   "winning_similarity": 0.8751103281974792,
+   "similarities": [
+    0.7116332650184631,
+    0.8736258745193481,
+    0.8751103281974792
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0039.png",
+   "patch_box_input": [
+    423,
+    869,
+    463,
+    889
+   ],
+   "x_px": 443.0,
+   "y_px": 879.0
+  },
+  {
+   "point_id": "LX0040",
+   "x": 655.0,
+   "y": 884.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8789488673210144,
+   "winning_similarity": 0.8789488673210144,
+   "similarities": [
+    0.8258452415466309,
+    0.7975283265113831,
+    0.8789488673210144
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0040.png",
+   "patch_box_input": [
+    635,
+    874,
+    675,
+    894
+   ],
+   "x_px": 655.0,
+   "y_px": 884.0
+  },
+  {
+   "point_id": "LX0041",
+   "x": 855.0,
+   "y": 211.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7994515299797058,
+   "winning_similarity": 0.7994515299797058,
+   "similarities": [
+    0.7655811309814453,
+    0.7994515299797058,
+    0.7910455465316772
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0041.png",
+   "patch_box_input": [
+    835,
+    201,
+    875,
+    221
+   ],
+   "x_px": 855.0,
+   "y_px": 211.0
+  },
+  {
+   "point_id": "LX0042",
+   "x": 1359.0,
+   "y": 245.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7947978377342224,
+   "winning_similarity": 0.7947978377342224,
+   "similarities": [
+    0.6393510699272156,
+    0.7909480333328247,
+    0.7947978377342224
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0042.png",
+   "patch_box_input": [
+    1339,
+    235,
+    1379,
+    255
+   ],
+   "x_px": 1359.0,
+   "y_px": 245.0
+  },
+  {
+   "point_id": "LX0043",
+   "x": 521.0,
+   "y": 666.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7446063160896301,
+   "winning_similarity": 0.7446063160896301,
+   "similarities": [
+    0.5924474596977234,
+    0.6865053176879883,
+    0.7446063160896301
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0043.png",
+   "patch_box_input": [
+    501,
+    656,
+    541,
+    676
+   ],
+   "x_px": 521.0,
+   "y_px": 666.0
+  },
+  {
+   "point_id": "LX0044",
+   "x": 1209.0,
+   "y": 301.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7504079341888428,
+   "winning_similarity": 0.7504079341888428,
+   "similarities": [
+    0.6085336208343506,
+    0.4515770375728607,
+    0.7504079341888428
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0044.png",
+   "patch_box_input": [
+    1189,
+    291,
+    1229,
+    311
+   ],
+   "x_px": 1209.0,
+   "y_px": 301.0
+  },
+  {
+   "point_id": "LX0045",
+   "x": 768.0,
+   "y": 862.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8472442030906677,
+   "winning_similarity": 0.8472442030906677,
+   "similarities": [
+    0.8472442030906677,
+    0.7159625291824341,
+    0.7974209189414978
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0045.png",
+   "patch_box_input": [
+    748,
+    852,
+    788,
+    872
+   ],
+   "x_px": 768.0,
+   "y_px": 862.0
+  },
+  {
+   "point_id": "LX0046",
+   "x": 1100.0,
+   "y": 412.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7726739645004272,
+   "winning_similarity": 0.7726739645004272,
+   "similarities": [
+    0.5695035457611084,
+    0.7288596630096436,
+    0.7726739645004272
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0046.png",
+   "patch_box_input": [
+    1080,
+    402,
+    1120,
+    422
+   ],
+   "x_px": 1100.0,
+   "y_px": 412.0
+  },
+  {
+   "point_id": "LX0047",
+   "x": 791.0,
+   "y": 289.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8412253856658936,
+   "winning_similarity": 0.8412253856658936,
+   "similarities": [
+    0.6834217309951782,
+    0.7776766419410706,
+    0.8412253856658936
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0047.png",
+   "patch_box_input": [
+    771,
+    279,
+    811,
+    299
+   ],
+   "x_px": 791.0,
+   "y_px": 289.0
+  },
+  {
+   "point_id": "LX0048",
+   "x": 905.0,
+   "y": 771.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8063356280326843,
+   "winning_similarity": 0.8063356280326843,
+   "similarities": [
+    0.7557024955749512,
+    0.7400317788124084,
+    0.8063356280326843
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0048.png",
+   "patch_box_input": [
+    885,
+    761,
+    925,
+    781
+   ],
+   "x_px": 905.0,
+   "y_px": 771.0
+  },
+  {
+   "point_id": "LX0049",
+   "x": 317.0,
+   "y": 930.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7194063067436218,
+   "winning_similarity": 0.7194063067436218,
+   "similarities": [
+    0.7147970795631409,
+    0.5308859348297119,
+    0.7194063067436218
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0049.png",
+   "patch_box_input": [
+    297,
+    920,
+    337,
+    940
+   ],
+   "x_px": 317.0,
+   "y_px": 930.0
+  },
+  {
+   "point_id": "LX0050",
+   "x": 1098.0,
+   "y": 239.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.77530437707901,
+   "winning_similarity": 0.77530437707901,
+   "similarities": [
+    0.5729475021362305,
+    0.77530437707901,
+    0.7553958892822266
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0050.png",
+   "patch_box_input": [
+    1078,
+    229,
+    1118,
+    249
+   ],
+   "x_px": 1098.0,
+   "y_px": 239.0
+  },
+  {
+   "point_id": "LX0051",
+   "x": 602.0,
+   "y": 630.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8412253856658936,
+   "winning_similarity": 0.8412253856658936,
+   "similarities": [
+    0.6834217309951782,
+    0.7776766419410706,
+    0.8412253856658936
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0051.png",
+   "patch_box_input": [
+    582,
+    620,
+    622,
+    640
+   ],
+   "x_px": 602.0,
+   "y_px": 630.0
+  },
+  {
+   "point_id": "LX0052",
+   "x": 583.0,
+   "y": 563.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.889067530632019,
+   "winning_similarity": 0.889067530632019,
+   "similarities": [
+    0.8194794654846191,
+    0.5521531105041504,
+    0.889067530632019
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0052.png",
+   "patch_box_input": [
+    563,
+    553,
+    603,
+    573
+   ],
+   "x_px": 583.0,
+   "y_px": 563.0
+  },
+  {
+   "point_id": "LX0053",
+   "x": 1262.0,
+   "y": 255.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.84485924243927,
+   "winning_similarity": 0.84485924243927,
+   "similarities": [
+    0.7395532727241516,
+    0.6860148906707764,
+    0.84485924243927
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0053.png",
+   "patch_box_input": [
+    1242,
+    245,
+    1282,
+    265
+   ],
+   "x_px": 1262.0,
+   "y_px": 255.0
+  },
+  {
+   "point_id": "LX0054",
+   "x": 296.0,
+   "y": 837.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7141211032867432,
+   "winning_similarity": 0.7141211032867432,
+   "similarities": [
+    0.6653838157653809,
+    0.7141211032867432,
+    0.6897737979888916
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0054.png",
+   "patch_box_input": [
+    276,
+    827,
+    316,
+    847
+   ],
+   "x_px": 296.0,
+   "y_px": 837.0
+  },
+  {
+   "point_id": "LX0055",
+   "x": 984.0,
+   "y": 671.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8656157851219177,
+   "winning_similarity": 0.8656157851219177,
+   "similarities": [
+    0.8656157851219177,
+    0.6456542015075684,
+    0.8516094088554382
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0055.png",
+   "patch_box_input": [
+    964,
+    661,
+    1004,
+    681
+   ],
+   "x_px": 984.0,
+   "y_px": 671.0
+  },
+  {
+   "point_id": "LX0056",
+   "x": 762.0,
+   "y": 859.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.878532350063324,
+   "winning_similarity": 0.878532350063324,
+   "similarities": [
+    0.878532350063324,
+    0.7677519917488098,
+    0.8476444482803345
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0056.png",
+   "patch_box_input": [
+    742,
+    849,
+    782,
+    869
+   ],
+   "x_px": 762.0,
+   "y_px": 859.0
+  },
+  {
+   "point_id": "LX0057",
+   "x": 744.0,
+   "y": 850.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8596867322921753,
+   "winning_similarity": 0.8596867322921753,
+   "similarities": [
+    0.8596867322921753,
+    0.6579811573028564,
+    0.7811065912246704
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0057.png",
+   "patch_box_input": [
+    724,
+    840,
+    764,
+    860
+   ],
+   "x_px": 744.0,
+   "y_px": 850.0
+  },
+  {
+   "point_id": "LX0058",
+   "x": 851.0,
+   "y": 716.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.319091796875,
+   "winning_similarity": 0.319091796875,
+   "similarities": [
+    0.17888453602790833,
+    0.319091796875,
+    0.2577005624771118
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0058.png",
+   "patch_box_input": [
+    831,
+    706,
+    871,
+    726
+   ],
+   "x_px": 851.0,
+   "y_px": 716.0
+  },
+  {
+   "point_id": "LX0059",
+   "x": 437.0,
+   "y": 902.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9105244278907776,
+   "winning_similarity": 0.9105244278907776,
+   "similarities": [
+    0.7691866159439087,
+    0.8906474113464355,
+    0.9105244278907776
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0059.png",
+   "patch_box_input": [
+    417,
+    892,
+    457,
+    912
+   ],
+   "x_px": 437.0,
+   "y_px": 902.0
+  },
+  {
+   "point_id": "LX0060",
+   "x": 531.0,
+   "y": 903.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.793306827545166,
+   "winning_similarity": 0.793306827545166,
+   "similarities": [
+    0.785522997379303,
+    0.7723129391670227,
+    0.793306827545166
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0060.png",
+   "patch_box_input": [
+    511,
+    893,
+    551,
+    913
+   ],
+   "x_px": 531.0,
+   "y_px": 903.0
+  },
+  {
+   "point_id": "LX0061",
+   "x": 403.0,
+   "y": 823.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7147557139396667,
+   "winning_similarity": 0.7147557139396667,
+   "similarities": [
+    0.4967282712459564,
+    0.6073634624481201,
+    0.7147557139396667
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0061.png",
+   "patch_box_input": [
+    383,
+    813,
+    423,
+    833
+   ],
+   "x_px": 403.0,
+   "y_px": 823.0
+  },
+  {
+   "point_id": "LX0062",
+   "x": 300.0,
+   "y": 931.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.6736496090888977,
+   "winning_similarity": 0.6736496090888977,
+   "similarities": [
+    0.33535900712013245,
+    0.6736496090888977,
+    0.6664627194404602
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0062.png",
+   "patch_box_input": [
+    280,
+    921,
+    320,
+    941
+   ],
+   "x_px": 300.0,
+   "y_px": 931.0
+  },
+  {
+   "point_id": "LX0063",
+   "x": 644.0,
+   "y": 882.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.8331098556518555,
+   "winning_similarity": 0.8331098556518555,
+   "similarities": [
+    0.8331098556518555,
+    0.702345073223114,
+    0.7799996137619019
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0063.png",
+   "patch_box_input": [
+    624,
+    872,
+    664,
+    892
+   ],
+   "x_px": 644.0,
+   "y_px": 882.0
+  }
+ ],
+ "unavailable": [],
+ "patches": [
+  {
+   "point_index": 0,
+   "point_id": "LX0000",
+   "box_input": [
+    250,
+    814,
+    290,
+    834
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0000.png"
+  },
+  {
+   "point_index": 1,
+   "point_id": "LX0001",
+   "box_input": [
+    1019,
+    504,
+    1059,
+    524
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0001.png"
+  },
+  {
+   "point_index": 2,
+   "point_id": "LX0002",
+   "box_input": [
+    529,
+    884,
+    569,
+    904
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0002.png"
+  },
+  {
+   "point_index": 3,
+   "point_id": "LX0003",
+   "box_input": [
+    744,
+    287,
+    784,
+    307
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0003.png"
+  },
+  {
+   "point_index": 4,
+   "point_id": "LX0004",
+   "box_input": [
+    1372,
+    226,
+    1412,
+    246
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0004.png"
+  },
+  {
+   "point_index": 5,
+   "point_id": "LX0005",
+   "box_input": [
+    852,
+    798,
+    892,
+    818
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0005.png"
+  },
+  {
+   "point_index": 6,
+   "point_id": "LX0006",
+   "box_input": [
+    1413,
+    241,
+    1453,
+    261
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0006.png"
+  },
+  {
+   "point_index": 7,
+   "point_id": "LX0007",
+   "box_input": [
+    1028,
+    322,
+    1068,
+    342
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0007.png"
+  },
+  {
+   "point_index": 8,
+   "point_id": "LX0008",
+   "box_input": [
+    555,
+    892,
+    595,
+    912
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0008.png"
+  },
+  {
+   "point_index": 9,
+   "point_id": "LX0009",
+   "box_input": [
+    264,
+    930,
+    304,
+    950
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0009.png"
+  },
+  {
+   "point_index": 10,
+   "point_id": "LX0010",
+   "box_input": [
+    332,
+    798,
+    372,
+    818
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0010.png"
+  },
+  {
+   "point_index": 11,
+   "point_id": "LX0011",
+   "box_input": [
+    1151,
+    301,
+    1191,
+    321
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0011.png"
+  },
+  {
+   "point_index": 12,
+   "point_id": "LX0012",
+   "box_input": [
+    410,
+    900,
+    450,
+    920
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0012.png"
+  },
+  {
+   "point_index": 13,
+   "point_id": "LX0013",
+   "box_input": [
+    1153,
+    212,
+    1193,
+    232
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0013.png"
+  },
+  {
+   "point_index": 14,
+   "point_id": "LX0014",
+   "box_input": [
+    684,
+    856,
+    724,
+    876
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0014.png"
+  },
+  {
+   "point_index": 15,
+   "point_id": "LX0015",
+   "box_input": [
+    900,
+    555,
+    940,
+    575
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0015.png"
+  },
+  {
+   "point_index": 16,
+   "point_id": "LX0016",
+   "box_input": [
+    1268,
+    253,
+    1308,
+    273
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0016.png"
+  },
+  {
+   "point_index": 17,
+   "point_id": "LX0017",
+   "box_input": [
+    607,
+    508,
+    647,
+    528
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0017.png"
+  },
+  {
+   "point_index": 18,
+   "point_id": "LX0018",
+   "box_input": [
+    1284,
+    228,
+    1324,
+    248
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0018.png"
+  },
+  {
+   "point_index": 19,
+   "point_id": "LX0019",
+   "box_input": [
+    780,
+    832,
+    820,
+    852
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0019.png"
+  },
+  {
+   "point_index": 20,
+   "point_id": "LX0020",
+   "box_input": [
+    986,
+    590,
+    1026,
+    610
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0020.png"
+  },
+  {
+   "point_index": 21,
+   "point_id": "LX0021",
+   "box_input": [
+    451,
+    691,
+    491,
+    711
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0021.png"
+  },
+  {
+   "point_index": 22,
+   "point_id": "LX0022",
+   "box_input": [
+    672,
+    418,
+    712,
+    438
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0022.png"
+  },
+  {
+   "point_index": 23,
+   "point_id": "LX0023",
+   "box_input": [
+    325,
+    916,
+    365,
+    936
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0023.png"
+  },
+  {
+   "point_index": 24,
+   "point_id": "LX0024",
+   "box_input": [
+    956,
+    269,
+    996,
+    289
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0024.png"
+  },
+  {
+   "point_index": 25,
+   "point_id": "LX0025",
+   "box_input": [
+    783,
+    285,
+    823,
+    305
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0025.png"
+  },
+  {
+   "point_index": 26,
+   "point_id": "LX0026",
+   "box_input": [
+    1181,
+    230,
+    1221,
+    250
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0026.png"
+  },
+  {
+   "point_index": 27,
+   "point_id": "LX0027",
+   "box_input": [
+    585,
+    885,
+    625,
+    905
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0027.png"
+  },
+  {
+   "point_index": 28,
+   "point_id": "LX0028",
+   "box_input": [
+    1340,
+    247,
+    1380,
+    267
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0028.png"
+  },
+  {
+   "point_index": 29,
+   "point_id": "LX0029",
+   "box_input": [
+    1016,
+    493,
+    1056,
+    513
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0029.png"
+  },
+  {
+   "point_index": 30,
+   "point_id": "LX0030",
+   "box_input": [
+    368,
+    785,
+    408,
+    805
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0030.png"
+  },
+  {
+   "point_index": 31,
+   "point_id": "LX0031",
+   "box_input": [
+    924,
+    706,
+    964,
+    726
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0031.png"
+  },
+  {
+   "point_index": 32,
+   "point_id": "LX0032",
+   "box_input": [
+    988,
+    422,
+    1028,
+    442
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0032.png"
+  },
+  {
+   "point_index": 33,
+   "point_id": "LX0033",
+   "box_input": [
+    376,
+    891,
+    416,
+    911
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0033.png"
+  },
+  {
+   "point_index": 34,
+   "point_id": "LX0034",
+   "box_input": [
+    688,
+    865,
+    728,
+    885
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0034.png"
+  },
+  {
+   "point_index": 35,
+   "point_id": "LX0035",
+   "box_input": [
+    1101,
+    246,
+    1141,
+    266
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0035.png"
+  },
+  {
+   "point_index": 36,
+   "point_id": "LX0036",
+   "box_input": [
+    1244,
+    237,
+    1284,
+    257
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0036.png"
+  },
+  {
+   "point_index": 37,
+   "point_id": "LX0037",
+   "box_input": [
+    931,
+    700,
+    971,
+    720
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0037.png"
+  },
+  {
+   "point_index": 38,
+   "point_id": "LX0038",
+   "box_input": [
+    493,
+    899,
+    533,
+    919
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0038.png"
+  },
+  {
+   "point_index": 39,
+   "point_id": "LX0039",
+   "box_input": [
+    423,
+    869,
+    463,
+    889
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0039.png"
+  },
+  {
+   "point_index": 40,
+   "point_id": "LX0040",
+   "box_input": [
+    635,
+    874,
+    675,
+    894
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0040.png"
+  },
+  {
+   "point_index": 41,
+   "point_id": "LX0041",
+   "box_input": [
+    835,
+    201,
+    875,
+    221
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0041.png"
+  },
+  {
+   "point_index": 42,
+   "point_id": "LX0042",
+   "box_input": [
+    1339,
+    235,
+    1379,
+    255
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0042.png"
+  },
+  {
+   "point_index": 43,
+   "point_id": "LX0043",
+   "box_input": [
+    501,
+    656,
+    541,
+    676
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0043.png"
+  },
+  {
+   "point_index": 44,
+   "point_id": "LX0044",
+   "box_input": [
+    1189,
+    291,
+    1229,
+    311
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0044.png"
+  },
+  {
+   "point_index": 45,
+   "point_id": "LX0045",
+   "box_input": [
+    748,
+    852,
+    788,
+    872
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0045.png"
+  },
+  {
+   "point_index": 46,
+   "point_id": "LX0046",
+   "box_input": [
+    1080,
+    402,
+    1120,
+    422
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0046.png"
+  },
+  {
+   "point_index": 47,
+   "point_id": "LX0047",
+   "box_input": [
+    771,
+    279,
+    811,
+    299
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0047.png"
+  },
+  {
+   "point_index": 48,
+   "point_id": "LX0048",
+   "box_input": [
+    885,
+    761,
+    925,
+    781
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0048.png"
+  },
+  {
+   "point_index": 49,
+   "point_id": "LX0049",
+   "box_input": [
+    297,
+    920,
+    337,
+    940
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0049.png"
+  },
+  {
+   "point_index": 50,
+   "point_id": "LX0050",
+   "box_input": [
+    1078,
+    229,
+    1118,
+    249
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0050.png"
+  },
+  {
+   "point_index": 51,
+   "point_id": "LX0051",
+   "box_input": [
+    582,
+    620,
+    622,
+    640
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0051.png"
+  },
+  {
+   "point_index": 52,
+   "point_id": "LX0052",
+   "box_input": [
+    563,
+    553,
+    603,
+    573
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0052.png"
+  },
+  {
+   "point_index": 53,
+   "point_id": "LX0053",
+   "box_input": [
+    1242,
+    245,
+    1282,
+    265
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0053.png"
+  },
+  {
+   "point_index": 54,
+   "point_id": "LX0054",
+   "box_input": [
+    276,
+    827,
+    316,
+    847
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0054.png"
+  },
+  {
+   "point_index": 55,
+   "point_id": "LX0055",
+   "box_input": [
+    964,
+    661,
+    1004,
+    681
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0055.png"
+  },
+  {
+   "point_index": 56,
+   "point_id": "LX0056",
+   "box_input": [
+    742,
+    849,
+    782,
+    869
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0056.png"
+  },
+  {
+   "point_index": 57,
+   "point_id": "LX0057",
+   "box_input": [
+    724,
+    840,
+    764,
+    860
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0057.png"
+  },
+  {
+   "point_index": 58,
+   "point_id": "LX0058",
+   "box_input": [
+    831,
+    706,
+    871,
+    726
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0058.png"
+  },
+  {
+   "point_index": 59,
+   "point_id": "LX0059",
+   "box_input": [
+    417,
+    892,
+    457,
+    912
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0059.png"
+  },
+  {
+   "point_index": 60,
+   "point_id": "LX0060",
+   "box_input": [
+    511,
+    893,
+    551,
+    913
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0060.png"
+  },
+  {
+   "point_index": 61,
+   "point_id": "LX0061",
+   "box_input": [
+    383,
+    813,
+    423,
+    833
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0061.png"
+  },
+  {
+   "point_index": 62,
+   "point_id": "LX0062",
+   "box_input": [
+    280,
+    921,
+    320,
+    941
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0062.png"
+  },
+  {
+   "point_index": 63,
+   "point_id": "LX0063",
+   "box_input": [
+    624,
+    872,
+    664,
+    892
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/patches/LX0063.png"
+  }
+ ],
+ "similarity_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/er__trastuzumab_3_1_2__p01__v8/lineex_grouped/similarity.npy",
+ "similarity_row_point_ids": [
+  "LX0000",
+  "LX0001",
+  "LX0002",
+  "LX0003",
+  "LX0004",
+  "LX0005",
+  "LX0006",
+  "LX0007",
+  "LX0008",
+  "LX0009",
+  "LX0010",
+  "LX0011",
+  "LX0012",
+  "LX0013",
+  "LX0014",
+  "LX0015",
+  "LX0016",
+  "LX0017",
+  "LX0018",
+  "LX0019",
+  "LX0020",
+  "LX0021",
+  "LX0022",
+  "LX0023",
+  "LX0024",
+  "LX0025",
+  "LX0026",
+  "LX0027",
+  "LX0028",
+  "LX0029",
+  "LX0030",
+  "LX0031",
+  "LX0032",
+  "LX0033",
+  "LX0034",
+  "LX0035",
+  "LX0036",
+  "LX0037",
+  "LX0038",
+  "LX0039",
+  "LX0040",
+  "LX0041",
+  "LX0042",
+  "LX0043",
+  "LX0044",
+  "LX0045",
+  "LX0046",
+  "LX0047",
+  "LX0048",
+  "LX0049",
+  "LX0050",
+  "LX0051",
+  "LX0052",
+  "LX0053",
+  "LX0054",
+  "LX0055",
+  "LX0056",
+  "LX0057",
+  "LX0058",
+  "LX0059",
+  "LX0060",
+  "LX0061",
+  "LX0062",
+  "LX0063"
+ ],
+ "similarity_column_series_ids": [
+  "s01",
+  "s02",
+  "s03"
+ ],
+ "timing": {
+  "shared_input_verification_seconds": 0.026115200016647577,
+  "legend_crop_seconds": 0.003094600047916174,
+  "network_seconds": 0.012530199950560927,
+  "head_postprocess_and_export_seconds": 0.014123800094239414,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.062247700057923794,
+  "learned_matching_seconds": 0.25357979990076274,
+  "total_seconds": 0.3469562000827864,
+  "method_total_excluding_shared_verification_seconds": 0.3469562000827864,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "patch_matching_timing": {
+  "patch_extract_and_export_seconds": 0.062247700057923794,
+  "learned_matching_seconds": 0.25357979990076274,
+  "total_seconds": 0.31720759999006987
+ },
+ "timing_breakdown": {
+  "shared_input_verification_seconds": 0.026115200016647577,
+  "legend_crop_seconds": 0.003094600047916174,
+  "network_seconds": 0.012530199950560927,
+  "head_postprocess_and_export_seconds": 0.014123800094239414,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.062247700057923794,
+  "learned_matching_seconds": 0.25357979990076274,
+  "total_seconds": 0.3469562000827864,
+  "method_total_excluding_shared_verification_seconds": 0.3469562000827864,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "raw_heads_result_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/raw_heads/lineex/er__trastuzumab_3_1_2__p01__v8.json",
+ "raw_points": [
+  {
+   "point_id": "LX0000",
+   "x": 270.0,
+   "y": 824.0,
+   "detection_score": null,
+   "x_px": 270.0,
+   "y_px": 824.0
+  },
+  {
+   "point_id": "LX0001",
+   "x": 1039.0,
+   "y": 514.0,
+   "detection_score": null,
+   "x_px": 1039.0,
+   "y_px": 514.0
+  },
+  {
+   "point_id": "LX0002",
+   "x": 549.0,
+   "y": 894.0,
+   "detection_score": null,
+   "x_px": 549.0,
+   "y_px": 894.0
+  },
+  {
+   "point_id": "LX0003",
+   "x": 764.0,
+   "y": 297.0,
+   "detection_score": null,
+   "x_px": 764.0,
+   "y_px": 297.0
+  },
+  {
+   "point_id": "LX0004",
+   "x": 1392.0,
+   "y": 236.0,
+   "detection_score": null,
+   "x_px": 1392.0,
+   "y_px": 236.0
+  },
+  {
+   "point_id": "LX0005",
+   "x": 872.0,
+   "y": 808.0,
+   "detection_score": null,
+   "x_px": 872.0,
+   "y_px": 808.0
+  },
+  {
+   "point_id": "LX0006",
+   "x": 1433.0,
+   "y": 251.0,
+   "detection_score": null,
+   "x_px": 1433.0,
+   "y_px": 251.0
+  },
+  {
+   "point_id": "LX0007",
+   "x": 1048.0,
+   "y": 332.0,
+   "detection_score": null,
+   "x_px": 1048.0,
+   "y_px": 332.0
+  },
+  {
+   "point_id": "LX0008",
+   "x": 575.0,
+   "y": 902.0,
+   "detection_score": null,
+   "x_px": 575.0,
+   "y_px": 902.0
+  },
+  {
+   "point_id": "LX0009",
+   "x": 284.0,
+   "y": 940.0,
+   "detection_score": null,
+   "x_px": 284.0,
+   "y_px": 940.0
+  },
+  {
+   "point_id": "LX0010",
+   "x": 352.0,
+   "y": 808.0,
+   "detection_score": null,
+   "x_px": 352.0,
+   "y_px": 808.0
+  },
+  {
+   "point_id": "LX0011",
+   "x": 1171.0,
+   "y": 311.0,
+   "detection_score": null,
+   "x_px": 1171.0,
+   "y_px": 311.0
+  },
+  {
+   "point_id": "LX0012",
+   "x": 430.0,
+   "y": 910.0,
+   "detection_score": null,
+   "x_px": 430.0,
+   "y_px": 910.0
+  },
+  {
+   "point_id": "LX0013",
+   "x": 1173.0,
+   "y": 222.0,
+   "detection_score": null,
+   "x_px": 1173.0,
+   "y_px": 222.0
+  },
+  {
+   "point_id": "LX0014",
+   "x": 704.0,
+   "y": 866.0,
+   "detection_score": null,
+   "x_px": 704.0,
+   "y_px": 866.0
+  },
+  {
+   "point_id": "LX0015",
+   "x": 920.0,
+   "y": 565.0,
+   "detection_score": null,
+   "x_px": 920.0,
+   "y_px": 565.0
+  },
+  {
+   "point_id": "LX0016",
+   "x": 1288.0,
+   "y": 263.0,
+   "detection_score": null,
+   "x_px": 1288.0,
+   "y_px": 263.0
+  },
+  {
+   "point_id": "LX0017",
+   "x": 627.0,
+   "y": 518.0,
+   "detection_score": null,
+   "x_px": 627.0,
+   "y_px": 518.0
+  },
+  {
+   "point_id": "LX0018",
+   "x": 1304.0,
+   "y": 238.0,
+   "detection_score": null,
+   "x_px": 1304.0,
+   "y_px": 238.0
+  },
+  {
+   "point_id": "LX0019",
+   "x": 800.0,
+   "y": 842.0,
+   "detection_score": null,
+   "x_px": 800.0,
+   "y_px": 842.0
+  },
+  {
+   "point_id": "LX0020",
+   "x": 1006.0,
+   "y": 600.0,
+   "detection_score": null,
+   "x_px": 1006.0,
+   "y_px": 600.0
+  },
+  {
+   "point_id": "LX0021",
+   "x": 471.0,
+   "y": 701.0,
+   "detection_score": null,
+   "x_px": 471.0,
+   "y_px": 701.0
+  },
+  {
+   "point_id": "LX0022",
+   "x": 692.0,
+   "y": 428.0,
+   "detection_score": null,
+   "x_px": 692.0,
+   "y_px": 428.0
+  },
+  {
+   "point_id": "LX0023",
+   "x": 345.0,
+   "y": 926.0,
+   "detection_score": null,
+   "x_px": 345.0,
+   "y_px": 926.0
+  },
+  {
+   "point_id": "LX0024",
+   "x": 976.0,
+   "y": 279.0,
+   "detection_score": null,
+   "x_px": 976.0,
+   "y_px": 279.0
+  },
+  {
+   "point_id": "LX0025",
+   "x": 803.0,
+   "y": 295.0,
+   "detection_score": null,
+   "x_px": 803.0,
+   "y_px": 295.0
+  },
+  {
+   "point_id": "LX0026",
+   "x": 1201.0,
+   "y": 240.0,
+   "detection_score": null,
+   "x_px": 1201.0,
+   "y_px": 240.0
+  },
+  {
+   "point_id": "LX0027",
+   "x": 605.0,
+   "y": 895.0,
+   "detection_score": null,
+   "x_px": 605.0,
+   "y_px": 895.0
+  },
+  {
+   "point_id": "LX0028",
+   "x": 1360.0,
+   "y": 257.0,
+   "detection_score": null,
+   "x_px": 1360.0,
+   "y_px": 257.0
+  },
+  {
+   "point_id": "LX0029",
+   "x": 1036.0,
+   "y": 503.0,
+   "detection_score": null,
+   "x_px": 1036.0,
+   "y_px": 503.0
+  },
+  {
+   "point_id": "LX0030",
+   "x": 388.0,
+   "y": 795.0,
+   "detection_score": null,
+   "x_px": 388.0,
+   "y_px": 795.0
+  },
+  {
+   "point_id": "LX0031",
+   "x": 944.0,
+   "y": 716.0,
+   "detection_score": null,
+   "x_px": 944.0,
+   "y_px": 716.0
+  },
+  {
+   "point_id": "LX0032",
+   "x": 1008.0,
+   "y": 432.0,
+   "detection_score": null,
+   "x_px": 1008.0,
+   "y_px": 432.0
+  },
+  {
+   "point_id": "LX0033",
+   "x": 396.0,
+   "y": 901.0,
+   "detection_score": null,
+   "x_px": 396.0,
+   "y_px": 901.0
+  },
+  {
+   "point_id": "LX0034",
+   "x": 708.0,
+   "y": 875.0,
+   "detection_score": null,
+   "x_px": 708.0,
+   "y_px": 875.0
+  },
+  {
+   "point_id": "LX0035",
+   "x": 1121.0,
+   "y": 256.0,
+   "detection_score": null,
+   "x_px": 1121.0,
+   "y_px": 256.0
+  },
+  {
+   "point_id": "LX0036",
+   "x": 1264.0,
+   "y": 247.0,
+   "detection_score": null,
+   "x_px": 1264.0,
+   "y_px": 247.0
+  },
+  {
+   "point_id": "LX0037",
+   "x": 951.0,
+   "y": 710.0,
+   "detection_score": null,
+   "x_px": 951.0,
+   "y_px": 710.0
+  },
+  {
+   "point_id": "LX0038",
+   "x": 513.0,
+   "y": 909.0,
+   "detection_score": null,
+   "x_px": 513.0,
+   "y_px": 909.0
+  },
+  {
+   "point_id": "LX0039",
+   "x": 443.0,
+   "y": 879.0,
+   "detection_score": null,
+   "x_px": 443.0,
+   "y_px": 879.0
+  },
+  {
+   "point_id": "LX0040",
+   "x": 655.0,
+   "y": 884.0,
+   "detection_score": null,
+   "x_px": 655.0,
+   "y_px": 884.0
+  },
+  {
+   "point_id": "LX0041",
+   "x": 855.0,
+   "y": 211.0,
+   "detection_score": null,
+   "x_px": 855.0,
+   "y_px": 211.0
+  },
+  {
+   "point_id": "LX0042",
+   "x": 1359.0,
+   "y": 245.0,
+   "detection_score": null,
+   "x_px": 1359.0,
+   "y_px": 245.0
+  },
+  {
+   "point_id": "LX0043",
+   "x": 521.0,
+   "y": 666.0,
+   "detection_score": null,
+   "x_px": 521.0,
+   "y_px": 666.0
+  },
+  {
+   "point_id": "LX0044",
+   "x": 1209.0,
+   "y": 301.0,
+   "detection_score": null,
+   "x_px": 1209.0,
+   "y_px": 301.0
+  },
+  {
+   "point_id": "LX0045",
+   "x": 768.0,
+   "y": 862.0,
+   "detection_score": null,
+   "x_px": 768.0,
+   "y_px": 862.0
+  },
+  {
+   "point_id": "LX0046",
+   "x": 1100.0,
+   "y": 412.0,
+   "detection_score": null,
+   "x_px": 1100.0,
+   "y_px": 412.0
+  },
+  {
+   "point_id": "LX0047",
+   "x": 791.0,
+   "y": 289.0,
+   "detection_score": null,
+   "x_px": 791.0,
+   "y_px": 289.0
+  },
+  {
+   "point_id": "LX0048",
+   "x": 905.0,
+   "y": 771.0,
+   "detection_score": null,
+   "x_px": 905.0,
+   "y_px": 771.0
+  },
+  {
+   "point_id": "LX0049",
+   "x": 317.0,
+   "y": 930.0,
+   "detection_score": null,
+   "x_px": 317.0,
+   "y_px": 930.0
+  },
+  {
+   "point_id": "LX0050",
+   "x": 1098.0,
+   "y": 239.0,
+   "detection_score": null,
+   "x_px": 1098.0,
+   "y_px": 239.0
+  },
+  {
+   "point_id": "LX0051",
+   "x": 602.0,
+   "y": 630.0,
+   "detection_score": null,
+   "x_px": 602.0,
+   "y_px": 630.0
+  },
+  {
+   "point_id": "LX0052",
+   "x": 583.0,
+   "y": 563.0,
+   "detection_score": null,
+   "x_px": 583.0,
+   "y_px": 563.0
+  },
+  {
+   "point_id": "LX0053",
+   "x": 1262.0,
+   "y": 255.0,
+   "detection_score": null,
+   "x_px": 1262.0,
+   "y_px": 255.0
+  },
+  {
+   "point_id": "LX0054",
+   "x": 296.0,
+   "y": 837.0,
+   "detection_score": null,
+   "x_px": 296.0,
+   "y_px": 837.0
+  },
+  {
+   "point_id": "LX0055",
+   "x": 984.0,
+   "y": 671.0,
+   "detection_score": null,
+   "x_px": 984.0,
+   "y_px": 671.0
+  },
+  {
+   "point_id": "LX0056",
+   "x": 762.0,
+   "y": 859.0,
+   "detection_score": null,
+   "x_px": 762.0,
+   "y_px": 859.0
+  },
+  {
+   "point_id": "LX0057",
+   "x": 744.0,
+   "y": 850.0,
+   "detection_score": null,
+   "x_px": 744.0,
+   "y_px": 850.0
+  },
+  {
+   "point_id": "LX0058",
+   "x": 851.0,
+   "y": 716.0,
+   "detection_score": null,
+   "x_px": 851.0,
+   "y_px": 716.0
+  },
+  {
+   "point_id": "LX0059",
+   "x": 437.0,
+   "y": 902.0,
+   "detection_score": null,
+   "x_px": 437.0,
+   "y_px": 902.0
+  },
+  {
+   "point_id": "LX0060",
+   "x": 531.0,
+   "y": 903.0,
+   "detection_score": null,
+   "x_px": 531.0,
+   "y_px": 903.0
+  },
+  {
+   "point_id": "LX0061",
+   "x": 403.0,
+   "y": 823.0,
+   "detection_score": null,
+   "x_px": 403.0,
+   "y_px": 823.0
+  },
+  {
+   "point_id": "LX0062",
+   "x": 300.0,
+   "y": 931.0,
+   "detection_score": null,
+   "x_px": 300.0,
+   "y_px": 931.0
+  },
+  {
+   "point_id": "LX0063",
+   "x": 644.0,
+   "y": 882.0,
+   "detection_score": null,
+   "x_px": 644.0,
+   "y_px": 882.0
+  }
+ ],
+ "raw_queries": [
+  {
+   "query_id": 0,
+   "x": 270,
+   "y": 824,
+   "score": null,
+   "normalized_x": 0.14827050268650055,
+   "normalized_y": 0.677200973033905,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 1,
+   "x": 1039,
+   "y": 514,
+   "score": null,
+   "normalized_x": 0.569994330406189,
+   "normalized_y": 0.4227079153060913,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 2,
+   "x": 549,
+   "y": 894,
+   "score": null,
+   "normalized_x": 0.3015054166316986,
+   "normalized_y": 0.7345874309539795,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 3,
+   "x": 764,
+   "y": 297,
+   "score": null,
+   "normalized_x": 0.41937634348869324,
+   "normalized_y": 0.24429327249526978,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 4,
+   "x": 1392,
+   "y": 236,
+   "score": null,
+   "normalized_x": 0.763291597366333,
+   "normalized_y": 0.193902388215065,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 5,
+   "x": 872,
+   "y": 808,
+   "score": null,
+   "normalized_x": 0.4781189262866974,
+   "normalized_y": 0.6637067794799805,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 6,
+   "x": 1433,
+   "y": 251,
+   "score": null,
+   "normalized_x": 0.7856931090354919,
+   "normalized_y": 0.2066303938627243,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 7,
+   "x": 1048,
+   "y": 332,
+   "score": null,
+   "normalized_x": 0.5746420621871948,
+   "normalized_y": 0.2728404402732849,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 8,
+   "x": 575,
+   "y": 902,
+   "score": null,
+   "normalized_x": 0.3157845139503479,
+   "normalized_y": 0.7410581707954407,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 9,
+   "x": 284,
+   "y": 940,
+   "score": null,
+   "normalized_x": 0.15599869191646576,
+   "normalized_y": 0.7723513841629028,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 10,
+   "x": 352,
+   "y": 808,
+   "score": null,
+   "normalized_x": 0.19319215416908264,
+   "normalized_y": 0.6636914014816284,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 11,
+   "x": 1171,
+   "y": 311,
+   "score": null,
+   "normalized_x": 0.6425366997718811,
+   "normalized_y": 0.2556707561016083,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 12,
+   "x": 430,
+   "y": 910,
+   "score": null,
+   "normalized_x": 0.23583756387233734,
+   "normalized_y": 0.747803807258606,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 13,
+   "x": 1173,
+   "y": 222,
+   "score": null,
+   "normalized_x": 0.6436337232589722,
+   "normalized_y": 0.18262678384780884,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 14,
+   "x": 704,
+   "y": 866,
+   "score": null,
+   "normalized_x": 0.38634830713272095,
+   "normalized_y": 0.7117576599121094,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 15,
+   "x": 920,
+   "y": 565,
+   "score": null,
+   "normalized_x": 0.5046989321708679,
+   "normalized_y": 0.46466076374053955,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 16,
+   "x": 1288,
+   "y": 263,
+   "score": null,
+   "normalized_x": 0.7062939405441284,
+   "normalized_y": 0.216358482837677,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 17,
+   "x": 627,
+   "y": 518,
+   "score": null,
+   "normalized_x": 0.34413468837738037,
+   "normalized_y": 0.4255441129207611,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 18,
+   "x": 1304,
+   "y": 238,
+   "score": null,
+   "normalized_x": 0.7149739265441895,
+   "normalized_y": 0.19605208933353424,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 19,
+   "x": 800,
+   "y": 842,
+   "score": null,
+   "normalized_x": 0.4390876889228821,
+   "normalized_y": 0.6913147568702698,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 20,
+   "x": 1006,
+   "y": 600,
+   "score": null,
+   "normalized_x": 0.5520508289337158,
+   "normalized_y": 0.49305957555770874,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 21,
+   "x": 471,
+   "y": 701,
+   "score": null,
+   "normalized_x": 0.2585032284259796,
+   "normalized_y": 0.5757285356521606,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 22,
+   "x": 692,
+   "y": 428,
+   "score": null,
+   "normalized_x": 0.37939348816871643,
+   "normalized_y": 0.3519677519798279,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 23,
+   "x": 345,
+   "y": 926,
+   "score": null,
+   "normalized_x": 0.1895933896303177,
+   "normalized_y": 0.7607686519622803,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 24,
+   "x": 976,
+   "y": 279,
+   "score": null,
+   "normalized_x": 0.5353780388832092,
+   "normalized_y": 0.2292463481426239,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 25,
+   "x": 803,
+   "y": 295,
+   "score": null,
+   "normalized_x": 0.44042372703552246,
+   "normalized_y": 0.24298223853111267,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 26,
+   "x": 1201,
+   "y": 240,
+   "score": null,
+   "normalized_x": 0.6587502360343933,
+   "normalized_y": 0.19773352146148682,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 27,
+   "x": 605,
+   "y": 895,
+   "score": null,
+   "normalized_x": 0.3321225345134735,
+   "normalized_y": 0.7353724241256714,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 28,
+   "x": 1360,
+   "y": 257,
+   "score": null,
+   "normalized_x": 0.7456557154655457,
+   "normalized_y": 0.21156880259513855,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 29,
+   "x": 1036,
+   "y": 503,
+   "score": null,
+   "normalized_x": 0.5684694647789001,
+   "normalized_y": 0.4129805564880371,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 30,
+   "x": 388,
+   "y": 795,
+   "score": null,
+   "normalized_x": 0.21324129402637482,
+   "normalized_y": 0.653226375579834,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 31,
+   "x": 944,
+   "y": 716,
+   "score": null,
+   "normalized_x": 0.517742395401001,
+   "normalized_y": 0.5882734060287476,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 32,
+   "x": 1008,
+   "y": 432,
+   "score": null,
+   "normalized_x": 0.5530921816825867,
+   "normalized_y": 0.355163037776947,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 33,
+   "x": 396,
+   "y": 901,
+   "score": null,
+   "normalized_x": 0.21729344129562378,
+   "normalized_y": 0.7402212619781494,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 34,
+   "x": 708,
+   "y": 875,
+   "score": null,
+   "normalized_x": 0.388700932264328,
+   "normalized_y": 0.7186896800994873,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 35,
+   "x": 1121,
+   "y": 256,
+   "score": null,
+   "normalized_x": 0.6146329641342163,
+   "normalized_y": 0.2107851505279541,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 36,
+   "x": 1264,
+   "y": 247,
+   "score": null,
+   "normalized_x": 0.693478524684906,
+   "normalized_y": 0.20337581634521484,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 37,
+   "x": 951,
+   "y": 710,
+   "score": null,
+   "normalized_x": 0.5217309594154358,
+   "normalized_y": 0.5829530954360962,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 38,
+   "x": 513,
+   "y": 909,
+   "score": null,
+   "normalized_x": 0.28169116377830505,
+   "normalized_y": 0.7463372945785522,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 39,
+   "x": 443,
+   "y": 879,
+   "score": null,
+   "normalized_x": 0.24310611188411713,
+   "normalized_y": 0.7219498753547668,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 40,
+   "x": 655,
+   "y": 884,
+   "score": null,
+   "normalized_x": 0.3594752550125122,
+   "normalized_y": 0.7258549928665161,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 41,
+   "x": 855,
+   "y": 211,
+   "score": null,
+   "normalized_x": 0.4687683582305908,
+   "normalized_y": 0.17335228621959686,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 42,
+   "x": 1359,
+   "y": 245,
+   "score": null,
+   "normalized_x": 0.7452186942100525,
+   "normalized_y": 0.2012248933315277,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 43,
+   "x": 521,
+   "y": 666,
+   "score": null,
+   "normalized_x": 0.28576797246932983,
+   "normalized_y": 0.5475237369537354,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 44,
+   "x": 1209,
+   "y": 301,
+   "score": null,
+   "normalized_x": 0.6628820896148682,
+   "normalized_y": 0.24749726057052612,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 45,
+   "x": 768,
+   "y": 862,
+   "score": null,
+   "normalized_x": 0.4213261008262634,
+   "normalized_y": 0.7077484726905823,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 46,
+   "x": 1100,
+   "y": 412,
+   "score": null,
+   "normalized_x": 0.6035780310630798,
+   "normalized_y": 0.3389100432395935,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 47,
+   "x": 791,
+   "y": 289,
+   "score": null,
+   "normalized_x": 0.4337898790836334,
+   "normalized_y": 0.23741894960403442,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 48,
+   "x": 905,
+   "y": 771,
+   "score": null,
+   "normalized_x": 0.4964655041694641,
+   "normalized_y": 0.6334566473960876,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 49,
+   "x": 317,
+   "y": 930,
+   "score": null,
+   "normalized_x": 0.17400160431861877,
+   "normalized_y": 0.7641827464103699,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 50,
+   "x": 1098,
+   "y": 239,
+   "score": null,
+   "normalized_x": 0.6020055413246155,
+   "normalized_y": 0.1964343637228012,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 51,
+   "x": 602,
+   "y": 630,
+   "score": null,
+   "normalized_x": 0.3305380046367645,
+   "normalized_y": 0.5174700021743774,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 52,
+   "x": 583,
+   "y": 563,
+   "score": null,
+   "normalized_x": 0.3196863532066345,
+   "normalized_y": 0.4626403748989105,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 53,
+   "x": 1262,
+   "y": 255,
+   "score": null,
+   "normalized_x": 0.6923701763153076,
+   "normalized_y": 0.2096521556377411,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 54,
+   "x": 296,
+   "y": 837,
+   "score": null,
+   "normalized_x": 0.16277362406253815,
+   "normalized_y": 0.6872918009757996,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 55,
+   "x": 984,
+   "y": 671,
+   "score": null,
+   "normalized_x": 0.5394875407218933,
+   "normalized_y": 0.551099419593811,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 56,
+   "x": 762,
+   "y": 859,
+   "score": null,
+   "normalized_x": 0.4183098375797272,
+   "normalized_y": 0.7060197591781616,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 57,
+   "x": 744,
+   "y": 850,
+   "score": null,
+   "normalized_x": 0.40799787640571594,
+   "normalized_y": 0.6985407471656799,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 58,
+   "x": 851,
+   "y": 716,
+   "score": null,
+   "normalized_x": 0.4666285216808319,
+   "normalized_y": 0.5886046290397644,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 59,
+   "x": 437,
+   "y": 902,
+   "score": null,
+   "normalized_x": 0.23987480998039246,
+   "normalized_y": 0.7411277890205383,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 60,
+   "x": 531,
+   "y": 903,
+   "score": null,
+   "normalized_x": 0.2913550138473511,
+   "normalized_y": 0.741685152053833,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 61,
+   "x": 403,
+   "y": 823,
+   "score": null,
+   "normalized_x": 0.22121058404445648,
+   "normalized_y": 0.6759953498840332,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 62,
+   "x": 300,
+   "y": 931,
+   "score": null,
+   "normalized_x": 0.16456496715545654,
+   "normalized_y": 0.7647309899330139,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 63,
+   "x": 644,
+   "y": 882,
+   "score": null,
+   "normalized_x": 0.35313382744789124,
+   "normalized_y": 0.7246677279472351,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  }
+ ],
+ "head_status": "completed",
+ "implementation_choices": {
+  "keypoints": "Official 64-query L+D checkpoint and background gate",
+  "grouping": "Same official learned Siamese matcher as ChartParser paper, no histogram override."
+ },
+ "limitations": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ],
+ "shared_legend_status": "available",
+ "shared_legend_reason": null,
+ "shared_legends_sha256": "6fa2b42187ab3607cb268efea89cfd4f540829d3e6697bb87c8014c811196a5a",
+ "warnings": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ]
+}

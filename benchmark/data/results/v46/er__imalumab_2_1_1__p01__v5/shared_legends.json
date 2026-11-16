@@ -1,0 +1,157 @@
+{
+ "panel_id": "er__imalumab_2_1_1__p01__v5",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    718,
+    221,
+    782,
+    261
+   ],
+   "native_body_bbox": [
+    732,
+    223,
+    768,
+    259
+   ],
+   "class_name": "open_circle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s02",
+   "label": "C3 (neg. control)",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__imalumab_2_1_1__p01__v5/shared_legend_crops/legend_01.png",
+   "image_size": [
+    64,
+    40
+   ],
+   "sha256": "5533371e3cf012c9ff64607f036e172a8d718962ff55298b15e3b6e48bfde36b",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__imalumab_2_1_1__p01__v5/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    718,
+    221,
+    782,
+    261
+   ],
+   "bbox_original": [
+    718,
+    221,
+    782,
+    261
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    718,
+    362,
+    782,
+    398
+   ],
+   "native_body_bbox": [
+    734,
+    364,
+    767,
+    396
+   ],
+   "class_name": "filled_circle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "Bax94",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__imalumab_2_1_1__p01__v5/shared_legend_crops/legend_02.png",
+   "image_size": [
+    64,
+    36
+   ],
+   "sha256": "ad6da228bf4804895d6862f0552dd9a7f1d5eaa8c4edc0876b7edc93d1d97dda",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__imalumab_2_1_1__p01__v5/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    718,
+    362,
+    782,
+    398
+   ],
+   "bbox_original": [
+    718,
+    362,
+    782,
+    398
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s02",
+  "S02": "s01"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.64,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.6785225718194254,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s02",
+   "label": "C3 (neg. control)",
+   "bbox": [
+    708,
+    224,
+    792,
+    256
+   ]
+  },
+  {
+   "series_id": "s01",
+   "label": "Bax94",
+   "bbox": [
+    708,
+    364,
+    792,
+    395
+   ]
+  }
+ ],
+ "input_sha256": "3fac01b4995c6d4da4d793b92432c20f0278cc46b3509a7ca49aadb93789c9bd",
+ "source_sha256": "3fac01b4995c6d4da4d793b92432c20f0278cc46b3509a7ca49aadb93789c9bd",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.013629799999762326
+}

@@ -1,0 +1,89 @@
+{
+ "panel_id": "pk__latozinemab1__p02__v4",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "color02",
+   "native_swatch_id": "S01",
+   "bbox": [
+    221,
+    308,
+    262,
+    325
+   ],
+   "native_body_bbox": [
+    236,
+    311,
+    249,
+    322
+   ],
+   "class_name": "filled_circle",
+   "rgb": [
+    173,
+    95,
+    171
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s01",
+   "label": "60 mg/kg",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__latozinemab1__p02__v4/shared_legend_crops/legend_01.png",
+   "image_size": [
+    41,
+    17
+   ],
+   "sha256": "12646a3e022250ece8939d4b24d84373ae94395f7ce3bb48c13e02fd75fa9bbe",
+   "source_native_legend_id": "color02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__latozinemab1__p02__v4/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    221,
+    308,
+    262,
+    325
+   ],
+   "bbox_original": [
+    221,
+    308,
+    262,
+    325
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "color02": "s01"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "color02",
+    "series_id": "s01",
+    "iou": 0.5882352941176471,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "60 mg/kg",
+   "bbox": [
+    221,
+    311,
+    262,
+    321
+   ]
+  }
+ ],
+ "input_sha256": "decce0c435051fd3bc85bc2a2f730d687941745df42c1eb9b10c2813284204de",
+ "source_sha256": "decce0c435051fd3bc85bc2a2f730d687941745df42c1eb9b10c2813284204de",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.0028735999949276447
+}

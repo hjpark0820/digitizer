@@ -1,0 +1,108 @@
+{
+ "panel_id": "er__datopotamab_deruxtecan_1_1_0__p02__v8",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "Control ADC",
+   "bbox": [
+    953,
+    1000,
+    1035,
+    1024
+   ],
+   "bbox_crop": [
+    953,
+    1000,
+    1035,
+    1024
+   ],
+   "bbox_original": [
+    953,
+    1000,
+    1035,
+    1024
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__datopotamab_deruxtecan_1_1_0__p02__v8/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__datopotamab_deruxtecan_1_1_0__p02__v8/shared_legend_crops/legend_01.png",
+   "image_size": [
+    82,
+    24
+   ],
+   "sha256": "b36e003d1dce1322a77f044633954e49c135461aa4afa0fd8217633fc92f1409",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "Dato-DXd",
+   "bbox": [
+    953,
+    1091,
+    1034,
+    1115
+   ],
+   "bbox_crop": [
+    953,
+    1091,
+    1034,
+    1115
+   ],
+   "bbox_original": [
+    953,
+    1091,
+    1034,
+    1115
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__datopotamab_deruxtecan_1_1_0__p02__v8/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__datopotamab_deruxtecan_1_1_0__p02__v8/shared_legend_crops/legend_02.png",
+   "image_size": [
+    81,
+    24
+   ],
+   "sha256": "0e1a263cadc8e74462131923598b13b58a26ef779cbe4c34e2ea94001302216e",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s01": "s01",
+  "s02": "s02"
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Control ADC",
+   "bbox": [
+    953,
+    1000,
+    1035,
+    1024
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Dato-DXd",
+   "bbox": [
+    953,
+    1091,
+    1034,
+    1115
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "d36ff739b9367d0c55c5031632fccf6ef8e4ade8c328ac35fdef679088c66576",
+ "source_sha256": "d36ff739b9367d0c55c5031632fccf6ef8e4ade8c328ac35fdef679088c66576",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}

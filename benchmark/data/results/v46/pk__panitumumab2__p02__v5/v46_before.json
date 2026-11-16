@@ -1,0 +1,30 @@
+{
+  "panel_id": "pk__panitumumab2__p02__v5",
+  "model": "v46_before",
+  "method": "v46_before",
+  "status": "failed",
+  "reason": "RuntimeError: Detection CLI exited 1",
+  "predictions": [],
+  "coordinate_convention": "full original image pixel centers; crop translation added exactly once",
+  "score_note": "Native export may omit confidence; null is unavailable, not zero. No score threshold added.",
+  "input_sha256": "f16e2ffc63acc90b2fcc253a34844dc08c4aa632fbade1075285b64ae9edc57a",
+  "source_sha256": "f16e2ffc63acc90b2fcc253a34844dc08c4aa632fbade1075285b64ae9edc57a",
+  "timing": {
+    "input_verification_seconds": 0.0031826000194996595,
+    "detection_process_seconds": 4.07158819999313,
+    "total_wall_seconds": 4.086131000018213,
+    "native": {
+      "shared_legend_seconds": null,
+      "shared_legend_timing_note": "No complete native legend timing available; not estimated.",
+      "model_load_seconds": null,
+      "model_load_timing_note": "BW native imports/backend initialization, included in process wall time; colour unavailable, not zero.",
+      "timing_wrapper": {
+        "shared_legend_seconds": null,
+        "legend_calls": 0,
+        "module_preload_seconds": 0.0,
+        "wrapper": "perf_counter around original LegendRuntime.prepare; unchanged args and return value",
+        "native_cli_seconds": 3.127178599999752
+      }
+    }
+  }
+}

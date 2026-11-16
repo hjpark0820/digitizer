@@ -1,0 +1,78 @@
+{
+  "panel_id": "er__mirikizumab_2_1_0__p03__v9",
+  "model": "v46_before",
+  "method": "v46_before",
+  "status": "completed",
+  "reason": "",
+  "predictions": [
+    {
+      "point_id": "v46_before_color02_0001",
+      "x_px": 241.0,
+      "y_px": 1191.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "color02",
+      "crop_x_px": 241.0,
+      "crop_y_px": 1191.0
+    },
+    {
+      "point_id": "v46_before_color02_0002",
+      "x_px": 367.0,
+      "y_px": 1027.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "color02",
+      "crop_x_px": 367.0,
+      "crop_y_px": 1027.0
+    },
+    {
+      "point_id": "v46_before_color02_0003",
+      "x_px": 633.0,
+      "y_px": 949.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "color02",
+      "crop_x_px": 633.0,
+      "crop_y_px": 949.0
+    },
+    {
+      "point_id": "v46_before_color02_0004",
+      "x_px": 1018.0,
+      "y_px": 1041.0,
+      "series_id": "s01",
+      "score": null,
+      "native_series_id": "color02",
+      "crop_x_px": 1018.0,
+      "crop_y_px": 1041.0
+    }
+  ],
+  "coordinate_convention": "full original image pixel centers; crop translation added exactly once",
+  "score_note": "Native export may omit confidence; null is unavailable, not zero. No score threshold added.",
+  "input_sha256": "9ec6f8ffb5ca54aaef8b4a7ff2ba5c79167e38c6cb5727f7ee1f9a86a5d79729",
+  "source_sha256": "9ec6f8ffb5ca54aaef8b4a7ff2ba5c79167e38c6cb5727f7ee1f9a86a5d79729",
+  "timing": {
+    "input_verification_seconds": 0.022250099980738014,
+    "detection_process_seconds": 20.544183499994688,
+    "legend_crop_export_seconds": 0.006278099986957386,
+    "total_wall_seconds": 20.5942227000196,
+    "native": {
+      "shared_legend_seconds": 9.017864499997813,
+      "shared_legend_timing_note": "BW native timer or transparent colour LegendRuntime.prepare timer; included in detection process wall time.",
+      "model_load_seconds": null,
+      "model_load_timing_note": "BW native imports/backend initialization, included in process wall time; colour unavailable, not zero.",
+      "timing_wrapper": {
+        "shared_legend_seconds": 9.017864499997813,
+        "legend_calls": 1,
+        "module_preload_seconds": 0.1346412999846507,
+        "wrapper": "perf_counter around original LegendRuntime.prepare; unchanged args and return value",
+        "native_cli_seconds": 19.687797099992167
+      },
+      "color_marker_stage_seconds": 6.105601299990667,
+      "color_marker_analysis_timing": {
+        "proposals_seconds": 0.6594414999999572,
+        "window_seconds": 0.24230279991752468,
+        "analysis_seconds": 0.9046151000075042
+      }
+    }
+  }
+}

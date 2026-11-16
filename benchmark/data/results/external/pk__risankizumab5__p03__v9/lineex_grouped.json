@@ -1,0 +1,3740 @@
+{
+ "version": "external_shared_input_benchmark_v1",
+ "panel_id": "pk__risankizumab5__p03__v9",
+ "modality": "color",
+ "method": "lineex_grouped",
+ "status": "completed",
+ "coordinate_system": "x_px/y_px = full original unrotated image pixels; x/y = shared native crop pixels",
+ "image_path": "data/images\\pk__risankizumab5__p03__v9.png",
+ "input_sha256": "42a21b3784285907d47f291d16b4fec06199e475eaf6b75c471834ab9fad70dc",
+ "source_image_path": "data/images\\pk__risankizumab5__p03__v9.png",
+ "source_sha256": "42a21b3784285907d47f291d16b4fec06199e475eaf6b75c471834ab9fad70dc",
+ "crop_box_original": [
+  0,
+  0,
+  698,
+  519
+ ],
+ "plot_box": [
+  123.0,
+  40.0,
+  681.0,
+  432.0
+ ],
+ "legend_box": [
+  349.0,
+  69.0,
+  586.0,
+  127.0
+ ],
+ "legends": [
+  {
+   "legend_index": 0,
+   "series_id": "s01",
+   "label": "300 mg SC Japanese (N = 6)",
+   "source_native_legend_id": "color02",
+   "box_input": [
+    349,
+    69,
+    382,
+    87
+   ],
+   "box_original": [
+    349,
+    69,
+    382,
+    87
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__risankizumab5__p03__v9/shared_legend_crops/legend_01.png",
+   "crop_sha256": "9f6e5a4f27734ef34c7dd8da780b55b7aaa232c53f9b494f35e59e2ea9260045",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/pk__risankizumab5__p03__v9/shared_legends.json",
+   "shared_legends_sha256": "b448d28211c865b835dec9905af89c1369bc816211f75edd1838cf98b068787a",
+   "mapping_provenance": {
+    "color02": "s01",
+    "color03": "s02",
+    "color04": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 1,
+   "series_id": "s02",
+   "label": "300 mg SC Chinese (N = 6)",
+   "source_native_legend_id": "color03",
+   "box_input": [
+    349,
+    86,
+    382,
+    107
+   ],
+   "box_original": [
+    349,
+    86,
+    382,
+    107
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__risankizumab5__p03__v9/shared_legend_crops/legend_02.png",
+   "crop_sha256": "b1221965c91928956ad547843fae2b2119c6b1ae4a442a759ac70674504e2666",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/pk__risankizumab5__p03__v9/shared_legends.json",
+   "shared_legends_sha256": "b448d28211c865b835dec9905af89c1369bc816211f75edd1838cf98b068787a",
+   "mapping_provenance": {
+    "color02": "s01",
+    "color03": "s02",
+    "color04": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  },
+  {
+   "legend_index": 2,
+   "series_id": "s03",
+   "label": "300 mg SC Caucasian (N = 6)",
+   "source_native_legend_id": "color04",
+   "box_input": [
+    349,
+    106,
+    382,
+    127
+   ],
+   "box_original": [
+    349,
+    106,
+    382,
+    127
+   ],
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__risankizumab5__p03__v9/shared_legend_crops/legend_03.png",
+   "crop_sha256": "31910349a09c9b8eedb7deaec6991700d469e24685927f9bf540d01a4ec0c143",
+   "shape_label": null,
+   "shared_legends_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/v46/pk__risankizumab5__p03__v9/shared_legends.json",
+   "shared_legends_sha256": "b448d28211c865b835dec9905af89c1369bc816211f75edd1838cf98b068787a",
+   "mapping_provenance": {
+    "color02": "s01",
+    "color03": "s02",
+    "color04": "s03"
+   },
+   "provenance": "Shared actual observed v46 legend source-pixel crop; no template pixels or v46 marker coordinates used. IDs supplied by bbox-only mapping."
+  }
+ ],
+ "predictions": [
+  {
+   "point_id": "LX0000",
+   "x": 155.0,
+   "y": 160.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8956282138824463,
+   "winning_similarity": 0.8956282138824463,
+   "similarities": [
+    0.030120765790343285,
+    0.8956282138824463,
+    0.5813311338424683
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0000.png",
+   "patch_box_input": [
+    135,
+    150,
+    175,
+    170
+   ],
+   "x_px": 155.0,
+   "y_px": 160.0
+  },
+  {
+   "point_id": "LX0001",
+   "x": 441.0,
+   "y": 358.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.21529151499271393,
+   "winning_similarity": 0.21529151499271393,
+   "similarities": [
+    0.00623210659250617,
+    0.21529151499271393,
+    0.1764649897813797
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0001.png",
+   "patch_box_input": [
+    421,
+    348,
+    461,
+    368
+   ],
+   "x_px": 441.0,
+   "y_px": 358.0
+  },
+  {
+   "point_id": "LX0002",
+   "x": 358.0,
+   "y": 301.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.2044191062450409,
+   "winning_similarity": 0.2044191062450409,
+   "similarities": [
+    0.2044191062450409,
+    0.011555622331798077,
+    0.1620515137910843
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0002.png",
+   "patch_box_input": [
+    338,
+    291,
+    378,
+    311
+   ],
+   "x_px": 358.0,
+   "y_px": 301.0
+  },
+  {
+   "point_id": "LX0003",
+   "x": 441.0,
+   "y": 348.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8367812037467957,
+   "winning_similarity": 0.8367812037467957,
+   "similarities": [
+    0.01241474412381649,
+    0.4109572768211365,
+    0.8367812037467957
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0003.png",
+   "patch_box_input": [
+    421,
+    338,
+    461,
+    358
+   ],
+   "x_px": 441.0,
+   "y_px": 348.0
+  },
+  {
+   "point_id": "LX0004",
+   "x": 664.0,
+   "y": 397.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9573454260826111,
+   "winning_similarity": 0.9573454260826111,
+   "similarities": [
+    0.003203267464414239,
+    0.9573454260826111,
+    0.10647936910390854
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0004.png",
+   "patch_box_input": [
+    644,
+    387,
+    684,
+    407
+   ],
+   "x_px": 664.0,
+   "y_px": 397.0
+  },
+  {
+   "point_id": "LX0005",
+   "x": 366.0,
+   "y": 318.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9008225202560425,
+   "winning_similarity": 0.9008225202560425,
+   "similarities": [
+    0.017165137454867363,
+    0.5859047174453735,
+    0.9008225202560425
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0005.png",
+   "patch_box_input": [
+    346,
+    308,
+    386,
+    328
+   ],
+   "x_px": 366.0,
+   "y_px": 318.0
+  },
+  {
+   "point_id": "LX0006",
+   "x": 660.0,
+   "y": 405.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.6456948518753052,
+   "winning_similarity": 0.6456948518753052,
+   "similarities": [
+    0.6456948518753052,
+    0.48599082231521606,
+    0.2607843577861786
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0006.png",
+   "patch_box_input": [
+    640,
+    395,
+    680,
+    415
+   ],
+   "x_px": 660.0,
+   "y_px": 405.0
+  },
+  {
+   "point_id": "LX0007",
+   "x": 519.0,
+   "y": 371.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8918730020523071,
+   "winning_similarity": 0.8918730020523071,
+   "similarities": [
+    0.08175917714834213,
+    0.47763189673423767,
+    0.8918730020523071
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0007.png",
+   "patch_box_input": [
+    499,
+    361,
+    539,
+    381
+   ],
+   "x_px": 519.0,
+   "y_px": 371.0
+  },
+  {
+   "point_id": "LX0008",
+   "x": 258.0,
+   "y": 223.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8204349279403687,
+   "winning_similarity": 0.8204349279403687,
+   "similarities": [
+    0.06221170350909233,
+    0.8204349279403687,
+    0.5088591575622559
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0008.png",
+   "patch_box_input": [
+    238,
+    213,
+    278,
+    233
+   ],
+   "x_px": 258.0,
+   "y_px": 223.0
+  },
+  {
+   "point_id": "LX0009",
+   "x": 154.0,
+   "y": 165.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.928400456905365,
+   "winning_similarity": 0.928400456905365,
+   "similarities": [
+    0.0058814953081309795,
+    0.928400456905365,
+    0.2742558717727661
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0009.png",
+   "patch_box_input": [
+    134,
+    155,
+    174,
+    175
+   ],
+   "x_px": 154.0,
+   "y_px": 165.0
+  },
+  {
+   "point_id": "LX0010",
+   "x": 204.0,
+   "y": 132.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.1532425880432129,
+   "winning_similarity": 0.1532425880432129,
+   "similarities": [
+    0.032089609652757645,
+    0.021725300699472427,
+    0.1532425880432129
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0010.png",
+   "patch_box_input": [
+    184,
+    122,
+    224,
+    142
+   ],
+   "x_px": 204.0,
+   "y_px": 132.0
+  },
+  {
+   "point_id": "LX0011",
+   "x": 481.0,
+   "y": 372.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.2288765162229538,
+   "winning_similarity": 0.2288765162229538,
+   "similarities": [
+    0.0011252707336097956,
+    0.11413604766130447,
+    0.2288765162229538
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0011.png",
+   "patch_box_input": [
+    461,
+    362,
+    501,
+    382
+   ],
+   "x_px": 481.0,
+   "y_px": 372.0
+  },
+  {
+   "point_id": "LX0012",
+   "x": 141.0,
+   "y": 425.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.2425970435142517,
+   "winning_similarity": 0.2425970435142517,
+   "similarities": [
+    0.0019819613080471754,
+    0.2425970435142517,
+    0.11975724250078201
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0012.png",
+   "patch_box_input": [
+    121,
+    415,
+    161,
+    435
+   ],
+   "x_px": 141.0,
+   "y_px": 425.0
+  },
+  {
+   "point_id": "LX0013",
+   "x": 586.0,
+   "y": 375.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.045163433998823166,
+   "winning_similarity": 0.045163433998823166,
+   "similarities": [
+    0.0011403722455725074,
+    0.008260839618742466,
+    0.045163433998823166
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0013.png",
+   "patch_box_input": [
+    566,
+    365,
+    606,
+    385
+   ],
+   "x_px": 586.0,
+   "y_px": 375.0
+  },
+  {
+   "point_id": "LX0014",
+   "x": 257.0,
+   "y": 239.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9288524985313416,
+   "winning_similarity": 0.9288524985313416,
+   "similarities": [
+    0.016322394832968712,
+    0.2001744508743286,
+    0.9288524985313416
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0014.png",
+   "patch_box_input": [
+    237,
+    229,
+    277,
+    249
+   ],
+   "x_px": 257.0,
+   "y_px": 239.0
+  },
+  {
+   "point_id": "LX0015",
+   "x": 596.0,
+   "y": 384.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8790058493614197,
+   "winning_similarity": 0.8790058493614197,
+   "similarities": [
+    0.14002402126789093,
+    0.619891881942749,
+    0.8790058493614197
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0015.png",
+   "patch_box_input": [
+    576,
+    374,
+    616,
+    394
+   ],
+   "x_px": 596.0,
+   "y_px": 384.0
+  },
+  {
+   "point_id": "LX0016",
+   "x": 588.0,
+   "y": 385.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.493496298789978,
+   "winning_similarity": 0.493496298789978,
+   "similarities": [
+    0.11992201209068298,
+    0.493496298789978,
+    0.433967262506485
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0016.png",
+   "patch_box_input": [
+    568,
+    375,
+    608,
+    395
+   ],
+   "x_px": 588.0,
+   "y_px": 385.0
+  },
+  {
+   "point_id": "LX0017",
+   "x": 371.0,
+   "y": 309.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.49553507566452026,
+   "winning_similarity": 0.49553507566452026,
+   "similarities": [
+    0.0029083925765007734,
+    0.24360482394695282,
+    0.49553507566452026
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0017.png",
+   "patch_box_input": [
+    351,
+    299,
+    391,
+    319
+   ],
+   "x_px": 371.0,
+   "y_px": 309.0
+  },
+  {
+   "point_id": "LX0018",
+   "x": 668.0,
+   "y": 392.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8710616230964661,
+   "winning_similarity": 0.8710616230964661,
+   "similarities": [
+    0.00169042416382581,
+    0.8710616230964661,
+    0.38159605860710144
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0018.png",
+   "patch_box_input": [
+    648,
+    382,
+    688,
+    402
+   ],
+   "x_px": 668.0,
+   "y_px": 392.0
+  },
+  {
+   "point_id": "LX0019",
+   "x": 306.0,
+   "y": 266.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.46249496936798096,
+   "winning_similarity": 0.46249496936798096,
+   "similarities": [
+    0.1142311841249466,
+    0.21509180963039398,
+    0.46249496936798096
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0019.png",
+   "patch_box_input": [
+    286,
+    256,
+    326,
+    276
+   ],
+   "x_px": 306.0,
+   "y_px": 266.0
+  },
+  {
+   "point_id": "LX0020",
+   "x": 368.0,
+   "y": 326.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8719976544380188,
+   "winning_similarity": 0.8719976544380188,
+   "similarities": [
+    0.0014427517307922244,
+    0.8719976544380188,
+    0.14039649069309235
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0020.png",
+   "patch_box_input": [
+    348,
+    316,
+    388,
+    336
+   ],
+   "x_px": 368.0,
+   "y_px": 326.0
+  },
+  {
+   "point_id": "LX0021",
+   "x": 252.0,
+   "y": 229.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.5057864189147949,
+   "winning_similarity": 0.5057864189147949,
+   "similarities": [
+    0.41642311215400696,
+    0.15888696908950806,
+    0.5057864189147949
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0021.png",
+   "patch_box_input": [
+    232,
+    219,
+    272,
+    239
+   ],
+   "x_px": 252.0,
+   "y_px": 229.0
+  },
+  {
+   "point_id": "LX0022",
+   "x": 445.0,
+   "y": 350.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8304075002670288,
+   "winning_similarity": 0.8304075002670288,
+   "similarities": [
+    0.012999770231544971,
+    0.4587273597717285,
+    0.8304075002670288
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0022.png",
+   "patch_box_input": [
+    425,
+    340,
+    465,
+    360
+   ],
+   "x_px": 445.0,
+   "y_px": 350.0
+  },
+  {
+   "point_id": "LX0023",
+   "x": 146.0,
+   "y": 384.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.48346203565597534,
+   "winning_similarity": 0.48346203565597534,
+   "similarities": [
+    0.00013797817518934608,
+    0.48346203565597534,
+    0.23180216550827026
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0023.png",
+   "patch_box_input": [
+    126,
+    374,
+    166,
+    394
+   ],
+   "x_px": 146.0,
+   "y_px": 384.0
+  },
+  {
+   "point_id": "LX0024",
+   "x": 545.0,
+   "y": 371.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.5295601487159729,
+   "winning_similarity": 0.5295601487159729,
+   "similarities": [
+    0.029319286346435547,
+    0.5136637687683105,
+    0.5295601487159729
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0024.png",
+   "patch_box_input": [
+    525,
+    361,
+    565,
+    381
+   ],
+   "x_px": 545.0,
+   "y_px": 371.0
+  },
+  {
+   "point_id": "LX0025",
+   "x": 366.0,
+   "y": 309.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8362150192260742,
+   "winning_similarity": 0.8362150192260742,
+   "similarities": [
+    0.025685282424092293,
+    0.14716094732284546,
+    0.8362150192260742
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0025.png",
+   "patch_box_input": [
+    346,
+    299,
+    386,
+    319
+   ],
+   "x_px": 366.0,
+   "y_px": 309.0
+  },
+  {
+   "point_id": "LX0026",
+   "x": 598.0,
+   "y": 386.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.42111313343048096,
+   "winning_similarity": 0.42111313343048096,
+   "similarities": [
+    0.2964945137500763,
+    0.42111313343048096,
+    0.3680512607097626
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0026.png",
+   "patch_box_input": [
+    578,
+    376,
+    618,
+    396
+   ],
+   "x_px": 598.0,
+   "y_px": 386.0
+  },
+  {
+   "point_id": "LX0027",
+   "x": 246.0,
+   "y": 224.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8137944936752319,
+   "winning_similarity": 0.8137944936752319,
+   "similarities": [
+    0.0725536197423935,
+    0.8137944936752319,
+    0.6118203997612
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0027.png",
+   "patch_box_input": [
+    226,
+    214,
+    266,
+    234
+   ],
+   "x_px": 246.0,
+   "y_px": 224.0
+  },
+  {
+   "point_id": "LX0028",
+   "x": 600.0,
+   "y": 389.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.16562286019325256,
+   "winning_similarity": 0.16562286019325256,
+   "similarities": [
+    0.11768343299627304,
+    0.1250622719526291,
+    0.16562286019325256
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0028.png",
+   "patch_box_input": [
+    580,
+    379,
+    620,
+    399
+   ],
+   "x_px": 600.0,
+   "y_px": 389.0
+  },
+  {
+   "point_id": "LX0029",
+   "x": 442.0,
+   "y": 354.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7297770977020264,
+   "winning_similarity": 0.7297770977020264,
+   "similarities": [
+    0.11527568846940994,
+    0.5213460922241211,
+    0.7297770977020264
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0029.png",
+   "patch_box_input": [
+    422,
+    344,
+    462,
+    364
+   ],
+   "x_px": 442.0,
+   "y_px": 354.0
+  },
+  {
+   "point_id": "LX0030",
+   "x": 252.0,
+   "y": 214.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9797676801681519,
+   "winning_similarity": 0.9797676801681519,
+   "similarities": [
+    0.002239079913124442,
+    0.9797676801681519,
+    0.24282091856002808
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0030.png",
+   "patch_box_input": [
+    232,
+    204,
+    272,
+    224
+   ],
+   "x_px": 252.0,
+   "y_px": 214.0
+  },
+  {
+   "point_id": "LX0031",
+   "x": 479.0,
+   "y": 366.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.8318087458610535,
+   "winning_similarity": 0.8318087458610535,
+   "similarities": [
+    0.021165864542126656,
+    0.8318087458610535,
+    0.7272924780845642
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0031.png",
+   "patch_box_input": [
+    459,
+    356,
+    499,
+    376
+   ],
+   "x_px": 479.0,
+   "y_px": 366.0
+  },
+  {
+   "point_id": "LX0032",
+   "x": 597.0,
+   "y": 385.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7413113713264465,
+   "winning_similarity": 0.7413113713264465,
+   "similarities": [
+    0.09790109843015671,
+    0.5535001754760742,
+    0.7413113713264465
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0032.png",
+   "patch_box_input": [
+    577,
+    375,
+    617,
+    395
+   ],
+   "x_px": 597.0,
+   "y_px": 385.0
+  },
+  {
+   "point_id": "LX0033",
+   "x": 151.0,
+   "y": 116.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.016585320234298706,
+   "winning_similarity": 0.016585320234298706,
+   "similarities": [
+    0.008164491504430771,
+    0.0014950906625017524,
+    0.016585320234298706
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0033.png",
+   "patch_box_input": [
+    131,
+    106,
+    171,
+    126
+   ],
+   "x_px": 151.0,
+   "y_px": 116.0
+  },
+  {
+   "point_id": "LX0034",
+   "x": 262.0,
+   "y": 245.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.6701963543891907,
+   "winning_similarity": 0.6701963543891907,
+   "similarities": [
+    0.03552936017513275,
+    0.07063727080821991,
+    0.6701963543891907
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0034.png",
+   "patch_box_input": [
+    242,
+    235,
+    282,
+    255
+   ],
+   "x_px": 262.0,
+   "y_px": 245.0
+  },
+  {
+   "point_id": "LX0035",
+   "x": 529.0,
+   "y": 375.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7093065977096558,
+   "winning_similarity": 0.7093065977096558,
+   "similarities": [
+    0.7093065977096558,
+    0.050623420625925064,
+    0.6277190446853638
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0035.png",
+   "patch_box_input": [
+    509,
+    365,
+    549,
+    385
+   ],
+   "x_px": 529.0,
+   "y_px": 375.0
+  },
+  {
+   "point_id": "LX0036",
+   "x": 610.0,
+   "y": 386.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9019531607627869,
+   "winning_similarity": 0.9019531607627869,
+   "similarities": [
+    0.3014321029186249,
+    0.5542622804641724,
+    0.9019531607627869
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0036.png",
+   "patch_box_input": [
+    590,
+    376,
+    630,
+    396
+   ],
+   "x_px": 610.0,
+   "y_px": 386.0
+  },
+  {
+   "point_id": "LX0037",
+   "x": 362.0,
+   "y": 326.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9356513023376465,
+   "winning_similarity": 0.9356513023376465,
+   "similarities": [
+    0.0010123776737600565,
+    0.9356513023376465,
+    0.0338154062628746
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0037.png",
+   "patch_box_input": [
+    342,
+    316,
+    382,
+    336
+   ],
+   "x_px": 362.0,
+   "y_px": 326.0
+  },
+  {
+   "point_id": "LX0038",
+   "x": 156.0,
+   "y": 135.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8296341300010681,
+   "winning_similarity": 0.8296341300010681,
+   "similarities": [
+    0.2592405378818512,
+    0.04862775281071663,
+    0.8296341300010681
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0038.png",
+   "patch_box_input": [
+    136,
+    125,
+    176,
+    145
+   ],
+   "x_px": 156.0,
+   "y_px": 135.0
+  },
+  {
+   "point_id": "LX0039",
+   "x": 348.0,
+   "y": 304.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8091536164283752,
+   "winning_similarity": 0.8091536164283752,
+   "similarities": [
+    0.2884957790374756,
+    0.49095267057418823,
+    0.8091536164283752
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0039.png",
+   "patch_box_input": [
+    328,
+    294,
+    368,
+    314
+   ],
+   "x_px": 348.0,
+   "y_px": 304.0
+  },
+  {
+   "point_id": "LX0040",
+   "x": 149.0,
+   "y": 366.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.42329174280166626,
+   "winning_similarity": 0.42329174280166626,
+   "similarities": [
+    0.00021578557789325714,
+    0.42329174280166626,
+    0.19498741626739502
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0040.png",
+   "patch_box_input": [
+    129,
+    356,
+    169,
+    376
+   ],
+   "x_px": 149.0,
+   "y_px": 366.0
+  },
+  {
+   "point_id": "LX0041",
+   "x": 471.0,
+   "y": 356.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9246702194213867,
+   "winning_similarity": 0.9246702194213867,
+   "similarities": [
+    0.010043518617749214,
+    0.7080962061882019,
+    0.9246702194213867
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0041.png",
+   "patch_box_input": [
+    451,
+    346,
+    491,
+    366
+   ],
+   "x_px": 471.0,
+   "y_px": 356.0
+  },
+  {
+   "point_id": "LX0042",
+   "x": 664.0,
+   "y": 399.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9557373523712158,
+   "winning_similarity": 0.9557373523712158,
+   "similarities": [
+    0.007258550263941288,
+    0.9557373523712158,
+    0.15920332074165344
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0042.png",
+   "patch_box_input": [
+    644,
+    389,
+    684,
+    409
+   ],
+   "x_px": 664.0,
+   "y_px": 399.0
+  },
+  {
+   "point_id": "LX0043",
+   "x": 298.0,
+   "y": 271.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.30034512281417847,
+   "winning_similarity": 0.30034512281417847,
+   "similarities": [
+    0.0013226052979007363,
+    0.30034512281417847,
+    0.2781761586666107
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0043.png",
+   "patch_box_input": [
+    278,
+    261,
+    318,
+    281
+   ],
+   "x_px": 298.0,
+   "y_px": 271.0
+  },
+  {
+   "point_id": "LX0044",
+   "x": 546.0,
+   "y": 376.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.9560768604278564,
+   "winning_similarity": 0.9560768604278564,
+   "similarities": [
+    0.12070661038160324,
+    0.47887662053108215,
+    0.9560768604278564
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0044.png",
+   "patch_box_input": [
+    526,
+    366,
+    566,
+    386
+   ],
+   "x_px": 546.0,
+   "y_px": 376.0
+  },
+  {
+   "point_id": "LX0045",
+   "x": 269.0,
+   "y": 248.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.515428364276886,
+   "winning_similarity": 0.515428364276886,
+   "similarities": [
+    0.008587388321757317,
+    0.06434792280197144,
+    0.515428364276886
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0045.png",
+   "patch_box_input": [
+    249,
+    238,
+    289,
+    258
+   ],
+   "x_px": 269.0,
+   "y_px": 248.0
+  },
+  {
+   "point_id": "LX0046",
+   "x": 466.0,
+   "y": 371.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9308094382286072,
+   "winning_similarity": 0.9308094382286072,
+   "similarities": [
+    0.0008817451889626682,
+    0.9308094382286072,
+    0.06583241373300552
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0046.png",
+   "patch_box_input": [
+    446,
+    361,
+    486,
+    381
+   ],
+   "x_px": 466.0,
+   "y_px": 371.0
+  },
+  {
+   "point_id": "LX0047",
+   "x": 460.0,
+   "y": 355.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8867177367210388,
+   "winning_similarity": 0.8867177367210388,
+   "similarities": [
+    0.017908042296767235,
+    0.4425146281719208,
+    0.8867177367210388
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0047.png",
+   "patch_box_input": [
+    440,
+    345,
+    480,
+    365
+   ],
+   "x_px": 460.0,
+   "y_px": 355.0
+  },
+  {
+   "point_id": "LX0048",
+   "x": 424.0,
+   "y": 343.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.892240047454834,
+   "winning_similarity": 0.892240047454834,
+   "similarities": [
+    0.05028390884399414,
+    0.3866324722766876,
+    0.892240047454834
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0048.png",
+   "patch_box_input": [
+    404,
+    333,
+    444,
+    353
+   ],
+   "x_px": 424.0,
+   "y_px": 343.0
+  },
+  {
+   "point_id": "LX0049",
+   "x": 146.0,
+   "y": 133.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7379933595657349,
+   "winning_similarity": 0.7379933595657349,
+   "similarities": [
+    0.02580089494585991,
+    0.12014921754598618,
+    0.7379933595657349
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0049.png",
+   "patch_box_input": [
+    126,
+    123,
+    166,
+    143
+   ],
+   "x_px": 146.0,
+   "y_px": 133.0
+  },
+  {
+   "point_id": "LX0050",
+   "x": 565.0,
+   "y": 374.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.7155888080596924,
+   "winning_similarity": 0.7155888080596924,
+   "similarities": [
+    0.01659649983048439,
+    0.6283020973205566,
+    0.7155888080596924
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0050.png",
+   "patch_box_input": [
+    545,
+    364,
+    585,
+    384
+   ],
+   "x_px": 565.0,
+   "y_px": 374.0
+  },
+  {
+   "point_id": "LX0051",
+   "x": 349.0,
+   "y": 304.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.8071322441101074,
+   "winning_similarity": 0.8071322441101074,
+   "similarities": [
+    0.12991489470005035,
+    0.47005152702331543,
+    0.8071322441101074
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0051.png",
+   "patch_box_input": [
+    329,
+    294,
+    369,
+    314
+   ],
+   "x_px": 349.0,
+   "y_px": 304.0
+  },
+  {
+   "point_id": "LX0052",
+   "x": 334.0,
+   "y": 298.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.6962883472442627,
+   "winning_similarity": 0.6962883472442627,
+   "similarities": [
+    0.005321897100657225,
+    0.6962883472442627,
+    0.668483555316925
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0052.png",
+   "patch_box_input": [
+    314,
+    288,
+    354,
+    308
+   ],
+   "x_px": 334.0,
+   "y_px": 298.0
+  },
+  {
+   "point_id": "LX0053",
+   "x": 628.0,
+   "y": 393.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.5034838318824768,
+   "winning_similarity": 0.5034838318824768,
+   "similarities": [
+    0.475173681974411,
+    0.07141606509685516,
+    0.5034838318824768
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0053.png",
+   "patch_box_input": [
+    608,
+    383,
+    648,
+    403
+   ],
+   "x_px": 628.0,
+   "y_px": 393.0
+  },
+  {
+   "point_id": "LX0054",
+   "x": 162.0,
+   "y": 83.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.08779303729534149,
+   "winning_similarity": 0.08779303729534149,
+   "similarities": [
+    0.006137519143521786,
+    0.0009020284051075578,
+    0.08779303729534149
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0054.png",
+   "patch_box_input": [
+    142,
+    73,
+    182,
+    93
+   ],
+   "x_px": 162.0,
+   "y_px": 83.0
+  },
+  {
+   "point_id": "LX0055",
+   "x": 349.0,
+   "y": 318.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.7821499705314636,
+   "winning_similarity": 0.7821499705314636,
+   "similarities": [
+    0.024523887783288956,
+    0.7821499705314636,
+    0.4777699410915375
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0055.png",
+   "patch_box_input": [
+    329,
+    308,
+    369,
+    328
+   ],
+   "x_px": 349.0,
+   "y_px": 318.0
+  },
+  {
+   "point_id": "LX0056",
+   "x": 352.0,
+   "y": 322.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9388704299926758,
+   "winning_similarity": 0.9388704299926758,
+   "similarities": [
+    0.0027516151312738657,
+    0.9388704299926758,
+    0.1129196360707283
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0056.png",
+   "patch_box_input": [
+    332,
+    312,
+    372,
+    332
+   ],
+   "x_px": 352.0,
+   "y_px": 322.0
+  },
+  {
+   "point_id": "LX0057",
+   "x": 248.0,
+   "y": 245.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.2397262454032898,
+   "winning_similarity": 0.2397262454032898,
+   "similarities": [
+    0.013539074920117855,
+    0.005107687320560217,
+    0.2397262454032898
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0057.png",
+   "patch_box_input": [
+    228,
+    235,
+    268,
+    255
+   ],
+   "x_px": 248.0,
+   "y_px": 245.0
+  },
+  {
+   "point_id": "LX0059",
+   "x": 182.0,
+   "y": 133.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9130575656890869,
+   "winning_similarity": 0.9130575656890869,
+   "similarities": [
+    0.009825804270803928,
+    0.9130575656890869,
+    0.5326216816902161
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0059.png",
+   "patch_box_input": [
+    162,
+    123,
+    202,
+    143
+   ],
+   "x_px": 182.0,
+   "y_px": 133.0
+  },
+  {
+   "point_id": "LX0060",
+   "x": 252.0,
+   "y": 234.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.7943922877311707,
+   "winning_similarity": 0.7943922877311707,
+   "similarities": [
+    0.7943922877311707,
+    0.09888630360364914,
+    0.6476948261260986
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0060.png",
+   "patch_box_input": [
+    232,
+    224,
+    272,
+    244
+   ],
+   "x_px": 252.0,
+   "y_px": 234.0
+  },
+  {
+   "point_id": "LX0061",
+   "x": 202.0,
+   "y": 158.0,
+   "detection_score": null,
+   "series_id": "s02",
+   "legend_index": 1,
+   "score": 0.9242393374443054,
+   "winning_similarity": 0.9242393374443054,
+   "similarities": [
+    0.0027181310579180717,
+    0.9242393374443054,
+    0.09592806547880173
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0061.png",
+   "patch_box_input": [
+    182,
+    148,
+    222,
+    168
+   ],
+   "x_px": 202.0,
+   "y_px": 158.0
+  },
+  {
+   "point_id": "LX0062",
+   "x": 151.0,
+   "y": 143.0,
+   "detection_score": null,
+   "series_id": "s01",
+   "legend_index": 0,
+   "score": 0.9372944235801697,
+   "winning_similarity": 0.9372944235801697,
+   "similarities": [
+    0.9372944235801697,
+    0.0018931248923763633,
+    0.5517465472221375
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0062.png",
+   "patch_box_input": [
+    131,
+    133,
+    171,
+    153
+   ],
+   "x_px": 151.0,
+   "y_px": 143.0
+  },
+  {
+   "point_id": "LX0063",
+   "x": 245.0,
+   "y": 239.0,
+   "detection_score": null,
+   "series_id": "s03",
+   "legend_index": 2,
+   "score": 0.36401650309562683,
+   "winning_similarity": 0.36401650309562683,
+   "similarities": [
+    0.0021054877433925867,
+    0.031697966158390045,
+    0.36401650309562683
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0063.png",
+   "patch_box_input": [
+    225,
+    229,
+    265,
+    249
+   ],
+   "x_px": 245.0,
+   "y_px": 239.0
+  }
+ ],
+ "unavailable": [],
+ "patches": [
+  {
+   "point_index": 0,
+   "point_id": "LX0000",
+   "box_input": [
+    135,
+    150,
+    175,
+    170
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0000.png"
+  },
+  {
+   "point_index": 1,
+   "point_id": "LX0001",
+   "box_input": [
+    421,
+    348,
+    461,
+    368
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0001.png"
+  },
+  {
+   "point_index": 2,
+   "point_id": "LX0002",
+   "box_input": [
+    338,
+    291,
+    378,
+    311
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0002.png"
+  },
+  {
+   "point_index": 3,
+   "point_id": "LX0003",
+   "box_input": [
+    421,
+    338,
+    461,
+    358
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0003.png"
+  },
+  {
+   "point_index": 4,
+   "point_id": "LX0004",
+   "box_input": [
+    644,
+    387,
+    684,
+    407
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0004.png"
+  },
+  {
+   "point_index": 5,
+   "point_id": "LX0005",
+   "box_input": [
+    346,
+    308,
+    386,
+    328
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0005.png"
+  },
+  {
+   "point_index": 6,
+   "point_id": "LX0006",
+   "box_input": [
+    640,
+    395,
+    680,
+    415
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0006.png"
+  },
+  {
+   "point_index": 7,
+   "point_id": "LX0007",
+   "box_input": [
+    499,
+    361,
+    539,
+    381
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0007.png"
+  },
+  {
+   "point_index": 8,
+   "point_id": "LX0008",
+   "box_input": [
+    238,
+    213,
+    278,
+    233
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0008.png"
+  },
+  {
+   "point_index": 9,
+   "point_id": "LX0009",
+   "box_input": [
+    134,
+    155,
+    174,
+    175
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0009.png"
+  },
+  {
+   "point_index": 10,
+   "point_id": "LX0010",
+   "box_input": [
+    184,
+    122,
+    224,
+    142
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0010.png"
+  },
+  {
+   "point_index": 11,
+   "point_id": "LX0011",
+   "box_input": [
+    461,
+    362,
+    501,
+    382
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0011.png"
+  },
+  {
+   "point_index": 12,
+   "point_id": "LX0012",
+   "box_input": [
+    121,
+    415,
+    161,
+    435
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0012.png"
+  },
+  {
+   "point_index": 13,
+   "point_id": "LX0013",
+   "box_input": [
+    566,
+    365,
+    606,
+    385
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0013.png"
+  },
+  {
+   "point_index": 14,
+   "point_id": "LX0014",
+   "box_input": [
+    237,
+    229,
+    277,
+    249
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0014.png"
+  },
+  {
+   "point_index": 15,
+   "point_id": "LX0015",
+   "box_input": [
+    576,
+    374,
+    616,
+    394
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0015.png"
+  },
+  {
+   "point_index": 16,
+   "point_id": "LX0016",
+   "box_input": [
+    568,
+    375,
+    608,
+    395
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0016.png"
+  },
+  {
+   "point_index": 17,
+   "point_id": "LX0017",
+   "box_input": [
+    351,
+    299,
+    391,
+    319
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0017.png"
+  },
+  {
+   "point_index": 18,
+   "point_id": "LX0018",
+   "box_input": [
+    648,
+    382,
+    688,
+    402
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0018.png"
+  },
+  {
+   "point_index": 19,
+   "point_id": "LX0019",
+   "box_input": [
+    286,
+    256,
+    326,
+    276
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0019.png"
+  },
+  {
+   "point_index": 20,
+   "point_id": "LX0020",
+   "box_input": [
+    348,
+    316,
+    388,
+    336
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0020.png"
+  },
+  {
+   "point_index": 21,
+   "point_id": "LX0021",
+   "box_input": [
+    232,
+    219,
+    272,
+    239
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0021.png"
+  },
+  {
+   "point_index": 22,
+   "point_id": "LX0022",
+   "box_input": [
+    425,
+    340,
+    465,
+    360
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0022.png"
+  },
+  {
+   "point_index": 23,
+   "point_id": "LX0023",
+   "box_input": [
+    126,
+    374,
+    166,
+    394
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0023.png"
+  },
+  {
+   "point_index": 24,
+   "point_id": "LX0024",
+   "box_input": [
+    525,
+    361,
+    565,
+    381
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0024.png"
+  },
+  {
+   "point_index": 25,
+   "point_id": "LX0025",
+   "box_input": [
+    346,
+    299,
+    386,
+    319
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0025.png"
+  },
+  {
+   "point_index": 26,
+   "point_id": "LX0026",
+   "box_input": [
+    578,
+    376,
+    618,
+    396
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0026.png"
+  },
+  {
+   "point_index": 27,
+   "point_id": "LX0027",
+   "box_input": [
+    226,
+    214,
+    266,
+    234
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0027.png"
+  },
+  {
+   "point_index": 28,
+   "point_id": "LX0028",
+   "box_input": [
+    580,
+    379,
+    620,
+    399
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0028.png"
+  },
+  {
+   "point_index": 29,
+   "point_id": "LX0029",
+   "box_input": [
+    422,
+    344,
+    462,
+    364
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0029.png"
+  },
+  {
+   "point_index": 30,
+   "point_id": "LX0030",
+   "box_input": [
+    232,
+    204,
+    272,
+    224
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0030.png"
+  },
+  {
+   "point_index": 31,
+   "point_id": "LX0031",
+   "box_input": [
+    459,
+    356,
+    499,
+    376
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0031.png"
+  },
+  {
+   "point_index": 32,
+   "point_id": "LX0032",
+   "box_input": [
+    577,
+    375,
+    617,
+    395
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0032.png"
+  },
+  {
+   "point_index": 33,
+   "point_id": "LX0033",
+   "box_input": [
+    131,
+    106,
+    171,
+    126
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0033.png"
+  },
+  {
+   "point_index": 34,
+   "point_id": "LX0034",
+   "box_input": [
+    242,
+    235,
+    282,
+    255
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0034.png"
+  },
+  {
+   "point_index": 35,
+   "point_id": "LX0035",
+   "box_input": [
+    509,
+    365,
+    549,
+    385
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0035.png"
+  },
+  {
+   "point_index": 36,
+   "point_id": "LX0036",
+   "box_input": [
+    590,
+    376,
+    630,
+    396
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0036.png"
+  },
+  {
+   "point_index": 37,
+   "point_id": "LX0037",
+   "box_input": [
+    342,
+    316,
+    382,
+    336
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0037.png"
+  },
+  {
+   "point_index": 38,
+   "point_id": "LX0038",
+   "box_input": [
+    136,
+    125,
+    176,
+    145
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0038.png"
+  },
+  {
+   "point_index": 39,
+   "point_id": "LX0039",
+   "box_input": [
+    328,
+    294,
+    368,
+    314
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0039.png"
+  },
+  {
+   "point_index": 40,
+   "point_id": "LX0040",
+   "box_input": [
+    129,
+    356,
+    169,
+    376
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0040.png"
+  },
+  {
+   "point_index": 41,
+   "point_id": "LX0041",
+   "box_input": [
+    451,
+    346,
+    491,
+    366
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0041.png"
+  },
+  {
+   "point_index": 42,
+   "point_id": "LX0042",
+   "box_input": [
+    644,
+    389,
+    684,
+    409
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0042.png"
+  },
+  {
+   "point_index": 43,
+   "point_id": "LX0043",
+   "box_input": [
+    278,
+    261,
+    318,
+    281
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0043.png"
+  },
+  {
+   "point_index": 44,
+   "point_id": "LX0044",
+   "box_input": [
+    526,
+    366,
+    566,
+    386
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0044.png"
+  },
+  {
+   "point_index": 45,
+   "point_id": "LX0045",
+   "box_input": [
+    249,
+    238,
+    289,
+    258
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0045.png"
+  },
+  {
+   "point_index": 46,
+   "point_id": "LX0046",
+   "box_input": [
+    446,
+    361,
+    486,
+    381
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0046.png"
+  },
+  {
+   "point_index": 47,
+   "point_id": "LX0047",
+   "box_input": [
+    440,
+    345,
+    480,
+    365
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0047.png"
+  },
+  {
+   "point_index": 48,
+   "point_id": "LX0048",
+   "box_input": [
+    404,
+    333,
+    444,
+    353
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0048.png"
+  },
+  {
+   "point_index": 49,
+   "point_id": "LX0049",
+   "box_input": [
+    126,
+    123,
+    166,
+    143
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0049.png"
+  },
+  {
+   "point_index": 50,
+   "point_id": "LX0050",
+   "box_input": [
+    545,
+    364,
+    585,
+    384
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0050.png"
+  },
+  {
+   "point_index": 51,
+   "point_id": "LX0051",
+   "box_input": [
+    329,
+    294,
+    369,
+    314
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0051.png"
+  },
+  {
+   "point_index": 52,
+   "point_id": "LX0052",
+   "box_input": [
+    314,
+    288,
+    354,
+    308
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0052.png"
+  },
+  {
+   "point_index": 53,
+   "point_id": "LX0053",
+   "box_input": [
+    608,
+    383,
+    648,
+    403
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0053.png"
+  },
+  {
+   "point_index": 54,
+   "point_id": "LX0054",
+   "box_input": [
+    142,
+    73,
+    182,
+    93
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0054.png"
+  },
+  {
+   "point_index": 55,
+   "point_id": "LX0055",
+   "box_input": [
+    329,
+    308,
+    369,
+    328
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0055.png"
+  },
+  {
+   "point_index": 56,
+   "point_id": "LX0056",
+   "box_input": [
+    332,
+    312,
+    372,
+    332
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0056.png"
+  },
+  {
+   "point_index": 57,
+   "point_id": "LX0057",
+   "box_input": [
+    228,
+    235,
+    268,
+    255
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0057.png"
+  },
+  {
+   "point_index": 58,
+   "point_id": "LX0059",
+   "box_input": [
+    162,
+    123,
+    202,
+    143
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0059.png"
+  },
+  {
+   "point_index": 59,
+   "point_id": "LX0060",
+   "box_input": [
+    232,
+    224,
+    272,
+    244
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0060.png"
+  },
+  {
+   "point_index": 60,
+   "point_id": "LX0061",
+   "box_input": [
+    182,
+    148,
+    222,
+    168
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0061.png"
+  },
+  {
+   "point_index": 61,
+   "point_id": "LX0062",
+   "box_input": [
+    131,
+    133,
+    171,
+    153
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0062.png"
+  },
+  {
+   "point_index": 62,
+   "point_id": "LX0063",
+   "box_input": [
+    225,
+    229,
+    265,
+    249
+   ],
+   "patch_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/patches/LX0063.png"
+  }
+ ],
+ "similarity_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/pk__risankizumab5__p03__v9/lineex_grouped/similarity.npy",
+ "similarity_row_point_ids": [
+  "LX0000",
+  "LX0001",
+  "LX0002",
+  "LX0003",
+  "LX0004",
+  "LX0005",
+  "LX0006",
+  "LX0007",
+  "LX0008",
+  "LX0009",
+  "LX0010",
+  "LX0011",
+  "LX0012",
+  "LX0013",
+  "LX0014",
+  "LX0015",
+  "LX0016",
+  "LX0017",
+  "LX0018",
+  "LX0019",
+  "LX0020",
+  "LX0021",
+  "LX0022",
+  "LX0023",
+  "LX0024",
+  "LX0025",
+  "LX0026",
+  "LX0027",
+  "LX0028",
+  "LX0029",
+  "LX0030",
+  "LX0031",
+  "LX0032",
+  "LX0033",
+  "LX0034",
+  "LX0035",
+  "LX0036",
+  "LX0037",
+  "LX0038",
+  "LX0039",
+  "LX0040",
+  "LX0041",
+  "LX0042",
+  "LX0043",
+  "LX0044",
+  "LX0045",
+  "LX0046",
+  "LX0047",
+  "LX0048",
+  "LX0049",
+  "LX0050",
+  "LX0051",
+  "LX0052",
+  "LX0053",
+  "LX0054",
+  "LX0055",
+  "LX0056",
+  "LX0057",
+  "LX0059",
+  "LX0060",
+  "LX0061",
+  "LX0062",
+  "LX0063"
+ ],
+ "similarity_column_series_ids": [
+  "s01",
+  "s02",
+  "s03"
+ ],
+ "timing": {
+  "shared_input_verification_seconds": 0.005817399942316115,
+  "legend_crop_seconds": 0.0030113999964669347,
+  "network_seconds": 0.01213729998562485,
+  "head_postprocess_and_export_seconds": 0.0064764999551698565,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.06221530004404485,
+  "learned_matching_seconds": 0.24830829992424697,
+  "total_seconds": 0.33730019989889115,
+  "method_total_excluding_shared_verification_seconds": 0.33730019989889115,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "patch_matching_timing": {
+  "patch_extract_and_export_seconds": 0.06221530004404485,
+  "learned_matching_seconds": 0.24830829992424697,
+  "total_seconds": 0.3156749999616295
+ },
+ "timing_breakdown": {
+  "shared_input_verification_seconds": 0.005817399942316115,
+  "legend_crop_seconds": 0.0030113999964669347,
+  "network_seconds": 0.01213729998562485,
+  "head_postprocess_and_export_seconds": 0.0064764999551698565,
+  "curve_correction_seconds": 0.0,
+  "patch_extract_and_export_seconds": 0.06221530004404485,
+  "learned_matching_seconds": 0.24830829992424697,
+  "total_seconds": 0.33730019989889115,
+  "method_total_excluding_shared_verification_seconds": 0.33730019989889115,
+  "shared_legend_frontend_seconds": null,
+  "shared_legend_frontend_cost_included": false,
+  "timing_scope": "Resident external heads + correction + matching/export. Model initialization and upstream v46 shared legend extraction excluded."
+ },
+ "raw_heads_result_path": "<BENCHMARK_V2>/results/run_test100v2_20261025_0fd678a840bc/external/raw_heads/lineex/pk__risankizumab5__p03__v9.json",
+ "raw_points": [
+  {
+   "point_id": "LX0000",
+   "x": 155.0,
+   "y": 160.0,
+   "detection_score": null,
+   "x_px": 155.0,
+   "y_px": 160.0
+  },
+  {
+   "point_id": "LX0001",
+   "x": 441.0,
+   "y": 358.0,
+   "detection_score": null,
+   "x_px": 441.0,
+   "y_px": 358.0
+  },
+  {
+   "point_id": "LX0002",
+   "x": 358.0,
+   "y": 301.0,
+   "detection_score": null,
+   "x_px": 358.0,
+   "y_px": 301.0
+  },
+  {
+   "point_id": "LX0003",
+   "x": 441.0,
+   "y": 348.0,
+   "detection_score": null,
+   "x_px": 441.0,
+   "y_px": 348.0
+  },
+  {
+   "point_id": "LX0004",
+   "x": 664.0,
+   "y": 397.0,
+   "detection_score": null,
+   "x_px": 664.0,
+   "y_px": 397.0
+  },
+  {
+   "point_id": "LX0005",
+   "x": 366.0,
+   "y": 318.0,
+   "detection_score": null,
+   "x_px": 366.0,
+   "y_px": 318.0
+  },
+  {
+   "point_id": "LX0006",
+   "x": 660.0,
+   "y": 405.0,
+   "detection_score": null,
+   "x_px": 660.0,
+   "y_px": 405.0
+  },
+  {
+   "point_id": "LX0007",
+   "x": 519.0,
+   "y": 371.0,
+   "detection_score": null,
+   "x_px": 519.0,
+   "y_px": 371.0
+  },
+  {
+   "point_id": "LX0008",
+   "x": 258.0,
+   "y": 223.0,
+   "detection_score": null,
+   "x_px": 258.0,
+   "y_px": 223.0
+  },
+  {
+   "point_id": "LX0009",
+   "x": 154.0,
+   "y": 165.0,
+   "detection_score": null,
+   "x_px": 154.0,
+   "y_px": 165.0
+  },
+  {
+   "point_id": "LX0010",
+   "x": 204.0,
+   "y": 132.0,
+   "detection_score": null,
+   "x_px": 204.0,
+   "y_px": 132.0
+  },
+  {
+   "point_id": "LX0011",
+   "x": 481.0,
+   "y": 372.0,
+   "detection_score": null,
+   "x_px": 481.0,
+   "y_px": 372.0
+  },
+  {
+   "point_id": "LX0012",
+   "x": 141.0,
+   "y": 425.0,
+   "detection_score": null,
+   "x_px": 141.0,
+   "y_px": 425.0
+  },
+  {
+   "point_id": "LX0013",
+   "x": 586.0,
+   "y": 375.0,
+   "detection_score": null,
+   "x_px": 586.0,
+   "y_px": 375.0
+  },
+  {
+   "point_id": "LX0014",
+   "x": 257.0,
+   "y": 239.0,
+   "detection_score": null,
+   "x_px": 257.0,
+   "y_px": 239.0
+  },
+  {
+   "point_id": "LX0015",
+   "x": 596.0,
+   "y": 384.0,
+   "detection_score": null,
+   "x_px": 596.0,
+   "y_px": 384.0
+  },
+  {
+   "point_id": "LX0016",
+   "x": 588.0,
+   "y": 385.0,
+   "detection_score": null,
+   "x_px": 588.0,
+   "y_px": 385.0
+  },
+  {
+   "point_id": "LX0017",
+   "x": 371.0,
+   "y": 309.0,
+   "detection_score": null,
+   "x_px": 371.0,
+   "y_px": 309.0
+  },
+  {
+   "point_id": "LX0018",
+   "x": 668.0,
+   "y": 392.0,
+   "detection_score": null,
+   "x_px": 668.0,
+   "y_px": 392.0
+  },
+  {
+   "point_id": "LX0019",
+   "x": 306.0,
+   "y": 266.0,
+   "detection_score": null,
+   "x_px": 306.0,
+   "y_px": 266.0
+  },
+  {
+   "point_id": "LX0020",
+   "x": 368.0,
+   "y": 326.0,
+   "detection_score": null,
+   "x_px": 368.0,
+   "y_px": 326.0
+  },
+  {
+   "point_id": "LX0021",
+   "x": 252.0,
+   "y": 229.0,
+   "detection_score": null,
+   "x_px": 252.0,
+   "y_px": 229.0
+  },
+  {
+   "point_id": "LX0022",
+   "x": 445.0,
+   "y": 350.0,
+   "detection_score": null,
+   "x_px": 445.0,
+   "y_px": 350.0
+  },
+  {
+   "point_id": "LX0023",
+   "x": 146.0,
+   "y": 384.0,
+   "detection_score": null,
+   "x_px": 146.0,
+   "y_px": 384.0
+  },
+  {
+   "point_id": "LX0024",
+   "x": 545.0,
+   "y": 371.0,
+   "detection_score": null,
+   "x_px": 545.0,
+   "y_px": 371.0
+  },
+  {
+   "point_id": "LX0025",
+   "x": 366.0,
+   "y": 309.0,
+   "detection_score": null,
+   "x_px": 366.0,
+   "y_px": 309.0
+  },
+  {
+   "point_id": "LX0026",
+   "x": 598.0,
+   "y": 386.0,
+   "detection_score": null,
+   "x_px": 598.0,
+   "y_px": 386.0
+  },
+  {
+   "point_id": "LX0027",
+   "x": 246.0,
+   "y": 224.0,
+   "detection_score": null,
+   "x_px": 246.0,
+   "y_px": 224.0
+  },
+  {
+   "point_id": "LX0028",
+   "x": 600.0,
+   "y": 389.0,
+   "detection_score": null,
+   "x_px": 600.0,
+   "y_px": 389.0
+  },
+  {
+   "point_id": "LX0029",
+   "x": 442.0,
+   "y": 354.0,
+   "detection_score": null,
+   "x_px": 442.0,
+   "y_px": 354.0
+  },
+  {
+   "point_id": "LX0030",
+   "x": 252.0,
+   "y": 214.0,
+   "detection_score": null,
+   "x_px": 252.0,
+   "y_px": 214.0
+  },
+  {
+   "point_id": "LX0031",
+   "x": 479.0,
+   "y": 366.0,
+   "detection_score": null,
+   "x_px": 479.0,
+   "y_px": 366.0
+  },
+  {
+   "point_id": "LX0032",
+   "x": 597.0,
+   "y": 385.0,
+   "detection_score": null,
+   "x_px": 597.0,
+   "y_px": 385.0
+  },
+  {
+   "point_id": "LX0033",
+   "x": 151.0,
+   "y": 116.0,
+   "detection_score": null,
+   "x_px": 151.0,
+   "y_px": 116.0
+  },
+  {
+   "point_id": "LX0034",
+   "x": 262.0,
+   "y": 245.0,
+   "detection_score": null,
+   "x_px": 262.0,
+   "y_px": 245.0
+  },
+  {
+   "point_id": "LX0035",
+   "x": 529.0,
+   "y": 375.0,
+   "detection_score": null,
+   "x_px": 529.0,
+   "y_px": 375.0
+  },
+  {
+   "point_id": "LX0036",
+   "x": 610.0,
+   "y": 386.0,
+   "detection_score": null,
+   "x_px": 610.0,
+   "y_px": 386.0
+  },
+  {
+   "point_id": "LX0037",
+   "x": 362.0,
+   "y": 326.0,
+   "detection_score": null,
+   "x_px": 362.0,
+   "y_px": 326.0
+  },
+  {
+   "point_id": "LX0038",
+   "x": 156.0,
+   "y": 135.0,
+   "detection_score": null,
+   "x_px": 156.0,
+   "y_px": 135.0
+  },
+  {
+   "point_id": "LX0039",
+   "x": 348.0,
+   "y": 304.0,
+   "detection_score": null,
+   "x_px": 348.0,
+   "y_px": 304.0
+  },
+  {
+   "point_id": "LX0040",
+   "x": 149.0,
+   "y": 366.0,
+   "detection_score": null,
+   "x_px": 149.0,
+   "y_px": 366.0
+  },
+  {
+   "point_id": "LX0041",
+   "x": 471.0,
+   "y": 356.0,
+   "detection_score": null,
+   "x_px": 471.0,
+   "y_px": 356.0
+  },
+  {
+   "point_id": "LX0042",
+   "x": 664.0,
+   "y": 399.0,
+   "detection_score": null,
+   "x_px": 664.0,
+   "y_px": 399.0
+  },
+  {
+   "point_id": "LX0043",
+   "x": 298.0,
+   "y": 271.0,
+   "detection_score": null,
+   "x_px": 298.0,
+   "y_px": 271.0
+  },
+  {
+   "point_id": "LX0044",
+   "x": 546.0,
+   "y": 376.0,
+   "detection_score": null,
+   "x_px": 546.0,
+   "y_px": 376.0
+  },
+  {
+   "point_id": "LX0045",
+   "x": 269.0,
+   "y": 248.0,
+   "detection_score": null,
+   "x_px": 269.0,
+   "y_px": 248.0
+  },
+  {
+   "point_id": "LX0046",
+   "x": 466.0,
+   "y": 371.0,
+   "detection_score": null,
+   "x_px": 466.0,
+   "y_px": 371.0
+  },
+  {
+   "point_id": "LX0047",
+   "x": 460.0,
+   "y": 355.0,
+   "detection_score": null,
+   "x_px": 460.0,
+   "y_px": 355.0
+  },
+  {
+   "point_id": "LX0048",
+   "x": 424.0,
+   "y": 343.0,
+   "detection_score": null,
+   "x_px": 424.0,
+   "y_px": 343.0
+  },
+  {
+   "point_id": "LX0049",
+   "x": 146.0,
+   "y": 133.0,
+   "detection_score": null,
+   "x_px": 146.0,
+   "y_px": 133.0
+  },
+  {
+   "point_id": "LX0050",
+   "x": 565.0,
+   "y": 374.0,
+   "detection_score": null,
+   "x_px": 565.0,
+   "y_px": 374.0
+  },
+  {
+   "point_id": "LX0051",
+   "x": 349.0,
+   "y": 304.0,
+   "detection_score": null,
+   "x_px": 349.0,
+   "y_px": 304.0
+  },
+  {
+   "point_id": "LX0052",
+   "x": 334.0,
+   "y": 298.0,
+   "detection_score": null,
+   "x_px": 334.0,
+   "y_px": 298.0
+  },
+  {
+   "point_id": "LX0053",
+   "x": 628.0,
+   "y": 393.0,
+   "detection_score": null,
+   "x_px": 628.0,
+   "y_px": 393.0
+  },
+  {
+   "point_id": "LX0054",
+   "x": 162.0,
+   "y": 83.0,
+   "detection_score": null,
+   "x_px": 162.0,
+   "y_px": 83.0
+  },
+  {
+   "point_id": "LX0055",
+   "x": 349.0,
+   "y": 318.0,
+   "detection_score": null,
+   "x_px": 349.0,
+   "y_px": 318.0
+  },
+  {
+   "point_id": "LX0056",
+   "x": 352.0,
+   "y": 322.0,
+   "detection_score": null,
+   "x_px": 352.0,
+   "y_px": 322.0
+  },
+  {
+   "point_id": "LX0057",
+   "x": 248.0,
+   "y": 245.0,
+   "detection_score": null,
+   "x_px": 248.0,
+   "y_px": 245.0
+  },
+  {
+   "point_id": "LX0059",
+   "x": 182.0,
+   "y": 133.0,
+   "detection_score": null,
+   "x_px": 182.0,
+   "y_px": 133.0
+  },
+  {
+   "point_id": "LX0060",
+   "x": 252.0,
+   "y": 234.0,
+   "detection_score": null,
+   "x_px": 252.0,
+   "y_px": 234.0
+  },
+  {
+   "point_id": "LX0061",
+   "x": 202.0,
+   "y": 158.0,
+   "detection_score": null,
+   "x_px": 202.0,
+   "y_px": 158.0
+  },
+  {
+   "point_id": "LX0062",
+   "x": 151.0,
+   "y": 143.0,
+   "detection_score": null,
+   "x_px": 151.0,
+   "y_px": 143.0
+  },
+  {
+   "point_id": "LX0063",
+   "x": 245.0,
+   "y": 239.0,
+   "detection_score": null,
+   "x_px": 245.0,
+   "y_px": 239.0
+  }
+ ],
+ "raw_queries": [
+  {
+   "query_id": 0,
+   "x": 155,
+   "y": 160,
+   "score": null,
+   "normalized_x": 0.22336839139461517,
+   "normalized_y": 0.3094571530818939,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 1,
+   "x": 441,
+   "y": 358,
+   "score": null,
+   "normalized_x": 0.6329261660575867,
+   "normalized_y": 0.6909029483795166,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 2,
+   "x": 358,
+   "y": 301,
+   "score": null,
+   "normalized_x": 0.5140754580497742,
+   "normalized_y": 0.5803143978118896,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 3,
+   "x": 441,
+   "y": 348,
+   "score": null,
+   "normalized_x": 0.6331830620765686,
+   "normalized_y": 0.6713520884513855,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 4,
+   "x": 664,
+   "y": 397,
+   "score": null,
+   "normalized_x": 0.9520772695541382,
+   "normalized_y": 0.7654547095298767,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 5,
+   "x": 366,
+   "y": 318,
+   "score": null,
+   "normalized_x": 0.524633526802063,
+   "normalized_y": 0.6129477620124817,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 6,
+   "x": 660,
+   "y": 405,
+   "score": null,
+   "normalized_x": 0.9459273815155029,
+   "normalized_y": 0.7811269164085388,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 7,
+   "x": 519,
+   "y": 371,
+   "score": null,
+   "normalized_x": 0.7448193430900574,
+   "normalized_y": 0.7148475646972656,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 8,
+   "x": 258,
+   "y": 223,
+   "score": null,
+   "normalized_x": 0.37042945623397827,
+   "normalized_y": 0.4313516616821289,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 9,
+   "x": 154,
+   "y": 165,
+   "score": null,
+   "normalized_x": 0.22186140716075897,
+   "normalized_y": 0.31971240043640137,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 10,
+   "x": 204,
+   "y": 132,
+   "score": null,
+   "normalized_x": 0.29347139596939087,
+   "normalized_y": 0.25539472699165344,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 11,
+   "x": 481,
+   "y": 372,
+   "score": null,
+   "normalized_x": 0.6902070641517639,
+   "normalized_y": 0.7186055779457092,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 12,
+   "x": 141,
+   "y": 425,
+   "score": null,
+   "normalized_x": 0.20286376774311066,
+   "normalized_y": 0.8204644322395325,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 13,
+   "x": 586,
+   "y": 375,
+   "score": null,
+   "normalized_x": 0.840255618095398,
+   "normalized_y": 0.724108099937439,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 14,
+   "x": 257,
+   "y": 239,
+   "score": null,
+   "normalized_x": 0.3684351444244385,
+   "normalized_y": 0.4615035951137543,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 15,
+   "x": 596,
+   "y": 384,
+   "score": null,
+   "normalized_x": 0.8538804650306702,
+   "normalized_y": 0.7414668202400208,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 16,
+   "x": 588,
+   "y": 385,
+   "score": null,
+   "normalized_x": 0.842910885810852,
+   "normalized_y": 0.7431588768959045,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 17,
+   "x": 371,
+   "y": 309,
+   "score": null,
+   "normalized_x": 0.5328871011734009,
+   "normalized_y": 0.5965740084648132,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 18,
+   "x": 668,
+   "y": 392,
+   "score": null,
+   "normalized_x": 0.9577214121818542,
+   "normalized_y": 0.7554675936698914,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 19,
+   "x": 306,
+   "y": 266,
+   "score": null,
+   "normalized_x": 0.4384661018848419,
+   "normalized_y": 0.5132603645324707,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 20,
+   "x": 368,
+   "y": 326,
+   "score": null,
+   "normalized_x": 0.5273508429527283,
+   "normalized_y": 0.6286919713020325,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 21,
+   "x": 252,
+   "y": 229,
+   "score": null,
+   "normalized_x": 0.36160629987716675,
+   "normalized_y": 0.44227784872055054,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 22,
+   "x": 445,
+   "y": 350,
+   "score": null,
+   "normalized_x": 0.6383036375045776,
+   "normalized_y": 0.6749274134635925,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 23,
+   "x": 146,
+   "y": 384,
+   "score": null,
+   "normalized_x": 0.21001069247722626,
+   "normalized_y": 0.7402846217155457,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 24,
+   "x": 545,
+   "y": 371,
+   "score": null,
+   "normalized_x": 0.7818447947502136,
+   "normalized_y": 0.7150483131408691,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 25,
+   "x": 366,
+   "y": 309,
+   "score": null,
+   "normalized_x": 0.5245046019554138,
+   "normalized_y": 0.5964373350143433,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 26,
+   "x": 598,
+   "y": 386,
+   "score": null,
+   "normalized_x": 0.8571752905845642,
+   "normalized_y": 0.7455297112464905,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 27,
+   "x": 246,
+   "y": 224,
+   "score": null,
+   "normalized_x": 0.3529354929924011,
+   "normalized_y": 0.432272344827652,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 28,
+   "x": 600,
+   "y": 389,
+   "score": null,
+   "normalized_x": 0.8601112365722656,
+   "normalized_y": 0.7512980699539185,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 29,
+   "x": 442,
+   "y": 354,
+   "score": null,
+   "normalized_x": 0.6334378123283386,
+   "normalized_y": 0.6834433674812317,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 30,
+   "x": 252,
+   "y": 214,
+   "score": null,
+   "normalized_x": 0.36224156618118286,
+   "normalized_y": 0.41425150632858276,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 31,
+   "x": 479,
+   "y": 366,
+   "score": null,
+   "normalized_x": 0.686852216720581,
+   "normalized_y": 0.7068057060241699,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 32,
+   "x": 597,
+   "y": 385,
+   "score": null,
+   "normalized_x": 0.856593132019043,
+   "normalized_y": 0.7431601285934448,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 33,
+   "x": 151,
+   "y": 116,
+   "score": null,
+   "normalized_x": 0.21700738370418549,
+   "normalized_y": 0.22528977692127228,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 34,
+   "x": 262,
+   "y": 245,
+   "score": null,
+   "normalized_x": 0.3766895532608032,
+   "normalized_y": 0.4721880555152893,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 35,
+   "x": 529,
+   "y": 375,
+   "score": null,
+   "normalized_x": 0.758846640586853,
+   "normalized_y": 0.7244096994400024,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 36,
+   "x": 610,
+   "y": 386,
+   "score": null,
+   "normalized_x": 0.8741716742515564,
+   "normalized_y": 0.7456430792808533,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 37,
+   "x": 362,
+   "y": 326,
+   "score": null,
+   "normalized_x": 0.5189021229743958,
+   "normalized_y": 0.6289125680923462,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 38,
+   "x": 156,
+   "y": 135,
+   "score": null,
+   "normalized_x": 0.22405274212360382,
+   "normalized_y": 0.2611315846443176,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 39,
+   "x": 348,
+   "y": 304,
+   "score": null,
+   "normalized_x": 0.4992518424987793,
+   "normalized_y": 0.5863810777664185,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 40,
+   "x": 149,
+   "y": 366,
+   "score": null,
+   "normalized_x": 0.2137022465467453,
+   "normalized_y": 0.7061325907707214,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 41,
+   "x": 471,
+   "y": 356,
+   "score": null,
+   "normalized_x": 0.6755114197731018,
+   "normalized_y": 0.6863372921943665,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 42,
+   "x": 664,
+   "y": 399,
+   "score": null,
+   "normalized_x": 0.9515059590339661,
+   "normalized_y": 0.7691237926483154,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 43,
+   "x": 298,
+   "y": 271,
+   "score": null,
+   "normalized_x": 0.42693841457366943,
+   "normalized_y": 0.5225241780281067,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 44,
+   "x": 546,
+   "y": 376,
+   "score": null,
+   "normalized_x": 0.7827364802360535,
+   "normalized_y": 0.7261992692947388,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 45,
+   "x": 269,
+   "y": 248,
+   "score": null,
+   "normalized_x": 0.3857460618019104,
+   "normalized_y": 0.47824186086654663,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 46,
+   "x": 466,
+   "y": 371,
+   "score": null,
+   "normalized_x": 0.668422281742096,
+   "normalized_y": 0.7166496515274048,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 47,
+   "x": 460,
+   "y": 355,
+   "score": null,
+   "normalized_x": 0.6590709090232849,
+   "normalized_y": 0.684184193611145,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 48,
+   "x": 424,
+   "y": 343,
+   "score": null,
+   "normalized_x": 0.608579158782959,
+   "normalized_y": 0.662194013595581,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 49,
+   "x": 146,
+   "y": 133,
+   "score": null,
+   "normalized_x": 0.2105354517698288,
+   "normalized_y": 0.2581252455711365,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 50,
+   "x": 565,
+   "y": 374,
+   "score": null,
+   "normalized_x": 0.8097644448280334,
+   "normalized_y": 0.7207015752792358,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 51,
+   "x": 349,
+   "y": 304,
+   "score": null,
+   "normalized_x": 0.5011918544769287,
+   "normalized_y": 0.5864496827125549,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 52,
+   "x": 334,
+   "y": 298,
+   "score": null,
+   "normalized_x": 0.47936612367630005,
+   "normalized_y": 0.5757789611816406,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 53,
+   "x": 628,
+   "y": 393,
+   "score": null,
+   "normalized_x": 0.9006601572036743,
+   "normalized_y": 0.7575647830963135,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 54,
+   "x": 162,
+   "y": 83,
+   "score": null,
+   "normalized_x": 0.2332640439271927,
+   "normalized_y": 0.16015087068080902,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 55,
+   "x": 349,
+   "y": 318,
+   "score": null,
+   "normalized_x": 0.5012298226356506,
+   "normalized_y": 0.6145136952400208,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 56,
+   "x": 352,
+   "y": 322,
+   "score": null,
+   "normalized_x": 0.504741907119751,
+   "normalized_y": 0.6210758686065674,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 57,
+   "x": 248,
+   "y": 245,
+   "score": null,
+   "normalized_x": 0.3564521074295044,
+   "normalized_y": 0.4725586175918579,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 58,
+   "x": 322,
+   "y": 321,
+   "score": null,
+   "normalized_x": 0.4624203145503998,
+   "normalized_y": 0.6187909245491028,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": true,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 59,
+   "x": 182,
+   "y": 133,
+   "score": null,
+   "normalized_x": 0.26197880506515503,
+   "normalized_y": 0.2575874328613281,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 60,
+   "x": 252,
+   "y": 234,
+   "score": null,
+   "normalized_x": 0.36244943737983704,
+   "normalized_y": 0.45271915197372437,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 61,
+   "x": 202,
+   "y": 158,
+   "score": null,
+   "normalized_x": 0.29073378443717957,
+   "normalized_y": 0.30603668093681335,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 62,
+   "x": 151,
+   "y": 143,
+   "score": null,
+   "normalized_x": 0.2171541154384613,
+   "normalized_y": 0.27591672539711,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  },
+  {
+   "query_id": 63,
+   "x": 245,
+   "y": 239,
+   "score": null,
+   "normalized_x": 0.35216641426086426,
+   "normalized_y": 0.46162089705467224,
+   "in_plot": true,
+   "in_legend": false,
+   "background_rejected": false,
+   "gate_status": "completed"
+  }
+ ],
+ "head_status": "completed",
+ "implementation_choices": {
+  "keypoints": "Official 64-query L+D checkpoint and background gate",
+  "grouping": "Same official learned Siamese matcher as ChartParser paper, no histogram override."
+ },
+ "limitations": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ],
+ "shared_legend_status": "available",
+ "shared_legend_reason": null,
+ "shared_legends_sha256": "b448d28211c865b835dec9905af89c1369bc816211f75edd1838cf98b068787a",
+ "warnings": [
+  "Annotated shared plot/legend ROI; actual observed source-pixel swatch crops exported by v46 are shared. Not an end-to-end chart parser.",
+  "Native swatch IDs mapped to supplied IDs by bbox-only overlap; then learned swatch argmax. Unmapped extra swatches retain their unknown ID. No reference-point matching.",
+  "If the shared legend front end failed, actual scoped head/corrected locations remain as unknown-series predictions for center-only evaluation; no legend or marker is fabricated.",
+  "A valid detection whose native 40x20 patch crosses the image edge is retained as unknown_patch_unavailable, not dropped or padded.",
+  "Scores are learned similarities, not calibrated correctness probabilities.",
+  "Fixed native 40x20 patches, learned RGB Siamese matcher; no histogram override.",
+  "Pivot locations may not correspond to visible markers. No semantic marker-shape classification.",
+  "No reference targets, reference curves, reference point positions, or shape labels read.",
+  "No deduplication or score threshold added after highest-similarity legend assignment."
+ ]
+}

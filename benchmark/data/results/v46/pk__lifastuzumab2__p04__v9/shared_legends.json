@@ -1,0 +1,169 @@
+{
+ "panel_id": "pk__lifastuzumab2__p04__v9",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "color02",
+   "native_swatch_id": "S01",
+   "bbox": [
+    66,
+    31,
+    80,
+    45
+   ],
+   "native_body_bbox": [
+    68,
+    33,
+    77,
+    42
+   ],
+   "class_name": "unknown_marker",
+   "rgb": [
+    36,
+    161,
+    155
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s01",
+   "label": "HERALD arm A (18 mg/kg q3w)",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__lifastuzumab2__p04__v9/shared_legend_crops/legend_01.png",
+   "image_size": [
+    14,
+    14
+   ],
+   "sha256": "a324928fff6762221637c2341cba24816a8a7cf2f4b700d93ae529e24ad67195",
+   "source_native_legend_id": "color02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__lifastuzumab2__p04__v9/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    66,
+    31,
+    80,
+    45
+   ],
+   "bbox_original": [
+    66,
+    31,
+    80,
+    45
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color03",
+   "native_swatch_id": "S02",
+   "bbox": [
+    66,
+    43,
+    80,
+    57
+   ],
+   "native_body_bbox": [
+    68,
+    46,
+    77,
+    55
+   ],
+   "class_name": "unknown_marker",
+   "rgb": [
+    48,
+    69,
+    136
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s02",
+   "label": "HERALD arm B (18 mg/kg LD and 9 mg/kg LD q3w)",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__lifastuzumab2__p04__v9/shared_legend_crops/legend_02.png",
+   "image_size": [
+    14,
+    14
+   ],
+   "sha256": "ddf8da06ebe40c323e5ce3ef0c97f8c172d5694f1a7aac7bedc0d683d1d1a43f",
+   "source_native_legend_id": "color03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__lifastuzumab2__p04__v9/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    66,
+    43,
+    80,
+    57
+   ],
+   "bbox_original": [
+    66,
+    43,
+    80,
+    57
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "color02": "s01",
+  "color03": "s02"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "color02",
+    "series_id": "s01",
+    "iou": 0.5283018867924528,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s02",
+    "iou": 0.5283018867924528,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "HERALD arm A (18 mg/kg q3w)",
+   "bbox": [
+    64,
+    33,
+    80,
+    41
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "HERALD arm B (18 mg/kg LD and 9 mg/kg LD q3w)",
+   "bbox": [
+    64,
+    46,
+    80,
+    54
+   ]
+  }
+ ],
+ "input_sha256": "caf50a4d2fee3234dd7a7a8484f8f787d3b4dcf3d5f19074a0723622fb221d5d",
+ "source_sha256": "caf50a4d2fee3234dd7a7a8484f8f787d3b4dcf3d5f19074a0723622fb221d5d",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.0035810999979730695
+}

@@ -1,0 +1,263 @@
+{
+ "panel_id": "er__demcizumab_1_1_0__p04__v4",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "color02",
+   "native_swatch_id": "S01",
+   "bbox": [
+    124,
+    12,
+    141,
+    28
+   ],
+   "native_body_bbox": [
+    127,
+    14,
+    138,
+    25
+   ],
+   "class_name": "filled_circle",
+   "rgb": [
+    216,
+    25,
+    31
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s02",
+   "label": "Day 2",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__demcizumab_1_1_0__p04__v4/shared_legend_crops/legend_01.png",
+   "image_size": [
+    17,
+    16
+   ],
+   "sha256": "408f5d30052d51ca25e643ba7456446bb684f3b83db428efd41af8affa9cedb1",
+   "source_native_legend_id": "color02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__demcizumab_1_1_0__p04__v4/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    124,
+    12,
+    141,
+    28
+   ],
+   "bbox_original": [
+    124,
+    12,
+    141,
+    28
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color03",
+   "native_swatch_id": "S02",
+   "bbox": [
+    189,
+    12,
+    206,
+    28
+   ],
+   "native_body_bbox": [
+    192,
+    14,
+    203,
+    25
+   ],
+   "class_name": "filled_circle",
+   "rgb": [
+    118,
+    19,
+    221
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s03",
+   "label": "Day 3",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__demcizumab_1_1_0__p04__v4/shared_legend_crops/legend_02.png",
+   "image_size": [
+    17,
+    16
+   ],
+   "sha256": "4cb89fb3908a06d82246a1d9841bf00dedae433972824a9d63bc4d6af76ef931",
+   "source_native_legend_id": "color03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__demcizumab_1_1_0__p04__v4/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    189,
+    12,
+    206,
+    28
+   ],
+   "bbox_original": [
+    189,
+    12,
+    206,
+    28
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color04",
+   "native_swatch_id": "S03",
+   "bbox": [
+    60,
+    12,
+    77,
+    28
+   ],
+   "native_body_bbox": [
+    63,
+    14,
+    74,
+    25
+   ],
+   "class_name": "filled_circle",
+   "rgb": [
+    3,
+    3,
+    3
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s01",
+   "label": "Day 1",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__demcizumab_1_1_0__p04__v4/shared_legend_crops/legend_03.png",
+   "image_size": [
+    17,
+    16
+   ],
+   "sha256": "585b35f358ed9c76fd074c08843eadf4ad9515c6f2ae694611798ca218decb43",
+   "source_native_legend_id": "color04",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/er__demcizumab_1_1_0__p04__v4/shared_legend_crops/legend_03.png",
+   "bbox_crop": [
+    60,
+    12,
+    77,
+    28
+   ],
+   "bbox_original": [
+    60,
+    12,
+    77,
+    28
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "color02": "s02",
+  "color03": "s03",
+  "color04": "s01"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "color02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s02",
+    "iou": 0.5917721518987342,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s03",
+    "iou": 0.5718654434250765,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s01",
+    "iou": 0.5917721518987342,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Day 1",
+   "bbox": [
+    57,
+    13,
+    78,
+    24
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Day 2",
+   "bbox": [
+    122,
+    13,
+    143,
+    24
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "Day 3",
+   "bbox": [
+    186,
+    13,
+    208,
+    24
+   ]
+  }
+ ],
+ "input_sha256": "cecc7c9f7c1f3c7543f1064e1e1a19ed0d5df1c3077f9a71ef0e6e2ba9fa02f1",
+ "source_sha256": "cecc7c9f7c1f3c7543f1064e1e1a19ed0d5df1c3077f9a71ef0e6e2ba9fa02f1",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.0051660999888554215
+}

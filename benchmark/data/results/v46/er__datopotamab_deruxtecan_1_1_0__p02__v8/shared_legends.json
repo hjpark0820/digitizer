@@ -1,0 +1,157 @@
+{
+ "panel_id": "er__datopotamab_deruxtecan_1_1_0__p02__v8",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    962,
+    998,
+    1025,
+    1027
+   ],
+   "native_body_bbox": [
+    981,
+    1000,
+    1008,
+    1025
+   ],
+   "class_name": "filled_circle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "Control ADC",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__datopotamab_deruxtecan_1_1_0__p02__v8/shared_legend_crops/legend_01.png",
+   "image_size": [
+    63,
+    29
+   ],
+   "sha256": "e21a1410a0ec1541735f8028eebd659c6a6d62ece92da6cfd50fcb4686419c74",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__datopotamab_deruxtecan_1_1_0__p02__v8/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    962,
+    998,
+    1025,
+    1027
+   ],
+   "bbox_original": [
+    962,
+    998,
+    1025,
+    1027
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    980,
+    1090,
+    1014,
+    1117
+   ],
+   "native_body_bbox": [
+    982.5015155176641,
+    1091.4957009194818,
+    1005.4948656620643,
+    1114.489051063882
+   ],
+   "class_name": "filled_square",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s02",
+   "label": "Dato-DXd",
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__datopotamab_deruxtecan_1_1_0__p02__v8/shared_legend_crops/legend_02.png",
+   "image_size": [
+    34,
+    27
+   ],
+   "sha256": "503ee960bbe66cbd5debba5c26bf7949043edcd015c3ed72b8461d5939ca003b",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_guilegend_20261116_0fd678a840bc/v46/er__datopotamab_deruxtecan_1_1_0__p02__v8/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    980,
+    1090,
+    1014,
+    1117
+   ],
+   "bbox_original": [
+    980,
+    1090,
+    1014,
+    1117
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01",
+  "S02": "s02"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 0.6622864651773982,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 0.39882697947214074,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Control ADC",
+   "bbox": [
+    953,
+    1000,
+    1035,
+    1024
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Dato-DXd",
+   "bbox": [
+    953,
+    1091,
+    1034,
+    1115
+   ]
+  }
+ ],
+ "input_sha256": "d36ff739b9367d0c55c5031632fccf6ef8e4ade8c328ac35fdef679088c66576",
+ "source_sha256": "d36ff739b9367d0c55c5031632fccf6ef8e4ade8c328ac35fdef679088c66576",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.008337699982803315
+}

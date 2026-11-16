@@ -1,0 +1,157 @@
+{
+ "panel_id": "pk__pepinemab2__p01__v1",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "S01",
+   "bbox": [
+    586,
+    93,
+    650,
+    114
+   ],
+   "native_body_bbox": [
+    607,
+    93,
+    630,
+    114
+   ],
+   "class_name": "filled_circle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s01",
+   "label": "Part A",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__pepinemab2__p01__v1/shared_legend_crops/legend_01.png",
+   "image_size": [
+    64,
+    21
+   ],
+   "sha256": "8958b8b07f634d2bdc31d7dc04a774a3b4f94b078a6f70bb0f7278961c0127d3",
+   "source_native_legend_id": "S01",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__pepinemab2__p01__v1/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    586,
+    93,
+    650,
+    114
+   ],
+   "bbox_original": [
+    586,
+    93,
+    650,
+    114
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "S02",
+   "bbox": [
+    586,
+    123,
+    650,
+    145
+   ],
+   "native_body_bbox": [
+    607.752556202192,
+    123.40841759989894,
+    628.2353293327726,
+    144.3083698770305
+   ],
+   "class_name": "filled_circle",
+   "crop_source": "v46_grid_diagnostics.swatches.box",
+   "series_id": "s02",
+   "label": "Part B",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__pepinemab2__p01__v1/shared_legend_crops/legend_02.png",
+   "image_size": [
+    64,
+    22
+   ],
+   "sha256": "2c21dfc1bd3f503c284765764beedb3fb3f1b3ca94349ee427022f73817eb31d",
+   "source_native_legend_id": "S02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__pepinemab2__p01__v1/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    586,
+    123,
+    650,
+    145
+   ],
+   "bbox_original": [
+    586,
+    123,
+    650,
+    145
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "S01": "s01",
+  "S02": "s02"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "S01",
+    "series_id": "s01",
+    "iou": 1.0,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "S01",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "S02",
+    "series_id": "s02",
+    "iou": 0.8806818181818182,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Part A",
+   "bbox": [
+    586,
+    93,
+    650,
+    114
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Part B",
+   "bbox": [
+    587,
+    124,
+    649,
+    144
+   ]
+  }
+ ],
+ "input_sha256": "80782a488bfc0202d376809fe55a420854bf004fd4acbf10b941b96b20e8338c",
+ "source_sha256": "80782a488bfc0202d376809fe55a420854bf004fd4acbf10b941b96b20e8338c",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.014065499999560416
+}

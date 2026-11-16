@@ -1,0 +1,108 @@
+{
+ "panel_id": "pk__gedivumab1__p01__v9",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "3600-mg MHAA4549A+OS",
+   "bbox": [
+    178,
+    6,
+    210,
+    14
+   ],
+   "bbox_crop": [
+    178,
+    6,
+    210,
+    14
+   ],
+   "bbox_original": [
+    178,
+    6,
+    210,
+    14
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__gedivumab1__p01__v9/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__gedivumab1__p01__v9/shared_legend_crops/legend_01.png",
+   "image_size": [
+    32,
+    8
+   ],
+   "sha256": "0c13da7a34d53d478fd80f3886300b62f480763f5957e272cb452482d07f3d45",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "8400-mg MHAA4549A+OS",
+   "bbox": [
+    178,
+    23,
+    210,
+    31
+   ],
+   "bbox_crop": [
+    178,
+    23,
+    210,
+    31
+   ],
+   "bbox_original": [
+    178,
+    23,
+    210,
+    31
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__gedivumab1__p01__v9/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__gedivumab1__p01__v9/shared_legend_crops/legend_02.png",
+   "image_size": [
+    32,
+    8
+   ],
+   "sha256": "ab3bf64b2d408b8cc1c79d1396fef6631c63b831288dc3aaef9a1eef3f7fc6e6",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s01": "s01",
+  "s02": "s02"
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "3600-mg MHAA4549A+OS",
+   "bbox": [
+    178,
+    6,
+    210,
+    14
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "8400-mg MHAA4549A+OS",
+   "bbox": [
+    178,
+    23,
+    210,
+    31
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "83d98e316ef1bf097b31fef627fe3717f0e07a0b1ee2bdc6459310794f22a80d",
+ "source_sha256": "83d98e316ef1bf097b31fef627fe3717f0e07a0b1ee2bdc6459310794f22a80d",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}

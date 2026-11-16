@@ -1,0 +1,154 @@
+{
+ "panel_id": "pk__pepinemab2__p02__v1",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "Ages <12 y.o.",
+   "bbox": [
+    574,
+    88,
+    616,
+    110
+   ],
+   "bbox_crop": [
+    574,
+    88,
+    616,
+    110
+   ],
+   "bbox_original": [
+    574,
+    88,
+    616,
+    110
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__pepinemab2__p02__v1/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__pepinemab2__p02__v1/shared_legend_crops/legend_01.png",
+   "image_size": [
+    42,
+    22
+   ],
+   "sha256": "802fdd178613eaa1747b65c871073bd19a9db54033ea5fec29fdab736a84cce7",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "Ages 12-18 y.o.",
+   "bbox": [
+    575,
+    123,
+    614,
+    141
+   ],
+   "bbox_crop": [
+    575,
+    123,
+    614,
+    141
+   ],
+   "bbox_original": [
+    575,
+    123,
+    614,
+    141
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__pepinemab2__p02__v1/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__pepinemab2__p02__v1/shared_legend_crops/legend_02.png",
+   "image_size": [
+    39,
+    18
+   ],
+   "sha256": "65db8928c43902bec528e059194fc6a9886e34e65892d3d997338381a48a9f48",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s03",
+   "series_id": "s03",
+   "source_native_legend_id": "s03",
+   "label": "Ages >18 y.o.",
+   "bbox": [
+    575,
+    155,
+    615,
+    175
+   ],
+   "bbox_crop": [
+    575,
+    155,
+    615,
+    175
+   ],
+   "bbox_original": [
+    575,
+    155,
+    615,
+    175
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__pepinemab2__p02__v1/shared_legend_crops/legend_03.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/pk__pepinemab2__p02__v1/shared_legend_crops/legend_03.png",
+   "image_size": [
+    40,
+    20
+   ],
+   "sha256": "16c0c1c667f584d596bcc7228eb9e5fd5801f8e140c9625a669990b0356b1167",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s01": "s01",
+  "s02": "s02",
+  "s03": "s03"
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Ages <12 y.o.",
+   "bbox": [
+    574,
+    88,
+    616,
+    110
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Ages 12-18 y.o.",
+   "bbox": [
+    575,
+    123,
+    614,
+    141
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "Ages >18 y.o.",
+   "bbox": [
+    575,
+    155,
+    615,
+    175
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "2407556d1bd77b7e2a21941089a86c4e339efc8827dfd095b9770f2723aff3f1",
+ "source_sha256": "2407556d1bd77b7e2a21941089a86c4e339efc8827dfd095b9770f2723aff3f1",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}

@@ -49,6 +49,28 @@ def _json_ready(value):
     return value
 
 
+def _run_with_legend_diagnostics(run_detection, out_dir, reviewed_entries, **kwargs):
+    """Keep failed crop reports available to GUI review, then preserve failure.
+
+    If every legend crop fails, the detector raises before the normal export
+    path. Saving that exception's reports lets the user inspect each crop; no
+    point coordinates, successful session, or substitute template is created.
+    """
+    from bw_legend_v46 import LegendExtractionError
+    try:
+        return run_detection(**kwargs)
+    except LegendExtractionError as error:
+        result = {'grid_diagnostics': {
+            'status': 'legend_extraction_failed', 'failure_stage': 'legend_extraction',
+            'reason': str(error), 'swatches': error.reports, 'detector_completed': False}}
+        if reviewed_entries is not None:
+            from reviewed_legend_models_v46 import annotate_bw_reports
+            annotate_bw_reports(result, reviewed_entries)
+        with open(os.path.join(out_dir, 'v46_grid_diagnostics.json'), 'w', encoding='utf-8') as stream:
+            json.dump(_json_ready(result['grid_diagnostics']), stream, indent=2)
+        raise
+
+
 def _state_binding(image, plot_area, legend_area, upscale, backend):
     """Bind saved pixel coordinates to the submitted raster and selected ROIs."""
     return {'image_sha256': hashlib.sha256(image.tobytes()).hexdigest(),
@@ -129,6 +151,8 @@ def main():
                     help='default-OFF native BW shadow corner/arc diagnostics; does not change detection or Step 5 decisions')
     ap.add_argument('--swatches-json', default='',
                     help='JSON list of [class_name, [x0,y0,x1,y1]]; exclusive right/bottom')
+    ap.add_argument('--legend-review-json', default='',
+                    help='Saved GUI legend review; replaces automatic swatch locations without supplying shape labels')
     ap.add_argument("--errorbars", default="")
     ap.add_argument('--skip-segments', action='store_true',
                     help='skip line/errorbar detection; preserve original marker pixels (B&W web workflow)')
@@ -220,6 +244,16 @@ def main():
         print("[bw-cli] ERROR: could not read image"); sys.exit(2)
     H, W = img.shape[:2]
     pa = _p4(a.plot_area)
+    reviewed_entries = None
+    if a.legend_review_json:
+        if a.swatches_json:
+            ap.error('--legend-review-json and --swatches-json cannot be combined')
+        from reviewed_legend_models_v46 import load_review, bw_swatches
+        reviewed_entries = load_review(a.legend_review_json, img, image_path=a.image,
+                                       legend_box=_p4(a.legend_area))
+        swatches = bw_swatches(reviewed_entries)
+    else:
+        swatches = json.loads(a.swatches_json) if a.swatches_json else None
     # Keep absent limits absent until axis OCR. A fabricated 0..1 range looks
     # like real data in the editor and prevents automatic calibration entirely.
     from axis_calibration_v46 import resolve_calibration
@@ -262,7 +296,7 @@ def main():
             _prev_state = None
 
     _t_det0 = _tmod.perf_counter()
-    result = bw_pipeline.run_detection(
+    result = _run_with_legend_diagnostics(bw_pipeline.run_detection, a.out_dir, reviewed_entries,
         **({'diagnostic_detail': a.diagnostic_detail} if a.diagnostic_detail is not None else {}),
         point_backend=a.point_backend,
         grid_fraction=a.grid_fraction, grid_overlap=a.grid_overlap,
@@ -271,7 +305,7 @@ def main():
         filled_contour_identity=a.filled_contour_identity,
         visible_first_detection=a.visible_first_detection,
         corner_identity_audit=a.corner_identity_audit,
-        swatches=(json.loads(a.swatches_json) if a.swatches_json else None),
+        swatches=swatches,
         skip_point_detection=bool(_prev_state),
         img_bgr=img, plot_area_px=pa, legend_area_px=_p4(a.legend_area),
         known_classes=kc, x_range=xr, y_range=yr,
@@ -280,6 +314,9 @@ def main():
         conf_thresh=(float(a.conf) if a.conf else None),
         stride=None, has_lines=not a.skip_segments, log_fn=_safe_log,
     )
+    if reviewed_entries is not None:
+        from reviewed_legend_models_v46 import annotate_bw_reports
+        annotate_bw_reports(result, reviewed_entries)
     _detection_seconds = _tmod.perf_counter()-_t_det0
     _t_post0 = _tmod.perf_counter()
     print(f"[bw-cli] [timing] run_detection total: {_detection_seconds:.2f}s")

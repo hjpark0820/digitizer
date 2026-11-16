@@ -1,0 +1,2281 @@
+{
+ "name": "test100_20261018",
+ "created": "2026-10-18",
+ "role": "test set; new-100 (inputs_new100_run.json) is the development set",
+ "seed": 20261018,
+ "procedure": "Test set \"test100_20261018\": 25 synthetic charts per group (ER B&W, ER colour, PK B&W, PK colour), source-disjoint\nfrom new-100, which is the development set (user, 2026-10-18: \"테스트셋만 25개씩 각 카테고리에서 뽑아서 ... new100만 빼고\").\n\nSelection = the new-100 procedure (new100/select_new100.py) with a new seed and one more exclusion:\n  shuffle sorted synthetic_similar/images/*.png with random.Random(SEED); one variant per base plot (source plot);\n  pk / er from the filename prefix; bw / color from pixel chroma (>= 80 pixels with max-min > 35 and min < 200 -> color);\n  eligible(variant) exactly as new-100: a legend box after rounding, a non-ref_line swatch box for every series that has\n  points, every point-bearing series has a marker and only marker_centre points; no image-size cap;\n  skip every base plot of new-100 (source-level disjoint). Nothing else is excluded (the user's rule), so a chart may\n  share its source plot, or even its exact image, with DEV / held-out sets; the record lists that overlap per chart.\nInputs / targets are built exactly as new100/build_new100.py builds them. Chart ids: t1_<group>_NN.\nWrites (nothing is overwritten; the script refuses if an output exists):\n  benchmark_v2/inputs_test100_20261018.json, targets_test100_20261018.json, chart_id_map_test100_20261018.json\n  test100_20261018/selection_test100.json (procedure, seed, counts, rejections, per-chart record incl. overlaps)\n",
+ "excluded_base_plots": "the 100 source plots of new-100 only",
+ "candidates_examined": 257,
+ "counts": {
+  "er_bw": 25,
+  "er_color": 25,
+  "pk_bw": 25,
+  "pk_color": 25
+ },
+ "rejected_by_gt_filter": [
+  {
+   "shuffle_index": 6,
+   "stem": "er__iscalimab_2_2_1__p01__v9",
+   "group": "er_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 16,
+   "stem": "pk__visilizumab1__p02__v3",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 19,
+   "stem": "pk__ficlatuzumab1__p02__v6",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 25,
+   "stem": "pk__pateclizumab1__p04__v2",
+   "group": "pk_bw",
+   "reason": "line_vertex_gt"
+  },
+  {
+   "shuffle_index": 41,
+   "stem": "pk__gantenerumab2__p01__v7",
+   "group": "pk_color",
+   "reason": "line_vertex_gt"
+  },
+  {
+   "shuffle_index": 43,
+   "stem": "pk__roledumab1__p01__v9",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 44,
+   "stem": "pk__ficlatuzumab1__p05__v5",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 49,
+   "stem": "pk__brontictuzumab2__p05__v2",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 57,
+   "stem": "pk__tosatoxumab1__p02__v0",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 62,
+   "stem": "pk__amatuximab3__p01__v5",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 63,
+   "stem": "pk__briquilimab1__p01__v7",
+   "group": "pk_color",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 64,
+   "stem": "pk__zolbetuximab1__p03__v9",
+   "group": "pk_color",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 71,
+   "stem": "pk__barzolvolimab2__p04__v5",
+   "group": "pk_color",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 75,
+   "stem": "er__sotigalimab_1_3_0__p02__v0",
+   "group": "er_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 76,
+   "stem": "pk__magrolimab1__p01__v5",
+   "group": "pk_color",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 82,
+   "stem": "pk__briquilimab1__p03__v0",
+   "group": "pk_color",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 86,
+   "stem": "pk__demcizumab2__p01__v4",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 124,
+   "stem": "pk__denosumab2__p01__v8",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 128,
+   "stem": "pk__ficlatuzumab1__p05__v3",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 129,
+   "stem": "pk__brontictuzumab2__p01__v8",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 146,
+   "stem": "pk__brontictuzumab2__p12__v2",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 150,
+   "stem": "pk__latozinemab2__p01__v7",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 171,
+   "stem": "pk__brontictuzumab2__p02__v8",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 198,
+   "stem": "pk__brontictuzumab2__p07__v6",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 205,
+   "stem": "pk__galiximab1__p01__v2",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 212,
+   "stem": "pk__brontictuzumab2__p07__v0",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 225,
+   "stem": "pk__brontictuzumab2__p04__v4",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 232,
+   "stem": "pk__denosumab1__p01__v1",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 244,
+   "stem": "pk__brontictuzumab2__p08__v0",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 259,
+   "stem": "pk__brontictuzumab2__p06__v8",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 280,
+   "stem": "pk__demcizumab2__p04__v0",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 281,
+   "stem": "pk__ragifilimab1__p03__v6",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 287,
+   "stem": "pk__brontictuzumab2__p09__v0",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 291,
+   "stem": "pk__brontictuzumab2__p10__v5",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 303,
+   "stem": "pk__tiragolumab2__p02__v9",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  },
+  {
+   "shuffle_index": 311,
+   "stem": "pk__demcizumab2__p07__v8",
+   "group": "pk_bw",
+   "reason": "no_legend"
+  }
+ ],
+ "overlap_summary": {
+  "DEV_testset365": {
+   "same_image": 4,
+   "same_source_plot": 65
+  },
+  "heldout": {
+   "same_image": 3,
+   "same_source_plot": 40
+  },
+  "heldout2": {
+   "same_image": 1,
+   "same_source_plot": 25
+  },
+  "heldout3": {
+   "same_image": 2,
+   "same_source_plot": 25
+  },
+  "astra100": {
+   "same_image": 0,
+   "same_source_plot": 0
+  },
+  "inputs_synth": {
+   "same_image": 26,
+   "same_source_plot": 100
+  }
+ },
+ "charts": [
+  {
+   "chart_id": "t1_er_bw_01",
+   "group": "er_bw",
+   "source_filename": "er__veltuzumab_1_2_0__p01__v8.png",
+   "source_plot_id": "er__veltuzumab_1_2_0__p01",
+   "image_path": "data/images\\er__veltuzumab_1_2_0__p01__v8.png",
+   "width": 1196,
+   "height": 602,
+   "colored_pixel_count": 0,
+   "source_sha256": "6fd7b49cf68486b5cd43205ecd42c165ef8bcbbb85059a6637904558c7bddc07",
+   "shuffle_index": 1,
+   "gt_points": 12,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_02",
+   "group": "er_bw",
+   "source_filename": "er__adalimumab_4_3_1__p01__v7.png",
+   "source_plot_id": "er__adalimumab_4_3_1__p01",
+   "image_path": "data/images\\er__adalimumab_4_3_1__p01__v7.png",
+   "width": 2041,
+   "height": 1724,
+   "colored_pixel_count": 0,
+   "source_sha256": "cb30259f6ac4482554f7c3da7f8521bc3c9bd2e26ac07a58f4c4d12ece191b85",
+   "shuffle_index": 5,
+   "gt_points": 35,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_03",
+   "group": "er_bw",
+   "source_filename": "er__mapatumumab_1_1_0__p01__v3.png",
+   "source_plot_id": "er__mapatumumab_1_1_0__p01",
+   "image_path": "data/images\\er__mapatumumab_1_1_0__p01__v3.png",
+   "width": 805,
+   "height": 774,
+   "colored_pixel_count": 0,
+   "source_sha256": "b247d4ba7518921cd65b6e3d753601ddd7adf10d7dcf599a314738eb472435a5",
+   "shuffle_index": 11,
+   "gt_points": 15,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_04",
+   "group": "er_bw",
+   "source_filename": "er__aducanumab_1_1_0__p01__v9.png",
+   "source_plot_id": "er__aducanumab_1_1_0__p01",
+   "image_path": "data/images\\er__aducanumab_1_1_0__p01__v9.png",
+   "width": 491,
+   "height": 339,
+   "colored_pixel_count": 0,
+   "source_sha256": "739a4dd66bfc0ec3aca50fee1e70a0cad5e76b8324f68cc9f19200a1ce207e84",
+   "shuffle_index": 14,
+   "gt_points": 21,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_05",
+   "group": "er_bw",
+   "source_filename": "er__adalimumab_4_1_1__p01__v9.png",
+   "source_plot_id": "er__adalimumab_4_1_1__p01",
+   "image_path": "data/images\\er__adalimumab_4_1_1__p01__v9.png",
+   "width": 923,
+   "height": 855,
+   "colored_pixel_count": 0,
+   "source_sha256": "d0ea77cbfaf6c36c741c50b660b088d5dc252db123a340c8839ac98e5ec0a296",
+   "shuffle_index": 24,
+   "gt_points": 41,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_06",
+   "group": "er_bw",
+   "source_filename": "er__imalumab_2_1_1__p01__v0.png",
+   "source_plot_id": "er__imalumab_2_1_1__p01",
+   "image_path": "data/images\\er__imalumab_2_1_1__p01__v0.png",
+   "width": 1074,
+   "height": 692,
+   "colored_pixel_count": 0,
+   "source_sha256": "b85a11eba4fd6980d394a2b5900344c32aef9087ac1af5f8c15f72cb28bbd0b1",
+   "shuffle_index": 29,
+   "gt_points": 12,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_07",
+   "group": "er_bw",
+   "source_filename": "er__teclistamab_2_6_0__p01__v3.png",
+   "source_plot_id": "er__teclistamab_2_6_0__p01",
+   "image_path": "data/images\\er__teclistamab_2_6_0__p01__v3.png",
+   "width": 461,
+   "height": 486,
+   "colored_pixel_count": 0,
+   "source_sha256": "4321fe43f96553d243d97d4722e3e1256d13ede8154f836382e6b0cf3aebebd1",
+   "shuffle_index": 33,
+   "gt_points": 22,
+   "generator_modality": "bw",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_08",
+   "group": "er_bw",
+   "source_filename": "er__daclizumab_1_1_0__p02__v5.png",
+   "source_plot_id": "er__daclizumab_1_1_0__p02",
+   "image_path": "data/images\\er__daclizumab_1_1_0__p02__v5.png",
+   "width": 538,
+   "height": 276,
+   "colored_pixel_count": 0,
+   "source_sha256": "625dde1f0e4089e6e60ad0a420973d9d5e6866089b66b2856a25baf9d97d3fd5",
+   "shuffle_index": 34,
+   "gt_points": 10,
+   "generator_modality": "bw",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_09",
+   "group": "er_bw",
+   "source_filename": "er__mapatumumab_1_2_1__p01__v8.png",
+   "source_plot_id": "er__mapatumumab_1_2_1__p01",
+   "image_path": "data/images\\er__mapatumumab_1_2_1__p01__v8.png",
+   "width": 1732,
+   "height": 1112,
+   "colored_pixel_count": 0,
+   "source_sha256": "1c5a98f2fa5c1bc106dd86771ee416e4b527b7c9f7ccc2614f994e7f94ad73d2",
+   "shuffle_index": 35,
+   "gt_points": 34,
+   "generator_modality": "bw",
+   "same_image_in": [
+    "heldout3"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_10",
+   "group": "er_bw",
+   "source_filename": "er__zalutumumab_1_10_2__p01__v6.png",
+   "source_plot_id": "er__zalutumumab_1_10_2__p01",
+   "image_path": "data/images\\er__zalutumumab_1_10_2__p01__v6.png",
+   "width": 766,
+   "height": 286,
+   "colored_pixel_count": 0,
+   "source_sha256": "755625c2561caad896cd0e00ad574df5c92e61eb32b92e336cc1f1270b74ea15",
+   "shuffle_index": 39,
+   "gt_points": 19,
+   "generator_modality": "bw",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_11",
+   "group": "er_bw",
+   "source_filename": "er__temtokibart_1_2_1__p01__v1.png",
+   "source_plot_id": "er__temtokibart_1_2_1__p01",
+   "image_path": "data/images\\er__temtokibart_1_2_1__p01__v1.png",
+   "width": 888,
+   "height": 562,
+   "colored_pixel_count": 0,
+   "source_sha256": "7361c5024db620dc08cedaf4e271cdfdd3ee00f5607d7568bb6a01175bbda8bb",
+   "shuffle_index": 52,
+   "gt_points": 29,
+   "generator_modality": "bw",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_12",
+   "group": "er_bw",
+   "source_filename": "er__teclistamab_2_5_0__p06__v3.png",
+   "source_plot_id": "er__teclistamab_2_5_0__p06",
+   "image_path": "data/images\\er__teclistamab_2_5_0__p06__v3.png",
+   "width": 1413,
+   "height": 443,
+   "colored_pixel_count": 0,
+   "source_sha256": "ea24462fa860cb859ba6c8022bd4513c456ac362c7a05f5714c8bfe2ab93654b",
+   "shuffle_index": 77,
+   "gt_points": 25,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_13",
+   "group": "er_bw",
+   "source_filename": "er__trastuzumab_3_1_2__p01__v8.png",
+   "source_plot_id": "er__trastuzumab_3_1_2__p01",
+   "image_path": "data/images\\er__trastuzumab_3_1_2__p01__v8.png",
+   "width": 1824,
+   "height": 1218,
+   "colored_pixel_count": 0,
+   "source_sha256": "fa3e3ff715a0ad56497f192334bc21787a918260c84822f9cc63667fd4a856fc",
+   "shuffle_index": 81,
+   "gt_points": 42,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_14",
+   "group": "er_bw",
+   "source_filename": "er__atezolizumab_2_2_4__p01__v6.png",
+   "source_plot_id": "er__atezolizumab_2_2_4__p01",
+   "image_path": "data/images\\er__atezolizumab_2_2_4__p01__v6.png",
+   "width": 511,
+   "height": 417,
+   "colored_pixel_count": 0,
+   "source_sha256": "47e71aff87eee783f9654e12b4ac738542ac14784a391694b4f2c3a503721d03",
+   "shuffle_index": 88,
+   "gt_points": 8,
+   "generator_modality": "bw",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_15",
+   "group": "er_bw",
+   "source_filename": "er__veltuzumab_1_2_0__p02__v8.png",
+   "source_plot_id": "er__veltuzumab_1_2_0__p02",
+   "image_path": "data/images\\er__veltuzumab_1_2_0__p02__v8.png",
+   "width": 1196,
+   "height": 597,
+   "colored_pixel_count": 0,
+   "source_sha256": "c12aff344924d0938c60f6b356011b608ddb4f1105b65f9fa3ca0f95983cc62d",
+   "shuffle_index": 92,
+   "gt_points": 12,
+   "generator_modality": "bw",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_16",
+   "group": "er_bw",
+   "source_filename": "er__ixekizumab_1_1_2__p01__v8.png",
+   "source_plot_id": "er__ixekizumab_1_1_2__p01",
+   "image_path": "data/images\\er__ixekizumab_1_1_2__p01__v8.png",
+   "width": 693,
+   "height": 575,
+   "colored_pixel_count": 0,
+   "source_sha256": "2e2591c84e133929b3ecff12747e8330e8cf43b9274e237cd4042c5ca22e9204",
+   "shuffle_index": 97,
+   "gt_points": 14,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_17",
+   "group": "er_bw",
+   "source_filename": "er__pf-06747143_1_1_1__p01__v0.png",
+   "source_plot_id": "er__pf-06747143_1_1_1__p01",
+   "image_path": "data/images\\er__pf-06747143_1_1_1__p01__v0.png",
+   "width": 729,
+   "height": 538,
+   "colored_pixel_count": 0,
+   "source_sha256": "d53e2cd46f7927ac627dc477db38ba293904f68a4414673c820b3a2cc7b20ed3",
+   "shuffle_index": 103,
+   "gt_points": 23,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_18",
+   "group": "er_bw",
+   "source_filename": "er__temtokibart_1_1_0__p01__v0.png",
+   "source_plot_id": "er__temtokibart_1_1_0__p01",
+   "image_path": "data/images\\er__temtokibart_1_1_0__p01__v0.png",
+   "width": 836,
+   "height": 486,
+   "colored_pixel_count": 0,
+   "source_sha256": "1452086696c06054b9789540361a965d39175e735a1e56a226fcc912701c62f0",
+   "shuffle_index": 117,
+   "gt_points": 37,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_19",
+   "group": "er_bw",
+   "source_filename": "er__zalutumumab_1_8_0__p01__v8.png",
+   "source_plot_id": "er__zalutumumab_1_8_0__p01",
+   "image_path": "data/images\\er__zalutumumab_1_8_0__p01__v8.png",
+   "width": 948,
+   "height": 1632,
+   "colored_pixel_count": 0,
+   "source_sha256": "4fb10142a222f60875686362d495097bf6afe02e5c16b3fb2ef2971d5dd521f0",
+   "shuffle_index": 120,
+   "gt_points": 26,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_20",
+   "group": "er_bw",
+   "source_filename": "er__mapatumumab_1_1_0__p04__v5.png",
+   "source_plot_id": "er__mapatumumab_1_1_0__p04",
+   "image_path": "data/images\\er__mapatumumab_1_1_0__p04__v5.png",
+   "width": 755,
+   "height": 783,
+   "colored_pixel_count": 0,
+   "source_sha256": "6ef1db5086ad0f330244b5ea0e2509a1d6d1dadaafe48d4a07c53018f1ec5a0c",
+   "shuffle_index": 127,
+   "gt_points": 17,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_21",
+   "group": "er_bw",
+   "source_filename": "er__teclistamab_2_5_0__p03__v5.png",
+   "source_plot_id": "er__teclistamab_2_5_0__p03",
+   "image_path": "data/images\\er__teclistamab_2_5_0__p03__v5.png",
+   "width": 1413,
+   "height": 844,
+   "colored_pixel_count": 0,
+   "source_sha256": "210d0c608c2c477f95666c338057d6bbe98cd497eef0c4b5dab76997e1a2aa49",
+   "shuffle_index": 135,
+   "gt_points": 27,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_22",
+   "group": "er_bw",
+   "source_filename": "er__naxitamab_1_1_0__p03__v9.png",
+   "source_plot_id": "er__naxitamab_1_1_0__p03",
+   "image_path": "data/images\\er__naxitamab_1_1_0__p03__v9.png",
+   "width": 279,
+   "height": 155,
+   "colored_pixel_count": 0,
+   "source_sha256": "68f810ed4a013a7041137ea13d4150f763bc860f1140150be0f9f115edca4570",
+   "shuffle_index": 140,
+   "gt_points": 13,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_23",
+   "group": "er_bw",
+   "source_filename": "er__ulocuplumab_1_2_1__p01__v4.png",
+   "source_plot_id": "er__ulocuplumab_1_2_1__p01",
+   "image_path": "data/images\\er__ulocuplumab_1_2_1__p01__v4.png",
+   "width": 864,
+   "height": 671,
+   "colored_pixel_count": 0,
+   "source_sha256": "b291468aee907dd03ec7e62649fdb87aa2b94c8044e632a1da7c579cd945c9bc",
+   "shuffle_index": 144,
+   "gt_points": 47,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_24",
+   "group": "er_bw",
+   "source_filename": "er__aducanumab_1_2_1__p01__v4.png",
+   "source_plot_id": "er__aducanumab_1_2_1__p01",
+   "image_path": "data/images\\er__aducanumab_1_2_1__p01__v4.png",
+   "width": 665,
+   "height": 386,
+   "colored_pixel_count": 0,
+   "source_sha256": "ca56346e438be7b04f3edf51e286fbc9e037707aa234a3cd7374c73050b7211c",
+   "shuffle_index": 148,
+   "gt_points": 19,
+   "generator_modality": "bw",
+   "same_image_in": [
+    "heldout3"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_bw_25",
+   "group": "er_bw",
+   "source_filename": "er__datopotamab_deruxtecan_1_1_0__p02__v8.png",
+   "source_plot_id": "er__datopotamab_deruxtecan_1_1_0__p02",
+   "image_path": "data/images\\er__datopotamab_deruxtecan_1_1_0__p02__v8.png",
+   "width": 1232,
+   "height": 1132,
+   "colored_pixel_count": 0,
+   "source_sha256": "d36ff739b9367d0c55c5031632fccf6ef8e4ade8c328ac35fdef679088c66576",
+   "shuffle_index": 152,
+   "gt_points": 10,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_01",
+   "group": "er_color",
+   "source_filename": "er__imalumab_1_1_4__p01__v8.png",
+   "source_plot_id": "er__imalumab_1_1_4__p01",
+   "image_path": "data/images\\er__imalumab_1_1_4__p01__v8.png",
+   "width": 665,
+   "height": 678,
+   "colored_pixel_count": 10545,
+   "source_sha256": "b853bad12c72056f2d37fb0562655919ca5a8f418f24baf37928d80899fd1778",
+   "shuffle_index": 0,
+   "gt_points": 26,
+   "generator_modality": "color",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_02",
+   "group": "er_color",
+   "source_filename": "er__bimekizumab_1_1_0__p01__v9.png",
+   "source_plot_id": "er__bimekizumab_1_1_0__p01",
+   "image_path": "data/images\\er__bimekizumab_1_1_0__p01__v9.png",
+   "width": 1463,
+   "height": 687,
+   "colored_pixel_count": 16473,
+   "source_sha256": "caafa56d3061ddd083fffd58285c9bace0088fc0ea0ff7e51cd4cb2ac7799532",
+   "shuffle_index": 3,
+   "gt_points": 25,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_03",
+   "group": "er_color",
+   "source_filename": "er__guselkumab_2_1_2__p01__v8.png",
+   "source_plot_id": "er__guselkumab_2_1_2__p01",
+   "image_path": "data/images\\er__guselkumab_2_1_2__p01__v8.png",
+   "width": 1336,
+   "height": 1080,
+   "colored_pixel_count": 37784,
+   "source_sha256": "986b9b33fb0a0d6b8de64d6f193a2863fe86cb4a8e9b7017f00017e2116af82d",
+   "shuffle_index": 4,
+   "gt_points": 63,
+   "generator_modality": "color",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_04",
+   "group": "er_color",
+   "source_filename": "er__mirikizumab_2_1_0__p02__v2.png",
+   "source_plot_id": "er__mirikizumab_2_1_0__p02",
+   "image_path": "data/images\\er__mirikizumab_2_1_0__p02__v2.png",
+   "width": 1479,
+   "height": 684,
+   "colored_pixel_count": 17348,
+   "source_sha256": "7a5b8e6fe3c0620d0574d14b887f9d3b5e68f1e6bd8fd51d9329e37d01a1ff4e",
+   "shuffle_index": 9,
+   "gt_points": 6,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_05",
+   "group": "er_color",
+   "source_filename": "er__utomilumab_1_1_3__p01__v0.png",
+   "source_plot_id": "er__utomilumab_1_1_3__p01",
+   "image_path": "data/images\\er__utomilumab_1_1_3__p01__v0.png",
+   "width": 509,
+   "height": 536,
+   "colored_pixel_count": 8215,
+   "source_sha256": "6e5bce4bef79b580a0b1a29df2dd4e10bd93a03bd50400784fe4b62f1d3d77dd",
+   "shuffle_index": 12,
+   "gt_points": 18,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_06",
+   "group": "er_color",
+   "source_filename": "er__palivizumab_1_1_0__p03__v2.png",
+   "source_plot_id": "er__palivizumab_1_1_0__p03",
+   "image_path": "data/images\\er__palivizumab_1_1_0__p03__v2.png",
+   "width": 406,
+   "height": 744,
+   "colored_pixel_count": 4747,
+   "source_sha256": "ff45d58ce9b5e33e4922161f98ae7b7af5a511632926d578a119d437d7257402",
+   "shuffle_index": 13,
+   "gt_points": 22,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_07",
+   "group": "er_color",
+   "source_filename": "er__talacotuzumab_1_1_1__p01__v2.png",
+   "source_plot_id": "er__talacotuzumab_1_1_1__p01",
+   "image_path": "data/images\\er__talacotuzumab_1_1_1__p01__v2.png",
+   "width": 1002,
+   "height": 534,
+   "colored_pixel_count": 7904,
+   "source_sha256": "bad84f0261ff0ec4243d2876e58f2feef1ebc1bef7805616bd2af27ff785c74f",
+   "shuffle_index": 18,
+   "gt_points": 16,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_08",
+   "group": "er_color",
+   "source_filename": "er__talacotuzumab_1_2_2__p01__v5.png",
+   "source_plot_id": "er__talacotuzumab_1_2_2__p01",
+   "image_path": "data/images\\er__talacotuzumab_1_2_2__p01__v5.png",
+   "width": 980,
+   "height": 369,
+   "colored_pixel_count": 6254,
+   "source_sha256": "0fa47ce0c1a71801ce63e562ac33fc61af2e203a9bc2e27051998840edc99b87",
+   "shuffle_index": 23,
+   "gt_points": 16,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_09",
+   "group": "er_color",
+   "source_filename": "er__chf_10067_1_1_4__p01__v6.png",
+   "source_plot_id": "er__chf_10067_1_1_4__p01",
+   "image_path": "data/images\\er__chf_10067_1_1_4__p01__v6.png",
+   "width": 217,
+   "height": 285,
+   "colored_pixel_count": 402,
+   "source_sha256": "59f6165d9bfbbe1e72f8b4304dfac1d75122100a0d607a4b95fde42bc870cd5b",
+   "shuffle_index": 30,
+   "gt_points": 19,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_10",
+   "group": "er_color",
+   "source_filename": "er__dalotuzumab_1_1_0__p01__v8.png",
+   "source_plot_id": "er__dalotuzumab_1_1_0__p01",
+   "image_path": "data/images\\er__dalotuzumab_1_1_0__p01__v8.png",
+   "width": 1027,
+   "height": 542,
+   "colored_pixel_count": 8386,
+   "source_sha256": "d90aa8037ab27aa0edf766dc412e4b9906da0c1f685cf0793308df239d5a1462",
+   "shuffle_index": 32,
+   "gt_points": 17,
+   "generator_modality": "color",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_11",
+   "group": "er_color",
+   "source_filename": "er__palivizumab_1_1_0__p01__v8.png",
+   "source_plot_id": "er__palivizumab_1_1_0__p01",
+   "image_path": "data/images\\er__palivizumab_1_1_0__p01__v8.png",
+   "width": 406,
+   "height": 241,
+   "colored_pixel_count": 1584,
+   "source_sha256": "5334b178b972a7cfc4f0c03a110a68a420803f7f4766ee8f71a11fc86a11ebac",
+   "shuffle_index": 37,
+   "gt_points": 24,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_12",
+   "group": "er_color",
+   "source_filename": "er__ibalizumab_1_1_0__p05__v9.png",
+   "source_plot_id": "er__ibalizumab_1_1_0__p05",
+   "image_path": "data/images\\er__ibalizumab_1_1_0__p05__v9.png",
+   "width": 855,
+   "height": 404,
+   "colored_pixel_count": 12709,
+   "source_sha256": "5bc948a79e43c0ee9e93877a1ba9f8f4ecdb33ceeb7302d8453b29f66e8f1d36",
+   "shuffle_index": 40,
+   "gt_points": 35,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_13",
+   "group": "er_color",
+   "source_filename": "er__perenostobart_1_1_0__p05__v4.png",
+   "source_plot_id": "er__perenostobart_1_1_0__p05",
+   "image_path": "data/images\\er__perenostobart_1_1_0__p05__v4.png",
+   "width": 723,
+   "height": 534,
+   "colored_pixel_count": 7325,
+   "source_sha256": "ff5c3ba56ce3df356e42c55e0ee379963660cace2d5625c9a29af2aca132e74d",
+   "shuffle_index": 46,
+   "gt_points": 22,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_14",
+   "group": "er_color",
+   "source_filename": "er__utomilumab_1_1_2__p01__v2.png",
+   "source_plot_id": "er__utomilumab_1_1_2__p01",
+   "image_path": "data/images\\er__utomilumab_1_1_2__p01__v2.png",
+   "width": 510,
+   "height": 545,
+   "colored_pixel_count": 7233,
+   "source_sha256": "5b2d082ec0a486c46a39a930c34d362f88be48ab359b204b2e8bac6a2a4bb2da",
+   "shuffle_index": 48,
+   "gt_points": 20,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_15",
+   "group": "er_color",
+   "source_filename": "er__sotigalimab_1_2_0__p01__v4.png",
+   "source_plot_id": "er__sotigalimab_1_2_0__p01",
+   "image_path": "data/images\\er__sotigalimab_1_2_0__p01__v4.png",
+   "width": 781,
+   "height": 413,
+   "colored_pixel_count": 13114,
+   "source_sha256": "18f6f1eeb2e74576803e8dcc271acb7383e162e0bade745e3c0f5a2fac719412",
+   "shuffle_index": 60,
+   "gt_points": 25,
+   "generator_modality": "color",
+   "same_image_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_16",
+   "group": "er_color",
+   "source_filename": "er__pozelimab_1_2_2__p01__v7.png",
+   "source_plot_id": "er__pozelimab_1_2_2__p01",
+   "image_path": "data/images\\er__pozelimab_1_2_2__p01__v7.png",
+   "width": 581,
+   "height": 562,
+   "colored_pixel_count": 5124,
+   "source_sha256": "fa928afbf6a1dacd4b0958428ff42e73bf08e186bb334f58962a771a5d7acc42",
+   "shuffle_index": 72,
+   "gt_points": 26,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_17",
+   "group": "er_color",
+   "source_filename": "er__demcizumab_1_1_0__p09__v6.png",
+   "source_plot_id": "er__demcizumab_1_1_0__p09",
+   "image_path": "data/images\\er__demcizumab_1_1_0__p09__v6.png",
+   "width": 724,
+   "height": 586,
+   "colored_pixel_count": 10829,
+   "source_sha256": "6c9b77ee6e7cdc569a5c51bdeeaeba04278a2f1d989df2ab0906f545c93ad6f4",
+   "shuffle_index": 83,
+   "gt_points": 21,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_18",
+   "group": "er_color",
+   "source_filename": "er__dostarlimab_1_1_0__p01__v9.png",
+   "source_plot_id": "er__dostarlimab_1_1_0__p01",
+   "image_path": "data/images\\er__dostarlimab_1_1_0__p01__v9.png",
+   "width": 762,
+   "height": 528,
+   "colored_pixel_count": 7106,
+   "source_sha256": "4576f784346d073649efeec0a5af0fae1ef0c82baf2c8c875ef1aef1b3a3397c",
+   "shuffle_index": 91,
+   "gt_points": 25,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_19",
+   "group": "er_color",
+   "source_filename": "er__demcizumab_1_1_0__p03__v5.png",
+   "source_plot_id": "er__demcizumab_1_1_0__p03",
+   "image_path": "data/images\\er__demcizumab_1_1_0__p03__v5.png",
+   "width": 721,
+   "height": 234,
+   "colored_pixel_count": 6034,
+   "source_sha256": "d66336001e1b2ce4b3fbf5c01ff5e9c2d94831abc7a00cb3918044314fbeea31",
+   "shuffle_index": 99,
+   "gt_points": 21,
+   "generator_modality": "color",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_20",
+   "group": "er_color",
+   "source_filename": "er__mirikizumab_2_1_0__p03__v9.png",
+   "source_plot_id": "er__mirikizumab_2_1_0__p03",
+   "image_path": "data/images\\er__mirikizumab_2_1_0__p03__v9.png",
+   "width": 1201,
+   "height": 1437,
+   "colored_pixel_count": 27065,
+   "source_sha256": "9ec6f8ffb5ca54aaef8b4a7ff2ba5c79167e38c6cb5727f7ee1f9a86a5d79729",
+   "shuffle_index": 102,
+   "gt_points": 6,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_21",
+   "group": "er_color",
+   "source_filename": "er__suptavumab_1_1_0__p01__v2.png",
+   "source_plot_id": "er__suptavumab_1_1_0__p01",
+   "image_path": "data/images\\er__suptavumab_1_1_0__p01__v2.png",
+   "width": 1050,
+   "height": 903,
+   "colored_pixel_count": 5792,
+   "source_sha256": "55c1b68604121adb70f1c4cb7f28b65392d4608506666ff4fa9ee3db7bd138b9",
+   "shuffle_index": 116,
+   "gt_points": 19,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_22",
+   "group": "er_color",
+   "source_filename": "er__demcizumab_1_1_0__p08__v9.png",
+   "source_plot_id": "er__demcizumab_1_1_0__p08",
+   "image_path": "data/images\\er__demcizumab_1_1_0__p08__v9.png",
+   "width": 474,
+   "height": 590,
+   "colored_pixel_count": 7206,
+   "source_sha256": "02fc837ac2a1d1f0ee5e9be3f5084f3a15150528108428b771dc00c8b3fa20ca",
+   "shuffle_index": 125,
+   "gt_points": 23,
+   "generator_modality": "color",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_23",
+   "group": "er_color",
+   "source_filename": "er__imalumab_1_1_3__p01__v6.png",
+   "source_plot_id": "er__imalumab_1_1_3__p01",
+   "image_path": "data/images\\er__imalumab_1_1_3__p01__v6.png",
+   "width": 631,
+   "height": 681,
+   "colored_pixel_count": 4731,
+   "source_sha256": "003c0280539a0a47e3295b34781385d343ba6421ef1abc0bf96d78682022eb21",
+   "shuffle_index": 137,
+   "gt_points": 28,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_24",
+   "group": "er_color",
+   "source_filename": "er__demcizumab_1_1_0__p04__v4.png",
+   "source_plot_id": "er__demcizumab_1_1_0__p04",
+   "image_path": "data/images\\er__demcizumab_1_1_0__p04__v4.png",
+   "width": 288,
+   "height": 331,
+   "colored_pixel_count": 2126,
+   "source_sha256": "cecc7c9f7c1f3c7543f1064e1e1a19ed0d5df1c3077f9a71ef0e6e2ba9fa02f1",
+   "shuffle_index": 175,
+   "gt_points": 24,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_er_color_25",
+   "group": "er_color",
+   "source_filename": "er__imalumab_1_1_6__p01__v2.png",
+   "source_plot_id": "er__imalumab_1_1_6__p01",
+   "image_path": "data/images\\er__imalumab_1_1_6__p01__v2.png",
+   "width": 669,
+   "height": 679,
+   "colored_pixel_count": 15847,
+   "source_sha256": "4de3e534c29014f330d425bb120c3d560f61de57ac9ad9a814612b12d79665d8",
+   "shuffle_index": 176,
+   "gt_points": 30,
+   "generator_modality": "color",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_01",
+   "group": "pk_bw",
+   "source_filename": "pk__pepinemab2__p02__v1.png",
+   "source_plot_id": "pk__pepinemab2__p02",
+   "image_path": "data/images\\pk__pepinemab2__p02__v1.png",
+   "width": 877,
+   "height": 660,
+   "colored_pixel_count": 0,
+   "source_sha256": "2407556d1bd77b7e2a21941089a86c4e339efc8827dfd095b9770f2723aff3f1",
+   "shuffle_index": 22,
+   "gt_points": 12,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_02",
+   "group": "pk_bw",
+   "source_filename": "pk__garadacimab1__p02__v1.png",
+   "source_plot_id": "pk__garadacimab1__p02",
+   "image_path": "data/images\\pk__garadacimab1__p02__v1.png",
+   "width": 709,
+   "height": 451,
+   "colored_pixel_count": 0,
+   "source_sha256": "50d3bfa84b8232f3f1c89fcb42485aac6fe448125ae9da4cd491b6c18bff479c",
+   "shuffle_index": 51,
+   "gt_points": 39,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_03",
+   "group": "pk_bw",
+   "source_filename": "pk__bepranemab1__p01__v3.png",
+   "source_plot_id": "pk__bepranemab1__p01",
+   "image_path": "data/images\\pk__bepranemab1__p01__v3.png",
+   "width": 804,
+   "height": 382,
+   "colored_pixel_count": 0,
+   "source_sha256": "5b72e3048e1f40ae9c3d107aa6c07e1f88b8f31ac444d5c28b90e81e92169b70",
+   "shuffle_index": 53,
+   "gt_points": 67,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_04",
+   "group": "pk_bw",
+   "source_filename": "pk__fiztasovimab1__p01__v3.png",
+   "source_plot_id": "pk__fiztasovimab1__p01",
+   "image_path": "data/images\\pk__fiztasovimab1__p01__v3.png",
+   "width": 386,
+   "height": 291,
+   "colored_pixel_count": 0,
+   "source_sha256": "96728051b457e8d43179b7baa821f693ebf4b75cc46e44a9ba511287c9f0f9ea",
+   "shuffle_index": 54,
+   "gt_points": 19,
+   "generator_modality": "bw",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_05",
+   "group": "pk_bw",
+   "source_filename": "pk__denosumab_-_SB162__p01__v0.png",
+   "source_plot_id": "pk__denosumab_-_SB162__p01",
+   "image_path": "data/images\\pk__denosumab_-_SB162__p01__v0.png",
+   "width": 520,
+   "height": 364,
+   "colored_pixel_count": 59,
+   "source_sha256": "b30a1c93ec672a8f30b6d5ed5ef36f11bb6973420087199035555a9e1feb4c2b",
+   "shuffle_index": 68,
+   "gt_points": 46,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_06",
+   "group": "pk_bw",
+   "source_filename": "pk__zilovertamab1__p05__v9.png",
+   "source_plot_id": "pk__zilovertamab1__p05",
+   "image_path": "data/images\\pk__zilovertamab1__p05__v9.png",
+   "width": 168,
+   "height": 142,
+   "colored_pixel_count": 0,
+   "source_sha256": "4abed8be028a5b2caad06cd9fd1f0fa19f347bf909ce89fa4ea64a974aad9235",
+   "shuffle_index": 73,
+   "gt_points": 4,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_07",
+   "group": "pk_bw",
+   "source_filename": "pk__nesvacumab1__p01__v8.png",
+   "source_plot_id": "pk__nesvacumab1__p01",
+   "image_path": "data/images\\pk__nesvacumab1__p01__v8.png",
+   "width": 520,
+   "height": 368,
+   "colored_pixel_count": 0,
+   "source_sha256": "2d4800bd68dc3b3dc3862d0ab0a18a95f331295ef7c4374359710137243c8e56",
+   "shuffle_index": 87,
+   "gt_points": 74,
+   "generator_modality": "color",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_08",
+   "group": "pk_bw",
+   "source_filename": "pk__fulranumab1__p01__v4.png",
+   "source_plot_id": "pk__fulranumab1__p01",
+   "image_path": "data/images\\pk__fulranumab1__p01__v4.png",
+   "width": 382,
+   "height": 414,
+   "colored_pixel_count": 0,
+   "source_sha256": "94bd236014bacfb0fade509eb7e94636865b6fc69c1ca88fcb79bf9ecde44de5",
+   "shuffle_index": 96,
+   "gt_points": 55,
+   "generator_modality": "bw",
+   "same_image_in": [
+    "DEV_testset365",
+    "heldout2"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_09",
+   "group": "pk_bw",
+   "source_filename": "pk__pepinemab2__p01__v1.png",
+   "source_plot_id": "pk__pepinemab2__p01",
+   "image_path": "data/images\\pk__pepinemab2__p01__v1.png",
+   "width": 877,
+   "height": 656,
+   "colored_pixel_count": 0,
+   "source_sha256": "80782a488bfc0202d376809fe55a420854bf004fd4acbf10b941b96b20e8338c",
+   "shuffle_index": 112,
+   "gt_points": 8,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_10",
+   "group": "pk_bw",
+   "source_filename": "pk__narnatumab1__p02__v1.png",
+   "source_plot_id": "pk__narnatumab1__p02",
+   "image_path": "data/images\\pk__narnatumab1__p02__v1.png",
+   "width": 374,
+   "height": 331,
+   "colored_pixel_count": 0,
+   "source_sha256": "20f6a4df62942c6f7252ceb770b301da4acdd1659f4d221f896426dd7bb1a175",
+   "shuffle_index": 119,
+   "gt_points": 21,
+   "generator_modality": "bw",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_11",
+   "group": "pk_bw",
+   "source_filename": "pk__narnatumab1__p04__v9.png",
+   "source_plot_id": "pk__narnatumab1__p04",
+   "image_path": "data/images\\pk__narnatumab1__p04__v9.png",
+   "width": 372,
+   "height": 334,
+   "colored_pixel_count": 0,
+   "source_sha256": "03a9f554b611bed6d8e8cac7f44f8d134bf56dc695a486910c55ddcbd2d879c0",
+   "shuffle_index": 130,
+   "gt_points": 13,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_12",
+   "group": "pk_bw",
+   "source_filename": "pk__zilovertamab1__p07__v1.png",
+   "source_plot_id": "pk__zilovertamab1__p07",
+   "image_path": "data/images\\pk__zilovertamab1__p07__v1.png",
+   "width": 168,
+   "height": 144,
+   "colored_pixel_count": 0,
+   "source_sha256": "8c71a1c2d87d916258b674e022b39a400ba04caeafa1ca0f767b0a6df668d6e2",
+   "shuffle_index": 131,
+   "gt_points": 4,
+   "generator_modality": "color",
+   "same_image_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_13",
+   "group": "pk_bw",
+   "source_filename": "pk__amubarvimab1__p02__v1.png",
+   "source_plot_id": "pk__amubarvimab1__p02",
+   "image_path": "data/images\\pk__amubarvimab1__p02__v1.png",
+   "width": 314,
+   "height": 203,
+   "colored_pixel_count": 0,
+   "source_sha256": "67fed0358beeedc4cca6174a3fdb9dba5269a3a74b5f6fc29ebfab8348da7ea5",
+   "shuffle_index": 134,
+   "gt_points": 23,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_14",
+   "group": "pk_bw",
+   "source_filename": "pk__tigatuzumab1__p01__v6.png",
+   "source_plot_id": "pk__tigatuzumab1__p01",
+   "image_path": "data/images\\pk__tigatuzumab1__p01__v6.png",
+   "width": 646,
+   "height": 346,
+   "colored_pixel_count": 0,
+   "source_sha256": "e213d5f9130a422b6e9fbc3cf8969c013edf70052a5687420c003f6d756974e9",
+   "shuffle_index": 172,
+   "gt_points": 37,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_15",
+   "group": "pk_bw",
+   "source_filename": "pk__panitumumab2__p02__v5.png",
+   "source_plot_id": "pk__panitumumab2__p02",
+   "image_path": "data/images\\pk__panitumumab2__p02__v5.png",
+   "width": 382,
+   "height": 248,
+   "colored_pixel_count": 0,
+   "source_sha256": "f16e2ffc63acc90b2fcc253a34844dc08c4aa632fbade1075285b64ae9edc57a",
+   "shuffle_index": 173,
+   "gt_points": 42,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_16",
+   "group": "pk_bw",
+   "source_filename": "pk__lenzilumab1__p01__v7.png",
+   "source_plot_id": "pk__lenzilumab1__p01",
+   "image_path": "data/images\\pk__lenzilumab1__p01__v7.png",
+   "width": 750,
+   "height": 425,
+   "colored_pixel_count": 0,
+   "source_sha256": "d1594c66305b47277ba81f4fcca8b61127ba2d4efefb2481339529dfbc8cf4d4",
+   "shuffle_index": 190,
+   "gt_points": 30,
+   "generator_modality": "bw",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_17",
+   "group": "pk_bw",
+   "source_filename": "pk__obinutuzumab2__p01__v2.png",
+   "source_plot_id": "pk__obinutuzumab2__p01",
+   "image_path": "data/images\\pk__obinutuzumab2__p01__v2.png",
+   "width": 340,
+   "height": 185,
+   "colored_pixel_count": 0,
+   "source_sha256": "c407433859eef90a25c7e25dbc76bb95eae12604a9fc83978616d54e3b0b8d6d",
+   "shuffle_index": 202,
+   "gt_points": 23,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_18",
+   "group": "pk_bw",
+   "source_filename": "pk__ligelizumab1__p01__v7.png",
+   "source_plot_id": "pk__ligelizumab1__p01",
+   "image_path": "data/images\\pk__ligelizumab1__p01__v7.png",
+   "width": 490,
+   "height": 453,
+   "colored_pixel_count": 0,
+   "source_sha256": "d89d718830a745dadafc4ae446e6282bd98ce82de1bd2d2521114eb1c8b46b60",
+   "shuffle_index": 209,
+   "gt_points": 50,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_19",
+   "group": "pk_bw",
+   "source_filename": "pk__abrilumab2__p02__v8.png",
+   "source_plot_id": "pk__abrilumab2__p02",
+   "image_path": "data/images\\pk__abrilumab2__p02__v8.png",
+   "width": 989,
+   "height": 518,
+   "colored_pixel_count": 0,
+   "source_sha256": "54fff30cf708bc5ccdb25ff62f541156048f6fde537a62412c69766db868395a",
+   "shuffle_index": 216,
+   "gt_points": 60,
+   "generator_modality": "bw",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_20",
+   "group": "pk_bw",
+   "source_filename": "pk__evolocumab1__p02__v3.png",
+   "source_plot_id": "pk__evolocumab1__p02",
+   "image_path": "data/images\\pk__evolocumab1__p02__v3.png",
+   "width": 800,
+   "height": 531,
+   "colored_pixel_count": 0,
+   "source_sha256": "9422647c6c60d62930a9c58a4bd696305752466cda9145ebdfcbf9f701b1d31f",
+   "shuffle_index": 236,
+   "gt_points": 26,
+   "generator_modality": "bw",
+   "same_image_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_21",
+   "group": "pk_bw",
+   "source_filename": "pk__obinutuzumab2__p02__v0.png",
+   "source_plot_id": "pk__obinutuzumab2__p02",
+   "image_path": "data/images\\pk__obinutuzumab2__p02__v0.png",
+   "width": 353,
+   "height": 185,
+   "colored_pixel_count": 0,
+   "source_sha256": "4f5330260bef7ec80b8070ba46994d64b00ec5f9e83c58cdffa58bc8b1a8cac5",
+   "shuffle_index": 240,
+   "gt_points": 25,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_22",
+   "group": "pk_bw",
+   "source_filename": "pk__imalumab1__p01__v3.png",
+   "source_plot_id": "pk__imalumab1__p01",
+   "image_path": "data/images\\pk__imalumab1__p01__v3.png",
+   "width": 709,
+   "height": 346,
+   "colored_pixel_count": 0,
+   "source_sha256": "fe6d469999a6636e16322aaa3e83d0d0506b29b481198bfc62002063edf206e8",
+   "shuffle_index": 245,
+   "gt_points": 41,
+   "generator_modality": "bw",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_23",
+   "group": "pk_bw",
+   "source_filename": "pk__balstilimab2__p01__v5.png",
+   "source_plot_id": "pk__balstilimab2__p01",
+   "image_path": "data/images\\pk__balstilimab2__p01__v5.png",
+   "width": 491,
+   "height": 207,
+   "colored_pixel_count": 0,
+   "source_sha256": "1a989d0348cac38fd0336a4d80cc5e864073b5ece95984277a95ac0030500e2a",
+   "shuffle_index": 267,
+   "gt_points": 42,
+   "generator_modality": "bw",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_24",
+   "group": "pk_bw",
+   "source_filename": "pk__aducanumab1__p01__v0.png",
+   "source_plot_id": "pk__aducanumab1__p01",
+   "image_path": "data/images\\pk__aducanumab1__p01__v0.png",
+   "width": 625,
+   "height": 527,
+   "colored_pixel_count": 0,
+   "source_sha256": "a7df29079f7cc192bc777132fea339535a99072f50b66be0e9a65c84f5ccfae3",
+   "shuffle_index": 310,
+   "gt_points": 64,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_bw_25",
+   "group": "pk_bw",
+   "source_filename": "pk__gosuranemab1__p02__v6.png",
+   "source_plot_id": "pk__gosuranemab1__p02",
+   "image_path": "data/images\\pk__gosuranemab1__p02__v6.png",
+   "width": 772,
+   "height": 1147,
+   "colored_pixel_count": 0,
+   "source_sha256": "0685b80e46fcf5435f69fda2ffc17ff735299bcc6eb0a2e76c68c0c2a97305e7",
+   "shuffle_index": 316,
+   "gt_points": 82,
+   "generator_modality": "bw",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout2",
+    "heldout3",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_01",
+   "group": "pk_color",
+   "source_filename": "pk__opicinumab1__p01__v9.png",
+   "source_plot_id": "pk__opicinumab1__p01",
+   "image_path": "data/images\\pk__opicinumab1__p01__v9.png",
+   "width": 530,
+   "height": 538,
+   "colored_pixel_count": 9193,
+   "source_sha256": "dc1874810349e0f3d41a5183e76831ffa0cbee7fae73b26a0b1b02fde01002db",
+   "shuffle_index": 15,
+   "gt_points": 70,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_02",
+   "group": "pk_color",
+   "source_filename": "pk__lumretuzumab2__p04__v2.png",
+   "source_plot_id": "pk__lumretuzumab2__p04",
+   "image_path": "data/images\\pk__lumretuzumab2__p04__v2.png",
+   "width": 356,
+   "height": 398,
+   "colored_pixel_count": 182,
+   "source_sha256": "2d26c09566d2b221fab92aa93552c4cc12461624bede507c2e5583187513bbf1",
+   "shuffle_index": 17,
+   "gt_points": 13,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_03",
+   "group": "pk_color",
+   "source_filename": "pk__cetrelimab2__p02__v7.png",
+   "source_plot_id": "pk__cetrelimab2__p02",
+   "image_path": "data/images\\pk__cetrelimab2__p02__v7.png",
+   "width": 709,
+   "height": 405,
+   "colored_pixel_count": 7236,
+   "source_sha256": "6903641b41daca445ac117d240934141160bdc420efb17d25b24a537cee93c36",
+   "shuffle_index": 20,
+   "gt_points": 68,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_04",
+   "group": "pk_color",
+   "source_filename": "pk__tozorakimab1__p03__v6.png",
+   "source_plot_id": "pk__tozorakimab1__p03",
+   "image_path": "data/images\\pk__tozorakimab1__p03__v6.png",
+   "width": 603,
+   "height": 645,
+   "colored_pixel_count": 5665,
+   "source_sha256": "9d5c2a01545dd12a6a601d072efd46d2a9a6ea49d5ded04b0b4bcf5b9e0e4353",
+   "shuffle_index": 21,
+   "gt_points": 26,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_05",
+   "group": "pk_color",
+   "source_filename": "pk__tuvonralimab1__p03__v5.png",
+   "source_plot_id": "pk__tuvonralimab1__p03",
+   "image_path": "data/images\\pk__tuvonralimab1__p03__v5.png",
+   "width": 661,
+   "height": 458,
+   "colored_pixel_count": 11550,
+   "source_sha256": "84d2e5bc9f25d49cec3465c83c23858a64d99896b4869e6bd7d8ea0c3ca75964",
+   "shuffle_index": 26,
+   "gt_points": 46,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_06",
+   "group": "pk_color",
+   "source_filename": "pk__mibavademab2__p02__v8.png",
+   "source_plot_id": "pk__mibavademab2__p02",
+   "image_path": "data/images\\pk__mibavademab2__p02__v8.png",
+   "width": 692,
+   "height": 322,
+   "colored_pixel_count": 8455,
+   "source_sha256": "b2ba223ab11d5785f373a2c6e58f8992f5bd021c67a364b55ad090d0d573b57c",
+   "shuffle_index": 27,
+   "gt_points": 81,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_07",
+   "group": "pk_color",
+   "source_filename": "pk__atidortoxumab1__p04__v5.png",
+   "source_plot_id": "pk__atidortoxumab1__p04",
+   "image_path": "data/images\\pk__atidortoxumab1__p04__v5.png",
+   "width": 607,
+   "height": 309,
+   "colored_pixel_count": 3709,
+   "source_sha256": "ef52921e92451c9a6bdca367425ab289005a6c8ba2e112e5ee43173f712810a2",
+   "shuffle_index": 31,
+   "gt_points": 22,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_08",
+   "group": "pk_color",
+   "source_filename": "pk__abelacimab1__p01__v3.png",
+   "source_plot_id": "pk__abelacimab1__p01",
+   "image_path": "data/images\\pk__abelacimab1__p01__v3.png",
+   "width": 709,
+   "height": 457,
+   "colored_pixel_count": 9483,
+   "source_sha256": "74f602b63a9f3295a165efbeb5f01746d24b6aa66bfaf5de019d4995935c1505",
+   "shuffle_index": 36,
+   "gt_points": 87,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_09",
+   "group": "pk_color",
+   "source_filename": "pk__upanovimab1__p02__v5.png",
+   "source_plot_id": "pk__upanovimab1__p02",
+   "image_path": "data/images\\pk__upanovimab1__p02__v5.png",
+   "width": 568,
+   "height": 318,
+   "colored_pixel_count": 4774,
+   "source_sha256": "9d095d089c9ddd024e8f7e220a8a8a48b49781fae53fab005ae86bdc85c3918a",
+   "shuffle_index": 38,
+   "gt_points": 37,
+   "generator_modality": "color",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_10",
+   "group": "pk_color",
+   "source_filename": "pk__lifastuzumab2__p04__v9.png",
+   "source_plot_id": "pk__lifastuzumab2__p04",
+   "image_path": "data/images\\pk__lifastuzumab2__p04__v9.png",
+   "width": 339,
+   "height": 352,
+   "colored_pixel_count": 2773,
+   "source_sha256": "caf50a4d2fee3234dd7a7a8484f8f787d3b4dcf3d5f19074a0723622fb221d5d",
+   "shuffle_index": 45,
+   "gt_points": 26,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_11",
+   "group": "pk_color",
+   "source_filename": "pk__barzolvolimab3__p01__v5.png",
+   "source_plot_id": "pk__barzolvolimab3__p01",
+   "image_path": "data/images\\pk__barzolvolimab3__p01__v5.png",
+   "width": 687,
+   "height": 198,
+   "colored_pixel_count": 7273,
+   "source_sha256": "fc6c63e6d6a29bbdc944ede27e41e4a5060f5fe8cabfe20d5527668bb2dce34c",
+   "shuffle_index": 47,
+   "gt_points": 32,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_12",
+   "group": "pk_color",
+   "source_filename": "pk__cilgavimab3__p05__v4.png",
+   "source_plot_id": "pk__cilgavimab3__p05",
+   "image_path": "data/images\\pk__cilgavimab3__p05__v4.png",
+   "width": 1161,
+   "height": 526,
+   "colored_pixel_count": 9982,
+   "source_sha256": "de2d038c8e4f7fff0e6550c9613cc990b9745207b95fdf66cbde1f7ad412d3b1",
+   "shuffle_index": 56,
+   "gt_points": 32,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_13",
+   "group": "pk_color",
+   "source_filename": "pk__risankizumab5__p03__v9.png",
+   "source_plot_id": "pk__risankizumab5__p03",
+   "image_path": "data/images\\pk__risankizumab5__p03__v9.png",
+   "width": 698,
+   "height": 519,
+   "colored_pixel_count": 4575,
+   "source_sha256": "42a21b3784285907d47f291d16b4fec06199e475eaf6b75c471834ab9fad70dc",
+   "shuffle_index": 59,
+   "gt_points": 28,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_14",
+   "group": "pk_color",
+   "source_filename": "pk__cilgavimab3__p06__v5.png",
+   "source_plot_id": "pk__cilgavimab3__p06",
+   "image_path": "data/images\\pk__cilgavimab3__p06__v5.png",
+   "width": 944,
+   "height": 391,
+   "colored_pixel_count": 6237,
+   "source_sha256": "1e3d290ed541be8c27a8439f58bf005edf5fb647935592d3f384b1797668037c",
+   "shuffle_index": 61,
+   "gt_points": 25,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_15",
+   "group": "pk_color",
+   "source_filename": "pk__sibeprenlimab1__p01__v2.png",
+   "source_plot_id": "pk__sibeprenlimab1__p01",
+   "image_path": "data/images\\pk__sibeprenlimab1__p01__v2.png",
+   "width": 1000,
+   "height": 542,
+   "colored_pixel_count": 12455,
+   "source_sha256": "1e170bd64dc8736023dc09a2e7bd5be221a5cf82018d2e675b2f768387c5ab16",
+   "shuffle_index": 65,
+   "gt_points": 45,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_16",
+   "group": "pk_color",
+   "source_filename": "pk__ongericimab1__p01__v7.png",
+   "source_plot_id": "pk__ongericimab1__p01",
+   "image_path": "data/images\\pk__ongericimab1__p01__v7.png",
+   "width": 369,
+   "height": 286,
+   "colored_pixel_count": 1916,
+   "source_sha256": "8b12132408fb38fd7383bc9bda0d78cd6a94111e3e634efa3f575afacaaec0bd",
+   "shuffle_index": 66,
+   "gt_points": 52,
+   "generator_modality": "color",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_17",
+   "group": "pk_color",
+   "source_filename": "pk__latozinemab1__p03__v3.png",
+   "source_plot_id": "pk__latozinemab1__p03",
+   "image_path": "data/images\\pk__latozinemab1__p03__v3.png",
+   "width": 783,
+   "height": 253,
+   "colored_pixel_count": 3591,
+   "source_sha256": "155f56c19819510685efd335d62a523d755992e6af12bee27faeff9cdb01477a",
+   "shuffle_index": 69,
+   "gt_points": 11,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_18",
+   "group": "pk_color",
+   "source_filename": "pk__lumretuzumab2__p03__v7.png",
+   "source_plot_id": "pk__lumretuzumab2__p03",
+   "image_path": "data/images\\pk__lumretuzumab2__p03__v7.png",
+   "width": 354,
+   "height": 398,
+   "colored_pixel_count": 333,
+   "source_sha256": "96b16d261add70fa7fff24efac671e70ab936aa4f79e19d6471591486289dc40",
+   "shuffle_index": 70,
+   "gt_points": 50,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_19",
+   "group": "pk_color",
+   "source_filename": "pk__itepekimab1_F2__p01__v3.png",
+   "source_plot_id": "pk__itepekimab1_F2__p01",
+   "image_path": "data/images\\pk__itepekimab1_F2__p01__v3.png",
+   "width": 699,
+   "height": 565,
+   "colored_pixel_count": 4942,
+   "source_sha256": "3014f8961348b1aabf110fd3e80f9920a2e39e6fa8a01d20d1e4c3a44fd5b209",
+   "shuffle_index": 78,
+   "gt_points": 78,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_20",
+   "group": "pk_color",
+   "source_filename": "pk__tuvonralimab1__p02__v5.png",
+   "source_plot_id": "pk__tuvonralimab1__p02",
+   "image_path": "data/images\\pk__tuvonralimab1__p02__v5.png",
+   "width": 730,
+   "height": 455,
+   "colored_pixel_count": 7270,
+   "source_sha256": "67ee1a3e92459a00335d79c8d77fa76d3d2bdbc8764bf859b825e10be23fd63c",
+   "shuffle_index": 79,
+   "gt_points": 42,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_21",
+   "group": "pk_color",
+   "source_filename": "pk__tarextumab1__p01__v9.png",
+   "source_plot_id": "pk__tarextumab1__p01",
+   "image_path": "data/images\\pk__tarextumab1__p01__v9.png",
+   "width": 649,
+   "height": 327,
+   "colored_pixel_count": 13333,
+   "source_sha256": "f586450fe644c24cf0d8ee9174dd7594052a12c691cfa6e454d70203d26c709b",
+   "shuffle_index": 84,
+   "gt_points": 86,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_22",
+   "group": "pk_color",
+   "source_filename": "pk__latozinemab1__p02__v4.png",
+   "source_plot_id": "pk__latozinemab1__p02",
+   "image_path": "data/images\\pk__latozinemab1__p02__v4.png",
+   "width": 354,
+   "height": 441,
+   "colored_pixel_count": 1789,
+   "source_sha256": "decce0c435051fd3bc85bc2a2f730d687941745df42c1eb9b10c2813284204de",
+   "shuffle_index": 85,
+   "gt_points": 9,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_23",
+   "group": "pk_color",
+   "source_filename": "pk__zuberitamab1__p03__v4.png",
+   "source_plot_id": "pk__zuberitamab1__p03",
+   "image_path": "data/images\\pk__zuberitamab1__p03__v4.png",
+   "width": 407,
+   "height": 190,
+   "colored_pixel_count": 3723,
+   "source_sha256": "13baa0e5f50a4ad0da7e77de7b8e7c5a0f3140a34c1617a26b988961ac0c71e2",
+   "shuffle_index": 95,
+   "gt_points": 36,
+   "generator_modality": "color",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_24",
+   "group": "pk_color",
+   "source_filename": "pk__gedivumab1__p01__v1.png",
+   "source_plot_id": "pk__gedivumab1__p01",
+   "image_path": "data/images\\pk__gedivumab1__p01__v1.png",
+   "width": 375,
+   "height": 217,
+   "colored_pixel_count": 1818,
+   "source_sha256": "7cdbd80e9cfce546c7db3dba02361f2aeb8a5c71b5822bc970046d9cd8d6432e",
+   "shuffle_index": 101,
+   "gt_points": 14,
+   "generator_modality": "color",
+   "same_image_in": [
+    "inputs_synth"
+   ],
+   "same_source_plot_in": [
+    "DEV_testset365",
+    "heldout",
+    "inputs_synth"
+   ]
+  },
+  {
+   "chart_id": "t1_pk_color_25",
+   "group": "pk_color",
+   "source_filename": "pk__iparomlimab1__p01__v5.png",
+   "source_plot_id": "pk__iparomlimab1__p01",
+   "image_path": "data/images\\pk__iparomlimab1__p01__v5.png",
+   "width": 504,
+   "height": 322,
+   "colored_pixel_count": 1431,
+   "source_sha256": "2b36c04e6bb594e918e4ac4c1333bef15ea8aadb4ba8e46372a1257ce2b4a285",
+   "shuffle_index": 104,
+   "gt_points": 37,
+   "generator_modality": "color",
+   "same_image_in": [],
+   "same_source_plot_in": [
+    "inputs_synth"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,108 @@
+{
+ "panel_id": "er__aducanumab_1_2_1__p01__v1",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "human Aβ1-16",
+   "bbox": [
+    149,
+    44,
+    191,
+    65
+   ],
+   "bbox_crop": [
+    149,
+    44,
+    191,
+    65
+   ],
+   "bbox_original": [
+    149,
+    44,
+    191,
+    65
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__aducanumab_1_2_1__p01__v1/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__aducanumab_1_2_1__p01__v1/shared_legend_crops/legend_01.png",
+   "image_size": [
+    42,
+    21
+   ],
+   "sha256": "2931b3c3aa78722e1d9c8d52ab722a5a8415c01a81975593f9304145e96f595d",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "mouse Aβ1-16",
+   "bbox": [
+    152,
+    98,
+    188,
+    113
+   ],
+   "bbox_crop": [
+    152,
+    98,
+    188,
+    113
+   ],
+   "bbox_original": [
+    152,
+    98,
+    188,
+    113
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__aducanumab_1_2_1__p01__v1/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__aducanumab_1_2_1__p01__v1/shared_legend_crops/legend_02.png",
+   "image_size": [
+    36,
+    15
+   ],
+   "sha256": "0a3ffdc4f8e2d34c1c98fa38ac52284a8e0b7b01ed6427cd2b78fc656c26329b",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s01": "s01",
+  "s02": "s02"
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "human Aβ1-16",
+   "bbox": [
+    149,
+    44,
+    191,
+    65
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "mouse Aβ1-16",
+   "bbox": [
+    152,
+    98,
+    188,
+    113
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "531468e6d030e534e5c2cc4449dcacbd8c10341487446a0865ef798023d648c5",
+ "source_sha256": "531468e6d030e534e5c2cc4449dcacbd8c10341487446a0865ef798023d648c5",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}

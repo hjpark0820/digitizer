@@ -1,0 +1,108 @@
+{
+ "panel_id": "er__daclizumab_1_1_0__p02__v2",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "negative control antibody",
+   "bbox": [
+    4,
+    217,
+    37,
+    224
+   ],
+   "bbox_crop": [
+    4,
+    217,
+    37,
+    224
+   ],
+   "bbox_original": [
+    4,
+    217,
+    37,
+    224
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__daclizumab_1_1_0__p02__v2/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__daclizumab_1_1_0__p02__v2/shared_legend_crops/legend_01.png",
+   "image_size": [
+    33,
+    7
+   ],
+   "sha256": "171509c395513f2ac7ad93bfc4b03b65295365293ed6dbb697f3dbc6e7b0acda",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "CDC positive control antibody",
+   "bbox": [
+    4,
+    255,
+    37,
+    262
+   ],
+   "bbox_crop": [
+    4,
+    255,
+    37,
+    262
+   ],
+   "bbox_original": [
+    4,
+    255,
+    37,
+    262
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__daclizumab_1_1_0__p02__v2/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__daclizumab_1_1_0__p02__v2/shared_legend_crops/legend_02.png",
+   "image_size": [
+    33,
+    7
+   ],
+   "sha256": "5d896f584854a7640d1f06f531677fd1a8d3664ebe3d37aa4d37c708a46f2680",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s01": "s01",
+  "s02": "s02"
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "negative control antibody",
+   "bbox": [
+    4,
+    217,
+    37,
+    224
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "CDC positive control antibody",
+   "bbox": [
+    4,
+    255,
+    37,
+    262
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "69ae38e095947fed688ba264ae7b3f06199da9265921bc95e51e5cd3cd0cffd0",
+ "source_sha256": "69ae38e095947fed688ba264ae7b3f06199da9265921bc95e51e5cd3cd0cffd0",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}

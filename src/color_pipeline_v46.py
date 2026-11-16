@@ -29,6 +29,7 @@ def _prepare_image_and_palette():
     _ap.add_argument('--legend', default=None, help='External legend image path')
     _ap.add_argument('--no-stem', action='store_true', help='Skip stem/pixel classification; use raw mask directly for walk')
     _ap.add_argument('--legend-box', default=None, help='User-drawn legend box "x0,y0,x1,y1" (overrides auto-detect)')
+    _ap.add_argument('--legend-review-json', default=None, help='Saved GUI legend review replacing automatic swatch discovery')
     _ap.add_argument('--plot-area', default=None, help='User-drawn plot area "x0,y0,x1,y1" (overrides auto-detect)')
     _ap.add_argument('--x-min', default=None, help='Manual x-axis minimum (data value at plot-area left edge)')
     _ap.add_argument('--x-max', default=None, help='Manual x-axis maximum (data value at plot-area right edge)')
@@ -157,7 +158,14 @@ def _prepare_image_and_palette():
         _ex0, _ey0, _ex1, _ey1 = _extra_exclude
         _dig.ink[max(0, _ey0):_ey1 + 1, max(0, _ex0):_ex1 + 1] = False
         _dig.inplot[max(0, _ey0):_ey1 + 1, max(0, _ex0):_ex1 + 1] = False
-    recover_palette()
+    if globals().get('_V46_REVIEW_ENTRIES') is not None:
+        # The reviewed set is authoritative: automatic neutral-row recovery
+        # must not put a deleted legend entry back into the palette.
+        globals()['_names'] = [c['name'] for c in COLORS]
+        globals()['_rgbs'] = [tuple(c['mean_rgb']) for c in COLORS]
+        globals()['_unified'] = None
+    else:
+        recover_palette()
     try:
         with open(os.path.join(OUT_DIR, 'legend_grid.json'), 'w') as _gf:
             json.dump({'legend_box': _lb, 'grid': globals().get('_LAST_LEGEND_GRID'), 'achro': globals().get('_LAST_ACHRO_SWATCHES', []), 'unified': _unified}, _gf)

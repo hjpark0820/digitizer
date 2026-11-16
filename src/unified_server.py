@@ -323,6 +323,11 @@ def agent_workflow_script():
     return FileResponse(str(HERE / 'agent_workflow.js'), media_type='text/javascript')
 
 
+@app.get('/legend_review_v46.js')
+def legend_review_script():
+    return FileResponse(str(HERE / 'legend_review_v46.js'), media_type='text/javascript')
+
+
 @app.post("/digitize")
 async def digitize(
     image: UploadFile = File(...),
@@ -413,6 +418,14 @@ async def digitize(
             raise HTTPException(409, 'Previous correction uses different image pixels/resolution. Use saved Step 5 or run detection again.')
     _console_print(f"[unified] Fast detection {'ON' if enabled else 'OFF'}: "
                    f"{speed['source_size']} -> {speed['working_size']}", flush=True)
+    # Persist the settings in the RESULT coordinate system. Legend review forks
+    # this job and uses these pixels/settings, never the browser's next-run fields.
+    settings = dict(mode=mode, plot_area=plot_area, legend_box=legend_box,
+                    legend_area=legend_area, x_min=x_min, x_max=x_max,
+                    y_min=y_min, y_max=y_max, x_log=x_log, y_log=y_log,
+                    conf=conf, color_series_mode=color_series_mode)
+    (out_dir / 'detection_settings_v46.json').write_text(
+        json.dumps(settings, indent=2), encoding='utf-8')
 
     try:
         if mode == "bw":
@@ -474,6 +487,8 @@ def _run_color(job_id, in_path, out_dir, plot_area, legend_box,
         raise HTTPException(500, "run_A4_auto_v46.py is missing; restore the complete v46 runtime")
     cmd = [sys.executable, str(pipeline), str(in_path), str(out_dir),
            '--mode', 'color', '--color-series-mode', color_series_mode]
+    if (out_dir / 'legend_review_input.json').exists():
+        cmd += ['--legend-review-json', str(out_dir / 'legend_review_input.json')]
     if legend is None: cmd += ['--no-legend']
     if legend_box.strip(): cmd += ["--legend-box", legend_box.strip()]
     if plot_area.strip():  cmd += ["--plot-area", plot_area.strip()]
@@ -561,6 +576,8 @@ def _run_bw(job_id, in_path, out_dir, plot_area, legend_area, known_classes,
     cmd = [sys.executable, str(cli), str(in_path), str(out_dir),
            "--mode", "bw", "--skip-segments",
            "--plot-area", plot_area.strip()]
+    if (out_dir / 'legend_review_input.json').exists():
+        cmd += ['--legend-review-json', str(out_dir / 'legend_review_input.json')]
     for flag, value in (("--x-min", x_min), ("--x-max", x_max),
                         ("--y-min", y_min), ("--y-max", y_max)):
         # Omitted limits request axis OCR in either legend workflow. A zero
@@ -776,6 +793,7 @@ def _response(job_id, out_dir, mode, ok, log):
         "step5_stop_url": url('step5_stop_report.json') if stop_report else None,
         "legend_optional": diagnostic,
         "legend_optional_url": url("legend_optional_v46.json"),
+        "legend_review_url": f'/legend-review/{job_id}' if _legend_review_context(out_dir) else None,
         "triangle_errorbar": triangle_guard,
         "triangle_errorbar_overlay_url": url('triangle_errorbar_review_v46.png') if triangle_guard else None,
         "triangle_errorbar_weak_url": url('triangle_errorbar_weak_suppressed_v46.json') if triangle_guard else None,
@@ -829,6 +847,118 @@ async def _session_request(request):
         return data
     except (ValueError,TypeError,RecursionError) as error:
         raise HTTPException(400,str(error)) from error
+
+
+def _legend_review_context(out_dir):
+    """Saved detection settings, including a migration for earlier GUI jobs."""
+    try:
+        settings_file = out_dir / 'detection_settings_v46.json'
+        if settings_file.exists():
+            settings = json.loads(settings_file.read_text(encoding='utf-8'))
+        else:
+            speed = json.loads((out_dir / 'fast_detection_v46.json').read_text(encoding='utf-8'))
+            selection = json.loads((out_dir / 'mode_selection_v46.json').read_text(encoding='utf-8'))
+            regions = speed['working_regions']
+            settings = dict(mode=selection['mode'], color_series_mode='auto')
+            for name in ('plot_area', 'legend_area', 'legend_box'):
+                settings[name] = ','.join(map(str, regions.get(name, [])))
+            # Earlier jobs did not save original axis form values. Re-read axes
+            # on rerun rather than mislabelling an automatic fit as manual input.
+        box = _parse4(settings.get('legend_area') or settings.get('legend_box', ''), 'legend')
+        if box is None or settings.get('mode') not in ('bw', 'color'):
+            return None
+        return settings, box
+    except (OSError, ValueError, TypeError, KeyError, HTTPException):
+        return None
+
+
+@app.get('/legend-review/{job_id}')
+def legend_review(job_id: str):
+    from legend_review_v46 import load_review
+    out_dir = _job_output(job_id)
+    context = _legend_review_context(out_dir)
+    if not context:
+        raise HTTPException(409, 'Select a legend region and run detection to review its swatches.')
+    settings, box = context
+    try:
+        review = load_review(out_dir, out_dir / 'input.png', box, settings['mode'])
+    except (ValueError, OSError) as error:
+        raise HTTPException(400, str(error)) from error
+    review.update(job_id=job_id, image_url=f'/result/{job_id}/input.png',
+                  image_size=[review['image']['width'], review['image']['height']],
+                  coordinate_space='working')
+    return review
+
+
+@app.post('/legend-review/{job_id}/suggest')
+async def suggest_legend_entry(job_id: str, request: Request):
+    from legend_review_v46 import validate_review, propose_entry
+    payload = await _session_request(request)
+    out_dir = _job_output(job_id)
+    context = _legend_review_context(out_dir)
+    if not context:
+        raise HTTPException(409, 'This result has no selected legend region.')
+    try:
+        checked = validate_review(payload, out_dir / 'input.png', context[1], allow_empty=True)
+        return await run_in_threadpool(propose_entry, out_dir / 'input.png', context[1],
+                                       payload.get('center'), checked['entries'])
+    except (ValueError, TypeError, OSError) as error:
+        raise HTTPException(400, str(error)) from error
+
+
+@app.post('/legend-review/{job_id}/rerun')
+async def rerun_reviewed_legend(job_id: str, request: Request):
+    from legend_review_v46 import validate_review
+    payload = await _session_request(request)
+    previous_out = _job_output(job_id)
+    context = _legend_review_context(previous_out)
+    if not context:
+        raise HTTPException(409, 'This result has no saved legend selection.')
+    settings, box = context
+    try:
+        review = validate_review(payload, previous_out / 'input.png', box)
+    except (ValueError, TypeError, OSError) as error:
+        raise HTTPException(400, str(error)) from error
+    fast_path = previous_out / 'fast_detection_v46.json'
+    if fast_path.exists():
+        fast_info = json.loads(fast_path.read_text(encoding='utf-8'))
+        if fast_info.get('applied') and not (previous_out / 'source_input.png').is_file():
+            raise HTTPException(409, 'This saved result used fast detection, but the original-resolution image is not included. Open the original image and run detection again before changing its legend swatches. Existing points can still be reviewed and edited.')
+    selected_ocr = _job_ocr_mode(previous_out)
+    if selected_ocr == 'agent' or selected_ocr == 'auto-agent' and not _tesseract_health()['available']:
+        if not _WORKFLOW.agent_status()['active']:
+            raise HTTPException(409, 'Agent OCR is selected. Connect an operating agent before rerunning detection.')
+    new_id = uuid.uuid4().hex[:12]
+    out_dir = JOBS_ROOT / new_id / 'out'
+    out_dir.mkdir(parents=True)
+    _register_job(new_id, out_dir)
+    # Preserve the exact working image plus its original-resolution OCR context.
+    # Do not resize again, carry old detections forward, or mutate the old job.
+    for name in ('input.png', 'source_input.png', 'fast_detection_v46.json', 'mode_selection_v46.json'):
+        if (previous_out / name).exists():
+            shutil.copy2(previous_out / name, out_dir / name)
+    _save_ocr_mode(out_dir, selected_ocr)
+    (out_dir / 'detection_settings_v46.json').write_text(json.dumps(settings, indent=2), encoding='utf-8')
+    review.update(source_job_id=job_id, source='human_review', mode=settings['mode'])
+    (out_dir / 'legend_review_input.json').write_text(json.dumps(review, indent=2), encoding='utf-8')
+    value = lambda name: str(settings.get(name) or '')
+    try:
+        if settings['mode'] == 'bw':
+            result = await run_in_threadpool(_run_bw, new_id, out_dir / 'input.png', out_dir,
+                value('plot_area'), value('legend_area') or value('legend_box'), '',
+                value('x_min'), value('x_max'), value('y_min'), value('y_max'),
+                value('x_log'), value('y_log'), '', value('conf'))
+        else:
+            result = await run_in_threadpool(_run_color, new_id, out_dir / 'input.png', out_dir,
+                value('plot_area'), value('legend_box') or value('legend_area'),
+                value('x_min'), value('x_max'), value('y_min'), value('y_max'),
+                value('x_log'), value('y_log'), color_series_mode=settings.get('color_series_mode', 'auto'))
+    except subprocess.TimeoutExpired as error:
+        result = _response(new_id, out_dir, settings['mode'], False,
+                           f'Detection with reviewed legend timed out after {error.timeout:g} seconds.')
+    data = json.loads(result.body)
+    data['legend_review_source_job_id'] = job_id
+    return JSONResponse(data)
 
 
 @app.post('/correction-session/import')

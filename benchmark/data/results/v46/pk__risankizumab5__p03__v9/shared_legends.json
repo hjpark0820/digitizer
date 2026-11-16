@@ -1,0 +1,263 @@
+{
+ "panel_id": "pk__risankizumab5__p03__v9",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "color02",
+   "native_swatch_id": "S01",
+   "bbox": [
+    349,
+    69,
+    382,
+    87
+   ],
+   "native_body_bbox": [
+    356,
+    69,
+    373,
+    84
+   ],
+   "class_name": "filled_triangle",
+   "rgb": [
+    43,
+    144,
+    41
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s01",
+   "label": "300 mg SC Japanese (N = 6)",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__risankizumab5__p03__v9/shared_legend_crops/legend_01.png",
+   "image_size": [
+    33,
+    18
+   ],
+   "sha256": "9f6e5a4f27734ef34c7dd8da780b55b7aaa232c53f9b494f35e59e2ea9260045",
+   "source_native_legend_id": "color02",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__risankizumab5__p03__v9/shared_legend_crops/legend_01.png",
+   "bbox_crop": [
+    349,
+    69,
+    382,
+    87
+   ],
+   "bbox_original": [
+    349,
+    69,
+    382,
+    87
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color03",
+   "native_swatch_id": "S02",
+   "bbox": [
+    349,
+    86,
+    382,
+    107
+   ],
+   "native_body_bbox": [
+    356,
+    89,
+    373,
+    104
+   ],
+   "class_name": "filled_square",
+   "rgb": [
+    49,
+    47,
+    191
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s02",
+   "label": "300 mg SC Chinese (N = 6)",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__risankizumab5__p03__v9/shared_legend_crops/legend_02.png",
+   "image_size": [
+    33,
+    21
+   ],
+   "sha256": "b1221965c91928956ad547843fae2b2119c6b1ae4a442a759ac70674504e2666",
+   "source_native_legend_id": "color03",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__risankizumab5__p03__v9/shared_legend_crops/legend_02.png",
+   "bbox_crop": [
+    349,
+    86,
+    382,
+    107
+   ],
+   "bbox_original": [
+    349,
+    86,
+    382,
+    107
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  },
+  {
+   "native_id": "color04",
+   "native_swatch_id": "S03",
+   "bbox": [
+    349,
+    106,
+    382,
+    127
+   ],
+   "native_body_bbox": [
+    357,
+    110,
+    372,
+    123
+   ],
+   "class_name": "filled_circle",
+   "rgb": [
+    0,
+    0,
+    0
+   ],
+   "crop_source": "composition.source_swatch_box",
+   "series_id": "s03",
+   "label": "300 mg SC Caucasian (N = 6)",
+   "image_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__risankizumab5__p03__v9/shared_legend_crops/legend_03.png",
+   "image_size": [
+    33,
+    21
+   ],
+   "sha256": "31910349a09c9b8eedb7deaec6991700d469e24685927f9bf540d01a4ec0c143",
+   "source_native_legend_id": "color04",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100_20261018_0fd678a840bc/v46/pk__risankizumab5__p03__v9/shared_legend_crops/legend_03.png",
+   "bbox_crop": [
+    349,
+    106,
+    382,
+    127
+   ],
+   "bbox_original": [
+    349,
+    106,
+    382,
+    127
+   ],
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false
+  }
+ ],
+ "mapping": {
+  "color02": "s01",
+  "color03": "s02",
+  "color04": "s03"
+ },
+ "legend_mapping_audit": {
+  "policy": "maximum-total-IoU one-to-one observed legend boxes; strictly positive overlap; no point references",
+  "pairs": [
+   {
+    "native_id": "color02",
+    "series_id": "s01",
+    "iou": 0.6653225806451613,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color02",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s02",
+    "iou": 0.5871886120996441,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   },
+   {
+    "native_id": "color03",
+    "series_id": "s03",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s01",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s02",
+    "iou": 0.0,
+    "accepted": false,
+    "reason": "zero_bbox_overlap"
+   },
+   {
+    "native_id": "color04",
+    "series_id": "s03",
+    "iou": 0.5739130434782609,
+    "accepted": true,
+    "reason": "maximum_total_iou_assignment"
+   }
+  ],
+  "unmatched_annotations": [],
+  "unmatched_native": []
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "300 mg SC Japanese (N = 6)",
+   "bbox": [
+    343,
+    69,
+    386,
+    84
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "300 mg SC Chinese (N = 6)",
+   "bbox": [
+    343,
+    89,
+    386,
+    104
+   ]
+  },
+  {
+   "series_id": "s03",
+   "label": "300 mg SC Caucasian (N = 6)",
+   "bbox": [
+    344,
+    109,
+    385,
+    123
+   ]
+  }
+ ],
+ "input_sha256": "42a21b3784285907d47f291d16b4fec06199e475eaf6b75c471834ab9fad70dc",
+ "source_sha256": "42a21b3784285907d47f291d16b4fec06199e475eaf6b75c471834ab9fad70dc",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "status": "available",
+ "protocol": "Shared actual v46 observed legend crops; not an independent legend-localization comparison.",
+ "export_seconds": 0.008788399980403483
+}

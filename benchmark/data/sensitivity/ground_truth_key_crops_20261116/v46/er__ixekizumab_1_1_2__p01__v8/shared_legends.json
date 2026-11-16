@@ -1,0 +1,108 @@
+{
+ "panel_id": "er__ixekizumab_1_1_2__p01__v8",
+ "modality": "bw",
+ "entries": [
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "Cyno IL-17 + ixekizumab",
+   "bbox": [
+    115,
+    43,
+    158,
+    56
+   ],
+   "bbox_crop": [
+    115,
+    43,
+    158,
+    56
+   ],
+   "bbox_original": [
+    115,
+    43,
+    158,
+    56
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__ixekizumab_1_1_2__p01__v8/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__ixekizumab_1_1_2__p01__v8/shared_legend_crops/legend_01.png",
+   "image_size": [
+    43,
+    13
+   ],
+   "sha256": "4fa9acae683ba3a5547d126a0b20eb09bcb67a0ea6cfe96096dfcb81fe28c3b5",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "Cyno IL-17 + hu IgG4",
+   "bbox": [
+    116,
+    156,
+    156,
+    167
+   ],
+   "bbox_crop": [
+    116,
+    156,
+    156,
+    167
+   ],
+   "bbox_original": [
+    116,
+    156,
+    156,
+    167
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__ixekizumab_1_1_2__p01__v8/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__ixekizumab_1_1_2__p01__v8/shared_legend_crops/legend_02.png",
+   "image_size": [
+    40,
+    11
+   ],
+   "sha256": "93b168386c513e274f9bd858f228593b8384f59de8af6770b0c08b0df8fe4c81",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s01": "s01",
+  "s02": "s02"
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Cyno IL-17 + ixekizumab",
+   "bbox": [
+    115,
+    43,
+    158,
+    56
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Cyno IL-17 + hu IgG4",
+   "bbox": [
+    116,
+    156,
+    156,
+    167
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "2e2591c84e133929b3ecff12747e8330e8cf43b9274e237cd4042c5ca22e9204",
+ "source_sha256": "2e2591c84e133929b3ecff12747e8330e8cf43b9274e237cd4042c5ca22e9204",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}

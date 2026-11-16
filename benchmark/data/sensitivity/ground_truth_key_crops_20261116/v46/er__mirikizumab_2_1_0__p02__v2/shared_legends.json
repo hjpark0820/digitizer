@@ -1,0 +1,108 @@
+{
+ "panel_id": "er__mirikizumab_2_1_0__p02__v2",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "SERENITY",
+   "bbox": [
+    0,
+    31,
+    67,
+    77
+   ],
+   "bbox_crop": [
+    0,
+    31,
+    67,
+    77
+   ],
+   "bbox_original": [
+    0,
+    31,
+    67,
+    77
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__mirikizumab_2_1_0__p02__v2/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__mirikizumab_2_1_0__p02__v2/shared_legend_crops/legend_01.png",
+   "image_size": [
+    67,
+    46
+   ],
+   "sha256": "ba1132f25e908b884a808b99fc40673b7041aa223606d2bd3a521598f12e847c",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "VIVID-1",
+   "bbox": [
+    1,
+    86,
+    58,
+    114
+   ],
+   "bbox_crop": [
+    1,
+    86,
+    58,
+    114
+   ],
+   "bbox_original": [
+    1,
+    86,
+    58,
+    114
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__mirikizumab_2_1_0__p02__v2/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__mirikizumab_2_1_0__p02__v2/shared_legend_crops/legend_02.png",
+   "image_size": [
+    57,
+    28
+   ],
+   "sha256": "b2ed6c2b16bc26ea8f28d9485e9fa2e88d139711f31f4c1d87ac1b190f51ab91",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s01": "s01",
+  "s02": "s02"
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "SERENITY",
+   "bbox": [
+    0,
+    31,
+    67,
+    77
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "VIVID-1",
+   "bbox": [
+    1,
+    86,
+    58,
+    114
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "7a5b8e6fe3c0620d0574d14b887f9d3b5e68f1e6bd8fd51d9329e37d01a1ff4e",
+ "source_sha256": "7a5b8e6fe3c0620d0574d14b887f9d3b5e68f1e6bd8fd51d9329e37d01a1ff4e",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}

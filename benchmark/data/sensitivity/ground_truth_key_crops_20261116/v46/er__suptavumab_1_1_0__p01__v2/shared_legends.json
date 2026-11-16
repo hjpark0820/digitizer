@@ -1,0 +1,108 @@
+{
+ "panel_id": "er__suptavumab_1_1_0__p01__v2",
+ "modality": "color",
+ "entries": [
+  {
+   "native_id": "s01",
+   "series_id": "s01",
+   "source_native_legend_id": "s01",
+   "label": "Synthesized palivizumab",
+   "bbox": [
+    317,
+    61,
+    375,
+    72
+   ],
+   "bbox_crop": [
+    317,
+    61,
+    375,
+    72
+   ],
+   "bbox_original": [
+    317,
+    61,
+    375,
+    72
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__suptavumab_1_1_0__p01__v2/shared_legend_crops/legend_01.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__suptavumab_1_1_0__p01__v2/shared_legend_crops/legend_01.png",
+   "image_size": [
+    58,
+    11
+   ],
+   "sha256": "5220c1755ecfd57765dfd06fc7f3ffd8318557e09578e5bb077b08d13240a6a0",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  },
+  {
+   "native_id": "s02",
+   "series_id": "s02",
+   "source_native_legend_id": "s02",
+   "label": "Suptavumab",
+   "bbox": [
+    685,
+    61,
+    744,
+    73
+   ],
+   "bbox_crop": [
+    685,
+    61,
+    744,
+    73
+   ],
+   "bbox_original": [
+    685,
+    61,
+    744,
+    73
+   ],
+   "image_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__suptavumab_1_1_0__p01__v2/shared_legend_crops/legend_02.png",
+   "crop_path": "<BENCHMARK_V2>/results/run_test100v2_gtswatch_external_20261116/v46/er__suptavumab_1_1_0__p01__v2/shared_legend_crops/legend_02.png",
+   "image_size": [
+    59,
+    12
+   ],
+   "sha256": "1ae37e9b121963dba25da428b2e2d8f9970465a7f1145abf3656aeb3b394ef33",
+   "observed_rgb_pixels": true,
+   "connector_pixels_removed": false,
+   "template_rendered": false,
+   "crop_source": "benchmark_annotation_swatch_box"
+  }
+ ],
+ "mapping": {
+  "s01": "s01",
+  "s02": "s02"
+ },
+ "annotations": [
+  {
+   "series_id": "s01",
+   "label": "Synthesized palivizumab",
+   "bbox": [
+    317,
+    61,
+    375,
+    72
+   ]
+  },
+  {
+   "series_id": "s02",
+   "label": "Suptavumab",
+   "bbox": [
+    685,
+    61,
+    744,
+    73
+   ]
+  }
+ ],
+ "status": "available",
+ "source": "ground_truth_swatches",
+ "input_sha256": "55c1b68604121adb70f1c4cb7f28b65392d4608506666ff4fa9ee3db7bd138b9",
+ "source_sha256": "55c1b68604121adb70f1c4cb7f28b65392d4608506666ff4fa9ee3db7bd138b9",
+ "coordinate_convention": "bbox crop-local half-open; bbox_original full original half-open",
+ "protocol": "Experiment: crops cut from the benchmark annotated swatch boxes for every key, independent of v46; for the published methods only."
+}
