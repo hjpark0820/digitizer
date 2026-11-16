@@ -1,10 +1,12 @@
 # Plot Digitizer v46 — AI maintenance guide
 
 This repository is a standalone runtime extracted from a larger research workspace.
-The runtime sources are copied without changing their algorithms. Training data,
-experiments, evaluation outputs, obsolete trained ViT entry points and model
-weights are intentionally absent. Do not recreate dependencies on the original
-workspace or assume its absolute paths, `experiments/` or `models/` are available.
+The runtime sources are copied without changing their algorithms. The separate
+`benchmark/` package contains public test charts, reference points, saved predictions
+and evaluation code. Private research data, the full development workspace,
+obsolete trained ViT entry points and model weights are not bundled. Do not recreate
+runtime dependencies on the original workspace or its absolute paths, `experiments/`
+or `models/` folders. The benchmark is not a runtime dependency.
 
 ## Start and dependencies
 
@@ -386,10 +388,21 @@ The legend panel can show `legend_optional` and its JSON link without a PNG diag
   old image. `openEditorView()` switches to a fixed full-window editor;
   `closeEditorView()` restores the previous workspace without saving or discarding
   in-memory edits. Resume and reopening the current job preserve edits.
-- `edTool` selects Edit points or Pan. An empty-space press is deferred until
-  pointer release: a click adds a point, while movement beyond the gesture
-  threshold pans. Point drags edit coordinates. Pan can start on points without
-  moving them. Pointer cancellation/capture loss must clear gesture state.
+- `edTool` selects Edit points or Pan. Edit points uses the default arrow cursor.
+  An empty-space click adds a point on release. Movement beyond four pixels
+  immediately turns a background gesture into pan and shows a grabbing cursor;
+  there is no hold timer or long-press delay. Releasing returns to the arrow.
+  Point drags still edit coordinates. Pan mode permits dragging anywhere,
+  including on points. Pointer cancellation, capture loss and window blur clear
+  the gesture and restore a partially dragged point to its starting coordinates.
+- `edUndoStack` keeps at most 100 point additions, movements and removals.
+  One completed point drag creates one action; selection, no-op movement and
+  panning create none. `undoEditorPointEdit()` restores the point/selection and
+  refreshes the reconstruction and coordinate table. Undo and Ctrl+Z/Command+Z
+  are disabled during active gestures and busy operations. Text fields retain
+  native text undo. `initEditor()` and `clearEditorState()` reset history;
+  Back/Resume preserves it. Axis/name changes are outside point Undo. Keep
+  action records per edit rather than cloning every curve for every action.
 - `editSurface` provides scroll extent. `editCanvas` allocates only the visible
   viewport; `edViewX`/`edViewY` translate drawing and hit testing. Do not restore
   `max-width:100%` on this canvas or allocate a bitmap the size of the entire
@@ -400,7 +413,15 @@ The legend panel can show `legend_optional` and its JSON link without a PNG diag
 - `drawRecon()` is a display-only x-ordered straight-line view of current points.
   Do not overwrite the saved Step-5 reference or fit state with this visualization.
 - Folder preview navigation and the editor's loaded file are independent.
-  Unsaved-change and busy guards must survive switching adjacent files.
+  `moveFolderFile()` supports ±1, ±10 and ±100, clamping at either end.
+  `jumpToFolderNumber()` validates a 1-based integer from the File # field.
+  Both use `goToFolderFile()` to load only the destination, with editor jumps
+  going through `openFolderImage()` and its existing unsaved-change confirmation.
+  Preview jumps must not replace the editor's loaded result. Preserve folder
+  ownership checks, busy-state guards, no-op jumps to the current file, and
+  resetting the displayed number after a cancelled or failed switch.
+  `syncFolderNavigation()` must not overwrite an actively typed number during
+  unrelated UI updates. Test Enter/Go, both jump sizes, boundaries and cancelling.
 
 ### Legend swatch review
 
@@ -432,11 +453,14 @@ Axis text edits use `calibration.x/y.label` and `unit`, with `label_source: manu
 5. Round-trip image + JSON, manual edits, version history and Excel; include an
    `edit_data` multipart file larger than 1MiB and verify all points survive.
 6. For UI changes, verify folder previews/arrows, opening/closing/resuming the
-   editor, one-colour reconstruction, point drag/add/delete, background/Pan drag,
-   high zoom, Fit, viewport resizing and save buttons visible on screen.
+   editor, one-colour reconstruction, point drag/add/delete and Undo, immediate
+   background and Pan-tool dragging, high zoom, Fit, viewport resizing and save
+   buttons visible on screen. Include cancelled drags, click/drag separation, keyboard
+   undo while typing, busy-state guards and history reset after loading a result.
 
-The original research test corpus is intentionally not included. Keep future
-tests small and self-contained; do not add private user charts or absolute paths.
+The public 100-chart test set is included in `benchmark/`; the full private research
+corpus is not. Keep future feature tests small and self-contained; do not add
+private user charts or absolute paths.
 Regenerate the manifest hashes when runtime code changes. The standalone migration
 was checked with 143 runtime files, 141 imports, five detection/correction cases,
 exact point/label/colour/calibration parity, and a 55,000-point JSON/Excel round trip.

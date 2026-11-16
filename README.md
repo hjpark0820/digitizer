@@ -1,4 +1,4 @@
-# Plot Digitizer v46
+# Plot Digitizer
 
 A local web app for extracting data points from chart images, editing them in a browser, and saving the results as JSON, Excel, or CSV. Supports colour and black-and-white charts. AI agents maintaining the code should read [README_AI.md](README_AI.md).
 
@@ -169,20 +169,26 @@ If an imported fast-detection result lacks the original-resolution image, reopen
 
 ## Synthetic examples
 
-[examples/](examples/) contains 40 selected synthetic plots in one flat folder: 10 PK B&W, 10 PK colour, 10 ER B&W and 10 ER colour. Filename prefixes identify each category. The [example guide](examples/README.md) and [manifest](examples/examples_manifest.json) provide the tested plot/legend regions, calibration, scores before and after automatic correction, and timing. These are curated demonstration cases, not a representative benchmark or clinical measurements.
+[examples/](examples/) contains 40 selected synthetic plots in one flat folder: 10 PK B&W, 10 PK colour, 10 PD B&W and 10 PD colour. PK denotes concentration–time plots; PD denotes concentration–response plots (the PD filenames retain the legacy `er` prefix). The [example guide](examples/README.md) and [manifest](examples/examples_manifest.json) provide the tested plot/legend regions, calibration, scores before and after automatic correction, and timing. These are curated demonstration cases, not a representative benchmark or clinical measurements.
+
+## 100-chart benchmark
+
+[benchmark/](benchmark/) provides 100 synthetic test charts with 3,092 reference marker centres, saved predictions, scoring scripts, and comparison tables and figures. Under the tested plot/legend-region inputs, the digitizer achieved pooled F1 scores of **80.9% before** and **81.7% after automatic correction**. Manual legend review was not used in those results. The curated examples above use a different selection process and matching tolerance.
+
+The benchmark evaluates a recorded software snapshot; the current application includes later changes. Stored predictions can be re-scored without running the detectors. An exact full rerun additionally requires the archived digitizer source and the upstream comparator models; the archived digitizer source is not bundled in this package. See the [benchmark reproduction instructions](benchmark/README.md#6-reproducing).
 
 ## Opening saved images and JSON files
 
 1. Select an image folder using **Edit saved results → Choose edit folder**.
 2. Only image/JSON pairs with matching names, such as `plot.png` and `plot.json`, appear in the editing list.
-3. Select a file from the list or use `<` / `>` to update the **Original / Overlay / Reconstructed plot** previews automatically.
+3. Select a file from the list, use `<` / `>`, jump with **−10 / +10 / −100 / +100**, or enter **File #** and press Enter / **Go**. The **Original / Overlay / Reconstructed plot** previews update automatically.
 4. Press **Open selected image for editing**. If several versions are available, select the saved version to edit.
 
 Select the folder again after refreshing or reopening the page. In browsers without folder access support, use **Legacy import — select image + JSON manually** to load individual files. Direct saving to a folder requires Chrome or Edge's folder access feature.
 
 ## Dedicated editing view
 
-Pressing Edit switches from the previous workspace to a dedicated editing view. File navigation, series selection, zoom, and save controls remain available within the view.
+Pressing Edit switches from the previous workspace to a dedicated editing view. File navigation, series selection, zoom, and save controls remain available within the view. **Edit points** uses a normal arrow pointer; dragging empty space immediately pans the image and shows a hand cursor.
 
 | Control or gesture | Action |
 | --- | --- |
@@ -190,14 +196,21 @@ Pressing Edit switches from the previous workspace to a dedicated editing view. 
 | All symbols | Show every series |
 | Drag a point in Edit points mode | Change the point's coordinates |
 | Click empty space in Edit points mode | Add a point to the selected series |
-| Left-drag on empty space | Pan the zoomed image |
-| Select Pan, then left-drag | Pan even when the drag starts on a point |
+| Drag empty space | Pan immediately; the arrow changes to a hand while dragging |
+| Select Pan, then left-drag | Pan anywhere, including when starting on a point |
 | Select a point, then Delete / Remove selected | Delete the point |
+| Undo / Ctrl+Z / Command+Z | Undo the last point addition, movement or removal |
 | `+` / `−` / Ctrl+mouse wheel | Zoom in or out; the former 600% limit has been removed |
 | Fit | Show the entire image |
 | `<` / `>` | Move to the previous or next editable file in the same folder |
+| **−10 / +10 / −100 / +100** | Jump directly by 10 or 100 saved images |
+| **File #** + Enter / **Go** | Open a saved image by its 1-based position in the selected folder |
 | Coordinates table | Expand or collapse the coordinate table |
 | Back / Resume editing | Switch views within the current page while preserving edits, zoom, and scroll position |
+
+A click adds a point on release; dragging empty space moves the image without adding a point. There is no long-press delay and no need to select **Pan** first. Dragging an existing point still moves that point; select **Pan** to move the view even from a point. One point drag is one Undo step. The editor remembers up to 100 point edits in the current loaded result. **Back / Resume editing** preserves this history; loading another result, **Reset to loaded result**, or refreshing clears it. Axis/name changes, panning and zooming are not part of point Undo. Ctrl+Z inside a text field keeps the field's normal text-editing behaviour.
+
+File numbers follow the displayed folder order, starting at 1, and refer only to matching image/JSON pairs. Navigation is available after choosing an edit folder. A jump loads only the destination, without opening each intervening image; large steps stop at the first or last image. Unsaved point or metadata edits still prompt before switching. Cancel keeps the current result so you can save first. The preview controls browse separately from the editor's currently loaded image.
 
 `Back` does not save changes to a file. Press **Save result versions (.json)** before refreshing the page or closing the browser.
 
@@ -233,6 +246,8 @@ The server creates temporary results under `unified_digitizer_jobs` in the opera
 ├── requirements.txt       # Verified Python dependencies
 ├── run.py                 # Recommended launcher
 ├── RUNTIME_MANIFEST.json  # Included sources, reference locations, and SHA-256 hashes
+├── examples/              # 40 curated demonstration images and metadata
+├── benchmark/             # 100 test images, reference points, saved predictions and evaluation code
 └── src/
     ├── unified_server.py
     ├── AI_WORKFLOW.md      # Agent startup, regions, OCR and folder batches
@@ -250,7 +265,7 @@ The server creates temporary results under `unified_digitizer_jobs` in the opera
     └── ...                # Runtime modules for detection, correction, and saving
 ```
 
-The runtime files in `src` were copied from the development workspace. Legacy Vision Transformer (ViT) detection CLIs, training code, experimental results, and model files are excluded from this distribution. You can also run `src/unified_server.py` directly, but `run.py` locates the app independently of the current working directory and defaults to `127.0.0.1`.
+The runtime files in `src` were copied from the development workspace. Legacy trained-detector entry points, private research data and model weights are excluded. The separately packaged `benchmark/` contains the public evaluation data, saved outputs and evaluation code; it is not a runtime dependency. You can also run `src/unified_server.py` directly, but `run.py` locates the app independently of the current working directory and defaults to `127.0.0.1`.
 
 ## Troubleshooting
 
@@ -278,4 +293,4 @@ When uploading to GitHub, place the **contents of this folder at the root of the
 
 ## Removing the v45 dependency
 
-The server explicitly selects `run_A4_auto_v46.py`. Reading and rewriting v45 source for execution, and automatic fallback to legacy detectors, have been removed. If a marker legend cannot be analyzed, the app reports an error; check the selected region or choose `Auto` / `line-only` mode. If the `PLOT_PIPELINE` environment variable points to an old v45 file, unset it or change it to the v46 path. Restart the existing server to apply the changes.
+The server explicitly selects `run_A4_auto_v46.py`. Reading and rewriting v45 source for execution, and automatic fallback to legacy detectors, have been removed. If marker-legend extraction fails, open **Show legend swatches / review**, check the selected legend region, add missing swatches by their centres and rerun detection with the reviewed crops. The GUI has no separate line-only selector. If the `PLOT_PIPELINE` environment variable points to an old v45 file, unset it or change it to the v46 path. Restart the existing server to apply the changes.

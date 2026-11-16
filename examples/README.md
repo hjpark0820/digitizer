@@ -1,6 +1,6 @@
 # Synthetic example plots
 
-All 40 input PNGs are together in this folder: 10 PK B&W, 10 PK colour, 10 ER B&W and 10 ER colour. Filename prefixes identify the categories. PK means pharmacokinetic; ER means exposure-response.
+All 40 input PNGs are together in this folder: 10 PK B&W, 10 PK colour, 10 PD B&W and 10 PD colour. Filename prefixes identify the categories. PK means pharmacokinetic (concentration–time); PD means pharmacodynamic (concentration–response). The PD filenames retain the legacy `er` prefix.
 
 These are deliberately selected easy/high-performing examples, not a representative benchmark. Sixty-two synthetic plots were screened with the current public runtime. The selected 40 are distinct, single-panel examples with final F1 at least 0.95. Following review, the single-series Cusatuzumab2 example was replaced with the two-series Motavizumab p02 example. They are redrawn synthetic charts with perturbed/simulated data, not original clinical measurements.
 
@@ -14,7 +14,7 @@ The table below summarizes results after automatic correction.
 | --- | ---: | ---: | ---: | ---: | ---: |
 | PK B&W | 10 | 223 | 1 | 11 | 97.38% |
 | PK colour | 10 | 200 | 0 | 2 | 99.50% |
-| ER B&W | 10 | 147 | 0 | 1 | 99.66% |
-| ER colour | 10 | 195 | 0 | 0 | 100.00% |
+| PD B&W | 10 | 147 | 0 | 1 | 99.66% |
+| PD colour | 10 | 195 | 0 | 0 | 100.00% |
 
 The PNGs are unchanged copies of rendered synthetic inputs. Source images were not moved or modified. There are no category subfolders. Full digitization results and screening diagnostics remain outside the public package; `examples_manifest.json` is descriptive metadata, not an editable saved session.
